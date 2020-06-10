@@ -3,14 +3,14 @@
 :toc:
 :table-caption: Table
 :icons: font
-:revnumber: 0.9
-:revdate: 2019-08-23
+:revnumber: 0.1
+:revdate: 2020-06-10
 
-:iTC-longname: Coffee Maker
-:iTC-shortname: CM-iTC
-:iTC-email: cm-itc-mailing-list@gmail.com
-:iTC-website: https://coffeemaker.github.io/
-:iTC-GitHub: https://github.com/coffeemaker/repository/
+:iTC-longname: Dedicated Security Components
+:iTC-shortname: DSC-iTC
+:iTC-email: iTC-DSC@niap-ccevs.org
+:iTC-website: https://DSC-iTC.github.io/
+:iTC-GitHub: https://github.com/DSC-iTC/cPP
 
 :sectnums!:
 == Acknowledgements

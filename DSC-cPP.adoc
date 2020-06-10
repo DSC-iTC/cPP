@@ -1,4 +1,4 @@
-= collaborative Protection Profile for _Coffee Maker_
+= collaborative Protection Profile for Dedicated Security Component
 :showtitle:
 :toc: macro
 :toclevels: 7
@@ -6,14 +6,14 @@
 :sectnumlevels: 7
 :imagesdir: images
 :icons: font
-:revnumber: 0.2
-:revdate: 2019-08-23
+:revnumber: .01
+:revdate: 2020-06-10
 
-:iTC-longname: Coffee Maker
-:iTC-shortname: CM-iTC
-:iTC-email: cm-itc-mailing-list@gmail.com
-:iTC-website: https://coffeemaker.github.io/
-:iTC-GitHub: https://github.com/coffeemaker/repository/
+:iTC-longname: Dedicated Security Components
+:iTC-shortname: DSC-iTC
+:iTC-email: iTC-DSC@niap-ccevs.org
+:iTC-website: https://DSC-iTC.github.io/
+:iTC-GitHub: https://github.com/DSC-iTC/cPP
 
 :sectnums!:
 

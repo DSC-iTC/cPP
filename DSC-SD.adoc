@@ -1,4 +1,4 @@
-= Supporting Document Mandatory Technical Document: Evaluation Activities for collaborative Protection Profile for Coffee Maker
+= Supporting Document Mandatory Technical Document: Evaluation Activities for collaborative Protection Profile for Dedicated Security Component
 :showtitle:
 :toc: macro
 :toclevels: 7
@@ -6,16 +6,16 @@
 :table-caption: Table
 :imagesdir: images
 :icons: font
-:revnumber: 0.2
-:revdate: 2019-08-23
+:revnumber: 0.1
+:revdate: 2020-06-10
 :xrefstyle: full
 
-:iTC-longname: Coffee Maker
-:iTC-shortname: CM-iTC
-:iTC-email: cm-itc-mailing-list@gmail.com
-:iTC-website: https://coffeemaker.github.io/
-:iTC-GitHub: https://github.com/coffeemaker/repository/
-:pp-name: collaborative Protection Profile for Coffee Maker
+:iTC-longname: Dedicated Security Components
+:iTC-shortname: DSC-iTC
+:iTC-email: iTC-DSC@niap-ccevs.org
+:iTC-website: https://DSC-iTC.github.io/
+:iTC-GitHub: https://github.com/DSC-iTC/cPP
+:pp-name: collaborative Protection Profile for Dedicated Security Component
 :pp-version: Version 1.0
 :pp-date: January 1, 2020
 
