@@ -3,9 +3,7 @@
 image::https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg[link="code_of_conduct.adoc]
 
 == Introduction
-This is the primary repository for the Dedicated Security Components iTC. 
-
-This is the primary repository for the Biometrics Security iTC and its work on creating collaborative Protection Profiles and related supporting documents. The Common Criteria Portal page can be found https://www.commoncriteriaportal.org/communities/dedicated_security_components.cfm[here].
+This is the primary repository for the Dedicated Security Components iTC and its work on creating collaborative Protection Profiles and related supporting documents. The Common Criteria Portal page can be found https://www.commoncriteriaportal.org/communities/dedicated_security_components.cfm[here].
 
 Check out the main page for the iTC at https://DSC-iTC.github.io.
 
