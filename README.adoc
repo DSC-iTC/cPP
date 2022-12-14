@@ -33,7 +33,7 @@ The DSC-iTC has three primary branches:
 |Branch
 |Description
 
-|Master
+|Main
 |The current, approved released version of the documents.
 
 |Working
@@ -57,11 +57,11 @@ This table provides an overview of the files in the repository.
 |Description
 
 |Protection Profile
-|DSC-cPP.adoc
+|cPP_DSC.adoc
 |The DSC cPP
 
 |Supporting Documents
-|DSC-SD.adoc
+|SD_DSC.adoc
 |The Supporting Documentation for the cPP
 
 |PP-Configurations
@@ -69,3 +69,24 @@ This table provides an overview of the files in the repository.
 |
 
 |===
+
+== iTC variables
+In many of the templates there will be a series of lines after the header all starting with :iTC.
+
+ :iTC-longname: Dedicated Security Components
+ :iTC-shortname: DSC-iTC
+ :iTC-email: iTC-DSC@niap-ccevs.org
+ :iTC-website: https://DSC-iTC.github.io/
+ :iTC-GitHub: https://github.com/DSC-iTC/cPP
+
+There may be more or less lines depending on the template, but all will follow this basic structure.
+
+The purpose of these lines is to make it easier to enter this information within the template without needing to edit it individually every time. This can be done by entering the name between the colons inside curly brackets {}. When this is done, the value entered in the line above will be replaced when the file is processed.
+
+For example, entering {iTC-website} would replace that with the URL specified in the line in the heading.
+
+Using these variables will allow you to maintain consistency throughout the document.
+
+The variable values that are currently being used can be found at this link:
+
+https://github.com/itc-wgtools/cPP-Tools/wiki/Dummy-iTC-for-Examples
