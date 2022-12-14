@@ -1,3 +1,4 @@
+= collaborative Protection Profile for Dedicated Security Component
 :showtitle:
 :toc: macro
 :toclevels: 3
