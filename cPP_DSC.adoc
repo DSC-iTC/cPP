@@ -2796,13 +2796,15 @@ _If at least one of [.underline]#KeyDrv4#, [.underline]#KeyDrv5#, or [.underline
 
 FCS_COP.1/PBKDF Cryptographic Operation (Password-Based Key Derivation Functions)
 
-FCS_COP.1.1/PBKDF:: The TSF shall perform [_password-based key derivation functions_] in accordance with a specified cryptographic algorithm [_HMAC-[selection: SHA-256, SHA-384, SHA-512_]], *with [_assignment: integer number greater than or equal to 1000_] iterations, and output* cryptographic key sizes [.underline]#[selection: 128, 192, 256#] *bits* that meet the following standard: [_NIST SP 800-132_].
+FCS_COP.1.1/PBKDF:: The TSF shall perform [_password-based key derivation functions_] in accordance with a specified cryptographic algorithm [_HMAC-[selection: SHA-256, SHA-384, SHA-512]_ ], *with [selection: _[assignment: integer number greater than or equal to 1000 iterations], at least 1 iteration followed by a function equivalent to the workload of at least 1000 iterations_], and output* cryptographic key sizes [selection: 128, 192, 256] bits that meet the following standard: [_NIST SP 800-132_].
 
-_Application Note {counter:remark_count}_:: _The ST must condition a password into a string of bits prior to using it as input to algorithms that form SKs and KEKs. The ST can perform conditioning using one of the identified hash functions or the process described in NIST SP 800-132; the ST author selects the method used. NIST SP 800-132 requires the use of a pseudo-random function (PRF) consisting of HMAC with an approved hash function._
+_Application Note {counter:remark_count}_:: _The TSF must condition a password into a string of bits prior to using it as input to algorithms that form SKs and KEKs. The TSF can perform conditioning using one of the identified hash functions or the process described in NIST SP 800-132; the ST author selects the method used. NIST SP 800-132 requires the use of a pseudo-random function (PRF) consisting of HMAC with an approved hash function._
 +
 _Appendix A of NIST SP 800-132 recommends setting the iteration count in order to increase the computation needed to derive a key from a password and, therefore, increase the workload of performing a dictionary attack._
 +
 _The TOE must claim this requirement if it claims FCS_CKM.1/SK and selects an algorithm in the PBK row or claims FCS_CKM_EXT.5 and selects at least one of [.underline]#KeyDrv4#, [.underline]#KeyDrv5#, or [.underline]#KeyDrv6# AND uses password-based key derivation to create at least one of the inputs._
++
+_If less than 1000 PBKDF iterations are used, the ST must specify the workload equivalence to at least 1000 PBKDF iterations._
 
 === User Data Protection
 ==== FDP_DAU.1/Prove Basic Data Authentication (for Use with The Prove Service)

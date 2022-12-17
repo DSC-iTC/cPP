@@ -2628,9 +2628,11 @@ The evaluator shall examine the KMD to ensure that:
 
 ====== TSS
 
-The evaluator shall review the TSS to verify that it contains a description of the PBKDF. The evaluator shall also confirm the ST supports the selected hash function itself. The evaluator shall confirm that the TSS contains a description of how the TOE ensures that the output of the PBKDF is at least the same length as that specified in FCS_CKM.1/SK and for the KeyDrv4, KeyDrv5, or KeyDrv6 in FCS_CKM_EXT.5.
+The evaluator shall review the TSS to verify that it contains a description of the PBKDF. The evaluator shall also confirm the TSF supports the selected hash function itself. The evaluator shall confirm that the TSS contains a description of how the TOE ensures that the output of the PBKDF is at least the same length as that specified in FCS_CKM.1/SK and for the KeyDrv4, KeyDrv5, or KeyDrv6 in FCS_CKM_EXT.5.
 
-If the ST performs additional conditioning, whitening, or manipulation of the password or passphrase before applying the PBKDF, or to the output of the PBKDF, the evaluator shall ensure that the TSS describes the actions and provides assurance that the TSF does not negatively impact the entropy of the PBKDF output.
+If the ST claims iterations less than 1000 iterations, the evaluator shall verify the TSS contains a description of the workload function used to claim equivalence to at least 1000 iterations of PBKDF.
+
+If the TSF performs additional conditioning, whitening, or manipulation of the password or passphrase before applying the PBKDF, or to the output of the PBKDF, the evaluator shall ensure that the TSS describes the actions and provides assurance that the TSF does not negatively impact the entropy of the PBKDF output.
 
 If any manipulation of the key is performed in forming the submask that will be used to form the KEK, that process shall be described in the TSS.
 
@@ -2648,7 +2650,9 @@ The evaluator shall verify that the iteration count for PBKDFs performed by the 
 
 ====== KMD
 
-There are no KMD evaluation activities for this component.
+If the ST claims less than 1000 PBKDF iterations, the evaluator shall verify the KMD contains a description of the process for increasing the workload. The description shall provide a flow diagram of the operations involved including the keys used in the operations. The evaluator shall also confirm that the TSF supports any algorithms in use for this sequence of operations.
+
+The KMD shall include an equivalency argument comparing the workload (time to completion) using at least 1000 PBKDF iterations vs the workload of the alternative process.
 
 === User Data Protection (FDP)
 
