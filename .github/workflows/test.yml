@@ -1,7 +1,7 @@
 name: Move to Awaiting Review - v1.1
 on:
-  label:
-    types: [created, edited]
+  issues:
+    types: [labeled]
   workflow_dispatch:
 
 jobs:
