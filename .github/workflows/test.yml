@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: GitHub Project Automation+
-        if: ${{ github.event.label.name == 'Awaiting Review' && github.event.label.name == 'v1.1' }}
+        #if: ${{ github.event.label.name == 'Awaiting Review' && github.event.label.name == 'v1.1' }}
         uses: alex-page/github-project-automation-plus@v0.8.2
         with:
           project: v1.1
