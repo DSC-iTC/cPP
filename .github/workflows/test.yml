@@ -2,10 +2,14 @@ name: Move to Awaiting Review - v1.1
 on:
   issues:
     types: [labeled]
-  workflow_dispatch:
 
 jobs:
   move-assigned-card:
+    strategy:
+      fail-fast: false
+      matrix:
+        project: 
+          - 'v1.1'
     runs-on: ubuntu-latest
     steps:
       - name: GitHub Project Automation+
