@@ -1276,7 +1276,7 @@ FCS_COP.1.1/SigVer:: The TSF shall perform [_digital signature verification for 
 |[.underline]#[selection: 2048 bit, 3072 bit]#
 a|[.underline]#[selection: RFC 8017, PKCS #1 v2.2 (Section 8.2); FIPS186-4, (Section 5.5)]# (RSASSA-PKCS1-v1_5)
 
-[.underline]#[selection: ISO10118-3, (Clause 10, 11); FIPS180-4, (Section 6)] (SHA)
+[.underline]#[selection: ISO10118-3, (Clause 10, 11); FIPS180-4, (Section 6)]# (SHA)
 
 |SigVer2 
 |Digital signature scheme 2 using [.underline]#[selection: one or more hash algorithms selected in FCS_COP.1.1/Hash]#
@@ -2133,7 +2133,7 @@ The following rationale provides justification for each security objective for t
 | FIA_AFL_EXT.2 (selection-based)
 |This requirement defines how access to an SDO is restored if excessive authentication failures trigger a lock on it.
 
-.19+|O.AUTHORIZATION 
+.10+|O.AUTHORIZATION 
 |FCS_STG_EXT.1 
 |This requirement ensures that key data is placed into protected storage and cannot be modified by untrusted subjects.
 
@@ -2164,6 +2164,7 @@ The following rationale provides justification for each security objective for t
 |FMT_MSA.3 
 |This requirement defines the default access restrictions that are enforced on SDO attributes if not overridden by specific access control policy rules.
 
+.9+|O.AUTHORIZATION 
 |FMT_SMF.1 
 |This requirement defines the management functions that are provided by the TOE to authorized subjects.
 
@@ -2191,7 +2192,7 @@ The following rationale provides justification for each security objective for t
 |FIA_AFL_EXT.2 (selection-based)
 |This requirement defines the access control that is enforced on an SDO if excessive authentication failures block access to it.
 
-.19+|O.DATA_PROTECTION 
+.10+|O.DATA_PROTECTION 
 |FCS_COP.1/Hash 
 |This requirement provides a cryptographic operation for asserting the integrity of SDOs.
 
@@ -2222,6 +2223,7 @@ The following rationale provides justification for each security objective for t
 |FDP_ITC_EXT.1 
 |This requirement ensures that all SDEs parsed by the TOE have verifiable integrity.
 
+.9+|O.DATA_PROTECTION 
 |FDP_ITC_EXT.2 
 |This requirement ensures that all SDOs parsed by the TOE have verifiable integrity.
 
@@ -2320,7 +2322,7 @@ The following rationale provides justification for each security objective for t
 |FDP_ITC_EXT.1 
 |This requirement ensures that all SDEs parsed by the TOE include appropriate binding metadata.
 
-.24+|O.STRONG_CRYPTO 
+.10+|O.STRONG_CRYPTO 
 |FCS_CKM.1 
 |This requirement specifies the supported methods of key generation.
 
@@ -2351,6 +2353,7 @@ The following rationale provides justification for each security objective for t
 |FCS_COP.1/SKC 
 |This requirement ensures the use of strong methods to encrypt sensitive data.
 
+.10+|O.STRONG_CRYPTO 
 |FCS_RBG_EXT.1 
 |This requirement ensures the use of strong random bit generation mechanisms.
 
@@ -2381,6 +2384,7 @@ The following rationale provides justification for each security objective for t
 |FCS_CKM_EXT.5 (selection-based)
 |This requirement ensures the use of strong mechanism to perform key derivation.
 
+.4+|O.STRONG_CRYPTO 
 |FCS_COP.1/PBKDF (selection-based)
 |This requirement ensures the use of strong methods to derive keys from password data.
 
