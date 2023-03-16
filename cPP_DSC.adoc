@@ -2086,7 +2086,7 @@ _Application Note {counter:remark_count}_:: _It is acceptable for the TSF to pro
 
 FPT_TST.1 TSF Testing
 
-FPT_TST.1.1:: The TSF shall run a suite of self tests *during power-on start-up*, [.underline]#[selection:periodically during normal operation, at the request of the authorized user, *at no other condition,* at the conditions [_assignment: conditions under which self test should occur_]]# to demonstrate the correct operation of [the TSF].
+FPT_TST.1.1:: The TSF shall run a suite of self tests *during power-on start-up*, [.underline]#[selection: periodically during normal operation, at the request of the authorized user, *at no other condition,* at the conditions [_assignment: conditions under which self test should occur_]]# to demonstrate the correct operation of [the TSF].
 
 FPT_TST.1.2:: The TSF shall provide authorized users with the capability to verify the integrity of [.underline]#[TSF data]#.
 
@@ -2456,7 +2456,7 @@ After the ST has been approved for evaluation, the ITSEF will obtain the TOE, su
 
 The ST is evaluated as per ASE activities defined in the CEM. In addition, there may be Evaluation Activities specified within the SD that call for necessary descriptions to be included in the TSS that are specific to the TOE technology type.
 
-In addition to using the ST to demonstrate that ASE_TSS.1 has been satisfied, this cPP requires the creation of supplemental documentation to justify how the TOE satisfies certain SFRs. This documentation is separated from the ST because the required level of detail may include information that is proprietary to the developer of the TOE. The required supplemental documentation includes entropy documentation and key management documentation. The requirements for the entropy documentation are described in Appendix D of this cPP. The requirements for the key management documentation are described in the SD under the SFRs that require a detailed description of the TSF's key management.
+In addition to using the ST to demonstrate that ASE_TSS.1 has been satisfied, this cPP requires the creation of supplemental documentation to justify how the TOE satisfies certain SFRs. This documentation is separated from the ST because the required level of detail may include information that is proprietary to the developer of the TOE. The required supplemental documentation includes entropy documentation and key management documentation. The requirements for the entropy documentation are described in <<Entropy Documentation and Assessment>> of this cPP. The requirements for the key management documentation are described in the SD under the SFRs that require a detailed description of the TSF's key management.
 
 === ADV: Development
 
@@ -2566,7 +2566,7 @@ _Application Note {counter:remark_count}_:: _Although a platform may enter any s
 
 FPT_ROT_EXT.3 Root of Trust for Reporting Mechanisms
 
-FPT_ROT_EXT.3.1:: The TSF shall be able to attest to a state as represented by platform characteristics with a Root of Trust for Reporting mechanism that uses for its identity [.underline]#[selection: a cryptographically verifiable identity in FPT_PRO_EXT.1, an alias key bound to the cryptographically verifiable identity in FPT_PRO_EXT.1]# and using a signature algorithm as specified in FCS_COP.1/**SigGen**.
+FPT_ROT_EXT.3.1:: The TSF shall be able to attest to a state as represented by platform characteristics with a Root of Trust for Reporting mechanism that uses for its identity [.underline]#[selection: a cryptographically verifiable identity in FPT_PRO_EXT.1, an alias key bound to the cryptographically verifiable identity in FPT_PRO_EXT.1]# and using a signature algorithm as specified in FCS_COP.1**/SigGen**.
 
 _Application Note {counter:remark_count}_:: _While it is possible for a group of components to share a single unique group identifier, it is important to ensure that individual components have their own unique identifiers relative to each other._
 +
@@ -2686,7 +2686,7 @@ _This requirement must be claimed by the TOE if at least one of FCS_CKM.1 or FCS
 
 FCS_CKM_EXT.5 Cryptographic Key Derivation
 
-FCS_CKM_EXT.5.1:: The TSF shall generate cryptographic keys with [.underline]#[selection: identifier as chosen from <<KeyDerivation>>]# using [_input parameters as chosen from KeyDerivation for corresponding key types_], key derivation algorithm [_assignment: key derivation algorithms as chosen from <<KeyDerivation>> for corresponding key types_], and specified cryptographic key sizes [_key sizes as chosen from <<KeyDerivation>> for corresponding key types_] that meet the following: [_standards as chosen from <<KeyDerivation>> for corresponding key types_].
+FCS_CKM_EXT.5.1:: The TSF shall generate cryptographic keys with [.underline]#[selection: identifier as chosen from <<KeyDerivation>>]# using [_input parameters as chosen from <<KeyDerivation>> for corresponding key types_], key derivation algorithm [_assignment: key derivation algorithms as chosen from <<KeyDerivation>> for corresponding key types_], and specified cryptographic key sizes [_key sizes as chosen from <<KeyDerivation>> for corresponding key types_] that meet the following: [_standards as chosen from <<KeyDerivation>> for corresponding key types_].
 
 .Key Derivation Functions
 [[KeyDerivation]]
@@ -2750,9 +2750,9 @@ a|NIST SP 800-108 [.underline]#[selection: (Section 5.1) (KDF in Counter Mode);#
 |KeyDrv6 
 |[.underline]#[selection: symmetric key, initialization vector, authentication token, authorization value, HMAC key, KMAC key]#
 |Two keys 
-a|[.underline]#[selection: AES-CCM, AES-GCM, AES-CBC, AES-KWP, AES-KW, CAM-CBC, CAM-CCM, CAM-GCM]# from FCS_COP.1/SKC Symmetric Key table 
+a|[.underline]#[selection: AES-CCM, AES-GCM, AES-CBC, AES-KWP, AES-KW, CAM-CBC, CAM-CCM, CAM-GCM]# from <<SymmetricKeys>> 
 |[.underline]#[selection: 128, 192, 256]# bits 
-a|[.underline]#[selection: see List of Standards in FCS_COP.1/SKC Symmetric Key table]#
+a|[.underline]#[selection: see List of Standards in <<SymmetricKeys>>]#
 
 |KeyDrv7 
 |[.underline]#[selection: symmetric key, secret IV, seed]#
@@ -2788,7 +2788,7 @@ _KeyDrv5, KeyDrv6, and the XOR option in KeyDrv4 will create an "inverted key hi
 +
 _If keys are combined, the ST author shall describe which method of combination is used in order to justify that the effective entropy of each factor is preserved._
 +
-_The documentation of the product's encryption key management should be detailed enough that, after reading, the evaluator will thoroughly understand the product's key management and how it meets the requirements to ensure the keys are adequately protected. This documentation should include an essay and diagrams. This documentation is not required to be part of the <<abbr_TSS,TSS>>; it can be submitted as a separate document and marked as developer proprietary._
+_The documentation of the product's encryption key management should be detailed enough that, after reading, the evaluator will thoroughly understand the product's key management and how it meets the requirements to ensure the keys are adequately protected. This documentation should include an essay and diagrams. This documentation is not required to be part of the TSS; it can be submitted as a separate document and marked as developer proprietary._
 +
 _SP 800-56C specifies a two-step key derivation procedure that employs an extraction-then-expansion technique for deriving keying material from a shared secret generated during a key establishment scheme. The Randomness Extraction step as described in Section 5 of SP 800-56C is followed by Key Expansion using the key derivation functions defined in SP 800-108._
 +
@@ -2817,7 +2817,7 @@ FDP_DAU.1/Prove Basic Data Authentication (for Use with the Prove Service)
 
 FDP_DAU.1.1/Prove:: The TSF shall provide a capability to generate evidence that can be used as a guarantee of the validity of [.underline]#[selection: [_assignment: list of objects or information types_] declared valid by the TSF, [_assignment: list of objects or information types_] declared valid by an authenticated user]#.
 
-FDP_DAU.1.2/Prove:: The TSF shall provide [_assignment: list of subjects_]with the ability to verify evidence of the validity of the indicated information.
+FDP_DAU.1.2/Prove:: The TSF shall provide [_assignment: list of subjects_] with the ability to verify evidence of the validity of the indicated information.
 
 _Application Note {counter:remark_count}_:: _This SFR describes the output of the Prove service provided by the DSC. The evidence of validity or authenticity, or other evidence derived, is expected to be processed by the RoT for Measurement. Additionally, the use of a RoT for Reporting presupposes a logging capability or other means of generating state information that could be conveyed to external entities. Therefore, FDP_DAU.1.1/Prove must be selected if-and-only-if the RoT for Measurement and the RoT for Reporting are both selected in FPT_ROT_EXT.1.1. An 'authenticated user' in the sense of the selection in FDP_DAU.1.1/Prove means a user who has been authenticated by the DSC according to the mechanisms of FIA_UAU.5._
 +
@@ -2952,7 +2952,7 @@ _If [.underline]#GCMP# is selected, the ST author must include FTP_GCMP_EXT.1._
 
 FTP_ITE_EXT.1 Encrypted Data Communications
 
-FTP_ITE_EXT.1.1:: The TSF shall encrypt data for transfer between the TOE and [_assignment: list of entities external to the TOE_] using a cryptographic algorithm and key size as specified in FCS_COP.1/**SKC**, and using [.underline]#[selection:#
+FTP_ITE_EXT.1.1:: The TSF shall encrypt data for transfer between the TOE and [_assignment: list of entities external to the TOE_] using a cryptographic algorithm and key size as specified in FCS_COP.1**/SKC**, and using [.underline]#[selection:#
 +
 * [.underline]#Pre-shared keys;#
 * [.underline]#Keys established according to FCS_CKM.2;#
@@ -3516,7 +3516,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: No dependencies.
 [vertical]
-FDP_MFW_EXT.1.1:: The TSF shall be maintained as [selection: immutable, mutable] firmware.
+FDP_MFW_EXT.1.1:: The TSF shall be maintained as [.underline]#[selection: immutable, mutable]# firmware.
 
 *FDP_MFW_EXT.2 Basic Firmware Integrity*
 [horizontal]
@@ -3525,7 +3525,7 @@ Hierarchical to:: No other components.
 Dependencies:: FDP_MFW_EXT.1 Mutable/Immutable Firmware +
 FCS_COP.1 Cryptographic Operation
 [vertical]
-FDP_MFW_EXT.2.1:: The TSF shall have the ability to verify the integrity of the firmware_._
+FDP_MFW_EXT.2.1:: The TSF shall have the ability to verify the integrity of the firmware.
 
 FDP_MFW_EXT.2.2:: The TSF shall provide a capability to generate evidence of the integrity of the firmware.
 
