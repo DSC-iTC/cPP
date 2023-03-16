@@ -227,20 +227,20 @@ Users: The entities using the DSC will be client applications on the platform. T
 
 Subjects: The following list contains the fundamental actors in the expected operational use cases of the DSC. The first three are active actors, while the fourth is usually passive but could be active.
 
-* DSC - DSC with security attribute DSC.ID, which is the identity of the DSC
-* Admin - Admin (an authorized administrator with special privileges) security attribute Admin.ID - See <<Roles>> for more discussion on Admin.
-* CA - CA (i.e. an authorized user or an application with a verifiable identity) with security attribute CA.ID - See <<Roles>> for more discussion on users.
-* EPS - External Platform Storage (EPS) (e.g. transient SDE/SDO source and destination, in the case of data imported and exported for the sole use inside the DSC). In the case of a passive EPS, the DSC will properly protect the integrity and confidentiality of the objects it stores and retrieves from there. In the case of an active EPS with security attribute EPS.ID, the DSC and EPS may choose to create a secure channel through which they will pass objects back and forth.
+* S.DSC - DSC with security attribute DSC.ID, which is the identity of the DSC
+* S.Admin - Admin (an authorized administrator with special privileges) security attribute Admin.ID - See <<Roles>> for more discussion on Admin.
+* S.CA - CA (i.e. an authorized user or an application with a verifiable identity) with security attribute CA.ID - See <<Roles>> for more discussion on users.
+* S.EPS - External Platform Storage (EPS) (e.g. transient SDE/SDO source and destination, in the case of data imported and exported for the sole use inside the DSC). In the case of a passive EPS, the DSC will properly protect the integrity and confidentiality of the objects it stores and retrieves from there. In the case of an active EPS with security attribute EPS.ID, the DSC and EPS may choose to create a secure channel through which they will pass objects back and forth.
 
 Objects: The following list contains objects the DSC expects to use during the expected operational use cases.
 
-* P_SDO - Pre-provisioned SDOs (e.g. DSC.ID) with security attributes listed in the next paragraph.
-* T_SDO - Transient SDOs or just SDOs (i.e. SDOs in the DSC currently, but are either ephemeral or are normally stored external to DSC when not in use) with security attributes listed in the next paragraphs. See <<Key Usage>>, <<Key Hierarchies>>, and <<SDEs and SDOs>> for more discussion on keys, which are the primary use cases for SDOs.
-* AuthData - Authorization Data (including authentication data, e.g. PINs, passwords, tokens) 
-* Pstate - Platform State (e.g. measurements and assertions)
-* FAACntr - Failed Authorization Attempt Counters
-* AntiReplay - Anti-replay tokens (e.g. counters, nonces, etc.)
-* Context - Session Context (The DSC may maintain one or more sessions with a CA involving one or more of SDOs, Authorization Data, Platform State, Failed Authorization Counters, and Anti-Replay Tokens. The DSC may represent internally the state of these objects at any given time in a Session Context) - See <<Sessions>> for more discussion on sessions.
+* OB.P_SDO - Pre-provisioned SDOs (e.g. DSC.ID) with security attributes listed in the next paragraph.
+* OB.T_SDO - Transient SDOs or just SDOs (i.e. SDOs in the DSC currently, but are either ephemeral or are normally stored external to DSC when not in use) with security attributes listed in the next paragraphs. See <<Key Usage>>, <<Key Hierarchies>>, and <<SDEs and SDOs>> for more discussion on keys, which are the primary use cases for SDOs.
+* OB.AuthData - Authorization Data (including authentication data, e.g. PINs, passwords, tokens) 
+* OB.Pstate - Platform State (e.g. measurements and assertions)
+* OB.FAACntr - Failed Authorization Attempt Counters
+* OB.AntiReplay - Anti-replay tokens (e.g. counters, nonces, etc.)
+* OB.Context - Session Context (The DSC may maintain one or more sessions with a CA involving one or more of SDOs, Authorization Data, Platform State, Failed Authorization Counters, and Anti-Replay Tokens. The DSC may represent internally the state of these objects at any given time in a Session Context) - See <<Sessions>> for more discussion on sessions.
 
 Security Attributes: The following list contains the minimum security attributes for a DSC. Individual DSCs may implement additional security attributes beyond this (whether they are additional standalone attributes or additional attributes that are associated with SDOs); the ST author is expected to identify these.
 
@@ -261,12 +261,12 @@ Operations: The following list contains the expected operations of a DSC.
 
 * OP.Import (See Parse) - The DSC may receive SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens or Session Contexts from the CA or the EPS. The Admin may also give the DSC Authorization Data.
 * OP.Create (See Provision) - The DSC may create SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts with authorization from a CA or Admin.
-* Use (See Process) - The DSC may use or perform a cryptographic operation on Pre-Provisioned SDOs, Transient SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts with Create authorization from a CA or Admin. Cryptographic operations may include encryption, decryption, hashing, signature generation, and signature verification.
-* Modify (See Process) - The DSC may modify SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts with authorization from a CA or Admin.
-* Attest (See Prove) - The DSC may create an attestation of Platform State using an SDO or Pre-Provisioned SDO and Anti-Replay Tokens as authorized by a CA or Admin respectively. 
-* Store (See Protect) - The DSC may store SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts in protected storage of the DSC. See section 2.4.5 for more discussion on protected storage.
-* Export (See Propagate) - The DSC may export SDOs, SDEs, Authorization Data, Platform State, or Anti-Replay Tokens to a CA or EPS with the proper authorization from the owner of each object. In the case of EPS, the DSC will bind the objects to the DSC in such a way as to deny other DSCs or entities the ability to import, use, modify, attest, store, export, or destroy them. The DSC may export Session Contexts only to an EPS binding it in the same way as above.
-* Destroy (See Purge) - The DSC may purge SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts in protected storage with proper authorization from the owner of each object.
+* OP.Use (See Process) - The DSC may use or perform a cryptographic operation on Pre-Provisioned SDOs, Transient SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts with Create authorization from a CA or Admin. Cryptographic operations may include encryption, decryption, hashing, signature generation, and signature verification.
+* OP.Modify (See Process) - The DSC may modify SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts with authorization from a CA or Admin.
+* OP.Attest (See Prove) - The DSC may create an attestation of Platform State using an SDO or Pre-Provisioned SDO and Anti-Replay Tokens as authorized by a CA or Admin respectively. 
+* OP.Store (See Protect) - The DSC may store SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts in protected storage of the DSC. See section 2.4.5 for more discussion on protected storage.
+* OP.Export (See Propagate) - The DSC may export SDOs, SDEs, Authorization Data, Platform State, or Anti-Replay Tokens to a CA or EPS with the proper authorization from the owner of each object. In the case of EPS, the DSC will bind the objects to the DSC in such a way as to deny other DSCs or entities the ability to import, use, modify, attest, store, export, or destroy them. The DSC may export Session Contexts only to an EPS binding it in the same way as above.
+* OP.Destroy (See Purge) - The DSC may purge SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts in protected storage with proper authorization from the owner of each object.
 
 === TOE Use Cases
 
@@ -907,7 +907,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 The conventions used in descriptions of the SFRs are as follows:
 
 * Unaltered SFRs are stated in the form used in [CC2] or their extended component definition (ECD);
-* Refinement made in the PP: the added/removed text is indicated with bold text/strikethroughs. When text is substituted (i.e. some text is added in place of some other text, which is then deleted), only the added text is included;
+* Refinement made in the PP: the added/removed text is indicated with *bold text*/[.line-through]#strikethroughs#. When text is substituted (i.e. some text is added in place of some other text, which is then deleted), only the added text is included;
 
 Note that a refinement is also used to indicate cases where the PP replaces an assignment defined for an SFR in [CC2] and replaces it with a selection;
 
@@ -979,7 +979,7 @@ _If symmetric key generation in accordance with FCS_CKM.1/SK is selected, the se
 
 FCS_CKM.1/KEK Cryptographic Key Generation (Key Encryption Key)
 
-FCS_CKM.1.1/KEK:: The TSF shall generate key encryption keys in accordance with a specified cryptographic key generation algorithm corresponding to [selection:
+FCS_CKM.1.1/KEK:: The TSF shall generate *key encryption keys* in accordance with a specified cryptographic key generation algorithm *corresponding to [.underline]#[selection:*#
 +
 * [.underline]#*Asymmetric KEKs generated in accordance with FCS_CKM.1/AK identifier AK1,*#
 * [.underline]#*Symmetric KEKs generated in accordance with FCS_CKM.1/SK,*#
@@ -1029,7 +1029,7 @@ _The selections in this SFR must be consistent with those for FCS_COP.1/KAT._
 
 FCS_CKM.4 Cryptographic Key Destruction
 
-FCS_CKM.4.1:: The TSF shall destroy cryptographic keys *and keying material* in accordance with a specified cryptographic key destruction *method [selection:*
+FCS_CKM.4.1:: The TSF shall destroy cryptographic keys *and keying material* in accordance with a specified cryptographic key destruction *method [.underline]#[selection:*#
 +
 * [.underline]#*For volatile memory, the destruction shall be executed by a [selection:*# 
 ** [.underline]#*single overwrite consisting of [selection:*# 
@@ -1037,12 +1037,12 @@ FCS_CKM.4.1:: The TSF shall destroy cryptographic keys *and keying material* in 
 *** [.underline]#*zeroes,*#
 *** [.underline]#*ones,*#
 *** [.underline]#*a new value of a key,*#
-*** [.underline]#*[*_assignment: some value that does not contain any CSP_]],*#
+*** [.underline]#*[_assignment: some value that does not contain any CSP_]],*#
 ** [.underline]#*removal of power to the memory,*#
 ** [.underline]#*removal of all references to the key directly followed by a request for garbage collection];*#
 * [.underline]#*For non-volatile memory [selection:*#
 ** [.underline]#*that employs a wear-leveling algorithm, the destruction shall be executed by a [selection:*#
-*** [.underline]#*single overwrite consisting of [selection: zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment: some value that does not contain any CSP_]],*# 
+*** [.underline]#*single overwrite consisting of [selection: zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [_assignment: some value that does not contain any CSP_]],*# 
 *** [.underline]#*block erase];*#
 ** [.underline]#*that does not employ a wear-leveling algorithm, the destruction shall be executed by a [selection:*#
 *** [.underline]#*[selection: single, [_assignment: ST author defined multi-pass_]] overwrite consisting of [selection: zeros, ones, pseudo-random pattern, a new value of a key of the same size, [_assignment: some value that does not contain any CSP_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated again up to [_assignment: number of times to attempt overwrite_] times, whereupon an error is returned.*#
@@ -1109,17 +1109,17 @@ FCS_COP.1.1/KAT:: The TSF shall perform [_cryptographic key agreement/transport_
 |KAS1
 |RSA-single party
 |[.underline]#[selection: 2048, 3072, 4096, 6144, 8192]# bits
-|NIST SP 800-56Br2 section 8.2
+|NIST SP 800-56Br2 Section 8.2
 
 |KAS2
 |RSA-both party
 |[.underline]#[selection: 2048, 3072, 4096, 6144, 8192]# bits
-|NIST SP 800-56Br2 section 8.3
+|NIST SP 800-56Br2 Section 8.3
 
 |KTS-OAEP
 |RSA
 |[.underline]#[selection: 2048, 3072, 4096, 6144, 8192]# bits
-|NIST SP 800-56Br2 section 9
+|NIST SP 800-56Br2 Section 9
 
 |RSAES-PKCS1-v1_5
 |RSA
@@ -1367,7 +1367,7 @@ ISO 10116 (CTR)
 NIST SP800-38A (CTR)
 
 |XTS-AES 
-|AES in XTS mode with unique [selection: consecutive non- negative integers starting at an arbitrary non-negative integer, data unit sequence numbers] tweak values 
+|AES in XTS mode with unique [.underline]#[selection: consecutive non- negative integers starting at an arbitrary non-negative integer, data unit sequence numbers]# tweak values 
 |[.underline]#[selection: 256 bits, 512 bits]#
 a|ISO 18033-3 (AES) 
 
@@ -1458,7 +1458,7 @@ _Application Note {counter:remark_count}_:: _Not all conformant TOEs will have t
 
 FCS_STG_EXT.2 Key Storage Encryption
 
-FCS_STG_EXT.2.1:: The TSF shall encrypt &#91; _AKs, SKs, KEKs, and [.underline]#[selection: long-term trusted channel key material, all software-based key storage, no other keys]_#] using one of the following methods: [_assignment: key encryption methods as specified in FCS_COP.1/**KeyEnc**_].
+FCS_STG_EXT.2.1:: The TSF shall encrypt &#91; _AKs, SKs, KEKs, and [.underline]#[selection: long-term trusted channel key material, all software-based key storage, no other keys]_#] using one of the following methods: [_assignment: key encryption methods as specified in FCS_COP.1**/KeyEnc**_].
 
 ==== FCS_STG_EXT.3 Key Integrity Protection
 
@@ -1565,9 +1565,9 @@ FDP_FRS_EXT.1 Factory Reset
 
 FDP_FRS_EXT.1.1:: The TSF shall permit a factory reset of the TOE upon: [.underline]#[selection: activation by external interface, presentation of [_assignment: types of authorization data required and reference to their specification_], no actions or conditions]#.
 
-_Application Note {counter:remark_count}_:: _If the DSC provides factory reset and requires an authorization to carry out the operation then the ST author selects either presentation of… and fills in the authorization data accepted (e.g. a PIN or a cryptographic token based on some specification referenced in the assigned value). If the DSC provides factory reset external to the DSC without requiring authorization then the ST author selects activation by external interface. This selection is intended for use when the device containing the DSC takes responsibility for obtaining and checking the authorization for factory reset._
+_Application Note {counter:remark_count}_:: _If the DSC provides factory reset and requires an authorization to carry out the operation then the ST author selects either [.underline]#presentation of…# and fills in the authorization data accepted (e.g. a PIN or a cryptographic token based on some specification referenced in the assigned value). If the DSC provides factory reset external to the DSC without requiring authorization then the ST author selects [.underline]#activation by external interface#. This selection is intended for use when the device containing the DSC takes responsibility for obtaining and checking the authorization for factory reset._
 +
-_If any selection other than no actions or conditions is made in FDP_FRS_EXT.1.1, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
+_If any selection other than [.underline]#no actions or conditions# is made in FDP_FRS_EXT.1.1, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
 
 ==== FDP_ITC_EXT.1 Parsing of SDEs
 
@@ -1640,7 +1640,7 @@ FDP_SDC_EXT.1 Confidentiality of SDEs
 
 FDP_SDC_EXT.1.1:: The TSF shall use [.underline]#[selection: protected storage, symmetric encryption using [selection: AES-CCM, AES-GCM, AES-CBC, AES-KWP, AES-KW, CAM-CBC, CAM-CCM, CAM-GCM] as specified in FCS_COP.1/SKC, key wrapping using [selection: KAS1, KAS2, KTS-OAEP] as specified in FCS_COP.1/KAT]# to protect the confidentiality of authorization data and [_assignment: list of internally and externally stored SDEs identified in the Confidential SDE List attribute of an SDO_].
 
-FDP_SDC_EXT.1.2:: The TSF shall use FCS_CKM.1/KEK to derive or generate the key to encrypt the SDEs.
+FDP_SDC_EXT.1.2:: The TSF shall use FCS_CKM.1**/KEK** to derive or generate the key to encrypt the SDEs.
 
 _Application Note {counter:remark_count}_:: _This SFR applies to confidential SDEs, especially secret and private keys, Allowed Random Number Generators' state data, and vendor verification reference data. This SFR also applies to all authorization data appearing in the attribute list under SDO.AuthData as well as any administrator authorization data which may be stored implicitly._
 +
@@ -1700,9 +1700,9 @@ _Application Note {counter:remark_count}_:: _The product validates the authoriza
 +
 _It is possible for the TOE to have different rules for the treatment of different SDOs or groups of SDOs. For example, some SDOs may trigger a factory reset in the event of excessive authorization failures while others may only temporarily block future authorization attempts. The ST author should iterate this SFR for each distinct response the TSF can make (as defined by the selections in FIA_AFL_EXT.1.3) and the SDOs whose authorization failures will trigger these responses._
 +
-XT.2 is selected in FIA_AFL_EXT.1.3, the selection-based SFR FIA_AFL_EXT.2 must be claimed._
+_If [.underline]#prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FIA_AFL_EXT.2 must be claimed._
 +
-_If factory reset the TOE wiping out all non-persistent SDOs, as described by FDP_FRS_EXT.2 is selected in FIA_AFL_EXT.1.3, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
+_If [.underline]#factory reset the TOE wiping out all non-persistent SDOs, as described by FDP_FRS_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
 
 ==== FIA_SOS.2 TSF Generation of Secrets
 
@@ -1946,9 +1946,9 @@ _When a TOE generates an SDO internally for the first time, it properly indicate
 _The TOE may contain pre-installed SDOs or SDOs either provisioned the first time the user turns on the TOE or provisioned as the result of a "factory reset" event. TSFs may refer to such persistent SDOs as root keys or trusted anchors. Pre-installed SDOs may reside in immutable hardware and persist across factory resets. Other persistent SDOs may persist until a user issues a "factory reset" which either cryptographically erases the SDOs or overwrites them by provisioning new ones. These SDOs may not contain a confidential SDE list since either these persistent values serve as a root encryption key for a hierarchy of SDOs, or they serve as a KDF seed for generating root encryption keys for a hierarchy of SDOs._
 +
 _It is possible that the default attributes of some SDOs should be restrictive, and that the default attributes of other SDOs may be permissive. If this is the case, then the ST author should iterate this SFR and indicate in the TSS what the default attribute properties are for each SDO._
-
++
 _Policy as represented by the attributes in the SDO dictates whether or not a user must authenticate itself in order to authorize access to the SDO._
-
++
 _It is possible that the attributes of some SDOs should remain unchanged, and that the attributes of other SDOs may be changed by authorized users. If this is the case, then the ST author should iterate this SFR and indicate in the TSS which SDOs apply to each iteration._
 
 :xrefstyle: full
