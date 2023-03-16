@@ -1382,15 +1382,6 @@ The evaluator shall repeat this test with the application-imported or applicatio
 * The evaluator shall deny the approvals to verify that the application is not able to use the key/secret as described. 
 * The evaluator shall repeat the test, allowing the approvals to verify that the application is able to use the key/secret as described.
 
-If the ST author has selected [.underline]#common application developer#, this test is performed by either using applications from different developers or appropriately (according to API documentation) not authorizing sharing. 
-
-Test 3: The evaluator shall destroy keys/secrets of each supported type according to the operational guidance. The evaluator shall write, or the developer shall provide access to, an application that destroys an imported or generated key/secret. The evaluator shall repeat this test with the application-imported or application-generated keys/secrets and a different application's imported or generated keys/secrets. The evaluator shall verify that the TOE requires approval before allowing the application to destroy the key/secret imported by the administrator or by a different application: 
-
-* The evaluator shall deny the approvals and verify that the application is still able to use the key/secret as described. 
-* The evaluator shall repeat the test, allowing the approvals and verifying that the application is no longer able to use the key/secret as described. 
-
-If the ST author has selected [.underline]#common application developer#, this test is performed by either using applications from different developers or appropriately (according to API documentation) not authorizing sharing.
-
 ====== KMD
 
 There are no KMD evaluation activities for this component.
@@ -1633,7 +1624,7 @@ There are no AGD evaluation activities for this component.
 
 If the TOE stores SDEs and authorization data inside the TSF, the evaluator shall ensure that external interfaces cannot extract this data in plaintext. 
 
-In this case, use the evaluation activities of the FPT_PHP.3 if [.underline]#protected storage# is selected, FCS_COP.1/SK if [.underline]#symmetric encryption using…# is selected, and FCS_COP.1/KAT if [.underline]#key wrapping using…# is selected.
+In this case, use the evaluation activities of the FPT_PHP.3 if [.underline]#protected storage# is selected, FCS_COP.1/SKC if [.underline]#symmetric encryption using…# is selected, and FCS_COP.1/KAT if [.underline]#key wrapping using…# is selected.
 
 If the TOE stores authentication data inside the operational environment, the evaluator shall ensure that plaintext data is not visible on the interface between the TOE and the operational environment.
 
@@ -1815,7 +1806,7 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-For each management function described in FMT_SMF_EXT.1.1, the evaluator shall perform the function with administrator authorization data and confirm it succeeds, and again with client application authorization data and confirm that it fails.
+For each management function described in FMT_SMF.1.1, the evaluator shall perform the function with administrator authorization data and confirm it succeeds, and again with client application authorization data and confirm that it fails.
 
 ====== KMD
 
@@ -2005,7 +1996,7 @@ For mutable Root of Trust data, the evaluator shall confirm the AGD contains an 
 
 *_Immutability_*
 
-For immutable Root of Trust identity, the evaluator shall confirm a successful evaluation of FPT_PHP.1 (Physical Protection).
+For immutable Root of Trust identity, the evaluator shall confirm a successful evaluation of FPT_PHP.3 (Resistance to Physical Attack).
 
 *_Mutability_*
 
