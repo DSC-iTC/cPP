@@ -959,7 +959,7 @@ SFR text that is bold, italicized, and underlined indicates that the original SF
 
 If the selection or assignment is to be completed by the ST author, it is preceded by 'selection:' or 'assignment:'. If the selection or assignment has been completed by the PP author and the ST author does not have the ability to modify it, the proper formatting convention is applied but the preceding word is not included. The exception to this is if the SFR definition includes multiple options in a selection or assignment and the PP has excluded certain options but at least two remain. In this case, the selection or assignment operations that are not permitted by this PP are removed without applying additional formatting and the 'selection:' or 'assignment:' text is preserved to show that the ST author still has the ability to choose from the reduced set of options.
 
-Extended SFRs (i.e. those SFRs that are not defined in [CC2] are identified by having a label '_EXT' at the end of the SFR name.
+Extended SFRs (i.e. those SFRs that are not defined in [CC2]) are identified by having a label '_EXT' at the end of the SFR name.
 
 === Cryptographic Support
 
