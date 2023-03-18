@@ -2459,9 +2459,10 @@ The ST is evaluated as per ASE activities defined in the CEM. In addition, there
 In addition to using the ST to demonstrate that ASE_TSS.1 has been satisfied, this cPP requires the creation of supplemental documentation to justify how the TOE satisfies certain SFRs. This documentation is separated from the ST because the required level of detail may include information that is proprietary to the developer of the TOE. The required supplemental documentation includes entropy documentation and key management documentation. The requirements for the entropy documentation are described in <<Entropy Documentation and Assessment>> of this cPP. The requirements for the key management documentation are described in the SD under the SFRs that require a detailed description of the TSF's key management.
 
 === ADV: Development
+:xrefstyle: short
+The design information about the TOE is contained in the guidance documentation available to the end user as well as the TSS portion of the ST, and any additional information required by this cPP that is not to be made public (e.g., Entropy Essay). The DSC cPP requires only basic functional specification of interfaces presented in the AGD documentation (see <<Basic Functional Specification (ADV_FSP.1)>>) and specification of interfaces that can be invoked by a dependent component in a composed evaluation where the DSC is the base component.
 
-The design information about the TOE is contained in the guidance documentation available to the end user as well as the TSS portion of the ST, and any additional information required by this cPP that is not to be made public (e.g., Entropy Essay). The DSC cPP requires only basic functional specification of interfaces presented in the AGD documentation (see 6.2.1) and specification of interfaces that can be invoked by a dependent component in a composed evaluation where the DSC is the base component.
-
+:xrefstyle: full
 ==== Basic Functional Specification (ADV_FSP.1)
 
 The functional specification describes the TOE Security Functions Interfaces (TSFIs). It is not necessary to have a formal or complete specification of these interfaces. For this cPP, the Evaluation Activities for this family focus on understanding the interfaces presented in the TSS in response to the functional requirements and the interfaces presented in the AGD documentation.
