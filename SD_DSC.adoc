@@ -2100,6 +2100,10 @@ There are no KMD evaluation activities for this component.
 
 The evaluator shall examine the TSS to ensure that it lists each security function that makes use of time. The TSS provides a description of how the time is maintained and considered reliable in the context of each of the time related functions.
 
+The evaluator shall examine the TSS and other vendor documentation and ensure they describe the location of the time source for the TSF.
+
+[conditional] For a time source that is outside the TOE but contained inside the same physical enclosure, the evaluator shall ensure there is a description of how the time is obtained from the source outside the TOE.
+
 ====== AGD
 
 The evaluator shall examine the guidance documentation to ensure it instructs the administrator how to set the time or indicates any configuration steps required for the TSF to receive time data from an external source.

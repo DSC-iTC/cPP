@@ -2080,7 +2080,7 @@ FPT_STM.1 Reliable Time Stamps
 
 FPT_STM.1.1:: The TSF shall be able to provide reliable time stamps.
 
-_Application Note {counter:remark_count}_:: _It is acceptable for the TSF to provide timestamp data either through an internal clock or a counter. It is also permissible for the TSF to obtain time data from a clock contained within the same physical enclosure as the TOE._
+_Application Note {counter:remark_count}_:: _It is acceptable for the TSF to provide timestamp data either through an internal clock or a counter. It is also permissible for the TSF to obtain time data from a clock contained within the same physical enclosure in which the TOE is embedded (e.g. a mobile device)._
 
 ==== FPT_TST.1 TSF Testing
 
