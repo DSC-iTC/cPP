@@ -1615,7 +1615,7 @@ The evaluator shall examine the TSS to determine that it describes the protectio
 
 The evaluator shall also examine the TSS to determine whether the TSF stores this data inside the TOE boundary or in its operational environment. If the TSF stores this data inside the TOE boundary, the evaluator shall ensure that TSF uses one of the listed methods to provide confidentiality. If the data is stored in the TOE's operational environment, the evaluator shall ensure that the TSF uses key wrapping to provide confidentiality.
 
-The evaluator shall examine the TSS to confirm is sufficiently describes each method used to provide confidentiality for SDEs. The evaluator shall also confirm that the TOE supports all encryption methods selected.
+The evaluator shall examine the TSS to confirm it sufficiently describes each method used to provide confidentiality for SDEs. The evaluator shall also confirm that the TOE supports all encryption methods selected.
 
 ====== AGD
 
@@ -2291,7 +2291,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS to verify that it describes how the TOE generates an asymmetric key based on the methods selected from [DSC cPP] Table 13: "Supported Methods for Asymmetric Key Generation". The evaluator shall examine the TSS to verify that it describes how the TOE invokes the methods selected in the ST from the same table. The evaluator shall examine the TSS to verify that it identifies the usage for each row identifier (key type, key size, and list of standards) selected in the ST.
+The evaluator shall examine the TSS to verify that it describes how the TOE generates an asymmetric key based on the methods selected from [DSC cPP] Table 14: _Supported Methods for Asymmetric Key Generation_. The evaluator shall examine the TSS to verify that it describes how the TOE invokes the methods selected in the ST from the same table. The evaluator shall examine the TSS to verify that it identifies the usage for each row identifier (key type, key size, and list of standards) selected in the ST.
 
 ====== AGD
 
@@ -2385,7 +2385,7 @@ for each FFC parameter set and key pair.
 
 *AK5: Curve25519 Key Generation*
 
-The evaluator shall require the implementation under test (IUT) to generate 10 private/public key pairs. The private key shall be generated as specified in RFC 7748 using an approved random bit generator (RBG) and shall be written in little-endian order (least significant byte first. To determine correctness, the evaluator shall submit the generated key pairs to the public key verification (PKV) function of a known good implementation.
+The evaluator shall require the implementation under test (IUT) to generate 10 private/public key pairs. The private key shall be generated as specified in RFC 7748 using an approved random bit generator (RBG) and shall be written in little-endian order (least significant byte first). To determine correctness, the evaluator shall submit the generated key pairs to the public key verification (PKV) function of a known good implementation.
 
 Note: Assuming the PKV function of the good implementation will (using little-endian order):
 
@@ -2435,7 +2435,7 @@ The evaluator shall confirm that the KMD describes, as applicable:
 
 ====== TSS 
 
-The evaluator shall check that the TSS includes a description of the key derivation functions and shall check that this uses a key derivation algorithm and key sizes according to the specification selected in the ST out of the table as provided in the [DSC cPP] table per row. The evaluator shall confirm that the TSS supports the selected methods.
+The evaluator shall check that the TSS includes a description of the key derivation functions and shall check that this uses a key derivation algorithm and key sizes according to the specification selected in the ST out of [DSC cPP] Table 16: _Key Derivation Functions_ per row. The evaluator shall confirm that the TSS supports the selected methods.
 
 If [.underline]#KeyDrv5# is selected, the evaluator shall verify that the TSS shows that the total length of the concatenated keys used as input to the KDF is greater than or equal to the length of the output from the KDF. 
 
@@ -2587,7 +2587,7 @@ The evaluator should confirm that the combined length of the concatenated keys s
 
 *KeyDrv6: Two Keys Method*
 
-The evaluator should confirm that the combined length of the two keys should be at least as long as the keysize of the selected methods. There are no other tests other than for the methods selected for this row from FCD_COP.1/SK.
+The evaluator should confirm that the combined length of the two keys should be at least as long as the keysize of the selected methods. There are no other tests other than for the methods selected for this row from FCS_COP.1/SKC.
 
 *KeyDrv7: Shared Secret, Salt, Output Length, Fixed Information Method*
 
@@ -2967,7 +2967,7 @@ The EAs presented in this section address the CEM work units ADV_FSP.1-1, ADV_FS
 
 The EAs are reworded for clarity and interpret the CEM work units such that they will result in more objective and repeatable actions by the evaluator. The EAs in this SD are intended to ensure the evaluators are consistently performing equivalent actions.
 
-The documents to be examined for this assurance component in an evaluation are therefore the Security Target, AGD documentation, and any required supplementary information required by the [DSC cPP]: no additional "functional specification" documentation is necessary to satisfy the EAs. The interfaces that need to be evaluated are also identified by reference to the EAs listed for each SFR, and are expected to be identified in the context of the Security Target, AGD documentation, and any required supplementary information defined in the [DSC cPP] rather than as a separate list specifically for the purposes of CC evaluation. The direct identification of documentation requirements and their assessment as part of the EAs for each SFR also means that the tracing required in ADV_FSP.1.2D (work units ADV_FSP.1-4, ADV_FSP.1-6 and ADV_FSP.1-7 is treated as implicit and no separate mapping information is required for this element.
+The documents to be examined for this assurance component in an evaluation are therefore the Security Target, AGD documentation, and any required supplementary information required by the [DSC cPP]: no additional "functional specification" documentation is necessary to satisfy the EAs. The interfaces that need to be evaluated are also identified by reference to the EAs listed for each SFR, and are expected to be identified in the context of the Security Target, AGD documentation, and any required supplementary information defined in the [DSC cPP] rather than as a separate list specifically for the purposes of CC evaluation. The direct identification of documentation requirements and their assessment as part of the EAs for each SFR also means that the tracing required in ADV_FSP.1.2D (work units ADV_FSP.1-4, ADV_FSP.1-6 and ADV_FSP.1-7) is treated as implicit and no separate mapping information is required for this element.
 
 .Mapping of ADV_FSP.1 CEM Work Units to Evaluation Activities
 [cols=".^1,.^1",options="header"]
@@ -2986,7 +2986,7 @@ The documents to be examined for this assurance component in an evaluation are t
 |<<FSPEval3>>: _The evaluator shall examine the interface documentation to develop a mapping of the interfaces to SFRs._
 
 |ADV_FSP.1-4 The evaluator *_shall examine_* the rationale provided by the developer for the implicit categorisation of interfaces as SFR-non-interfering to determine that it is accurate. 
-|Paragraph 561 from the CEM: "In the case where the developer has provided adequate documentation to perform the analysis called for by the rest of the work units for this component without explicitly identifying SFR-enforcing and SFR-supporting interfaces, this work unit should be considered satisfied."Since the rest of the ADV_FSP.1 work units will have been satisfied upon completion of the EAs, it follows that this work unit is satisfied as well.
+|Paragraph 609 from the CEM: "In the case where the developer has provided adequate documentation to perform the analysis called for by the rest of the work units for this component without explicitly identifying SFR-enforcing and SFR-supporting interfaces, this work unit should be considered satisfied."Since the rest of the ADV_FSP.1 work units will have been satisfied upon completion of the EAs, it follows that this work unit is satisfied as well.
 
 |ADV_FSP.1-5 The evaluator *_shall check_* that the tracing links the SFRs to the corresponding TSFIs. 
 |<<FSPEval4>>: _The evaluator shall examine the interface documentation to develop a mapping of the interfaces to SFRs._
@@ -3104,7 +3104,7 @@ However, if the evaluator is unable to perform some other required EA because th
 
 The ST must include a description of the interface for each exported service. Interface descriptions must include the purpose of the interface, method of use, parameters, and parameter descriptions. The descriptions must provide sufficient detail to allow the ST author of a composite evaluation to align the DSC interfaces with the dependent component SFRs that they satisfy. Multiple DSC operations may be combined to satisfy dependent component SFRs. 
 
-It is not required that a DSC expose interfaces to all the Table 1 services to a dependent component. Nor is a DSC limited to providing only the above services. But all such services that are provided must be documented and the interfaces described.
+It is not required that a DSC expose interfaces to all the <<Mapping between DSC Exportable Services and SFRs>> services to a dependent component. Nor is a DSC limited to providing only the above services. But all such services that are provided must be documented and the interfaces described.
 
 === AGD: Guidance Documents
 
