@@ -616,7 +616,7 @@ The evaluators devise an input set consisting of m/8 messages, where m is the bl
 
 *Pseudo-randomly Generated Messages Test*
 
-The evaluators randomly generate a seed that is n bits long, where n is the length of the message digest produced by the hash function to be tested. The evaluators then formulate a set of 100 messages and associated digests by following the algorithm provided in Figure 1 of SHAVS, section 6.4. The evaluators then ensure that the correct result is produced when the messages are provided to the TSF.
+The evaluators randomly generate a seed that is n bits long, where n is the length of the message digest produced by the hash function to be tested. This seed is used by a pseudorandom function to generate 100,000 message digests. One hundred of the digests (every 1,000th digest) are recorded as checkpoints by following the algorithm provided in Figure 1 of SHAVS, section 6.4. The TOE then uses the same procedure to generate the same 100,000 message digests and 100 checkpoint values. The evaluators then ensure that the correct result is produced when the messages are provided to the TSF.
 
 *SHA-3 Tests*
 
