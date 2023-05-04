@@ -616,7 +616,7 @@ The evaluators devise an input set consisting of m/8 messages, where m is the bl
 
 *Pseudo-randomly Generated Messages Test*
 
-The evaluators randomly generate a seed that is n bits long, where n is the length of the message digest produced by the hash function to be tested. The evaluators then formulate a set of 100 messages and associated digests by following the algorithm provided in Figure 1 of SHAVS, section 6.4. The evaluators then ensure that the correct result is produced when the messages are provided to the TSF.
+The evaluators randomly generate a seed that is n bits long, where n is the length of the message digest produced by the hash function to be tested. This seed is used by a pseudorandom function to generate 100,000 message digests. One hundred of the digests (every 1,000th digest) are recorded as checkpoints by following the algorithm provided in Figure 1 of SHAVS, section 6.4. The TOE then uses the same procedure to generate the same 100,000 message digests and 100 checkpoint values. The evaluators then ensure that the correct result is produced when the messages are provided to the TSF.
 
 *SHA-3 Tests*
 
@@ -698,7 +698,7 @@ The evaluator shall verify the implementation of the key generation routines of 
 
 *SP800-56A Key Agreement Schemes*
 
-The evaluator shall verify a TOE's implementation of SP800-56A key agreement schemes using the following Function and Validity tests. These validation tests for each key agreement scheme verify that a TOE has implemented the components of the key agreement scheme according to the specifications in the Recommendation. These components include the calculation of the DLC primitives (the shared secret value Z) and the calculation of the derived keying material (DKM) via the Key Derivation Function (KDF). If key confirmation is supported, the evaluator shall also verify that the components of key confirmation have been implemented correctly, using the test procedures described below. This includes the parsing of the DKM, the generation of MACdata and the calculation of MACtag.
+The evaluator shall verify a TOE's implementation of SP800-56A key agreement schemes using the following function and validity tests. These validation tests for each key agreement scheme verify that a TOE has implemented the components of the key agreement scheme according to the specifications in the recommendation. These components include the calculation of the DLC primitives (the shared secret value Z) and the calculation of the derived keying material (DKM) via the Key Derivation Function (KDF). If key confirmation is supported, the evaluator shall also verify that the components of key confirmation have been implemented correctly, using the test procedures described below. This includes the parsing of the DKM, the generation of MACdata and the calculation of MACtag.
 
 _Function Test_
 
@@ -806,7 +806,7 @@ Each section below contains tests the evaluators must perform for each selected 
 
 The following tests require the developer to provide access to a test platform that provides the evaluator with tools that are not found on the TOE in its evaluated configuration.
 
-*If SigGen1: RSASSA-PKCS1-v1_5or SigGen4: RSASSA-PSS is claimed:*
+*If SigGen1: RSASSA-PKCS1-v1_5 or SigGen4: RSASSA-PSS is claimed:*
 
 The below test is derived from The 186-4 RSA Validation System (RSA2VS). Updated 8 July 2014, Section 6.3, from the National Institute of Standards and Technology.
 
@@ -1383,15 +1383,6 @@ The evaluator shall repeat this test with the application-imported or applicatio
 * The evaluator shall deny the approvals to verify that the application is not able to use the key/secret as described. 
 * The evaluator shall repeat the test, allowing the approvals to verify that the application is able to use the key/secret as described.
 
-If the ST author has selected [.underline]#common application developer#, this test is performed by either using applications from different developers or appropriately (according to API documentation) not authorizing sharing. 
-
-Test 3: The evaluator shall destroy keys/secrets of each supported type according to the operational guidance. The evaluator shall write, or the developer shall provide access to, an application that destroys an imported or generated key/secret. The evaluator shall repeat this test with the application-imported or application-generated keys/secrets and a different application's imported or generated keys/secrets. The evaluator shall verify that the TOE requires approval before allowing the application to destroy the key/secret imported by the administrator or by a different application: 
-
-* The evaluator shall deny the approvals and verify that the application is still able to use the key/secret as described. 
-* The evaluator shall repeat the test, allowing the approvals and verifying that the application is no longer able to use the key/secret as described. 
-
-If the ST author has selected [.underline]#common application developer#, this test is performed by either using applications from different developers or appropriately (according to API documentation) not authorizing sharing.
-
 ====== KMD
 
 There are no KMD evaluation activities for this component.
@@ -1634,7 +1625,7 @@ There are no AGD evaluation activities for this component.
 
 If the TOE stores SDEs and authorization data inside the TSF, the evaluator shall ensure that external interfaces cannot extract this data in plaintext. 
 
-In this case, use the evaluation activities of the FPT_PHP.3 if [.underline]#protected storage# is selected, FCS_COP.1/SK if [.underline]#symmetric encryption using…# is selected, and FCS_COP.1/KAT if [.underline]#key wrapping using…# is selected.
+In this case, use the evaluation activities of the FPT_PHP.3 if [.underline]#protected storage# is selected, FCS_COP.1/SKC if [.underline]#symmetric encryption using…# is selected, and FCS_COP.1/KAT if [.underline]#key wrapping using…# is selected.
 
 If the TOE stores authentication data inside the operational environment, the evaluator shall ensure that plaintext data is not visible on the interface between the TOE and the operational environment.
 
@@ -1816,7 +1807,7 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-For each management function described in FMT_SMF_EXT.1.1, the evaluator shall perform the function with administrator authorization data and confirm it succeeds, and again with client application authorization data and confirm that it fails.
+For each management function described in FMT_SMF.1.1, the evaluator shall perform the function with administrator authorization data and confirm it succeeds, and again with client application authorization data and confirm that it fails.
 
 ====== KMD
 
@@ -2006,7 +1997,7 @@ For mutable Root of Trust data, the evaluator shall confirm the AGD contains an 
 
 *_Immutability_*
 
-For immutable Root of Trust identity, the evaluator shall confirm a successful evaluation of FPT_PHP.1 (Physical Protection).
+For immutable Root of Trust identity, the evaluator shall confirm a successful evaluation of FPT_PHP.3 (Resistance to Physical Attack).
 
 *_Mutability_*
 
@@ -2099,6 +2090,10 @@ There are no KMD evaluation activities for this component.
 ====== TSS
 
 The evaluator shall examine the TSS to ensure that it lists each security function that makes use of time. The TSS provides a description of how the time is maintained and considered reliable in the context of each of the time related functions.
+
+The evaluator shall examine the TSS and other vendor documentation and ensure they describe the location of the time source for the TSF.
+
+[conditional] For a time source that is outside the TOE but contained inside the same physical enclosure, the evaluator shall ensure there is a description of how the time is obtained from the source outside the TOE.
 
 ====== AGD
 
@@ -2413,7 +2408,7 @@ If the TOE uses the generated key in a key chain/hierarchy then the evaluator sh
 
 ====== TSS
 
-The evaluator shall examine the TSS to verify that it describes how the TOE obtains an SK through direct generation as specified in FCS_RBG_EXT.1, FCS_COP.1/KDF, or FCS_COP.1/PBKDF. The evaluator shall review the TSS to verify that it describes how the ST invokes the functionality described by FCS_RBG_EXT.1 and FCS_COP.1/PBKDF where applicable.
+The evaluator shall examine the TSS to verify that it describes how the TOE obtains an SK through direct generation as specified in FCS_RBG_EXT.1, FCS_CKM_EXT.5, or FCS_COP.1/PBKDF. The evaluator shall review the TSS to verify that it describes how the ST invokes the functionality described by FCS_RBG_EXT.1 and FCS_COP.1/PBKDF where applicable.
 
 [conditional] If the symmetric key is generated by an RBG, the evaluator shall review the TSS to determine that it describes how the functionality described by FCS_RBG_EXT.1 is invoked. The evaluator uses the description of the RBG functionality in FCS_RBG_EXT.1 or documentation available for the operational environment to determine that the key size being requested is greater than or equal to the key size and mode to be used for the encryption/decryption of the data.
 
@@ -2423,7 +2418,7 @@ The evaluator shall verify that the AGD guidance instructs the administrator how
 
 ====== Test
 
-For each selected key generation method, the evaluator shall configure the selected generation capability. The evaluator shall use the description of the RBG interface to verify that the TOE requests and receives an amount of RBG output greater than or equal to the requested key size. The evaluator shall perform the tests as described for FCS_COP.1/KDF and FCS_COP.1/PBKDF.
+For each selected key generation method, the evaluator shall configure the selected generation capability. The evaluator shall use the description of the RBG interface to verify that the TOE requests and receives an amount of RBG output greater than or equal to the requested key size. The evaluator shall perform the tests as described for FCS_CKM_EXT.5 and FCS_COP.1/PBKDF.
 
 ====== KMD
 
@@ -2511,7 +2506,7 @@ The following table maps the data fields in the tests below to the notations use
 |Z (shared secret)
 
 |Pseudorandom salt values
-|
+|n/a
 |S
 
 |Randomness extraction MAC
@@ -3109,7 +3104,10 @@ However, if the evaluator is unable to perform some other required EA because th
 
 The ST must include a description of the interface for each exported service. Interface descriptions must include the purpose of the interface, method of use, parameters, and parameter descriptions. The descriptions must provide sufficient detail to allow the ST author of a composite evaluation to align the DSC interfaces with the dependent component SFRs that they satisfy. Multiple DSC operations may be combined to satisfy dependent component SFRs. 
 
-It is not required that a DSC expose interfaces to all the Table 1 services to a dependent component. Nor is a DSC limited to providing only the above services. But all such services that are provided must be documented and the interfaces described.
+:xrefstyle: short
+It is not required that a DSC expose interfaces to all the <<Mapping between DSC Exportable Services and SFRs>> services to a dependent component. Nor is a DSC limited to providing only the above services. But all such services that are provided must be documented and the interfaces described.
+
+:xrefstyle: full
 
 === AGD: Guidance Documents
 
@@ -3340,7 +3338,7 @@ However, if the evaluators discover a Type 3 potential flaw that they believe sh
 
 ==== Type 4 Hypotheses—Tool-Generated
 
-The iTC has called out several tools that should be used during the Type 2 hypotheses process. Therefore, the use of any tools is covered within the Type 2 construct and the iTC does not see any additional tools that are necessary. The use case for Version 2 of this [DSC cPP] is rather straightforward - the device is found in a powered down state and has not been subjected to revisit/evil maid attacks. Since that is the use case, the iTC has also assumed there is a trusted channel between the AA and EE. Since the use case is so narrow, and is not a typical model for penetration or fuzzing testing, the normal types of testing do not apply. Therefore, the relevant types of tools are referenced in Type 2.
+The iTC has called out several tools that should be used during the Type 2 hypotheses process. Therefore, the use of any tools is covered within the Type 2 construct and the iTC does not see any additional tools that are necessary. The use case for Version 2 of this [DSC cPP] is rather straightforward - the device is found in a powered down state and has not been subjected to revisit/evil maid attacks. Since the use case is so narrow, and is not a typical model for penetration or fuzzing testing, the normal types of testing do not apply. Therefore, the relevant types of tools are referenced in Type 2.
 
 === Process for Evaluator Vulnerability Analysis
 
@@ -3385,7 +3383,8 @@ The internal CB report contains, in addition to the information in the public-fa
 
 * A list of all of the flaw hypotheses generated (cf. AVA_VAN.1-4); 
 * The evaluator penetration testing effort, outlining the testing approach, configuration, depth and results (cf. AVA_VAN.1-9);
-* All documentation used to generate the flaw hypotheses (in identifying the documentation used in coming up with the flaw hypotheses, the evaluation team must characterize the documentation so that a reader can determine whether it is strictly required by this Supporting Document, and the nature of the documentation (design information, developer engineering notebooks, etc.));
+* All documentation used to generate the flaw hypotheses: 
+** The documentation shall be characterized so that a reader can determine whether it is strictly required by this Supporting Document, and the nature of the documentation (design information, developer engineering notebooks, etc.);
 * The evaluator shall report all exploitable vulnerabilities and residual vulnerabilities, detailing for each:
 ** Its source (e.g. CEM activity being undertaken when it was conceived, known to the evaluator, read in a publication);
 ** The SFRs not met;
