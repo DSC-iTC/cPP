@@ -999,7 +999,7 @@ _If [.underline]#Derived KEKs generated in accordance with FCS_CKM_EXT.5# is sel
 
 FCS_CKM.2 Cryptographic Key Establishment
 
-FCS_CKM.2.1:: The TSF shall *establish* cryptographic *keys* in accordance with a specified cryptographic key *establishment* method: [.underline]#*[selection:*#
+FCS_CKM.2.1:: The TSF shall *establish* cryptographic keys in accordance with a specified cryptographic key *establishment* method: [.underline]#*[selection:*#
 +
 * [.underline]#*RSA-based key establishment schemes that meet the following: NIST Special Publication 800-56B Revision 2, "Recommendation for Pair-Wise Key Establishment Schemes Using Integer Factorization Cryptography";*#
 * [.underline]#*RSA-based key establishment schemes that meet the following: RSAES-PKCS1-v1_5 as specified in Section 7.2 of RFC 8017, "Public-Key Cryptography Standards (PKCS) #1: RSA Cryptography Specifications Version 2.2";*#
@@ -2106,7 +2106,7 @@ FRU_FLT.1 Degraded Fault Tolerance
 
 FRU_FLT.1.1:: The TSF shall ensure the operation of [_protection of TSF data_] when the following failures occur: [_fault injection_].
 
-_Application Note {counter:remark_count}_:: _TSF data may be protected in response to a fault injection either by providing a method to ensure that the data remains protected or by logically destroying the data or any part of a key change that encrypts it. This behavior may differ based on the type of fault._
+_Application Note {counter:remark_count}_:: _TSF data may be protected in response to a fault injection either by providing a method to ensure that the data remains protected or by logically destroying the data or any part of a key chain that encrypts it. This behavior may differ based on the type of fault._
 
 === TOE Security Functional Requirements Rationale
 
@@ -2461,8 +2461,8 @@ In addition to using the ST to demonstrate that ASE_TSS.1 has been satisfied, th
 === ADV: Development
 :xrefstyle: short
 The design information about the TOE is contained in the guidance documentation available to the end user as well as the TSS portion of the ST, and any additional information required by this cPP that is not to be made public (e.g., Entropy Essay). The DSC cPP requires only basic functional specification of interfaces presented in the AGD documentation (see <<Basic Functional Specification (ADV_FSP.1)>>) and specification of interfaces that can be invoked by a dependent component in a composed evaluation where the DSC is the base component.
-
 :xrefstyle: full
+
 ==== Basic Functional Specification (ADV_FSP.1)
 
 The functional specification describes the TOE Security Functions Interfaces (TSFIs). It is not necessary to have a formal or complete specification of these interfaces. For this cPP, the Evaluation Activities for this family focus on understanding the interfaces presented in the TSS in response to the functional requirements and the interfaces presented in the AGD documentation.
@@ -2516,8 +2516,9 @@ Given the scope of the TOE and its associated evaluation evidence requirements, 
 Testing is specified for functional aspects of the system as well as aspects that take advantage of design or implementation weaknesses. The former is done through the ATE_IND family, while the latter is through the AVA_VAN family. For this cPP, testing is based on advertised functionality and interfaces with dependency on the availability of design information. One of the primary outputs of the evaluation process is the test report as specified in the following requirement.
 
 ==== Independent Testing - Conformance (ATE_IND.1)
-
-Testing is performed to confirm the functionality described in the TSS as well as the operational guidance (includes "evaluated configuration" instructions). The focus of the testing is to confirm that the requirements specified in Section 5 are being met. The Evaluation Activities in the SD identify the specific testing activities necessary to verify compliance with the SFRs. The evaluator produces a test report documenting the plan for and results of testing, as well as coverage arguments focused on the platform/TOE combinations that are claiming conformance to this cPP.
+:xrefstyle: short
+Testing is performed to confirm the functionality described in the TSS as well as the operational guidance (includes "evaluated configuration" instructions). The focus of the testing is to confirm that the requirements specified in <<Security Functional Requirements>> are being met. The Evaluation Activities in the SD identify the specific testing activities necessary to verify compliance with the SFRs. The evaluator produces a test report documenting the plan for and results of testing, as well as coverage arguments focused on the platform/TOE combinations that are claiming conformance to this cPP.
+:xrefstyle: full
 
 === Class AVA: Vulnerability Assessment
 
