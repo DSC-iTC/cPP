@@ -393,7 +393,7 @@ The methodology applied for the cPP evaluation is defined in [CEM] and refined b
 
 In order to be conformant to this cPP, a TOE must demonstrate Exact Conformance. Exact Conformance is defined as the ST containing all of the requirements in <<Security Objectives>> of this cPP (these are the mandatory SFRs), and potentially requirements from <<Optional Requirements>> (these are optional SFRs) or <<Selection-Based Requirements>> (these are selection-based SFRs, some of which will be mandatory according to the selections made in other SFRs) of this cPP. While iteration is allowed, no additional requirements (from CC Parts 2 or 3, or definitions of extended components not already included in this cPP) are allowed to be included in the ST. Further, no requirements in <<Security Objectives>> of this cPP are allowed to be omitted.
 
-The PPs and PP-Modules that are allowed to be specified in a PP-Configuration with this cPP are specified in the 'Allowed-With' list at https://ccusersforum.onlyoffice.com/Products/Files/doceditor.aspx?fileid=6746219[https://ccusersforum.onlyoffice.com/Products/Files/doceditor.aspx?fileid=6746219].
+The PPs and PP-Modules that are allowed to be specified in a PP-Configuration with this cPP are specified on the https://dsc-itc.github.io/[DSC-iTC website] Allowed Components page.
 
 == Security Problem Definition
 
