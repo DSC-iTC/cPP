@@ -249,7 +249,7 @@ For definitions of standard CC terminology, see [CC] part 1.
 |Advanced Encryption Standard
 
 |CA 
-|Certificate Authority
+|CClient Application
 
 |CBC 
 |Cipher Block Chaining
@@ -316,6 +316,9 @@ For definitions of standard CC terminology, see [CC] part 1.
 
 |KMAC 
 |KECCACK Message Authentication Code
+
+|KMD
+|Key Management Document
 
 |NIST 
 |National Institute of Standards and Technology
@@ -402,7 +405,7 @@ The test EAs for individual SFRs identify cases where developer tools may be nee
 
 The EAs presented in this section capture the actions the evaluator performs to address technology specific aspects covering specific SARs (e.g., ASE_TSS.1, ADV_FSP.1, AGD_OPE.1, and ATE_IND.1) - this is in addition to the CEM work units that are performed in <<Evaluation Activities for SARs>>. 
 
-Regarding design descriptions (designated by the subsections labelled TSS, as well as any required supplementary material that may be treated as proprietary), the evaluator must ensure there is specific information that satisfies the EA. For findings regarding the TSS section, the evaluator's verdicts will be associated with the CEM work unit ASE_TSS.1-1. Evaluator verdicts associated with the supplementary evidence will also be associated with ASE_TSS.1-1, since the requirement to provide such evidence is specified in ASE in the cPP. 
+Regarding design descriptions (designated by the subsections labelled TSS, as well as any required supplementary material that may be treated as proprietary designated by the subsections labelled KMD), the evaluator must ensure there is specific information that satisfies the EA. For findings regarding the TSS and KMD sections, the evaluator's verdicts will be associated with the CEM work unit ASE_TSS.1-1. Evaluator verdicts associated with the supplementary evidence will also be associated with ASE_TSS.1-1, since the requirement to provide such evidence is specified in ASE in the cPP. 
 
 For ensuring the guidance documentation provides sufficient information for the administrators/users as it pertains to SFRs, the evaluator's verdicts will be associated with CEM work units ADV_FSP.1-7, AGD_OPE.1-4, and AGD_OPE.1-5. 
 
