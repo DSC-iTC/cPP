@@ -390,7 +390,9 @@ For definitions of standard CC terminology, see [CC] part 1.
 
 === Test Environment Note
 
-Many of the test EAs in this Supporting Document require the evaluator to directly exercise low-level interfaces to the DSC to manipulate it in a manner that may not be feasible with a commercially-available model of the DSC and associated tools. In such cases it is acceptable for the TOE developer to produce materials that allow for the required tests to be executed. As such materials may be proprietary to the vendor, it is sufficient for the evaluator to execute these tests (or observe the execution of these tests) at the TOE developer's facility. For any tests that are executed in this manner, the evaluator shall ensure the following:
+Many of the test EAs in this Supporting Document require the evaluator to directly exercise low-level interfaces to the DSC to manipulate it in a manner that may not be feasible with the commercially-available (production) model of the DSC and associated tools. When this is the case, the TOE developer may provide models of the DSC and associated tools which allow for the required tests to be executed. 
+
+For any tests that are executed using non-commercially-available versions of the TOE provided by the developer, the evaluator shall ensure the following:
 
 * The test report shall document the measures the evaluator took to gain assurance that if the TOE itself is modified to allow for certain tests to be performed, the security of the TOE is not reduced in the unmodified TOE (i.e. if the TOE is modified to use a special firmware build, this should not create a situation where the modified build enforces required security functionality that the unmodified build does not).
 * Any tools used to conduct the required testing shall produce sufficient evidence to demonstrate that the test was successful (e.g., if a tool is designed to erase a particular key, it should also attempt to perform some operation that requires the use of that key to provide evidence that the key destruction succeeded).
