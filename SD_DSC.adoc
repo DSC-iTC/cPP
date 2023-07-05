@@ -3221,12 +3221,12 @@ a|AVA_VAN.1-6 The evaluator *_shall produce_* penetration test documentation for
 [loweralpha]
 . identification of the potential vulnerability the TOE is being tested for;
 . instructions to connect and setup all required test equipment as required to conduct the penetration test;
-. instructions to establish all penetration test prerequisite initialconditions;
+. instructions to establish all penetration test prerequisite initial conditions;
 . instructions to stimulate the TSF;
 . instructions for observing the behaviour of the TSF;
 . descriptions of all expected results and the necessary analysis to be performed on the observed behaviour for comparison againstexpected results;
 . instructions to conclude the test and establish the necessary post-test state for the TOE. 
-|The CEM work unit is captured in <<Reporting>>; there are no substantive differences.
+|Replace the CEM work unit with the activities specified in <<Reporting>>.
 
 |AVA_VAN.1-7 The evaluator *_shall conduct_* penetration testing. 
 |The evaluator shall perform the CEM activity as specified. See <<Reporting>>, for guidance related to attack potential for confirmed flaws.
