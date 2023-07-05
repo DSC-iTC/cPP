@@ -3179,7 +3179,7 @@ When evaluating the developer's coverage of the TOE in their CM system, the eval
 
 ==== Independent Testing - Conformance (ATE_IND.1)
 
-The focus of the testing is to confirm that the requirements specified in the SFRs are being met. Testing is performed to confirm the functionaltiy, as described in the AGD (operational guidance), TSS and KMD (as specified for the functional specification), is accurate.
+The focus of the testing is to confirm that the requirements specified in the SFRs are being met. Testing is performed to confirm the functionality, as described in the AGD (operational guidance), TSS and KMD (as specified for the functional specification), is accurate.
 
 The evaluator performs the CEM work units associated with the ATE_IND.1 SAR. Specific testing requirements and EAs are captured for each SFR in <<Evaluation Activities for SFRs>>, <<Evaluation Activities for Optional Requirements>> and <<Evaluation Activities for Selection-Based Requirements>>. 
 
