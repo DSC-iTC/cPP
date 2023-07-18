@@ -249,7 +249,7 @@ For definitions of standard CC terminology, see [CC] part 1.
 |Advanced Encryption Standard
 
 |CA 
-|CClient Application
+|Client Application
 
 |CBC 
 |Cipher Block Chaining
