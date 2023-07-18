@@ -390,7 +390,7 @@ For definitions of standard CC terminology, see [CC] part 1.
 
 === Test Environment Note
 
-Many of the test EAs in this Supporting Document require the evaluator to directly exercise low-level interfaces to the DSC to manipulate it in a manner that may not be feasible with the commercially-available (production) model of the DSC and associated tools. When this is the case, the TOE developer may provide models of the DSC and associated tools which allow for the required tests to be executed. 
+Many of the test EAs in this Supporting Document require the evaluator to directly exercise low-level interfaces to the DSC to manipulate it in a manner that may not be feasible with the commercially-available (production) model of the DSC and associated tools. When this is the case, the TOE developer may provide models of the DSC and associated tools which allow for the required tests to be executed by the evaluator (or as necessary, executed by the TOE developer and observed by the evaluator). 
 
 For any tests that are executed using non-commercially-available versions of the TOE provided by the developer, the evaluator shall ensure the following:
 
