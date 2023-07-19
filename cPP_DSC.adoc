@@ -967,13 +967,13 @@ Extended SFRs (i.e. those SFRs that are not defined in [CC2]) are identified by 
 
 FCS_CKM.1 Cryptographic Key Generation
 
-FCS_CKM.1.1:: The TSF shall generate cryptographic keys by &#91; _parsing in accordance with FDP_ITC_EXT.1 and FDP_ITC_EXT.2,_ [.underline]#[_selection: asymmetric key generation in accordance with FCS_CKM.1/AK, symmetric key generation in accordance to FCS_CKM.1/SK, no other methods_#]] [.line-through]#in accordance with a specified cryptographic key generation algorithm [assignment: _cryptographic key generation algorithm_] and specified cryptographic key sizes [assignment: _cryptographic key sizes_] that meet the following: [assignment: _list of standards_#]. 
+FCS_CKM.1.1:: The TSF shall generate cryptographic keys by &#91; _parsing in accordance with FDP_ITC_EXT.1 and FDP_ITC_EXT.2,_ [.underline]#[_selection: asymmetric key generation in accordance with FCS_CKM.1/AKG, symmetric key generation in accordance to FCS_CKM.1/SKG, no other methods_#]] [.line-through]#in accordance with a specified cryptographic key generation algorithm [assignment: _cryptographic key generation algorithm_] and specified cryptographic key sizes [assignment: _cryptographic key sizes_] that meet the following: [assignment: _list of standards_#]. 
 
 _Application Note {counter:remark_count}_:: _Parsing of keys can refer to both the act of importing keys from outside the TOE boundary and to the act of issuing commands or parameters to the TOE that trigger the TSF to perform a key generation function._
 +
-_If asymmetric key generation in accordance with FCS_CKM.1/AK is selected, the selection-based SFR FCS_CKM.1/AK must be claimed by the TOE._
+_If asymmetric key generation in accordance with FCS_CKM.1/AKG is selected, the selection-based SFR FCS_CKM.1/AK must be claimed by the TOE._
 +
-_If symmetric key generation in accordance with FCS_CKM.1/SK is selected, the selection-based SFR FCS_CKM.1/SK must be claimed by the TOE._
+_If symmetric key generation in accordance with FCS_CKM.1/SKG is selected, the selection-based SFR FCS_CKM.1/SK must be claimed by the TOE._
 
 ==== FCS_CKM.1/KEK Cryptographic Key Generation (Key Encryption Key)
 
@@ -981,86 +981,136 @@ FCS_CKM.1/KEK Cryptographic Key Generation (Key Encryption Key)
 
 FCS_CKM.1.1/KEK:: The TSF shall generate *key encryption keys* in accordance with a specified cryptographic key generation algorithm *corresponding to [.underline]#[selection:*#
 +
-* [.underline]#*Asymmetric KEKs generated in accordance with FCS_CKM.1/AK identifier AK1,*#
-* [.underline]#*Symmetric KEKs generated in accordance with FCS_CKM.1/SK,*#
+* [.underline]#*Asymmetric KEKs generated in accordance with FCS_CKM.1/AKG identifier AK1,*#
+* [.underline]#*Symmetric KEKs generated in accordance with FCS_CKM.1/SKG,*#
 * [.underline]#*Derived KEKs generated in accordance with FCS_CKM_EXT.5*#
 +
 ] [.line-through]#and specified cryptographic key sizes [_assignment: cryptographic key sizes_] that meet the following: [_assignment: list of standards_]#.
 
 _Application Note {counter:remark_count}_:: _KEKs protect KEKs and Symmetric Keys (SKs). DSCs should use key strengths commensurate with protecting the chosen symmetric encryption key strengths._
 +
-_If [.underline]#Asymmetric KEKs generated in accordance with FCS_CKM.1/AK# is selected, the selection-based SFR FCS_CKM.1/AK must be claimed by the TOE._
+_If [.underline]#Asymmetric KEKs generated in accordance with FCS_CKM.1/AKG# is selected, the selection-based SFR FCS_CKM.1/AKG must be claimed by the TOE._
 +
-_If [.underline]#Symmetric KEKs generated in accordance with FCS_CKM.1/SK# is selected, the selection-based SFR FCS_CKM.1/SK must be claimed by the TOE._
+_If [.underline]#Symmetric KEKs generated in accordance with FCS_CKM.1/SKG# is selected, the selection-based SFR FCS_CKM.1/SKG must be claimed by the TOE._
 +
 _If [.underline]#Derived KEKs generated in accordance with FCS_CKM_EXT.5# is selected, the selection-based SFR FCS_CKM_EXT.5 must be claimed by the TOE._
 
-==== FCS_CKM.2 Cryptographic Key Establishment
+==== FCS_CKM_EXT.7 Cryptographic Key Agreement
 
-FCS_CKM.2 Cryptographic Key Establishment
+FCS_CKM_EXT.7 Cryptographic Key Agreement
 
-FCS_CKM.2.1:: The TSF shall *establish* cryptographic keys in accordance with a specified cryptographic key *establishment* method: [.underline]#*[selection:*#
-+
-* [.underline]#*RSA-based key establishment schemes that meet the following: NIST Special Publication 800-56B Revision 2, "Recommendation for Pair-Wise Key Establishment Schemes Using Integer Factorization Cryptography";*#
-* [.underline]#*RSA-based key establishment schemes that meet the following: RSAES-PKCS1-v1_5 as specified in Section 7.2 of RFC 8017, "Public-Key Cryptography Standards (PKCS) #1: RSA Cryptography Specifications Version 2.2";*#
-* [.underline]#*Elliptic curve-based key establishment schemes that meet the following: [selection:*#
-** [.underline]#*NIST Special Publication 800-56A Revision 3, "Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography";*#
-** [.underline]#*RFC 7748, "Elliptic Curves for Security"]*#
-* [.underline]#*Finite field-based key establishment schemes that meet the following: NIST Special Publication 800-56A Revision 3, "Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography";*#
-* [.underline]#*Elliptic Curve Integrated Encryption Scheme (ECIES) that meets the following: [selection:*#
-** [.underline]#*ANSI X9.63 - Public Key Cryptography for the Financial Services Industry Key Agreement and Key Transport Using Elliptic Curve Cryptography;*#
-** [.underline]#*IEEE 1363a - Standard Specification for Public-Key Cryptography - Amendment 1: Additional Techniques;*#
-** [.underline]#*ISO/IEC 18033-2 - Information Technology - Security Techniques - Encryption Algorithms - Part 2: Asymmetric Ciphers;*#
-** [.underline]#*SECG SEC1 - Standards for Efficient Cryptography Group Elliptic Curve Cryptography, section 5.1 Elliptic Curve Integrated Encryption Scheme]*#
-+
-] [.line-through]#that meets the following: [_assignment: list of standards_]#.
+FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from multiple parties in accordance with specified cryptographic key derivation algorithms [*selection:* _cryptographic algorithm_] and specified key sizes [*selection:* _key sizes_] that meets the following: [*selection:* _list of standards_].
 
-_Application Note {counter:remark_count}_:: _This is a refinement of the SFR FCS_CKM.2 to deal with key establishment rather than key distribution._
-+
-_The ST author selects all key establishment schemes used for the selected cryptographic protocols._
-+
-_The RSA-based key establishment schemes are described in Section 8 of NIST SP 800-56B Revision 2 [NIST-RSA]; however, Section 8 relies on implementation of other sections in SP 800-56B Revision 2._
-+
-_The elliptic curves used for the key establishment scheme correlate with the curves specified in FCS_CKM.1/AK._
-+
-_The selections in this SFR must be consistent with those for FCS_COP.1/KAT._
+The following table provides the allowed choices for completion of the selection operations of FCS_CKM_EXT.7.
 
-==== FCS_CKM.4 Cryptographic Key Destruction
+.Supported Methods for Key Agreement Operations
+[[KeyAgreement]]
+[cols=".^1,.^2,.^2,.^2",options=header]
+|===
 
-FCS_CKM.4 Cryptographic Key Destruction
+|Identifier
+|Cryptographic Algorithm
+|Key Sizes
+|List of Standards
 
-FCS_CKM.4.1:: The TSF shall destroy cryptographic keys *and keying material* in accordance with a specified cryptographic key destruction *method [.underline]#[selection:*#
-+
-* [.underline]#*For volatile memory, the destruction shall be executed by a [selection:*# 
-** [.underline]#*single overwrite consisting of [selection:*# 
-*** [.underline]#*a pseudo-random pattern using the TSF's RBG,*#
-*** [.underline]#*zeroes,*#
-*** [.underline]#*ones,*#
-*** [.underline]#*a new value of a key,*#
-*** [.underline]#*[_assignment: some value that does not contain any CSP_]],*#
-** [.underline]#*removal of power to the memory,*#
-** [.underline]#*removal of all references to the key directly followed by a request for garbage collection];*#
-* [.underline]#*For non-volatile memory [selection:*#
-** [.underline]#*that employs a wear-leveling algorithm, the destruction shall be executed by a [selection:*#
-*** [.underline]#*single overwrite consisting of [selection: zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [_assignment: some value that does not contain any CSP_]],*# 
-*** [.underline]#*block erase];*#
-** [.underline]#*that does not employ a wear-leveling algorithm, the destruction shall be executed by a [selection:*#
-*** [.underline]#*[selection: single, [_assignment: ST author defined multi-pass_]] overwrite consisting of [selection: zeros, ones, pseudo-random pattern, a new value of a key of the same size, [_assignment: some value that does not contain any CSP_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated again up to [_assignment: number of times to attempt overwrite_] times, whereupon an error is returned.*#
-*** [.underline]#*block erase]*#
-+
-*]]* that meets the following: [_no standard_].
+|KAS2
+|RSA
+|&#91; *selection:* [.underline]#2048, 3072, 4096, 6144, 8192]# bits
+|NIST SP 800-56B Rev 2 (Section 8.3)
 
-_Application Note {counter:remark_count}_:: _A DSC must implement mechanisms to destroy cryptographic keys and key material contained in persistent storage when no longer needed. The term "cryptographic keys" in this SFR includes the authorization data that is the entry point to a key chain and all other cryptographic keys and keying material (whether in plaintext or encrypted form). This SFR does not apply to the public component of asymmetric key pairs, or to keys that are permitted to remain stored such as device identification keys._
+|DH
+|Diffie-Hellman
+|&#91; *selection:* [.underline]#2048, 3072, 4096, 6144, 8192]# bits
+|NIST SP 800-56A Rev 3, &#91; *selection:* RFC 3526 (Section [.underline]#[*selection:* 3, 4, 5, 6, 7]), RFC 7919 (Appendixes [*selection:* A.1, A.2, A.3, A.4, A.5]#)]
+
+|ECDH-NIST
+|ECDH with NIST curves
+|&#91; *selection:* [.underline]#256 (P-256), 384 (P-384), 512 (P-521)]#
+|NIST SP 800-56A
+
+|ECDH-BPC
+|ECDH with Brainpool curves
+|&#91; *selection:* [.underline]#256 (brainpoolP256r1), 384 (brainpoolP384r1), 512 (brainpoolP512r1)]#
+|RFC 5639 (Section 3)
+
+|ECDH-Ed
+|ECDH with Edwards Curves
+|&#91; *selection:* [.underline]#256, 448]# bits
+|RFC 7748
+
+|ECIES
+|ECIES
+|&#91; *selection:* [.underline]#256, 384, 512]# bits
+|&#91; *selection:* [.underline]#ANSI X9.63, IEEE 1363a, ISO/IEC 18033-2 Part 2, SECG SEC1 sec 5.1]#
+
+|KDF
+|&#91; *selection:* [.underline]#KDF-CTR, KDF-FB, KDF-DPI]# with concatenated keys as input using &#91; *selection:* [.underline]#AES-128-CMAC; AES-192-CMAC; AES-256-CMAC, HMAC-SHA-1; HMAC-SHA-256; HMAC-SHA-512]# as the PRF.
+|&#91; *selection:* [.underline]#128, 192, 256]# bits
+|NIST SP 800-108 (Section 5) [KDF]
+
+&#91; *selection:* [.underline]#ISO/IEC 9797-1:2011 (CMAC), NIST SP 800-38B (CMAC), ISO/IEC 18033-3:2010 (AES), ISO/IEC 9797-2:2021 (HMAC), FIPS PUB 198-1 (HMAC), ISO/IEC 10118-3:2018 (SHA), FIPS PUB 180-4 (SHA)]# 
+
+|KEK
+|Encrypting one key with another
+|&#91; *selection:* [.underline]#128, 192, 256]# bits
+|N/A
+
+|XOR
+|exclusive OR (XOR)
+|&#91; *selection:* [.underline]#128, 192, 256]# bits
+|N/A
+
+|===
+_Application Note {counter:remark_count}_:: _This SFR captures methods for multi-party key agreement in which multiple parties contribute material used to derive the shared key used by each party to encrypt and decrypt messages to and from each other.  TOEs can use the derived keys as symmetric keys, keyed-hash keys, or cryptographic keys for key derivation functions._
 +
-_In the case of volatile memory, the selection "removal of all references to the key directly followed by a request for garbage collection" is used in a situation where the TSF cannot address the specific physical memory locations holding the data to be erased and therefore relies on addressing logical addresses (which frees the relevant physical addresses holding the old data) and then requesting the platform to ensure that the data in the physical addresses is no longer available for reading (i.e. the "garbage collection" referred to in the SFR text)._
+_FCS_CKM.5 defines KDF-CTR, KDF-FB, and KDF-DPI._
 +
-_Guidance documentation for the TOE requires users not to allow the TOE to leave the user's control while a session is active (and hence while the DEK is likely to be in plaintext in volatile memory)._
+_For the KDF functions, when concatenating keys for AES-CMAC, the contributions from each party should be an equal number of bits, resulting in the selected key size (e.g., if each share is128 bits, then the result after concatenation is a 256-bit key, which is appropriate only for AES-256-CMAC).  For HMAC functions, the shares can be any size as long as the concatenated result is at least equal to or greater than the nominal cryptographic strength of the chosen hash function (e.g. if each share is 128 bits, then the result after concatenation is 256 bits, which can be used in any of SHA-1, SHA-256, or SHA-512)._
 +
-_The selection for destruction of data in non-volatile memory includes block erase as an option, and this option applies only to flash memory. A block erase does not require a read verify, since the mappings of logical addresses to the erased memory locations are erased as well as the data itself._
+_For the KDF functions and XOR, each party may have to use an asymmetric method from FCS_CKM.2 to transmit their shares to each other.  Key shares may also come from a token, in which case, TOEs may use key access methods in FCS_CKM.3 to authorize access and use of those keys in this SFR._
 +
-_Where different destruction methods are used for different data or different destruction situations then the different methods and the data/situations they apply to (e.g. different points in time, or power-loss situations) are described in the TSS (and the ST may use separate iterations of the SFR to aid clarity). The TSS includes a table describing all relevant keys and keying material (including authorization data) used in the implementation of the SFRs, stating the source of the data, all memory types in which the data is stored (covering storage both during and outside of a session, and both plaintext and non-plaintext forms of the data), and the applicable destruction method and time of destruction in each case._
+_For KEK, encrypting one key with another, one must use one of the algorithms listed in FCS_COP.1/SKC._
 +
-_Some selections allow assignment of "some value that does not contain any CSP." This means that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG_EXT requirements, and not being any of the particular values listed as other selection options. The point of the phrase "does not contain any sensitive data" is to ensure that the overwritten data is carefully selected, and not taken from a general pool that might contain current or residual data (e.g. SDOs or intermediate key chain values) that itself requires confidentiality protection._
+_For cPP/ST authors, please consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
+
+==== FCS_CKM.6 Cryptographic Key Destruction
+
+FCS_CKM.6 Cryptographic Key Destruction
+
+FCS_CKM.6.1:: The TSF shall destroy [*assignment:* _list of cryptographic keys (including keying material)_] when [*selection:* _no longer needed, [*assignment:* other circumstances for key or keying material destruction]_].
+
+_Application Note {counter:remark_count}_:: _The TOE will have mechanisms to destroy keys, including intermediate keys and key material, by using an approved method as specified in FCS_CKM.6.2.  Examples of keys include intermediate keys, leaf keys, encryption keys, signing keys, verification keys, authentication tokens, entry points to key chains, and submasks.  Key material includes seeds, secret authorization values, passwords, PINs, and other secret values used to derive keys.  The ST Author shall list all such keys and keying material that are subject to destruction in the first assignment._
++
+_Based on their implementation, vendors will explain when certain keys are no longer needed.  An example in which key is no longer necessary includes a wrapped key whose password has changed.  This SFR does not apply to the public component of asymmetric key pairs, or to keys that are permitted to remain stored such as device identification keys._
+
+FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material specified by FCS_CKM.6.1 in accordance with a specified cryptographic key destruction method [.underline]#[*selection:*#
+
+. [.underline]#For volatile memory, the destruction shall be executed by a [*selection:*# 
+.. [.underline]#single overwrite consisting of [*selection:*# 
+... [.underline]#a pseudo-random pattern using the TSF's RBG,#
+... [.underline]#zeroes,#
+... [.underline]#ones,#
+... [.underline]#a new value of a key,#
+... [.underline]#[*_assignment*: some value that does not contain any CSP_]],#
+.. [.underline]#removal of power to the memory,#
+.. [.underline]#removal of all references to the key directly followed by a request for garbage collection];#
+. [.underline]#For non-volatile memory [*selection:*#
+.. [.underline]#that employs a wear-leveling algorithm, the destruction shall be executed by a [*selection:*#
+... [.underline]#single overwrite consisting of [*selection:* zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any CSP_]],# 
+... [.underline]#block erase];#
+.. [.underline]#that does not employ a wear-leveling algorithm, the destruction shall be executed by a [*selection:*#
+... [.underline]#[*selection:* single, [*_assignment:* ST author defined multi-pass_]] overwrite consisting of [*selection:* zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any CSP_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated again up to [*_assignment:* number of times to attempt overwrite_] times, whereupon an error is returned.#
+... [.underline]#block erase]#
++
+]] that meets the following: [_no standard_].
+
+_Application Note {counter:remark_count}_:: _In the case of volatile memory, the selection "removal of all references to the key directly followed by a request for garbage collection" is used in a situation where the TSF cannot address the specific physical memory locations holding the data to be erased and therefore relies on addressing logical addresses (which frees the relevant physical addresses holding the old data) and then requesting the platform to ensure that the data in the physical addresses is no longer available for reading (i.e. the "garbage collection" referred to in the SFR text)._
++
+_The selection for destruction of data in non-volatile memory includes block erase as an option, and this option applies only to flash memory.  A block erase does not require a read verify, since the mappings of logical addresses to the erased memory locations are erased as well as the data itself._
++
+_The TSS includes a table describing all relevant keys and keying material, their sources, all memory types in which they are stored (covering storage both during and outside of a session, and both plaintext and encrypted forms), the applicable destruction method, and time of destruction for each case._
++
+_Some selections allow assignment of "some value that does not contain any CSP." This means that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG_EXT requirements, and not being any of the particular values listed as other selection options. The point of the phrase "does not contain any sensitive data" is to ensure that the overwritten data is carefully selected, and not taken from a general pool that might contain data that itself requires confidentiality protection._
 
 ==== FCS_CKM_EXT.4 Cryptographic Key and Key Material Destruction Timing
 
