@@ -3303,13 +3303,16 @@ CEM work unit AVA_VAN.1-3 has been supplemented in this Supporting Document to p
 
 ==== Type 1 Hypotheses—Public-Vulnerability-based
 
-The following list of public sources of vulnerability information was selected by the iTC:
+The following list of public sources of vulnerability information were selected by the iTC (in no particular order):
 [loweralpha]
-. Search Common Vulnerabilities and Exposures: https://cve.mitre.org/cve/[https://cve.mitre.org/cve/]
-. Search the National Vulnerability Database: https://nvd.nist.gov/[https://nvd.nist.gov/]
-. Search US-CERT https://www.kb.cert.org/vuls/search/[https://www.kb.cert.org/vuls/search/]
+. Common Vulnerabilities and Exposures: https://cve.mitre.org/cve/[https://cve.mitre.org/cve/]
+. The National Vulnerability Database: https://nvd.nist.gov/[https://nvd.nist.gov/]
+. US-CERT https://www.kb.cert.org/vuls/search/[https://www.kb.cert.org/vuls/search/]
+. CVE Details: https://www.cvedetails.com/vulnerability-search.php[https://www.cvedetails.com/vulnerability-search.php]
+. Tipping Point Zero Day Initiative https://www.zerodayinitiative.com/advisories[https://www.zerodayinitiative.com/advisories]
+. Offensive Security Exploit Database: https://www.exploit-db.com/[https://www.exploit-db.com/]
 
-The list of sources above was searched with the following search terms:
+The list of sources above should be searched with the following search terms:
 
 * Vendor name
 * Product name
