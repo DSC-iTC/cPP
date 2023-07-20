@@ -1017,6 +1017,14 @@ _If [.underline]#Symmetric KEKs generated in accordance with FCS_CKM.1/SKG# is s
 +
 _If [.underline]#Derived KEKs generated in accordance with FCS_CKM.5# is selected, the selection-based SFR FCS_CKM.5 must be claimed by the TOE._
 
+==== FCS_CKM.2 Cryptographic Key Distribution
+
+FCS_CKM.2 Cryptographic Key Distribution
+
+FCS_CKM.2.1:: The TSF shall distribute cryptographic keys in accordance with a specified cryptographic key distribution method [*selection:* _key encapsulation, encrypted channels_] that meets the following: [_none_].
+
+_Application Note {counter:remark_count}_:: _This SFR assumes there is no pre-shared key between the parties. If key encapsulation is chosen, then FCS_COP.1/KeyEncap SHALL be included which specifies the relevant list of standards. If encrypted channels is chosen, then FTP_PRO.1 SHALL be included which specifies the relevant list of standards._
+
 ==== FCS_CKM_EXT.7 Cryptographic Key Agreement
 
 FCS_CKM_EXT.7 Cryptographic Key Agreement
