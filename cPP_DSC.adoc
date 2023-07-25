@@ -616,9 +616,9 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation (Keyed Hash)
 
-!FCS_COP.1/KAT !Cryptographic Operation (Key Agreement/Transport)
+!FCS_COP.1/KeyEncap !Cryptographic Operation - Key Encapsulation
 
-!FCS_COP.1/KeyEnc !Cryptographic Operation (Key Encryption)
+!FCS_COP.1/KeyWrap !Cryptographic Operation - Key Wrap
 
 !FCS_COP.1/PBKDF !Cryptographic Operation (Password-Based Key Derivation Functions)
 
@@ -1222,112 +1222,78 @@ _Application Note {counter:remark_count}_:: _The HMAC minimum key sizes in the t
 
 :xrefstyle: full
 
-==== FCS_COP.1/KAT Cryptographic Operation (Key Agreement/Transport)
+==== FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
 
-FCS_COP.1/KAT Cryptographic Operations (Key Agreement/Transport)
+FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
 
-FCS_COP.1.1/KAT:: The TSF shall perform [_cryptographic key agreement/transport_] *using [.underline]#[selection: identifier from <<KeyAgreeTransport>>]#* in accordance with a specified cryptographic algorithm [_cryptographic algorithms as chosen from <<KeyAgreeTransport>> for corresponding identifiers_] and cryptographic key sizes [_key sizes as chosen from <<KeyAgreeTransport>> for corresponding cryptographic algorithms_] that meet the following: [_standards as chosen from <<KeyAgreeTransport>> for corresponding cryptographic algorithms_].
+FCS_COP.1.1/KeyEncap:: The TSF shall perform _key encapsulation_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
 
-.Supported Methods for Key Agreement/Transport Operation
-[[KeyAgreeTransport]]
-[cols=".^1,.^2,.^2,.^2",options=header]
+.Allowed choices for completion of the selection operations of FCS_COP.1/KeyEncap.
+[[KeyEncapAlgorithms]]
+[cols=".^1,.^2,.^2",options=header]
+|===
+
+|Cryptographic algorithm 
+|Key sizes
+|List of Standards
+
+|KAS1 [RSA-single party] 
+|[*selection*: 2048, 3072, 4096, 8192] bits 
+|NIST SP 800-56B Rev 2 (Sections 6.3 & 8.2) 
+
+|KTS-OAEP [RSA-OAEP] 
+|[*selection*: 2048, 3072, 4096, 8192] bits 
+|NIST SP 800-56B Rev 2 (Sections 6.3 & 9) 
+
+|RSAES-PKCS1-v1_5 [RSA-PKCS1] 
+|[*selection*: 2048, 3072, 4096, 8192] bits 
+|RFC 3447 (Section 7.2) 
+
+|===
+
+==== FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrap
+
+FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrap
+
+FCS_COP.1.1/KeyWrap:: The TSF shall perform _key wrapping_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
+
+.Allowed choices for completion of the selection operations of FCS_COP.1/KeyEncap.
+[[KeyWrapAlgorithms]]
+[cols=".^1,.^1,.^1,.^2",options=header]
 |===
 
 |Identifier
-|Cryptographic Algorithm
-|Key Sizes
+|Cryptographic algorithm 
+|Key sizes
 |List of Standards
 
-|KAS1
-|RSA-single party
-|[.underline]#[selection: 2048, 3072, 4096, 6144, 8192]# bits
-|NIST SP 800-56Br2 Section 8.2
+|KW 
+|[*selection*: AES, CAM, SEED, LEA] in KW mode 
+|{empty}[*selection*: [.underline]#128 bits, 256 bits#] 
+|ISO/IEC 18033-3 (Sub Clause 5.2) [AES] 
 
-|KAS2
-|RSA-both party
-|[.underline]#[selection: 2048, 3072, 4096, 6144, 8192]# bits
-|NIST SP 800-56Br2 Section 8.3
+ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]  
 
-|KTS-OAEP
-|RSA
-|[.underline]#[selection: 2048, 3072, 4096, 6144, 8192]# bits
-|NIST SP 800-56Br2 Section 9
+ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED] 
 
-|RSAES-PKCS1-v1_5
-|RSA
-|[.underline]#[selection: 2048, 3072, 4096, 6144, 8192]# bits
-|RFC 8017 Section 7.2
+ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA] 
 
-|ECDH-NIST
-|ECDH with NIST curves
-|[.underline]#[selection: 256 (P-256), 384 (P-384), 512 (P-521)]#
-|NIST SP 800-56Ar3
+NIST SP 800-38F (Section 6.2) [KW]] 
 
-|ECDH-BPC
-|ECDH with Brainpool curves
-|[.underline]#[selection: 256 (brainpoolP256r1), 384 (brainpoolP384r1), 512 (brainpoolP512r1)]#
-|RFC 5639 (Section 3)
+|KWP 
+|[*selection*: AES, CAM, SEED, LEA]  in KWP mode 
+|{empty}[*selection*: [.underline]#128 bits, 256 bits#] 
+|ISO/IEC 18033-3 (Sub Clause 5.2) [AES] 
 
-|DH
-|Diffie-Hellman
-|[.underline]#[selection: 2048, 3072, 4096, 6144, 8192]# bits
-|NIST SP 800-56A rev 3, [.underline]#[selection: RFC 3526 Section [selection: 3, 4, 5, 6, 7], RFC 7919 Appendices [selection: A.1, A.2, A.3, A.4, A.5]]#
+ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]  
 
-|Curve25519
-|ECDH
-|256 bits
-|RFC 7748
+ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED] 
 
-|ECIES
-|ECIES
-|[.underline]#[selection: 256, 384, 512]# bits
-|[.underline]#[selection:ANSI X9.63,IEEE 1363a,ISO/IEC 18033-2 Part 2,SECG SEC1 sec 5.1]#
+ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA] 
+
+NIST SP 800-38F (Section 6.3) [KWP] 
 
 |===
-
-_Application Note {counter:remark_count}_:: _The selections in this SFR should be consistent with the algorithms selected in FCS_CKM_EXT.7._
-
-==== FCS_COP.1/KeyEnc Cryptographic Operation (Key Encryption)
-
-FCS_COP.1/KeyEnc Cryptographic Operation (Key Encryption)
-
-FCS_COP.1.1/KeyEnc:: The TSF shall perform [_key encryption and decryption_] *using [.underline]#[selection: identifier from <<KeyEncryptOps>>]#* in accordance with a specified cryptographic algorithm [_cryptographic algorithms as chosen from <<KeyEncryptOps>> for corresponding identifiers_] and cryptographic key size [_key sizes as chosen from <<KeyEncryptOps>> for corresponding identifiers_] that meet the following: [_standards as chosen from <<KeyEncryptOps>> for corresponding identifiers_].
-
-.Supported Methods for Key Encryption Operation
-[[KeyEncryptOps]]
-[cols=".^1,.^2,.^2,.^2",options=header]
-|===
-
-|Identifier
-|Cryptographic Algorithm
-|Key Size
-|List of Standards
-
-|SE1
-|Symmetric [.underline]#[selection: AES-CCM, AES-GCM, AES-CBC, AES-CTR, AES-KWP, AES-KW]#
-|[.underline]#[selection: 128, 192, 256]# bits
-|See FCS_COP.1/SKC
-
-|SE2
-|Symmetric [.underline]#[CAM-CBC, CAM-CCM, CAM-GCM]#
-|[.underline]#[selection: 128, 256]# bits
-|See FCS_COP.1/SKC
-
-|AE1
-|Asymmetric KTS-OAEP
-|[.underline]#[selection: 2048, 3072]# bits
-|See FCS_COP.1/KAT
-
-|XOR
-|Exclusive OR operation
-|[.underline]#[selection: 128, 192, 256]# bits
-|See FCS_CKM.5
-
-|===
-
-_Application Note {counter:remark_count}_:: _A TOE will use this requirement to specify how the Key Encryption Key (KEK) wraps a symmetric encryption key. A TOE will always need this requirement in order to capture the last stage of the key chain in which the Key Encryption Key (KEK) wraps the symmetric encryption key._
-+
-_If XOR is selected, the selection-based SFR FCS_CKM.5 must be claimed by the TOE._
 
 ==== FCS_COP.1/SigGen Cryptographic Operation (Signature Generation)
 
@@ -2027,7 +1993,7 @@ _Application Note {counter:remark_count}_:: _When an SDE is a key then it is als
 
 FDP_SDC_EXT.1 Confidentiality of SDEs
 
-FDP_SDC_EXT.1.1:: The TSF shall use [.underline]#[selection: protected storage, symmetric encryption using [selection: AES-CCM, AES-GCM, AES-CBC, AES-KWP, AES-KW, CAM-CBC, CAM-CCM, CAM-GCM] as specified in FCS_COP.1/SKC, key wrapping using [selection: KAS1, KAS2, KTS-OAEP] as specified in FCS_COP.1/KAT]# to protect the confidentiality of authorization data and [_assignment: list of internally and externally stored SDEs identified in the Confidential SDE List attribute of an SDO_].
+FDP_SDC_EXT.1.1:: The TSF shall use [.underline]#[*selection*: protected storage, symmetric encryption using [*selection*: AES-CCM, AES-GCM, AES-CBC, CAM-CBC, CAM-CCM, CAM-GCM] as specified in FCS_COP.1/SKC, key encapsulation using [*selection*: KAS1, KTS-OAEP, RSAES-PKCS1-v1_5] as specified in FCS_COP.1/KeyEncap, key wrapping using [*selection*: KW, KWP] as specified in FCS_COP.1/KeyWrap]# to protect the confidentiality of authorization data and [*_assignment*: list of internally and externally stored SDEs identified in the Confidential SDE List attribute of an SDO_].
 
 FDP_SDC_EXT.1.2:: The TSF shall use FCS_CKM.1**/KEK** to derive or generate the key to encrypt the SDEs.
 
@@ -2724,11 +2690,11 @@ The following rationale provides justification for each security objective for t
 |FCS_COP.1/KeyedHash 
 |This requirement ensures the use of string HMAC mechanisms.
 
-|FCS_COP.1/KAT 
-|This requirement ensures the use of strong methods to perform key agreement and key transport.
+|FCS_COP.1/KeyEncap 
+|This requirement ensures the use of strong methods to perform key encapsulation.
 
-|FCS_COP.1/KeyEnc 
-|This requirement ensures the use of strong methods to perform key encryption.
+|FCS_COP.1/KeyWrap 
+|This requirement ensures the use of strong methods to perform key wrapping.
 
 |FCS_COP.1/SigGen 
 |This requirement ensures the use of strong digital signature services.
@@ -4597,8 +4563,8 @@ FCS_CKM.6
 FCS_CKM.6 
 |FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
 
-|FCS_COP.1/KeyEnc 
-|[FDP_ITC.1, FDP_ITC.2, or FCS_CKM.1] 
+|FCS_COP.1/KeyWrap
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
 
 FCS_CKM.6 
 |FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
