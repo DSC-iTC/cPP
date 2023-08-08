@@ -1372,7 +1372,7 @@ NIST SP 800-186 (Section 3) [NIST Curves]
 |NIST SP 800-208
 
 |XMSS
-|{empty}[*selection*: [.underline]#WOTS+, XMSS, XMSS^TM^]
+|{empty}[*selection*: [.underline]#WOTS+, XMSS, XMSS^TM^]#
 |[*selection:* 408, 536]
 |NIST SP 800-208
 
@@ -1507,7 +1507,7 @@ IV length must be equal to 96 bits; the deterministic IV construction method [SP
 |XTS-AES
 |AES in XTS mode with unique [*selection*: [.underline]#consecutive non-negative integers starting at an arbitrary non-negative integer, data unit sequence numbers#] tweak values
 |{empty}[*selection*: [.underline]#256 bits, 512 bits#]
-|{empty}[*selection*: [.underline]# # ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197] [AES] 
+|{empty}[*selection*: [.underline]#ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197]# [AES] 
 
 {empty}[*selection*: [.underline]#IEEE Std. 1619-2018, NIST SP 800-38E#] [XTS]
 
