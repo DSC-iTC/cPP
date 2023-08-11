@@ -1965,13 +1965,15 @@ The evaluator shall perform the following tests:
 
 Refer to the testing for FPT_FLS.1/FI.
 
-*Test 2: Temperature and Power Analysis*
+*Test 2: Temperature*
 
 The following testing is derived from [ISO 24759] test procedures TE07.77.01 through TE07.77.03:
 
-The evaluator shall configure the ambient temperature and voltage close to the approximate extreme of the normal operating ranges specified in the TSS and verify that the TSF continues to function as expected. The evaluator shall determine 'expected functionality' based on how the TSS describes the TOE's reaction to an environmental failure. For example, if the TSS states that the TOE's response is to shut down, it can be assumed that the TOE functions as expected if it does not shut down. If the TSS states that the TOE's response is to zeroize certain data, it can be assumed that the TOE functions as expected if the evaluator performs functions that rely on known data values and obtain results that indicate non-zero values.
+The evaluator shall configure the temperature of the TOE close to the approximate extreme of the normal operating range specified in the TSS and verify that the TSF continues to function as expected. This may be done via ambient temperature or induced locally as is most appropriate for the TOE (and the accessibility to the physical component). The evaluator shall determine 'expected functionality' based on how the TSS describes the TOE's reaction to an environmental failure. For example, if the TSS states that the TOE's response is to shut down, it can be assumed that the TOE functions as expected if it does not shut down. If the TSS states that the TOE's response is to zeroize certain data, it can be assumed that the TOE functions as expected if the evaluator performs functions that rely on known data values and obtain results that indicate non-zero values.
 
-The evaluator shall then extend the temperature and voltage outside of the specified normal range and verify that the TOE responds in the manner specified in the ST. If the TOE's response is to zeroize known data, the evaluator shall return the ambient temperature and voltage to a normal range, perform functions that rely on known data values, and observe that the results of these functions are consistent with known values of zero.
+The evaluator shall then extend the temperature outside of the specified normal range and verify that the TOE responds in the manner specified in the ST. If the TOE's response is to zeroize known data, the evaluator shall return the ambient temperature to a normal range, perform functions that rely on known data values, and observe that the results of these functions are consistent with known values of zero.
+
+*Test 3: Power Analysis*
 
 ====== KMD
 
