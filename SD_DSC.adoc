@@ -1913,11 +1913,7 @@ The evaluator shall examine the operational guidance to verify that it describes
 
 ====== Test
 
-The evaluator shall perform fault injection on the DSC and attempt to extract a known SDO/SDE. 
-
-The evaluator shall cause the DSC to parse or generate an SDO/SDE with a known value. The evaluator will then cause the TOE to process the SDO/SDE, possibly multiple times, while injecting faults on the TOE.
-
-If the evaluator is able to acquire the original SDO/SDE or a known result from the DSC processing the SDO/SDE, the test is a 'Fail', otherwise, the test is a 'Pass'.
+Refer to the testing for FPT_PHP.3.
 
 ====== KMD
 
@@ -1959,13 +1955,17 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-The evaluator shall perform the following tests:
+All tests here are based on an attempted Fault Injection. 
 
-*Test 1: Fault Injection*
+The evaluator shall perform fault injection on the DSC and attempt to extract a known SDO/SDE. 
 
-Refer to the testing for FPT_FLS.1/FI.
+The evaluator shall cause the DSC to parse or generate an SDO/SDE with a known value. The evaluator will then cause the TOE to process the SDO/SDE, possibly multiple times, while injecting faults on the TOE.
 
-*Test 2: Temperature*
+This test is repeated for each type of Fault Injection.
+
+If the evaluator is able to acquire the original SDO/SDE or a known result from the DSC processing the SDO/SDE, the test is a 'Fail', otherwise, the test is a 'Pass'.
+
+*Test 1: Temperature*
 
 The following testing is derived from [ISO 24759] test procedures TE07.77.01 through TE07.77.03:
 
@@ -1975,7 +1975,7 @@ The evaluator shall determine 'expected functionality' based on how the TSS desc
 
 The evaluator shall then extend the temperature outside of the specified normal range and verify that the TOE responds in the manner specified in the ST. If the TOE's response is to zeroize known data, the evaluator shall return the ambient temperature to a normal range, perform functions that rely on known data values, and observe that the results of these functions are consistent with known values of zero.
 
-*Test 3: Power Analysis*
+*Test 2: Power Analysis*
 
 The following testing is derived from [ISO 24759] test procedures TE07.77.01 through TE07.77.03:
 
