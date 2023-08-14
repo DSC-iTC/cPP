@@ -2008,7 +2008,7 @@ FPT_MOD_EXT.1 Debug Modes
 
 FPT_MOD_EXT.1.1:: The TSF shall provide no access to debug modes.
 
-_Application Note {counter:remark_count}_:: '_Debug modes' may include, but are not limited to, any alternate mode of operation, such as developer mode, test mode, manufacturer mode, or altered boot mode._
+_Application Note {counter:remark_count}_:: '_Debug modes' may include, but are not limited to, any alternate mode of operation, such as developer mode, test mode, manufacturer mode, or altered boot mode. These modes may be available in some versions of the TOE, but not in the final pruoduction version._
 
 ==== FPT_PHP.3 Resistance to Physical Attack
 
