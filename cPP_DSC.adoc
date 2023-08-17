@@ -2014,7 +2014,7 @@ _Application Note {counter:remark_count}_:: '_Debug modes' may include, but are 
 
 FPT_PHP.3 Resistance to Physical Attack
 
-FPT_PHP.3.1:: The TSF shall resist [_data extraction via fault injection, extreme temperatures, abnormal voltage_] to the &#91; _TSF storage elements that contain [.underline]#[selection: SDEs, SDOs, firmware]#_] by responding automatically such that the SFRs are always enforced.
+FPT_PHP.3.1:: The TSF shall resist [_data extraction via fault injection from extreme temperatures and abnormal voltage_] to the &#91; _TSF storage elements that contain [.underline]#[selection: SDEs, SDOs, firmware]#_] by responding automatically such that the SFRs are always enforced.
 
 _Application Note {counter:remark_count}_:: _Physical protection mechanisms as envisioned by this requirement are mechanisms that protect communications to the extent that encryption or other logical protections are not required to ensure confidentiality, integrity, and assured identification of endpoints. Such mechanisms may include, for example, physically isolated traces, or mechanisms that take advantage of physical properties of signals to ensure that communications are receivable only by the intended endpoint._
 +
