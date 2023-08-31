@@ -1793,7 +1793,7 @@ _Each algorithm and mode have varying guidance on the lengths of the salts, nonc
 
 FCS_STG_EXT.1 Protected Storage
 
-FCS_STG_EXT.1.1:: The TSF shall provide [.underline]#[selection: mutable hardware-based, immutable hardware-based, software-based]# protected storage for asymmetric private keys and [.underline]#[selection: symmetric keys, persistent secrets, no other keys]#.
+FCS_STG_EXT.1.1:: The TSF shall provide [.underline]#[selection: mutable hardware-based, immutable hardware-based, software-based]# protected storage for [.underline]#[selection: asymmetric private keys, symmetric keys]# and [.underline]#[selection: persistent secrets, no other keys]#.
 
 _Application Note {counter:remark_count}_:: _If the protected storage is implemented in software that is protected as required by FCS_STG_EXT.2, the ST author is expected to select [.underline]#software-based#. If [.underline]#software-based# is selected, the ST author is expected to select [.underline]#all software-based key storage# in FCS_STG_EXT.2._
 +
