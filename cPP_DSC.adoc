@@ -2363,13 +2363,13 @@ FPT_MOD_EXT.1 Debug Modes
 
 FPT_MOD_EXT.1.1:: The TSF shall provide no access to debug modes.
 
-_Application Note {counter:remark_count}_:: '_Debug modes' may include, but are not limited to, any alternate mode of operation, such as developer mode, test mode, manufacturer mode, or altered boot mode._
+_Application Note {counter:remark_count}_:: '_Debug modes' may include, but are not limited to, any alternate mode of operation, such as developer mode, test mode, manufacturer mode, or altered boot mode. These modes may be available in some versions of the TOE, but not in the final production version._
 
 ==== FPT_PHP.3 Resistance to Physical Attack
 
 FPT_PHP.3 Resistance to Physical Attack
 
-FPT_PHP.3.1:: The TSF shall resist [_data extraction via fault injection, extreme temperatures, abnormal voltage_] to the {empty}[_TSF storage elements that contain [.underline]#[selection: SDEs, SDOs, firmware]#_] by responding automatically such that the SFRs are always enforced.
+FPT_PHP.3.1:: The TSF shall resist [_data extraction via fault injection from extreme temperatures and abnormal voltage_] to the {empty}[_TSF storage elements that contain [.underline]#[selection: SDEs, SDOs, firmware]#_] by responding automatically such that the SFRs are always enforced.
 
 _Application Note {counter:remark_count}_:: _Physical protection mechanisms as envisioned by this requirement are mechanisms that protect communications to the extent that encryption or other logical protections are not required to ensure confidentiality, integrity, and assured identification of endpoints. Such mechanisms may include, for example, physically isolated traces, or mechanisms that take advantage of physical properties of signals to ensure that communications are receivable only by the intended endpoint._
 +
@@ -2887,7 +2887,7 @@ For the current generation of this cPP, the iTC is expected to survey open sourc
 
 ==== Vulnerability Survey (AVA_VAN.1)
 
-As with ATE_IND, the evaluator shall generate a report to document their findings with respect to this requirement. This report could physically be part of the overall test report mentioned in ATE_IND, or a separate document. The evaluator performs a search of public information to determine the vulnerabilities that have been found in network infrastructure platforms and the implemented communication protocols in general, as well as those that pertain to the particular TOE. The evaluator documents the sources consulted and the vulnerabilities found in the report. For each vulnerability found, the evaluator either provides a rationale with respect to its non-applicability, or the evaluator formulates a test (using the guidelines provided in ATE_IND) to confirm the vulnerability, if suitable. Suitability is determined by assessing the attack vector needed to take advantage of the vulnerability. If exploiting the vulnerability requires expert skills and an electron microscope, for instance, then a test would not be suitable and an appropriate justification would be formulated.
+As with ATE_IND, the evaluator shall generate a report to document their findings with respect to this requirement. This report could physically be part of the overall test report mentioned in ATE_IND, or a separate document. The evaluator performs a search of public information to determine the vulnerabilities that have been found in components similar to the component under evaluation (such as a secure element) and when applicable, implemented communication protocols in general, as well as those that pertain to the particular TOE. The evaluator documents the sources consulted and the vulnerabilities found in the report. For each vulnerability found, the evaluator either provides a rationale with respect to its non-applicability, or the evaluator formulates a test (using the guidelines provided in ATE_IND) to confirm the vulnerability, if suitable. Suitability is determined by assessing the attack vector needed to take advantage of the vulnerability. If exploiting the vulnerability requires expert skills and an electron microscope, for instance, then a test would not be suitable and an appropriate justification would be formulated.
 
 [appendix]
 == Optional Requirements

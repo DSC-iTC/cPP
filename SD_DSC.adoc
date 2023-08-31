@@ -249,7 +249,7 @@ For definitions of standard CC terminology, see [CC] part 1.
 |Advanced Encryption Standard
 
 |CA 
-|Certificate Authority
+|Client Application
 
 |CBC 
 |Cipher Block Chaining
@@ -316,6 +316,9 @@ For definitions of standard CC terminology, see [CC] part 1.
 
 |KMAC 
 |KECCACK Message Authentication Code
+
+|KMD
+|Key Management Document
 
 |NIST 
 |National Institute of Standards and Technology
@@ -390,7 +393,9 @@ For definitions of standard CC terminology, see [CC] part 1.
 
 === Test Environment Note
 
-Many of the test EAs in this Supporting Document require the evaluator to directly exercise low-level interfaces to the DSC to manipulate it in a manner that may not be feasible with a commercially-available model of the DSC and associated tools. In such cases it is acceptable for the TOE developer to produce materials that allow for the required tests to be executed. As such materials may be proprietary to the vendor, it is sufficient for the evaluator to execute these tests (or observe the execution of these tests) at the TOE developer's facility. For any tests that are executed in this manner, the evaluator shall ensure the following:
+Many of the test EAs in this Supporting Document require the evaluator to directly exercise low-level interfaces to the DSC to manipulate it in a manner that may not be feasible with the commercially-available (production) model of the DSC and associated tools. When this is the case, the TOE developer may provide models of the DSC and associated tools which allow for the required tests to be executed by the evaluator (or as necessary, executed by the TOE developer and observed by the evaluator). 
+
+For any tests that are executed using non-commercially-available versions of the TOE provided by the developer, the evaluator shall ensure the following:
 
 * The test report shall document the measures the evaluator took to gain assurance that if the TOE itself is modified to allow for certain tests to be performed, the security of the TOE is not reduced in the unmodified TOE (i.e. if the TOE is modified to use a special firmware build, this should not create a situation where the modified build enforces required security functionality that the unmodified build does not).
 * Any tools used to conduct the required testing shall produce sufficient evidence to demonstrate that the test was successful (e.g., if a tool is designed to erase a particular key, it should also attempt to perform some operation that requires the use of that key to provide evidence that the key destruction succeeded).
@@ -402,7 +407,7 @@ The test EAs for individual SFRs identify cases where developer tools may be nee
 
 The EAs presented in this section capture the actions the evaluator performs to address technology specific aspects covering specific SARs (e.g., ASE_TSS.1, ADV_FSP.1, AGD_OPE.1, and ATE_IND.1) - this is in addition to the CEM work units that are performed in <<Evaluation Activities for SARs>>. 
 
-Regarding design descriptions (designated by the subsections labelled TSS, as well as any required supplementary material that may be treated as proprietary), the evaluator must ensure there is specific information that satisfies the EA. For findings regarding the TSS section, the evaluator's verdicts will be associated with the CEM work unit ASE_TSS.1-1. Evaluator verdicts associated with the supplementary evidence will also be associated with ASE_TSS.1-1, since the requirement to provide such evidence is specified in ASE in the cPP. 
+Regarding design descriptions (designated by the subsections labelled TSS, as well as any required supplementary material that may be treated as proprietary designated by the subsections labelled KMD), the evaluator must ensure there is specific information that satisfies the EA. For findings regarding the TSS and KMD sections, the evaluator's verdicts will be associated with the CEM work unit ASE_TSS.1-1. Evaluator verdicts associated with the supplementary evidence will also be associated with ASE_TSS.1-1, since the requirement to provide such evidence is specified in ASE in the cPP. 
 
 For ensuring the guidance documentation provides sufficient information for the administrators/users as it pertains to SFRs, the evaluator's verdicts will be associated with CEM work units ADV_FSP.1-7, AGD_OPE.1-4, and AGD_OPE.1-5. 
 
@@ -1913,11 +1918,7 @@ The evaluator shall examine the operational guidance to verify that it describes
 
 ====== Test
 
-The evaluator shall perform fault injection on the DSC and attempt to extract a known SDO/SDE. 
-
-The evaluator shall cause the DSC to parse or generate an SDO/SDE with a known value. The evaluator will then cause the TOE to process the SDO/SDE, possibly multiple times, while injecting faults on the TOE.
-
-If the evaluator is able to acquire the original SDO/SDE or a known result from the DSC processing the SDO/SDE, the test is a 'Fail', otherwise, the test is a 'Pass'.
+Refer to the testing for FPT_PHP.3.
 
 ====== KMD
 
@@ -1959,19 +1960,37 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-The evaluator shall perform the following tests:
+All tests here are based on an attempted Fault Injection. 
 
-*Test 1: Fault Injection*
+The evaluator shall perform fault injection on the DSC and attempt to extract a known SDO/SDE. 
 
-Refer to the testing for FPT_FLS.1/FI.
+The evaluator shall cause the DSC to parse or generate an SDO/SDE with a known value. The evaluator will then cause the TOE to process the SDO/SDE, possibly multiple times, while injecting faults on the TOE.
 
-*Test 2: Temperature and Power Analysis*
+This test is repeated for each type of Fault Injection.
+
+If the evaluator is able to acquire the original SDO/SDE or a known result from the DSC processing the SDO/SDE, the test is a 'Fail', otherwise, the test is a 'Pass'.
+
+*Test 1: Temperature*
 
 The following testing is derived from [ISO 24759] test procedures TE07.77.01 through TE07.77.03:
 
-The evaluator shall configure the ambient temperature and voltage close to the approximate extreme of the normal operating ranges specified in the TSS and verify that the TSF continues to function as expected. The evaluator shall determine 'expected functionality' based on how the TSS describes the TOE's reaction to an environmental failure. For example, if the TSS states that the TOE's response is to shut down, it can be assumed that the TOE functions as expected if it does not shut down. If the TSS states that the TOE's response is to zeroize certain data, it can be assumed that the TOE functions as expected if the evaluator performs functions that rely on known data values and obtain results that indicate non-zero values.
+The evaluator shall configure the temperature of the TOE close to the approximate extreme of the normal operating range specified in the TSS and verify that the TSF continues to function as expected. This may be done via ambient temperature or induced locally as is most appropriate for the TOE (and the accessibility to the physical component). 
 
-The evaluator shall then extend the temperature and voltage outside of the specified normal range and verify that the TOE responds in the manner specified in the ST. If the TOE's response is to zeroize known data, the evaluator shall return the ambient temperature and voltage to a normal range, perform functions that rely on known data values, and observe that the results of these functions are consistent with known values of zero.
+The evaluator shall determine 'expected functionality' based on how the TSS describes the TOE's reaction to an environmental failure. For example, if the TSS states that the TOE's response is to shut down, it can be assumed that the TOE functions as expected if it does not shut down. If the TSS states that the TOE's response is to zeroize certain data, it can be assumed that the TOE functions as expected if the evaluator performs functions that rely on known data values and obtain results that indicate non-zero values.
+
+The evaluator shall then extend the temperature outside of the specified normal range and verify that the TOE responds in the manner specified in the ST. If the TOE's response is to zeroize known data, the evaluator shall return the ambient temperature to a normal range, perform functions that rely on known data values, and observe that the results of these functions are consistent with known values of zero.
+
+*Test 2: Power Analysis*
+
+The following testing is derived from [ISO 24759] test procedures TE07.77.01 through TE07.77.03:
+
+The evaluator shall configure the voltage of the TOE close to the approximate extreme of the normal operating range specified in the TSS and verify that the TSF continues to function as expected. 
+
+The evaluator shall determine 'expected functionality' based on how the TSS describes the TOE's reaction to an environmental failure. For example, if the TSS states that the TOE's response is to shut down, it can be assumed that the TOE functions as expected if it does not shut down. If the TSS states that the TOE's response is to zeroize certain data, it can be assumed that the TOE functions as expected if the evaluator performs functions that rely on known data values and obtain results that indicate non-zero values.
+
+The evaluator shall then extend the voltage outside of the specified normal range and verify that the TOE responds in the manner specified in the ST. If the TOE's response is to zeroize known data, the evaluator shall return the voltage to a normal range, perform functions that rely on known data values, and observe that the results of these functions are consistent with known values of zero.
+
+The evaluator shall then induce a voltage glitch outside of the specified normal range and verify that the TOE responds in the manner specified in the ST. If the TOE's response is to zeroize known data, the evaluator shall return the voltage to a normal range, perform functions that rely on known data values, and observe that the results of these functions are consistent with known values of zero.
 
 ====== KMD
 
@@ -3303,13 +3322,16 @@ CEM work unit AVA_VAN.1-3 has been supplemented in this Supporting Document to p
 
 ==== Type 1 Hypotheses—Public-Vulnerability-based
 
-The following list of public sources of vulnerability information was selected by the iTC:
+The following list of public sources of vulnerability information were selected by the iTC (in no particular order):
 [loweralpha]
-. Search Common Vulnerabilities and Exposures: https://cve.mitre.org/cve/[https://cve.mitre.org/cve/]
-. Search the National Vulnerability Database: https://nvd.nist.gov/[https://nvd.nist.gov/]
-. Search US-CERT https://www.kb.cert.org/vuls/search/[https://www.kb.cert.org/vuls/search/]
+. Common Vulnerabilities and Exposures: https://cve.mitre.org/cve/[https://cve.mitre.org/cve/]
+. The National Vulnerability Database: https://nvd.nist.gov/[https://nvd.nist.gov/]
+. US-CERT https://www.kb.cert.org/vuls/search/[https://www.kb.cert.org/vuls/search/]
+. CVE Details: https://www.cvedetails.com/vulnerability-search.php[https://www.cvedetails.com/vulnerability-search.php]
+. Tipping Point Zero Day Initiative https://www.zerodayinitiative.com/advisories[https://www.zerodayinitiative.com/advisories]
+. Offensive Security Exploit Database: https://www.exploit-db.com/[https://www.exploit-db.com/]
 
-The list of sources above was searched with the following search terms:
+The list of sources above should be searched with the following search terms:
 
 * Vendor name
 * Product name
