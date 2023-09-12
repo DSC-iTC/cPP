@@ -2768,7 +2768,9 @@ This section lists the set of SARs from CC part 3 that are required in evaluatio
 
 The general model for evaluation of TOEs against STs written to conform to this cPP is as follows:
 
-After the ST has been approved for evaluation, the ITSEF will obtain the TOE, supporting environmental IT (if required), and the administrative/user guides for the TOE. The ITSEF is expected to perform actions mandated by the Common Evaluation Methodology (CEM) for the ASE and ALC SARs. The ITSEF also performs the Evaluation Activities contained within the SD, which are intended to be an interpretation of the other CEM assurance requirements as they apply to the specific technology instantiated in the TOE. The Evaluation Activities that are captured in the SD also provide clarification as to what the developer needs to provide to demonstrate the TOE is compliant with the cPP.
+After the ST has been approved for evaluation, the ITSEF will obtain the TOE, supporting environmental IT (if required), and the administrative/user guides for the TOE. The ITSEF is expected to perform actions mandated by the Common Evaluation Methodology (CEM) and the Evaluation Activities contained within the SD. 
+
+The actions for ALC Class (ALC_CMC.1 and ALC_CMS.1) are specified solely within the CEM, while the remaining Assurance Classes are extended beyond the CEM as described in the SD. The SD is intended to be an interpretation of the other CEM assurance requirements as they apply to the specific technology instantiated in the TOE. The Evaluation Activities that are captured in the SD also provide clarification as to what the developer needs to provide to demonstrate the TOE is compliant with the cPP.
 
 .Security Assurance Requirements
 [cols=".^1,.^2",options=header]
