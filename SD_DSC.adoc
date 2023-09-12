@@ -1612,9 +1612,9 @@ Testing for FCS_CKM.4 is sufficient to address this component.
 
 There are no KMD evaluation activities for this component.
 
-==== Confidentiality of SDEs (Extended - FDP_SDC_EXT)
+==== Stored data confidentiality with dedicated method
 
-===== FDP_SDC_EXT.1 Confidentiality of SDEs
+===== FDP_SDC.2 Stored data confidentiality with dedicated method
 
 ====== TSS
 
