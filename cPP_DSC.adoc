@@ -531,9 +531,7 @@ This security objective for the operating environment expects an entity to wipe 
 |T.WEAK_OWNERSHIP_BINDING
 |This objective protects SDEs from unauthorized access.
 
-.3+|O.FW_INTEGRITY
-|A.ROT_INTEGRITY
-|This objective ensures that the RoT's attestation of firmware integrity is sufficient assurance that the attestation is valid because the RoT is assumed to be trusted.
+.2+|O.FW_INTEGRITY
 
 |T.WEAK_ELEMENT_BINDING
 |This objective ensures that the TOE's firmware cannot be corrupted in a way that allows the unauthorized substitution of SDEs.
