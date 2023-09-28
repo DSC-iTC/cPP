@@ -648,8 +648,6 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_CKM.1/AKG !Cryptographic key generation - Asymmetric Key
 
-!FCS_CKM.1/KEK !Cryptographic Key Generation Key Encryption Key (KEK)
-
 !FCS_CKM.5 !Cryptographic Key Derivation
 
 !FCS_COP.1/Hash !Cryptographic Operation (Hashing)
@@ -987,33 +985,21 @@ Extended SFRs (i.e. those SFRs that are not defined in [CC2]) are identified by 
 
 FCS_CKM.1 Cryptographic Key Generation
 
-FCS_CKM.1.1:: The TSF shall generate cryptographic keys by {empty}[_parsing in accordance with FDP_ITC_EXT.1 and FDP_ITC_EXT.2,_ [.underline]#[_selection: asymmetric key generation in accordance with FCS_CKM.1/AKG, symmetric key generation in accordance to FCS_CKM.1/SKG, no other methods_#]] [.line-through]#in accordance with a specified cryptographic key generation algorithm [assignment: _cryptographic key generation algorithm_] and specified cryptographic key sizes [assignment: _cryptographic key sizes_] that meet the following: [assignment: _list of standards_#]. 
-
-_Application Note {counter:remark_count}_:: _Parsing of keys can refer to both the act of importing keys from outside the TOE boundary and to the act of issuing commands or parameters to the TOE that trigger the TSF to perform a key generation function._
+FCS_CKM.1.1:: The TSF shall generate cryptographic keys in accordance with a specified cryptographic key generation algorithm *corresponding to [.underline]#[selection:*#
 +
-_If asymmetric key generation in accordance with FCS_CKM.1/AKG is selected, the selection-based SFR FCS_CKM.1/AKG must be claimed by the TOE._
-+
-_If symmetric key generation in accordance with FCS_CKM.1/SKG is selected, the selection-based SFR FCS_CKM.1/SKG must be claimed by the TOE._
-
-==== FCS_CKM.1/KEK Cryptographic Key Generation (Key Encryption Key)
-
-FCS_CKM.1/KEK Cryptographic Key Generation (Key Encryption Key)
-
-FCS_CKM.1.1/KEK:: The TSF shall generate *key encryption keys* in accordance with a specified cryptographic key generation algorithm *corresponding to [.underline]#[selection:*#
-+
-* [.underline]#*Asymmetric KEKs generated in accordance with FCS_CKM.1/AKG identifier AK1,*#
-* [.underline]#*Symmetric KEKs generated in accordance with FCS_CKM.1/SKG,*#
-* [.underline]#*Derived KEKs generated in accordance with FCS_CKM.5*#
+* [.underline]#*Asymmetric keys generated in accordance with FCS_CKM.1/AKG identifier AK1,*#
+* [.underline]#*Symmetric keys generated in accordance with FCS_CKM.1/SKG,*#
+* [.underline]#*Derived keys generated in accordance with FCS_CKM.5*#
 +
 ] [.line-through]#and specified cryptographic key sizes [_assignment: cryptographic key sizes_] that meet the following: [_assignment: list of standards_]#.
 
-_Application Note {counter:remark_count}_:: _KEKs protect KEKs and Symmetric Keys (SKs). DSCs should use key strengths commensurate with protecting the chosen symmetric encryption key strengths._
+_Application Note {counter:remark_count}_:: _Cryptographic keys can include KEKs that protect keys as well as the keys used to protect SDEs and SDOs. DSCs should use key strengths commensurate with protecting the chosen symmetric encryption key strengths._
 +
-_If [.underline]#Asymmetric KEKs generated in accordance with FCS_CKM.1/AKG# is selected, the selection-based SFR FCS_CKM.1/AKG must be claimed by the TOE._
+_If [.underline]#Asymmetric keys generated in accordance with FCS_CKM.1/AKG# is selected, the selection-based SFR FCS_CKM.1/AKG must be claimed by the TOE._
 +
-_If [.underline]#Symmetric KEKs generated in accordance with FCS_CKM.1/SKG# is selected, the selection-based SFR FCS_CKM.1/SKG must be claimed by the TOE._
+_If [.underline]#Symmetric keys generated in accordance with FCS_CKM.1/SKG# is selected, the selection-based SFR FCS_CKM.1/SKG must be claimed by the TOE._
 +
-_If [.underline]#Derived KEKs generated in accordance with FCS_CKM.5# is selected, the selection-based SFR FCS_CKM.5 must be claimed by the TOE._
+_If [.underline]#Derived keys generated in accordance with FCS_CKM.5# is selected, the selection-based SFR FCS_CKM.5 must be claimed by the TOE._
 
 ==== FCS_CKM.2 Cryptographic Key Distribution
 
@@ -2675,9 +2661,6 @@ The following rationale provides justification for each security objective for t
 .10+|O.STRONG_CRYPTO 
 |FCS_CKM.1 
 |This requirement specifies the supported methods of key generation.
-
-|FCS_CKM.1/KEK 
-|This requirement ensures the generation of strong key encryption keys.
 
 |FCS_CKM_EXT.7 
 |This requirement ensures the use of strong key agreement mechanisms.
@@ -4487,9 +4470,6 @@ The dependencies between SFRs implemented by the TOE are addressed as follows.
 
 FCS_CKM.6 
 |All of FCS_CKM_EXT.7, FCS_CKM.6, and FCS_COP.1 are required by the PP.
-
-|FCS_CKM.1/KEK 
-|[FCS_CKM_EXT.7 or FCS_COP.1] 
 
 FCS_CKM.6 
 |All of FCS_CKM_EXT.7, FCS_CKM.6, and FCS_COP.1 are required by the PP.
