@@ -987,19 +987,19 @@ FCS_CKM.1 Cryptographic Key Generation
 
 FCS_CKM.1.1:: The TSF shall generate cryptographic keys in accordance with a specified cryptographic key generation algorithm *corresponding to [.underline]#[selection:*#
 +
-* [.underline]#*Asymmetric KEKs generated in accordance with FCS_CKM.1/AKG identifier AK1,*#
-* [.underline]#*Symmetric KEKs generated in accordance with FCS_CKM.1/SKG,*#
-* [.underline]#*Derived KEKs generated in accordance with FCS_CKM.5*#
+* [.underline]#*Asymmetric keys generated in accordance with FCS_CKM.1/AKG identifier AK1,*#
+* [.underline]#*Symmetric keys generated in accordance with FCS_CKM.1/SKG,*#
+* [.underline]#*Derived keys generated in accordance with FCS_CKM.5*#
 +
 ] [.line-through]#and specified cryptographic key sizes [_assignment: cryptographic key sizes_] that meet the following: [_assignment: list of standards_]#.
 
 _Application Note {counter:remark_count}_:: _Cryptographic keys can include KEKs that protect keys as well as the keys used to protect SDEs and SDOs. DSCs should use key strengths commensurate with protecting the chosen symmetric encryption key strengths._
 +
-_If [.underline]#Asymmetric KEKs generated in accordance with FCS_CKM.1/AKG# is selected, the selection-based SFR FCS_CKM.1/AKG must be claimed by the TOE._
+_If [.underline]#Asymmetric keys generated in accordance with FCS_CKM.1/AKG# is selected, the selection-based SFR FCS_CKM.1/AKG must be claimed by the TOE._
 +
-_If [.underline]#Symmetric KEKs generated in accordance with FCS_CKM.1/SKG# is selected, the selection-based SFR FCS_CKM.1/SKG must be claimed by the TOE._
+_If [.underline]#Symmetric keys generated in accordance with FCS_CKM.1/SKG# is selected, the selection-based SFR FCS_CKM.1/SKG must be claimed by the TOE._
 +
-_If [.underline]#Derived KEKs generated in accordance with FCS_CKM.5# is selected, the selection-based SFR FCS_CKM.5 must be claimed by the TOE._
+_If [.underline]#Derived keys generated in accordance with FCS_CKM.5# is selected, the selection-based SFR FCS_CKM.5 must be claimed by the TOE._
 
 ==== FCS_CKM.2 Cryptographic Key Distribution
 
