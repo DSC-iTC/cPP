@@ -121,9 +121,9 @@ The Target of Evaluation (TOE) is a Dedicated Security Component (DSC). In the c
 [[RepofTOE]]
 image::representationofTOE.png[]
 
-The TOE should be one or more discrete and embedded hardware components that provide well-scoped security functions that are physically inaccessible directly from the rich operating system. The DSC TOE would consist of isolated firmware and circuitry capable of executing well-defined commands against SDEs/SDOs in memory and across restricted interfaces.
+The TOE should be one or more discrete and embedded hardware components that provide well-scoped security functions that are physically inaccessible directly from the rich operating system. The DSC TOE would consist of isolated firmware and circuitry capable of executing well-defined commands against SDEs/SDOs in memory and across restricted interfaces. The DSC TOE is not intended to be a discrete, separate stand-alone component, but one which is directly embedded into a larger system.
 
-Examples of a DSC that could claim conformance to this cPP include Secure Elements (SE), Trusted Platform Modules (TPM), Hardware Security Modules (HSM), Trusted Execution Environments (TEE), and Secure Enclave Processors (SEP). In some cases, vendors have already integrated these dedicated hardware components into a System on Chip (SoC) and as such are isolated components of a larger physical package. <<ExofTOEInt>> below shows a block diagram of a typical example of a DSC TOE with all of its internal components.
+A DSC may be comprised of a single embedded component within a device, such as a Secure Enclave Processor (SEP), while in other cases it may be a multi-component system comprised of a software layer and several hardware components (which may be discrete or embedded), such as a Trusted Execution Environment (TEE). Other configurations are possible, with the key point being the DSC is embedded within a larger system and is not a discrete component. These dedicated hardware/software components are integrated into a System on Chip (SoC) and as such are isolated components of a larger physical package. <<ExofTOEInt>> below shows a block diagram of a typical example of a DSC TOE with all of its internal components.
 
 .Example of TOE Internal Components
 [[ExofTOEInt]]
@@ -415,7 +415,7 @@ The PPs and PP-Modules that are allowed to be specified in a PP-Configuration wi
 
 The consequences of risks to SDEs include the loss of confidentiality of the SDE or SDO data, unauthorized access to and use of this data, destruction of this data, and the ability of the adversary to impersonate a user or that user's platform.
 
-(T.HW_ATTACK) An individual with physical access to the TOE may apply hardware attacks such as probing, physical manipulation, fault-injection, side-channel analysis, environmental stress, or reactivating blocked test-features or other pre-delivery services to manipulate the behavior of the TOE to disclose SDOs.
+(T.HW_ATTACK) An individual with physical access to the TOE may apply hardware attacks such as probing, physical manipulation, fault-injection, environmental stress, or reactivating blocked test-features or other pre-delivery services to manipulate the behavior of the TOE to disclose SDOs.
 
 (T.SDE_TRANSIT_COMPROMISE) An attacker with the ability to observe data transmission into and out of the TOE may access or determine plaintext values of keys, authorization data, and other SDEs as the TSF transmits them into or out of the TOE. This puts the SDE/SDO data, user identity, and the TOE's underlying platform at risk.
 
