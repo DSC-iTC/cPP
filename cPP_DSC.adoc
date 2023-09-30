@@ -2926,7 +2926,7 @@ _This SFR lists several methods for protecting the confidentiality of keys prior
 +
 *_Key wrapping* - If the STF claims key wrapping, then it should use approved methods such as KW, or KWP._
 +
-*_Key encryption* - If the STF claims key encryption, then it should use approved methods such as those in FCS_COP.1/SKG combined with either a hash using approved methods such as those in FCS_COP.1/Hash or a keyed hash using approved methods such as those in FCS_COP.2/KeyedHash._
+*_Key encryption* - If the STF claims key encryption, then it should use approved methods such as those in FCS_COP.1/SKC combined with either a hash using approved methods such as those in FCS_COP.1/Hash or a keyed hash using approved methods such as those in FCS_COP.2/KeyedHash._
 +
 *_Authentication for Key Access Methods_*
 +
