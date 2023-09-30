@@ -1882,7 +1882,7 @@ There are no KMD evaluation activities for this component.
 
 ==== Security Management Roles (FMT_SMR)
 
-===== FMT_SMR.2 Restrictions on Security Roles
+===== FMT_SMR.1 Security Roles
 
 ====== TSS
 
