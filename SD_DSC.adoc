@@ -2084,9 +2084,9 @@ Testing for this component is completed through evaluation of FCS_CKM.1, FCS_STG
 
 There are no KMD evaluation activities for this component.
 
-==== Replay Prevention (Extended - FPT_RPL_EXT)
+==== Replay Prevention (FPT_RPL)
 
-===== FPT_RPL_EXT.1 Replay Prevention
+===== FPT_RPL.1/Authorization Replay Prevention
 
 ====== TSS
 

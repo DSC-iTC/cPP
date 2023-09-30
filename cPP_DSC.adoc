@@ -768,7 +768,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FPT_ROT_EXT.1 !Root of Trust Services
 
-!FPT_RPL_EXT.1 !Replay Prevention
+!FPT_RPL.1/Authorization !Replay Prevention
 
 !FPT_STM.1 !Reliable Time Stamps
 
@@ -794,7 +794,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FPT_PRO_EXT.1 !Root of Trust
 
-!FPT_RPL_EXT.1 !Replay Prevention
+!FPT_RPL.1/Authorization !Replay Prevention
 
 !FPT_STM.1 !Reliable Time Stamps
 
@@ -2399,19 +2399,15 @@ FPT_ROT_EXT.2.1:: The TSF shall prevent unauthorized access to SDOs associated w
 
 _Application Note {counter:remark_count}_:: _TOEs may use shielded locations or cryptographic protections to prevent unauthorized access to SDOs. Use FDP_SDI.2 to protect the integrity of SDOs stored in the RoT for Storage._
 
-==== FPT_RPL_EXT.1 Replay Prevention
+==== FPT_RPL.1/Authorization Replay Prevention
 
-FPT_RPL_EXT.1 Replay Prevention
+FPT_RPL.1/Authorization Replay Prevention
 
-FPT_RPL_EXT.1.1:: The TSF shall have a mechanism for preventing replay of user authorization of operations on SDOs using the following methods [.underline]#[selection: monotonic counters, random nonces, [_assignment: other methods as specified_]]#.
+FPT_RPL.1.1/Authorization:: The TSF shall detect replay for the following entities: [_user authorization of operations on SDOs_].
 
-FPT_RPL_EXT.1.2:: The TSF shall detect replay for the following actions: [_authorization of operations on SDOs_].
-
-FPT_RPL_EXT.1.3:: The TSF shall deny the requested operation on the SDO when it detects a replay.
+FPT_RPL.1.2/Authorization:: The TSF shall perform [_denial of the requested operation on the SDO_] when a replay is detected *using the following methods [.underline]#[selection: monotonic counters, random nonces, [_assignment: other methods as specified_]]#*.
 
 _Application Note {counter:remark_count}_:: _The TSF receives authorization from an external source to the DSC to perform an operation on an SDO. If the operation on the SDO is restricted to authorized users, then anyone observing the communication to the DSC can copy the authorization and replay it. Random nonces and monotonic counters are but two mechanisms the TSF can use to mitigate replay. In this requirement, operations on SDOs include generating, using, modifying, propagating, and destroying. Besides monotonic counters and random nonces, the TSF could employ other methods to prevent replay of user authorizations, which the Security Target should describe._
-+
-_This requirement does not specify how TSF detects replays._
 
 ==== FPT_STM.1 Reliable Time Stamps
 
@@ -2575,7 +2571,7 @@ The following rationale provides justification for each security objective for t
 |FPT_ROT_EXT.1 
 |This requirement defines the RoT services that are available for the protection of data.
 
-|FPT_RPL_EXT.1 
+|FPT_RPL.1/Authorization
 |This requirement ensures that access control restrictions cannot be bypassed through replay of operations.
 
 |FPT_ITT.1 (optional)
@@ -3376,14 +3372,12 @@ This Appendix provides a definition for all of the extended components introduce
 | Security Management (FMT) 
 | FMT_MOF_EXT Management of Functions in TSF
 
-.4+| Protection of the TSF (FPT) 
+.3+| Protection of the TSF (FPT) 
 | FPT_MOD_EXT Debug Modes
 
 | FPT_PRO_EXT Root of Trust
 
 | FPT_ROT_EXT Root of Trust Services
-
-| FPT_RPL_EXT Replay Detection
 
 .5+| Trusted Path/Channels (FTP) 
 | FTP_CCMP_EXT CCM Protocol
@@ -4186,47 +4180,6 @@ FPT_ROT_EXT.1 Root of Trust Services
 [vertical]
 FPT_ROT_EXT.3.1:: The TSF shall be able to attest to a state as represented by platform characteristics with a Root of Trust for Reporting mechanism that uses for its identity [.underline]#[selection: a cryptographically verifiable identity in FPT_PRO_EXT.1, an alias key bound to the cryptographically verifiable identity in FPT_PRO_EXT.1]# and using a signature algorithm as specified in FCS_COP.1.
 
-==== FPT_RPL_EXT Replay Detection
-
-*Family Behavior*
-
-This family defines requirements for protection of TSF data through detecting and acting upon replay attempts
-
-*Component Leveling*
-
-[#img-FPT_RPL_EXT] 
-[ditaa,"FPT_RPL_EXT"]
-....
-
-    +--------------------------------------------+ 
-    |                                            |     +---+
-    | FPT_RPL_EXT Replay Detection               +---->| 1 |
-    |                                            |     +---+
-    +--------------------------------------------+ 
-....
-
-FPT_RPL_EXT.1 Replay Prevention, requires the TSF to implement a specific method of replay detection and use this to prevent unauthorized operations from being performed on TSF data.
-
-*Management: FPT_RPL_EXT.1*
-
-No specific management functions are identified.
-
-*Audit: FPT_RPL_EXT.1*
-
-There are no auditable events foreseen.
-
-*FPT_RPL_EXT.1 Replay Prevention*
-[horizontal]
-Hierarchical to:: No other components.
-
-Dependencies:: No dependencies.
-[vertical]
-FPT_RPL_EXT.1.1:: The TSF shall have a mechanism for preventing replay of user authorization of operations on SDOs using the following methods [.underline]#[selection: monotonic counters, random nonces, [_assignment: other methods as specified_]]#.
-
-FPT_RPL_EXT.1.2:: The TSF shall detect replay for the following actions: [_authorization of operations on SDOs_].
-
-FPT_RPL_EXT.1.3:: The TSF shall deny the requested operation on the SDO when it detects a replay.
-
 === Class FTP: Trusted Path/Channels
 ==== FTP_CCMP_EXT CCM Protocol
 
@@ -4668,7 +4621,7 @@ FMT_SMR.1
 |FPT_PRO_EXT.1 
 |FPT_PRO_EXT.1 is required by this PP.
 
-|FPT_RPL_EXT.1 
+|FPT_RPL.1/Authorization
 |No dependencies. 
 |N/A
 
