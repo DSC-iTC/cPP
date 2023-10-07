@@ -702,7 +702,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FDP_SDI.2 !Stored Data Integrity Monitoring and Action
 
-!FMT_SMR.2 !Separation of Roles
+!FMT_SMR.1 !Separation of Roles
 
 !FPT_FLS.1/FI !Failure with Preservation of Secure State (Fault Injection)
 
@@ -764,7 +764,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FMT_SMF.1 !Specification of Management Functions
 
-!FMT_SMR.2 !Separation of Roles
+!FMT_SMR.1 !Separation of Roles
 
 !FPT_ROT_EXT.1 !Root of Trust Services
 
@@ -1878,7 +1878,7 @@ FDP_ACF.1.2The TSF shall enforce the following rules to determine if an operatio
 
 FDP_ACF.1.3 The TSF shall explicitly authorize access of subjects to objects based on the following additional rules: [_assignment: rules, based on security attributes, that explicitly authorize access of subjects to objects_].
 
-FDP_ACF.1.4 The TSF shall explicitly deny access of subjects to objects based on the following additional rules: [_assignment: rules, based on security attributes, that explicitly deny access of subjects to objects_].
+FDP_ACF.1.4 The TSF shall explicitly deny access of subjects to objects based on the following additional rules: [_client applications can only access their own data, [assignment: rules, based on security attributes, that explicitly deny access of subjects to objects]_].
 
 _Application Note {counter:remark_count}_:: _The expectation of this SFR is that the reader is given sufficient information to determine, for each object controlled by the TOE, the operations that can be performed on it based on the subject attempting to perform the operation, and whether this is conditional based on attribute values or any other circumstances._
 +
@@ -2314,20 +2314,13 @@ _Recall that resetting a TOE to factory state also wipes all user data, but may 
 +
 _Protections for pre-installed SDEs/SDOs come through the firmware, and by extension, through firmware updates. In the same vein, the authorized updates may also affect the SDEs as well, if the vendor so chooses. One could say that the authorized update binds the attributes present in the functionality of the firmware to the pre-installed SDEs._
 
-==== FMT_SMR.2 Restrictions on Security Roles
+==== FMT_SMR.1 Security Roles
 
-FMT_SMR.2 Restrictions on Security Roles
+FMT_SMR.1 Security Roles
 
-FMT_SMR.2.1:: The TSF shall maintain the roles: [_administrator, client application_].
+FMT_SMR.1.1:: The TSF shall maintain the roles: [_administrator, client application_].
 
-FMT_SMR.2.2:: The TSF shall be able to associate users with roles.
-
-FMT_SMR.2.3:: The TSF shall ensure that the conditions [
-+
-* _Only client applications can access their own encrypted data,_
-* _Only administrators can perform privileged functions_]
-+
-are satisfied.
+FMT_SMR.1.2:: The TSF shall be able to associate users with roles.
 
 _Application Note {counter:remark_count}_:: _This cPP uses the term "user" throughout to reference both the administrator and client application roles simultaneously._
 
@@ -2507,7 +2500,7 @@ The following rationale provides justification for each security objective for t
 |FMT_SMF.1 
 |This requirement defines the management functions that are provided by the TOE to authorized subjects.
 
-|FMT_SMR.2 
+|FMT_SMR.1 
 |This requirement defines the roles used by the TSF for enforcement of access control to protected functions and data.
 
 |FPT_FLS.1/FI 
@@ -4628,19 +4621,19 @@ When Protected storage is used for storing SDEs and SDOs, FPT_PHP.3 provides equ
 FMT_SMR.1 
 
 FMT_SMF.1 
-|FDP_ACC.1 and FMT_SMF.1 are required by the PP. FMT_SMR.2 is hierarchical to FMT_SMR.1 and is required by the PP.
+|FDP_ACC.1, FMT_SMF.1 and FMT_SMR.1 are required by the PP.
 
 |FMT_MSA.3 
 |FMT_MSA.1 
 
 FMT_SMR.1 
-|FMT_MSA.1 is required by the PP. FMT_SMR.2 is hierarchical to FMT_SMR.1 and is required by the PP.
+|FMT_MSA.1 and FMT_SMR.1 are required by the PP.
 
 |FMT_SMF.1 
 |No dependencies. 
 |N/A
 
-|FMT_SMR.2 
+|FMT_SMR.1 
 |FIA_UID.1 
 |This dependency is not present in the PP because all of the methods used to access the TSF (physically protected channels, encrypted data buffers, or cryptographically protected data channels) all implicitly identify the subject that is attempting to authenticate to the TOE. Therefore, it is not necessary to include a separate SFR that requires subjects to be identified.
 
