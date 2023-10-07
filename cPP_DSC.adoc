@@ -1005,9 +1005,9 @@ _If [.underline]#Derived keys generated in accordance with FCS_CKM.5# is selecte
 
 FCS_CKM.2 Cryptographic Key Distribution
 
-FCS_CKM.2.1:: The TSF shall distribute cryptographic keys in accordance with a specified cryptographic key distribution method [*selection*: _key encapsulation, encrypted channels_] that meets the following: [_none_].
+FCS_CKM.2.1:: The TSF shall distribute cryptographic keys in accordance with a specified cryptographic key distribution method [*selection*: _key encapsulation, physically protected channels as specified in FTP_ITP_EXT.1, encrypted data buffers as specified in FTP_ITE_EXT.1, cryptographically protected data channels as specified in FTP_ITC_EXT.1_] that meets the following: [_none_].
 
-_Application Note {counter:remark_count}_:: _This SFR assumes there is no pre-shared key between the parties. If key encapsulation is chosen, then FCS_COP.1/KeyEncap SHALL be included which specifies the relevant list of standards. If encrypted channels is chosen, then FTP_PRO.1 SHALL be included which specifies the relevant list of standards._
+_Application Note {counter:remark_count}_:: _This SFR assumes there is no pre-shared key between the parties. If key encapsulation is chosen, then FCS_COP.1/KeyEncap SHALL be included which specifies the relevant list of standards._
 
 ==== FCS_CKM_EXT.7 Cryptographic Key Agreement
 
