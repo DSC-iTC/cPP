@@ -1914,7 +1914,7 @@ FDP_ITC_EXT.1 Parsing of SDEs
 
 FDP_ITC_EXT.1.1:: The TSF shall support importing SDEs using [.underline]#[selection: physically protected channels as specified in FTP_ITP_EXT.1, encrypted data buffers as specified in FTP_ITE_EXT.1, cryptographically protected data channels as specified in FTP_ITC_EXT.1]#.
 
-FDP_ITC_EXT.1.2:: The TSF shall verify the integrity of the SDE using [.underline]#[selection: cryptographic hash as specified in FCS_COP.1/Hash, keyed hash as specified in FCS_COP.1/KeyedHash, integrity-providing encryption algorithm as specified in FCS_COP.1/KeyEnc [selection: SE1, SE2], digital signature as specified in FCS_COP.1/SigVer, integrity verification supported by FDP_ITC_EXT.1.1]#.
+FDP_ITC_EXT.1.2:: The TSF shall verify the integrity of the SDE using [.underline]#[selection: cryptographic hash as specified in FCS_COP.1/Hash, keyed hash as specified in FCS_COP.1/KeyedHash, integrity-providing encryption algorithm as specified in FCS_COP.1/KeyWrap, digital signature as specified in FCS_COP.1/SigVer, integrity verification supported by FDP_ITC_EXT.1.1]#.
 
 FDP_ITC_EXT.1.3:: The TSF shall ignore any security attributes associated with the user data when imported from outside the TOE.
 
@@ -1936,7 +1936,7 @@ FDP_ITC_EXT.2 Parsing of SDOs
 
 FDP_ITC_EXT.2.1:: The TSF shall support importing SDOs using [.underline]#[selection: physically protected channels as specified in FTP_ITP_EXT.1, encrypted data buffers as specified in FTP_ITE_EXT.1, cryptographically protected data channels as specified in FTP_ITC_EXT.1]#.
 
-FDP_ITC_EXT.2.2:: The TSF shall verify the integrity of the SDO using [.underline]#[selection: cryptographic hash as specified in FCS_COP.1/Hash, keyed hash as specified in FCS_COP.1/KeyedHash, integrity-providing encryption algorithm as specified in FCS_COP.1/KeyEnc [selection: SE1, SE2], digital signature as specified in FCS_COP.1/SigVer, integrity verification supported by FDP_ITC_EXT.2.1]#.
+FDP_ITC_EXT.2.2:: The TSF shall verify the integrity of the SDO using [.underline]#[selection: cryptographic hash as specified in FCS_COP.1/Hash, keyed hash as specified in FCS_COP.1/KeyedHash, integrity-providing encryption algorithm as specified in FCS_COP.1/KeyWrap, digital signature as specified in FCS_COP.1/SigVer, integrity verification supported by FDP_ITC_EXT.2.1]#.
 
 FDP_ITC_EXT.2.3:: The TSF shall use the security attributes associated with the imported user data.
 
@@ -1993,7 +1993,7 @@ _The confidential-SDE List attribute of the SDO indicates those SDEs that requir
 
 FDP_SDI.2 Stored Data Integrity Monitoring and Action
 
-FDP_SDI.2.1:: The TSF shall monitor *SDOs and SDEs* controlled by the TSF for [_integrity errors_] on all objects, based on the following attributes: [.underline]#*[selection: [_assignment: attribute associated with presence in protected storage_], cryptographic hash, digital signature, integrity-providing encryption algorithm as specified in FCS_COP.1/KeyEnc [selection: SE1, SE2]]*#.
+FDP_SDI.2.1:: The TSF shall monitor *SDOs and SDEs* controlled by the TSF for [_integrity errors_] on all objects, based on the following attributes: [.underline]#*[selection: [_assignment: attribute associated with presence in protected storage_], cryptographic hash, digital signature, integrity-providing encryption algorithm as specified in FCS_COP.1/KeyWrap]*#.
 
 FDP_SDI.2.2:: Upon detection of a data integrity error, the TSF shall [
 +
@@ -2887,7 +2887,7 @@ _Application Note {counter:remark_count}_:: _The TSF accepts enough input from a
 
 FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
 
-FCS_RBG.3.1:: The TSF shall be able to seed the RBG using a [*selection*: choose one of:_ TSF software-based noise source, TSF hardware-based noise source_] [*assignment*: _name of noise source_] with a minimum of [*assignment*: _number of bits_] bits of min-entropy. 
+FCS_RBG.3.1:: The TSF shall be able to seed the RBG using a [*selection*: choose one of: _TSF software-based noise source, TSF hardware-based noise source_] [*assignment*: _name of noise source_] with a minimum of [*assignment*: _number of bits_] bits of min-entropy. 
 
 _Application Note {counter:remark_count}_:: _If an ST Author wishes to use multiple internal noise sources, they iterate this requirement for each noise source used by the TSF._
 +
