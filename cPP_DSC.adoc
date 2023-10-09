@@ -4417,9 +4417,6 @@ The dependencies between SFRs implemented by the TOE are addressed as follows.
 FCS_CKM.6 
 |All of FCS_CKM_EXT.7, FCS_CKM.6, and FCS_COP.1 are required by the PP.
 
-FCS_CKM.6 
-|All of FCS_CKM_EXT.7, FCS_CKM.6, and FCS_COP.1 are required by the PP.
-
 |FCS_CKM_EXT.7 
 |[FDP_ITC.1, FDP_ITC.2, or FCS_CKM.1] 
 
