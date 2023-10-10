@@ -115,7 +115,7 @@ PP Date: {revdate}
 
 === TOE Overview
 
-The Target of Evaluation (TOE) is a Dedicated Security Component (DSC). In the context of this cPP, a DSC is the combination of a hardware component and its controlling firmware. The firmware should be dedicated to providing the encompassing platform with services for the provisioning, protection, and use of Security Data Objects (SDOs), which include keys, identities, attributes, and other types of Security Data Elements (SDEs). See <<RepofTOE>> for an example of a TOE representation.
+The Target of Evaluation (TOE) is a Dedicated Security Component (DSC). In the context of this cPP, a DSC is the combination of a hardware component and its controlling OS or firmware. The firmware should be dedicated to providing the encompassing platform with services for the provisioning, protection, and use of Security Data Objects (SDOs), which include keys, identities, attributes, and other types of Security Data Elements (SDEs). See <<RepofTOE>> for an example of a TOE representation.
 
 .Representation of the Target of Evaluation (TOE)
 [[RepofTOE]]
