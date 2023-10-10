@@ -1409,6 +1409,22 @@ FCS_COP.1.1/SKC:: The TSF shall perform _symmetric-key encryption/decryption_ in
 
 {empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A#] [CBC]
 
+|AES-CCM
+|AES in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
+|{empty}[*selection*: [.underline]#ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197]# [AES]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C]# [CCM]
+
+|AES-GCM
+|AES in GCM mode with non-repeating IVs
+
+IV length must be equal to 96 bits; the deterministic IV construction method [SP800-38D, Section 8.2.1] must be used; the MAC length t must be one of the values 96, 104, 112, 120, and 128 bits.
+|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
+|{empty}[*selection*: [.underline]#ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197]# [AES] 
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D]# [GCM]
+
 |XTS-AES
 |AES in XTS mode with unique [*selection*: [.underline]#consecutive non-negative integers starting at an arbitrary non-negative integer, data unit sequence numbers#] tweak values
 |{empty}[*selection*: [.underline]#256 bits, 512 bits#]
@@ -1429,6 +1445,22 @@ FCS_COP.1.1/SKC:: The TSF shall perform _symmetric-key encryption/decryption_ in
 |ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
 
 {empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A#] [CBC]
+
+|CAM-CCM
+|Camellia in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|{empty}[*selection*: [.underline]#128 bits, 256 bits#]
+|ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C#] [CCM]
+
+|CAM-GCM
+|Camellia in GCM mode with non-repeating IVs
+
+the IV length must be equal to 96 bits; the deterministic IV construction method [SP800-38D, Section 8.2.1] must be used; the MAC length t must be one of the values 96, 104, 112, 120, and 128 bits.
+|{empty}[*selection*: [.underline]#128 bits, 256 bits#]
+|ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D#] [GCM]
 
 |XTS-CAM
 |Camellia in XTS mode with unique [selection: consecutive non-negative integers starting at an arbitrary non-negative integer, data unit sequence numbers] tweak values
@@ -1464,6 +1496,22 @@ FCS_COP.1.1/SKC:: The TSF shall perform _symmetric-key encryption/decryption_ in
 |ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
 
 {empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A#] [CTR]
+
+|SEED-CCM
+|SEED in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|128 bits
+|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C#] [CCM]
+
+|SEED-GCM
+|SEED in GCM mode with non-repeating IVs
+
+IV length must be equal to 96 bits; the deterministic IV construction method [SP800-38D, Section 8.2.1] must be used; the MAC length t must be one of the values 96, 104, 112, 120, and 128 bits.
+|128 bits
+|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D#] [GCM]
 
 |HIGHT-CBC
 |HIGHT in CBC mode with non-repeating and unpredictable IVs
@@ -1520,6 +1568,23 @@ FCS_COP.1.1/SKC:: The TSF shall perform _symmetric-key encryption/decryption_ in
 |ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
 
 {empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A#] [CTR]
+
+|LEA-CCM
+|LEA in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
+|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C#] [CCM]
+
+|LEA-GCM
+|LEA in GCM mode with non-repeating IVs
+
+IV length must be equal to 96 bits; the deterministic IV construction method [SP800-38D, Section 8.2.1] must be used; the MAC length t must be one of the values 96, 104, 112, 120, and 128 bits.
+
+|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
+|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D#] [GCM]
 
 |===
 
