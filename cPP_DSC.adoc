@@ -140,10 +140,7 @@ An SDO is created by combining SDEs with some attributes. Each SDE used to creat
 * By parsing SDEs received via secure channels (see O.PARSE_PROTECTION). 
 * By generating the SDEs locally on the DSC as part of the Provisioning service. 
 
-An SDO may include one or more SDEs from one or both of these sources. In the Provisioning step, the relevant SDEs are then bound together with a set of attributes resulting in an SDO. Explicit binding occurs when the DSC includes one or more SDEs along with their attributes in a formatted structure to form the SDO. An X.509 certificate is just one example of an SDO (where the signature in the certificate provides the binding of the attributes contained). A DSC protects the integrity of an SDO with one of the following methods:
-
-* Hash or keyed hash (FCS_COP.1/Hash, FCS_COP.1/KeyedHash)
-* Digital signature (FCS_COP.1/SigGen, FCS_COP.1/SigVer)
+An SDO may include one or more SDEs from one or both of these sources. In the Provisioning step, the relevant SDEs are then bound together with a set of attributes resulting in an SDO. Explicit binding occurs when the DSC includes one or more SDEs along with their attributes in a formatted structure to form the SDO. An X.509 certificate is just one example of an SDO (where the signature in the certificate provides the binding of the attributes contained). A DSC protects the integrity of an SDO (see O.DATA_PROTECTION).
 
 Explicit binding may also occur when the DSC wraps an SDO prior to storing it externally. <<SDOcomposition>> shows an example SDO with binding data used to secure an arbitrary number of SDEs.
 
