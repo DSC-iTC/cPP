@@ -193,7 +193,7 @@ DSCs provide seven core security services to a platform as illustrated in <<Core
 |The DSC shall create SDOs from parsed or generated SDEs and attributes using binding mechanisms to apply integrity protection to the SDEs together with their attributes.
 
 |Protect
-|The DSC shall manage protected storage for all SDOs. Different DSCs may implement local storage internal to the DSC boundary or utlilize external storage outside the DSC boundary. A DSC shall maintain the integrity and confidentiality (if required) of SDOs both inside the boundary and stored outside the boundary.
+|The DSC shall manage protected storage for all SDOs. DSCs may implement local storage internal to the DSC boundary or utlilize external storage outside the DSC boundary. A DSC shall maintain the integrity and confidentiality (if required) of SDOs stored both inside and outside the boundary.
 
 |Process
 |The DSC shall modify and use SDOs or their attributes on behalf of authorized entities. The Process service shall coordinate with the Protect service for storage of the SDOs while not in use and shall collaborate with the Prove service to authenticate the requesting entity and validate their authorization for access to the SDO in the requested mode. The Process service shall submit an SDO to the Purge service when it is no longer needed by the platform.
