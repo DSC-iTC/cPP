@@ -691,10 +691,6 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_STG_EXT.1 !Protected Storage
 
-!FCS_STG_EXT.2 !Key Storage Encryption
-
-!FCS_STG_EXT.3 !Key Integrity Protection
-
 !FDP_SDC.2 !Stored data confidentiality with dedicated method
 
 !FDP_SDI.2 !Stored Data Integrity Monitoring and Action
@@ -1006,6 +1002,45 @@ FCS_CKM.2.1:: The TSF shall distribute cryptographic keys in accordance with a s
 
 _Application Note {counter:remark_count}_:: _This SFR assumes there is no pre-shared key between the parties. If key encapsulation is chosen, then FCS_COP.1/KeyEncap SHALL be included which specifies the relevant list of standards._
 
+==== FCS_CKM.6 Cryptographic Key Destruction
+
+FCS_CKM.6 Cryptographic Key Destruction
+
+FCS_CKM.6.1:: The TSF shall destroy [*assignment*: _list of cryptographic keys (including keying material)_] when [*selection*: _no longer needed, [*assignment*: other circumstances for key or keying material destruction]_].
+
+_Application Note {counter:remark_count}_:: _The TOE will have mechanisms to destroy keys, including intermediate keys and key material, by using an approved method as specified in FCS_CKM.6.2. Examples of keys include intermediate keys, leaf keys, encryption keys, signing keys, verification keys, authentication tokens, entry points to key chains, and submasks. Key material includes seeds, secret authorization values, passwords, PINs, and other secret values used to derive keys. The ST Author shall list all such keys and keying material that are subject to destruction in the first assignment._
++
+_Based on their implementation, vendors will explain when certain keys are no longer needed. An example in which key is no longer necessary includes a wrapped key whose password has changed. This SFR does not apply to the public component of asymmetric key pairs, or to keys that are permitted to remain stored such as device identification keys._
+
+FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material specified by FCS_CKM.6.1 in accordance with a specified cryptographic key destruction method [.underline]#[*selection*:#
+
+. [.underline]#For volatile memory, the destruction shall be executed by a [*selection*:# 
+.. [.underline]#single overwrite consisting of [*selection*:# 
+... [.underline]#a pseudo-random pattern using the TSF's RBG,#
+... [.underline]#zeroes,#
+... [.underline]#ones,#
+... [.underline]#a new value of a key,#
+... [.underline]#[*_assignment*: some value that does not contain any CSP_]],#
+.. [.underline]#removal of power to the memory,#
+.. [.underline]#removal of all references to the key directly followed by a request for garbage collection];#
+. [.underline]#For non-volatile memory [*selection*:#
+.. [.underline]#that employs a wear-leveling algorithm, the destruction shall be executed by a [*selection*:#
+... [.underline]#single overwrite consisting of [*selection*: zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any CSP_]],# 
+... [.underline]#block erase];#
+.. [.underline]#that does not employ a wear-leveling algorithm, the destruction shall be executed by a [*selection*:#
+... [.underline]#[*selection*: single, [*_assignment:* ST author defined multi-pass_]] overwrite consisting of [*selection*: zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any CSP_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated again up to [*_assignment:* number of times to attempt overwrite_] times, whereupon an error is returned.#
+... [.underline]#block erase]#
++
+]] that meets the following: [_no standard_].
+
+_Application Note {counter:remark_count}_:: _In the case of volatile memory, the selection "removal of all references to the key directly followed by a request for garbage collection" is used in a situation where the TSF cannot address the specific physical memory locations holding the data to be erased and therefore relies on addressing logical addresses (which frees the relevant physical addresses holding the old data) and then requesting the platform to ensure that the data in the physical addresses is no longer available for reading (i.e. the "garbage collection" referred to in the SFR text)._
++
+_The selection for destruction of data in non-volatile memory includes block erase as an option, and this option applies only to flash memory. A block erase does not require a read verify, since the mappings of logical addresses to the erased memory locations are erased as well as the data itself._
++
+_The TSS includes a table describing all relevant keys and keying material, their sources, all memory types in which they are stored (covering storage both during and outside of a session, and both plaintext and encrypted forms), the applicable destruction method, and time of destruction for each case._
++
+_Some selections allow assignment of "some value that does not contain any CSP." This means that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG_EXT requirements, and not being any of the particular values listed as other selection options. The point of the phrase "does not contain any sensitive data" is to ensure that the overwritten data is carefully selected, and not taken from a general pool that might contain data that itself requires confidentiality protection._
+
 ==== FCS_CKM_EXT.7 Cryptographic Key Agreement
 
 FCS_CKM_EXT.7 Cryptographic Key Agreement
@@ -1085,45 +1120,6 @@ _For KEK, encrypting one key with another, one must use one of the algorithms li
 +
 _For cPP/ST authors, please consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
 
-==== FCS_CKM.6 Cryptographic Key Destruction
-
-FCS_CKM.6 Cryptographic Key Destruction
-
-FCS_CKM.6.1:: The TSF shall destroy [*assignment*: _list of cryptographic keys (including keying material)_] when [*selection*: _no longer needed, [*assignment*: other circumstances for key or keying material destruction]_].
-
-_Application Note {counter:remark_count}_:: _The TOE will have mechanisms to destroy keys, including intermediate keys and key material, by using an approved method as specified in FCS_CKM.6.2. Examples of keys include intermediate keys, leaf keys, encryption keys, signing keys, verification keys, authentication tokens, entry points to key chains, and submasks. Key material includes seeds, secret authorization values, passwords, PINs, and other secret values used to derive keys. The ST Author shall list all such keys and keying material that are subject to destruction in the first assignment._
-+
-_Based on their implementation, vendors will explain when certain keys are no longer needed. An example in which key is no longer necessary includes a wrapped key whose password has changed. This SFR does not apply to the public component of asymmetric key pairs, or to keys that are permitted to remain stored such as device identification keys._
-
-FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material specified by FCS_CKM.6.1 in accordance with a specified cryptographic key destruction method [.underline]#[*selection*:#
-
-. [.underline]#For volatile memory, the destruction shall be executed by a [*selection*:# 
-.. [.underline]#single overwrite consisting of [*selection*:# 
-... [.underline]#a pseudo-random pattern using the TSF's RBG,#
-... [.underline]#zeroes,#
-... [.underline]#ones,#
-... [.underline]#a new value of a key,#
-... [.underline]#[*_assignment*: some value that does not contain any CSP_]],#
-.. [.underline]#removal of power to the memory,#
-.. [.underline]#removal of all references to the key directly followed by a request for garbage collection];#
-. [.underline]#For non-volatile memory [*selection*:#
-.. [.underline]#that employs a wear-leveling algorithm, the destruction shall be executed by a [*selection*:#
-... [.underline]#single overwrite consisting of [*selection*: zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any CSP_]],# 
-... [.underline]#block erase];#
-.. [.underline]#that does not employ a wear-leveling algorithm, the destruction shall be executed by a [*selection*:#
-... [.underline]#[*selection*: single, [*_assignment:* ST author defined multi-pass_]] overwrite consisting of [*selection*: zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any CSP_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated again up to [*_assignment:* number of times to attempt overwrite_] times, whereupon an error is returned.#
-... [.underline]#block erase]#
-+
-]] that meets the following: [_no standard_].
-
-_Application Note {counter:remark_count}_:: _In the case of volatile memory, the selection "removal of all references to the key directly followed by a request for garbage collection" is used in a situation where the TSF cannot address the specific physical memory locations holding the data to be erased and therefore relies on addressing logical addresses (which frees the relevant physical addresses holding the old data) and then requesting the platform to ensure that the data in the physical addresses is no longer available for reading (i.e. the "garbage collection" referred to in the SFR text)._
-+
-_The selection for destruction of data in non-volatile memory includes block erase as an option, and this option applies only to flash memory. A block erase does not require a read verify, since the mappings of logical addresses to the erased memory locations are erased as well as the data itself._
-+
-_The TSS includes a table describing all relevant keys and keying material, their sources, all memory types in which they are stored (covering storage both during and outside of a session, and both plaintext and encrypted forms), the applicable destruction method, and time of destruction for each case._
-+
-_Some selections allow assignment of "some value that does not contain any CSP." This means that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG_EXT requirements, and not being any of the particular values listed as other selection options. The point of the phrase "does not contain any sensitive data" is to ensure that the overwritten data is carefully selected, and not taken from a general pool that might contain data that itself requires confidentiality protection._
-
 ==== FCS_COP.1/Hash Cryptographic Operation (Hashing)
 
 FCS_COP.1/Hash Cryptographic Operation (Hashing)
@@ -1202,79 +1198,6 @@ FCS_COP.1.1/KeyedHash:: The TSF shall perform [_keyed hash message authenticatio
 _Application Note {counter:remark_count}_:: _The HMAC minimum key sizes in the table are specified in the ISO 9797-2:2021 standard, which requires that the minimum key size be equal to the digest size. The FIPS standard specifies no minimum or maximum key sizes, so if FIPS PUB 198-1 is selected, larger or smaller key sizes may be used._
 
 :xrefstyle: full
-
-==== FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
-
-FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
-
-FCS_COP.1.1/KeyEncap:: The TSF shall perform _key encapsulation_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
-
-.Allowed choices for completion of the selection operations of FCS_COP.1/KeyEncap.
-[[KeyEncapAlgorithms]]
-[cols=".^1,.^2,.^2",options=header]
-|===
-
-|Cryptographic algorithm 
-|Key sizes
-|List of Standards
-
-|KAS1 [RSA-single party] 
-|[*selection*: 2048, 3072, 4096, 8192] bits 
-|NIST SP 800-56B Rev 2 (Sections 6.3 & 8.2) 
-
-|KTS-OAEP [RSA-OAEP] 
-|[*selection*: 2048, 3072, 4096, 8192] bits 
-|NIST SP 800-56B Rev 2 (Sections 6.3 & 9) 
-
-|RSAES-PKCS1-v1_5 [RSA-PKCS1] 
-|[*selection*: 2048, 3072, 4096, 8192] bits 
-|RFC 3447 (Section 7.2) 
-
-|===
-
-==== FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrap
-
-FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrap
-
-FCS_COP.1.1/KeyWrap:: The TSF shall perform _key wrapping_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
-
-.Allowed choices for completion of the selection operations of FCS_COP.1/KeyEncap.
-[[KeyWrapAlgorithms]]
-[cols=".^1,.^1,.^1,.^2",options=header]
-|===
-
-|Identifier
-|Cryptographic algorithm 
-|Key sizes
-|List of Standards
-
-|KW 
-|[*selection*: AES, CAM, SEED, LEA] in KW mode 
-|{empty}[*selection*: [.underline]#128 bits, 256 bits#] 
-|ISO/IEC 18033-3 (Sub Clause 5.2) [AES] 
-
-ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]  
-
-ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED] 
-
-ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA] 
-
-NIST SP 800-38F (Section 6.2) [KW]] 
-
-|KWP 
-|[*selection*: AES, CAM, SEED, LEA]  in KWP mode 
-|{empty}[*selection*: [.underline]#128 bits, 256 bits#] 
-|ISO/IEC 18033-3 (Sub Clause 5.2) [AES] 
-
-ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]  
-
-ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED] 
-
-ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA] 
-
-NIST SP 800-38F (Section 6.3) [KWP] 
-
-|===
 
 ==== FCS_COP.1/SigGen Cryptographic Operation (Signature Generation)
 
@@ -1776,9 +1699,7 @@ FCS_STG_EXT.1 Protected Storage
 
 FCS_STG_EXT.1.1:: The TSF shall provide [.underline]#[selection: mutable hardware-based, immutable hardware-based, software-based]# protected storage for [.underline]#[selection: asymmetric private keys, symmetric keys]# and [.underline]#[selection: persistent secrets, no other keys]#.
 
-_Application Note {counter:remark_count}_:: _If the protected storage is implemented in software that is protected as required by FCS_STG_EXT.2, the ST author is expected to select [.underline]#software-based#. If [.underline]#software-based# is selected, the ST author is expected to select [.underline]#all software-based key storage# in FCS_STG_EXT.2._
-+
-_Support for protected storage for all symmetric keys and persistent secrets will be required in future revisions._
+_Application Note {counter:remark_count}_:: _If [.underline]#software-based# is selected, the ST author is expected to select [.underline]#all software-based key storage# in FCS_CKM_EXT.3._
 
 FCS_STG_EXT.1.2:: The TSF shall support the capability of [.underline]#[selection: importing keys/secrets into the TOE, causing the TOE to generate keys/secrets]# upon request of [.underline]#[selection: a client application, an administrator]#.
 
@@ -1789,32 +1710,6 @@ FCS_STG_EXT.1.4:: The TSF shall have the capability to allow only the user that 
 FCS_STG_EXT.1.5:: The TSF shall allow only the user that [.underline]#[selection: imported the key/secret, caused the key/secret to be generated]# to request that the key/secret be destroyed. Exceptions may only be explicitly authorized by [.underline]#[selection: the client application, the administrator]#.
 
 _Application Note {counter:remark_count}_:: _Not all conformant TOEs will have the ability to import pre-generated keys into the TOE. In these cases, the TOE's ability to receive commands to perform key generation is considered to be its implementation of the Parse service. A subject that caused a key to be generated is considered to be the 'owner' of that key in the same manner as they would be if they had imported it directly._
-
-==== FCS_STG_EXT.2 Key Storage Encryption
-
-FCS_STG_EXT.2 Key Storage Encryption
-
-FCS_STG_EXT.2.1:: The TSF shall encrypt {empty}[_AKs, SKs, KEKs, and [.underline]#[selection: long-term trusted channel key material, all software-based key storage, no other keys]_#] using one of the following methods: [_assignment: key encryption methods as specified in FCS_COP.1**/KeyEnc**_].
-
-==== FCS_STG_EXT.3 Key Integrity Protection
-
-FCS_STG_EXT.3 Key Integrity Protection
-
-FCS_STG_EXT.3.1:: The TSF shall protect the integrity of any encrypted {empty}[_AKs, SKs, KEKs, and [.underline]#[selection: long-term trusted channel key material, all software-based key storage, no other keys]#_] by using [.underline]#[selection:#
-+
-* [.underline]#Symmetric encryption in [selection: AES_CCM, AES_GCM, AES_KW, AES_KWP, CAM_CCM, CAM_GCM] mode in accordance with FCS_COP.1/SKC;#
-* [.underline]#A hash of the stored key in accordance with FCS_COP.1/Hash;#
-* [.underline]#A keyed hash of the stored key in accordance with FCS_COP.1/KeyedHash;#
-* [.underline]#A digital signature of the stored key in accordance with FCS_COP.1/SigGen using an asymmetric key that is protected in accordance with FCS_STG_EXT.2;#
-* [.underline]#An immediate application of the key for decrypting the protected data followed by a successful verification of the decrypted data with previously known information#
-+
-].
-
-FCS_STG_EXT.3.2:: The TSF shall verify the integrity of the [.underline]#[selection: hash, digital signature, MAC]# of the stored key prior to use of the key.
-
-_Application Note {counter:remark_count}_:: _This requirement is not applicable to derived keys that are not stored. It is not expected that a single key will be protected from corruption by multiple of these methods; however, a product may use one integrity-protection method for one type of key and a different method for other types of keys._
-+
-_The documentation of the product's encryption key management should be detailed enough that, after reading, the evaluator will thoroughly understand the product's key management and how it meets the requirements to ensure the keys are adequately protected. This documentation should include an essay and diagrams. This documentation is not required to be part of the TSS - it can be submitted as a separate document and marked as developer proprietary._
 
 === User Data Protection
 
@@ -2261,7 +2156,7 @@ _The SDO.AuthData attribute is data that is required in order to validate author
 +
 _The SDO.Reauth attribute for an individual SDO takes one of the values defined in the selection in the Allowed Values column of the <<SDOAttribInit>> Table. Examples of TOE-specified events might be explicit revocation of authorization by a user, expiry of a time interval, or completion of a fixed number of uses since the last authorization. The re-authorization conditions are used in FIA_UAU.6 and FDP_ACF.1. These determine whether a single authorization by the SDO owner will allow any number of uses of the SDO until the end of the user's session (value 'none'), or whether each use of the SDO must be individually authorized (value 'each access'), or whether re-authorization must happen each time one of the TOE-specified events occurs._
 +
-_The SDO.Conf attribute indicates which SDEs, if any, the TOE should encrypt when not in operational use. The TOE should use the methods in FCS_COP.1/SKC, FCS_STG_EXT.1, or FCS_STG_EXT.2 to protect the SDEs in this list._
+_The SDO.Conf attribute indicates which SDEs, if any, the TOE should encrypt when not in operational use. The TOE should use the methods in FCS_COP.1/SKC, FCS_STG_EXT.1, or FCS_CKM_EXT.3 to protect the SDEs in this list._
 +
 _The SDO.Export attribute takes one of the values 'exportable' or 'non-exportable'._
 +
@@ -2517,7 +2412,7 @@ The following rationale provides justification for each security objective for t
 |FIA_AFL_EXT.2 (selection-based)
 |This requirement defines the access control that is enforced on an SDO if excessive authentication failures block access to it.
 
-.10+|O.DATA_PROTECTION 
+.8+|O.DATA_PROTECTION 
 |FCS_COP.1/Hash 
 |This requirement provides a cryptographic operation for asserting the integrity of SDOs.
 
@@ -2535,12 +2430,6 @@ The following rationale provides justification for each security objective for t
 
 |FCS_STG_EXT.1 
 |This requirement ensures that key data is placed into protected storage and cannot be modified by untrusted subjects.
-
-|FCS_STG_EXT.2 
-|This requirement ensures that confidentiality of key storage is maintained using strong cryptography.
-
-|FCS_STG_EXT.3 
-|This requirement ensures that integrity of key storage is maintained using strong cryptography.
 
 |FDP_ETC_EXT.2 
 |This requirement ensures that the confidentiality of protected data propagated outside the TOE is maintained.
@@ -2672,18 +2561,12 @@ The following rationale provides justification for each security objective for t
 |FCS_COP.1/SKC 
 |This requirement ensures the use of strong methods to encrypt sensitive data.
 
-.10+|O.STRONG_CRYPTO 
+.8+|O.STRONG_CRYPTO 
 |FCS_RBG.1 
 |This requirement ensures the use of strong random bit generation mechanisms.
 
 |FCS_OTV_EXT.1 
 |This requirement ensures that salts and nonces used by the TOE do not negatively impact key strength.
-
-|FCS_STG_EXT.2 
-|This requirement ensures that confidentiality of key storage is maintained using strong cryptography.
-
-|FCS_STG_EXT.3 
-|This requirement ensures that integrity of key storage is maintained using strong cryptography.
 
 |FPT_STM.1 
 |This requirement provides reliable system time services that may be used as inputs to cryptographic functions.
@@ -3034,6 +2917,55 @@ _To derive symmetric keys from other keying material, see FCS_CKM.5. To derive s
 +
 _See FCS_RBG.1 for requirements about appropriate entropy for selected cryptographic key sizes._
 
+==== FCS_CKM_EXT.3 Cryptographic Key Access
+
+FCS_CKM_EXT.3 Cryptographic Key Access
+
+FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [*selection*: _key encapsulation, key wrapping, key encryption_] that meets the following: [*selection*: _list of standards that provide integrity and confidentiality_] to access keys when performing [*selection*: _cryptographic key usage in cryptographic operations, cryptographic key archival, cryptographic key backup, cryptographic key escrow, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
+
+_Application Note {counter:remark_count}_:: _It is not expected that a single key will be protected from corruption by multiple of these methods; however, a product may use one integrity-protection method for one type of key and a different method for other types of keys._
++
+*_Key Access Operations_*
++
+_There are several reasons for granting access to keys or restricting access to keys.  The list below enumerates typical actions for keys in a typical lifecycle of a key.  Further on in this note are listed some methods used to authenticate roles and to authorize them to perform these actions._
++
+_The typical actions for the lifecycle of a key may look something like:_
++
+--
+. _Creation_
+. _Use in cryptographic operation_
+. _Archival, Backup and Escrow_
+. _Recovery_
+. _Attribute modification_
+. _Destruction_
+--
++
+*_Creation of cryptographic keys* - It may be the case that during the creation of the key certain attributes are assigned to it that controls future access to the key, such as who is allowed to use it or restricted from using it, when they are allowed to use it or restricted from using it, who is allowed to backup and recover keys, who is allowed to destroy them, and who is allowed to modify attributes associated with the keys.  This SFR imposes no requirements on the creation of cryptographic keys, other than those specified already in FCS_CKM.1.  However, once created, this SFR does impose requirements to access keys for the purposes outlined in the first assignment._
++
+*_Cryptographic key usage in cryptographic operations* - Depending on the application, a cryptographic key could be root key which by virtue of being a root key, cannot be encrypted with another key.  It is often stored in plain sight, sometimes with hardware protections, sometimes obfuscated in clever ways, such as in physically unclonable functions.  Other than root keys, it is expected that other cryptographic keys should be protected with encryption, often using other keys, which leads to a chain or hierarchy of cryptographic keys that encrypt other keys often anchored by a root key.   Additionally, it is expected that an entity authenticate itself self as an authorized user of the key.  This latter requirement is in addition to the recommended requirements of the Common Criteria Part 2 for FCS_CKM.3._
++ 
+*_Cryptographic key archival, backup, and escrow* - TOEs often perform cryptographic key archival to manage limited memory resources inside its own security boundaries.  Often the TOE encrypts the cryptographic keys prior to saving them to storage that is close by on the same device as the TOE and that can be accessed quickly. TOEs may perform cryptographic key backups into storage that is meant for longer term keeping.  Backup storage is often not on the same device as the TOE and may be physically hundreds of miles away.  In practice, the TOE encrypts the keys using an approved method before sending them to backup storage.  TOEs may perform cryptographic key escrow in which it entrusts a third party with access to the private or secret keys.  In practice, the TOE protects the keys using a cryptographic key access method agreed upon with the escrow agent before sending them._
++
+*_Cryptographic key recovery* - This refers to the retrieval of cryptographic keys from either archival, backup, or escrow locations.  In each case, the TOE uses the agreed upon cryptographic key access method agreed upon._
++
+*_Modifications to attributes of cryptographic keys* - Often during the creation of cryptographic keys, the TOE assigns certain attributes to them.  This may include allowed key access methods, authentication methods, and other items as discussed above in Creation of cryptographic keys.  The TOE may require authentication for authorization to modify these attributes._
++
+*_Cryptographic key destruction* - The attributes of the cryptographic key should indicate the necessary conditions needed to destroy it.  Often this will be an authentication indicating authorization to destroy it.  This SFR would apply to keys stored in the TOE, and FCS_CKM.6 would apply for destruction.  Otherwise, the destruction of keys stored outside the TOE is not enforceable by this SFR._
++
+*_Key Access Methods_*
++
+_This SFR lists several methods for protecting the confidentiality of keys prior to authorizing their use, archival, backup, escrow, or recovery.  This protection is often afforded only to the private or secret portion of cryptographic keys.  Some methods offer integrity protection as well.  These methods may not apply to modification of attributes especially if the attributes do not need confidentiality.  These methods may not apply to destruction since a TOE can only destroy keys within its boundaries, and it is premused these keys are already in the boundary._
++
+*_Key encapsulation* - If the STF claims key encapsulation, then it should use approved methods such as those listed in FCS_CKM.2._
++
+*_Key wrapping* - If the STF claims key wrapping, then it should use approved methods such as KW, or KWP._
++
+*_Key encryption* - If the STF claims key encryption, then it should use approved methods such as those in FCS_COP.1/SKC combined with either a hash using approved methods such as those in FCS_COP.1/Hash or a keyed hash using approved methods such as those in FCS_COP.2/KeyedHash._
++
+*_Authentication for Key Access Methods_*
++
+_The PP/ST should contain FIA SFRs for authenticating users.  See NIST SP 800-63B “Digital Identity Guidelines” for guidance on methods for authenticating users for access to keys for any purpose._
+
 ==== FCS_CKM.5 Cryptographic Key Derivation
 
 FCS_CKM.5 Cryptographic Key Derivation
@@ -3145,6 +3077,144 @@ _The key size to be used in the HMAC falls into a range between L1 and L2 define
 FCS_COP.1/CMAC Cryptographic Operation (CMAC)
 
 FCS_COP.1.1/CMAC:: The TSF shall perform [_CMAC_] in accordance with a specified cryptographic algorithm [_AES-CMAC_] and cryptographic key sizes {empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits]# that meet the following: {empty}[*selection*: [.underline]#ISO/IEC 9797-1:2011 sub clause 7.6 (CMAC) and ISO/IEC 18033-3:2010 sub clause 5.2 (AES), NIST SP 800-38B (CMAC) and NIST FIPS 197 (AES)]#.
+
+==== FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
+
+FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
+
+FCS_COP.1.1/KeyEncap:: The TSF shall perform _key encapsulation_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
+
+.Allowed choices for completion of the selection operations of FCS_COP.1/KeyEncap.
+[[KeyEncapAlgorithms]]
+[cols=".^1,.^2,.^2",options=header]
+|===
+
+|Cryptographic algorithm 
+|Key sizes
+|List of Standards
+
+|KAS1 [RSA-single party] 
+|[*selection*: 2048, 3072, 4096, 8192] bits 
+|NIST SP 800-56B Rev 2 (Sections 6.3 & 8.2) 
+
+|KTS-OAEP [RSA-OAEP] 
+|[*selection*: 2048, 3072, 4096, 8192] bits 
+|NIST SP 800-56B Rev 2 (Sections 6.3 & 9) 
+
+|RSAES-PKCS1-v1_5 [RSA-PKCS1] 
+|[*selection*: 2048, 3072, 4096, 8192] bits 
+|RFC 3447 (Section 7.2) 
+
+|===
+
+==== FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrap
+
+FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrap
+
+FCS_COP.1.1/KeyWrap:: The TSF shall perform _key wrapping_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
+
+.Allowed choices for completion of the selection operations of FCS_COP.1/KeyEncap.
+[[KeyWrapAlgorithms]]
+[cols=".^1,.^1,.^1,.^2",options=header]
+|===
+
+|Identifier
+|Cryptographic algorithm 
+|Key sizes
+|List of Standards
+
+|KW 
+|[*selection*: AES, CAM, SEED, LEA] in KW mode 
+|{empty}[*selection*: [.underline]#128 bits, 256 bits#] 
+|ISO/IEC 18033-3 (Sub Clause 5.2) [AES] 
+
+ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]  
+
+ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED] 
+
+ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA] 
+
+NIST SP 800-38F (Section 6.2) [KW]] 
+
+|KWP 
+|[*selection*: AES, CAM, SEED, LEA]  in KWP mode 
+|{empty}[*selection*: [.underline]#128 bits, 256 bits#] 
+|ISO/IEC 18033-3 (Sub Clause 5.2) [AES] 
+
+ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]  
+
+ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED] 
+
+ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA] 
+
+NIST SP 800-38F (Section 6.3) [KWP] 
+
+|AES-CCM
+|AES in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
+|{empty}[*selection*: [.underline]#ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197]# [AES]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C]# [CCM]
+
+|AES-GCM
+|AES in GCM mode with non-repeating IVs
+
+IV length must be equal to 96 bits; the deterministic IV construction method [SP800-38D, Section 8.2.1] must be used; the MAC length t must be one of the values 96, 104, 112, 120, and 128 bits.
+|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
+|{empty}[*selection*: [.underline]#ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197]# [AES] 
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D]# [GCM]
+
+|CAM-CCM
+|Camellia in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|{empty}[*selection*: [.underline]#128 bits, 256 bits#]
+|ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C#] [CCM]
+
+|CAM-GCM
+|Camellia in GCM mode with non-repeating IVs
+
+the IV length must be equal to 96 bits; the deterministic IV construction method [SP800-38D, Section 8.2.1] must be used; the MAC length t must be one of the values 96, 104, 112, 120, and 128 bits.
+|{empty}[*selection*: [.underline]#128 bits, 256 bits#]
+|ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D#] [GCM]
+
+|SEED-CCM
+|SEED in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|128 bits
+|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C#] [CCM]
+
+|SEED-GCM
+|SEED in GCM mode with non-repeating IVs
+
+IV length must be equal to 96 bits; the deterministic IV construction method [SP800-38D, Section 8.2.1] must be used; the MAC length t must be one of the values 96, 104, 112, 120, and 128 bits.
+|128 bits
+|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D#] [GCM]
+
+|LEA-CCM
+|LEA in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
+|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C#] [CCM]
+
+|LEA-GCM
+|LEA in GCM mode with non-repeating IVs
+
+IV length must be equal to 96 bits; the deterministic IV construction method [SP800-38D, Section 8.2.1] must be used; the MAC length t must be one of the values 96, 104, 112, 120, and 128 bits.
+
+|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
+|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
+
+{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D#] [GCM]
+
+|===
 
 ==== FCS_COP.1/PBKDF Cryptographic Operation (Password-Based Key Derivation Functions)
 
@@ -3394,28 +3464,47 @@ This family defines requirements for key life cycle operations.
 [#img-FCS_CKM_EXT] 
 [ditaa,"FCS_CKM_EXT"]
 ....
-                                                     
-                                                    
-                                                    
-    +--------------------------------------------+ 
-    |                                            |     +---+
-    | FCS_CKM_EXT Cryptographic Key Management   +---->| 7 |
-    |                                            |     +---+
-    +--------------------------------------------+ 
-                                                
-                                                    
+                           
+                                                       +---+
+    +--------------------------------------------+  |->| 3 |
+    |                                            |  |  +---+
+    | FCS_STG_EXT Cryptographic Key Storage      +--+
+    |                                            |  |  +---+
+    +--------------------------------------------+  |->| 7 |
+                                                       +---+    
                                                     
 ....
 
+FCS_CKM_EXT.3 The cryptographic key access applies primarily to the storage of keys for future use and retrieval of keys for immediate use by the TOE.  There may be some overlap in primitives used in other SFRs, but the end goals here are to protect the confidentiality and authenticity of the keys while in storage.
+
 FCS_CKM_EXT.7 This SFR captures methods for key agreement in which multiple parties contribute material used to derive the shared key used by each party to encrypt and decrypt messages to and from each other. The derived key can be used either as a symmetric key, keyed-hash key, or cryptographic key for key derivation functions.
 
-*Management: FCS_CKM_EXT.7*
+*Management: FCS_CKM_EXT.3, FCS_CKM_EXT.7*
 
 No specific management functions are identified.
 
-*Audit: FCS_CKM_EXT.7*
+*Audit: FCS_CKM_EXT.3, FCS_CKM_EXT.7*
 
 There are no auditable events foreseen.
+
+*FCS_CKM_EXT.3 Cryptographic Key Access*
+[horizontal]
+Hierarchical to:: No other components.
+
+Dependencies:: [FDP_ITC.1 Import of user data without security attributes, +
+or +
+FDP_ITC.2 Import of user data with security attributes, +
+or +
+FCS_CKM.1 Cryptographic key generation, or +
+FCS_CKM.5 Cryptographic key derivation, or +
+FCS_CKM_EXT.8 Password-based key derivation] +
+FCS_CKM.6 Cryptographic key destruction, +
+[FCS_COP.1/KeyEncap Key Encapsulation, or +
+FCS_COP.1/KeyWrap Key Wrapping, or +
+FCS_COP.1/SKC Symmetric Key Cryptography]
+
+[vertical]
+FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [*selection*: _key encapsulation, key wrapping, key encryption_] that meets the following: [*selection*: _list of standards that provide integrity and confidentiality_] to access keys when performing [*selection*: _cryptographic key usage in cryptographic operations, cryptographic key archival, cryptographic key backup, cryptographic key escrow, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
 
 *FCS_CKM_EXT.7 Cryptographic Key Agreement*
 [horizontal]
@@ -3427,8 +3516,8 @@ FDP_ITC.2 Import of user data with security attributes, +
 or +
 FCS_CKM.1 Cryptographic key generation, or +
 FCS_CKM.5 Cryptographic key derivation, or +
-FCS_CKM.8 Password-based key derivation] +
-[FCS_CKM_EXT.7 Cryptographic key agreement, +
+FCS_CKM_EXT.8 Password-based key derivation] +
+[FCS_CKM.2 Cryptographic key distribution, +
 or FCS_COP.1 Cryptographic operation] +
 FCS_CKM.6 Cryptographic key destruction 
 
@@ -3602,30 +3691,23 @@ This family defines requirements for ensuring the protection of keys and secrets
 [#img-FCS_STG_EXT] 
 [ditaa,"FCS_STG_EXT"]
 ....
-                                                       +---+
-                                                    +->| 1 |
-                                                    |  +---+
-    +--------------------------------------------+  |
-    |                                            |  |  +---+
-    | FCS_STG_EXT Cryptographic Key Storage      +--+->| 2 |
-    |                                            |  |  +---+
-    +--------------------------------------------+  |
-                                                    |  +---+
-                                                    +->| 3 |
-                                                       +---+
+
+    +--------------------------------------------+ 
+    |                                            |     +---+
+    | FCS_STG_EXT Cryptographic Key Storage      +--+->| 1 |
+    |                                            |     +---+
+    +--------------------------------------------+ 
+
+
 ....
 
 FCS_STG_EXT.1 Protected Storage, requires the TSF to enforce protected storage for keys and secrets so that they cannot be accessed or destroyed without authorization.
 
-FCS_STG_EXT.2 Key Storage Encryption, requires the TSF to ensure the confidentiality of stored data using a specified method.
-
-FCS_STG_EXT.3 Key Integrity Protection, requires the TSF to ensure the integrity of stored data using a specified method.
-
-*Management: FCS_STG_EXT.1, FCS_STG_EXT.2, FCS_STG_EXT.3*
+*Management: FCS_STG_EXT.1*
 
 No specific management functions are identified.
 
-*Audit: FCS_STG_EXT.1, FCS_STG_EXT.2, FCS_STG_EXT.3*
+*Audit: FCS_STG_EXT.1*
 
 There are no auditable events foreseen.
 
@@ -3644,26 +3726,6 @@ FCS_STG_EXT.1.4:: The TSF shall have the capability to allow only the user that 
 FCS_STG_EXT.1.4:: The TSF shall have the capability to allow only the user that [.underline]#[selection: imported the key/secret, caused the key/secret to be generated]# to use the key/secret. Exceptions may only be explicitly authorized by [_assignment: authorized subject_].
 
 FCS_STG_EXT.1.5:: The TSF shall allow only the user that [.underline]#[selection: imported the key/secret, caused the key/secret to be generated]# to request that the key/secret be destroyed. Exceptions may only be explicitly authorized by [_assignment: authorized subject_].
-
-*FCS_STG_EXT.2 Key Storage Encryption*
-[horizontal]
-Hierarchical to:: No other components.
-
-Dependencies:: FCS_COP.1 Cryptographic Operation
-[vertical]
-FCS_STG_EXT.2.1:: The TSF shall encrypt [_assignment: key data_] using one of the following methods: [_assignment: key encryption methods as specified in FCS_COP.1_].
-
-*FCS_STG_EXT.3 Key Integrity Protection*
-[horizontal]
-Hierarchical to:: No other components.
-
-Dependencies:: FCS_CKM.1 Cryptographic Key Generation +
-FCS_COP.1 Cryptographic Operation +
-FCS_STG_EXT.2 Key Storage Encryption
-[vertical]
-FCS_STG_EXT.3.1:: The TSF shall protect the integrity of any encrypted [_assignment: key data_] by using [_assignment: integrity protection method_].
-
-FCS_STG_EXT.3.2:: The TSF shall verify the integrity of the [_assignment: integrity verification attribute associated with or computed from the stored key_] of the stored key prior to use of the key.
 
 === Class FDP: User Data Protection
 ==== FDP_ETC_EXT Export from the TOE
@@ -4477,18 +4539,6 @@ FCS_CKM.6
 |FCS_STG_EXT.1 
 |No dependencies. 
 |N/A
-
-|FCS_STG_EXT.2 
-|FCS_COP.1 
-|FCS_COP.1 is required by the PP.
-
-|FCS_STG_EXT.3 
-|FCS_CKM.1 
-
-FCS_COP.1 
-
-FCS_STG_EXT.2 
-|FCS_CKM.1, FCS_COP.1, and FCS_STG_EXT.2 are all required by the PP.
 
 |FDP_ACC.1 
 |FDP_ACF.1 
