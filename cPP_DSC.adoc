@@ -1921,7 +1921,7 @@ FIA_AFL_EXT.1.3:: When the failed authorization attempt counters [.underline]#[s
 * [.underline]#prevent future authorization attempts for a static prescribed amount of time;# 
 * [.underline]#prevent future authorization attempts for an administrator configurable amount of time;#
 * [.underline]#prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2;#
-* [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2#
+* [.underline]#factory reset the TOE wiping out all non-persistent SDOs, as described by FDP_FRS_EXT.2#
 +
 ] for these *SDOs*.
 
@@ -1933,7 +1933,7 @@ _It is possible for the TOE to have different rules for the treatment of differe
 +
 _If [.underline]#prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FIA_AFL_EXT.2 must be claimed._
 +
-_If [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
+_If [.underline]#factory reset the TOE wiping out all non-persistent SDOs, as described by FDP_FRS_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
 
 ==== FIA_SOS.2 TSF Generation of Secrets
 
@@ -2174,7 +2174,7 @@ _When a remote peer sends an SDO to the TOE, it properly indicates through the S
 +
 _When a TOE generates an SDO internally for the first time, it properly indicates through the SDE-confidentiality list any SDEs that are authorization values or authentication tokens. Similarly, if any of the attributes are authorization values or authentication tokens, the TOE will properly indicate through the SDE-confidentiality list that it will encrypt them prior to storing them._
 +
-_The TOE may contain pre-installed SDOs or SDOs either provisioned the first time the user turns on the TOE or provisioned as the result of a "factory reset" event. TSFs may refer to such SDOs as root keys or trusted anchors, and are classified as permanent keys (SDOs). Pre-installed SDOs may reside in immutable hardware and persist across factory resets. Other persistent SDOs may persist until a user issues a "factory reset" which either cryptographically erases the SDOs or overwrites them by provisioning new ones. These SDOs may not contain a confidential SDE list since either these persistent values serve as a root encryption key for a hierarchy of SDOs, or they serve as a KDF seed for generating root encryption keys for a hierarchy of SDOs._
+_The TOE may contain pre-installed SDOs or SDOs either provisioned the first time the user turns on the TOE or provisioned as the result of a "factory reset" event. TSFs may refer to such persistent SDOs as root keys or trusted anchors. Pre-installed SDOs may reside in immutable hardware and persist across factory resets. Other persistent SDOs may persist until a user issues a "factory reset" which either cryptographically erases the SDOs or overwrites them by provisioning new ones. These SDOs may not contain a confidential SDE list since either these persistent values serve as a root encryption key for a hierarchy of SDOs, or they serve as a KDF seed for generating root encryption keys for a hierarchy of SDOs._
 +
 _It is possible that the default attributes of some SDOs should be restrictive, and that the default attributes of other SDOs may be permissive. If this is the case, then the ST author should iterate this SFR and indicate in the TSS what the default attribute properties are for each SDO._
 +
@@ -2801,7 +2801,7 @@ FPT_PRO_EXT.2.1:: The TSF shall be able to quantify the integrity of the data pr
 
 _Application Note {counter:remark_count}_:: _The generation of these integrity measurements and assertions is the creation of OB.Pstate._
 +
-_Data protected by the TOE includes DSC firmware, DSC configuration data, and user data. DSC configuration data may include permanent SDEs or SDOs such as immutable or mutable root keys, authorization values, and authentication tokens (i.e. DSC.ID, OB.P_SDO, OB.FAACntr, OB.AntiReplay, and OB.Context). User data may include transient SDEs and SDOs as well as authorization values and authentication tokens bound to these SDEs and SDOs (i.e. OB.T_SDO). Integrity reporting is the process of attesting to integrity measurements (including those recorded in status registers in a DSC)._
+_Data protected by the TOE includes DSC firmware, DSC configuration data, and user data. DSC configuration data may include persistent SDEs or SDOs such as immutable or mutable root keys, authorization values, and authentication tokens (i.e. DSC.ID, OB.P_SDO, OB.FAACntr, OB.AntiReplay, and OB.Context). User data may include transient SDEs and SDOs as well as authorization values and authentication tokens bound to these SDEs and SDOs (i.e. OB.T_SDO). Integrity reporting is the process of attesting to integrity measurements (including those recorded in status registers in a DSC)._
 
 FPT_PRO_EXT.2.2:: The TSF shall accumulate platform characteristics using a consistent [_assignment: description of process for accumulating platform characteristics_] process in which verified quantifiable measurements are accumulated to prove the integrity of its SDOs.
 
@@ -3251,9 +3251,9 @@ _For data that is validity-stamped, the DSC does nothing but respond to a reques
 
 FDP_FRS_EXT.2 Factory Reset Behavior
 
-FDP_FRS_EXT.2.1:: Upon initiation of a factory reset, the TSF shall destroy [_all non-permanent SDOs_] and restore the following *pre-installed SDOs* to their factory settings: [_assignment: pre-installed SDOs to be restored during a factory reset_].
+FDP_FRS_EXT.2.1:: Upon initiation of a factory reset, the TSF shall destroy [_all non-persistent SDOs_] and restore the following *pre-installed SDOs* to their factory settings: [_assignment: pre-installed SDOs to be restored during a factory reset_].
 
-_Application Note {counter:remark_count}_:: _Not all DSCs permit a factory reset of the TOE, or perform a factory reset in response to excessive failed authentication or authorization attempts. Those that do are expected to perform a factory reset in a manner that prevents any inadvertent disclosure of security-relevant data that was present on the DSC prior to the factory reset. For DSCs that permit factory reset functionality (as indicated by selection of [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2# in FIA_AFL_EXT.1.3, or by [.underline]#no actions or conditions# NOT being selected in FDP_FRS_EXT.1.1), this SFR must be included in the TOE boundary._
+_Application Note {counter:remark_count}_:: _Not all DSCs permit a factory reset of the TOE, or perform a factory reset in response to excessive failed authentication or authorization attempts. Those that do are expected to perform a factory reset in a manner that prevents any inadvertent disclosure of security-relevant data that was present on the DSC prior to the factory reset. For DSCs that permit factory reset functionality (as indicated by selection of [.underline]#factory reset the TOE wiping out all non-persistent SDOs, as described by FDP_FRS_EXT.2# in FIA_AFL_EXT.1.3, or by [.underline]#no actions or conditions# NOT being selected in FDP_FRS_EXT.1.1), this SFR must be included in the TOE boundary._
 
 ==== FDP_MFW_EXT.2 Basic Firmware Integrity
 
@@ -4877,12 +4877,6 @@ FCS_COP.1
 
 |Owner 
 |Human being who controls/manages the platform on which the DSC is located. May be remote. [GD]
-
-|Permanent Keys/Seeds
-|Keys or seeds that are provisioned to the device during manufacturing or initial setup that remain even after a factory reset.
-
-|Persistent Secrets
-|Persistent secrets are long term keys or key material that are maintained longer than a single cryptographic operation. Persistent secrets do not remain after a factory reset.
 
 |Platform 
 |A platform consists of the hardware and firmware of a computing entity.
