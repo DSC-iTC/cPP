@@ -2927,7 +2927,7 @@ _See FCS_RBG.1 for requirements about appropriate entropy for selected cryptogra
 
 FCS_CKM_EXT.3 Cryptographic Key Access
 
-FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [*selection*: _key encapsulation, key wrapping, key encryption_] that meets the following: [*selection*: _list of standards that provide integrity and confidentiality_] to access keys when performing [*selection*: _cryptographic key usage in cryptographic operations, cryptographic key archival, cryptographic key backup, cryptographic key escrow, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
+FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [*selection*: _key encapsulation, key wrapping, key encryption_] that meets the following: [*selection*: _list of standards that provide integrity and confidentiality_] to access keys when performing [*selection*: _cryptographic key usage in cryptographic operations, cryptographic key storage, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
 
 _Application Note {counter:remark_count}_:: _It is not expected that a single key will be protected from corruption by multiple of these methods; however, a product may use one integrity-protection method for one type of key and a different method for other types of keys._
 +
@@ -2935,22 +2935,11 @@ _Application Note {counter:remark_count}_:: _It is not expected that a single ke
 +
 _There are several reasons for granting access to keys or restricting access to keys. The list below enumerates typical actions for keys in a typical lifecycle of a key. Further on in this note are listed some methods used to authenticate roles and to authorize them to perform these actions._
 +
-_The typical actions for the lifecycle of a key may look something like:_
-+
---
-. _Creation_
-. _Use in cryptographic operation_
-. _Archival, Backup and Escrow_
-. _Recovery_
-. _Attribute modification_
-. _Destruction_
---
-+
 *_Creation of cryptographic keys* - It may be the case that during the creation of the key certain attributes are assigned to it that controls future access to the key, such as who is allowed to use it or restricted from using it, when they are allowed to use it or restricted from using it, who is allowed to backup and recover keys, who is allowed to destroy them, and who is allowed to modify attributes associated with the keys. This SFR imposes no requirements on the creation of cryptographic keys, other than those specified already in FCS_CKM.1. However, once created, this SFR does impose requirements to access keys for the purposes outlined in the first assignment._
 +
 *_Cryptographic key usage in cryptographic operations* - Depending on the application, a cryptographic key could be root key which by virtue of being a root key, cannot be encrypted with another key. It is often stored in plain sight, sometimes with hardware protections, sometimes obfuscated in clever ways, such as in physically unclonable functions. Other than root keys, it is expected that other cryptographic keys should be protected with encryption, often using other keys, which leads to a chain or hierarchy of cryptographic keys that encrypt other keys often anchored by a root key. Additionally, it is expected that an entity authenticate itself self as an authorized user of the key. This latter requirement is in addition to the recommended requirements of the Common Criteria Part 2 for FCS_CKM.3._
 + 
-*_Cryptographic key archival, backup, and escrow* - TOEs often perform cryptographic key archival to manage limited memory resources inside its own security boundaries. Often the TOE encrypts the cryptographic keys prior to saving them to storage that is close by on the same device as the TOE and that can be accessed quickly. TOEs may perform cryptographic key backups into storage that is meant for longer term keeping. Backup storage is often not on the same device as the TOE and may be physically hundreds of miles away. In practice, the TOE encrypts the keys using an approved method before sending them to backup storage. TOEs may perform cryptographic key escrow in which it entrusts a third party with access to the private or secret keys. In practice, the TOE protects the keys using a cryptographic key access method agreed upon with the escrow agent before sending them._
+*_Cryptographic key storage* - _The TOE may utilize storage external to the DSC. This external storage requires the protection of the keys that are considered under the control of the TOE._
 +
 *_Cryptographic key recovery* - This refers to the retrieval of cryptographic keys from either archival, backup, or escrow locations. In each case, the TOE uses the agreed upon cryptographic key access method agreed upon._
 +
@@ -2967,10 +2956,6 @@ _This SFR lists several methods for protecting the confidentiality of keys prior
 *_Key wrapping* - If the STF claims key wrapping, then it should use approved methods such as KW, or KWP._
 +
 *_Key encryption* - If the STF claims key encryption, then it should use approved methods such as those in FCS_COP.1/SKC combined with either a hash using approved methods such as those in FCS_COP.1/Hash or a keyed hash using approved methods such as those in FCS_COP.2/KeyedHash._
-+
-*_Authentication for Key Access Methods_*
-+
-_The PP/ST should contain FIA SFRs for authenticating users. See NIST SP 800-63B “Digital Identity Guidelines” for guidance on methods for authenticating users for access to keys for any purpose._
 
 ==== FCS_CKM.5 Cryptographic Key Derivation
 
@@ -3510,7 +3495,7 @@ FCS_COP.1/KeyWrap Key Wrapping, or +
 FCS_COP.1/SKC Symmetric Key Cryptography]
 
 [vertical]
-FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [*selection*: _key encapsulation, key wrapping, key encryption_] that meets the following: [*selection*: _list of standards that provide integrity and confidentiality_] to access keys when performing [*selection*: _cryptographic key usage in cryptographic operations, cryptographic key archival, cryptographic key backup, cryptographic key escrow, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
+FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [*selection*: _key encapsulation, key wrapping, key encryption_] that meets the following: [*selection*: _list of standards that provide integrity and confidentiality_] to access keys when performing [*selection*: _cryptographic key usage in cryptographic operations, cryptographic key storage, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
 
 *FCS_CKM_EXT.7 Cryptographic Key Agreement*
 [horizontal]
