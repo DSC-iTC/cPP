@@ -5,8 +5,8 @@
 :sectnums:
 :sectnumlevels: 5
 :imagesdir: images
-:revnumber: 1.0.1
-:revdate: December 13, 2022
+:revnumber: 2.0-PRD-1
+:revdate: October 31, 2023
 :xrefstyle: full
 :doctype: book
 :chapter-refsig: Section
@@ -23,6 +23,8 @@ This collaborative Protection Profile (cPP) was developed by the {iTC-longame} i
 *Industry*
 [.text-center]
 Apple Inc.
+[.text-center]
+Google, LLC.
 [.text-center]
 Samsung Electronics Co., Ltd.
 [.text-center]
@@ -88,6 +90,10 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 |1.0.1
 |December 13, 2022
 |conversion to asciidoc
+
+|2.0-PRD-1
+|October 31, 2023
+|Public Review Draft 1 for v2.0
 
 |===
 
@@ -1288,7 +1294,7 @@ _Elliptic Curve Algorithms, (e.g., ECDSA, EC-KCDSA) require random bits from an 
 +
 _FIPS 186-5 specifies that the same key generation algorithm applies to both ECDSA and deterministic ECDSA._
 +
-_For LMS and XMSS, the key sizes do not represent the expected security strength.  All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
+_For LMS and XMSS, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
 
 ==== FCS_COP.1/SigVer Cryptographic Operation (Signature Verification)
 
@@ -1367,7 +1373,7 @@ _Application Note {counter:remark_count}_:: _FIPS PUB 186-5 deprecates DSS2 and 
 +
 _FIPS 186-5 modifies RSA-PSS to allow use of SHAKE128 and SHAKE256._
 +
-_The TOE may contain a public key which is integrity protected (e.g., in hardware), in which case the FDP_ITC.1 and FDP_ITC.2 dependencies do not apply.  In this case, no dependencies may be chosen.  For signature verifications, private keys are not necessary, so there are no dependencies required for generating or destroying cryptographic keys._
+_The TOE may contain a public key which is integrity protected (e.g., in hardware), in which case the FDP_ITC.1 and FDP_ITC.2 dependencies do not apply. In this case, no dependencies may be chosen. For signature verifications, private keys are not necessary, so there are no dependencies required for generating or destroying cryptographic keys._
 
 ==== FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
 
@@ -1758,7 +1764,7 @@ _The following are the SFP-relevant security attributes that are associated with
 +
 ].
 
-FDP_ACF.1.2The TSF shall enforce the following rules to determine if an operation among controlled subjects and controlled objects is allowed:
+FDP_ACF.1.2:: The TSF shall enforce the following rules to determine if an operation among controlled subjects and controlled objects is allowed:
 
 * [_Any subject that has been authorized to perform any operation against any OB.P_SDO or OB.T_SDO object can continue to perform this operation if one of the following conditions is true:_
 ** _The object's SDO.Reauth attribute has a value of 'none', indicating that re-authorization is not required for subsequent interactions with the SDO;_
@@ -1768,9 +1774,9 @@ FDP_ACF.1.2The TSF shall enforce the following rules to determine if an operatio
 * _[assignment: rules automatically enforced by the TSF that conditionally permit certain subject-object-operation actions based on subject security attributes, object security attributes, or other conditions]_
 * _[.underline]#[selection: [assignment: any configurable rules or parameters that can be modified to affect the behavior of the Access Control SFP], no configurable rules]#_].
 
-FDP_ACF.1.3 The TSF shall explicitly authorize access of subjects to objects based on the following additional rules: [_assignment: rules, based on security attributes, that explicitly authorize access of subjects to objects_].
+FDP_ACF.1.3:: The TSF shall explicitly authorize access of subjects to objects based on the following additional rules: [_assignment: rules, based on security attributes, that explicitly authorize access of subjects to objects_].
 
-FDP_ACF.1.4 The TSF shall explicitly deny access of subjects to objects based on the following additional rules: [_client applications can only access their own data, [assignment: rules, based on security attributes, that explicitly deny access of subjects to objects]_].
+FDP_ACF.1.4:: The TSF shall explicitly deny access of subjects to objects based on the following additional rules: [_client applications can only access their own data, [assignment: rules, based on security attributes, that explicitly deny access of subjects to objects]_].
 
 _Application Note {counter:remark_count}_:: _The expectation of this SFR is that the reader is given sufficient information to determine, for each object controlled by the TOE, the operations that can be performed on it based on the subject attempting to perform the operation, and whether this is conditional based on attribute values or any other circumstances._
 +
@@ -1921,7 +1927,7 @@ FIA_AFL_EXT.1.3:: When the failed authorization attempt counters [.underline]#[s
 * [.underline]#prevent future authorization attempts for a static prescribed amount of time;# 
 * [.underline]#prevent future authorization attempts for an administrator configurable amount of time;#
 * [.underline]#prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2;#
-* [.underline]#factory reset the TOE wiping out all non-persistent SDOs, as described by FDP_FRS_EXT.2#
+* [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2#
 +
 ] for these *SDOs*.
 
@@ -1933,7 +1939,7 @@ _It is possible for the TOE to have different rules for the treatment of differe
 +
 _If [.underline]#prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FIA_AFL_EXT.2 must be claimed._
 +
-_If [.underline]#factory reset the TOE wiping out all non-persistent SDOs, as described by FDP_FRS_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
+_If [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
 
 ==== FIA_SOS.2 TSF Generation of Secrets
 
@@ -2174,7 +2180,7 @@ _When a remote peer sends an SDO to the TOE, it properly indicates through the S
 +
 _When a TOE generates an SDO internally for the first time, it properly indicates through the SDE-confidentiality list any SDEs that are authorization values or authentication tokens. Similarly, if any of the attributes are authorization values or authentication tokens, the TOE will properly indicate through the SDE-confidentiality list that it will encrypt them prior to storing them._
 +
-_The TOE may contain pre-installed SDOs or SDOs either provisioned the first time the user turns on the TOE or provisioned as the result of a "factory reset" event. TSFs may refer to such persistent SDOs as root keys or trusted anchors. Pre-installed SDOs may reside in immutable hardware and persist across factory resets. Other persistent SDOs may persist until a user issues a "factory reset" which either cryptographically erases the SDOs or overwrites them by provisioning new ones. These SDOs may not contain a confidential SDE list since either these persistent values serve as a root encryption key for a hierarchy of SDOs, or they serve as a KDF seed for generating root encryption keys for a hierarchy of SDOs._
+_The TOE may contain pre-installed SDOs or SDOs either provisioned the first time the user turns on the TOE or provisioned as the result of a "factory reset" event. TSFs may refer to such SDOs as root keys or trusted anchors, and are classified as permanent keys (SDOs). Pre-installed SDOs may reside in immutable hardware and persist across factory resets. Other persistent SDOs may persist until a user issues a "factory reset" which either cryptographically erases the SDOs or overwrites them by provisioning new ones. These SDOs may not contain a confidential SDE list since either these persistent values serve as a root encryption key for a hierarchy of SDOs, or they serve as a KDF seed for generating root encryption keys for a hierarchy of SDOs._
 +
 _It is possible that the default attributes of some SDOs should be restrictive, and that the default attributes of other SDOs may be permissive. If this is the case, then the ST author should iterate this SFR and indicate in the TSS what the default attribute properties are for each SDO._
 +
@@ -2801,7 +2807,7 @@ FPT_PRO_EXT.2.1:: The TSF shall be able to quantify the integrity of the data pr
 
 _Application Note {counter:remark_count}_:: _The generation of these integrity measurements and assertions is the creation of OB.Pstate._
 +
-_Data protected by the TOE includes DSC firmware, DSC configuration data, and user data. DSC configuration data may include persistent SDEs or SDOs such as immutable or mutable root keys, authorization values, and authentication tokens (i.e. DSC.ID, OB.P_SDO, OB.FAACntr, OB.AntiReplay, and OB.Context). User data may include transient SDEs and SDOs as well as authorization values and authentication tokens bound to these SDEs and SDOs (i.e. OB.T_SDO). Integrity reporting is the process of attesting to integrity measurements (including those recorded in status registers in a DSC)._
+_Data protected by the TOE includes DSC firmware, DSC configuration data, and user data. DSC configuration data may include permanent SDEs or SDOs such as immutable or mutable root keys, authorization values, and authentication tokens (i.e. DSC.ID, OB.P_SDO, OB.FAACntr, OB.AntiReplay, and OB.Context). User data may include transient SDEs and SDOs as well as authorization values and authentication tokens bound to these SDEs and SDOs (i.e. OB.T_SDO). Integrity reporting is the process of attesting to integrity measurements (including those recorded in status registers in a DSC)._
 
 FPT_PRO_EXT.2.2:: The TSF shall accumulate platform characteristics using a consistent [_assignment: description of process for accumulating platform characteristics_] process in which verified quantifiable measurements are accumulated to prove the integrity of its SDOs.
 
@@ -2927,23 +2933,23 @@ _Application Note {counter:remark_count}_:: _It is not expected that a single ke
 +
 *_Key Access Operations_*
 +
-_There are several reasons for granting access to keys or restricting access to keys.  The list below enumerates typical actions for keys in a typical lifecycle of a key.  Further on in this note are listed some methods used to authenticate roles and to authorize them to perform these actions._
+_There are several reasons for granting access to keys or restricting access to keys. The list below enumerates typical actions for keys in a typical lifecycle of a key. Further on in this note are listed some methods used to authenticate roles and to authorize them to perform these actions._
 +
-*_Creation of cryptographic keys* - It may be the case that during the creation of the key certain attributes are assigned to it that controls future access to the key, such as who is allowed to use it or restricted from using it, when they are allowed to use it or restricted from using it, who is allowed to backup and recover keys, who is allowed to destroy them, and who is allowed to modify attributes associated with the keys.  This SFR imposes no requirements on the creation of cryptographic keys, other than those specified already in FCS_CKM.1.  However, once created, this SFR does impose requirements to access keys for the purposes outlined in the first assignment._
+*_Creation of cryptographic keys* - It may be the case that during the creation of the key certain attributes are assigned to it that controls future access to the key, such as who is allowed to use it or restricted from using it, when they are allowed to use it or restricted from using it, who is allowed to backup and recover keys, who is allowed to destroy them, and who is allowed to modify attributes associated with the keys. This SFR imposes no requirements on the creation of cryptographic keys, other than those specified already in FCS_CKM.1. However, once created, this SFR does impose requirements to access keys for the purposes outlined in the first assignment._
 +
-*_Cryptographic key usage in cryptographic operations* - Depending on the application, a cryptographic key could be root key which by virtue of being a root key, cannot be encrypted with another key.  It is often stored in plain sight, sometimes with hardware protections, sometimes obfuscated in clever ways, such as in physically unclonable functions.  Other than root keys, it is expected that other cryptographic keys should be protected with encryption, often using other keys, which leads to a chain or hierarchy of cryptographic keys that encrypt other keys often anchored by a root key.   Additionally, it is expected that an entity authenticate itself self as an authorized user of the key.  This latter requirement is in addition to the recommended requirements of the Common Criteria Part 2 for FCS_CKM.3._
+*_Cryptographic key usage in cryptographic operations* - Depending on the application, a cryptographic key could be root key which by virtue of being a root key, cannot be encrypted with another key. It is often stored in plain sight, sometimes with hardware protections, sometimes obfuscated in clever ways, such as in physically unclonable functions. Other than root keys, it is expected that other cryptographic keys should be protected with encryption, often using other keys, which leads to a chain or hierarchy of cryptographic keys that encrypt other keys often anchored by a root key. Additionally, it is expected that an entity authenticate itself self as an authorized user of the key. This latter requirement is in addition to the recommended requirements of the Common Criteria Part 2 for FCS_CKM.3._
 + 
 *_Cryptographic key storage* - _The TOE may utilize storage external to the DSC. This external storage requires the protection of the keys that are considered under the control of the TOE._
 +
-*_Cryptographic key recovery* - This refers to the retrieval of cryptographic keys from either archival, backup, or escrow locations.  In each case, the TOE uses the agreed upon cryptographic key access method agreed upon._
+*_Cryptographic key recovery* - This refers to the retrieval of cryptographic keys from either archival, backup, or escrow locations. In each case, the TOE uses the agreed upon cryptographic key access method agreed upon._
 +
-*_Modifications to attributes of cryptographic keys* - Often during the creation of cryptographic keys, the TOE assigns certain attributes to them.  This may include allowed key access methods, authentication methods, and other items as discussed above in Creation of cryptographic keys.  The TOE may require authentication for authorization to modify these attributes._
+*_Modifications to attributes of cryptographic keys* - Often during the creation of cryptographic keys, the TOE assigns certain attributes to them. This may include allowed key access methods, authentication methods, and other items as discussed above in Creation of cryptographic keys. The TOE may require authentication for authorization to modify these attributes._
 +
-*_Cryptographic key destruction* - The attributes of the cryptographic key should indicate the necessary conditions needed to destroy it.  Often this will be an authentication indicating authorization to destroy it.  This SFR would apply to keys stored in the TOE, and FCS_CKM.6 would apply for destruction.  Otherwise, the destruction of keys stored outside the TOE is not enforceable by this SFR._
+*_Cryptographic key destruction* - The attributes of the cryptographic key should indicate the necessary conditions needed to destroy it. Often this will be an authentication indicating authorization to destroy it. This SFR would apply to keys stored in the TOE, and FCS_CKM.6 would apply for destruction. Otherwise, the destruction of keys stored outside the TOE is not enforceable by this SFR._
 +
 *_Key Access Methods_*
 +
-_This SFR lists several methods for protecting the confidentiality of keys prior to authorizing their use, archival, backup, escrow, or recovery.  This protection is often afforded only to the private or secret portion of cryptographic keys.  Some methods offer integrity protection as well.  These methods may not apply to modification of attributes especially if the attributes do not need confidentiality.  These methods may not apply to destruction since a TOE can only destroy keys within its boundaries, and it is premused these keys are already in the boundary._
+_This SFR lists several methods for protecting the confidentiality of keys prior to authorizing their use, archival, backup, escrow, or recovery. This protection is often afforded only to the private or secret portion of cryptographic keys. Some methods offer integrity protection as well. These methods may not apply to modification of attributes especially if the attributes do not need confidentiality. These methods may not apply to destruction since a TOE can only destroy keys within its boundaries, and it is premused these keys are already in the boundary._
 +
 *_Key encapsulation* - If the STF claims key encapsulation, then it should use approved methods such as those listed in FCS_CKM.2._
 +
@@ -3236,9 +3242,9 @@ _For data that is validity-stamped, the DSC does nothing but respond to a reques
 
 FDP_FRS_EXT.2 Factory Reset Behavior
 
-FDP_FRS_EXT.2.1:: Upon initiation of a factory reset, the TSF shall destroy [_all non-persistent SDOs_] and restore the following *pre-installed SDOs* to their factory settings: [_assignment: pre-installed SDOs to be restored during a factory reset_].
+FDP_FRS_EXT.2.1:: Upon initiation of a factory reset, the TSF shall destroy [_all non-permanent SDOs_] and restore the following *pre-installed SDOs* to their factory settings: [_assignment: pre-installed SDOs to be restored during a factory reset_].
 
-_Application Note {counter:remark_count}_:: _Not all DSCs permit a factory reset of the TOE, or perform a factory reset in response to excessive failed authentication or authorization attempts. Those that do are expected to perform a factory reset in a manner that prevents any inadvertent disclosure of security-relevant data that was present on the DSC prior to the factory reset. For DSCs that permit factory reset functionality (as indicated by selection of [.underline]#factory reset the TOE wiping out all non-persistent SDOs, as described by FDP_FRS_EXT.2# in FIA_AFL_EXT.1.3, or by [.underline]#no actions or conditions# NOT being selected in FDP_FRS_EXT.1.1), this SFR must be included in the TOE boundary._
+_Application Note {counter:remark_count}_:: _Not all DSCs permit a factory reset of the TOE, or perform a factory reset in response to excessive failed authentication or authorization attempts. Those that do are expected to perform a factory reset in a manner that prevents any inadvertent disclosure of security-relevant data that was present on the DSC prior to the factory reset. For DSCs that permit factory reset functionality (as indicated by selection of [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2# in FIA_AFL_EXT.1.3, or by [.underline]#no actions or conditions# NOT being selected in FDP_FRS_EXT.1.1), this SFR must be included in the TOE boundary._
 
 ==== FDP_MFW_EXT.2 Basic Firmware Integrity
 
@@ -3460,7 +3466,7 @@ This family defines requirements for key life cycle operations.
                                                     
 ....
 
-FCS_CKM_EXT.3 The cryptographic key access applies primarily to the storage of keys for future use and retrieval of keys for immediate use by the TOE.  There may be some overlap in primitives used in other SFRs, but the end goals here are to protect the confidentiality and authenticity of the keys while in storage.
+FCS_CKM_EXT.3 The cryptographic key access applies primarily to the storage of keys for future use and retrieval of keys for immediate use by the TOE. There may be some overlap in primitives used in other SFRs, but the end goals here are to protect the confidentiality and authenticity of the keys while in storage.
 
 FCS_CKM_EXT.7 This SFR captures methods for key agreement in which multiple parties contribute material used to derive the shared key used by each party to encrypt and decrypt messages to and from each other. The derived key can be used either as a symmetric key, keyed-hash key, or cryptographic key for key derivation functions.
 
@@ -4862,6 +4868,12 @@ FCS_COP.1
 
 |Owner 
 |Human being who controls/manages the platform on which the DSC is located. May be remote. [GD]
+
+|Permanent Keys/Seeds
+|Keys or seeds that are provisioned to the device during manufacturing or initial setup that remain even after a factory reset.
+
+|Persistent Secrets
+|Persistent secrets are long term keys or key material that are maintained longer than a single cryptographic operation. Persistent secrets do not remain after a factory reset.
 
 |Platform 
 |A platform consists of the hardware and firmware of a computing entity.
