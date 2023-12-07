@@ -2512,7 +2512,7 @@ The following rationale provides justification for each security objective for t
 |FTP_ITP_EXT.1 (selection-based)
 |This requirement defines a physically protected channel that the TSF can use to securely parse data being imported into it.
 
-.5+|O.PURGE_PROTECTION 
+.4+|O.PURGE_PROTECTION 
 |FCS_CKM.6 
 |This requirement ensures that key data is destroyed in a manner that prevents its future recovery.
 
@@ -2567,9 +2567,10 @@ The following rationale provides justification for each security objective for t
 |FCS_COP.1/SKC 
 |This requirement ensures the use of strong methods to encrypt sensitive data.
 
-.8+|O.STRONG_CRYPTO 
 |FCS_RBG.1 
 |This requirement ensures the use of strong random bit generation mechanisms.
+
+.10+|O.STRONG_CRYPTO 
 
 |FCS_OTV_EXT.1 
 |This requirement ensures that salts and nonces used by the TOE do not negatively impact key strength.
