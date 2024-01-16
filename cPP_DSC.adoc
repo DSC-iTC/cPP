@@ -1723,7 +1723,7 @@ _Application Note {counter:remark_count}_:: _Not all conformant TOEs will have t
 
 FDP_ACC.1 Subset Access Control
 
-FDP_ACC.1.1:: The TSF shall enforce the[_Access Control SFP_] on [
+FDP_ACC.1.1:: The TSF shall enforce the [_Access Control SFP_] on [
 +
 * _Subjects: S.DSC, S.Admin, S.CA, S.EPS_
 * _Objects: OB.P_SDO, OB.T_SDO, OB.AuthData, OB.Pstate, OB.FAACntr, OB.AntiReplay, OB.Context_
