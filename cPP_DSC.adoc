@@ -2210,7 +2210,7 @@ _Application Note {counter:remark_count}_:: _If FDP_MFW_EXT.1 selects [.underlin
 +
 _Recall that resetting a TOE to factory state also wipes all user data, but may not wipe out pre-installed SDOs. Configuring authorization policies includes setting policies for allowed access to SDOs._
 +
-_Protections for pre-installed SDEs/SDOs come through the firmware, and by extension, through firmware updates. In the same vein, the authorized updates may also affect the SDEs as well, if the vendor so chooses. One could say that the authorized update binds the attributes present in the functionality of the firmware to the pre-installed SDEs._
+_Protections for pre-installed SDEs/SDOs come through the firmware as well as through firmware updates. In the same vein, the authorized updates may also affect the SDEs as well, if the vendor so chooses. One could say that the authorized update binds the attributes present in the functionality of the firmware to the pre-installed SDEs._
 
 ==== FMT_SMR.1 Security Roles
 
