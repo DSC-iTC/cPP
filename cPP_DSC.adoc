@@ -1879,13 +1879,10 @@ FDP_SDC.2.1:: The TSF shall ensure the confidentiality of the [.underline]#[the 
 
 FDP_SDC.2.2:: The TSF shall ensure the confidentiality of the user data specified in FDP_SDC.2.1 without user intervention.
 
-_Application Note {counter:remark_count}_:: _This SFR applies to confidential SDEs, especially secret and private keys, Allowed Random Number Generators' state data, and vendor verification reference data. This SFR also applies to all authorization data appearing in the attribute list under SDO.AuthData as well as any administrator authorization data which may be stored implicitly._
+_Application Note {counter:remark_count}_:: _This SFR applies to SDOs with the confidential-SDE attribute set to require confidentiality, especially secret and private keys, Allowed Random Number Generators' state data, and vendor verification reference data. If SDEs do not require confidentiality, then its omission from this list indicates that confidentiality is not required. This SFR also applies to all authorization data appearing in the attribute list under SDO.AuthData as well as any administrator authorization data which may be stored implicitly._
 +
 _If the TOE stores these parameters outside of its boundary, it must encrypt them according to the cryptographic requirements for key encryption, as required by FDP_ETC_EXT.2._
 +
-_Vendor pre-installed SDOs includes both objects installed during manufacturing, and those provisioned by the vendor before final release to customer. The administrator and no one else owns and controls these objects._
-+
-_The confidential-SDE List attribute of the SDO indicates those SDEs that require confidentiality. If SDEs do not require confidentiality, then its omission from this list indicates that confidentiality is not required._
 
 ==== FDP_SDI.2 Stored Data Integrity Monitoring and Action
 
