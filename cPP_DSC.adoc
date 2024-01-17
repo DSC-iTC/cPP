@@ -150,7 +150,7 @@ An SDO may include one or more SDEs from one or both of these sources. In the Pr
 
 Explicit binding may also occur when the DSC wraps an SDO prior to storing it externally. <<SDOcomposition>> shows an example SDO with binding data used to secure an arbitrary number of SDEs.
 
-Implicit binding may occur by virtue of the location of SDEs within the DSC. An implicit binding may occur for pre-installed SDEs, in which case the DSC restricts the functionality it allows with the SDEs. It may also occur when the contents of certain protected storage locations carry with them implicit attributes simply by existing in these locations.
+Implicit binding may occur by virtue of the location of SDEs within the DSC. An implicit binding may occur for pre-installed SDEs, in which case the DSC restricts the functionality it allows with the SDEs as part of the firmware itself. It may also occur when the contents of certain protected storage locations carry with them implicit attributes simply by existing in these locations.
 
 Vendors may pre-install keys and other material in the DSC during the manufacturing process, or the DSC may automatically generate keys or other material upon first boot. Since the user (an administrator or client application acting on behalf of a human user) provides no input to these items, the cPP calls these pre-installed SDEs. Pre-installed SDEs have two distinguishing characteristics:
 
@@ -214,7 +214,7 @@ DSCs provide seven core security services to a platform as illustrated in <<Core
 
 ==== Roots of Trust
 
-This collaborative Protection Profile (cPP) assumes a DSC will contain one Root of Trust (RoT) that is comprised of the compute engine, one set of firmware code, and pre-installed SDOs, including a unique identity bound to the hardware. The firmware code may be immutable, or it may be mutable but with controlled, authenticated, and authorized updates allowed. This code may provide one or more RoT services, such as a RoT for Measurement, Verification, or Reporting. The unique identity bound to the hardware should be immutable and third parties should be able to authenticate the manufacturer of the Root of Trust through its unique identity (e.g., the unique identity may be a credential signed by the manufacturer).
+This collaborative Protection Profile (cPP) assumes a DSC will contain one Root of Trust (RoT) that is comprised of the compute engine, one set of firmware code, and pre-installed SDOs, including a unique identity bound to the hardware. The firmware code may be immutable, or it may be mutable but with controlled, authenticated, and authorized updates allowed to ensure continued integrity of the RoT. This code may provide one or more RoT services, such as a RoT for Measurement, Verification, or Reporting. The unique identity bound to the hardware should be immutable and third parties should be able to authenticate the manufacturer of the Root of Trust through its unique identity (e.g., the unique identity may be a credential signed by the manufacturer).
 
 ==== DSC Characteristics
 
@@ -402,61 +402,45 @@ The PPs and PP-Modules that are allowed to be specified in a PP-Configuration wi
 
 === Assets
 
-(R.AUTHDATA) Authorization Data that the TOE manages in support of the authorization services that it offers, including both user-provided authentication tokens and authorization values and those created by the TOE. Authorization Data may be special cases of SDEs, or they may be attributes in an SDO. The TSF may use Authorization Data to manage the use and disposition of a single SDE, or a broad class of SDEs. The TOE protects the integrity of Authorization Data, and in some cases, may protect their confidentiality.
+*R.AUTHDATA:* Authorization Data that the TOE manages in support of the authorization services that it offers, including both user-provided authentication tokens and authorization values and those created by the TOE. Authorization Data may be special cases of SDEs, or they may be attributes in an SDO. The TSF may use Authorization Data to manage the use and disposition of a single SDE, or a broad class of SDEs. The TOE protects the integrity of Authorization Data, and in some cases, may protect their confidentiality.
 
-(R.CONFKEY) Confidential (or secret) keys used in symmetric cryptographic functions and private keys used in asymmetric cryptographic functions are managed and used by the TOE in support of the cryptographic services that it offers. This includes user keys that are owned and used by a specific user (which are a special case of an SDE), and support keys used in the implementation and operation of the TOE. The confidentiality and integrity of these keys must be protected.
+*R.CONFKEY:* Confidential (or secret) keys used in symmetric cryptographic functions and private keys used in asymmetric cryptographic functions are managed and used by the TOE in support of the cryptographic services that it offers. This includes user keys that are owned and used by a specific user (which are a special case of an SDE), and support keys used in the implementation and operation of the TOE. The confidentiality and integrity of these keys must be protected.
 
-(R.PUBKEY) Public keys are managed and used by the TOE in support of the cryptographic services that it offers (including user keys and support keys). This includes user keys that are owned and used by a specific user (which are a special case of an SDE), and support keys used in the implementation and operation of the TOE. The integrity of these keys must be protected.
+*R.PUBKEY:* Public keys are managed and used by the TOE in support of the cryptographic services that it offers (including user keys and support keys). This includes user keys that are owned and used by a specific user (which are a special case of an SDE), and support keys used in the implementation and operation of the TOE. The integrity of these keys must be protected.
 
-(R.SDE) An SDE is an item of user data that is held in (and may be stored on) the TOE and that may be used only by an authorized subject (i.e. a user or process acting on behalf of that user). Typically the TOE will not know what an SDE represents in terms of the application or service that it is used for: it will characterize an SDE only in terms of the authorization requirements that are necessary to access it (i.e. the presentation and possibly processing of authorization data presented to the TOE), and the operations that can be performed on or with it after authorization has been achieved. An SDE may require protection of its confidentiality, its integrity, or both.
+*R.SDE:* An SDE is an item of user data that is held in (and may be stored on) the TOE and that may be used only by an authorized subject (i.e. a user or process acting on behalf of that user). Typically the TOE will not know what an SDE represents in terms of the application or service that it is used for: it will characterize an SDE only in terms of the authorization requirements that are necessary to access it (i.e. the presentation and possibly processing of authorization data presented to the TOE), and the operations that can be performed on or with it after authorization has been achieved. An SDE may require protection of its confidentiality, its integrity, or both.
 
-(R.SDO) An SDO comprises one or more SDEs that are collectively bound to one or more attributes (e.g. an identifier for the identity that a key or authorization data is associated with). These attributes may necessarily be used by the TSF to enforce authorization policies concerning the allowed use and disposition of the subject SDEs. The bindings can either be explicit (e.g. in a well-formatted standards-based data structure) or implicit (e.g. by virtue of their location within the TOE which implies privileges of use and disposition by certain users), or a combination of both.
+*R.SDO:* An SDO comprises one or more SDEs that are collectively bound to one or more attributes (e.g. an identifier for the identity that a key or authorization data is associated with). These attributes may necessarily be used by the TSF to enforce authorization policies concerning the allowed use and disposition of the subject SDEs. The bindings can either be explicit (e.g. in a well-formatted standards-based data structure) or implicit (e.g. by virtue of their location within the TOE which implies privileges of use and disposition by certain users), or a combination of both.
 
 === Threats
 
-(T.BRUTE_FORCE_AUTH) An unauthorized user may attempt to gain unauthorized access to the TOE by repeatedly and rapidly supplying a large number of permutations of authorization data, such as passwords, biometrics, etc. that protect the SDEs, in the hopes that valid authorization data can be obtained through brute force. A successful brute force attack puts the SDE/SDO data, user identity, and the TOE's underlying platform at risk.
+*T.BRUTE_FORCE_AUTH:* An unauthorized user may attempt to gain unauthorized access to the TOE by repeatedly and rapidly supplying a large number of permutations of authorization data, such as passwords, biometrics, etc. that protect the SDEs, in the hopes that valid authorization data can be obtained through brute force.
 
-The consequences of risks to SDEs include the loss of confidentiality of the SDE or SDO data, unauthorized access to and use of this data, destruction of this data, and the ability of the adversary to impersonate a user or that user's platform.
+*T.HW_ATTACK:* An individual with physical access to the TOE may apply hardware attacks such as probing, physical manipulation, fault-injection, environmental stress, or reactivating blocked test-features or other pre-delivery services to manipulate the behavior of the TOE to disclose SDOs.
 
-(T.HW_ATTACK) An individual with physical access to the TOE may apply hardware attacks such as probing, physical manipulation, fault-injection, environmental stress, or reactivating blocked test-features or other pre-delivery services to manipulate the behavior of the TOE to disclose SDOs.
+*T.SDE_TRANSIT_COMPROMISE:* An attacker with the ability to observe data transmission into and out of the TOE may access or determine plaintext values of keys, authorization data, and other SDEs as the TSF transmits them into or out of the TOE.
 
-(T.SDE_TRANSIT_COMPROMISE) An attacker with the ability to observe data transmission into and out of the TOE may access or determine plaintext values of keys, authorization data, and other SDEs as the TSF transmits them into or out of the TOE. This puts the SDE/SDO data, user identity, and the TOE's underlying platform at risk.
+*T.UNAUTH_UPDATE:* An unauthorized user may force the platform to update the TOE with firmware that compromises its security features. Poorly chosen update protocols, cryptographic algorithms, and keys sizes may allow adversaries to install software or firmware that bypasses security features or rolls back to firmware versions with compromised security features and provides them with unauthorized access to SDEs.
 
-The consequences of access to plaintext SDEs in this way include the loss of confidentiality of SDE/SDO data, unauthorized use of this data, unauthorized modification of this data, and the ability of the adversary to impersonate a user or their platform.
+*T.UNAUTHORIZED_ACCESS:* An unauthorized user may gain unauthorized access to one or more SDEs within the TOE. If an adversary gains access to SDEs/SDOs stored in the TSF, they may attempt to view, use, or destroy this data as well as impersonate a user or that user's platform.
 
-(T.UNAUTH_UPDATE) An unauthorized user may force the platform to update the TOE with firmware that compromises its security features. Poorly chosen update protocols, cryptographic algorithms, and keys sizes may allow adversaries to install software or firmware that bypasses security features or rolls back to firmware versions with compromised security features and provides them with unauthorized access to SDEs.
+*T.WEAK_CRYPTO:* An unauthorized user or attacker that observes network traffic transmitted to and from the TOE may cryptographically exploit poorly chosen cryptographic algorithms, random bit generators, ciphers or key sizes. Weak cryptography chosen by users or by TSF protection mechanisms puts the user's data, identity, and platform at risk of exploitation by adversaries.
 
-The consequences of risks to firmware include the loss of confidentiality of the SDE/SDO data, unauthorized access to and use of this data, destruction of this data, and the ability of the adversary to impersonate a user or that user's platform.
+*T.WEAK_ELEMENT_BINDING:* An unauthorized user may successfully break the association between SDEs, for example to replace one element with another element.
 
-(T.UNAUTHORIZED_ACCESS) An unauthorized user may gain unauthorized access to one or more SDEs within the TOE. If an adversary gains access to SDEs/SDOs stored in the TSF, they may attempt to view, use, or destroy this data as well as impersonate a user or that user's platform.
-
-The consequences of unauthorized access to SDEs/SDOs include the loss of confidentiality of their content, unauthorized use of that content, unauthorized modification or destruction of that content, and the ability of the adversary to impersonate a user or that user's platform.
-
-(T.WEAK_CRYPTO) An unauthorized user or attacker that observes network traffic transmitted to and from the TOE may cryptographically exploit poorly chosen cryptographic algorithms, random bit generators, ciphers or key sizes. Weak cryptography chosen by users or by TSF protection mechanisms puts the user's data, identity, and platform at risk of exploitation by adversaries.
-
-The consequences of risks to SDEs include the loss of confidentiality of the SDE/SDO data, unauthorized access to and use of this data, destruction of this data, and the ability of the adversary to impersonate a user or that user's platform.
-
-(T.WEAK_ELEMENT_BINDING) An unauthorized user may successfully break the association between SDEs, for example to replace one element with another element.
-
-The consequences of manipulation of SDEs in this way include the loss of confidentiality of the data, unauthorized use of the data, destruction of the data, unauthorized modification of credentials, and the ability of the adversary to impersonate a user or that user's platform.
-
-(T.WEAK_OWNERSHIP_BINDING) A user may successfully access or manipulate SDEs that they do not own.
-
-The consequences of manipulation of SDEs in this way include the loss of confidentiality of SDE/SDO data, unauthorized use of that data, unauthorized modification of that data, and the ability of the adversary to impersonate a user or that user's platform.
+*T.WEAK_OWNERSHIP_BINDING:* A user may successfully access or manipulate SDEs that they do not own.
 
 === Assumptions
 
 This section describes the assumptions made in identification of the threats and security requirements for dedicated security components. The dedicated security component is not expected to provide assurance in any of these areas, and as a result, requirements are not included to mitigate the threats associated.
 
-(A.AUTH_USERS) Authorized users follow all provided guidance regarding the safeguarding of SDEs held outside the TOE.
+*A.AUTH_USERS:* Authorized users follow all provided guidance regarding the safeguarding of SDEs held outside the TOE.
 
-(A.CREDENTIAL_REVOCATION) If a platform is lost, stolen, or compromised then there is a method of revocation of any credentials held (or equivalent method of mitigating the impact of potential access to the credentials). Credential revocation ensures that the loss of physical custody does not have significant negative impact on the security of the platform. This implies that an attacker has only limited access to the device to apply attacks. It further implies that the device owner is not seen as an attacker.
+*A.CREDENTIAL_REVOCATION:* If a platform is lost, stolen, or compromised then there is a method of revocation of any credentials held (or equivalent method of mitigating the impact of potential access to the credentials). Credential revocation ensures that the loss of physical custody does not have significant negative impact on the security of the platform. This implies that an attacker has only limited access to the device to apply attacks. It further implies that the device owner is not seen as an attacker.
 
-(A.ROT_INTEGRITY) The vendor provides a RoT that is comprised of the TOE firmware, hardware, and pre-installed SDOs, free of intentionally malicious capabilities. The platform trusts the RoT since it cannot verify the integrity and authenticity of the RoT.
+*A.ROT_INTEGRITY:* The vendor provides a RoT that is comprised of the TOE firmware, hardware, and pre-installed SDOs, free of intentionally malicious capabilities. The platform trusts the RoT since it cannot verify the integrity and authenticity of the RoT. Trust in the ToR may be intrinsic in the case of an immmutable RoT, while a mutable RoT will verify the authenticity and integrity of the updates before applying them.
 
-If the RoT is immutable, then the platform can have confidence that once delivered, malicious actors cannot modify the RoT to add malicious capabilities. If the RoT is mutable (e.g. the firmware and pre-installed SDOs), then it will verify the authenticity and integrity of the updates before applying them.
-
-(A.TRUSTED_PEER) The remote peer communicating over a secure channel is trustworthy, and will not abuse the secure channel in order to introduce malware or fraudulent SDEs into the TOE.
+*A.TRUSTED_PEER:* The remote peer communicating over a secure channel is trustworthy, and will not abuse the secure channel in order to introduce malware or fraudulent SDEs into the TOE.
 
 === Organizational Security Policies
 
@@ -466,37 +450,33 @@ There are no organizational security policies defined in this cPP.
 
 === Security Objectives for the TOE
 
-(O.AUTH_FAILURES) The TOE resists repeated attempts to guess authorization data by responding to consecutive failed attempts in a way that prevents an attacker from exploring a significant amount of the space of possible authorization data values.
+*O.AUTH_FAILURES:* The TOE resists repeated attempts to guess authorization data by responding to consecutive failed attempts in a way that prevents an attacker from exploring a significant amount of the space of possible authorization data values.
 
-(O.AUTHORIZATION) The TOE authorizes only authenticated subjects to access SDOs stored by authenticated users of the TOE, pre-installed SDOs stored in the RoT by the manufacturer of the TOE, and management functions that are used to manipulate the TSF and its stored data.
+*O.AUTHORIZATION:* The TOE authorizes only authenticated subjects to access SDOs stored by authenticated users of the TOE, pre-installed SDOs stored in the RoT by the manufacturer of the TOE, and management functions that are used to manipulate the TSF and its stored data.
 
-(O.DATA_PROTECTION) The TOE provides authenticity, confidentiality, and integrity services for SDOs.
+*O.DATA_PROTECTION:* The TOE provides authenticity, confidentiality, and integrity services for SDOs.
 
-(O.FW_INTEGRITY) The TOE ensures its own integrity has remained intact and attests its integrity to outside parties on request.
+*O.FW_INTEGRITY:* The TOE ensures its own integrity has remained intact and attests its integrity to outside parties on request.
 
-(O.PARSE_PROTECTION) All SDEs are received by the TOE over a secure channel for parsing, protecting confidentiality and integrity of the SDEs while in transit. The TOE authenticates the source of all SDEs received, and authenticates itself to the remote peer.
+*O.PARSE_PROTECTION:* All SDEs are received by the TOE over a secure channel for parsing, protecting confidentiality and integrity of the SDEs while in transit. The TOE authenticates the source of all SDEs received, and authenticates itself to the remote peer.
 
-(O.PURGE_PROTECTION) The TOE provides secure destruction of SDEs when they are deleted, so that the previous value of the SDE can no longer be accessed (and cannot be restored).
+*O.PURGE_PROTECTION:* The TOE provides secure destruction of SDEs when they are deleted, so that the previous value of the SDE can no longer be accessed (and cannot be restored).
 
-(O.SECURE_UPDATE) The TOE software/firmware either does not allow update, or else implements a mechanism that ensures only authorized updates are applied. If the TOE allows updating its firmware, it is required to implement a mechanism that ensures only authorized firmware can be loaded into the TOE. A secure update mechanism ensures the firmware is authorized through verification of its integrity and authenticity while also preventing rollback to a previous and potentially vulnerable firmware instance.
+*O.SECURE_UPDATE:* The TOE software/firmware either does not allow update, or else implements a mechanism that ensures only authorized updates are applied. If the TOE allows updating its firmware, it is required to implement a mechanism that ensures only authorized firmware can be loaded into the TOE. A secure update mechanism ensures the firmware is authorized through verification of its integrity and authenticity while also preventing rollback to a previous and potentially vulnerable firmware instance.
 
-(O.STRONG_BINDING) The TOE provides a mechanism for binding data to its attributes (including the identity of its owner) and prevents unauthorized changes to data attributes.
+*O.STRONG_BINDING:* The TOE provides a mechanism for binding data to its attributes (including the identity of its owner) and prevents unauthorized changes to data attributes.
 
-The protections for pre-installed SDEs/SDOs come through the firmware protections. For example, only authorized updates to the firmware contains the functionality that determines the attributes of the pre-installed SDOs. In the same vein, the authorized updates may also affect the SDEs as well, if the vendor so chooses. The authorized update binds the attributes present in the functionality of the firmware to the pre-installed SDEs.
-
-(O.STRONG_CRYPTO) The TOE implements strong cryptographic mechanisms and algorithms according to recognized standards, including support for random bit generation based on recognized standards and a source of sufficient entropy. The TOE uses key sizes that are recognized as providing sufficient resistance to current attack capabilities.
+*O.STRONG_CRYPTO:* The TOE implements strong cryptographic mechanisms and algorithms according to recognized standards, including support for random bit generation based on recognized standards and a source of sufficient entropy. The TOE uses key sizes that are recognized as providing sufficient resistance to current attack capabilities.
 
 === Security Objectives for the Operational Environment
 
 The Operational Environment of the TOE implements technical and procedural measures to assist the TOE in correctly providing its security functionality. This section defines security objectives for the Operational Environment and consists of a set of statements describing the goals that the Operational Environment should achieve.
 
-(OE.AUTH_USERS) Authenticated users follow all provided guidance regarding the safeguarding of SDEs, especially authentication tokens such as passwords, pass-phrases, and biometrics.
+*OE.AUTH_USERS:* Authenticated users follow all provided guidance regarding the safeguarding of SDEs, especially authentication tokens such as passwords, pass-phrases, and biometrics.
 
-(OE.PHYSICAL) The platform holder will ensure that an attacker has no prolonged, unsupervised physical access to the platform. If a platform is lost or stolen then the platform holder will promptly initiate revocation of any credentials held (or equivalent method of mitigating the impact of potential access to the credentials).
+*OE.PHYSICAL:* The platform holder will ensure that an attacker has no prolonged, unsupervised physical access to the platform. If a platform is lost or stolen then the platform holder will promptly initiate revocation of any credentials held (or equivalent method of mitigating the impact of potential access to the credentials). The platform may initiate the revocation based on local conditions or in response to remote signals such as from a service provider on the request of the platform holder.
 
-This security objective for the operating environment expects an entity to wipe the contents of the TOE in the event that an attacker has prolonged unsupervised physical access to the platform containing the TOE. There exists a variety of methods to wipe the contents or render the contents useless to the attacker. The platform may institute its own signal to wipe the TOE upon reaching or exceeding a threshold of unsuccessful user authentication or authorization attempts by an attacker. A remote entity may signal to the platform that it should issue a signal to the TOE to wipe is contents. The platform user (who has lost physical access to the platform) may contact service providers and inform them of the loss of credentials in the TOE, who may in turn issue revocation of those credentials.
-
-(OE.TRUSTED_PEER) Connections using secure channels are made only to trusted peers, in whom confidence has been established that they will not abuse the secure channel in order to introduce malware or fraudulent SDEs into the TOE.
+*OE.TRUSTED_PEER:* Connections using secure channels are made only to trusted peers, in whom confidence has been established that they will not abuse the secure channel in order to introduce malware or fraudulent SDEs into the TOE.
 
 === Security Objectives Rationale
 
