@@ -1938,7 +1938,7 @@ _The sole presence of unique identity keys linking to the RoT does not prove aut
 
 FPT_PRO_EXT.1.2:: The TSF shall maintain Root of Trust data as [.underline]#[selection: immutable, mutable if and only if its mutability is controlled by a unique identifiable owner]#.
 
-_Application Note {counter:remark_count}_:: _One expects that only authorized sources can modify the single RoT, such as through a secure update. A pre-installed SDO may contain the identity of the manufacturer of the RoT._
+_Application Note {counter:remark_count}_:: _One expects that only authorized sources can modify the single RoT, such as through a secure update._
 +
 _The process of authenticating the source of a secure update may involve querying the identity of the manufacturer, contained on a pre-installed SDO. If this identity is in the form of an X.509 certificate containing a signature verification key signed by the manufacturer, then the authentication process is sufficient._
 +
