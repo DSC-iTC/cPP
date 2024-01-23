@@ -232,7 +232,7 @@ Subjects: The following list contains the fundamental actors in the expected ope
 
 * S.DSC - DSC with security attribute DSC.ID, which is the identity of the DSC
 * S.Admin - Admin (an authorized administrator with special privileges) security attribute Admin.ID - See <<Roles>> for more discussion on Admin.
-* S.CA - CA (i.e. an authorized user or an application with a verifiable identity) with security attribute CA.ID - See <<Roles>> for more discussion on users.
+* S.CApp - CApp (i.e. an authorized user or an application with a verifiable identity) with security attribute CA.ID - See <<Roles>> for more discussion on users.
 * S.EPS - External Platform Storage (EPS) (e.g. transient SDE/SDO source and destination, in the case of data imported and exported for the sole use inside the DSC). In the case of a passive EPS, the DSC will properly protect the integrity and confidentiality of the objects it stores and retrieves from there. In the case of an active EPS with security attribute EPS.ID, the DSC and EPS may choose to create a secure channel through which they will pass objects back and forth.
 
 Objects: The following list contains objects the DSC expects to use during the expected operational use cases.
@@ -243,7 +243,7 @@ Objects: The following list contains objects the DSC expects to use during the e
 * OB.Pstate - Platform State (e.g. measurements and assertions)
 * OB.FAACntr - Failed Authorization Attempt Counters
 * OB.AntiReplay - Anti-replay tokens (e.g. counters, nonces, etc.)
-* OB.Context - Session Context (The DSC may maintain one or more sessions with a CA involving one or more of SDOs, Authorization Data, Platform State, Failed Authorization Counters, and Anti-Replay Tokens. The DSC may represent internally the state of these objects at any given time in a Session Context) - See <<Sessions>> for more discussion on sessions.
+* OB.Context - Session Context (The DSC may maintain one or more sessions with a CApp involving one or more of SDOs, Authorization Data, Platform State, Failed Authorization Counters, and Anti-Replay Tokens. The DSC may represent internally the state of these objects at any given time in a Session Context) - See <<Sessions>> for more discussion on sessions.
 
 Security Attributes: The following list contains the minimum security attributes for a DSC. Individual DSCs may implement additional security attributes beyond this (whether they are additional standalone attributes or additional attributes that are associated with SDOs); the ST author is expected to identify these.
 
@@ -262,13 +262,13 @@ Security Attributes: The following list contains the minimum security attributes
 
 Operations: The following list contains the expected operations of a DSC.
 
-* OP.Import (See Parse) - The DSC may receive SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens or Session Contexts from the CA or the EPS. The Admin may also give the DSC Authorization Data.
-* OP.Create (See Provision) - The DSC may create SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts with authorization from a CA or Admin.
-* OP.Use (See Process) - The DSC may use or perform a cryptographic operation on Pre-Provisioned SDOs, Transient SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts with Create authorization from a CA or Admin. Cryptographic operations may include encryption, decryption, hashing, signature generation, and signature verification.
-* OP.Modify (See Process) - The DSC may modify SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts with authorization from a CA or Admin.
-* OP.Attest (See Prove) - The DSC may create an attestation of Platform State using an SDO or Pre-Provisioned SDO and Anti-Replay Tokens as authorized by a CA or Admin respectively. 
+* OP.Import (See Parse) - The DSC may receive SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens or Session Contexts from the CApp or the EPS. The Admin may also give the DSC Authorization Data.
+* OP.Create (See Provision) - The DSC may create SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts with authorization from a CApp or Admin.
+* OP.Use (See Process) - The DSC may use or perform a cryptographic operation on Pre-Provisioned SDOs, Transient SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts with Create authorization from a CApp or Admin. Cryptographic operations may include encryption, decryption, hashing, signature generation, and signature verification.
+* OP.Modify (See Process) - The DSC may modify SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts with authorization from a CApp or Admin.
+* OP.Attest (See Prove) - The DSC may create an attestation of Platform State using an SDO or Pre-Provisioned SDO and Anti-Replay Tokens as authorized by a CApp or Admin respectively. 
 * OP.Store (See Protect) - The DSC may store SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts in protected storage of the DSC. See section 2.4.5 for more discussion on protected storage.
-* OP.Export (See Propagate) - The DSC may export SDOs, SDEs, Authorization Data, Platform State, or Anti-Replay Tokens to a CA or EPS with the proper authorization from the owner of each object. In the case of EPS, the DSC will bind the objects to the DSC in such a way as to deny other DSCs or entities the ability to import, use, modify, attest, store, export, or destroy them. The DSC may export Session Contexts only to an EPS binding it in the same way as above.
+* OP.Export (See Propagate) - The DSC may export SDOs, SDEs, Authorization Data, Platform State, or Anti-Replay Tokens to a CApp or EPS with the proper authorization from the owner of each object. In the case of EPS, the DSC will bind the objects to the DSC in such a way as to deny other DSCs or entities the ability to import, use, modify, attest, store, export, or destroy them. The DSC may export Session Contexts only to an EPS binding it in the same way as above.
 * OP.Destroy (See Purge) - The DSC may purge SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts in protected storage with proper authorization from the owner of each object.
 
 === TOE Use Cases
@@ -312,20 +312,41 @@ The following paragraphs describe the relationships between elements of the DSC.
 
 ==== Roles
 
-There are two main roles that come into play with any platform, including the DSC. These are administrator and client applications. The DSC is often a component within a larger system or platform that is referred to as a platform from this point forward. Often the platform supports different roles as well. At times, these roles may coincide with the roles supported in the DSC, even on purpose.
+As with many systems, rather than managing access rights individually for each "user" of the DSC, access rights are managed through the use of roles. Within the DSC, there are three possible roles that are defined. These roles are defined as:
 
-The administrator may, among other things, accept responsibility for providing timely updates to the DSC, both feature updates and security updates. It may also be responsible for managing the pre-installed SDOs and the initial configuration of the DSC. Different administrators may have different authorities to manage the TSF; for example, one administrator may be responsible for controlling firmware updates while another may take an active part in managing the contents of the DSC installed post-manufacture.
+* ADM-R - Owner Admin role - the administrator role related to the management of the DSC once it has been integrated into a platform.
+* MFGADM-R - Manufacturer Admin role - the administrator role related to the management of firmware and key material that form the basis for the root of trust.
+* CApp-R - Client Application role - the client role of the DSC that requests and utilizes the functionality provided by the DSC.
 
-An administrator may manage the contents of the DSC, including user content. A DSC administrator is not necessarily the owner of a given SDO. Although the DSC administrator may possibly own one or more SDOs, not all SDOs allow a DSC administrator direct control of it. In some cases, a DSC administrator may also be in a position to grant or deny another administrator access to what it perceives as their content, namely the DSC's firmware and possibly some keying material belonging to the manufacturer. A DSC manufacturer's choice of allowing an administrator of the DSC this kind of latitude is a feature of its product.
+Depending on the configuration of the DSC, there may not be a separation of the Admin roles, such that the capabilities of the ADM-R and MFGADM-R roles are combined into a single role. For the purposes of the cPP, unless specifically called out, all administration roles are assumed to be combined and will use ADM-R.
 
-The CA role may also be further divided into multiple users. CAs can include:
+As the DSC is generally a component within a larger system or platform, the roles of the DSC are specific to the DSC. While there may be matching roles between the DSC and its platform, the roles here are specifically those in the DSC and are independent of any defined on the platform.
 
-* An application vendor acting on its own behalf to update software on the platform.
+The ADM-R role provides sufficient privileges to manage the functionality of the DSC. As a role designed for the administrator, this role may be responsible for the following:
+
+* Manage access control for SDOs (does not mean the contents of any particular SDO can be read by the administrator)
+* Manage the initial configuration of the DSC
+
+The MFGADM-R role, if explicitly defined in a DSC, may include the following responsibilities (which may be part of the ADM-R role otherwise):
+
+* Manage the pre-installed SDOs and initial configuration of the DSC
+
+The CApp-R role is focused on utilization of the functionality provided by the DSC. The following would be representative of the responsibilities for this role:
+
+* Requesting the creation of the SDOs
+* Accessing or modifying created SDOs
+* Deleting created SDOs
+
+The ADM-R role does not mean that an administrator may be able to read the contents of any SDO even though it may be able to manage access rights on the SDO.
+
+The management of timely updates (security or functional) for the DSC may be handled in a variety of ways, and as such may be associated with any role (though clearly this should be restricted to a well-defined "user").
+
+In general, the CApp-R role is expected to be the primary role used when the components of the platform call to access the services provided by the DSC. Some examples of entities that may call the DSC and utilize the CApp-R role include:
+
 * A content provider controlling access to its content through an application.
 * A human entity using the platform who has an identity that they use to authenticate themselves to the content provider through a CA.
+* An application vendor acting on its own behalf to update software on the platform.
 * An original equipment manufacturer (OEM) that designed and manufactured a more complex system with the DSC as a component (assuming that the DSC manufacturer and the manufacturer of the more complex system using the DSC as a component are different entities).
-
-In some cases, the DSC may allow the OEM to provision and manage its own content in the DSC for its own purpose, such as managing their firmware or software installed on the platform. In this case, the OEM is considered to be another CA under the control of the administrator. The role of administrator is not ascribed to the OEM since it likely does not control the manufacturer's firmware or key material and thus does not control the behavior of the DSC. Nor would the other CAs on the platform tolerate OEM control of their content stored in the DSC. Even so, there should be some separation between the administrator-owner and the other roles of the platform in terms of authorizing use of the contents assigned to each of the roles. For example, administrator-owners may deny access to contents, either temporarily or permanently (e.g., through cryptographic erase). However, they cannot themselves access their contents for their own use or to gain access to things they are not otherwise authorized to access.
 
 ==== Key Usage
 
@@ -1682,16 +1703,16 @@ FMT_MSA.1.1:: The TSF shall enforce the [_Access Control SFP_] to restrict the a
 |Cannot be modified
 
 |SDO.AuthData 
-|[_assignment_: _list of roles that are authorized to modify SDO reference authorization data_]
+|[_selection_: _ADM-R, MFGADM-r, CApp-R_] roles that are authorized to modify SDO reference authorization data
 
 |SDO.Reauth 
-|[_assignment_: _list of roles that are authorized to modify re-authorization conditions_]
+|[_selection_: _ADM-R, MFGADM-r, CApp-R_] roles that are authorized to modify re-authorization conditions
 
 |SDO.Conf 
-|[_assignment_: _list of roles that are authorized to modify confidential SDE-list_]
+|[_selection_: _ADM-R, MFGADM-r, CApp-R_] roles that are authorized to modify confidential SDE-list
 
 |SDO.Export 
-|[_assignment_: _list of roles that are authorized to modify export flag_]
+|[_selection_: _ADM-R, MFGADM-r, CApp-R_] roles that are authorized to modify export flag
 
 |SDO.Integrity 
 |Cannot be modified by users (maintained automatically by TSF)
@@ -1759,7 +1780,7 @@ FMT_MSA.3.2:: The TSF shall allow the [_authorized identified roles, according t
 
 .2+|SDO.AuthData 
 |Permissive 
-|[.underline]#[selection: admin, client application]#
+|[.underline]#[selection: ADM-R, MFGADM-R, CApp-R]#
 |Import process 
 .2+|[.underline]#[selection: none, [_assignment: list of types of authentication tokens allowed_], [_assignment: range of authorization values allowed_]]#
 
@@ -1801,9 +1822,9 @@ FMT_MSA.3.2:: The TSF shall allow the [_authorized identified roles, according t
 
 :xrefstyle: basic
 
-_Application Note {counter:remark_count}_:: _Both admin and client application roles can initiate the import process. The imported object contains the default values for each attribute, where allowed. The TSF can override default values for the following attributes of imported objects: SDO.ID, SDO.Type, SDO.Reauth, SDO.Export, and SDO.Integrity. The TSF may override default values in these cases to force the objects to comport to established structures within the TOE, or to comply with TOE-wide security policies. In these cases, the defined roles (i.e. admin and client application) cannot override the default values. For SDO.AuthData, the TSF shall allow user roles (i.e. admin and client applications) to override authorization data that may arrive with the object. For SDO.Conf the TSF accepts the imported value for this attribute. SDO.Bind is explained below._
+_Application Note {counter:remark_count}_:: _Both the ADM-R and CApp-R roles can initiate the import process. The imported object contains the default values for each attribute, where allowed. The TSF can override default values for the following attributes of imported objects: SDO.ID, SDO.Type, SDO.Reauth, SDO.Export, and SDO.Integrity. The TSF may override default values in these cases to force the objects to comport to established structures within the TOE, or to comply with TOE-wide security policies. In these cases, the defined roles (i.e. the ADM-R and CApp-R) cannot override the default values. For SDO.AuthData, the TSF shall allow user roles (i.e. the ADM-R and CApp-R) to override authorization data that may arrive with the object. For SDO.Conf the TSF accepts the imported value for this attribute. SDO.Bind is explained below._
 +
-_Unless otherwise noted, both admin and client application roles can initiate the generation process. The admin and client application will provide the default values for the attributes. This SFR assumes the TSF checks SDO.Type, SDO.AuthData, SDO.Reauth, SDO.Conf, and SDO.Export for compliance with established security policies and refuses to create objects which do not comply and thus will not override the value of any of these attributes. In the cases of the SDO.ID and SDO.Integrity, the TSF generates these values and therefore there is no need to override._
+_Unless otherwise noted, both the ADM-R and CApp-R roles can initiate the generation process. The the ADM-R and CApp-R roles will provide the default values for the attributes. This SFR assumes the TSF checks SDO.Type, SDO.AuthData, SDO.Reauth, SDO.Conf, and SDO.Export for compliance with established security policies and refuses to create objects which do not comply and thus will not override the value of any of these attributes. In the cases of the SDO.ID and SDO.Integrity, the TSF generates these values and therefore there is no need to override._
 +
 _In the case of SDO.Bind for both import and generation processes, the TSF may override values that denote a binding to the TOE, but it should not override values that denote a binding to other keys. In the case of the import process, the defined roles cannot override the default values for any binding._
 +
@@ -1868,11 +1889,11 @@ _Protections for pre-installed SDEs/SDOs come through the firmware as well as th
 
 FMT_SMR.1 Security Roles
 
-FMT_SMR.1.1:: The TSF shall maintain the roles: [_administrator, client application_].
+FMT_SMR.1.1:: The TSF shall maintain the roles: [_ADM-R, MFGADM-R, CApp-R_].
 
 FMT_SMR.1.2:: The TSF shall be able to associate users with roles.
 
-_Application Note {counter:remark_count}_:: _This cPP uses the term "user" throughout to reference both the administrator and client application roles simultaneously._
+_Application Note {counter:remark_count}_:: _This cPP uses the term "user" throughout to reference the ADM-R, MFGADM-R and CApp-R roles simultaneously._
 
 === Protection of the TSF
 
@@ -1922,7 +1943,7 @@ _Application Note {counter:remark_count}_:: _One expects that only authorized so
 +
 _The process of authenticating the source of a secure update may involve querying the identity of the manufacturer, contained on a pre-installed SDO. If this identity is in the form of an X.509 certificate containing a signature verification key signed by the manufacturer, then the authentication process is sufficient._
 +
-_A unique identifiable owner is assumed to be one with an administrative role; however, there may be circumstances where the owner does not take on an administrative role, which should be documented._
+_A unique identifiable owner is assumed to be one with an ADM-R role; however, there may be circumstances where the owner does not take on an ADM-R role, which should be documented._
 
 ==== FPT_ROT_EXT.1 Root of Trust Services
 
@@ -4863,7 +4884,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 |An SDO installed on the DSC by the manufacturer. The SDO consists of an SDE and attributes, which if not explicitly expressed in a data structure, are implicit based on the functions that have exclusive access to the SDE.
 
 |Privileged Function 
-|Functions restricted to the role of administrator, which may include, but are not limited to, provisioning keys, provisioning user authorization values, de-provisioning user authorization values, provisioning administrator authorization values, changing authorization values, disabling key escrow, and configuring cryptography.
+|Functions restricted to the ADM-R role, which may include, but are not limited to, provisioning keys, provisioning user authorization values, de-provisioning user authorization values, provisioning administrator authorization values, changing authorization values, disabling key escrow, and configuring cryptography.
 
 |Protected Data Blob 
 |Data in an encrypted structure that protects its confidentiality or integrity (as required by the context in which it is used).
@@ -4942,7 +4963,7 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 |AES 
 |Advanced Encryption Standard
 
-|CA 
+|CApp 
 |Client Application
 
 |CBC 
