@@ -3465,26 +3465,30 @@ This family defines requirements for key life cycle operations.
 [#img-FCS_CKM_EXT] 
 [ditaa,"FCS_CKM_EXT"]
 ....
-                           
                                                        +---+
-    +--------------------------------------------+  |->| 3 |
+                                                    +->| 3 |
+                                                    |  +---+
+    +--------------------------------------------+  |
     |                                            |  |  +---+
-    | FCS_STG_EXT Cryptographic Key Storage      +--+
+    | FCS_STG_EXT Cryptographic Key Storage      +--+->| 7 |
     |                                            |  |  +---+
-    +--------------------------------------------+  |->| 7 |
-                                                       +---+    
-                                                    
+    +--------------------------------------------+  |
+                                                    |  +---+
+                                                    +->| 8 |
+                                                       +---+
 ....
 
 FCS_CKM_EXT.3 The cryptographic key access applies primarily to the storage of keys for future use and retrieval of keys for immediate use by the TOE. There may be some overlap in primitives used in other SFRs, but the end goals here are to protect the confidentiality and authenticity of the keys while in storage.
 
 FCS_CKM_EXT.7 This SFR captures methods for key agreement in which multiple parties contribute material used to derive the shared key used by each party to encrypt and decrypt messages to and from each other. The derived key can be used either as a symmetric key, keyed-hash key, or cryptographic key for key derivation functions.
 
-*Management: FCS_CKM_EXT.3, FCS_CKM_EXT.7*
+FCS_CKM_EXT.8 Password key derivation is different from regular key derivation since for key derivation it is expected that the input parameters have full entropy compared to the expected key strength and the passwords for password-based key derivation have limited entropy.  One must add additional constraints, work, or entropy to increase the security of password-based key derivation algorithms that suffer from a lack of entropy induced by passwords sourced by human memory.  These password-based key derivation algorithms should result in derived keys that have sufficient security.
+
+*Management: FCS_CKM_EXT.3, FCS_CKM_EXT.7, FCS_CKM_EXT.8*
 
 No specific management functions are identified.
 
-*Audit: FCS_CKM_EXT.3, FCS_CKM_EXT.7*
+*Audit: FCS_CKM_EXT.3, FCS_CKM_EXT.7, FCS_CKM_EXT.8*
 
 There are no auditable events foreseen.
 
@@ -3492,10 +3496,8 @@ There are no auditable events foreseen.
 [horizontal]
 Hierarchical to:: No other components.
 
-Dependencies:: [FDP_ITC.1 Import of user data without security attributes, +
-or +
-FDP_ITC.2 Import of user data with security attributes, +
-or +
+Dependencies:: [FDP_ITC.1 Import of user data without security attributes, or +
+FDP_ITC.2 Import of user data with security attributes, or +
 FCS_CKM.1 Cryptographic key generation, or +
 FCS_CKM.5 Cryptographic key derivation, or +
 FCS_CKM_EXT.8 Password-based key derivation] +
@@ -3511,10 +3513,8 @@ FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [
 [horizontal]
 Hierarchical to:: No other components.
 
-Dependencies:: [FDP_ITC.1 Import of user data without security attributes, +
-or +
-FDP_ITC.2 Import of user data with security attributes, +
-or +
+Dependencies:: [FDP_ITC.1 Import of user data without security attributes, or +
+FDP_ITC.2 Import of user data with security attributes, or +
 FCS_CKM.1 Cryptographic key generation, or +
 FCS_CKM.5 Cryptographic key derivation, or +
 FCS_CKM_EXT.8 Password-based key derivation] +
@@ -3585,6 +3585,22 @@ The following table provides the allowed choices for completion of the selection
 |N/A
 
 |===
+
+*FCS_CKM_EXT.8 Password-Based Key Derivation*
+[horizontal]
+Hierarchical to:: No other components.
+
+Dependencies:: [FDP_ITC.1 Import of user data without security attributes, or +
+FDP_ITC.2 Import of user data with security attributes, or +
+FCS_ITC_EXT.1 Import of Key] +
+[FCS_CKM.2 Cryptographic key distribution, or +
+FCS_COP.1 Cryptographic operation, or +
+FCS_CKM_EXT.7 Cryptographic Key Agreement] +
+FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash) +
+FCS_CKM.6 Cryptographic key destruction 
+
+[vertical]
+FCS_CKM_EXT.8.1:: The TSF shall perform password-based key derivation functions in accordance with a specified cryptographic algorithm [_HMAC-[selection: SHA-256, SHA-384, SHA-512]_], with iteration count of _[assignment: number of iterations]_ using a randomly generated salt of length _[assignment: length of salt]_ and output cryptographic key sizes _[selection: 128, 192, 256]_ bits that meet the following standard: [NIST SP 800-132].
 
 ==== FCS_OTV_EXT One-Time Value
 
