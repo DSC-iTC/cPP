@@ -339,6 +339,8 @@ As an alternative to requiring authorization for each access to a key, the DSC c
 
 A session is a local connection only, between the CApp on the platform containing the DSC and the DSC itself. If the activities involving the DSC involve a connection with a remote system (i.e. something not on the platform), such a remote connection is the responsibility of the CApp. While the DSC may assist in establishing the remote connection, the DSC itself is only aware of the session between the CApp and the DSC itself.
 
+Where a DSC may support a direct connection to a remote entity, this connection is established over a channel, with its own separate requirements (a channel may also support sessions, but that is dependent on the protocol used).
+
 ==== Key Hierarchies
 
 Another way to categorize keys is the relationship they have with each other. A DSC may have a key hierarchy, or key chain, whereby data-at-rest is protected by one or more keys, which are protected in turn by one or more additional keys, and potentially so on. This model calls out three categories of keys generally found on typical DSCs. DSCs may contain Root Keys, Intermediate (or Branch) Keys, and Leaf Keys.
