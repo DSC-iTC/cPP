@@ -1726,7 +1726,7 @@ _Application Note {counter:remark_count}_:: _<<SDOAttrib>> defines the required 
 +
 _The assignments of authorized subjects in <<SDOAttrib>> may be defined by the ST author in terms of roles or in terms of an action such as presentation of a valid authentication token of a particular type (in this case the ST author identifies in an Application Note the other SFRs that govern the action)._
 +
-_The TSF vendor may pre-install SDOs with default attributes. The Security Target should make clear which attributes the administrators may change or are prohibited from changing. It should also make clear between authorization values required to use pre-installed SDOs and authorization values required to change the attributes of pre-installed SDOs._
+_The TSF vendor may pre-install SDOs with default attributes. The Security Target should make clear which attributes the may be changed or are prohibited from changing based on the ADM-R and MFGADM-R roles (as applicable). It should also make clear between authorization values required to use pre-installed SDOs and authorization values required to change the attributes of pre-installed SDOs._
 +
 _<<SDOAttrib>> lists SDO ID as "cannot be modified". In some cases, a change in the attributes may cause a change in the SDO ID. In these cases, a change in the SDO ID causes the creation of a new SDO and possibly the loss of the old SDO._
 +
