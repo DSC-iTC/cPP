@@ -1703,16 +1703,16 @@ FMT_MSA.1.1:: The TSF shall enforce the [_Access Control SFP_] to restrict the a
 |Cannot be modified
 
 |SDO.AuthData 
-|[_selection_: _ADM-R, MFGADM-r, CApp-R_] roles that are authorized to modify SDO reference authorization data
+|[_selection_: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify SDO reference authorization data
 
 |SDO.Reauth 
-|[_selection_: _ADM-R, MFGADM-r, CApp-R_] roles that are authorized to modify re-authorization conditions
+|[_selection_: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify re-authorization conditions
 
 |SDO.Conf 
-|[_selection_: _ADM-R, MFGADM-r, CApp-R_] roles that are authorized to modify confidential SDE-list
+|[_selection_: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify confidential SDE-list
 
 |SDO.Export 
-|[_selection_: _ADM-R, MFGADM-r, CApp-R_] roles that are authorized to modify export flag
+|[_selection_: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify export flag
 
 |SDO.Integrity 
 |Cannot be modified by users (maintained automatically by TSF)
