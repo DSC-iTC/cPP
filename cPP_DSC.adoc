@@ -1658,15 +1658,7 @@ _Application Note {counter:remark_count}_:: _This SFR describes the authenticati
 
 FIA_UAU.6 Re-Authenticating
 
-FIA_UAU.6.1:: The TSF shall re-authenticate the user *for access to an SDO* under the conditions: [
-+
-. _Re-authentication and re-authorization by further successful completion of the authentication and authorization methods in FIA_UAU.2, in accordance with the value of the SDO.Reauth attribute of the SDO as follows:_
-+
-[type=a]
-.. _If SDO.Reauth has the value 'each access';_
-.. _if SDO.Reauth has the value 'policy' and the TSF determines that the TOE satisfies the policy for re-authentication and reauthorization_
-+
-].
+FIA_UAU.6.1:: The TSF shall re-authenticate the user *for access to an SDO* under the conditions: *according to the policy specified in SDO.Reauth*.
 
 _Application Note {counter:remark_count}_:: _The allowed values for the SDO.Reauth attribute of an SDO are defined in FMT_MSA.3 and the SDO Attributes Initialization Table. The rules in FDP_ACF.1.2 and also ensure that the need for re-authorization has been checked before access to an SDO._
 +
