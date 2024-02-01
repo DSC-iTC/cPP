@@ -325,11 +325,11 @@ As the DSC is generally a component within a larger system or platform, the role
 The ADM-R role provides sufficient privileges to manage the functionality of the DSC. As a role designed for the administrator, this role may be responsible for the following:
 
 * Manage access control for SDOs (does not mean the contents of any particular SDO can be read by the administrator)
-* Manage the initial configuration of the DSC
+* Manage the configuration of the DSC
 
 The MFGADM-R role, if explicitly defined in a DSC, may include the following responsibilities (which may be part of the ADM-R role otherwise):
 
-* Manage the pre-installed SDOs and initial configuration of the DSC
+* Manage the pre-installed SDOs and configuration of the DSC
 
 The CApp-R role is focused on utilization of the functionality provided by the DSC. The following would be representative of the responsibilities for this role:
 
