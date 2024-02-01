@@ -672,7 +672,7 @@ _Application Note {counter:remark_count}_:: _The TOE will have mechanisms to des
 +
 _Based on their implementation, vendors will explain when certain keys are no longer needed. An example in which key is no longer necessary includes a wrapped key whose password has changed. This SFR does not apply to the public component of asymmetric key pairs, or to keys that are permitted to remain stored such as device identification keys._
 
-FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material specified by FCS_CKM.6.1 in accordance with a specified cryptographic key destruction method [*selection:*
+FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material specified by FCS_CKM.6.1 in accordance with a specified cryptographic key destruction method [.underline]#*selection:*#
 
 . [.underline]#For volatile memory, the destruction shall be executed by a [*selection:*#
 .. [.underline]#single overwrite consisting of [*selection:*#
