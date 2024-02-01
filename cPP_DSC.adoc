@@ -2963,7 +2963,7 @@ FPT_RPL.1.1/Rollback:: The TSF shall detect replay for the following entities: [
 
 FPT_RPL.1.2/Rollback:: The TSF shall *prevent the execution of the loaded firmware and* perform *[.underline]#[selection, choose one of: [_assignment: other actions_], no other actions]*# when replay is detected.
 
-_Application Note {counter:remark_count}_:: _A DSC's ability to detect an attempted rollback (software/firmware downgrade) is not applicable in all cases because some DSCs will have immutable firmware that cannot be modified in any way. This SFR must be claimed if [.underline]#mutable# is selected in FDP_MFW_EXT.1.1._
+_Application Note {counter:remark_count}_:: _This SFR must be claimed if [.underline]#mutable# is selected in FDP_MFW_EXT.1.1._
 +
 _The TSF data is used as a guarantee of the ordinal identifier of the firmware instance. When a firmware load is requested, the TSF ensures the authenticated firmware ordinal identifier is greater than or equal to the previously authenticated firmware identifier. For example, this could be accomplished by ensuring the validated instance of the firmware to be loaded is greater than or equal to the instance previously validated and loaded into the TOE. By loading a previous instance of firmware, it potentially opens up the device to known vulnerabilities._
 
