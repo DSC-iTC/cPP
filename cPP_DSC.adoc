@@ -685,7 +685,7 @@ FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material speci
 .. [.underline]#removal of all references to the key directly followed by a request for garbage collection that includes the immediate erasure of the collected data objects];#
 . [.underline]#For non-volatile memory [selection:#
 .. [.underline]#that employs a wear-leveling algorithm, the destruction shall be executed by a [*selection:*#
-... [.underline]#overwrite of the block containing the key with data consisting of [*selection*: zeroes, ones, pseudo-random pattern, [*_assignment:_ some value that does not contain any CSP*] using a method that meets the requirements of FDP_RIP.1, followed by a read-verify operation on the overwritten block (See App Note 4)],#
+... [.underline]#overwrite of the block containing the key with data consisting of [*selection*: zeroes, ones, pseudo-random pattern, [*_assignment:_ some value that does not contain any CSP*] using a method that meets the requirements of FDP_RIP.1, followed by a read-verify operation on the overwritten block (See the Application Note)],#
 ...	[.underline]#erasure of all logical blocks in the memory device (all physical blocks except the index blocks, if they can be reliably identified) followed by a read-verify operation on all logical blocks];#
 .. [.underline]#that does not employ a wear-leveling algorithm, the destruction shall be executed by a [*selection:*#
 ... [.underline]#[*selection:* single, [*_assignment:_ ST author defined multi-pass*]] overwrite consisting of [*selection:* zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:_ some value that does not contain any CSP*]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated up to [*_assignment:_ number of times to attempt overwrite*] times, whereupon an error is returned.#
@@ -693,9 +693,7 @@ FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material speci
 
 ]] that meets the following: _[no standard]_.
 
-*Application Note 4*
-
-_In the case of volatile memory, the selection "removal of all references to the key directly followed by a request for garbage collection" is used in a situation where the TSF cannot address the specific physical memory locations holding the data to be erased and therefore relies on addressing logical addresses (which frees the relevant physical addresses holding the old data) and then requesting the platform to ensure that the data in the physical addresses is no longer available for reading (i.e. the "garbage collection" referred to in the SFR text)._
+_Application Note {counter:remark_count}_:: _In the case of volatile memory, the selection "removal of all references to the key directly followed by a request for garbage collection" is used in a situation where the TSF cannot address the specific physical memory locations holding the data to be erased and therefore relies on addressing logical addresses (which frees the relevant physical addresses holding the old data) and then requesting the platform to ensure that the data in the physical addresses is no longer available for reading (i.e. the "garbage collection" referred to in the SFR text)._
 
 _In the case of wear-leveled non-volatile memory, the entire memory must be erased when a key is deleted unless the TOE has an erasure mechanism that meets FDP_RIP.1 and the vendor provides a rationale that the TOE uses it in a conformant way.  FDP_RIP.1 requires that keys not remain in unallocated memory after a key delete operation, a capability that wear-leveled non-volatile memory normally does not provide._
 +
