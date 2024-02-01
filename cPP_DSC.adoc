@@ -1689,6 +1689,7 @@ FMT_MOF_EXT.1 Management of Security Functions Behavior
 FMT_MOF_EXT.1.1:: The TSF shall restrict the ability to perform the functions in FMT_SMF.1 to authenticated administrators.
 
 ==== FMT_MSA.1 Management of Security Attributes
+:xrefstyle: basic
 
 FMT_MSA.1 Management of Security Attributes
 
