@@ -416,7 +416,7 @@ The PPs and PP-Modules that are allowed to be specified in a PP-Configuration wi
 
 *T.BRUTE_FORCE_AUTH:* An unauthorized user may attempt to gain unauthorized access to the TOE by repeatedly and rapidly supplying a large number of permutations of authorization data, such as passwords, biometrics, etc. that protect the SDEs, in the hopes that valid authorization data can be obtained through brute force.
 
-*T.HW_ATTACK:* An individual with physical access to the TOE may apply hardware attacks such as probing, physical manipulation, fault-injection, environmental stress, or reactivating blocked test-features or other pre-delivery services to manipulate the behavior of the TOE to disclose SDOs.
+*T.HW_ATTACK:* An individual with physical access to the TOE may apply hardware attacks such as probing, physical manipulation, fault injection, environmental stress, or reactivating blocked test-features or other pre-delivery services to manipulate the behavior of the TOE to disclose SDOs.
 
 *T.SDE_TRANSIT_COMPROMISE:* An attacker with the ability to observe data transmission into and out of the TOE may access or determine plaintext values of keys, authorization data, and other SDEs as the TSF transmits them into or out of the TOE.
 
