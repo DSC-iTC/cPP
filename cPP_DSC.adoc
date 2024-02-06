@@ -1756,64 +1756,54 @@ FMT_MSA.3.2:: The TSF shall allow the [_authorized identified roles, according t
 
 .Supported Methods for SDO Attributes Initialization
 [[SDOAttribInit]]
-[cols=".^1,.^1,.^1,.^1,.^2",options=header]
+[cols=".^1,.^1,.^1,.^2",options=header]
 |===
 
 |SDO Attribute
-|Property
 |Authorized Override Role
 |Initialization Method
 |Allowed Values
 
 |SDO.ID 
-|Restrictive 
 |None 
 |Import and generation process 
 |[_assignment: range of allowed values_]
 
 |SDO.Type 
-|Restrictive 
 |None 
 |Import and generation process 
 |[_assignment: list of allowed types_]
 
 .2+|SDO.AuthData 
-|Permissive 
 |[.underline]#[selection: ADM-R, MFGADM-R, CApp-R]#
 |Import process 
 .2+|[.underline]#[selection: none, [_assignment: list of types of authentication tokens allowed_], [_assignment: range of authorization values allowed_]]#
 
-|Restrictive 
 |None 
 |Generation process
 
 |SDO.Reauth 
-|Restrictive 
 |None 
 |Import and generation process 
 |[.underline]#[selection: none, each access, policy]#
 
 |SDO.Conf 
-|Restrictive 
 |None 
 |Import and generation process 
 |[_assignment: list of SDEs of which the TOE must provide a confidentiality service_]
 
 |SDO.Export 
-|Restrictive 
 |None 
 |Import and generation process 
 |[.underline]#[selection: exportable, non-exportable]#
 
 |SDO.Integrity
-|Restrictive 
 |None 
 |Import and generation process 
 |[_assignment: range of allowed values_]
 
 |SDO.Bind 
-|Restrictive 
-|None^*^ 
+|None 
 |Import and generation process 
 |[_assignment: range of allowed values_]
 
@@ -1821,21 +1811,19 @@ FMT_MSA.3.2:: The TSF shall allow the [_authorized identified roles, according t
 
 :xrefstyle: basic
 
-_Application Note {counter:remark_count}_:: _Both the ADM-R and CApp-R roles can initiate the import process. The imported object contains the default values for each attribute, where allowed. The TSF can override default values for the following attributes of imported objects: SDO.ID, SDO.Type, SDO.Reauth, SDO.Export, and SDO.Integrity. The TSF may override default values in these cases to force the objects to comport to established structures within the TOE, or to comply with TOE-wide security policies. In these cases, the defined roles (i.e. the ADM-R and CApp-R) cannot override the default values. For SDO.AuthData, the TSF shall allow user roles (i.e. the ADM-R and CApp-R) to override authorization data that may arrive with the object. For SDO.Conf the TSF accepts the imported value for this attribute. SDO.Bind is explained below._
+_Application Note {counter:remark_count}_:: _The <<SDOAttribInit>> Table is referenced from FMT_MSA.3 and matches the attributes covered by FMT_MSA.1 (which defines controls on the modification of the attributes). The initialization of these security attributes occurs when an SDO is either parsed by the TOE or generated on the TOE._
 +
-_Unless otherwise noted, both the ADM-R and CApp-R roles can initiate the generation process. The the ADM-R and CApp-R roles will provide the default values for the attributes. This SFR assumes the TSF checks SDO.Type, SDO.AuthData, SDO.Reauth, SDO.Conf, and SDO.Export for compliance with established security policies and refuses to create objects which do not comply and thus will not override the value of any of these attributes. In the cases of the SDO.ID and SDO.Integrity, the TSF generates these values and therefore there is no need to override._
+_An imported object contains the default values for each attribute, where allowed. The TSF can override default values for the following attributes of imported objects: SDO.ID, SDO.Type, SDO.Reauth, SDO.Export, and SDO.Integrity. The TSF may override default values in these cases to force the objects to comport to established structures within the TOE, or to comply with TOE-wide security policies. In these cases, the defined roles cannot override the default values. For SDO.AuthData, the TSF shall allow the CApp-R role to override authorization data that may arrive with the object. For SDO.Conf the TSF accepts the imported value for this attribute. SDO.Bind is explained below._
++
+_Unless otherwise noted, both the ADM-R and CApp-R roles can initiate the generation process. The ADM-R and CApp-R roles will provide the default values for the attributes. This SFR assumes the TSF checks SDO.Type, SDO.AuthData, SDO.Reauth, SDO.Conf, and SDO.Export for compliance with established security policies and refuses to create objects which do not comply with overriding the value of any of these attributes. In the cases of the SDO.ID and SDO.Integrity, the TSF generates these values and therefore there is no need or ability to override._
 +
 _In the case of SDO.Bind for both import and generation processes, the TSF may override values that denote a binding to the TOE, but it should not override values that denote a binding to other keys. In the case of the import process, the defined roles cannot override the default values for any binding._
-+
-_The <<SDOAttribInit>> Table is referenced from FMT_MSA.3 and matches the attributes covered by FMT_MSA.1 (which defines controls on the modification of the attributes). The initialization of these security attributes occurs when an SDO is either parsed by the TOE or generated on the TOE. The required constraints on security attribute initialization specified in this PP are shown in the <<SDOAttribInit>> Table; the Security Target completes the selection and assignments in the SFR and adds to the table any other information for other security attributes relevant to a particular TOE._
 +
 _The SDO.AuthData attribute is data that is required in order to validate authorization of a subject to access the SDO (in each of the modes relevant to that SDO). The nature of this data will depend on the authorization mechanism used in the TOE, as described in FIA_UAU.2._
 +
 _The SDO.Reauth attribute for an individual SDO takes one of the values defined in the selection in the Allowed Values column of the <<SDOAttribInit>> Table. Examples of TOE-specified events might be explicit revocation of authorization by a user, expiry of a time interval, or completion of a fixed number of uses since the last authorization. The re-authorization conditions are used in FIA_UAU.6 and FDP_ACF.1. These determine whether a single authorization by the SDO owner will allow any number of uses of the SDO until the end of the user's session (value 'none'), or whether each use of the SDO must be individually authorized (value 'each access'), or whether re-authorization must happen each time one of the TOE-specified events occurs._
 +
 _The SDO.Conf attribute indicates which SDEs, if any, the TOE should encrypt when not in operational use. The TOE should use the methods in FCS_COP.1/SKC, FCS_STG_EXT.1, or FCS_CKM_EXT.3 to protect the SDEs in this list._
-+
-_The SDO.Export attribute takes one of the values 'exportable' or 'non-exportable'._
 +
 _The SDO.Integrity attribute includes evidence that the TSF can use to protect and verify the integrity of the SDO._
 +
@@ -1845,7 +1833,7 @@ _The TOE uses the Binding Data for an SDO to strongly link the SDO to the TOE, a
 +
 _The vendor should document the implicit attributes for pre-installed SDOs and SDOs stored in special locations._
 +
-_In cases in which the SDO ID is a cryptographic hash of the attributes and SDEs, that value represents both the ID and projects the integrity of the SDO, including the SDEs. As the TOE unwraps an incoming SDO, it may automatically check the integrity. For pre-installed SDOs in protected storage, the hardware plus the TSF projects the integrity of them._
+_In cases in which the SDO.ID is a cryptographic hash of the attributes and SDEs, that value may act as both DSO.ID and SDO.Integrity for the SDO._
 +
 _When a remote peer sends an SDO to the TOE, it properly indicates through the SDE-confidentiality list of any authorization values and authentication tokens present in the SDO, whether they are present in the SDE or as attributes, which control access to the SDE._
 +
