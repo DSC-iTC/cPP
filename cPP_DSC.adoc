@@ -231,8 +231,8 @@ Users: The entities using the DSC will be client applications on the platform. T
 Subjects: The following list contains the fundamental actors in the expected operational use cases of the DSC. The first three are active actors, while the fourth is usually passive but could be active.
 
 * S.DSC - DSC with security attribute DSC.ID, which is the identity of the DSC
-* S.Admin - Admin (an authorized administrator with special privileges) security attribute Admin.ID - See <<Roles>> for more discussion on Admin.
-* S.CApp - CApp (i.e. an authorized user or an application with a verifiable identity) with security attribute CA.ID - See <<Roles>> for more discussion on users.
+* S.Admin - Admin (an authorized administrator with special privileges) security attribute - See <<Roles>> for more discussion on administrator roles.
+* S.CApp - CApp (i.e. an authorized user or an application with a verifiable identity) with security attribute CApp.ID - See <<Roles>> for more discussion on user roles.
 * S.EPS - External Platform Storage (EPS) (e.g. transient SDE/SDO source and destination, in the case of data imported and exported for the sole use inside the DSC). In the case of a passive EPS, the DSC will properly protect the integrity and confidentiality of the objects it stores and retrieves from there. In the case of an active EPS with security attribute EPS.ID, the DSC and EPS may choose to create a secure channel through which they will pass objects back and forth.
 
 Objects: The following list contains objects the DSC expects to use during the expected operational use cases.
@@ -248,7 +248,7 @@ Objects: The following list contains objects the DSC expects to use during the e
 Security Attributes: The following list contains the minimum security attributes for a DSC. Individual DSCs may implement additional security attributes beyond this (whether they are additional standalone attributes or additional attributes that are associated with SDOs); the ST author is expected to identify these.
 
 * DSC.ID - The DSC identifier. It may also serve as the identifier for the DSC RoT.
-* CA.ID - The Client Application identifier.
+* CApp.ID - The Client Application identifier.
 * EPS.ID - The External Platform Storage (EPS) identifier. This attribute is optional for a passive EPS (i.e. plain memory that only stores information). If the DSC uses a Client Application to manage storage, then support for this attribute is required.
 * SDO.* - The SDO Security Attributes:
 ** SDO.ID - SDO Identifier
@@ -344,7 +344,7 @@ The management of timely updates (security or functional) for the DSC may be han
 In general, the CApp-R role is expected to be the primary role used when the components of the platform call to access the services provided by the DSC. Some examples of entities that may call the DSC and utilize the CApp-R role include:
 
 * A content provider controlling access to its content through an application.
-* A human entity using the platform who has an identity that they use to authenticate themselves to the content provider through a CA.
+* A human entity using the platform who has an identity that they use to authenticate themselves to the content provider through a CApp.
 * An application vendor acting on its own behalf to update software on the platform.
 * An original equipment manufacturer (OEM) that designed and manufactured a more complex system with the DSC as a component (assuming that the DSC manufacturer and the manufacturer of the more complex system using the DSC as a component are different entities).
 
@@ -1406,7 +1406,7 @@ FDP_ACC.1 Subset Access Control
 
 FDP_ACC.1.1:: The TSF shall enforce the [_Access Control SFP_] on [
 +
-* _Subjects: S.DSC, S.Admin, S.CA, S.EPS_
+* _Subjects: S.DSC, S.Admin, S.CApp, S.EPS_
 * _Objects: OB.P_SDO, OB.T_SDO, OB.AuthData, OB.Pstate, OB.FAACntr, OB.AntiReplay, OB.Context_
 * _Operations: OP.Import, OP.Create, OP.Use, OP.Modify, OP.Attest, OP.Store, OP.Export, OP.Destroy_].
 
@@ -1423,8 +1423,8 @@ _The following are the SFP-relevant security attributes that are associated with
 * _S.DSC_
 ** _DSC.ID_
 * _S.Admin - none_ 
-* _S.CA_
-** _CA.ID_
+* _S.CApp_
+** _CApp.ID_
 * _S.EPS_
 ** _EPS.ID_
 * _OB.P_SDO_
@@ -1821,7 +1821,7 @@ _In the case of SDO.Bind for both import and generation processes, the TSF may o
 +
 _The SDO.AuthData attribute is data that is required in order to validate authorization of a subject to access the SDO (in each of the modes relevant to that SDO). The nature of this data will depend on the authorization mechanism used in the TOE, as described in FIA_UAU.2._
 +
-_The SDO.Reauth attribute for an individual SDO takes one of the values defined in the selection in the Allowed Values column of the <<SDOAttribInit>> Table. Examples of TOE-specified events might be explicit revocation of authorization by a user, expiry of a time interval, or completion of a fixed number of uses since the last authorization. The re-authorization conditions are used in FIA_UAU.6 and FDP_ACF.1. These determine whether a single authorization by the SDO owner will allow any number of uses of the SDO until the end of the user's session (value 'none'), or whether each use of the SDO must be individually authorized (value 'each access'), or whether re-authorization must happen each time one of the TOE-specified events occurs._
+_The SDO.Reauth attribute for an individual SDO specifies the conditions where access to the SDO will require reauthorization to continue access to the SDO. Examples of TOE-specified events might be explicit revocation of authorization by a user, expiry of a time interval, or completion of a fixed number of uses since the last authorization. The re-authorization conditions are used in FIA_UAU.6 and FDP_ACF.1. These determine whether a single authorization by the SDO owner will allow any number of uses of the SDO until the end of the user's session (value 'none'), or whether each use of the SDO must be individually authorized (value 'each access'), or whether re-authorization must happen each time one of the TOE-specified events occurs._
 +
 _The SDO.Conf attribute indicates which SDEs, if any, the TOE should encrypt when not in operational use. The TOE should use the methods in FCS_COP.1/SKC, FCS_STG_EXT.1, or FCS_CKM_EXT.3 to protect the SDEs in this list._
 +
@@ -1838,14 +1838,6 @@ _In cases in which the SDO.ID is a cryptographic hash of the attributes and SDEs
 _When a remote peer sends an SDO to the TOE, it properly indicates through the SDE-confidentiality list of any authorization values and authentication tokens present in the SDO, whether they are present in the SDE or as attributes, which control access to the SDE._
 +
 _When a TOE generates an SDO internally for the first time, it properly indicates through the SDE-confidentiality list any SDEs that are authorization values or authentication tokens. Similarly, if any of the attributes are authorization values or authentication tokens, the TOE will properly indicate through the SDE-confidentiality list that it will encrypt them prior to storing them._
-+
-_The TOE may contain pre-installed SDOs or SDOs either provisioned the first time the user turns on the TOE or provisioned as the result of a "factory reset" event. TSFs may refer to such SDOs as root keys or trusted anchors, and are classified as permanent keys (SDOs). Pre-installed SDOs may reside in immutable hardware and persist across factory resets. Other persistent SDOs may persist until a user issues a "factory reset" which either cryptographically erases the SDOs or overwrites them by provisioning new ones. These SDOs may not contain a confidential SDE list since either these persistent values serve as a root encryption key for a hierarchy of SDOs, or they serve as a KDF seed for generating root encryption keys for a hierarchy of SDOs._
-+
-_It is possible that the default attributes of some SDOs should be restrictive, and that the default attributes of other SDOs may be permissive. If this is the case, then the ST author should iterate this SFR and indicate in the TSS what the default attribute properties are for each SDO._
-+
-_Policy as represented by the attributes in the SDO dictates whether or not a user must authenticate itself in order to authorize access to the SDO._
-+
-_It is possible that the attributes of some SDOs should remain unchanged, and that the attributes of other SDOs may be changed by authorized users. If this is the case, then the ST author should iterate this SFR and indicate in the TSS which SDOs apply to each iteration._
 
 :xrefstyle: full
 
