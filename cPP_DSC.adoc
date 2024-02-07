@@ -214,7 +214,7 @@ DSCs provide seven core security services to a platform as illustrated in <<Core
 
 ==== Roots of Trust
 
-This collaborative Protection Profile (cPP) assumes a DSC will contain one Root of Trust (RoT) that is comprised of the compute engine, one set of firmware code, and pre-installed SDOs, including a unique identity bound to the hardware. The firmware code may be immutable, or it may be mutable but with controlled, authenticated, and authorized updates allowed to ensure continued integrity of the RoT. This code may provide one or more RoT services, such as a RoT for Measurement, Verification, or Reporting. The unique identity bound to the hardware should be immutable and third parties should be able to authenticate the manufacturer of the Root of Trust through its unique identity (e.g., the unique identity may be a credential signed by the manufacturer).
+This collaborative Protection Profile (cPP) assumes a DSC will contain a Root of Trust (RoT) that is comprised of the compute engine, one set of firmware code, and pre-installed SDOs, including a unique identity bound to the hardware. The firmware code may be immutable, or it may be mutable but with controlled, authenticated, and authorized updates allowed to ensure continued integrity of the RoT. This code may provide one or more RoT services, such as a RoT for Measurement, Verification, or Reporting. The unique identity bound to the hardware should be immutable and third parties should be able to authenticate the manufacturer of the Root of Trust through its unique identity (e.g., the unique identity may be a credential signed by the manufacturer).
 
 ==== DSC Characteristics
 
