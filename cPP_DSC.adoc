@@ -1833,7 +1833,7 @@ _The TOE uses the Binding Data for an SDO to strongly link the SDO to the TOE, a
 +
 _The vendor should document the implicit attributes for pre-installed SDOs and SDOs stored in special locations._
 +
-_In cases in which the SDO.ID is a cryptographic hash of the attributes and SDEs, that value may act as both DSO.ID and SDO.Integrity for the SDO._
+_In cases in which the SDO.ID is a cryptographic hash of the attributes and SDEs, that value may act as both SDO.ID and SDO.Integrity for the SDO._
 +
 _When a remote peer sends an SDO to the TOE, it properly indicates through the SDE-confidentiality list of any authorization values and authentication tokens present in the SDO, whether they are present in the SDE or as attributes, which control access to the SDE._
 +
