@@ -248,7 +248,7 @@ For definitions of standard CC terminology, see [CC] part 1.
 |AES 
 |Advanced Encryption Standard
 
-|CA 
+|CApp
 |Client Application
 
 |CBC 
@@ -421,30 +421,6 @@ Finally, the subsection labelled Tests is where the iTC has determined that test
 
 ====== TSS
 
-The evaluator shall examine the TSS to verify that it describes how the TOE obtains a cryptographic key through importation of keys from external sources as specified in FDP_ITC_EXT.1 and FDP_ITC_EXT.2. The evaluator shall also examine the TSS to determine whether it describes any supported asymmetric or symmetric key generation functionality consistent with the claims made in FCS_CKM.1.1.
-
-====== AGD
-
-The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key types for all uses identified in the ST.
-
-====== Test
-
-Testing for this function is performed in conjunction with FDP_ITC_EXT.1 and FDP_ITC_EXT.2. If asymmetric or symmetric key generation functionality is claimed, testing for this function is also performed in conjunction with FCS_CKM.1/AK or FCS_CKM.1/SK.
-
-====== KMD
-
-The evaluator shall confirm that the KMD describes:
-
-* The parsing interface and how the TSF imports keys for internal use
-* The asymmetric key generation interfaces and how the TSF internally creates asymmetric keys, if claimed
-* The symmetric key generation interfaces and how the TSF internally creates symmetric keys, if claimed
-
-If the TOE uses the generated key in a key chain/hierarchy then the KMD shall describe how the key is used as part of the key chain/hierarchy. 
-
-===== FCS_CKM.1 Cryptographic Key Generation
-
-====== TSS
-
 The evaluator shall examine the TSS to determine whether it describes any supported key generation or derivation functionality consistent with the claims made in FCS_CKM.1.1.
 
 [conditional] If the key is generated according to an asymmetric key scheme, the evaluator shall review the TSS to determine that it describes how the functionality described by FCS_CKM.1/AKG is invoked. The evaluator uses the description of the key generation functionality in FCS_CKM.1/AKG or documentation available for the operational environment to determine that the key strength being requested is greater than or equal to 112 bits.
@@ -465,7 +441,11 @@ The evaluator shall iterate through each of the methods selected by the ST and p
 
 The evaluator shall iterate through each of the methods selected by the ST and confirm that the KMD describes the applicable selected methods.
 
-===== FCS_CKM.2 Cryptographic Key Establishment
+===== FCS_CKM.2 Cryptographic Key Distribution
+[IMPORTANT]
+====
+This has been changed from establishment to distribution
+====
 
 ====== TSS
 
@@ -483,7 +463,7 @@ Testing for this SFR is performed under the corresponding functions in FCS_COP.1
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_CKM.4 Cryptographic Key Destruction
+===== FCS_CKM.6 Cryptographic Key Destruction
 
 ====== TSS
 
@@ -557,27 +537,25 @@ The evaluator shall examine the KMD to ensure that all keys and keying material 
 
 Note that where selections include 'destruction of reference to the key directly followed by a request for garbage collection' (for volatile memory) then the evaluator shall examine the KMD to ensure that it explains the nature of the destruction of the reference, the request for garbage collection, and of the garbage collection process itself.
 
-==== Cryptographic Key Management (Extended - FCS_CKM_EXT)
-
-===== FCS_CKM_EXT.4 Cryptographic Key and Key Material Destruction Timing
+===== FCS_CKM_EXT.7 Cryptographic Key Agreement
+[IMPORTANT]
+This is new (taken from old FCS_CKM.2)
 
 ====== TSS
 
-The evaluator shall verify the TSS provides a high-level description of what it means for keys and key material to be no longer needed and when this data should be expected to be destroyed.
+The evaluator shall examine the TSS to ensure that ST supports at least one key establishment scheme. The evaluator also ensures that for each key establishment scheme selected by the ST in FCS_CKM.2.1 it also supports one or more corresponding methods selected in FCS_COP.1/KAT. If the ST selects RSA in FCS_CKM.2.1, then the TOE must support one or more of "KAS1," or "KAS2," "KTS-OAEP," from FCS_COP.1/KAT. If the ST selects elliptic curve-based, then the TOE must support one or more of "ECDH-NIST" or "ECDH-BPC" from FCS_COP.1/KAT. If the ST selects Diffie-Hellman-based key establishment, then the TOE must support "DH" from FCS_COP.1/KAT.
 
 ====== AGD
 
-There are no guidance evaluation activities for this component.
+The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key establishment scheme .
 
 ====== Test
 
-There are no test evaluation activities for this component.
+Testing for this SFR is performed under the corresponding functions in FCS_COP.1/KAT.
 
 ====== KMD
 
-The evaluator shall verify that the KMD includes a description of the areas where keys and key material reside and when this data is no longer needed.
-
-The evaluator shall verify that the KMD includes a key lifecycle that includes a description where key materials reside, how the key materials are used, how it is determined that keys and key material are no longer needed, and how the data is destroyed once it is no longer needed. The evaluator shall also verify that all key destruction operations are performed in a manner specified by FCS_CKM.4.
+There are no KMD evaluation activities for this component.
 
 ==== Cryptographic Operation (FCS_COP)
 
@@ -659,7 +637,7 @@ The evaluators supply a seed of d bits (where d is the length of the message dig
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/HMAC Cryptographic Operation (Keyed Hash)
+===== FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash)
 
 ====== TSS
 
@@ -680,120 +658,6 @@ The evaluator shall provide 15 sets of messages and keys for each selected hash 
 ====== KMD
 
 There are no KMD evaluation activities for this component.
-
-===== FCS_COP.1/KAT Cryptographic Operation (Key Agreement/Transport)
-
-====== TSS
-
-The evaluator shall ensure that the selected RSA and ECDH key agreement/transport schemes correspond to the key generation schemes selected in FCS_CKM.1/AK, and the key establishment schemes selected in FCS_CKM.2 If the ST selects DH, the TSS shall describe how the implementation meets the relevant sections of RFC 3526 (Section 3-7) and RFC 7919 (Appendices A.1-A.5). If the ST selects ECIES, the TSS shall describe the key sizes and algorithms (e.g. elliptic curve point multiplication, ECDH with either NIST or Brainpool curves, AES in a mode permitted by FCS_COP.1/SKC, a SHA-2 hash algorithm permitted by FCS_COP.1/Hash, and a MAC algorithm permitted by FCS_COP.1/HMAC) that are supported for the ECIES implementation.
-
-The evaluator shall ensure that, for each key agreement/transport scheme, the size of the derived keying material is at least the same as the intended strength of the key agreement/transport scheme, and where feasible this should be twice the intended security strength of the key agreement/transport scheme. 
-
-Table 2 of NIST SP 800-57 identifies the key strengths for the different algorithms that can be used for the various key agreement/transport schemes.
-
-====== AGD
-
-There are no guidance evaluation activities for this component.
-
-====== Test
-
-The following tests require the developer to provide access to a test platform that provides the evaluator with tools that are typically not found on factory products.
-
-The evaluator shall verify the implementation of the key generation routines of the supported schemes using the following tests:
-
-*If ECDH-NIST or ECDH-BPC is claimed:*
-
-*SP800-56A Key Agreement Schemes*
-
-The evaluator shall verify a TOE's implementation of SP800-56A key agreement schemes using the following function and validity tests. These validation tests for each key agreement scheme verify that a TOE has implemented the components of the key agreement scheme according to the specifications in the recommendation. These components include the calculation of the DLC primitives (the shared secret value Z) and the calculation of the derived keying material (DKM) via the Key Derivation Function (KDF). If key confirmation is supported, the evaluator shall also verify that the components of key confirmation have been implemented correctly, using the test procedures described below. This includes the parsing of the DKM, the generation of MACdata and the calculation of MACtag.
-
-_Function Test_
-
-The Function test verifies the ability of the TOE to implement the key agreement schemes correctly. To conduct this test the evaluator shall generate or obtain test vectors from a known good implementation of the TOE supported schemes. For each supported key agreement scheme-key agreement role combination, KDF type, and, if supported, key confirmation role-key confirmation type combination, the tester shall generate 10 sets of test vectors. The data set consists of one set of domain parameter values (FFC) or the NIST approved curve (ECC) per 10 sets of public keys. These keys are static, ephemeral or both depending on the scheme being tested. 
-
-The evaluator shall obtain the DKM, the corresponding TOE's public keys (static or ephemeral), the MAC tags, and any inputs used in the KDF, such as the Other Information field OI and TOE id fields. 
-
-If the TOE does not use a KDF defined in SP 800-56A, the evaluator shall obtain only the public keys and the hashed value of the shared secret. 
-
-The evaluator shall verify the correctness of the TSF's implementation of a given scheme by using a known good implementation to calculate the shared secret value, derive the keying material DKM, and compare hashes or MAC tags generated from these values. 
-
-If key confirmation is supported, the TSF shall perform the above for each implemented approved MAC algorithm. 
-
-_Validity Test_
-
-The Validity test verifies the ability of the TOE to recognize another party's valid and invalid key agreement results with or without key confirmation. To conduct this test, the evaluator shall obtain a list of the supporting cryptographic functions included in the SP800-56A key agreement implementation to determine which errors the TOE should be able to recognize. The evaluator generates a set of 24 (FFC) or 30 (ECC) test vectors consisting of data sets including domain parameter values or NIST approved curves, the evaluator's public keys, the TOE's public/private key pairs, MACTag, and any inputs used in the KDF, such as the other info and TOE id fields. 
-
-The evaluator shall inject an error in some of the test vectors to test that the TOE recognizes invalid key agreement results caused by the following fields being incorrect: the shared secret value Z, the DKM, the other information field OI, the data to be MACed, or the generated MACTag. If the TOE contains the full or partial (only ECC) public key validation, The evaluator shall also individually inject errors in both parties' static public keys, both parties' ephemeral public keys and the TOE's static private key to assure the TOE detects errors in the public key validation function or the partial key validation function (in ECC only). At least two of the test vectors shall remain unmodified and therefore should result in valid key agreement results (they should pass). 
-
-The TOE shall use these modified test vectors to emulate the key agreement scheme using the corresponding parameters. The evaluator shall compare the TOE's results with the results using a known good implementation verifying that the TOE detects these errors. 
-
-*If KAS1, KAS2, KTS-OAEP, or RSAES-PKCS1-v1_5 is claimed:*
-
-*SP800-56B and PKCS#1 Key Establishment Schemes*
-
-If the TOE acts as a sender, the following evaluation activity shall be performed to ensure the proper operation of every TOE supported combination of RSA-based key establishment scheme: 
-
-To conduct this test the evaluator shall generate or obtain test vectors from a known good implementation of the TOE supported schemes. For each combination of supported key establishment scheme and its options (with or without key confirmation if supported, for each supported key confirmation MAC function if key confirmation is supported, and for each supported mask generation function if KTS-OAEP is supported), the tester shall generate 10 sets of test vectors. Each test vector shall include the RSA public key, the plaintext keying material, any additional input parameters if applicable, the MacKey and MacTag if key confirmation is incorporated, and the outputted ciphertext. For each test vector, the evaluator shall perform a key establishment encryption operation on the TOE with the same inputs (in cases where key confirmation is incorporated, the test shall use the MacKey from the test vector instead of the randomly generated MacKey used in normal operation) and ensure that the outputted ciphertext is equivalent to the ciphertext in the test vector. 
-
-If the TOE acts as a receiver, the following evaluation activities shall be performed to ensure the proper operation of every TOE supported combination of RSA-based key establishment scheme: 
-
-To conduct this test the evaluator shall generate or obtain test vectors from a known good implementation of the TOE supported schemes. For each combination of supported key establishment scheme and its options (with our without key confirmation if supported, for each supported key confirmation MAC function if key confirmation is supported, and for each supported mask generation function if KTSOAEP is supported), the tester shall generate 10 sets of test vectors. Each test vector shall include the RSA private key, the plaintext keying material (KeyData), any additional input parameters if applicable, the MacTag in cases where key confirmation is incorporated, and the outputted ciphertext. For each test vector, the evaluator shall perform the key establishment decryption operation on the TOE and ensure that the outputted plaintext keying material (KeyData) is equivalent to the plain text keying material in the test vector. In cases where key confirmation is incorporated, the evaluator shall perform the key confirmation steps and ensure that the outputted MacTag is equivalent to the MacTag in the test vector. 
-
-The evaluator shall ensure that the TSS describes how the TOE handles decryption errors. In accordance with NIST Special Publication 800-56B, the TOE must not reveal the particular error that occurred, either through the contents of any outputted or logged error message or through timing variations. If KTS-OAEP is supported, the evaluator shall create separate contrived ciphertext values that trigger each of the three decryption error checks described in NIST Special Publication 800-56B section 7.2.2.3, ensure that each decryption attempt results in an error, and ensure that any outputted or logged error message is identical for each. 
-
-*DH:*
-
-The evaluator shall verify the correctness of each TSF implementation of each supported Diffie-Hellman group by comparison with a known good implementation.
-
-*Curve25519:*
-
-The evaluator shall verify a TOE's implementation of the key agreement scheme using the following Function and Validity tests. These validation tests for each key agreement scheme verify that a TOE has implemented the components of the key agreement scheme according to the specification. These components include the calculation of the shared secret K and the hash of K.
-
-_Function Test_
-
-The Function test verifies the ability of the TOE to implement the key agreement schemes correctly. To conduct this test the evaluator shall generate or obtain test vectors from a known good implementation of the TOE supported schemes. For each supported key agreement role and hash function combination, the tester shall generate 10 sets of public keys. These keys are static, ephemeral or both depending on the scheme being tested.
-
-The evaluator shall obtain the shared secret value K, and the hash of K. The evaluator shall verify the correctness of the TSF's implementation of a given scheme by using a known good implementation to calculate the shared secret value K and compare the hash generated from this value.
-
-_Validity Test_
-
-The Validity test verifies the ability of the TOE to recognize another party's valid and invalid key agreement results. To conduct this test, the evaluator generates a set of 30 test vectors consisting of data sets including the evaluator's public keys and the TOE's public/private key pairs.
-
-The evaluator shall inject an error in some of the test vectors to test that the TOE recognizes invalid key agreement results caused by the following fields being incorrect: the shared secret value K or the hash of K. At least two of the test vectors shall remain unmodified and therefore should result in valid key agreement results (they should pass).
-
-The TOE shall use these modified test vectors to emulate the key agreement scheme using the corresponding parameters. The evaluator shall compare the TOE's results with the results using a known good implementation verifying that the TOE detects these errors.
-
-*ECIES:*
-
-The evaluator shall verify the correctness of each TSF implementation of each supported use of ECIES by comparison with a known good implementation.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
-===== FCS_COP.1/KeyEnc Cryptographic Operation (Key Encryption)
-
-====== TSS
-
-The evaluator shall examine the TSS to ensure that it identifies whether the implementation of this cryptographic operation for key encryption (including key lengths and modes) is an implementation that is tested in FCS_COP.1/SKC.
-
-The evaluator shall check that the TSS includes a description of the key wrap functions and shall check that this uses a key wrap algorithm and key sizes according to the specification selected in the ST out of the table as provided in the [DSC cPP] table.
-
-====== AGD
-
-The evaluator checks the AGD documents to confirm that the instructions for establishing the evaluated configuration use only those key wrap functions selected in the ST. If multiple key access modes are supported, the evaluator shall examine the guidance documentation to determine that the method of choosing a specific mode/key size by the end user is described.
-
-====== Test
-
-Refer to FCS_COP.1/SKC for the required testing for each symmetric key wrapping method selected from the table and to FCS_COP.1/KAT for the required testing for each asymmetric key wrapping method selected from the table. Each distinct implementation shall be tested separately.
-
-If the implementation of the key encryption operation is the same implementation tested under FCS_COP.1/SKC or FCS_COP.1/KAT, and it has been tested with the same key lengths and modes, then no further testing is required. If key encryption uses a different implementation, (where "different implementation" includes the use of different key lengths or modes), then the evaluator shall additionally test the key encryption implementation using the corresponding tests specified for FCS_COP.1/SKC or FCS_COP.1/KAT.
-
-====== KMD
-
-The evaluator shall examine the KMD to ensure that it describes when the key wrapping occurs, that the KMD description is consistent with the description in the TSS, and that for all keys that are wrapped the TOE uses a method as described in the [DSC cPP] table. No uncertainty should be left over which is the wrapping key and the key to be wrapped and where the wrapping key potentially comes from i.e. is derived from.
-
-If "AES-GCM" or "AES-CCM" is used the evaluator shall examine the KMD to ensure that it describes how the IV is generated and that the same IV is never reused to encrypt different plaintext pairs under the same key. Moreover in the case of GCM, he must ensure that, at each invocation of GCM, the length of the plaintext is at most (2^32)-2 blocks.
 
 ===== FCS_COP.1/SigGen Cryptographic Operation (Signature Generation)
 
@@ -1302,9 +1166,9 @@ Assessment of the complete data path for symmetric key encryption includes confi
 
 If support for AES-CTR is claimed and the counter value source is internal to the TOE, the evaluator shall verify that the KMD describes the internal counter mechanism used to ensure that it provides unique counter block values.
 
-==== Random Bit Generation (Extended - FCS_RBG_EXT)
+==== Random Bit Generation (FCS_RBG)
 
-===== FCS_RBG_EXT.1 Random Bit Generation
+===== FCS_RBG.1 Random Bit Generation
 
 In addition to the materials below, documentation shall be produced—and the evaluator shall perform the activities—in accordance with Appendix D of [DSC cPP].
 
@@ -1340,9 +1204,9 @@ The following paragraphs contain more information on some of the input values to
 
 There are no KMD evaluation activities for this component.
 
-==== Cryptographic Salt Generation (Extended - FCS_SLT_EXT)
+==== One-Time Value (Extended - FCS_OTV_EXT)
 
-===== FCS_SLT_EXT.1 Cryptographic Salt Generation
+===== FCS_OTV_EXT.1 One-Time Value
 
 ====== TSS
 
@@ -1394,42 +1258,6 @@ The evaluator shall repeat this test with the application-imported or applicatio
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_STG_EXT.2 Key Storage Encryption
-
-====== TSS
-
-The evaluator shall review the TSS to determine that the TSS describes the protection of symmetric keys, KEKs, long-term trusted channel key material, and software-based key storage as claimed in FCS_STG_EXT.2.1. 
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-There are no test evaluation activities for this component.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
-===== FCS_STG_EXT.3 Key Integrity Protection
-
-====== TSS
-
-The evaluator shall examine the TSS and ensure that it contains a description of how the TOE protects the integrity of its keys.
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-There are no test evaluation activities for this component.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
 === User Data Protection (FDP)
 
 ==== Access Control Policy (FDP_ACC)
@@ -1463,12 +1291,12 @@ The evaluator shall examine the TSS to verify that it describes the policy rules
 [loweralpha]
 . The subject can always perform the desired operation.
 . The subject can never perform the desired operation, either because they lack sufficient permission or because the TSF includes no interface to support the operation.
-. The subject can only perform the desired operation under certain conditions (which the evaluator shall verify are described in the TSS). For example, "the S.CA subject may only perform the OP.Destroy operation on an OB.SDO object if it was the subject that originally created or imported the SDO."
+. The subject can only perform the desired operation under certain conditions (which the evaluator shall verify are described in the TSS). For example, "the S.CApp subject may only perform the OP.Destroy operation on an OB.SDO object if it was the subject that originally created or imported the SDO."
 . The subject can only perform the desired operation on one or more attributes of the object as opposed to the entire object itself (which the evaluator shall verify are identified in the TSS).
 . Whether the subject can perform the desired operation depends on TSF configuration (which the evaluator shall verify is described in the TSS as part of the evaluation of FMT_SMF.1).
 . Some combination of c, d, and e.
 
-Given that this SFR requires a large number of potential subject-object-operation pairings to be identified, it is not the expectation that the TSS contain an exhaustive list of these pairings. It is possible that large numbers of pairings are addressed by blanket statements of policy rules, such as "the subjects S.DSC and S.CA are never able to perform any operation on the OB.AntiReplay object." For any rules that are not addressed in this manner, the evaluator shall verify the TSS includes sufficient data for the evaluator to determine how the TSF will evaluate the action. This can be presented in the form of a table, flowchart, list, or other manner that the ST author finds suitable.
+Given that this SFR requires a large number of potential subject-object-operation pairings to be identified, it is not the expectation that the TSS contain an exhaustive list of these pairings. It is possible that large numbers of pairings are addressed by blanket statements of policy rules, such as "the subjects S.DSC and S.CApp are never able to perform any operation on the OB.AntiReplay object." For any rules that are not addressed in this manner, the evaluator shall verify the TSS includes sufficient data for the evaluator to determine how the TSF will evaluate the action. This can be presented in the form of a table, flowchart, list, or other manner that the ST author finds suitable.
 
 Note that the DSC developer may not use the same terminology for its subjects, objects, and operations as the PP. If this is the case, the evaluator shall verify that the TSS includes a mapping that unambiguously shows how the vendor's preferred terminology corresponds to what the PP defines.
 
@@ -1612,7 +1440,7 @@ Testing for FCS_CKM.4 is sufficient to address this component.
 
 There are no KMD evaluation activities for this component.
 
-==== Stored data confidentiality with dedicated method
+==== Stored data confidentiality with dedicated method (FDP_SDC)
 
 ===== FDP_SDC.2 Stored data confidentiality with dedicated method
 
@@ -2200,9 +2028,9 @@ The evaluator shall develop and execute or verify and observe the developer tool
 
 There are no KMD evaluation activities for this component.
 
-==== Random Bit Generation (Extended - FCS_RBG_EXT)
+==== Random Bit Generation (FCS_RBG)
 
-===== FCS_RBG_EXT.2 External Seeding for Random Bit Generation
+===== FCS_RBG.2 Random Bit Generation (External Seeding)
 
 ====== TSS
 
@@ -2219,6 +2047,22 @@ The evaluator shall develop and execute or verify and observe the developer tool
 ====== KMD
 
 There are no KMD evaluation activities for this component.
+
+===== FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
+
+====== TSS
+
+===== FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
+
+====== TSS
+
+===== FCS_RBG.5 Random Bit Generation (Combining Noise Sources)
+
+====== TSS
+
+===== FCS_RBG.6 Random Bit Generation Service
+
+====== TSS
 
 === Protection of the TSF (FPT)
 
@@ -2308,7 +2152,7 @@ There are no KMD evaluation activities for this component.
 
 ==== Cryptographic Key Generation (FCS_CKM)
 
-===== FCS_CKM.1/AK Cryptographic Key Generation (Asymmetric Keys)
+===== FCS_CKM.1/AKG Cryptographic Key Generation - Asymmetric Keys
 
 ====== TSS
 
@@ -2425,7 +2269,7 @@ If the TOE uses the generated key in a key chain/hierarchy then the evaluator sh
 * If [.underline]#AK1# is selected, then the KMD describes which methods for generating p and q are used
 * How the key is used as part of the key chain/hierarchy. 
 
-===== FCS_CKM.1/SK Cryptographic Key Generation (Symmetric Encryption Key)
+===== FCS_CKM.1/SKG Cryptographic key generation - Symmetric Key
 
 ====== TSS
 
@@ -2450,9 +2294,7 @@ The evaluator shall confirm that the KMD describes, as applicable:
 * The PBKDF interface and how the ST uses it in symmetric key generation
 * If the TOE uses the generated key in a key chain/hierarchy then the KMD shall describe how the ST uses the key as part of the key chain/hierarchy. 
 
-==== Cryptographic Key Management (Extended - FCS_CKM_EXT)
-
-===== FCS_CKM_EXT.5 Cryptographic Key Derivation
+===== FCS_CKM.5 Cryptographic Key Derivation
 
 ====== TSS 
 
@@ -2630,7 +2472,135 @@ The evaluator shall examine the KMD to ensure that:
 * The length of the key derivation key is defined by the PRF. The evaluator should check whether the key derivation key length is consistent with the length provided by the selected PRF.
 * If a key is used as an input to several KDFs, each invocation must use a distinct context string. If the output of a KDF execution is used for multiple cryptographic keys, those keys must be disjoint segments of the output.
 
+==== Cryptographic Key Management (Extended - FCS_CKM_EXT)
+
+===== FCS_CKM_EXT.3 Cryptograhpic Key Access
+[IMPORTANT]
+This is new
+
 ==== Cryptographic Operation (FCS_COP)
+
+===== FCS_COP.1/CMAC Cryptographic Operation (CMAC)
+[IMPORTANT]
+This is new
+
+===== FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
+[IMPORTANT]
+This is new
+
+====== TSS
+
+The evaluator shall ensure that the selected RSA and ECDH key agreement/transport schemes correspond to the key generation schemes selected in FCS_CKM.1/AK, and the key establishment schemes selected in FCS_CKM.2 If the ST selects DH, the TSS shall describe how the implementation meets the relevant sections of RFC 3526 (Section 3-7) and RFC 7919 (Appendices A.1-A.5). If the ST selects ECIES, the TSS shall describe the key sizes and algorithms (e.g. elliptic curve point multiplication, ECDH with either NIST or Brainpool curves, AES in a mode permitted by FCS_COP.1/SKC, a SHA-2 hash algorithm permitted by FCS_COP.1/Hash, and a MAC algorithm permitted by FCS_COP.1/HMAC) that are supported for the ECIES implementation.
+
+The evaluator shall ensure that, for each key agreement/transport scheme, the size of the derived keying material is at least the same as the intended strength of the key agreement/transport scheme, and where feasible this should be twice the intended security strength of the key agreement/transport scheme. 
+
+Table 2 of NIST SP 800-57 identifies the key strengths for the different algorithms that can be used for the various key agreement/transport schemes.
+
+====== AGD
+
+There are no guidance evaluation activities for this component.
+
+====== Test
+
+The following tests require the developer to provide access to a test platform that provides the evaluator with tools that are typically not found on factory products.
+
+The evaluator shall verify the implementation of the key generation routines of the supported schemes using the following tests:
+
+*If ECDH-NIST or ECDH-BPC is claimed:*
+
+*SP800-56A Key Agreement Schemes*
+
+The evaluator shall verify a TOE's implementation of SP800-56A key agreement schemes using the following function and validity tests. These validation tests for each key agreement scheme verify that a TOE has implemented the components of the key agreement scheme according to the specifications in the recommendation. These components include the calculation of the DLC primitives (the shared secret value Z) and the calculation of the derived keying material (DKM) via the Key Derivation Function (KDF). If key confirmation is supported, the evaluator shall also verify that the components of key confirmation have been implemented correctly, using the test procedures described below. This includes the parsing of the DKM, the generation of MACdata and the calculation of MACtag.
+
+_Function Test_
+
+The Function test verifies the ability of the TOE to implement the key agreement schemes correctly. To conduct this test the evaluator shall generate or obtain test vectors from a known good implementation of the TOE supported schemes. For each supported key agreement scheme-key agreement role combination, KDF type, and, if supported, key confirmation role-key confirmation type combination, the tester shall generate 10 sets of test vectors. The data set consists of one set of domain parameter values (FFC) or the NIST approved curve (ECC) per 10 sets of public keys. These keys are static, ephemeral or both depending on the scheme being tested. 
+
+The evaluator shall obtain the DKM, the corresponding TOE's public keys (static or ephemeral), the MAC tags, and any inputs used in the KDF, such as the Other Information field OI and TOE id fields. 
+
+If the TOE does not use a KDF defined in SP 800-56A, the evaluator shall obtain only the public keys and the hashed value of the shared secret. 
+
+The evaluator shall verify the correctness of the TSF's implementation of a given scheme by using a known good implementation to calculate the shared secret value, derive the keying material DKM, and compare hashes or MAC tags generated from these values. 
+
+If key confirmation is supported, the TSF shall perform the above for each implemented approved MAC algorithm. 
+
+_Validity Test_
+
+The Validity test verifies the ability of the TOE to recognize another party's valid and invalid key agreement results with or without key confirmation. To conduct this test, the evaluator shall obtain a list of the supporting cryptographic functions included in the SP800-56A key agreement implementation to determine which errors the TOE should be able to recognize. The evaluator generates a set of 24 (FFC) or 30 (ECC) test vectors consisting of data sets including domain parameter values or NIST approved curves, the evaluator's public keys, the TOE's public/private key pairs, MACTag, and any inputs used in the KDF, such as the other info and TOE id fields. 
+
+The evaluator shall inject an error in some of the test vectors to test that the TOE recognizes invalid key agreement results caused by the following fields being incorrect: the shared secret value Z, the DKM, the other information field OI, the data to be MACed, or the generated MACTag. If the TOE contains the full or partial (only ECC) public key validation, The evaluator shall also individually inject errors in both parties' static public keys, both parties' ephemeral public keys and the TOE's static private key to assure the TOE detects errors in the public key validation function or the partial key validation function (in ECC only). At least two of the test vectors shall remain unmodified and therefore should result in valid key agreement results (they should pass). 
+
+The TOE shall use these modified test vectors to emulate the key agreement scheme using the corresponding parameters. The evaluator shall compare the TOE's results with the results using a known good implementation verifying that the TOE detects these errors. 
+
+*If KAS1, KAS2, KTS-OAEP, or RSAES-PKCS1-v1_5 is claimed:*
+
+*SP800-56B and PKCS#1 Key Establishment Schemes*
+
+If the TOE acts as a sender, the following evaluation activity shall be performed to ensure the proper operation of every TOE supported combination of RSA-based key establishment scheme: 
+
+To conduct this test the evaluator shall generate or obtain test vectors from a known good implementation of the TOE supported schemes. For each combination of supported key establishment scheme and its options (with or without key confirmation if supported, for each supported key confirmation MAC function if key confirmation is supported, and for each supported mask generation function if KTS-OAEP is supported), the tester shall generate 10 sets of test vectors. Each test vector shall include the RSA public key, the plaintext keying material, any additional input parameters if applicable, the MacKey and MacTag if key confirmation is incorporated, and the outputted ciphertext. For each test vector, the evaluator shall perform a key establishment encryption operation on the TOE with the same inputs (in cases where key confirmation is incorporated, the test shall use the MacKey from the test vector instead of the randomly generated MacKey used in normal operation) and ensure that the outputted ciphertext is equivalent to the ciphertext in the test vector. 
+
+If the TOE acts as a receiver, the following evaluation activities shall be performed to ensure the proper operation of every TOE supported combination of RSA-based key establishment scheme: 
+
+To conduct this test the evaluator shall generate or obtain test vectors from a known good implementation of the TOE supported schemes. For each combination of supported key establishment scheme and its options (with our without key confirmation if supported, for each supported key confirmation MAC function if key confirmation is supported, and for each supported mask generation function if KTSOAEP is supported), the tester shall generate 10 sets of test vectors. Each test vector shall include the RSA private key, the plaintext keying material (KeyData), any additional input parameters if applicable, the MacTag in cases where key confirmation is incorporated, and the outputted ciphertext. For each test vector, the evaluator shall perform the key establishment decryption operation on the TOE and ensure that the outputted plaintext keying material (KeyData) is equivalent to the plain text keying material in the test vector. In cases where key confirmation is incorporated, the evaluator shall perform the key confirmation steps and ensure that the outputted MacTag is equivalent to the MacTag in the test vector. 
+
+The evaluator shall ensure that the TSS describes how the TOE handles decryption errors. In accordance with NIST Special Publication 800-56B, the TOE must not reveal the particular error that occurred, either through the contents of any outputted or logged error message or through timing variations. If KTS-OAEP is supported, the evaluator shall create separate contrived ciphertext values that trigger each of the three decryption error checks described in NIST Special Publication 800-56B section 7.2.2.3, ensure that each decryption attempt results in an error, and ensure that any outputted or logged error message is identical for each. 
+
+*DH:*
+
+The evaluator shall verify the correctness of each TSF implementation of each supported Diffie-Hellman group by comparison with a known good implementation.
+
+*Curve25519:*
+
+The evaluator shall verify a TOE's implementation of the key agreement scheme using the following Function and Validity tests. These validation tests for each key agreement scheme verify that a TOE has implemented the components of the key agreement scheme according to the specification. These components include the calculation of the shared secret K and the hash of K.
+
+_Function Test_
+
+The Function test verifies the ability of the TOE to implement the key agreement schemes correctly. To conduct this test the evaluator shall generate or obtain test vectors from a known good implementation of the TOE supported schemes. For each supported key agreement role and hash function combination, the tester shall generate 10 sets of public keys. These keys are static, ephemeral or both depending on the scheme being tested.
+
+The evaluator shall obtain the shared secret value K, and the hash of K. The evaluator shall verify the correctness of the TSF's implementation of a given scheme by using a known good implementation to calculate the shared secret value K and compare the hash generated from this value.
+
+_Validity Test_
+
+The Validity test verifies the ability of the TOE to recognize another party's valid and invalid key agreement results. To conduct this test, the evaluator generates a set of 30 test vectors consisting of data sets including the evaluator's public keys and the TOE's public/private key pairs.
+
+The evaluator shall inject an error in some of the test vectors to test that the TOE recognizes invalid key agreement results caused by the following fields being incorrect: the shared secret value K or the hash of K. At least two of the test vectors shall remain unmodified and therefore should result in valid key agreement results (they should pass).
+
+The TOE shall use these modified test vectors to emulate the key agreement scheme using the corresponding parameters. The evaluator shall compare the TOE's results with the results using a known good implementation verifying that the TOE detects these errors.
+
+*ECIES:*
+
+The evaluator shall verify the correctness of each TSF implementation of each supported use of ECIES by comparison with a known good implementation.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
+
+===== FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrap
+[IMPORTANT]
+This is new
+
+====== TSS
+
+The evaluator shall examine the TSS to ensure that it identifies whether the implementation of this cryptographic operation for key encryption (including key lengths and modes) is an implementation that is tested in FCS_COP.1/SKC.
+
+The evaluator shall check that the TSS includes a description of the key wrap functions and shall check that this uses a key wrap algorithm and key sizes according to the specification selected in the ST out of the table as provided in the [DSC cPP] table.
+
+====== AGD
+
+The evaluator checks the AGD documents to confirm that the instructions for establishing the evaluated configuration use only those key wrap functions selected in the ST. If multiple key access modes are supported, the evaluator shall examine the guidance documentation to determine that the method of choosing a specific mode/key size by the end user is described.
+
+====== Test
+
+Refer to FCS_COP.1/SKC for the required testing for each symmetric key wrapping method selected from the table and to FCS_COP.1/KAT for the required testing for each asymmetric key wrapping method selected from the table. Each distinct implementation shall be tested separately.
+
+If the implementation of the key encryption operation is the same implementation tested under FCS_COP.1/SKC or FCS_COP.1/KAT, and it has been tested with the same key lengths and modes, then no further testing is required. If key encryption uses a different implementation, (where "different implementation" includes the use of different key lengths or modes), then the evaluator shall additionally test the key encryption implementation using the corresponding tests specified for FCS_COP.1/SKC or FCS_COP.1/KAT.
+
+====== KMD
+
+The evaluator shall examine the KMD to ensure that it describes when the key wrapping occurs, that the KMD description is consistent with the description in the TSS, and that for all keys that are wrapped the TOE uses a method as described in the [DSC cPP] table. No uncertainty should be left over which is the wrapping key and the key to be wrapped and where the wrapping key potentially comes from i.e. is derived from.
+
+If "AES-GCM" or "AES-CCM" is used the evaluator shall examine the KMD to ensure that it describes how the IV is generated and that the same IV is never reused to encrypt different plaintext pairs under the same key. Moreover in the case of GCM, he must ensure that, at each invocation of GCM, the length of the plaintext is at most (2^32)-2 blocks.
 
 ===== FCS_COP.1/PBKDF Cryptographic Operation (Password-Based Key Derivation Functions)
 
