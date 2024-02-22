@@ -690,7 +690,7 @@ FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material speci
 .. [.underline]#that does not employ a wear-leveling algorithm, the destruction shall be executed by a [*selection*:#
 ... [.underline]#[*selection*: single, [*_assignment*: ST author defined multi-pass_]] overwrite consisting of [*selection*: zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment*: some value that does not contain any CSP_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated up to [*_assignment*: number of times to attempt overwrite_] times, whereupon an error is returned.#
 ... [.underline]#block erase followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated up to [*_assignment*: number of times to attempt overwrite_] times, whereupon an error is returned.]#
-
++
 ]] that meets the following: [_no standard_].
 
 _Application Note {counter:remark_count}_:: _In the case of volatile memory, the selection "removal of all references to the key directly followed by a request for garbage collection" is used in a situation where the TSF cannot address the specific physical memory locations holding the data to be erased and therefore relies on addressing logical addresses (which frees the relevant physical addresses holding the old data) and then requesting the platform to ensure that the data in the physical addresses is no longer available for reading (i.e. the "garbage collection" referred to in the SFR text)._
