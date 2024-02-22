@@ -676,20 +676,20 @@ FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material speci
 
 . [.underline]#For volatile memory, the destruction shall be executed by a [*selection:*#
 .. [.underline]#single overwrite consisting of [*selection:*#
-... [.underline]#a pseudo-random pattern using the TSF’s RBG,#
+... [.underline]#a pseudo-random pattern using the TSF's RBG,#
 ... [.underline]#zeroes,#
-...	[.underline]#ones,#
-...	[.underline]#a new value of a key,#
-...	[.underline]#[*assignment: some value that does not contain any CSP*]],#
+... [.underline]#ones,#
+... [.underline]#a new value of a key,#
+...	[.underline]#[*_assignment*: some value that does not contain any CSP_]],#
 .. [.underline]#removal of power to the memory, if that can be done reliably,#
 .. [.underline]#removal of all references to the key directly followed by a request for garbage collection that includes the immediate erasure of the collected data objects];#
 . [.underline]#For non-volatile memory [selection:#
 .. [.underline]#that employs a wear-leveling algorithm, the destruction shall be executed by a [*selection:*#
-... [.underline]#overwrite of the block containing the key with data consisting of [*selection*: zeroes, ones, pseudo-random pattern, [*_assignment:_ some value that does not contain any CSP*] using a method that meets the requirements of FDP_RIP.1, followed by a read-verify operation on the overwritten block (See the Application Note)],#
+... [.underline]#overwrite of the block containing the key with data consisting of [*selection*: zeroes, ones, pseudo-random pattern, [*_assignment*: some value that does not contain any CSP_] using a method that meets the requirements of FDP_RIP.1, followed by a read-verify operation on the overwritten block (See the Application Note)],#
 ...	[.underline]#erasure of all logical blocks in the memory device (all physical blocks except the index blocks, if they can be reliably identified) followed by a read-verify operation on all logical blocks];#
 .. [.underline]#that does not employ a wear-leveling algorithm, the destruction shall be executed by a [*selection:*#
-... [.underline]#[*selection:* single, [*_assignment:_ ST author defined multi-pass*]] overwrite consisting of [*selection:* zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:_ some value that does not contain any CSP*]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated up to [*_assignment:_ number of times to attempt overwrite*] times, whereupon an error is returned.#
-... [.underline]#block erase #followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated up to [*_assignment:_ number of times to attempt overwrite*] times, whereupon an error is returned.]#
+... [.underline]#[*selection:* single, [*_assignment*: ST author defined multi-pass_]] overwrite consisting of [*selection:* zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment*: some value that does not contain any CSP_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated up to [*_assignment*: number of times to attempt overwrite_] times, whereupon an error is returned.#
+... [.underline]#block erase #followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated up to [*_assignment*: number of times to attempt overwrite_] times, whereupon an error is returned.]#
 
 ]] that meets the following: _[no standard]_.
 
