@@ -694,7 +694,7 @@ FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material speci
 ]] that meets the following: [_no standard_].
 
 _Application Note {counter:remark_count}_:: _In the case of volatile memory, the selection "removal of all references to the key directly followed by a request for garbage collection" is used in a situation where the TSF cannot address the specific physical memory locations holding the data to be erased and therefore relies on addressing logical addresses (which frees the relevant physical addresses holding the old data) and then requesting the platform to ensure that the data in the physical addresses is no longer available for reading (i.e. the "garbage collection" referred to in the SFR text)._
-
++
 _In the case of wear-leveled non-volatile memory, the entire memory must be erased when a key is deleted unless the TOE has an erasure mechanism that meets FDP_RIP.1 and the vendor provides a rationale that the TOE uses it in a conformant way.  FDP_RIP.1 requires that keys not remain in unallocated memory after a key delete operation, a capability that wear-leveled non-volatile memory normally does not provide._
 +
 _The TSS includes a table describing all relevant keys and keying material, their sources, all memory types in which they are stored (covering storage both during and outside of a session, and both plaintext and encrypted forms), the applicable destruction method, and time of destruction for each case._
