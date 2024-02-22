@@ -672,10 +672,10 @@ _Application Note {counter:remark_count}_:: _The TOE will have mechanisms to des
 +
 _Based on their implementation, vendors will explain when certain keys are no longer needed. An example in which key is no longer necessary includes a wrapped key whose password has changed. This SFR does not apply to the public component of asymmetric key pairs, or to keys that are permitted to remain stored such as device identification keys._
 
-FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material specified by FCS_CKM.6.1 in accordance with a specified cryptographic key destruction method [.underline]#[*selection:*#
+FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material specified by FCS_CKM.6.1 in accordance with a specified cryptographic key destruction method [.underline]#[*selection*:#
 
-. [.underline]#For volatile memory, the destruction shall be executed by a [*selection:*#
-.. [.underline]#single overwrite consisting of [*selection:*#
+. [.underline]#For volatile memory, the destruction shall be executed by a [*selection*:#
+.. [.underline]#single overwrite consisting of [*selection*:#
 ... [.underline]#a pseudo-random pattern using the TSF's RBG,#
 ... [.underline]#zeroes,#
 ... [.underline]#ones,#
@@ -683,12 +683,12 @@ FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material speci
 ... [.underline]#[*_assignment*: some value that does not contain any CSP_]],#
 .. [.underline]#removal of power to the memory, if that can be done reliably,#
 .. [.underline]#removal of all references to the key directly followed by a request for garbage collection that includes the immediate erasure of the collected data objects];#
-. [.underline]#For non-volatile memory [selection:#
-.. [.underline]#that employs a wear-leveling algorithm, the destruction shall be executed by a [*selection:*#
+. [.underline]#For non-volatile memory [*selection*:#
+.. [.underline]#that employs a wear-leveling algorithm, the destruction shall be executed by a [*selection*:#
 ... [.underline]#overwrite of the block containing the key with data consisting of [*selection*: zeroes, ones, pseudo-random pattern, [*_assignment*: some value that does not contain any CSP_] using a method that meets the requirements of FDP_RIP.1, followed by a read-verify operation on the overwritten block (See the Application Note)],#
 ... [.underline]#erasure of all logical blocks in the memory device (all physical blocks except the index blocks, if they can be reliably identified) followed by a read-verify operation on all logical blocks];#
-.. [.underline]#that does not employ a wear-leveling algorithm, the destruction shall be executed by a [*selection:*#
-... [.underline]#[*selection:* single, [*_assignment*: ST author defined multi-pass_]] overwrite consisting of [*selection:* zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment*: some value that does not contain any CSP_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated up to [*_assignment*: number of times to attempt overwrite_] times, whereupon an error is returned.#
+.. [.underline]#that does not employ a wear-leveling algorithm, the destruction shall be executed by a [*selection*:#
+... [.underline]#[*selection*: single, [*_assignment*: ST author defined multi-pass_]] overwrite consisting of [*selection:* zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment*: some value that does not contain any CSP_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated up to [*_assignment*: number of times to attempt overwrite_] times, whereupon an error is returned.#
 ... [.underline]#block erase #followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated up to [*_assignment*: number of times to attempt overwrite_] times, whereupon an error is returned.]#
 
 ]] that meets the following: [_no standard_].
