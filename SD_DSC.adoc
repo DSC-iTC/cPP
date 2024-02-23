@@ -1932,34 +1932,6 @@ The evaluator shall perform an authorization of an operation on an SDO and captu
 
 There are no KMD evaluation activities for this component.
 
-==== Time Stamps (FPT_STM)
-
-===== FPT_STM.1 Reliable Time Stamps
-
-====== TSS
-
-The evaluator shall examine the TSS to ensure that it lists each security function that makes use of time. The TSS provides a description of how the time is maintained and considered reliable in the context of each of the time related functions.
-
-The evaluator shall examine the TSS and other vendor documentation and ensure they describe the location of the time source for the TSF.
-
-[conditional] For a time source that is outside the TOE but contained inside the same physical enclosure, the evaluator shall ensure there is a description of how the time is obtained from the source outside the TOE.
-
-====== AGD
-
-The evaluator shall examine the guidance documentation to ensure it instructs the administrator how to set the time or indicates any configuration steps required for the TSF to receive time data from an external source.
-
-====== Test
-
-The evaluator shall perform the following tests:
-
-Test 1 [conditional]: If the TSF provides a mechanism to manually set the time, the evaluator shall use the guidance documentation to set the time. The evaluator shall then use an available interface to observe that the time was set correctly.
-
-Test 2 [conditional]: If the TSF receives time data from some source outside the TOE, the evaluator shall use the guidance documentation to configure the external time source (if applicable). The evaluator shall observe that the time has been set to the expected value.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
 ==== TSF Self Test (FPT_TST)
 
 ===== FPT_TST.1 TSF Testing
@@ -2815,6 +2787,36 @@ The evaluator shall repeat the following tests to cover all allowed firmware ver
 Test 1: The evaluator shall attempt to execute an earlier instance or build of the software (as determined by the vendor). The evaluator shall verify that this attempt fails by checking the version identifiers or cryptographic hashes of the firmware against those previously recorded and checking that the values do not correspond to an unauthorized build.
 
 Test 2: The evaluator shall attempt to execute a current or later instance and shall verify that the firmware execution succeeds.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
+
+==== Time Counting (FPT_STM_EXT)
+
+===== FPT_STM_EXT.1 Reliable Time Counting
+
+====== TSS
+
+The evaluator shall examine the TSS to ensure that it lists each security function that makes use of time. The TSS provides a description of how the time is maintained and considered reliable in the context of each of the time related functions.
+
+The evaluator shall examine the TSS and other vendor documentation and ensure they describe the location of the time source for the TSF.
+
+[conditional] For a time source that is outside the TOE but contained inside the same physical enclosure, the evaluator shall ensure there is a description of how the time is obtained from the source outside the TOE.
+
+====== AGD
+
+The evaluator shall examine the guidance documentation to ensure it instructs the administrator how to set the time or indicates any configuration steps required for the TSF to receive time data from an external source.
+
+====== Test
+
+The evaluator shall perform the following tests:
+
+Test 1 [conditional]: If the TSF provides a mechanism to manually set the time, the evaluator shall use the guidance documentation to set the time. The evaluator shall then use an available interface to observe that the time was set correctly.
+
+Test 2 [conditional]: If the TSF receives time data from some source outside the TOE, the evaluator shall use the guidance documentation to configure the external time source (if applicable). The evaluator shall observe that the time has been set to the expected value.
+
+Test 3 [conditional]: If the TSF configures time data inside the TOE, the evaluator shall use the guidance documentation to configure the internal time source (if applicable). The evaluator shall observe that the time has been set to the expected value.
 
 ====== KMD
 
