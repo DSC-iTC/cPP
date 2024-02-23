@@ -55,10 +55,7 @@ toc::[]
 
 === Technology Area and Scope of Supporting Document
 
-This Supporting Document (SD) is mandatory for evaluations of products that claim conformance to any of the following cPPs:
-
-[loweralpha]
-. collaborative Protection Profile for Dedicated Security Component, Version 1.0.1 - December 13, 2022
+This Supporting Document (SD) is mandatory for evaluations of products that claim conformance to the  collaborative Protection Profile for Dedicated Security Component.
 
 A Dedicated Security Component (DSC), in the context of this cPP, is the combination of a hardware component and its controlling OS or firmware dedicated to the protection and safe use by the rich OS of Security Data Objects (SDOs) consisting of keys, identities, attributes, and Security Data Elements (SDEs). 
 
