@@ -1533,14 +1533,6 @@ _If [.underline]#encrypted data buffers as specified in FTP_ITE_EXT.1# is select
 +
 _If [.underline]#cryptographically protected data channels as specified in FTP_ITC_EXT.1# is selected, the selection-based SFR FTP_ITC_EXT.1 must be claimed._
 
-==== FDP_MFW_EXT.1 Mutable/Immutable Firmware
-
-FDP_MFW_EXT.1 Mutable/Immutable Firmware
-
-FDP_MFW_EXT.1.1:: The TSF shall be maintained as [.underline]#[selection: immutable, mutable]# firmware.
-
-_Application Note {counter:remark_count}_:: _The ST author must include FDP_MFW_EXT.2, FDP_MFW_EXT.3, FPT_FLS.1/FW, and FPT_RPL.1/Rollback if [.underline]#mutable# is selected._
-
 ==== FDP_RIP.1 Subset Residual Information Protection
 
 FDP_RIP.1 Subset Residual Information Protection
@@ -1858,7 +1850,7 @@ _[.underline]#[selection:#_
 ** _[.underline]#unlock access to SDO following excessive failed authorization attempts,#_
 ** _[.underline]#no other functions]#_].
 
-_Application Note {counter:remark_count}_:: _If FDP_MFW_EXT.1 selects [.underline]#mutable firmware#, then FMT_SMF.1 must select [.underline]#Update TOE firmware and pre-installed SDOs#._
+_Application Note {counter:remark_count}_:: _If FPT_MFW_EXT.1 selects [.underline]#mutable firmware#, then FMT_SMF.1 must select [.underline]#Update TOE firmware and pre-installed SDOs#._
 +
 _Recall that resetting a TOE to factory state also wipes all user data, but may not wipe out pre-installed SDOs. Configuring authorization policies includes setting policies for allowed access to SDOs._
 +
@@ -1883,6 +1875,14 @@ FPT_FLS.1/FI Failure with Preservation of Secure State (Fault Injection)
 FPT_FLS.1.1/FI:: The TSF shall preserve a secure state when the following types of failures occur: [_fault injections_].
 
 _Application Note {counter:remark_count}_:: _Note that a secure state does not imply the uninterrupted enforcement of all claimed security functionality it is appropriate for the TSF to "fail closed" and block the execution of security-relevant behavior if a fault injection attempt or other significant glitch occurs._
+
+==== FPT_MFW_EXT.1 Mutable/Immutable Firmware
+
+FPT_MFW_EXT.1 Mutable/Immutable Firmware
+
+FPT_MFW_EXT.1.1:: The TSF shall be maintained as [.underline]#[selection: immutable, mutable]# firmware.
+
+_Application Note {counter:remark_count}_:: _The ST author must include FPT_MFW_EXT.2, FPT_MFW_EXT.3, FPT_FLS.1/FW, and FPT_RPL.1/Rollback if [.underline]#mutable# is selected._
 
 ==== FPT_MOD_EXT.1 Debug Modes
 
@@ -2124,7 +2124,7 @@ The following rationale provides justification for each security objective for t
 |This requirement defines the Prove service that can be used to invoke the Roots of Trust for Measurement and Reporting and provide affirmation of the validity of stored data.
 
 .7+|O.FW_INTEGRITY 
-|FDP_MFW_EXT.1 
+|FPT_MFW_EXT.1 
 |This requirement specifies whether the TOE's firmware is mutable or immutable, to determine the extent to which this is objective must be satisfied by other SFRs.
 
 |FPT_ROT_EXT.1 
@@ -2136,10 +2136,10 @@ The following rationale provides justification for each security objective for t
 |FDP_DAU.1/Prove (selection-based)
 |This requirement defines the Prove service that can be used to invoke the Roots of Trust for Measurement and Reporting and provide affirmation of the validity of the TSF.
 
-|FDP_MFW_EXT.2 (selection-based)
+|FPT_MFW_EXT.2 (selection-based)
 |This requirement ensures that the TSF can generate evidence that its mutable firmware integrity remains intact.
 
-|FDP_MFW_EXT.3 (selection-based)
+|FPT_MFW_EXT.3 (selection-based)
 |This requirement ensures that any firmware updates to the TSF are genuine.
 
 |FPT_FLS.1/FW (selection-based)
@@ -2178,7 +2178,7 @@ The following rationale provides justification for each security objective for t
 |This requirement ensures that all user-specific SDOs are purged upon factory reset and may indicate any factory default SDOs that are reset to their initial values.
 
 .3+|O.SECURE_UPDATE 
-|FDP_MFW_EXT.1 
+|FPT_MFW_EXT.1 
 |This requirement specifies whether the TOE's firmware is mutable or immutable.
 
 |FPT_FLS.1/FW (selection-based)
@@ -2893,42 +2893,6 @@ FDP_FRS_EXT.2.1:: Upon initiation of a factory reset, the TSF shall destroy [_al
 
 _Application Note {counter:remark_count}_:: _Not all DSCs permit a factory reset of the TOE, or perform a factory reset in response to excessive failed authentication or authorization attempts. Those that do are expected to perform a factory reset in a manner that prevents any inadvertent disclosure of security-relevant data that was present on the DSC prior to the factory reset. For DSCs that permit factory reset functionality (as indicated by selection of [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2# in FIA_AFL_EXT.1.3, or by [.underline]#no actions or conditions# NOT being selected in FDP_FRS_EXT.1.1), this SFR must be included in the TOE boundary._
 
-==== FDP_MFW_EXT.2 Basic Firmware Integrity
-
-FDP_MFW_EXT.2 Basic Firmware Integrity
-
-FDP_MFW_EXT.2.1:: The TSF shall have the ability to verify the integrity of the firmware.
-
-FDP_MFW_EXT.2.2:: The TSF shall provide a capability to generate evidence of the integrity of the firmware.
-
-_Application Note {counter:remark_count}_:: _Data and firmware integrity is not a required component of this cPP in all cases because some DSCs will have immutable firmware. This SFR must be claimed if [.underline]#mutable# is selected in FDP_MFW_EXT.1.1._
-+
-_The TOE guarantees the integrity of the firmware by verifying its integrity._
-+
-_Verifying the integrity of the firmware could be accomplished by guaranteeing the validity of firmware within the TOE prior to execution._
-+
-_This requirement covers the case of ensuring the firmware is trustworthy in immutable form or mutable through any firmware updates, since the integrity and authenticity are checked prior to execution._
-+
-_FCS_COP.1/SigVer applies if the TOE provides the capability to update the TOE firmware and uses digital signatures and MAC verification for update verification. The ST Author should choose the algorithm implemented to perform digital signatures. For the algorithms chosen, the ST author should make the appropriate assignments/selections to specify the parameters that are implemented for that algorithm._
-
-==== FDP_MFW_EXT.3 Firmware Authentication with Identity of Guarantor
-
-FDP_MFW_EXT.3 Firmware Authentication with Identity of Guarantor
-
-FDP_MFW_EXT.3.1:: The TSF shall have the ability to verify the authenticity of the firmware.
-
-FDP_MFW_EXT.3.2:: The TSF shall provide a capability to generate evidence of the authenticity of the firmware.
-
-_Application Note {counter:remark_count}_:: _Firmware authentication is not a required component of this cPP in all cases because some DSCs will have immutable firmware. This SFR must be claimed if [.underline]#mutable# is selected in FDP_MFW_EXT.1.1._
-+
-_The TOE guarantees the authenticity of the firmware by verifying its signature._
-+
-_Verifying the authenticity of the firmware could be accomplished by guaranteeing the validity of firmware within the TOE prior to execution._
-+
-_This requirement covers the case of ensuring the firmware is trustworthy in immutable form or mutable through any firmware updates, since the integrity and authenticity are checked prior to execution._
-+
-_FCS_COP.1/SigVer applies if the TOE provides the capability to update the TOE firmware and uses digital signatures and MAC verification for update verification. The ST Author should choose the algorithm implemented to perform digital signatures. For the algorithms chosen, the ST author should make the appropriate assignments/selections to specify the parameters that are implemented for that algorithm._
-
 === Identification and Authentication
 ==== FIA_AFL_EXT.2 Authorization Failure Response
 
@@ -2945,9 +2909,45 @@ FPT_FLS.1/FW:: Failure with Preservation of Secure State (Firmware)
 
 FPT_FLS.1.1/FW:: The TSF shall preserve a secure state when the following types of *firmware* failures occur: [_authenticity violation, integrity violation, rollback violation_].
 
-_Application Note {counter:remark_count}_:: _A DSC's ability to handle failures related to authenticity, integrity, and invalid versions of firmware is not applicable in all cases because some DSCs will have immutable firmware. This SFR must be claimed if [.underline]#mutable# is selected in FDP_MFW_EXT.1.1._
+_Application Note {counter:remark_count}_:: _A DSC's ability to handle failures related to authenticity, integrity, and invalid versions of firmware is not applicable in all cases because some DSCs will have immutable firmware. This SFR must be claimed if [.underline]#mutable# is selected in FPT_MFW_EXT.1.1._
 +
 _The phrase "secure state" refers to a state in which the TOE has consistent TSF data and a TSF that can correctly enforce the policy. The TOE must ensure that no further processing of TSF or user data takes place while in an insecure state. This state may be the initial "boot" of a clean system, or it might be some check-pointed state. It is expected that in most cases, the TOE will halt and require a reset or re-initialization to return to a known secure state._
+
+==== FPT_MFW_EXT.2 Basic Firmware Integrity
+
+FPT_MFW_EXT.2 Basic Firmware Integrity
+
+FPT_MFW_EXT.2.1:: The TSF shall have the ability to verify the integrity of the firmware.
+
+FPT_MFW_EXT.2.2:: The TSF shall provide a capability to generate evidence of the integrity of the firmware.
+
+_Application Note {counter:remark_count}_:: _Data and firmware integrity is not a required component of this cPP in all cases because some DSCs will have immutable firmware. This SFR must be claimed if [.underline]#mutable# is selected in FPT_MFW_EXT.1.1._
++
+_The TOE guarantees the integrity of the firmware by verifying its integrity._
++
+_Verifying the integrity of the firmware could be accomplished by guaranteeing the validity of firmware within the TOE prior to execution._
++
+_This requirement covers the case of ensuring the firmware is trustworthy in immutable form or mutable through any firmware updates, since the integrity and authenticity are checked prior to execution._
++
+_FCS_COP.1/SigVer applies if the TOE provides the capability to update the TOE firmware and uses digital signatures and MAC verification for update verification. The ST Author should choose the algorithm implemented to perform digital signatures. For the algorithms chosen, the ST author should make the appropriate assignments/selections to specify the parameters that are implemented for that algorithm._
+
+==== FPT_MFW_EXT.3 Firmware Authentication with Identity of Guarantor
+
+FPT_MFW_EXT.3 Firmware Authentication with Identity of Guarantor
+
+FPT_MFW_EXT.3.1:: The TSF shall have the ability to verify the authenticity of the firmware.
+
+FPT_MFW_EXT.3.2:: The TSF shall provide a capability to generate evidence of the authenticity of the firmware.
+
+_Application Note {counter:remark_count}_:: _Firmware authentication is not a required component of this cPP in all cases because some DSCs will have immutable firmware. This SFR must be claimed if [.underline]#mutable# is selected in FPT_MFW_EXT.1.1._
++
+_The TOE guarantees the authenticity of the firmware by verifying its signature._
++
+_Verifying the authenticity of the firmware could be accomplished by guaranteeing the validity of firmware within the TOE prior to execution._
++
+_This requirement covers the case of ensuring the firmware is trustworthy in immutable form or mutable through any firmware updates, since the integrity and authenticity are checked prior to execution._
++
+_FCS_COP.1/SigVer applies if the TOE provides the capability to update the TOE firmware and uses digital signatures and MAC verification for update verification. The ST Author should choose the algorithm implemented to perform digital signatures. For the algorithms chosen, the ST author should make the appropriate assignments/selections to specify the parameters that are implemented for that algorithm._
 
 ==== FPT_RPL.1/Rollback Replay Detection (Rollback)
 
@@ -2957,7 +2957,7 @@ FPT_RPL.1.1/Rollback:: The TSF shall detect replay for the following entities: [
 
 FPT_RPL.1.2/Rollback:: The TSF shall *prevent the execution of the loaded firmware and* perform *[.underline]#[selection, choose one of: [_assignment: other actions_], no other actions]*# when replay is detected.
 
-_Application Note {counter:remark_count}_:: _This SFR must be claimed if [.underline]#mutable# is selected in FDP_MFW_EXT.1.1._
+_Application Note {counter:remark_count}_:: _This SFR must be claimed if [.underline]#mutable# is selected in FPT_MFW_EXT.1.1._
 +
 _The TSF data is used as a guarantee of the ordinal identifier of the firmware instance. When a firmware load is requested, the TSF ensures the authenticated firmware ordinal identifier is greater than or equal to the previously authenticated firmware identifier. For example, this could be accomplished by ensuring the validated instance of the firmware to be loaded is greater than or equal to the instance previously validated and loaded into the TOE. By loading a previous instance of firmware, it potentially opens up the device to known vulnerabilities._
 
@@ -3062,7 +3062,7 @@ This Appendix provides a definition for all of the extended components introduce
 
 | FDP_ITC_EXT Import from Outside of the TOE
 
-| FDP_MFW_EXT Firmware
+| FPT_MFW_EXT Firmware
 
 | Identification and Authentication (FIA) 
 | FIA_AFL_EXT Authorization Failures
@@ -3549,80 +3549,6 @@ FDP_ITC_EXT.2.4:: The TSF shall ensure that the protocol used provides for the u
 
 FDP_ITC_EXT.2.5:: The TSF shall ensure that interpretation of the security attributes of the imported user data is as intended by the source of the user data.
 
-==== FDP_MFW_EXT Mutable/Immutable Firmware
-
-*Family Behavior*
-
-This family defines requirements for specified types of firmware and the management of integrity and authenticity.
-
-*Component Leveling*
-
-[#img-FDP_MFW_EXT] 
-[ditaa,"FDP_MFW_EXT"]
-....
-                                                       +---+
-                                                    +->| 1 |
-                                                    |  +---+
-    +--------------------------------------------+  |
-    |                                            |  |  +---+
-    | FDP_MFW_EXT Mutable/Immutable Firmware     +--+->| 2 |
-    |                                            |  |  +---+
-    +--------------------------------------------+  |
-                                                    |  +---+
-                                                    +->| 3 |
-                                                       +---+
-....
-
-FDP_MFW_EXT.1 Mutable/Immutable Firmware, requires the TSF to identify whether its firmware resides in mutable or immutable storage.
-
-FDP_MFW_EXT.2 Basic Firmware Integrity, requires the TSF to assert the integrity of the firmware.
-
-FDP_MFW_EXT.3 Firmware Authentication with Identity of Guarantor, requires the TSF to assert the authenticity of the firmware.
-
-*Management: FDP_MFW_EXT.1*
-
-The following actions could be considered for the management functions in FMT:
-
-* Update TOE firmware and pre-installed SDOs.
-
-*Management: FDP_MFW_EXT.2, FDP_MFW_EXT.3*
-
-No specific management functions are identified.
-
-*Audit: FDP_MFW_EXT.1, FDP_MFW_EXT.2, FDP_MFW_EXT.3*
-
-There are no auditable events foreseen.
-
-*FDP_MFW_EXT.1 Mutable/Immutable Firmware*
-[horizontal]
-Hierarchical to:: No other components.
-
-Dependencies:: No dependencies.
-[vertical]
-FDP_MFW_EXT.1.1:: The TSF shall be maintained as [.underline]#[selection: immutable, mutable]# firmware.
-
-*FDP_MFW_EXT.2 Basic Firmware Integrity*
-[horizontal]
-Hierarchical to:: No other components.
-
-Dependencies:: FDP_MFW_EXT.1 Mutable/Immutable Firmware +
-FCS_COP.1 Cryptographic Operation
-[vertical]
-FDP_MFW_EXT.2.1:: The TSF shall have the ability to verify the integrity of the firmware.
-
-FDP_MFW_EXT.2.2:: The TSF shall provide a capability to generate evidence of the integrity of the firmware.
-
-*FDP_MFW_EXT.3 Firmware Authentication with Identity of Guarantor*
-[horizontal]
-Hierarchical to:: No other components.
-
-Dependencies:: FDP_MFW_EXT.1 Mutable/Immutable Firmware +
-FCS_COP.1 Cryptographic Operation
-[vertical]
-FDP_MFW_EXT.3.1:: The TSF shall have the ability to verify the authenticity of the firmware.
-
-FDP_MFW_EXT.3.2:: The TSF shall provide a capability to generate evidence of the authenticity of the firmware.
-
 === Class FIA: Identification and Authentication
 ==== FIA_AFL_EXT Authorization Failure Handling
 
@@ -3729,6 +3655,80 @@ Dependencies:: FMT_SMF.1 Specification of Management Functions
 FMT_MOF_EXT.1.1:: The TSF shall restrict the ability to perform the functions in FMT_SMF.1 to authenticated administrators.
 
 === Class FPT: Protection of the TSF
+==== FPT_MFW_EXT Mutable/Immutable Firmware
+
+*Family Behavior*
+
+This family defines requirements for specified types of firmware and the management of integrity and authenticity.
+
+*Component Leveling*
+
+[#img-FPT_MFW_EXT] 
+[ditaa,"FPT_MFW_EXT"]
+....
+                                                       +---+
+                                                    +->| 1 |
+                                                    |  +---+
+    +--------------------------------------------+  |
+    |                                            |  |  +---+
+    | FPT_MFW_EXT Mutable/Immutable Firmware     +--+->| 2 |
+    |                                            |  |  +---+
+    +--------------------------------------------+  |
+                                                    |  +---+
+                                                    +->| 3 |
+                                                       +---+
+....
+
+FPT_MFW_EXT.1 Mutable/Immutable Firmware, requires the TSF to identify whether its firmware resides in mutable or immutable storage.
+
+FPT_MFW_EXT.2 Basic Firmware Integrity, requires the TSF to assert the integrity of the firmware.
+
+FPT_MFW_EXT.3 Firmware Authentication with Identity of Guarantor, requires the TSF to assert the authenticity of the firmware.
+
+*Management: FPT_MFW_EXT.1*
+
+The following actions could be considered for the management functions in FMT:
+
+* Update TOE firmware and pre-installed SDOs.
+
+*Management: FPT_MFW_EXT.2, FPT_MFW_EXT.3*
+
+No specific management functions are identified.
+
+*Audit: FPT_MFW_EXT.1, FPT_MFW_EXT.2, FPT_MFW_EXT.3*
+
+There are no auditable events foreseen.
+
+*FPT_MFW_EXT.1 Mutable/Immutable Firmware*
+[horizontal]
+Hierarchical to:: No other components.
+
+Dependencies:: No dependencies.
+[vertical]
+FPT_MFW_EXT.1.1:: The TSF shall be maintained as [.underline]#[selection: immutable, mutable]# firmware.
+
+*FPT_MFW_EXT.2 Basic Firmware Integrity*
+[horizontal]
+Hierarchical to:: No other components.
+
+Dependencies:: FPT_MFW_EXT.1 Mutable/Immutable Firmware +
+FCS_COP.1 Cryptographic Operation
+[vertical]
+FPT_MFW_EXT.2.1:: The TSF shall have the ability to verify the integrity of the firmware.
+
+FPT_MFW_EXT.2.2:: The TSF shall provide a capability to generate evidence of the integrity of the firmware.
+
+*FPT_MFW_EXT.3 Firmware Authentication with Identity of Guarantor*
+[horizontal]
+Hierarchical to:: No other components.
+
+Dependencies:: FPT_MFW_EXT.1 Mutable/Immutable Firmware +
+FCS_COP.1 Cryptographic Operation
+[vertical]
+FPT_MFW_EXT.3.1:: The TSF shall have the ability to verify the authenticity of the firmware.
+
+FPT_MFW_EXT.3.2:: The TSF shall provide a capability to generate evidence of the authenticity of the firmware.
+
 ==== FPT_MOD_EXT Debug Modes
 
 *Family Behavior*
@@ -4224,7 +4224,7 @@ FMT_MSA.1
 [FTP_ITC_EXT.1, FTP_ITE_EXT.1, or FTP_ITP_EXT.1] 
 |FCS_COP.1 is required by the PP. FTP_ITC_EXT.1, FTP_ITE_EXT.1, and FTP_ITP_EXT.1 are each selection-based SFRs in the PP but the PP's definition of FDP_ITC_EXT.1 requires at least one of them to be selected so the dependency is always addressed.
 
-|FDP_MFW_EXT.1 
+|FPT_MFW_EXT.1 
 |No dependencies. 
 |N/A
 
@@ -4423,17 +4423,17 @@ FCS_CKM.6
 |FDP_FRS_EXT.1 
 |FDP_FRS_EXT.1 is required by the PP.
 
-|FDP_MFW_EXT.2 
-|FDP_MFW_EXT.1 
+|FPT_MFW_EXT.2 
+|FPT_MFW_EXT.1 
 
 FCS_COP.1 
-|FDP_MFW_EXT.1 and FCS_COP.1 are required by the PP.
+|FPT_MFW_EXT.1 and FCS_COP.1 are required by the PP.
 
-|FDP_MFW_EXT.3 
-|FDP_MFW_EXT.1 
+|FPT_MFW_EXT.3 
+|FPT_MFW_EXT.1 
 
 FCS_COP.1 
-|FDP_MFW_EXT.1 and FCS_COP.1 are required by the PP.
+|FPT_MFW_EXT.1 and FCS_COP.1 are required by the PP.
 
 |FIA_AFL_EXT.2 
 |FIA_AFL_EXT.1 
@@ -4686,11 +4686,11 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FDP_DAU.1/Prove !Basic Data Authentication (for Use with the Prove Service)
 
-!FDP_MFW_EXT.1 !Mutable/Immutable Firmware
+!FPT_MFW_EXT.1 !Mutable/Immutable Firmware
 
-!FDP_MFW_EXT.2 !Basic Firmware Integrity
+!FPT_MFW_EXT.2 !Basic Firmware Integrity
 
-!FDP_MFW_EXT.3 !Firmware Authentication with Identity of Guarantor
+!FPT_MFW_EXT.3 !Firmware Authentication with Identity of Guarantor
 
 !===
 
@@ -4766,7 +4766,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FDP_FRS_EXT.1 !Factory Reset
 
-!FDP_MFW_EXT.1 !Mutable/Immutable Firmware
+!FPT_MFW_EXT.1 !Mutable/Immutable Firmware
 
 !FMT_SMF.1 !Specification of Management Functions
 
@@ -4782,9 +4782,9 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FPT_PRO_EXT.2 !Data Integrity Measurements
 
-!FDP_MFW_EXT.2 !Basic Firmware Integrity
+!FPT_MFW_EXT.2 !Basic Firmware Integrity
 
-!FDP_MFW_EXT.3 !Firmware Authentication with Identity of Guarantor
+!FPT_MFW_EXT.3 !Firmware Authentication with Identity of Guarantor
 
 !FDP_FRS_EXT.2 !Factory Reset Behavior
 
