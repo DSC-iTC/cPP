@@ -535,15 +535,15 @@ Note that where selections include 'destruction of reference to the key directly
 
 ===== FCS_CKM_EXT.7 Cryptographic Key Agreement
 [IMPORTANT]
-This is new (taken from old FCS_CKM.2)
+I am not certain how to edit this in part because it isn't clear what SFRs may be needed for ECDH algorithms. The previous FCS_CKM.2 had FCS_COP.1/KAT to point to for most of the algorithms, but the new catalog doesn't seem to have similar requirements.
 
 ====== TSS
 
-The evaluator shall examine the TSS to ensure that ST supports at least one key establishment scheme. The evaluator also ensures that for each key establishment scheme selected by the ST in FCS_CKM.2.1 it also supports one or more corresponding methods selected in FCS_COP.1/KAT. If the ST selects RSA in FCS_CKM.2.1, then the TOE must support one or more of "KAS1," or "KAS2," "KTS-OAEP," from FCS_COP.1/KAT. If the ST selects elliptic curve-based, then the TOE must support one or more of "ECDH-NIST" or "ECDH-BPC" from FCS_COP.1/KAT. If the ST selects Diffie-Hellman-based key establishment, then the TOE must support "DH" from FCS_COP.1/KAT.
+The evaluator shall examine the TSS to ensure that ST supports at least one key agreement scheme. The evaluator also ensures that for each key agreement scheme selected by the ST in FCS_CKM_EXT.7.1 it also supports one or more corresponding methods selected in FCS_COP.1/KAT. If the ST selects RSA in FCS_CKM.2.1, then the TOE must support one or more of "KAS1," or "KAS2," "KTS-OAEP," from FCS_COP.1/KAT. If the ST selects elliptic curve-based, then the TOE must support one or more of "ECDH-NIST" or "ECDH-BPC" from FCS_COP.1/KAT. If the ST selects Diffie-Hellman-based key establishment, then the TOE must support "DH" from FCS_COP.1/KAT.
 
 ====== AGD
 
-The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key establishment scheme .
+The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key agreement scheme .
 
 ====== Test
 
