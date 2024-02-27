@@ -449,15 +449,15 @@ This has been changed from establishment to distribution
 
 ====== TSS
 
-The evaluator shall examine the TSS to ensure that ST supports at least one key establishment scheme. The evaluator also ensures that for each key establishment scheme selected by the ST in FCS_CKM.2.1 it also supports one or more corresponding methods selected in FCS_COP.1/KAT. If the ST selects RSA in FCS_CKM.2.1, then the TOE must support one or more of "KAS1," or "KAS2," "KTS-OAEP," from FCS_COP.1/KAT. If the ST selects elliptic curve-based, then the TOE must support one or more of "ECDH-NIST" or "ECDH-BPC" from FCS_COP.1/KAT. If the ST selects Diffie-Hellman-based key establishment, then the TOE must support "DH" from FCS_COP.1/KAT.
+The evaluator shall examine the TSS to ensure that ST supports at least one key distribution method. The evaluator also ensures that for each key distribution method selected by the ST in FCS_CKM.2.1 it also supports one or more corresponding methods. If key encapsulation is selected then FCS_COP.1/KeyEncap shall be included.
 
 ====== AGD
 
-The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key establishment scheme .
+The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key distribution method.
 
 ====== Test
 
-Testing for this SFR is performed under the corresponding functions in FCS_COP.1/KAT.
+Testing for this SFR is performed under the corresponding functions in FCS_COP.1/KeyEncap, FTP_ITP_EXT.1, FTP_ITE_EXT.1 or FTP_ITC_EXT.1 based on the selection(s) made.
 
 ====== KMD
 
