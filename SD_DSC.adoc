@@ -442,10 +442,6 @@ The evaluator shall iterate through each of the methods selected by the ST and p
 The evaluator shall iterate through each of the methods selected by the ST and confirm that the KMD describes the applicable selected methods.
 
 ===== FCS_CKM.2 Cryptographic Key Distribution
-[IMPORTANT]
-====
-This has been changed from establishment to distribution
-====
 
 ====== TSS
 
