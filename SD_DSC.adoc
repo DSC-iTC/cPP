@@ -484,38 +484,16 @@ The following tests require the developer to provide access to a test platform t
 
 The evaluator shall perform the following tests:
 
-*Test 1:* Applied to each key or keying material held as plaintext in volatile memory and subject to destruction by overwrite by the TOE (whether or not the plaintext value is subsequently encrypted for storage in volatile or non-volatile memory).
+*Test 1:* [Conditional: Test applies to keys and key material where the caller-visible key reference is reused after a key destruction.]
 
-The evaluator shall:
-
-. Record the value of the key or keying material.
-. Cause the TOE to dump the SDO/SDE memory of the TOE into a binary file.
-. Search the content of the binary file created in Step #2. to locate all instances of the known key value from Step #1.
-+
-Note that the primary purpose of Step #3. is to demonstrate that appropriate search commands are being used for Steps #8. and #9.
-. Cause the TOE to perform normal cryptographic processing with the key from Step #1.
+. Record the value or a corresponding key check value (KCV) of the key or keying material. The key check value is an obfuscated value of the key, for example by hashing, encrypting or wrapping the key.
 . Cause the TOE to destroy the key.
-. Cause the TOE to stop execution but not exit.
-. Cause the TOE to dump the SDO/SDE memory of the TOE into a binary file.
-. Search the content of the binary file created in Step #7. for instances of the known key value from Step #1.
-. Break the key value from Step #1. into an evaluator-chosen set of fragments and perform a search using each fragment. (Note that the evaluator shall first confirm with the developer how the key is normally stored, in order to choose fragment sizes that are the same or smaller than any fragmentation of the data that may be implemented by the TOE. The endianness or byte-order should also be taken into account in the search.)
+. Record the value or a corresponding key check value (KCV) of the key or keying material and compare it with the value from step 1. If both are identical, the test fails.
 
-Steps #1.-8. ensure that the complete key does not exist anywhere in volatile memory. If a copy is found, then the test fails.
+*Test 2:* [Conditional: Test applies to keys and key material where the caller-visible key reference is not reused after a key destruction.]
 
-Step #9 ensures that partial key fragments do not remain in memory. If the evaluator finds a 32-or-greater-consecutive-bit fragment, then fail immediately. Otherwise, there is a chance that it is not within the context of a key (e.g., some random bits that happen to match). If this is the case the test should be repeated with a different key in Step #1. If a fragment is also found in this repeated run then the test fails unless the developer provides a reasonable explanation for the collision, then the evaluator may give a pass on this test.
-
-*Test 2:* Applied to each key and keying material held in non-volatile memory and subject to destruction by overwrite by the TOE.
-
-. Record the value of the key or keying material.
-. Cause the TOE to perform normal cryptographic processing with the key from Step #1.
-. Search the non-volatile memory the key was stored in for instances of the known key value from Step #1.
-+
-Note that the primary purpose of Step #3. is to demonstrate that appropriate search commands are being used for Steps #5 and #6.
 . Cause the TOE to destroy the key.
-. Search the non-volatile memory in which the key was stored for instances of the known key value from Step #1. If a copy is found, then the test fails.
-. Break the key value from Step #1. into an evaluator-chosen set of fragments and perform a search using each fragment. (Note that the evaluator shall first confirm with the developer how the key is normally stored, in order to choose fragment sizes that are the same or smaller than any fragmentation of the data that may be implemented by the TOE. The endianness or byte-order should also be taken into account in the search).
-
-Step #6 ensures that partial key fragments do not remain in non-volatile memory. If the evaluator finds a 32-or-greater-consecutive-bit fragment, then fail immediately. Otherwise, there is a chance that it is not within the context of a key (e.g., some random bits that happen to match). If this is the case the test should be repeated with a different key in Step #1. If a fragment is also found in this repeated run then the test fails unless the developer provides a reasonable explanation for the collision, then the evaluator may give a pass on this test.
+. Attempt to invoke a cryptographic service with use the caller-visible key reference and verify that the service is unavailable.
 
 *Test 3:* Applied to each key and keying material held in non-volatile memory and subject to destruction by overwrite by the TOE.
 
