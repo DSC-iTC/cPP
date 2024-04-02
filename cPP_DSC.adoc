@@ -17,7 +17,7 @@
 :sectnums!:
 
 == Acknowledgements
-This collaborative Protection Profile (cPP) was developed by the {iTC-longame} international Technical Community ({iTC-shortname}) with representatives from Industry, Information Technology Security Evaluation Facilities (ITSEFs), and International Common Criteria schemes. The organizations that directly contributed to the development of this cPP include:author:
+This collaborative Protection Profile (cPP) was developed by the {iTC-longame} international Technical Community ({iTC-shortname}) with representatives from Industry, Information Technology Security Evaluation Facilities (ITSEFs), and International Common Criteria schemes. The organizations that directly contributed to the development of this cPP include:
 
 [.text-center]
 *Industry*
