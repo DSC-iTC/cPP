@@ -121,7 +121,7 @@ PP Date: {revdate}
 
 === TOE Overview
 
-The Target of Evaluation (TOE) is a Dedicated Security Component (DSC). In the context of this cPP, a DSC is the combination of a hardware component and its controlling OS or firmware. The firmware should be dedicated to providing the encompassing platform with services for the provisioning, protection, and use of Security Data Objects (SDOs), which include keys, identities, attributes, and other types of Security Data Elements (SDEs). See <<RepofTOE>> for an example of a TOE representation.
+The Target of Evaluation (TOE) is a Dedicated Security Component (DSC). In the context of this cPP, a DSC is the combination of one or more hardware component(s) and its controlling OS or firmware. The firmware should be dedicated to providing the encompassing platform with services for the provisioning, protection, and use of Security Data Objects (SDOs), which are composed of Security Data Elements (SDEs) such as keys, identities, attributes. See <<RepofTOE>> for an example of a TOE representation.
 
 .Representation of the Target of Evaluation (TOE)
 [[RepofTOE]]
@@ -175,7 +175,7 @@ image::TOEservices.png[,600]
 The labels in Figure 4 refer to the following:
 
 * SDE: Security Data Element
-* SDO: Security Data Object (component from SDEs and attributes)
+* SDO: Security Data Object (composed of SDEs and attributes)
 * SDO ID: Unique identifier for an SDO
 * SDO1: SDO that is modified or is a reference to original SDO
 * SDO2: SDO that is bound to the DSC but stored outside of it
@@ -190,7 +190,7 @@ DSCs provide seven core security services to a platform as illustrated in <<Core
 |Description
 
 |Parse
-|The DSC shall ingest pre-provisioned keys, credentials, tokens, attributes, etc. from trusted components or services external to its boundary either across a secured channel or in a manner that the objects are protected for use only by the DSC.
+|The DSC shall ingest pre-installed keys, credentials, tokens, attributes, etc. from trusted components or services external to its boundary either across a secured channel or in a manner that the objects are protected for use only by the DSC.
 
 |Provision
 |The DSC shall create SDOs from parsed or generated SDEs and attributes using binding mechanisms to apply integrity protection to the SDEs together with their attributes.
@@ -226,7 +226,7 @@ The security functional requirements rely on the following characteristics of th
 * Security Attributes
 * Operations
 
-Users: The entities using the DSC will be client applications on the platform. They may be acting as proxies for users or may have identities of their own. The DSC will not be able to distinguish the difference; therefore, the cPP will recognize an entity known as the Client Application (CA), as the user presenting authentication tokens and authorization values (collectively known as authorization data) to the DSC for the purposes of identity verification and authorization to perform operations. <<Roles>> discusses the concept of users in more detail. This cPP also recognizes a special user called the administrator, which typically has access to DSC objects normally denied to CAs (see definition of objects below).
+Users: The entities using the DSC will be client applications on the platform. They may be acting as proxies for users or may have identities of their own. The DSC will not be able to distinguish the difference; therefore, the cPP will recognize an entity known as the Client Application (CApp), as the user presenting authentication tokens and authorization values (collectively known as authorization data) to the DSC for the purposes of identity verification and authorization to perform operations. <<Roles>> discusses the concept of users in more detail. This cPP also recognizes a special user called the administrator, which typically has access to DSC objects normally denied to CApps (see definition of objects below).
 
 Subjects: The following list contains the fundamental actors in the expected operational use cases of the DSC. The first three are active actors, while the fourth is usually passive but could be active.
 
@@ -237,7 +237,7 @@ Subjects: The following list contains the fundamental actors in the expected ope
 
 Objects: The following list contains objects the DSC expects to use during the expected operational use cases.
 
-* OB.P_SDO - Pre-provisioned SDOs (e.g. DSC.ID) with security attributes listed in the next paragraph.
+* OB.P_SDO - Pre-installed SDOs (e.g. DSC.ID) with security attributes listed in the next paragraph.
 * OB.T_SDO - Transient SDOs or just SDOs (i.e. SDOs in the DSC currently, but are either ephemeral or are normally stored external to DSC when not in use) with security attributes listed in the next paragraphs. See <<Key Usage>>, <<Key Hierarchies>>, and <<SDEs and SDOs>> for more discussion on keys, which are the primary use cases for SDOs.
 * OB.AuthData - Authorization Data (including authentication data, e.g. PINs, passwords, tokens) 
 * OB.Pstate - Platform State (e.g. measurements and assertions)
@@ -249,7 +249,7 @@ Security Attributes: The following list contains the minimum security attributes
 
 * DSC.ID - The DSC identifier. It may also serve as the identifier for the DSC RoT.
 * CApp.ID - The Client Application identifier.
-* EPS.ID - The External Platform Storage (EPS) identifier. This attribute is optional for a passive EPS (i.e. plain memory that only stores information). If the DSC uses a Client Application to manage storage, then support for this attribute is required.
+* EPS.ID - The External Platform Storage (EPS) identifier. This attribute is optional for a passive EPS (i.e. plain memory that only stores information). If the DSC uses an active EPS to manage storage, then support for this attribute is required.
 * SDO.* - The SDO Security Attributes:
 ** SDO.ID - SDO Identifier
 ** SDO.Type - SDO Type
