@@ -220,13 +220,11 @@ This collaborative Protection Profile (cPP) assumes a DSC will contain a Root of
 
 The security functional requirements rely on the following characteristics of the DSC:
 
-* Users
 * Subjects
+* Roles
 * Objects
 * Security Attributes
 * Operations
-
-Users: The entities using the DSC will be client applications on the platform. They may be acting as proxies for users or may have identities of their own. The DSC will not be able to distinguish the difference; therefore, the cPP will recognize an entity known as the Client Application (CA), as the user presenting authentication tokens and authorization values (collectively known as authorization data) to the DSC for the purposes of identity verification and authorization to perform operations. <<Roles>> discusses the concept of users in more detail. This cPP also recognizes a special user called the administrator, which typically has access to DSC objects normally denied to CAs (see definition of objects below).
 
 Subjects: The following list contains the fundamental actors in the expected operational use cases of the DSC. The first three are active actors, while the fourth is usually passive but could be active.
 
@@ -234,6 +232,8 @@ Subjects: The following list contains the fundamental actors in the expected ope
 * S.Admin - Admin (an authorized administrator with special privileges) security attribute - See <<Roles>> for more discussion on administrator roles.
 * S.CApp - CApp (i.e. an authorized user or an application with a verifiable identity) with security attribute CApp.ID - See <<Roles>> for more discussion on user roles.
 * S.EPS - External Platform Storage (EPS) (e.g. transient SDE/SDO source and destination, in the case of data imported and exported for the sole use inside the DSC). In the case of a passive EPS, the DSC will properly protect the integrity and confidentiality of the objects it stores and retrieves from there. In the case of an active EPS with security attribute EPS.ID, the DSC and EPS may choose to create a secure channel through which they will pass objects back and forth.
+
+Roles: Users of thge DSC are assigned to Roles which enumerate the permissions which are granted to the Objects and Operations. See <<Roles>> for more discussion on roles.
 
 Objects: The following list contains objects the DSC expects to use during the expected operational use cases.
 
@@ -270,6 +270,51 @@ Operations: The following list contains the expected operations of a DSC.
 * OP.Store (See Protect) - The DSC may store SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts in protected storage of the DSC. See section 2.4.5 for more discussion on protected storage.
 * OP.Export (See Propagate) - The DSC may export SDOs, SDEs, Authorization Data, Platform State, or Anti-Replay Tokens to a CApp or EPS with the proper authorization from the owner of each object. In the case of EPS, the DSC will bind the objects to the DSC in such a way as to deny other DSCs or entities the ability to import, use, modify, attest, store, export, or destroy them. The DSC may export Session Contexts only to an EPS binding it in the same way as above.
 * OP.Destroy (See Purge) - The DSC may purge SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts in protected storage with proper authorization from the owner of each object.
+
+===== Concept of Users in DSC
+
+The entities using the DSC will be client applications on the platform. They may be acting as proxies for users or may have identities of their own. The DSC will not be able to distinguish the difference; therefore, the cPP will recognize an entity known as the Client Application (CApp), as the user presenting authentication tokens and authorization values (collectively known as authorization data) to the DSC for the purposes of identity verification and authorization to perform operations. 
+
+The term users may be used throughout the cPP as a stand-in for Client Application, but there is not a specific requirement for direct user accounts or users within the system as opposed to the Client Applications.
+
+
+==== Roles
+
+As with many systems, rather than managing access rights individually for each "user" of the DSC, access rights are managed through the use of roles. Within the DSC, there are three possible roles that are defined. These roles are defined as:
+
+* ADM-R - Owner Admin role - the administrator role related to the management of the DSC once it has been integrated into a platform.
+* MFGADM-R - Manufacturer Admin role - the administrator role related to the management of firmware and key material that form the basis for the root of trust.
+* CApp-R - Client Application role - the client role of the DSC that requests and utilizes the functionality provided by the DSC.
+
+Depending on the configuration of the DSC, there may not be a separation of the Admin roles, such that the capabilities of the ADM-R and MFGADM-R roles are combined into a single role. For the purposes of the cPP, unless specifically called out, all administration roles are assumed to be combined and will use ADM-R.
+
+As the DSC is generally a component within a larger system or platform, the roles of the DSC are specific to the DSC. While there may be matching roles between the DSC and its platform, the roles here are specifically those in the DSC and are independent of any defined on the platform.
+
+The ADM-R role provides sufficient privileges to manage the functionality of the DSC. As a role designed for the administrator, this role may be responsible for the following:
+
+* Manage access control for SDOs (does not mean the contents of any particular SDO can be read by the administrator)
+* Manage the configuration of the DSC
+
+The MFGADM-R role, if explicitly defined in a DSC, may include the following responsibilities (which may be part of the ADM-R role otherwise):
+
+* Manage the pre-installed SDOs and configuration of the DSC
+
+The CApp-R role is focused on utilization of the functionality provided by the DSC. The following would be representative of the responsibilities for this role:
+
+* Requesting the creation of the SDOs
+* Accessing or modifying created SDOs
+* Deleting created SDOs
+
+The ADM-R role does not mean that an administrator may be able to read the contents of any SDO even though it may be able to manage access rights on the SDO.
+
+The management of timely updates (security or functional) for the DSC may be handled in a variety of ways, and as such may be associated with any role (though clearly this should be restricted to a well-defined "user").
+
+In general, the CApp-R role is expected to be the primary role used when the components of the platform call to access the services provided by the DSC. Some examples of entities that may call the DSC and utilize the CApp-R role include:
+
+* A content provider controlling access to its content through an application.
+* A human entity using the platform who has an identity that they use to authenticate themselves to the content provider through a CApp.
+* An application vendor acting on its own behalf to update software on the platform.
+* An original equipment manufacturer (OEM) that designed and manufactured a more complex system with the DSC as a component (assuming that the DSC manufacturer and the manufacturer of the more complex system using the DSC as a component are different entities).
 
 === TOE Use Cases
 
@@ -309,44 +354,6 @@ A platform that uses DSCs facilitates secure storage and protected use of creden
 The Key Reference Model abstraction draws inspiration from several different DSC products. The products distinguish themselves from one another in the types of keys supported, how they are protected, the types of applications supported, the number of layers of key, and the number of keys at each layer.
 
 The following paragraphs describe the relationships between elements of the DSC.
-
-==== Roles
-
-As with many systems, rather than managing access rights individually for each "user" of the DSC, access rights are managed through the use of roles. Within the DSC, there are three possible roles that are defined. These roles are defined as:
-
-* ADM-R - Owner Admin role - the administrator role related to the management of the DSC once it has been integrated into a platform.
-* MFGADM-R - Manufacturer Admin role - the administrator role related to the management of firmware and key material that form the basis for the root of trust.
-* CApp-R - Client Application role - the client role of the DSC that requests and utilizes the functionality provided by the DSC.
-
-Depending on the configuration of the DSC, there may not be a separation of the Admin roles, such that the capabilities of the ADM-R and MFGADM-R roles are combined into a single role. For the purposes of the cPP, unless specifically called out, all administration roles are assumed to be combined and will use ADM-R.
-
-As the DSC is generally a component within a larger system or platform, the roles of the DSC are specific to the DSC. While there may be matching roles between the DSC and its platform, the roles here are specifically those in the DSC and are independent of any defined on the platform.
-
-The ADM-R role provides sufficient privileges to manage the functionality of the DSC. As a role designed for the administrator, this role may be responsible for the following:
-
-* Manage access control for SDOs (does not mean the contents of any particular SDO can be read by the administrator)
-* Manage the configuration of the DSC
-
-The MFGADM-R role, if explicitly defined in a DSC, may include the following responsibilities (which may be part of the ADM-R role otherwise):
-
-* Manage the pre-installed SDOs and configuration of the DSC
-
-The CApp-R role is focused on utilization of the functionality provided by the DSC. The following would be representative of the responsibilities for this role:
-
-* Requesting the creation of the SDOs
-* Accessing or modifying created SDOs
-* Deleting created SDOs
-
-The ADM-R role does not mean that an administrator may be able to read the contents of any SDO even though it may be able to manage access rights on the SDO.
-
-The management of timely updates (security or functional) for the DSC may be handled in a variety of ways, and as such may be associated with any role (though clearly this should be restricted to a well-defined "user").
-
-In general, the CApp-R role is expected to be the primary role used when the components of the platform call to access the services provided by the DSC. Some examples of entities that may call the DSC and utilize the CApp-R role include:
-
-* A content provider controlling access to its content through an application.
-* A human entity using the platform who has an identity that they use to authenticate themselves to the content provider through a CApp.
-* An application vendor acting on its own behalf to update software on the platform.
-* An original equipment manufacturer (OEM) that designed and manufactured a more complex system with the DSC as a component (assuming that the DSC manufacturer and the manufacturer of the more complex system using the DSC as a component are different entities).
 
 ==== Key Usage
 
