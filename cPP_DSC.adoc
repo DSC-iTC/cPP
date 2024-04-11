@@ -233,7 +233,7 @@ Subjects: The following list contains the fundamental actors in the expected ope
 * S.CApp - CApp (i.e. an authorized user or an application with a verifiable identity) with security attribute CApp.ID - See <<Roles>> for more discussion on user roles.
 * S.EPS - External Platform Storage (EPS) (e.g. transient SDE/SDO source and destination, in the case of data imported and exported for the sole use inside the DSC). In the case of a passive EPS, the DSC will properly protect the integrity and confidentiality of the objects it stores and retrieves from there. In the case of an active EPS with security attribute EPS.ID, the DSC and EPS may choose to create a secure channel through which they will pass objects back and forth.
 
-Roles: Users of thge DSC are assigned to Roles which enumerate the permissions which are granted to the Objects and Operations. See <<Roles>> for more discussion on roles.
+Roles: Users of the DSC are assigned to Roles which enumerate the permissions which are granted to the Objects and Operations. See <<Roles>> for more discussion on roles.
 
 Objects: The following list contains objects the DSC expects to use during the expected operational use cases.
 
