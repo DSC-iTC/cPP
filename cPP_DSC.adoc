@@ -698,15 +698,15 @@ FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material speci
 ... [.underline]#zeroes,#
 ... [.underline]#ones,#
 ... [.underline]#a new value of a key,#
-... [.underline]#[*_assignment*: some value that does not contain any CSP_]],#
+... [.underline]#[*_assignment*: some value that does not contain any sensitive data_]],#
 .. [.underline]#removal of power to the memory,#
 .. [.underline]#removal of all references to the key directly followed by a request for garbage collection];#
 . [.underline]#For non-volatile memory [*selection*:#
 .. [.underline]#that employs a wear-leveling algorithm, the destruction shall be executed by a [*selection*:#
-... [.underline]#single overwrite consisting of [*selection*: zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any CSP_]],# 
+... [.underline]#single overwrite consisting of [*selection*: zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any sensitive data_]],#
 ... [.underline]#block erase];#
 .. [.underline]#that does not employ a wear-leveling algorithm, the destruction shall be executed by a [*selection*:#
-... [.underline]#[*selection*: single, [*_assignment:* ST author defined multi-pass_]] overwrite consisting of [*selection*: zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any CSP_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated again up to [*_assignment:* number of times to attempt overwrite_] times, whereupon an error is returned.#
+... [.underline]#[*selection*: single, [*_assignment:* ST author defined multi-pass_]] overwrite consisting of [*selection*: zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any sensitive data_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated again up to [*_assignment:* number of times to attempt overwrite_] times, whereupon an error is returned.#
 ... [.underline]#block erase]#
 +
 ]] that meets the following: [_no standard_].
@@ -715,7 +715,7 @@ _Application Note {counter:remark_count}_:: _In the case of volatile memory, the
 +
 _The selection for destruction of data in non-volatile memory includes block erase as an option, and this option applies only to flash memory. A block erase does not require a read verify, since the mappings of logical addresses to the erased memory locations are erased as well as the data itself._
 +
-_Some selections allow assignment of "some value that does not contain any CSP." This means that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG requirements, and not being any of the particular values listed as other selection options. The point of the phrase "does not contain any sensitive data" is to ensure that the overwritten data is carefully selected, and not taken from a general pool that might contain data that itself requires confidentiality protection._
+_Some selections allow assignment of "some value that does not contain any sensitive data." This means that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG requirements, and not being any of the particular values listed as other selection options. The point of the phrase "does not contain any sensitive data" is to ensure that the overwritten data is carefully selected, and not taken from a general pool that might contain data that itself requires confidentiality protection._
 
 ==== FCS_CKM_EXT.7 Cryptographic Key Agreement
 
@@ -786,9 +786,9 @@ _Application Note {counter:remark_count}_:: _This SFR captures methods for multi
 +
 _FCS_CKM.5 defines KDF-CTR, KDF-FB, and KDF-DPI._
 +
-_For the KDF functions, when concatenating keys for AES-CMAC, the contributions from each party should be an equal number of bits, resulting in the selected key size (e.g., if each share is 128 bits and there are two parties, then the result after concatenation is a 256-bit key, which is appropriate only for AES-256-CMAC). For HMAC functions, the shares can be any size as long as the concatenated result is equal to or greater than the nominal cryptographic strength of the chosen hash function (e.g. if each share is 128 bits, then the result after concatenation is 256 bits, which can be used in any of SHA-1, SHA-256, or SHA-512)._
+_For the key derivation functions, when concatenating keys for AES-CMAC, the contributions from each party should be an equal number of bits, resulting in the selected key size (e.g., if each share is 128 bits and there are two parties, then the result after concatenation is a 256-bit key, which is appropriate only for AES-256-CMAC). For HMAC functions, the shares can be any size as long as the concatenated result is equal to or greater than the nominal cryptographic strength of the chosen hash function (e.g. if each share is 128 bits, then the result after concatenation is 256 bits, which can be used in any of SHA-1, SHA-256, or SHA-512)._
 +
-_For the KDF functions and XOR, each party may have to use an asymmetric method from FCS_CKM.2 to transmit their shares to each other. Key shares may also come from a token, in which case, TOEs may use key access methods in FCS_CKM.3 to authorize access and use of those keys in this SFR._
+_For the key derivation functions and XOR, each party may have to use an asymmetric method from FCS_CKM.2 to transmit their shares to each other. Key shares may also come from a token, in which case, TOEs may use key access methods in FCS_CKM.3 to authorize access and use of those keys in this SFR._
 +
 _There are no standards that specify how to derive a key from two keys using KEK or XOR. For KEK, encrypting one key with another, one must use one of the algorithms listed in FCS_COP.1/AEAD or FCS_COP.1/SKC and indicate which of the inputs is the plaintext and which is the key. If XOR is selected, the ST Author should describe this method in the documentation._
 +
@@ -1796,7 +1796,7 @@ _Application Note {counter:remark_count}_:: _If FPT_MFW_EXT.1 selects [.underlin
 +
 _Recall that resetting a TOE to factory state also wipes all user data, but may not wipe out pre-installed SDOs. Configuring authorization policies includes setting policies for allowed access to SDOs._
 +
-_Protections for pre-installed SDEs/SDOs come through the firmware as well as through firmware updates. In the same vein, the authorized updates may also affect the SDEs as well, if the vendor so chooses. One could say that the authorized update binds the attributes present in the functionality of the firmware to the pre-installed SDEs._
+_Protections for pre-installed SDEs/SDOs come through the firmware as well as through firmware updates. In the same vein, the authorized updates may also affect the SDOs as well, if the vendor so chooses. One could say that the authorized update binds the attributes present in the functionality of the firmware to the pre-installed SDOs._
 
 ==== FMT_SMR.1 Security Roles
 
@@ -1867,6 +1867,8 @@ _The process of authenticating the source of a secure update may involve queryin
 _A unique identifiable owner is assumed to be one with an ADM-R role; however, there may be circumstances where the owner does not take on an ADM-R role, which should be documented._
 
 ==== FPT_ROT_EXT.1 Root of Trust Services
+
+:xrefstyle: short
 
 FPT_ROT_EXT.1 Root of Trust Services
 
@@ -2864,7 +2866,7 @@ FIA_AFL_EXT.2 Authorization Failure Response
 
 FIA_AFL_EXT.2.1:: When the TSF locks an *SDO* (i.e. prevents authorization attempts for an *SDO*) due to a user exceeding the allowed threshold for unsuccessful authorization attempts, then only an administrator may unlock access to the *SDO* and reset the corresponding failed authorization attempt counter.
 
-_Application Note {counter:remark_count}_:: _This SFR is applicable only when the TSF's response to excessive authorization failures selects [.underline]#prevent all future authorization attempts indefinitely (i.e., lock)# as specified by FIA_AFL_EXT.1.3._
+_Application Note {counter:remark_count}_:: _This SFR is applicable only when the TSF's response to excessive authorization failures selects [.underline]#prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2# as specified by FIA_AFL_EXT.1.3._
 
 === Protection of the TSF
 ==== FPT_FLS.1/FW Failure with Preservation of Secure State (Firmware)
@@ -3027,7 +3029,7 @@ This Appendix provides a definition for all of the extended components introduce
 
 | FCS_STG_EXT Cryptographic Key Storage
 
-.3+| User Data Protection (FDP) 
+.3+| User Data Protection (FDP)
 | FDP_ETC_EXT Export from the TOE
 
 | FDP_FRS_EXT Factory Reset
@@ -3187,6 +3189,65 @@ Hierarchical to:: No other components.
 Dependencies:: FCS_RBG.1 Random Bit Generation (RBG)
 [vertical]
 FCS_OTV_EXT.1.1:: The TSF shall perform cryptographic one-time value generation for [selection: _algorithm or mode_] using the output of a [selection: _random bit generator as defined in FCS_RBG.1, deterministic IV construction, [assignment: OTV construction method]_] and sizes of length that meet the following: [selection: _list of standards_].
+
+.Supported Methods for Generating One Time Values
+[[OTVsECD]]
+[cols=".^1,.^2,.^2",options=header]
+|===
+|Algorithm or Mode
+|List of Standards
+|Notes
+
+|HMAC 
+|FIPS 198-1, NIST SP 800-56Cr2
+|Depending on the use case, salts can be secret or known, randomly generated, or all zero; secret IVs may be required e.g., for key derivation. Please reference the relevant standards for your use case.
+
+|KMAC 
+|NIST SP 800-185, NIST SP 800-56Cr2
+|Depending on the use case, salts can be secret or known, randomly generated, or all zero; secret IVs may be required e.g., for key derivation. Please reference the relevant standards for your use case. 
+
+|KDF
+|NIST SP 800-108, NIST SP 800-135r1
+|Salts and IVs as directed in use of HMAC and AES modes. Please reference the relevant standards.
+
+|CTR 
+|SP 800-38A
+|"Initial Counter" (nonce) shall be non-repeating. No counter value shall be repeated across multiple messages with the same secret key.
+
+|CBC
+|SP 800-38A Appendix C
+|Depending on the use case, IVs shall be unpredictable. Repeating IVs leak information about whether the first one or more blocks are shared between two messages, so IVs should be non-repeating in such situations. Please reference the relevant standards for your use case. 
+
+|OFB
+|SP 800-38A
+|IVs shall be non-repeating and shall not be generated by invoking the cipher on another IV. OFB may require the IV to be a nonce.
+
+|CFB
+|SP 800-38A
+|IVs should be non-repeating as repeating IVs leak information about the first plaintext block and about common shared prefixes in messages.
+
+|XTS
+|SP 800-38E, IEEE Std 1619-2007
+|Tweak values shall be non-negative integers, assigned consecutively, and starting at an arbitrary non-negative integer (i.e., sequential nonces).
+
+|CMAC
+|SP 800-38B
+|IV is all zeros
+
+|KW, KWP
+|SP 800-38F
+|Depending on the use case, nonces may be required. Please reference the relevant standards for your use case.
+
+|CCM
+|SP 800-38C
+|Nonces shall be non-repeating.
+
+|GCM
+|SP 800-38D
+|IV shall be non-repeating. The number of invocations of GCM shall not exceed 2^32 for a given secret key unless an implementation only uses 96-bit IVs (default length).
+
+|===
+>>>>>>> 0d1ff4b (Proposed changes to non-cryptographic SFRs and non-technical changes to cryptographic SFRs)
 
 ==== FCS_STG_EXT Cryptographic Key Storage
 
@@ -4031,15 +4092,15 @@ FCS_CKM.6
 
 |FCS_CKM.1 is required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
 
-|FCS_CKM_EXT.7 
-|[FDP_ITC.1, FDP_ITC.2, or FCS_CKM.1] 
-
-FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
-
 |FCS_CKM.6 
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
 |FCS_CKM.1 is required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+
+|FCS_CKM_EXT.7
+|[FDP_ITC.1, FDP_ITC.2, or FCS_CKM.1]
+
+FCS_CKM.6
+|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
 
 |FCS_COP.1/Hash 
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
@@ -4247,8 +4308,8 @@ FCS_RBG.5
 [FCS_RBG.2 or FCS_RBG.3 or RCS_RBG.4]
 |FCS_RBG.1 is required by this PP. A second source is required for combining sources of entropy.
 
-|FCS_RBG.6 
-|FCS_RBG.1 
+|FCS_RBG.6
+|FCS_RBG.1
 |FCS_RBG.1 is required by this PP.
 
 |FPT_ITT.1 
@@ -4289,6 +4350,14 @@ FCS_CKM.6
 
 FCS_CKM.6 
 |All of FCS_CKM_EXT.7, FCS_CKM.6, and FCS_COP.1 are required by the PP.
+
+|FCS_CKM_EXT.3
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, or FCS_CKM_EXT.8]
+
+FCS_CKM.6
+
+[FCS_COP.1/KeyEncap, FCS_COP.1/KeyWrap, FCS_COP.1/SKC]
+|FCS_CKM.1 is required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF. FCS_CKM.6 and FCS_COP.1/KSC are required by the PP.
 
 |FCS_CKM.5 
 |FCS_CKM.1 
@@ -4392,6 +4461,8 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 !===
 
 !FCS_CKM.1 !Cryptographic Key Generation
+
+!FCS_CKM.2 !Cryptographic Key Distribution
 
 !FCS_CKM_EXT.7 !Cryptographic Key Agreement
 
@@ -4918,6 +4989,9 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 |GCM 
 |Galois Counter Mode
+
+|GCMP
+|GCM Protocol
 
 |HMAC 
 |Keyed-Hash Message Authentication Code
