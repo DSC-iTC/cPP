@@ -1350,7 +1350,7 @@ FCS_OTV_EXT.1.1:: The TSF shall perform _cryptographic one-time value generation
 
 |XTS
 |SP 800-38E, IEEE Std 1619-2007
-Tweak values shall be non-negative integers, assigned consecutively, and starting at an arbitrary non-negative integer (i.e., sequential nonces).
+|Tweak values shall be non-negative integers, assigned consecutively, and starting at an arbitrary non-negative integer (i.e., sequential nonces).
 
 |CMAC
 |SP 800-38B
@@ -1374,7 +1374,7 @@ _Application Note {counter:remark_count}_:: _The TSF shall generate cryptographi
 +
 _Salts help protect against dictionary and other precomputation attacks. Systems often prepend or append salts to passwords and other long-term, potentially guessable, values to increase the size of a dictionary an attacker must build to attack it. Salts, once associated with a password, generally do not change for the life of that password. Salts should also be unique for each password and should not be reused. Therefore, systems should randomly generate salts with sufficient size such that the combined entropy of both the salt and the password meet minimal key strength sizes of the chosen algorithms._
 +
-_Nonces help protect against replay attacks in cryptographic authentication protocols and some encryption modes. A nonce should never repeat. Using a sequence of nonces with a counter embedded in the value will ensure a nonce will never repeat. In protocol sessions which require multiple nonces, using sequential nonces that increments for each message, the receiver can check for and only accept an increase in the nonce value to verify that the message has not been replayed. In some protocols, the initial sequential nonce only needs to be sent once at the beginning of the session and the receiver can predict the remaining nonces in that session, which saves transmission bandwidth. Randomly generated nonces protect against attacks against sessions in which multiple keys are expected to be used. Therefore, nonces should be both randomly generated and never repeat. However, sequential nonces may be predictable. NIST provides additional guidance for the composition of a nonce in NIST SP 800-38c, NIST SP 800-56Ar3, NIST SP 800-56Br2, NIST SP 800-63B, and NIST SP 800-90Ar1._
+_Nonces help protect against replay attacks in cryptographic authentication protocols and some encryption modes. A nonce should never repeat. Using a sequence of nonces with a counter embedded in the value will ensure a nonce will never repeat. In protocol sessions which require multiple nonces, using sequential nonces that increments for each message, the receiver can check for and only accept an increase in the nonce value to verify that the message has not been replayed. In some protocols, the initial sequential nonce only needs to be sent once at the beginning of the session and the receiver can predict the remaining nonces in that session, which saves transmission bandwidth. Randomly generated nonces protect against attacks against sessions in which multiple keys are expected to be used. Therefore, nonces should be both randomly generated and never repeat. However, sequential nonces may be predictable. NIST provides additional guidance for the composition of a nonce in NIST SP 800-38C, NIST SP 800-56Ar3, NIST SP 800-56Br2, NIST SP 800-63B, and NIST SP 800-90Ar1._
 +
 _Initialization Vectors (IVs) help protect against attacks which depend on the reuse of static keys. Certain encryption modes often require IVs. They should be randomly generated in a nonpredictable way, cannot be sequential, and cannot repeat._
 +
@@ -1503,7 +1503,7 @@ _Application Note {counter:remark_count}_:: _The way the TSF checks the integrit
 +
 _When a TSF parses an SDE, it should generate security attributes and create an SDO by binding the security attributes to the SDE._
 +
-_If [.underline]#physically protected channels as specified in FTP_ITC_EXT.1# is selected, the selection-based SFR FTP_ITP_EXT.1 must be claimed._
+_If [.underline]#physically protected channels as specified in FTP_ITP_EXT.1# is selected, the selection-based SFR FTP_ITP_EXT.1 must be claimed._
 +
 _If [.underline]#encrypted data buffers as specified in FTP_ITE_EXT.1# is selected, the selection-based SFR FTP_ITE_EXT.1 must be claimed._
 +
@@ -1527,7 +1527,7 @@ _Application Note {counter:remark_count}_:: _The way the TSF checks the integrit
 +
 _When a TSF parses an SDO, it should already have a set of security attributes. However, the TSF may modify these attributes, if authorized, to comply with security policies on the TOE._
 +
-_If [.underline]#physically protected channels as specified in FTP_ITC_EXT.1# is selected, the selection-based SFR FTP_ITP_EXT.1 must be claimed._
+_If [.underline]#physically protected channels as specified in FTP_ITP_EXT.1# is selected, the selection-based SFR FTP_ITP_EXT.1 must be claimed._
 +
 _If [.underline]#encrypted data buffers as specified in FTP_ITE_EXT.1# is selected, the selection-based SFR FTP_ITE_EXT.1 must be claimed._
 +
@@ -1555,7 +1555,6 @@ FDP_SDC.2.2:: The TSF shall ensure the confidentiality of the user data specifie
 _Application Note {counter:remark_count}_:: _This SFR applies to SDOs with the confidential-SDE attribute set to require confidentiality, especially secret and private keys, Allowed Random Number Generators' state data, and vendor verification reference data. If SDEs do not require confidentiality, then its omission from this list indicates that confidentiality is not required. This SFR also applies to all authorization data appearing in the attribute list under SDO.AuthData as well as any administrator authorization data which may be stored implicitly._
 +
 _If the TOE stores these parameters outside of its boundary, it must encrypt them according to the cryptographic requirements for key encryption, as required by FDP_ETC_EXT.2._
-+
 
 ==== FDP_SDI.2 Stored Data Integrity Monitoring and Action
 
@@ -1719,7 +1718,7 @@ _Application Note {counter:remark_count}_:: _<<SDOAttrib>> defines the required 
 +
 _The assignments of authorized subjects in <<SDOAttrib>> may be defined by the ST author in terms of roles or in terms of an action such as presentation of a valid authentication token of a particular type (in this case the ST author identifies in an Application Note the other SFRs that govern the action)._
 +
-_The TSF vendor may pre-install SDOs with default attributes. The Security Target should make clear which attributes the may be changed or are prohibited from changing based on the ADM-R and MFGADM-R roles (as applicable). It should also make clear between authorization values required to use pre-installed SDOs and authorization values required to change the attributes of pre-installed SDOs._
+_The TSF vendor may pre-install SDOs with default attributes. The Security Target should make clear which attributes may be changed or are prohibited from changing based on the ADM-R and MFGADM-R roles (as applicable). It should also distinguish between authorization values required to use pre-installed SDOs and authorization values required to change the attributes of pre-installed SDOs._
 +
 _<<SDOAttrib>> lists SDO ID as "cannot be modified". In some cases, a change in the attributes may cause a change in the SDO ID. In these cases, a change in the SDO ID causes the creation of a new SDO and possibly the loss of the old SDO._
 +
@@ -2196,7 +2195,7 @@ The following rationale provides justification for each security objective for t
 |This requirement ensures the use of strong hash mechanisms.
 
 |FCS_COP.1/KeyedHash 
-|This requirement ensures the use of string HMAC mechanisms.
+|This requirement ensures the use of strong HMAC mechanisms.
 
 |FCS_COP.1/KeyEncap 
 |This requirement ensures the use of strong methods to perform key encapsulation.
@@ -2246,7 +2245,7 @@ The following rationale provides justification for each security objective for t
 |This requirement ensures the generation of strong symmetric keys.
 
 |FCS_CKM.5 (selection-based)
-|This requirement ensures the use of strong mechanism to perform key derivation.
+|This requirement ensures the use of strong mechanisms to perform key derivation.
 
 .4+|O.STRONG_CRYPTO 
 |FCS_CKM_EXT.8 (selection-based)
@@ -2326,7 +2325,9 @@ In addition to using the ST to demonstrate that ASE_TSS.1 has been satisfied, th
 
 === ADV: Development
 :xrefstyle: short
+
 The design information about the TOE is contained in the guidance documentation available to the end user as well as the TSS portion of the ST, and any additional information required by this cPP that is not to be made public (e.g., Entropy Essay). The DSC cPP requires only basic functional specification of interfaces presented in the AGD documentation (see <<Basic Functional Specification (ADV_FSP.1)>>) and specification of interfaces that can be invoked by a dependent component in a composed evaluation where the DSC is the base component.
+
 :xrefstyle: full
 
 ==== Basic Functional Specification (ADV_FSP.1)
@@ -2383,7 +2384,9 @@ Testing is specified for functional aspects of the system as well as aspects tha
 
 ==== Independent Testing - Conformance (ATE_IND.1)
 :xrefstyle: short
+
 Testing is performed to confirm the functionality described in the TSS as well as the operational guidance (includes "evaluated configuration" instructions). The focus of the testing is to confirm that the requirements specified in <<Security Functional Requirements>> are being met. The Evaluation Activities in the SD identify the specific testing activities necessary to verify compliance with the SFRs. The evaluator produces a test report documenting the plan for and results of testing, as well as coverage arguments focused on the platform/TOE combinations that are claiming conformance to this cPP.
+
 :xrefstyle: full
 
 === Class AVA: Vulnerability Assessment
@@ -2582,11 +2585,11 @@ _Application Note {counter:remark_count}_:: _It is not expected that a single ke
 +
 _There are several reasons for granting access to keys or restricting access to keys. The list below enumerates typical actions for keys in a typical lifecycle of a key. Further on in this note are listed some methods used to authenticate roles and to authorize them to perform these actions._
 +
-*_Creation of cryptographic keys* - It may be the case that during the creation of the key certain attributes are assigned to it that controls future access to the key, such as who is allowed to use it or restricted from using it, when they are allowed to use it or restricted from using it, who is allowed to backup and recover keys, who is allowed to destroy them, and who is allowed to modify attributes associated with the keys. This SFR imposes no requirements on the creation of cryptographic keys, other than those specified already in FCS_CKM.1. However, once created, this SFR does impose requirements to access keys for the purposes outlined in the first assignment._
+*_Creation of cryptographic keys* - It may be the case that during the creation of the key certain attributes are assigned to it that control future access to the key, such as who is allowed to use it or restricted from using it, when they are allowed to use it or restricted from using it, who is allowed to backup and recover keys, who is allowed to destroy them, and who is allowed to modify attributes associated with the keys. This SFR imposes no requirements on the creation of cryptographic keys, other than those specified already in FCS_CKM.1. However, once created, this SFR does impose requirements to access keys for the purposes outlined in the first assignment._
 +
-*_Cryptographic key usage in cryptographic operations* - Depending on the application, a cryptographic key could be root key which by virtue of being a root key, cannot be encrypted with another key. It is often stored in plain sight, sometimes with hardware protections, sometimes obfuscated in clever ways, such as in physically unclonable functions. Other than root keys, it is expected that other cryptographic keys should be protected with encryption, often using other keys, which leads to a chain or hierarchy of cryptographic keys that encrypt other keys often anchored by a root key. Additionally, it is expected that an entity authenticate itself self as an authorized user of the key. This latter requirement is in addition to the recommended requirements of the Common Criteria Part 2 for FCS_CKM.3._
+*_Cryptographic key usage in cryptographic operations* - Depending on the application, a cryptographic key could be a root key which by virtue of being a root key, cannot be encrypted with another key. It is often stored in plain sight, sometimes with hardware protections, sometimes obfuscated in clever ways, such as in physically unclonable functions. Other than root keys, it is expected that other cryptographic keys should be protected with encryption, often using other keys, which leads to a chain or hierarchy of cryptographic keys that encrypt other keys often anchored by a root key. Additionally, it is expected that an entity authenticates itself as an authorized user of the key. This latter requirement is in addition to the recommended requirements of the Common Criteria Part 2 for FCS_CKM.3._
 + 
-*_Cryptographic key storage* - _The TOE may utilize storage external to the DSC. This external storage requires the protection of the keys that are considered under the control of the TOE._
+*_Cryptographic key storage* - The TOE may utilize storage external to the DSC. This external storage requires the protection of the keys that are considered under the control of the TOE._
 +
 *_Cryptographic key recovery* - This refers to the retrieval of cryptographic keys from either archival, backup, or escrow locations. In each case, the TOE uses the agreed upon cryptographic key access method agreed upon._
 +
@@ -2706,7 +2709,7 @@ _If deriving a KMAC key, select [.underline]#KDF-CTR, KDF-FB, KDF-DPI , KDF-SHA,
 +
 _If deriving a secret IV, select [.underline]#KDF-SHA, KDF-MAC-1S, or KDF-MAC-2S#._
 +
-+If deriving a seed, select [.underline]#KDF-SHA, KDF-MAC-1S, or KDF-MAC-2S#._
+_If deriving a seed, select [.underline]#KDF-SHA, KDF-MAC-1S, or KDF-MAC-2S#._
 +
 _The key size to be used in the HMAC falls into a range between L1 and L2 defined in ISO/IEC 10118 for the appropriate hash function (for example for SHA-256 L1 = 512, L2 =256) where L2 ≤ k ≤ L1._
 
@@ -2759,7 +2762,7 @@ FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrap
 
 FCS_COP.1.1/KeyWrap:: The TSF shall perform _key wrapping_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
 
-.Allowed choices for completion of the selection operations of FCS_COP.1/KeyEncap.
+.Allowed choices for completion of the selection operations of FCS_COP.1/KeyWrap.
 [[KeyWrapAlgorithms]]
 [cols=".^1,.^1,.^1,.^2",options=header]
 |===
@@ -2863,7 +2866,7 @@ IV length must be equal to 96 bits; the deterministic IV construction method [SP
 |===
 
 === User Data Protection
-==== FDP_DAU.1/Prove Basic Data Authentication (for Use with The Prove Service)
+==== FDP_DAU.1/Prove Basic Data Authentication (for Use with the Prove Service)
 
 FDP_DAU.1/Prove Basic Data Authentication (for Use with the Prove Service)
 
@@ -2959,7 +2962,7 @@ _The TSF data is used as a guarantee of the ordinal identifier of the firmware i
 
 FPT_STM_EXT.1 Reliable Time Counting
 
-FPT_STM_EXT.1.1:: The TSF shall be able to provide reliable a [*selection*: internal time stamp, external time stamp, monotonically increasing counter] to measure the passage of time.
+FPT_STM_EXT.1.1:: The TSF shall be able to provide a reliable [*selection*: internal time stamp, external time stamp, monotonically increasing counter] to measure the passage of time.
 
 _Application Note {counter:remark_count}_:: _It is acceptable for the TSF to provide timestamp data either through an internal clock or a counter. It is also permissible for the TSF to obtain time data from a clock contained within the same physical enclosure in which the TOE is embedded (e.g. a mobile device)._
 
@@ -3316,7 +3319,7 @@ FCS_OTV_EXT.1.1:: The TSF shall perform _cryptographic one-time value generation
 
 |XTS
 |SP 800-38E, IEEE Std 1619-2007
-Tweak values shall be non-negative integers, assigned consecutively, and starting at an arbitrary non-negative integer (i.e., sequential nonces).
+|Tweak values shall be non-negative integers, assigned consecutively, and starting at an arbitrary non-negative integer (i.e., sequential nonces).
 
 |CMAC
 |SP 800-38B
@@ -3926,7 +3929,7 @@ Dependencies:: No dependencies.
 
 FPT_STM_EXT.1 Reliable Time Counting
 
-FPT_STM_EXT.1.1:: The TSF shall be able to provide reliable a [*selection*: internal time stamp, external time stamp, monotonically increasing counter] to measure the passage of time.
+FPT_STM_EXT.1.1:: The TSF shall be able to provide a reliable [*selection*: internal time stamp, external time stamp, monotonically increasing counter] to measure the passage of time.
 
 === Class FTP: Trusted Path/Channels
 ==== FTP_CCMP_EXT CCM Protocol
@@ -5145,7 +5148,7 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [FIPS-SHA] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 180-4, Secure Hash Standard (SHS)_, National Institute of Standards and Technology, March 2012.
 
-[GD] Grawrock, David. Dynamics of a Trusted Platform: A building block approach. Intel Press, 2009.
+[GD] Grawrock, David. _Dynamics of a Trusted Platform: A building block approach_. Intel Press, 2009.
 
 [GP_ROT] GlobalPlatform Technology. _Root of Trust Definitions and Requirements Version 1.1_. GlobalPlatform, June 2018.
 
@@ -5163,7 +5166,7 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [NIST-KDRV] Barker, Elaine, Lily Chen, and Rich Davis. _NIST Special Publication 800-56C, Recommendation for Key-Derivation Methods in Key-Establishment Schemes_, National Institute of Standards and Technology, April 2018.
 
-[NIST-KDV] Kelsey, John, Shu-jen Chang, and Ray Perlner_. NIST Special Publication 800-185 SHA-3 Derived Functions: cSHAKE, KMAC, TupleHash, and ParallelHash_, National Institute of Standards and Technology, December 2016.
+[NIST-KDV] Kelsey, John, Shu-jen Chang, and Ray Perlner. _NIST Special Publication 800-185 SHA-3 Derived Functions: cSHAKE, KMAC, TupleHash, and ParallelHash_, National Institute of Standards and Technology, December 2016.
 
 [NIST-ROTM] Chen, Lily, Joshua Franklin, and Andrew Regenscheid. _National Institute of Standards and Technology (NIST) Special Publication 800-164 (Draft), Guidelines on Hardware Rooted Security in Mobile Devices (Draft)_, National Institute of Standards and Technology, October 2012.
 
