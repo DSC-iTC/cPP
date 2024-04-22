@@ -230,7 +230,7 @@ Subjects: The following list contains the fundamental actors in the expected ope
 
 * S.DSC - DSC with security attribute DSC.ID, which is the identity of the DSC
 * S.Admin - Admin (an authorized administrator with special privileges) security attribute - See <<Roles>> for more discussion on administrator roles.
-* S.CApp - CApp (i.e. an authorized user or an application with a verifiable identity) with security attribute CApp.ID - See <<Roles>> for more discussion on user roles.
+* S.CApp - Client Application (CApp) (i.e. an authorized user or an application with a verifiable identity) with security attribute CApp.ID - See <<Roles>> for more discussion on user roles.
 * S.EPS - External Platform Storage (EPS) (e.g. transient SDE/SDO source and destination, in the case of data imported and exported for the sole use inside the DSC). In the case of a passive EPS, the DSC will properly protect the integrity and confidentiality of the objects it stores and retrieves from there. In the case of an active EPS with security attribute EPS.ID, the DSC and EPS may choose to create a secure channel through which they will pass objects back and forth.
 
 Roles: Users of the DSC are assigned to Roles which enumerate the permissions which are granted to the Objects and Operations. See <<Roles>> for more discussion on roles.
