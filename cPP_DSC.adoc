@@ -1932,9 +1932,13 @@ FPT_ROT_EXT.1 Root of Trust Services
 
 FPT_ROT_EXT.1.1:: The TSF shall provide a Root of Trust for Storage, a Root of Trust for Authorization, and [.underline]#[selection: Root of Trust for Measurement, Root of Trust for Reporting, no others]# based on the Root of Trust identified in FPT_PRO_EXT.1.1.
 
-_Application Note {counter:remark_count}_:: _This document uses the [GP_ROT] definitions for RoT for Storage (denoted as the combination of RoT for Confidentiality and RoT for Integrity), Authorization, Measurement, and Reporting. DSCs use Roots of Trust for Storage to protect SDOs. Section 6.5 has a number of requirements for ensuring the TSF has functionality to authorize a user in order to access an SDO, including FIA_UAU.6._
+:xrefstyle: short
+
+_Application Note {counter:remark_count}_:: _This document uses the [GP_ROT] definitions for RoT for Storage (denoted as the combination of RoT for Confidentiality and RoT for Integrity), Authorization, Measurement, and Reporting. DSCs use Roots of Trust for Storage to protect SDOs. <<Identification and Authentication>> has a number of requirements for ensuring the TSF has functionality to authorize a user in order to access an SDO, including FIA_UAU.6._
 +
 _If both [.underline]#Root of Trust for Measurement# and [.underline]#Root of Trust for Reporting# are selected in FPT_ROT_EXT.1.1, the selection-based SFR FDP_DAU.1/Prove must also be claimed._
+
+:xrefstyle: full
 
 ==== FPT_ROT_EXT.2 Root of Trust for Storage
 
