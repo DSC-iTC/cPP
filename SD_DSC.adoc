@@ -1349,7 +1349,7 @@ The evaluator shall examine the TSS to determine that it describes each of the c
 
 ====== AGD
 
-The evaluator shall examine the operational guidance to ensure that it describes the ways the administrator can set the conditions to initiate a factory reset.
+The evaluator shall examine the operational guidance to ensure that it describes the ways the administrator can set the conditions to initiate a factory reset if this is supported.
 
 ====== Test
 
@@ -1403,7 +1403,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall check to ensure that the TSS describes resource deallocation to the extent that they can determine that no data will be reused when reallocating resources following the destruction of an SDE or SDO. The evaluator shall ensure that this description at a minimum describes how the previous data is destroyed. The evaluator shall also ensure that this destruction method is consistent with FCS_CKM.4.
+The evaluator shall check to ensure that the TSS describes resource deallocation to the extent that they can determine that no data will be reused when reallocating resources following the destruction of an SDE or SDO. The evaluator shall ensure that this description at a minimum describes how the previous data is destroyed. The evaluator shall also ensure that this destruction method is consistent with FCS_CKM.6.
 
 ====== AGD
 
