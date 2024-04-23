@@ -1548,7 +1548,7 @@ _Application Note {counter:remark_count}_:: _When an SDE is a key then it is als
 
 FDP_SDC.2 Stored data confidentiality with dedicated method
 
-FDP_SDC.2.1:: The TSF shall ensure the confidentiality of the [.underline]#[the following user data [assignment: _list of internally and externally stored SDEs_]#] according to {empty}[assignment: [.underline]#_SDEs identified in the Confidential SDE List attribute of an SDO_#] while it is stored under the control of the TSF.
+FDP_SDC.2.1:: The TSF shall ensure the confidentiality of the [.underline]#[authorization data and the following user data [assignment: _list of internally and externally stored SDEs_]#] according to {empty}[assignment: [.underline]#_SDEs identified in the Confidential SDE List attribute of an SDO_#] while it is stored under the control of the TSF.
 
 FDP_SDC.2.2:: The TSF shall ensure the confidentiality of the user data specified in FDP_SDC.2.1 without user intervention.
 
