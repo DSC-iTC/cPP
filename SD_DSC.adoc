@@ -1437,7 +1437,7 @@ There are no AGD evaluation activities for this component.
 
 If the TOE stores SDEs and authorization data inside the TSF, the evaluator shall ensure that external interfaces cannot extract this data in plaintext. 
 
-In this case, use the evaluation activities of the FPT_PHP.3 if [.underline]#protected storage# is selected, FCS_COP.1/SKC if [.underline]#symmetric encryption using…# is selected, and FCS_COP.1/KAT if [.underline]#key wrapping using…# is selected.
+In this case, use the evaluation activities of the FPT_PHP.3 if [.underline]#protected storage# is selected, FCS_COP.1/SKC if [.underline]#symmetric encryption using…# is selected, and FCS_COP.1/KeyWrap if [.underline]#key wrapping using…# is selected.
 
 If the TOE stores authentication data inside the operational environment, the evaluator shall ensure that plaintext data is not visible on the interface between the TOE and the operational environment.
 
@@ -1451,11 +1451,11 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall confirm that the ST author describes the methods for protecting the integrity of SDOs stored with the TOE, and shall identify the iteration of FCS_COP.1/Hash or FCS_COP.1/HMAC that covers any cryptographic algorithm used. The evaluator shall also confirm that the TSS describes the response upon the detection of an integrity error.
+The evaluator shall confirm that the ST author describes the methods for protecting the integrity of SDOs stored with the TOE, and shall identify the iteration of FCS_COP.1/Hash, FCS_COP.1/KeyedHash, FCS_COP.1/SigVer or FCS_COP.1/KeyWrap that covers any cryptographic algorithm used. The evaluator shall also confirm that the TSS describes the response upon the detection of an integrity error.
 
 The evaluator shall confirm that the TSS describes the actions the TSF takes when the integrity verification fails for an SDO, including the circumstances that cause a notification to be sent when this occurs.
 
-The evaluator shall confirm that TSS describes how integrity of SDOs is protected in FMT_MSA.3 during initialization, and how the integrity of SDOs are verified during parsing (import) in FDP_ITC_EXT.
+The evaluator shall confirm that TSS describes how integrity of SDOs is protected in FMT_MSA.3 during initialization, and how the integrity of SDOs are verified during parsing (import) in FDP_ITC_EXT.1 and FDP_ITC_EXT.2.
 
 ====== AGD
 
@@ -1463,7 +1463,7 @@ The evaluator shall examine the operational guidance to verify that it describes
 
 ====== Test
 
-The tests for FDP_ITC_EXT and FMT_MSA.3 shall suffice for this component.
+The tests for FDP_ITC_EXT.1, FDP_ITC_EXT.2 and FMT_MSA.3 shall suffice for this component.
 
 ====== KMD
 
