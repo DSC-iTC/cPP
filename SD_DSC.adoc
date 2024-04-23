@@ -1263,7 +1263,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall confirm that the TSS contain the access control policy implemented by the TOE. I.e., the ST author lists each object and identifies for each object, which operations the TSF permits for each subject (i.e. what can "admins" do vs "users").
+The evaluator shall confirm that the TSS contains the access control policy implemented by the TOE where the ST author lists each object and identifies for each object, which operations the TSF permits for each subject (i.e. what can different roles do).
 
 ====== AGD
 
@@ -1295,7 +1295,7 @@ The evaluator shall examine the TSS to verify that it describes the policy rules
 
 Given that this SFR requires a large number of potential subject-object-operation pairings to be identified, it is not the expectation that the TSS contain an exhaustive list of these pairings. It is possible that large numbers of pairings are addressed by blanket statements of policy rules, such as "the subjects S.DSC and S.CApp are never able to perform any operation on the OB.AntiReplay object." For any rules that are not addressed in this manner, the evaluator shall verify the TSS includes sufficient data for the evaluator to determine how the TSF will evaluate the action. This can be presented in the form of a table, flowchart, list, or other manner that the ST author finds suitable.
 
-Note that the DSC developer may not use the same terminology for its subjects, objects, and operations as the PP. If this is the case, the evaluator shall verify that the TSS includes a mapping that unambiguously shows how the vendor's preferred terminology corresponds to what the PP defines.
+Note that the TOE developer may not use the same terminology for its subjects, objects, and operations as the PP. If this is the case, the evaluator shall verify that the TSS includes a mapping that unambiguously shows how the vendor's preferred terminology corresponds to what the PP defines.
 
 ====== AGD
 
@@ -1303,7 +1303,7 @@ For any access control policy enforcement behavior that is configurable, the eva
 
 ====== Test
 
-The following testing may require the TOE developer to make a test harness available to the evaluator that allows the evaluator to interface directly with the DSC. Due to the large volume of potential testing that this requires, this test may require the use of an automated script. If a test script is made available, the evaluator shall verify that it includes sufficient detail to validate the claims made in the TSS.
+The following testing may require the TOE developer to make a test harness available to the evaluator that allows the evaluator to interface directly with the TOE. Due to the large volume of potential testing that this requires, this test may require the use of an automated script. If a test script is made available, the evaluator shall verify that it includes sufficient detail to validate the claims made in the TSS.
 
 For each subject/object/operation/attribute combination, the evaluator shall attempt to perform the operation or determine that no interface is present to attempt the operation, consistent with the limitations described in the TSS.
 
@@ -1345,7 +1345,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS to determine that it describes each of the conditions which will lead to a factory reset.
+The evaluator shall examine the TSS to determine that it describes each of the conditions which may lead to a factory reset.
 
 ====== AGD
 
