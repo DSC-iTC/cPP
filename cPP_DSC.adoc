@@ -1561,7 +1561,7 @@ _If the TOE stores these parameters outside of its boundary, it must encrypt the
 
 FDP_SDI.2 Stored Data Integrity Monitoring and Action
 
-FDP_SDI.2.1:: The TSF shall monitor *SDOs and SDEs* controlled by the TSF for [_integrity errors_] on all objects, based on the following attributes: [.underline]#*[selection: [_assignment: attribute associated with presence in protected storage_], cryptographic hash, digital signature, integrity-providing encryption algorithm as specified in FCS_COP.1/KeyWrap]*#.
+FDP_SDI.2.1:: The TSF shall monitor *SDOs and SDEs* controlled by the TSF for [_integrity errors_] on all objects, based on the following attributes: [.underline]#*[selection: [_assignment: attribute associated with presence in protected storage_], message authentication code as specified in FCS_COP.1/CMAC, cryptographic hash as specified in FCS_COP.1/Hash, keyed hash as specified in FCS_COP.1/KeyedHash, digital signature as specified in FCS_COP.1/SigVer, integrity-providing encryption algorithm as specified in FCS_COP.1/KeyWrap]*#.
 
 FDP_SDI.2.2:: Upon detection of a data integrity error, the TSF shall [
 +
