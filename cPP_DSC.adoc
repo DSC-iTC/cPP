@@ -1571,7 +1571,7 @@ _Application Note {counter:remark_count}_:: _This SFR deals with the mechanism t
 +
 _The cryptographic requirements for cryptographic hashes and digital signatures apply here._
 +
-_No specific requirement is placed here on the nature of the integrity protection data, but the Security Target shall describe this protection measure, and shall identify the iteration of FCS_COP.1/Hash or FCS_COP.1/KeyedHash that covers any cryptographic algorithm used._
+_No specific requirement is placed here on the nature of the integrity protection data, but the Security Target shall describe this protection measure, and shall identify the iteration of FCS_COP.1/Hash, FCS_COP.1/KeyedHash, FCS_COP.1/KeyVer or FCS_COP.1/KeyWrap that covers any cryptographic algorithm used._
 +
 _The integrity protection data in FDP_SDI.2.1 is included in the list of attributes identified in FMT_MSA.1, and protects the value of the SDEs and of the SDO security attributes._
 +
