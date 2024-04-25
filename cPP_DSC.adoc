@@ -220,20 +220,20 @@ This collaborative Protection Profile (cPP) assumes a DSC will contain a Root of
 
 The security functional requirements rely on the following characteristics of the DSC:
 
-* Users
 * Subjects
+* Roles
 * Objects
 * Security Attributes
 * Operations
-
-Users: The entities using the DSC will be client applications on the platform. They may be acting as proxies for users or may have identities of their own. The DSC will not be able to distinguish the difference; therefore, the cPP will recognize an entity known as the Client Application (CApp), as the user presenting authentication tokens and authorization values (collectively known as authorization data) to the DSC for the purposes of identity verification and authorization to perform operations. <<Roles>> discusses the concept of users in more detail. This cPP also recognizes a special user called the administrator, which typically has access to DSC objects normally denied to CApps (see definition of objects below).
 
 Subjects: The following list contains the fundamental actors in the expected operational use cases of the DSC. The first three are active actors, while the fourth is usually passive but could be active.
 
 * S.DSC - DSC with security attribute DSC.ID, which is the identity of the DSC
 * S.Admin - Admin (an authorized administrator with special privileges) security attribute - See <<Roles>> for more discussion on administrator roles.
-* S.CApp - CApp (i.e. an authorized user or an application with a verifiable identity) with security attribute CApp.ID - See <<Roles>> for more discussion on user roles.
+* S.CApp - Client Application (CApp) (i.e. an authorized user or an application with a verifiable identity) with security attribute CApp.ID - See <<Roles>> for more discussion on user roles.
 * S.EPS - External Platform Storage (EPS) (e.g. transient SDE/SDO source and destination, in the case of data imported and exported for the sole use inside the DSC). In the case of a passive EPS, the DSC will properly protect the integrity and confidentiality of the objects it stores and retrieves from there. In the case of an active EPS with security attribute EPS.ID, the DSC and EPS may choose to create a secure channel through which they will pass objects back and forth.
+
+Roles: Users of the DSC are assigned to Roles which enumerate the permissions which are granted to the Objects and Operations. See <<Roles>> for more discussion on roles.
 
 Objects: The following list contains objects the DSC expects to use during the expected operational use cases.
 
@@ -271,44 +271,11 @@ Operations: The following list contains the expected operations of a DSC.
 * OP.Export (See Propagate) - The DSC may export SDOs, SDEs, Authorization Data, Platform State, or Anti-Replay Tokens to a CApp or EPS with the proper authorization from the owner of each object. In the case of EPS, the DSC will bind the objects to the DSC in such a way as to deny other DSCs or entities the ability to import, use, modify, attest, store, export, or destroy them. The DSC may export Session Contexts only to an EPS binding it in the same way as above.
 * OP.Destroy (See Purge) - The DSC may purge SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts in protected storage with proper authorization from the owner of each object.
 
-=== TOE Use Cases
+===== Concept of Users in DSC
 
-DSCs are used in platforms to support mobile commerce, to manage platform credentials, manage user access to sensitive resources such as enterprise data centers or entertainment content servers, to manage and protect data-in-transit such as through secure channels or VPN tunnels, and to manage and protect keying, authentication, and authorization material for data-at-rest solutions such as self-encrypting drives.
+The entities using the DSC will be client applications on the platform. They may be acting as proxies for users or may have identities of their own. The DSC will not be able to distinguish the difference; therefore, the cPP will recognize an entity known as the Client Application (CApp), as the user presenting authentication tokens and authorization values (collectively known as authorization data) to the DSC for the purposes of identity verification and authorization to perform operations. 
 
-For the mobile commerce use case, users, merchants, and financial institutions expect and require that financial transactions between them and their platforms be trusted and secure. For example,
-
-* All peers to a transaction must be able to authenticate each other.
-* The integrity of the transaction must be ensured.
-
-To support such transactions, a DSC performs the following:
-
-* Ingests data elements and attributes and exports the data objects associated with these transactions and the identities of the parties
-* Generates data objects to use for these transactions.
-* Securely stores data elements bound with their attributes within a protected hardware boundary.
-* Authenticates and processes these data elements within a protected execution environment to ensure the authenticity of the parties and the transactions.
-* Establishes secure communications channels between the parties to ensure the integrity and confidentiality of the transactions.
-* Securely erases data objects when no longer needed.
-* Ensures its own integrity and authenticity prior to execution.
-
-DSCs are implemented to satisfy the following use cases:
-
-*[USE CASE 1] Protected Key Store*
-
-A platform leveraging DSCs as a hardware-secured Key Store facilitates the use of secure and protected storage of symmetric and asymmetric keys for access to data and services. These DSCs would ensure the confidentiality and integrity of the secret and private keys, as well as the integrity of public keys, inside the protected hardware boundary.
-
-*[USE CASE 2] User / Platform Authentication to Enterprise Managed Resources*
-
-A platform leveraging DSCs for a hardware-secured ID facilitates the use of the platform as a secure and reliable form of authentication for authorized access to highly sensitive local or remote data and services.
-
-*[USE CASE 3] Mobile Commerce*
-
-A platform that uses DSCs facilitates secure storage and protected use of credentials for financial transactions between trusted and authorized users, platforms, merchants and financial institutions. These DSCs would provide safe use of the credentials inside the protected hardware boundary. The use of certified hardware-isolated credential stores on smart platforms and only unlocking their use with authenticated authorization provides confidence that the transaction was indeed authorized by the approved 'platform holder'.
-
-=== Key Reference Model
-
-The Key Reference Model abstraction draws inspiration from several different DSC products. The products distinguish themselves from one another in the types of keys supported, how they are protected, the types of applications supported, the number of layers of key, and the number of keys at each layer.
-
-The following paragraphs describe the relationships between elements of the DSC.
+The term users may be used throughout the cPP as a stand-in for Client Application, but there is not a specific requirement for direct user accounts or users within the system as opposed to the Client Applications.
 
 ==== Roles
 
@@ -347,6 +314,45 @@ In general, the CApp-R role is expected to be the primary role used when the com
 * A human entity using the platform who has an identity that they use to authenticate themselves to the content provider through a CApp.
 * An application vendor acting on its own behalf to update software on the platform.
 * An original equipment manufacturer (OEM) that designed and manufactured a more complex system with the DSC as a component (assuming that the DSC manufacturer and the manufacturer of the more complex system using the DSC as a component are different entities).
+
+=== TOE Use Cases
+
+DSCs are used in platforms to support mobile commerce, to manage platform credentials, manage user access to sensitive resources such as enterprise data centers or entertainment content servers, to manage and protect data-in-transit such as through secure channels or VPN tunnels, and to manage and protect keying, authentication, and authorization material for data-at-rest solutions such as self-encrypting drives.
+
+For the mobile commerce use case, users, merchants, and financial institutions expect and require that financial transactions between them and their platforms be trusted and secure. For example,
+
+* All peers to a transaction must be able to authenticate each other.
+* The integrity of the transaction must be ensured.
+
+To support such transactions, a DSC performs the following:
+
+* Ingests data elements and attributes and exports the data objects associated with these transactions and the identities of the parties
+* Generates data objects to use for these transactions.
+* Securely stores data elements bound with their attributes within a protected hardware boundary.
+* Authenticates and processes these data elements within a protected execution environment to ensure the authenticity of the parties and the transactions.
+* Establishes secure communications channels between the parties to ensure the integrity and confidentiality of the transactions.
+* Securely erases data objects when no longer needed.
+* Ensures its own integrity and authenticity prior to execution.
+
+DSCs are implemented to satisfy the following use cases:
+
+*[USE CASE 1] Protected Key Store*
+
+A platform leveraging DSCs as a hardware-secured Private Key Store facilitates the use of secure and protected storage of secret symmetric keys and private asymmetric keys for access to data and services. These DSCs would provide safe use of the private and secret keys inside the protected hardware boundary.
+
+*[USE CASE 2] User / Platform Authentication to Enterprise Managed Resources*
+
+A platform leveraging DSCs for a hardware-secured ID facilitates the use of the platform as a secure and reliable form of authentication for authorized access to highly sensitive local or remote data and services.
+
+*[USE CASE 3] Mobile Commerce*
+
+A platform that uses DSCs facilitates secure storage and protected use of credentials for financial transactions between trusted and authorized users, platforms, merchants and financial institutions. These DSCs would provide safe use of the credentials inside the protected hardware boundary. The use of certified hardware-isolated credential stores on smart platforms and only unlocking their use with authenticated authorization provides confidence that the transaction was indeed authorized by the approved 'platform holder'.
+
+=== Key Reference Model
+
+The Key Reference Model abstraction draws inspiration from several different DSC products. The products distinguish themselves from one another in the types of keys supported, how they are protected, the types of applications supported, the number of layers of key, and the number of keys at each layer.
+
+The following paragraphs describe the relationships between elements of the DSC.
 
 ==== Key Usage
 
