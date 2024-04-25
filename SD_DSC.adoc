@@ -1485,7 +1485,7 @@ The evaluator shall also examine the TSS to determine the behaviour that will oc
 
 ====== AGD
 
-The evaluator shall examine the guidance documentation to ensure that instructions for configuring the number of successive unsuccessful authentication attempts and time period (if implemented) are provided, and that the process of unlocking the SDOs is described for each "action" specified (if that option is chosen). 
+If the administrator is able to configure any of the variables for authorization attempts, the evaluator shall examine the guidance documentation to ensure that instructions for configuring the number of successive unsuccessful authentication attempts and time period (if implemented) are provided, and that the process of unlocking the SDOs is described for each "action" specified (if that option is chosen). 
 
 The evaluator shall examine the guidance documentation to confirm that it describes, and identifies the importance of, any actions that are required in order to ensure that access to SDOs can be maintained, unless it is made permanently unavailable due to a factory reset.
 
@@ -1493,7 +1493,7 @@ The evaluator shall examine the guidance documentation to confirm that it descri
 
 The evaluator shall perform the following tests for each method by which the TSF authorizes access the SDOs (e.g. any passwords entered as part of establishing authorization):
 
-Test 1: The evaluator shall use the operational guidance to configure the number of successive unsuccessful authorization attempts allowed by the TOE (and, if the time period selection in FIA_AFL_EXT.1.3 is included in the ST, then the evaluator shall also use the operational guidance to configure the time period after which access is re-enabled). The evaluator shall test that once the authorization attempts limit is reached, authorization attempts with valid credentials are no longer successful.
+Test 1: If the administrator is able to configure any of the variables for authorization attempts, the evaluator shall use the operational guidance to configure the number of successive unsuccessful authorization attempts allowed by the TOE. The evaluator shall test that once the authorization attempts limit is reached (whether configured by the administrator or staticlly specified), authorization attempts with valid credentials are no longer successful.
 
 Test 2: After reaching the limit for unsuccessful authorization attempts as in Test 1 above, the evaluator shall proceed as follows. If the action selected in FIA_AFL_EXT.1.3 is included in the ST then the evaluator shall confirm by testing that following the operational guidance and performing each action specified in the ST to re-enable access results in successful access. If the time period selection in FIA_AFL_EXT.1.3 is included in the ST, then the evaluator shall wait for just less than the time period configured in Test 1 and show that an authorization attempt using valid credentials does not result in successful access. The evaluator shall then wait until just after the time period configured in Test 1 and show that an authorization attempt using valid credentials results in successful access.
 
@@ -1551,7 +1551,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS to determine that it describes the identification and authentication process for each supported method (PIN/try-PIN, salted hash, etc.), the circumstances in which each supported method is used, and constitutes "successful authentication."
+The evaluator shall examine the TSS to determine that it describes the identification and authentication process for each supported method (PIN/try-PIN, salted hash, etc.), the circumstances in which each supported method is used, and what constitutes "successful authentication."
 
 The evaluator shall examine the TSS to determine that it describes which actions are allowed before user identification and authentication. The evaluator shall also determine that the TSS describes, for each action that does require identification and authentication, the method and circumstances by which the authentication is performed (e.g., as per the application note, the TSF may authenticate a user once rather than each time access to an SDO is attempted; the TSS shall describe when authentication is or is not required in order to perform a TSF-mediated action).
 
@@ -1561,7 +1561,7 @@ The evaluator shall examine the guidance documentation to determine that any nec
 
 ====== Test
 
-The evaluator shall use the guidance documentation to configure the appropriate credentials supported for each authentication method. For that authentication method, the evaluator shall attempt to perform TSF-mediated actions that require successful use of that authentication method and subsequently show that providing correct I&A information results in the ability to perform the requested action, while providing incorrect information results in denial of access.
+The evaluator shall use the guidance documentation to configure the appropriate credentials supported for each authentication method. For that authentication method, the evaluator shall attempt to perform TSF-mediated actions that require successful use of that authentication method and subsequently show that providing correct identification and authentication information results in the ability to perform the requested action, while providing incorrect information results in denial of access.
 
 ====== KMD
 
