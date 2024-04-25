@@ -1263,7 +1263,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall confirm that the TSS contain the access control policy implemented by the TOE. I.e., the ST author lists each object and identifies for each object, which operations the TSF permits for each subject (i.e. what can "admins" do vs "users").
+The evaluator shall confirm that the TSS contains the access control policy implemented by the TOE. In other words, the ST shall list each object and identify for each object, which operations the TSF permits for each subject (i.e. what can "admins" do vs "users").
 
 ====== AGD
 
@@ -1271,7 +1271,7 @@ There are no guidance evaluation activities for this component.
 
 ====== Test
 
-Testing for FDP_ACF includes testing this component.
+This component is tested as part of FDP_ACF.1.
 
 ====== KMD
 
@@ -1611,7 +1611,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall verify that the TSS describes those management functions that may be performed by the Administrator, to include how the client applications are prevented from accessing, performing, or relaxing the function (if applicable), and how they are prevented from modifying the Administrator configuration. The TSS also describes any functionality that is affected by administrator-configured policy and how. This activity will be performed in conjunction with FMT_SMF_EXT.1.
+The evaluator shall verify that the TSS describes those management functions that may be performed by the ADM-R or MFGADM-R roles, to include how the CApp-R role is prevented from accessing, performing, or relaxing the function (if applicable), and how they are prevented from modifying the administrator configuration. The TSS also describes any functionality that is affected by administrator-configured policy and how. This activity will be performed in conjunction with FMT_SMF_EXT.1.
 
 ====== AGD
 
@@ -1675,7 +1675,7 @@ The evaluator shall verify that the TSS describes all management functions.
 
 ====== AGD
 
-The evaluator shall verify that the AGD describes how the administrator configures the management functions.
+The evaluator shall verify that the AGD describes how the ADM-R or MFGADM-R roles configure the management functions.
 
 ====== Test
 
@@ -1691,11 +1691,11 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall confirm that the TSS describes the mechanisms by which client applications can exclusively access their own encrypted data and administrators cannot access client application encrypted data. The evaluator shall also confirm the TSS describes the mechanisms that allow only administrators to perform privileged functions.
+The evaluator shall confirm that the TSS describes the mechanisms by which CApp-R roles can exclusively access their own encrypted data and administrators cannot access client application encrypted data. The evaluator shall also confirm the TSS describes the mechanisms that allow only ADM-R and MFGADM-R roles to perform privileged functions.
 
 ====== AGD
 
-The evaluator shall verify that the AGD describes how the administrator configures the management functions.
+The evaluator shall verify that the AGD describes how the administrator roles configure the management functions.
 
 ====== Test
 
