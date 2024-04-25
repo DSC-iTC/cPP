@@ -405,11 +405,11 @@ A conformant TOE may include "write-once" storage such as single-use eFuses. Sin
 
 ==== SDEs and SDOs
 
-Although there is another section written about SDEs and SDOs, this section is used to map keys and authentication tokens to SDEs and SDOs. This cPP does not impose a strict structure on the items in the key hierarchy. An X.509 certificate is one example of a strict structure of a key with attributes. Collecting attributes of an SDE and composing an SDO structure with an SDE and attribute fields imposes temporal and storage penalties in all cases. In certain resource-constrained cases the attributes could be implicit. 
+This section is used to map keys and authentication tokens to SDEs and SDOs. This cPP does not impose a strict structure on the items in the key hierarchy. An X.509 certificate is one example of a strict structure of a key with attributes. Collecting attributes of an SDE and composing an SDO structure with an SDE and attribute fields imposes temporal and storage penalties in all cases. In certain resource-constrained cases the attributes could be implicit. 
 
 In the previous section on protected storage locations, a DSC may have to use storage external to itself. In these cases, an SDO of a wrapped key may contain a number of important attributes, such as a pointer to its parent, authorization values, and other indications of the functions allowed (encrypt vs. sign). Alternatively, some or all attributes may be implied, which means that only the keys or CSPs themselves exist outside the DSC. In either case, the sensitive values, such as private keys, secret keys, and CSPs, should be encrypted when outside the DSC. The parents of these objects are either Intermediate Keys, or encrypting Root Keys.
 
-Some DSCs may want to distinguish between SDEs created within itself from SDEs ingested from an external source. Additionally, some DSCs may output SDEs without additional context or attributes from the DSC. A DSC, in some contexts, will not distinguish an ingested SDO from raw keys.
+Some DSCs may want to distinguish between SDEs created within itself from SDEs ingested from an external source. Additionally, some DSCs may output SDEs without additional context or attributes from the DSC. A DSC, in some contexts, will not distinguish an ingested SDE from raw keys.
 
 == CC Conformance Claims
 
