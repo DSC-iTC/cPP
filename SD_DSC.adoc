@@ -1263,7 +1263,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall confirm that the TSS contain the access control policy implemented by the TOE. I.e., the ST author lists each object and identifies for each object, which operations the TSF permits for each subject (i.e. what can "admins" do vs "users").
+The evaluator shall confirm that the TSS contains the access control policy implemented by the TOE. In other words, the ST shall list each object and identify for each object, which operations the TSF permits for each subject (i.e. what can "admins" do vs "users").
 
 ====== AGD
 
@@ -1271,7 +1271,7 @@ There are no guidance evaluation activities for this component.
 
 ====== Test
 
-Testing for FDP_ACF includes testing this component.
+This component is tested as part of FDP_ACF.1.
 
 ====== KMD
 
