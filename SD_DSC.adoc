@@ -1787,13 +1787,13 @@ There are no AGD evaluation activities for this component.
 
 All tests here are based on an attempted Fault Injection. 
 
-The evaluator shall perform fault injection on the DSC and attempt to extract a known SDO/SDE. 
+The evaluator shall perform fault injection on the TOE and attempt to extract a known SDO/SDE. 
 
-The evaluator shall cause the DSC to parse or generate an SDO/SDE with a known value. The evaluator will then cause the TOE to process the SDO/SDE, possibly multiple times, while injecting faults on the TOE.
+The evaluator shall cause the TOE to parse or generate an SDO/SDE with a known value. The evaluator will then cause the TOE to process the SDO/SDE, possibly multiple times, while injecting faults on the TOE.
 
 This test is repeated for each type of Fault Injection.
 
-If the evaluator is able to acquire the original SDO/SDE or a known result from the DSC processing the SDO/SDE, the test is a 'Fail', otherwise, the test is a 'Pass'.
+If the evaluator is able to acquire the original SDO/SDE or a known result from the TOE processing the SDO/SDE, the test is a 'Fail', otherwise, the test is a 'Pass'.
 
 *Test 1: Temperature*
 
@@ -1829,7 +1829,7 @@ There are no KMD evaluation activities for this component.
 
 The evaluator shall ensure that the TSS describes either a pre-installed identity (contained within an SDO), or a process on how the TOE creates an identity. IEEE 802.1ar is one example of a standard which a device can use to create such an identity. 
 
-The evaluator shall additionally examine the TSS to ensure that it describes how the Root of Trust is immutable or otherwise mutable if and only if controlled by a unique identifiable owner, the roles this owner assumes in doing so (manufacturer administrator, owner administrator, etc.), as well as the circumstances in which the Root of Trust is mutable.
+The evaluator shall additionally examine the TSS to ensure that it describes how the Root of Trust is immutable or otherwise mutable if and only if controlled by a unique identifiable owner, the roles this owner assumes in doing so (ADM-R or MFGADM-R roles, etc.), as well as the circumstances in which the Root of Trust is mutable.
 
 [conditional] For an immutable Root of Trust, the evaluator shall ensure there are no RoT update functions. 
 
@@ -1935,7 +1935,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS and other vendor documentation and ensure they describe the methods used to verify integrity of the TSF and TSF data. The evaluator shall also verify that the TSS describes how the tests are performed automatically and autonomously (without intervention). 
+The evaluator shall examine the TSS and other vendor documentation and ensure they describe the methods used to verify integrity of the TSF and TSF data, both automatic checks and if supported, checks requested by the user. If more than the power-on check is selected, then each condition for the self test shall be examined.
 
 ====== AGD
 
@@ -1946,6 +1946,8 @@ The evaluator shall examine the operational guidance to ensure it provides autho
 Test 1: The evaluator shall verify that the DSC performs an integrity check of all TSF, including data, as well as performing KATs for those functions. The evaluator shall verify failures using malformed known answer test data (for example, unexpected input or output values).
 
 Test 2: The evaluator shall ensure that when an integrity check failure occurs specific to failing KATs and failure to verify the integrity of the TSF, the TOE will prevent any further processing of the current TSF and user data. 
+
+Test 3: [CONDITIONAL] For each condition where a self test may be initiated, the evalautor shall verify that the self tests are run as specified.
 
 ====== KMD
 
