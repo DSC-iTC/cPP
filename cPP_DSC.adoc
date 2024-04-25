@@ -2968,7 +2968,7 @@ _Application Note {counter:remark_count}_:: _It is acceptable for the TSF to pro
 
 FTP_CCMP_EXT.1 CCM Protocol
 
-FTP_CCMP_EXT.1.1:: The TSF shall implement CCMP using [.underline]#[selection: AES, Camellia]# in CCM mode and key size [.underline]#[selection: 128-bits, 256-bits]# as defined in [.underline]#[selection: IEEE 802.11i, IEEE 802.11ac]#.
+FTP_CCMP_EXT.1.1:: The TSF shall implement CCMP using AES in CCM mode and key size [.underline]#[selection: 128-bits, 256-bits]# as defined in [.underline]#[selection: IEEE 802.11i, IEEE 802.11ac]#.
 
 FTP_CCMP_EXT.1.2:: The TSF shall discard incoming messages if authentication fails.
 
@@ -2984,7 +2984,7 @@ _CCMP is defined in IEEE 802.11i. CCMP-256 is defined in IEEE 802.11ac._
 
 FTP_GCMP_EXT.1 GCM Mode Protocol
 
-FTP_GCMP_EXT.1.1:: The TSF shall implement GCMP using [.underline]#[selection: AES, Camellia]# in GCM mode and key size [.underline]#[selection: 128-bits, 256-bits]# as defined in [_IEEE 802.11ad_].
+FTP_GCMP_EXT.1.1:: The TSF shall implement GCMP using AES in GCM mode and key size [.underline]#[selection: 128-bits, 256-bits]# as defined in [_IEEE 802.11ad_].
 
 FTP_GCMP_EXT.1.2:: The TSF shall discard incoming messages if authentication fails.
 
@@ -3964,7 +3964,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: FCS_COP.1 Cryptographic Operation
 [vertical]
-FTP_CCMP_EXT.1.1:: The TSF shall implement CCMP using [_assignment: cryptographic algorithm_] in CCM mode and key size [_assignment: key sizes_] as defined in [_assignment: list of standards_].
+FTP_CCMP_EXT.1.1:: The TSF shall implement CCMP using AES in CCM mode and key size [_assignment: key sizes_] as defined in [_assignment: list of standards_].
 
 FTP_CCMP_EXT.1.2:: The TSF shall discard incoming messages if authentication fails.
 
@@ -4005,7 +4005,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: FCS_COP.1 Cryptographic Operation
 [vertical]
-FTP_GCMP_EXT.1.1:: The TSF shall implement GCMP using [_assignment: cryptographic algorithm_] in GCM mode and key size [_assignment: key sizes_] as defined in [_assignment: list of standards_].
+FTP_GCMP_EXT.1.1:: The TSF shall implement GCMP using AES in GCM mode and key size [_assignment: key sizes_] as defined in [_assignment: list of standards_].
 
 FTP_GCMP_EXT.1.2:: The TSF shall discard incoming messages if authentication fails.
 
