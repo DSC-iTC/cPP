@@ -1622,10 +1622,7 @@ _If [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as des
 
 FIA_SOS.2 TSF Generation of Secrets
 
-FIA_SOS.2.1:: The TSF shall provide a mechanism to generate *authorization data* that meet [_the following quality metrics:_
-+
-* _For each authentication attempt, the probability shall be less than one in 1,000,000 that a random attempt will be successful_
-* _For multiple attempts to authenticate during a one-minute period, the probability shall be less than one in 100,000 that a series of random attempts will be successful_].
+FIA_SOS.2.1:: The TSF shall provide a mechanism to generate *authorization data* that meet [_the metric where for each authentication attempt, the probability shall be less than one in 1,000,000 that a random attempt will be successful_].
 
 FIA_SOS.2.2:: The TSF shall be able to enforce the use of TSF generated *authorization data* for [_assignment: non-empty list of TSF functions_].
 

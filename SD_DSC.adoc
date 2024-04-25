@@ -1513,13 +1513,7 @@ The evaluator shall ensure that the TSS describes for each of the TSF functions 
 
 The evaluator shall ensure that the TSS states that the quality metrics provided is based on the assumption of sufficient entropy being provided in accordance with the information given in [DSC cPP] Annex D.
 
-The evaluator shall ensure that the TSS describes the restrictions implemented in order to restrict consecutive authentication attempts. (Authentication throttling)
-
-The evaluator shall ensure that the TSS describes the mechanism used to generate authorization values and documents the quality metric that the mechanism provides. The information provided in the TSS shall demonstrate that:
-
-[loweralpha]
-. The probability that a random single authentication attempt will be successful is less than one in 1,000,000; and
-. The probability that random multiple authentication attempts during a one (1) minute period will be successful is less than one in 100,000.
+The evaluator shall ensure that the TSS describes the mechanism used to generate authorization values and documents the quality metric that the mechanism provides. The information provided in the TSS shall demonstrate that the probability that a random single authentication attempt will be successful is less than one in 1,000,000.
 
 ====== AGD
 
