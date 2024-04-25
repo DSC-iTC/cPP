@@ -1611,7 +1611,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall verify that the TSS describes those management functions that may be performed by the Administrator, to include how the client applications are prevented from accessing, performing, or relaxing the function (if applicable), and how they are prevented from modifying the Administrator configuration. The TSS also describes any functionality that is affected by administrator-configured policy and how. This activity will be performed in conjunction with FMT_SMF_EXT.1.
+The evaluator shall verify that the TSS describes those management functions that may be performed by the ADM-R or MFGADM-R roles, to include how the CApp-R role is prevented from accessing, performing, or relaxing the function (if applicable), and how they are prevented from modifying the administrator configuration. The TSS also describes any functionality that is affected by administrator-configured policy and how. This activity will be performed in conjunction with FMT_SMF_EXT.1.
 
 ====== AGD
 
