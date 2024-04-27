@@ -1263,7 +1263,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall confirm that the TSS contain the access control policy implemented by the TOE. I.e., the ST author lists each object and identifies for each object, which operations the TSF permits for each subject (i.e. what can "admins" do vs "users").
+The evaluator shall confirm that the TSS contains the access control policy implemented by the TOE where the ST author lists each object and identifies for each object, which operations the TSF permits for each subject (i.e. what can different roles do).
 
 ====== AGD
 
@@ -1271,7 +1271,7 @@ There are no guidance evaluation activities for this component.
 
 ====== Test
 
-Testing for FDP_ACF includes testing this component.
+This component is tested as part of FDP_ACF.1.
 
 ====== KMD
 
@@ -1295,7 +1295,7 @@ The evaluator shall examine the TSS to verify that it describes the policy rules
 
 Given that this SFR requires a large number of potential subject-object-operation pairings to be identified, it is not the expectation that the TSS contain an exhaustive list of these pairings. It is possible that large numbers of pairings are addressed by blanket statements of policy rules, such as "the subjects S.DSC and S.CApp are never able to perform any operation on the OB.AntiReplay object." For any rules that are not addressed in this manner, the evaluator shall verify the TSS includes sufficient data for the evaluator to determine how the TSF will evaluate the action. This can be presented in the form of a table, flowchart, list, or other manner that the ST author finds suitable.
 
-Note that the DSC developer may not use the same terminology for its subjects, objects, and operations as the PP. If this is the case, the evaluator shall verify that the TSS includes a mapping that unambiguously shows how the vendor's preferred terminology corresponds to what the PP defines.
+Note that the TOE developer may not use the same terminology for its subjects, objects, and operations as the PP. If this is the case, the evaluator shall verify that the TSS includes a mapping that unambiguously shows how the vendor's preferred terminology corresponds to what the PP defines.
 
 ====== AGD
 
@@ -1303,7 +1303,7 @@ For any access control policy enforcement behavior that is configurable, the eva
 
 ====== Test
 
-The following testing may require the TOE developer to make a test harness available to the evaluator that allows the evaluator to interface directly with the DSC. Due to the large volume of potential testing that this requires, this test may require the use of an automated script. If a test script is made available, the evaluator shall verify that it includes sufficient detail to validate the claims made in the TSS.
+The following testing may require the TOE developer to make a test harness available to the evaluator that allows the evaluator to interface directly with the TOE. Due to the large volume of potential testing that this requires, this test may require the use of an automated script. If a test script is made available, the evaluator shall verify that it includes sufficient detail to validate the claims made in the TSS.
 
 For each subject/object/operation/attribute combination, the evaluator shall attempt to perform the operation or determine that no interface is present to attempt the operation, consistent with the limitations described in the TSS.
 
@@ -1345,11 +1345,11 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS to determine that it describes each of the conditions which will lead to a factory reset.
+The evaluator shall examine the TSS to determine that it describes each of the conditions which may lead to a factory reset.
 
 ====== AGD
 
-The evaluator shall examine the operational guidance to ensure that it describes the ways the administrator can set the conditions to initiate a factory reset.
+The evaluator shall examine the operational guidance to ensure that it describes the ways the administrator can set the conditions to initiate a factory reset if this is supported.
 
 ====== Test
 
@@ -1403,7 +1403,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall check to ensure that the TSS describes resource deallocation to the extent that they can determine that no data will be reused when reallocating resources following the destruction of an SDE or SDO. The evaluator shall ensure that this description at a minimum describes how the previous data is destroyed. The evaluator shall also ensure that this destruction method is consistent with FCS_CKM.4.
+The evaluator shall check to ensure that the TSS describes resource deallocation to the extent that they can determine that no data will be reused when reallocating resources following the destruction of an SDE or SDO. The evaluator shall ensure that this description at a minimum describes how the previous data is destroyed. The evaluator shall also ensure that this destruction method is consistent with FCS_CKM.6.
 
 ====== AGD
 
@@ -1437,7 +1437,7 @@ There are no AGD evaluation activities for this component.
 
 If the TOE stores SDEs and authorization data inside the TSF, the evaluator shall ensure that external interfaces cannot extract this data in plaintext. 
 
-In this case, use the evaluation activities of the FPT_PHP.3 if [.underline]#protected storage# is selected, FCS_COP.1/SKC if [.underline]#symmetric encryption using…# is selected, and FCS_COP.1/KAT if [.underline]#key wrapping using…# is selected.
+In this case, use the evaluation activities of the FPT_PHP.3 if [.underline]#protected storage# is selected, FCS_COP.1/SKC if [.underline]#symmetric encryption using…# is selected, and FCS_COP.1/KeyWrap if [.underline]#key wrapping using…# is selected.
 
 If the TOE stores authentication data inside the operational environment, the evaluator shall ensure that plaintext data is not visible on the interface between the TOE and the operational environment.
 
@@ -1451,11 +1451,11 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall confirm that the ST author describes the methods for protecting the integrity of SDOs stored with the TOE, and shall identify the iteration of FCS_COP.1/Hash or FCS_COP.1/HMAC that covers any cryptographic algorithm used. The evaluator shall also confirm that the TSS describes the response upon the detection of an integrity error.
+The evaluator shall confirm that the ST author describes the methods for protecting the integrity of SDOs stored with the TOE, and shall identify the iteration of FCS_COP.1/Hash, FCS_COP.1/KeyedHash, FCS_COP.1/SigVer or FCS_COP.1/KeyWrap that covers any cryptographic algorithm used. The evaluator shall also confirm that the TSS describes the response upon the detection of an integrity error.
 
 The evaluator shall confirm that the TSS describes the actions the TSF takes when the integrity verification fails for an SDO, including the circumstances that cause a notification to be sent when this occurs.
 
-The evaluator shall confirm that TSS describes how integrity of SDOs is protected in FMT_MSA.3 during initialization, and how the integrity of SDOs are verified during parsing (import) in FDP_ITC_EXT.
+The evaluator shall confirm that TSS describes how integrity of SDOs is protected in FMT_MSA.3 during initialization, and how the integrity of SDOs are verified during parsing (import) in FDP_ITC_EXT.1 and FDP_ITC_EXT.2.
 
 ====== AGD
 
@@ -1463,7 +1463,7 @@ The evaluator shall examine the operational guidance to verify that it describes
 
 ====== Test
 
-The tests for FDP_ITC_EXT and FMT_MSA.3 shall suffice for this component.
+The tests for FDP_ITC_EXT.1, FDP_ITC_EXT.2 and FMT_MSA.3 shall suffice for this component.
 
 ====== KMD
 
@@ -1611,7 +1611,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall verify that the TSS describes those management functions that may be performed by the Administrator, to include how the client applications are prevented from accessing, performing, or relaxing the function (if applicable), and how they are prevented from modifying the Administrator configuration. The TSS also describes any functionality that is affected by administrator-configured policy and how. This activity will be performed in conjunction with FMT_SMF_EXT.1.
+The evaluator shall verify that the TSS describes those management functions that may be performed by the ADM-R or MFGADM-R roles, to include how the CApp-R role is prevented from accessing, performing, or relaxing the function (if applicable), and how they are prevented from modifying the administrator configuration. The TSS also describes any functionality that is affected by administrator-configured policy and how. This activity will be performed in conjunction with FMT_SMF_EXT.1.
 
 ====== AGD
 
@@ -1675,7 +1675,7 @@ The evaluator shall verify that the TSS describes all management functions.
 
 ====== AGD
 
-The evaluator shall verify that the AGD describes how the administrator configures the management functions.
+The evaluator shall verify that the AGD describes how the ADM-R or MFGADM-R roles configure the management functions.
 
 ====== Test
 
@@ -1691,11 +1691,11 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall confirm that the TSS describes the mechanisms by which client applications can exclusively access their own encrypted data and administrators cannot access client application encrypted data. The evaluator shall also confirm the TSS describes the mechanisms that allow only administrators to perform privileged functions.
+The evaluator shall confirm that the TSS describes the mechanisms by which CApp-R roles can exclusively access their own encrypted data and administrators cannot access client application encrypted data. The evaluator shall also confirm the TSS describes the mechanisms that allow only ADM-R and MFGADM-R roles to perform privileged functions.
 
 ====== AGD
 
-The evaluator shall verify that the AGD describes how the administrator configures the management functions.
+The evaluator shall verify that the AGD describes how the administrator roles configure the management functions.
 
 ====== Test
 

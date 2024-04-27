@@ -17,7 +17,7 @@
 :sectnums!:
 
 == Acknowledgements
-This collaborative Protection Profile (cPP) was developed by the {iTC-longame} international Technical Community ({iTC-shortname}) with representatives from Industry, Information Technology Security Evaluation Facilities (ITSEFs), and International Common Criteria schemes. The organizations that directly contributed to the development of this cPP include:author:
+This collaborative Protection Profile (cPP) was developed by the {iTC-longame} international Technical Community ({iTC-shortname}) with representatives from Industry, Information Technology Security Evaluation Facilities (ITSEFs), and International Common Criteria schemes. The organizations that directly contributed to the development of this cPP include:
 
 [.text-center]
 *Industry*
@@ -121,7 +121,7 @@ PP Date: {revdate}
 
 === TOE Overview
 
-The Target of Evaluation (TOE) is a Dedicated Security Component (DSC). In the context of this cPP, a DSC is the combination of a hardware component and its controlling OS or firmware. The firmware should be dedicated to providing the encompassing platform with services for the provisioning, protection, and use of Security Data Objects (SDOs), which include keys, identities, attributes, and other types of Security Data Elements (SDEs). See <<RepofTOE>> for an example of a TOE representation.
+The Target of Evaluation (TOE) is a Dedicated Security Component (DSC). In the context of this cPP, a DSC is the combination of one or more hardware component(s) and its controlling OS or firmware. The firmware should be dedicated to providing the encompassing platform with services for the provisioning, protection, and use of Security Data Objects (SDOs), which are composed of Security Data Elements (SDEs) such as keys, identities, attributes. See <<RepofTOE>> for an example of a TOE representation.
 
 .Representation of the Target of Evaluation (TOE)
 [[RepofTOE]]
@@ -175,7 +175,7 @@ image::TOEservices.png[,600]
 The labels in Figure 4 refer to the following:
 
 * SDE: Security Data Element
-* SDO: Security Data Object (component from SDEs and attributes)
+* SDO: Security Data Object (composed of SDEs and attributes)
 * SDO ID: Unique identifier for an SDO
 * SDO1: SDO that is modified or is a reference to original SDO
 * SDO2: SDO that is bound to the DSC but stored outside of it
@@ -190,7 +190,7 @@ DSCs provide seven core security services to a platform as illustrated in <<Core
 |Description
 
 |Parse
-|The DSC shall ingest pre-provisioned keys, credentials, tokens, attributes, etc. from trusted components or services external to its boundary either across a secured channel or in a manner that the objects are protected for use only by the DSC.
+|The DSC shall ingest pre-installed keys, credentials, tokens, attributes, etc. from trusted components or services external to its boundary either across a secured channel or in a manner that the objects are protected for use only by the DSC.
 
 |Provision
 |The DSC shall create SDOs from parsed or generated SDEs and attributes using binding mechanisms to apply integrity protection to the SDEs together with their attributes.
@@ -220,24 +220,24 @@ This collaborative Protection Profile (cPP) assumes a DSC will contain a Root of
 
 The security functional requirements rely on the following characteristics of the DSC:
 
-* Users
 * Subjects
+* Roles
 * Objects
 * Security Attributes
 * Operations
-
-Users: The entities using the DSC will be client applications on the platform. They may be acting as proxies for users or may have identities of their own. The DSC will not be able to distinguish the difference; therefore, the cPP will recognize an entity known as the Client Application (CA), as the user presenting authentication tokens and authorization values (collectively known as authorization data) to the DSC for the purposes of identity verification and authorization to perform operations. <<Roles>> discusses the concept of users in more detail. This cPP also recognizes a special user called the administrator, which typically has access to DSC objects normally denied to CAs (see definition of objects below).
 
 Subjects: The following list contains the fundamental actors in the expected operational use cases of the DSC. The first three are active actors, while the fourth is usually passive but could be active.
 
 * S.DSC - DSC with security attribute DSC.ID, which is the identity of the DSC
 * S.Admin - Admin (an authorized administrator with special privileges) security attribute - See <<Roles>> for more discussion on administrator roles.
-* S.CApp - CApp (i.e. an authorized user or an application with a verifiable identity) with security attribute CApp.ID - See <<Roles>> for more discussion on user roles.
+* S.CApp - Client Application (CApp) (i.e. an authorized user or an application with a verifiable identity) with security attribute CApp.ID - See <<Roles>> for more discussion on user roles.
 * S.EPS - External Platform Storage (EPS) (e.g. transient SDE/SDO source and destination, in the case of data imported and exported for the sole use inside the DSC). In the case of a passive EPS, the DSC will properly protect the integrity and confidentiality of the objects it stores and retrieves from there. In the case of an active EPS with security attribute EPS.ID, the DSC and EPS may choose to create a secure channel through which they will pass objects back and forth.
+
+Roles: Users of the DSC are assigned to Roles which enumerate the permissions which are granted to the Objects and Operations. See <<Roles>> for more discussion on roles.
 
 Objects: The following list contains objects the DSC expects to use during the expected operational use cases.
 
-* OB.P_SDO - Pre-provisioned SDOs (e.g. DSC.ID) with security attributes listed in the next paragraph.
+* OB.P_SDO - Pre-installed SDOs (e.g. DSC.ID) with security attributes listed in the next paragraph.
 * OB.T_SDO - Transient SDOs or just SDOs (i.e. SDOs in the DSC currently, but are either ephemeral or are normally stored external to DSC when not in use) with security attributes listed in the next paragraphs. See <<Key Usage>>, <<Key Hierarchies>>, and <<SDEs and SDOs>> for more discussion on keys, which are the primary use cases for SDOs.
 * OB.AuthData - Authorization Data (including authentication data, e.g. PINs, passwords, tokens) 
 * OB.Pstate - Platform State (e.g. measurements and assertions)
@@ -249,7 +249,7 @@ Security Attributes: The following list contains the minimum security attributes
 
 * DSC.ID - The DSC identifier. It may also serve as the identifier for the DSC RoT.
 * CApp.ID - The Client Application identifier.
-* EPS.ID - The External Platform Storage (EPS) identifier. This attribute is optional for a passive EPS (i.e. plain memory that only stores information). If the DSC uses a Client Application to manage storage, then support for this attribute is required.
+* EPS.ID - The External Platform Storage (EPS) identifier. This attribute is optional for a passive EPS (i.e. plain memory that only stores information). If the DSC uses an active EPS to manage storage, then support for this attribute is required.
 * SDO.* - The SDO Security Attributes:
 ** SDO.ID - SDO Identifier
 ** SDO.Type - SDO Type
@@ -270,6 +270,50 @@ Operations: The following list contains the expected operations of a DSC.
 * OP.Store (See Protect) - The DSC may store SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts in protected storage of the DSC. See section 2.4.5 for more discussion on protected storage.
 * OP.Export (See Propagate) - The DSC may export SDOs, SDEs, Authorization Data, Platform State, or Anti-Replay Tokens to a CApp or EPS with the proper authorization from the owner of each object. In the case of EPS, the DSC will bind the objects to the DSC in such a way as to deny other DSCs or entities the ability to import, use, modify, attest, store, export, or destroy them. The DSC may export Session Contexts only to an EPS binding it in the same way as above.
 * OP.Destroy (See Purge) - The DSC may purge SDOs, SDEs, Authorization Data, Platform State, Anti-Replay Tokens, or Session Contexts in protected storage with proper authorization from the owner of each object.
+
+===== Concept of Users in DSC
+
+The entities using the DSC will be client applications on the platform. They may be acting as proxies for users or may have identities of their own. The DSC will not be able to distinguish the difference; therefore, the cPP will recognize an entity known as the Client Application (CApp), as the user presenting authentication tokens and authorization values (collectively known as authorization data) to the DSC for the purposes of identity verification and authorization to perform operations. 
+
+The term users may be used throughout the cPP as a stand-in for Client Application, but there is not a specific requirement for direct user accounts or users within the system as opposed to the Client Applications.
+
+==== Roles
+
+As with many systems, rather than managing access rights individually for each "user" of the DSC, access rights are managed through the use of roles. Within the DSC, there are three possible roles that are defined. These roles are defined as:
+
+* ADM-R - Owner Admin role - the administrator role related to the management of the DSC once it has been integrated into a platform.
+* MFGADM-R - Manufacturer Admin role - the administrator role related to the management of firmware and key material that form the basis for the root of trust.
+* CApp-R - Client Application role - the client role of the DSC that requests and utilizes the functionality provided by the DSC.
+
+Depending on the configuration of the DSC, there may not be a separation of the Admin roles, such that the capabilities of the ADM-R and MFGADM-R roles are combined into a single role. For the purposes of the cPP, unless specifically called out, all administration roles are assumed to be combined and will use ADM-R.
+
+As the DSC is generally a component within a larger system or platform, the roles of the DSC are specific to the DSC. While there may be matching roles between the DSC and its platform, the roles here are specifically those in the DSC and are independent of any defined on the platform.
+
+The ADM-R role provides sufficient privileges to manage the functionality of the DSC. As a role designed for the administrator, this role may be responsible for the following:
+
+* Manage access control for SDOs (does not mean the contents of any particular SDO can be read by the administrator)
+* Manage the configuration of the DSC
+
+The MFGADM-R role, if explicitly defined in a DSC, may include the following responsibilities (which may be part of the ADM-R role otherwise):
+
+* Manage the pre-installed SDOs and configuration of the DSC
+
+The CApp-R role is focused on utilization of the functionality provided by the DSC. The following would be representative of the responsibilities for this role:
+
+* Requesting the creation of the SDOs
+* Accessing or modifying created SDOs
+* Deleting created SDOs
+
+The ADM-R role does not mean that an administrator may be able to read the contents of any SDO even though it may be able to manage access rights on the SDO.
+
+The management of timely updates (security or functional) for the DSC may be handled in a variety of ways, and as such may be associated with any role (though clearly this should be restricted to a well-defined "user").
+
+In general, the CApp-R role is expected to be the primary role used when the components of the platform call to access the services provided by the DSC. Some examples of entities that may call the DSC and utilize the CApp-R role include:
+
+* A content provider controlling access to its content through an application.
+* A human entity using the platform who has an identity that they use to authenticate themselves to the content provider through a CApp.
+* An application vendor acting on its own behalf to update software on the platform.
+* An original equipment manufacturer (OEM) that designed and manufactured a more complex system with the DSC as a component (assuming that the DSC manufacturer and the manufacturer of the more complex system using the DSC as a component are different entities).
 
 === TOE Use Cases
 
@@ -310,44 +354,6 @@ The Key Reference Model abstraction draws inspiration from several different DSC
 
 The following paragraphs describe the relationships between elements of the DSC.
 
-==== Roles
-
-As with many systems, rather than managing access rights individually for each "user" of the DSC, access rights are managed through the use of roles. Within the DSC, there are three possible roles that are defined. These roles are defined as:
-
-* ADM-R - Owner Admin role - the administrator role related to the management of the DSC once it has been integrated into a platform.
-* MFGADM-R - Manufacturer Admin role - the administrator role related to the management of firmware and key material that form the basis for the root of trust.
-* CApp-R - Client Application role - the client role of the DSC that requests and utilizes the functionality provided by the DSC.
-
-Depending on the configuration of the DSC, there may not be a separation of the Admin roles, such that the capabilities of the ADM-R and MFGADM-R roles are combined into a single role. For the purposes of the cPP, unless specifically called out, all administration roles are assumed to be combined and will use ADM-R.
-
-As the DSC is generally a component within a larger system or platform, the roles of the DSC are specific to the DSC. While there may be matching roles between the DSC and its platform, the roles here are specifically those in the DSC and are independent of any defined on the platform.
-
-The ADM-R role provides sufficient privileges to manage the functionality of the DSC. As a role designed for the administrator, this role may be responsible for the following:
-
-* Manage access control for SDOs (does not mean the contents of any particular SDO can be read by the administrator)
-* Manage the configuration of the DSC
-
-The MFGADM-R role, if explicitly defined in a DSC, may include the following responsibilities (which may be part of the ADM-R role otherwise):
-
-* Manage the pre-installed SDOs and configuration of the DSC
-
-The CApp-R role is focused on utilization of the functionality provided by the DSC. The following would be representative of the responsibilities for this role:
-
-* Requesting the creation of the SDOs
-* Accessing or modifying created SDOs
-* Deleting created SDOs
-
-The ADM-R role does not mean that an administrator may be able to read the contents of any SDO even though it may be able to manage access rights on the SDO.
-
-The management of timely updates (security or functional) for the DSC may be handled in a variety of ways, and as such may be associated with any role (though clearly this should be restricted to a well-defined "user").
-
-In general, the CApp-R role is expected to be the primary role used when the components of the platform call to access the services provided by the DSC. Some examples of entities that may call the DSC and utilize the CApp-R role include:
-
-* A content provider controlling access to its content through an application.
-* A human entity using the platform who has an identity that they use to authenticate themselves to the content provider through a CApp.
-* An application vendor acting on its own behalf to update software on the platform.
-* An original equipment manufacturer (OEM) that designed and manufactured a more complex system with the DSC as a component (assuming that the DSC manufacturer and the manufacturer of the more complex system using the DSC as a component are different entities).
-
 ==== Key Usage
 
 One way to categorize keys is by the cryptographic functions they are allowed to participate in. When one creates a key, one often restricts its use to encryption and decryption, or to signature generation and verification. There are exceptions to this rule, especially in proof of possession protocols. However, certification regimes often require strict separation of usage in regards to encryption/decryption and signature generation/verification: one may use a key for one or the other, but never both. As such, a DSC may have to enforce this separation of usage for keys; this may mean that an attribute must accompany a key to help the DSC in its enforcement.
@@ -364,52 +370,52 @@ Where a DSC may support a direct connection to a remote entity, this connection 
 
 ==== Key Hierarchies
 
-Another way to categorize keys is the relationship they have with each other. A DSC may have a key hierarchy, or key chain, whereby data-at-rest is protected by one or more keys, which are protected in turn by one or more additional keys, and potentially so on. This model calls out three categories of keys generally found on typical DSCs. DSCs may contain Root Keys, Intermediate (or Branch) Keys, and Leaf Keys.
+Another way to categorize keys is the relationship they have with each other. A DSC may have a key hierarchy, or key chain, whereby data at rest is protected by one or more keys, which are protected in turn by one or more additional keys, and potentially so on. This model calls out three categories of keys generally found on typical DSCs. DSCs may contain Root Keys, Intermediate (or Branch) Keys, and Leaf Keys.
 
 Most DSCs have a concept of Root Keys. These keys are typically provisioned by the DSC manufacturer and have some permanence in the DSC. Root Keys may be derived from seeds (which is discussed later), injected at manufacturing time, or provisioned by a user. Root keys installed by the manufacturers are considered administrator key material. Typically, normal client applications, including OEMs, should not alter or erase this material unless specifically authorized to do so. Root keys installed by the administrator should be similarly restricted. Client application-installed root keys, on the other hand, are not considered as permanent since the client application or the administrator can remove them at any time without authorization.
 
-Root Keys may either be encryption/decryption keys, signature verification keys, or signature generation keys. Encryption/decryption keys, or simply Root Encryption Key (REK), usually anchor a hierarchy of keys stored external to the DSC necessitating both the encrypt key to protect the key outside the DSC, and the decrypt key to expose its operations within the protected and secure confines of the DSC. The Signature Verification Keys from public key schemes should always contain the public portion and never the private portion. Use of Signature Generation keys as Root Keys is rare.
+Root Keys may either be encryption/decryption keys, signature verification keys, or signature generation keys. Encryption/decryption keys, or simply Root Encryption Key (REK), usually anchor a hierarchy of keys stored external to the DSC necessitating both the encryption key to protect the key outside the DSC, and the decryption key to expose its contents within the protected and secure confines of the DSC. The signature verification keys from public key schemes should always contain the public portion and never the private portion. Use of signature generation keys as Root Keys is rare.
 
-Most DSCs have a concept of Intermediate Keys. These are sometimes known as Branch Keys, Key Encryption Keys, and Key Wrapping Keys. In the SFRs of this cPP, these will be referred to as Key Encryption Keys (KEKs), even if the target of encryption is not a key. Intermediate Keys must always be encryption keys. Intermediate keys cannot be signing keys.
+Most DSCs have a concept of Intermediate Keys. These are sometimes known as Branch Keys, Key Encryption Keys, and Key Wrapping Keys. In the SFRs of this cPP, these will be referred to as Key Encryption Keys (KEKs), even if the target of encryption is not a key. Intermediate Keys must always be encryption/decryption keys. Intermediate Keys cannot be signing keys.
 
 Note that although chained certificates (see certificates below) are one form of a sequence of keys, each of which signs another key, the creation and verification of such a chain of certificates is out of scope for the core requirements of the cPP; however, it may be added as a package if one or both of these features (creating the chain and verifying the chain) is indeed present in the DSC. Nonetheless, the primitives of signing and verification are present due to other cryptographic operations in scope for this cPP.
 
 Intermediate Keys should always be protected (i.e. wrapped) by either a Root Key or another Intermediate Key.
 
-Leaf Objects consist of Authorization Data and Leaf Keys. Leaf Keys can be either signing or encryption keys. Leaf Objects collectively refers to data that should be wrapped by either a Root Key or a KEK and is not subsequently used as a KEK itself. Encryption Leaf Keys do not wrap other keys (at least in the context of the DSC; what happens outside the DSC with Leaf Keys is out of its control). In many contexts, an Encryption Leaf Key is known as a Data Encryption Key (DEK). In the context of the DSC, this cPP will not assume how the user of the DSC will use the Leaf Keys it creates, and will refrain from using the term DEK.
+Leaf Objects consist of Authorization Data and Leaf Keys. Leaf Keys can be either encryption, decryption, signature generation, or signature verification keys. Leaf Objects collectively refers to data that should be wrapped by either a Root Key or a KEK and is not subsequently used as a KEK itself. Leaf Keys used for encryption/decryption do not wrap other keys (at least in the context of the DSC; what happens outside the DSC with Leaf Keys is out of its control). In many contexts, a Leaf Key used for encryption/decryption is known as a Data Encryption Key (DEK). In the context of the DSC, this cPP will not assume how the user of the DSC will use the Leaf Keys it creates, and will refrain from using the term DEK.
 
-Certificates contain either signed public keys, signed encryption/decryption keys, or some sort of Authorization Data. Signature keys come in several varieties: asymmetric signing keys, which contain a private key for signing (and maybe also the public key for verification) and verification keys, which contains only the public verification key and does not contain the private key (and thus cannot perform a signing function). There are also symmetric signature keys. In this case these consist of only a single key for both signing and verifying.
+Certificates contain either signed public keys or some sort of Authorization Data. Signature keys come in several varieties: signature generation keys, which contain a private key for signing (and maybe also the public key for verification) and signature verification keys, which contain only the public verification key and do not contain the private key (and thus cannot perform a signing function). There are also symmetric signature keys. In this case these consist of only a single key for both signing and verifying.
 
 Authorization Data may have an arbitrary length of bits or bytes and may contain arbitrary or non-arbitrary values of bits or bytes.
 
-Seeds have a special place in this Key Reference Model. Manufacturers, owners, and users of the DSC can use permanent seeds to create root keys. Manufacturers have good reasons to use seeds to derive Root Keys and other items in the Key Reference Model. These include:
+Seeds have a special place in this Key Reference Model. Manufacturers, owners, and users of the DSC can use permanent seeds to create Root Keys. Manufacturers have good reasons to use seeds to derive Root Keys and other items in the Key Reference Model. These include:
 
 * Seeds take less space to store than certain asymmetric keys for given desired cryptographic strengths.
-* Having seeds that are unique per DSC enhances the chance that the same key derivation function on different DSCs will yield unique keys.
+* Having seeds that are unique per DSC increases the probability that the same key derivation function on different DSCs will yield unique keys.
 
-<<ExampleKeyHierarchy>> contains an example of a hierarchy of keys where each lower-level key is wrapped by a higher-level key that is connected to it. The Firmware Signature Key and the Root Encryption Key are examples of Root Keys. The Intermediate Wrapping Key is an example of an Intermediate Key. The Software Signature Key, the File Encryption Key, and the Streaming Movie Authorization Token are examples of Leaf Objects. <<ExampleKeyHierarchy>> serves as an illustration of key hierarchies; other configurations are possible.
+<<ExampleKeyHierarchy>> contains an example of a hierarchy of keys where each lower-level key is wrapped by a higher-level key that is connected to it. The Root Encryption Key is an example of a Root Key. The numbered Key Encryption Keys are examples of Intermediate Keys. The Data Encryption Keys and Stored Keys are examples of Leaf Objects. <<ExampleKeyHierarchy>> serves as an illustration of key hierarchies; other configurations are possible.
 
 .Example Key Hierarchy
 [[ExampleKeyHierarchy]]
 image::examplekeyhierarchy.png[,600]
 
-Roles may play an important part in key hierarchies. One of the simplest models enforces a different hierarchy for each role at the root key level. Another way to put this is each hierarchy at the root key level supports a different role. However, for more complexity, once intermediate keys are allowed, then each intermediate key could serve as the root of a hierarchy of keys for a different role. Here is where the key functions and the roles come together. Roles may further divide into which role has the right to use a key, which role has the right to move the key from one parent to another, which role has the right to destroy a key, etc.
+Roles may play an important part in key hierarchies. One of the simplest models enforces a different hierarchy for each role at the Root Key level. Another way to put this is each hierarchy at the Root Key level supports a different role. However, for more complexity, once Intermediate Keys are allowed, then each Intermediate Key could serve as the root of a hierarchy of keys for a different role. Here is where the key functions and the roles come together. Roles may further divide into which role has the right to use a key, which role has the right to move the key from one parent to another, which role has the right to destroy a key, etc.
 
 ==== Protected Storage Locations
 
 This cPP covers several different types of storage locations for keys and critical security parameters (CSPs) such as authentication tokens. Some DSCs may have a generous amount of protected storage internal to themselves, which allows it to accommodate all keys and CSPs in operational use, whether the DSC is performing operations to administer itself or operations on behalf of users. Other DSCs may have a minimal amount of protected storage locations with just enough to accommodate root keys along with a limited number of operational keys and CSPs for user authorized sessions.
 
-For those cases in which the DSC relies on storage external to itself to accommodate all the keys and CSPs on which applications expect it to operate, it will either have to support secure channels to another DSC with a more generous allocation of protected storage locations, or use a series of wrapping keys to protect private keys and CSPs while outside of the DSC. Whether the DSC is powered on or powered off, the DSC is expected to provide support for protected storage locations for its root keys. If the DSC uses external storage without secure channels, then it should be ready to wrap both intermediate wrapping keys as well as the Leaf Objects. This implies that there will be some sort of structure on each of these items stored external to the DSC. The next section discusses that structure.
+For those cases in which the DSC relies on storage external to itself to accommodate all the keys and CSPs on which applications expect it to operate, it will either have to support secure channels to another DSC with a more generous allocation of protected storage locations, or use a series of wrapping keys to protect private keys and CSPs while outside of the DSC. Whether the DSC is powered on or powered off, the DSC is expected to provide support for protected storage locations for its Root Keys. If the DSC uses external storage without secure channels, then it should be ready to wrap both Intermediate Keys as well as the Leaf Objects. This implies that there will be some sort of structure on each of these items stored external to the DSC. The next section discusses that structure.
 
 A conformant TOE may include "write-once" storage such as single-use eFuses. Since data is written to any such storage as part of the initial provisioning of the TOE, the data is considered immutable once the TOE has entered its evaluated configuration. The integrity of this data is maintained through the physical properties of its storage medium.
 
 ==== SDEs and SDOs
 
-Although there is another section written about SDEs and SDOs, this section is used to map keys and authentication tokens to SDEs and SDOs. This cPP does not impose a strict structure on the items in the key hierarchy. An X.509 certificate is one example of a strict structure of a key with attributes. Collecting attributes of an SDE and composing an SDO structure with an SDE and attribute fields imposes temporal and storage penalties in all cases. In certain resource-constrained cases the attributes could be implicit. 
+This section is used to map keys and authentication tokens to SDEs and SDOs. This cPP does not impose a strict structure on the items in the key hierarchy. An X.509 certificate is one example of a strict structure of a key with attributes. Collecting attributes of an SDE and composing an SDO structure with an SDE and attribute fields imposes temporal and storage penalties in all cases. In certain resource-constrained cases the attributes could be implicit. 
 
-In the previous section on protected storage locations, a DSC may have to use storage external to itself. In these cases, an SDO of a wrapped key may contain a number of important attributes, such as a pointer to its parent, authorization values, and other indications of the functions allowed (encrypt vs. sign). Alternatively, some or all attributes may be implied, which means that only the keys or CSPs themselves exist outside the DSC. In either case, the sensitive values, such as private keys, secret keys, and CSPs, should be encrypted when outside the DSC. The parent of these objects are either intermediate wrapping keys, or encrypting root keys.
+In the previous section on protected storage locations, a DSC may have to use storage external to itself. In these cases, an SDO of a wrapped key may contain a number of important attributes, such as a pointer to its parent, authorization values, and other indications of the functions allowed (encrypt vs. sign). Alternatively, some or all attributes may be implied, which means that only the keys or CSPs themselves exist outside the DSC. In either case, the sensitive values, such as private keys, secret keys, and CSPs, should be encrypted when outside the DSC. The parents of these objects are either Intermediate Keys, or encrypting Root Keys.
 
-Some DSCs may want to distinguish between SDEs created within itself from SDEs ingested from an external source. Additionally, some DSCs may output SDEs without additional context or attributes from the DSC. A DSC, in some contexts, will not distinguish an ingested SDO from raw keys.
+Some DSCs may want to distinguish between SDEs created within itself from SDEs ingested from an external source. Additionally, some DSCs may output SDEs without additional context or attributes from the DSC. A DSC, in some contexts, will not distinguish an ingested SDE from raw keys.
 
 == CC Conformance Claims
 
@@ -443,15 +449,15 @@ The PPs and PP-Modules that are allowed to be specified in a PP-Configuration wi
 
 *T.BRUTE_FORCE_AUTH:* An unauthorized user may attempt to gain unauthorized access to the TOE by repeatedly and rapidly supplying a large number of permutations of authorization data, such as passwords, biometrics, etc. that protect the SDEs, in the hopes that valid authorization data can be obtained through brute force.
 
-*T.HW_ATTACK:* An individual with physical access to the TOE may apply hardware attacks such as probing, physical manipulation, fault injection, environmental stress, or reactivating blocked test-features or other pre-delivery services to manipulate the behavior of the TOE to disclose SDOs.
+*T.HW_ATTACK:* An individual with physical access to the TOE may apply hardware attacks such as probing, physical manipulation, fault injection, environmental stress, or reactivating blocked test-features or other pre-delivery services to manipulate the behavior of the TOE to disclose SDEs.
 
 *T.SDE_TRANSIT_COMPROMISE:* An attacker with the ability to observe data transmission into and out of the TOE may access or determine plaintext values of keys, authorization data, and other SDEs as the TSF transmits them into or out of the TOE.
 
 *T.UNAUTH_UPDATE:* An unauthorized user may force the platform to update the TOE with firmware that compromises its security features. Poorly chosen update protocols, cryptographic algorithms, and keys sizes may allow adversaries to install software or firmware that bypasses security features or rolls back to firmware versions with compromised security features and provides them with unauthorized access to SDEs.
 
-*T.UNAUTHORIZED_ACCESS:* An unauthorized user may gain unauthorized access to one or more SDEs within the TOE. If an adversary gains access to SDEs/SDOs stored in the TSF, they may attempt to view, use, or destroy this data as well as impersonate a user or that user's platform.
+*T.UNAUTHORIZED_ACCESS:* An unauthorized user may gain unauthorized access to one or more SDEs within the TOE. If an adversary gains access to SDEs stored in the TSF, they may attempt to view, use, or destroy this data as well as impersonate a user or that user's platform.
 
-*T.WEAK_CRYPTO:* An unauthorized user or attacker that observes network traffic transmitted to and from the TOE may cryptographically exploit poorly chosen cryptographic algorithms, random bit generators, ciphers or key sizes. Weak cryptography chosen by users or by TSF protection mechanisms puts the user's data, identity, and platform at risk of exploitation by adversaries.
+*T.WEAK_CRYPTO:* An unauthorized user or attacker that observes network traffic transmitted to and from the TOE may cryptographically exploit poorly chosen cryptographic algorithms, random bit generators, ciphers or key sizes. Weak cryptography chosen by users or by TSF protection mechanisms puts the user's data (including SDEs), identity, and platform at risk of exploitation by adversaries.
 
 *T.WEAK_ELEMENT_BINDING:* An unauthorized user may successfully break the association between SDEs, for example to replace one element with another element.
 
@@ -465,7 +471,7 @@ This section describes the assumptions made in identification of the threats and
 
 *A.CREDENTIAL_REVOCATION:* If a platform is lost, stolen, or compromised then there is a method of revocation of any credentials held (or equivalent method of mitigating the impact of potential access to the credentials). Credential revocation ensures that the loss of physical custody does not have significant negative impact on the security of the platform. This implies that an attacker has only limited access to the device to apply attacks. It further implies that the device owner is not seen as an attacker.
 
-*A.ROT_INTEGRITY:* The vendor provides a RoT that is comprised of the TOE firmware, hardware, and pre-installed SDOs, free of intentionally malicious capabilities. The platform trusts the RoT since it cannot verify the integrity and authenticity of the RoT. Trust in the ToR may be intrinsic in the case of an immmutable RoT, while a mutable RoT will verify the authenticity and integrity of the updates before applying them.
+*A.ROT_INTEGRITY:* The vendor provides a RoT that is comprised of the TOE firmware, hardware, and pre-installed SDOs, free of intentionally malicious capabilities. The platform trusts the RoT since it cannot verify the integrity and authenticity of the RoT. Trust in the RoT may be intrinsic in the case of an immmutable RoT, while a mutable RoT will verify the authenticity and integrity of the updates before applying them.
 
 *A.TRUSTED_PEER:* The remote peer communicating over a secure channel is trustworthy, and will not abuse the secure channel in order to introduce malware or fraudulent SDEs into the TOE.
 
@@ -1350,7 +1356,7 @@ FCS_OTV_EXT.1.1:: The TSF shall perform _cryptographic one-time value generation
 
 |XTS
 |SP 800-38E, IEEE Std 1619-2007
-Tweak values shall be non-negative integers, assigned consecutively, and starting at an arbitrary non-negative integer (i.e., sequential nonces).
+|Tweak values shall be non-negative integers, assigned consecutively, and starting at an arbitrary non-negative integer (i.e., sequential nonces).
 
 |CMAC
 |SP 800-38B
@@ -1374,7 +1380,7 @@ _Application Note {counter:remark_count}_:: _The TSF shall generate cryptographi
 +
 _Salts help protect against dictionary and other precomputation attacks. Systems often prepend or append salts to passwords and other long-term, potentially guessable, values to increase the size of a dictionary an attacker must build to attack it. Salts, once associated with a password, generally do not change for the life of that password. Salts should also be unique for each password and should not be reused. Therefore, systems should randomly generate salts with sufficient size such that the combined entropy of both the salt and the password meet minimal key strength sizes of the chosen algorithms._
 +
-_Nonces help protect against replay attacks in cryptographic authentication protocols and some encryption modes. A nonce should never repeat. Using a sequence of nonces with a counter embedded in the value will ensure a nonce will never repeat. In protocol sessions which require multiple nonces, using sequential nonces that increments for each message, the receiver can check for and only accept an increase in the nonce value to verify that the message has not been replayed. In some protocols, the initial sequential nonce only needs to be sent once at the beginning of the session and the receiver can predict the remaining nonces in that session, which saves transmission bandwidth. Randomly generated nonces protect against attacks against sessions in which multiple keys are expected to be used. Therefore, nonces should be both randomly generated and never repeat. However, sequential nonces may be predictable. NIST provides additional guidance for the composition of a nonce in NIST SP 800-38c, NIST SP 800-56Ar3, NIST SP 800-56Br2, NIST SP 800-63B, and NIST SP 800-90Ar1._
+_Nonces help protect against replay attacks in cryptographic authentication protocols and some encryption modes. A nonce should never repeat. Using a sequence of nonces with a counter embedded in the value will ensure a nonce will never repeat. In protocol sessions which require multiple nonces, using sequential nonces that increments for each message, the receiver can check for and only accept an increase in the nonce value to verify that the message has not been replayed. In some protocols, the initial sequential nonce only needs to be sent once at the beginning of the session and the receiver can predict the remaining nonces in that session, which saves transmission bandwidth. Randomly generated nonces protect against attacks against sessions in which multiple keys are expected to be used. Therefore, nonces should be both randomly generated and never repeat. However, sequential nonces may be predictable. NIST provides additional guidance for the composition of a nonce in NIST SP 800-38C, NIST SP 800-56Ar3, NIST SP 800-56Br2, NIST SP 800-63B, and NIST SP 800-90Ar1._
 +
 _Initialization Vectors (IVs) help protect against attacks which depend on the reuse of static keys. Certain encryption modes often require IVs. They should be randomly generated in a nonpredictable way, cannot be sequential, and cannot repeat._
 +
@@ -1503,7 +1509,7 @@ _Application Note {counter:remark_count}_:: _The way the TSF checks the integrit
 +
 _When a TSF parses an SDE, it should generate security attributes and create an SDO by binding the security attributes to the SDE._
 +
-_If [.underline]#physically protected channels as specified in FTP_ITC_EXT.1# is selected, the selection-based SFR FTP_ITP_EXT.1 must be claimed._
+_If [.underline]#physically protected channels as specified in FTP_ITP_EXT.1# is selected, the selection-based SFR FTP_ITP_EXT.1 must be claimed._
 +
 _If [.underline]#encrypted data buffers as specified in FTP_ITE_EXT.1# is selected, the selection-based SFR FTP_ITE_EXT.1 must be claimed._
 +
@@ -1527,7 +1533,7 @@ _Application Note {counter:remark_count}_:: _The way the TSF checks the integrit
 +
 _When a TSF parses an SDO, it should already have a set of security attributes. However, the TSF may modify these attributes, if authorized, to comply with security policies on the TOE._
 +
-_If [.underline]#physically protected channels as specified in FTP_ITC_EXT.1# is selected, the selection-based SFR FTP_ITP_EXT.1 must be claimed._
+_If [.underline]#physically protected channels as specified in FTP_ITP_EXT.1# is selected, the selection-based SFR FTP_ITP_EXT.1 must be claimed._
 +
 _If [.underline]#encrypted data buffers as specified in FTP_ITE_EXT.1# is selected, the selection-based SFR FTP_ITE_EXT.1 must be claimed._
 +
@@ -1548,14 +1554,13 @@ _Application Note {counter:remark_count}_:: _When an SDE is a key then it is als
 
 FDP_SDC.2 Stored data confidentiality with dedicated method
 
-FDP_SDC.2.1:: The TSF shall ensure the confidentiality of the [.underline]#[the following user data [assignment: _list of internally and externally stored SDEs_]#] according to {empty}[assignment: [.underline]#_SDEs identified in the Confidential SDE List attribute of an SDO_#] while it is stored under the control of the TSF.
+FDP_SDC.2.1:: The TSF shall ensure the confidentiality of the [.underline]#[authorization data and the following user data [assignment: _list of internally and externally stored SDEs_]#] according to {empty}[assignment: [.underline]#_SDEs identified in the Confidential SDE List attribute of an SDO_#] while it is stored under the control of the TSF.
 
 FDP_SDC.2.2:: The TSF shall ensure the confidentiality of the user data specified in FDP_SDC.2.1 without user intervention.
 
 _Application Note {counter:remark_count}_:: _This SFR applies to SDOs with the confidential-SDE attribute set to require confidentiality, especially secret and private keys, Allowed Random Number Generators' state data, and vendor verification reference data. If SDEs do not require confidentiality, then its omission from this list indicates that confidentiality is not required. This SFR also applies to all authorization data appearing in the attribute list under SDO.AuthData as well as any administrator authorization data which may be stored implicitly._
 +
 _If the TOE stores these parameters outside of its boundary, it must encrypt them according to the cryptographic requirements for key encryption, as required by FDP_ETC_EXT.2._
-+
 
 ==== FDP_SDI.2 Stored Data Integrity Monitoring and Action
 
@@ -1572,7 +1577,7 @@ _Application Note {counter:remark_count}_:: _This SFR deals with the mechanism t
 +
 _The cryptographic requirements for cryptographic hashes and digital signatures apply here._
 +
-_No specific requirement is placed here on the nature of the integrity protection data, but the Security Target shall describe this protection measure, and shall identify the iteration of FCS_COP.1/CMAC, FCS_COP.1/Hash, or FCS_COP.1/KeyedHash that covers any cryptographic algorithm used._
+_No specific requirement is placed here on the nature of the integrity protection data, but the Security Target shall describe this protection measure, and shall identify the iteration of FCS_COP.1/CMAC, FCS_COP.1/Hash, FCS_COP.1/KeyedHash, FCS_COP.1/KeyVer or FCS_COP.1/KeyWrap that covers any cryptographic algorithm used._
 +
 _The integrity protection data in FDP_SDI.2.1 is included in the list of attributes identified in FMT_MSA.1, and protects the value of the SDEs and of the SDO security attributes._
 +
@@ -1719,7 +1724,7 @@ _Application Note {counter:remark_count}_:: _<<SDOAttrib>> defines the required 
 +
 _The assignments of authorized subjects in <<SDOAttrib>> may be defined by the ST author in terms of roles or in terms of an action such as presentation of a valid authentication token of a particular type (in this case the ST author identifies in an Application Note the other SFRs that govern the action)._
 +
-_The TSF vendor may pre-install SDOs with default attributes. The Security Target should make clear which attributes the may be changed or are prohibited from changing based on the ADM-R and MFGADM-R roles (as applicable). It should also make clear between authorization values required to use pre-installed SDOs and authorization values required to change the attributes of pre-installed SDOs._
+_The TSF vendor may pre-install SDOs with default attributes. The Security Target should make clear which attributes may be changed or are prohibited from changing based on the ADM-R and MFGADM-R roles (as applicable). It should also distinguish between authorization values required to use pre-installed SDOs and authorization values required to change the attributes of pre-installed SDOs._
 +
 _<<SDOAttrib>> lists SDO ID as "cannot be modified". In some cases, a change in the attributes may cause a change in the SDO ID. In these cases, a change in the SDO ID causes the creation of a new SDO and possibly the loss of the old SDO._
 +
@@ -1932,9 +1937,13 @@ FPT_ROT_EXT.1 Root of Trust Services
 
 FPT_ROT_EXT.1.1:: The TSF shall provide a Root of Trust for Storage, a Root of Trust for Authorization, and [.underline]#[selection: Root of Trust for Measurement, Root of Trust for Reporting, no others]# based on the Root of Trust identified in FPT_PRO_EXT.1.1.
 
-_Application Note {counter:remark_count}_:: _This document uses the [GP_ROT] definitions for RoT for Storage (denoted as the combination of RoT for Confidentiality and RoT for Integrity), Authorization, Measurement, and Reporting. DSCs use Roots of Trust for Storage to protect SDOs. Section 6.5 has a number of requirements for ensuring the TSF has functionality to authorize a user in order to access an SDO, including FIA_UAU.6._
+:xrefstyle: short
+
+_Application Note {counter:remark_count}_:: _This document uses the [GP_ROT] definitions for RoT for Storage (denoted as the combination of RoT for Confidentiality and RoT for Integrity), Authorization, Measurement, and Reporting. DSCs use Roots of Trust for Storage to protect SDOs. <<Identification and Authentication>> has a number of requirements for ensuring the TSF has functionality to authorize a user in order to access an SDO, including FIA_UAU.6._
 +
 _If both [.underline]#Root of Trust for Measurement# and [.underline]#Root of Trust for Reporting# are selected in FPT_ROT_EXT.1.1, the selection-based SFR FDP_DAU.1/Prove must also be claimed._
+
+:xrefstyle: full
 
 ==== FPT_ROT_EXT.2 Root of Trust for Storage
 
@@ -2196,7 +2205,7 @@ The following rationale provides justification for each security objective for t
 |This requirement ensures the use of strong hash mechanisms.
 
 |FCS_COP.1/KeyedHash 
-|This requirement ensures the use of string HMAC mechanisms.
+|This requirement ensures the use of strong HMAC mechanisms.
 
 |FCS_COP.1/KeyEncap 
 |This requirement ensures the use of strong methods to perform key encapsulation.
@@ -2246,7 +2255,7 @@ The following rationale provides justification for each security objective for t
 |This requirement ensures the generation of strong symmetric keys.
 
 |FCS_CKM.5 (selection-based)
-|This requirement ensures the use of strong mechanism to perform key derivation.
+|This requirement ensures the use of strong mechanisms to perform key derivation.
 
 .4+|O.STRONG_CRYPTO 
 |FCS_CKM_EXT.8 (selection-based)
@@ -2326,7 +2335,9 @@ In addition to using the ST to demonstrate that ASE_TSS.1 has been satisfied, th
 
 === ADV: Development
 :xrefstyle: short
+
 The design information about the TOE is contained in the guidance documentation available to the end user as well as the TSS portion of the ST, and any additional information required by this cPP that is not to be made public (e.g., Entropy Essay). The DSC cPP requires only basic functional specification of interfaces presented in the AGD documentation (see <<Basic Functional Specification (ADV_FSP.1)>>) and specification of interfaces that can be invoked by a dependent component in a composed evaluation where the DSC is the base component.
+
 :xrefstyle: full
 
 ==== Basic Functional Specification (ADV_FSP.1)
@@ -2383,7 +2394,9 @@ Testing is specified for functional aspects of the system as well as aspects tha
 
 ==== Independent Testing - Conformance (ATE_IND.1)
 :xrefstyle: short
+
 Testing is performed to confirm the functionality described in the TSS as well as the operational guidance (includes "evaluated configuration" instructions). The focus of the testing is to confirm that the requirements specified in <<Security Functional Requirements>> are being met. The Evaluation Activities in the SD identify the specific testing activities necessary to verify compliance with the SFRs. The evaluator produces a test report documenting the plan for and results of testing, as well as coverage arguments focused on the platform/TOE combinations that are claiming conformance to this cPP.
+
 :xrefstyle: full
 
 === Class AVA: Vulnerability Assessment
@@ -2469,10 +2482,6 @@ FPT_ROT_EXT.3.1:: The TSF shall be able to attest to a state as represented by p
 _Application Note {counter:remark_count}_:: _While it is possible for a group of components to share a single unique group identifier, it is important to ensure that individual components have their own unique identifiers relative to each other._
 +
 _Resident keys or aliases are designed such that they are never visible outside the subset of DSC scope containing the RoT services and are only to be used for encryption. Therefore, possession of such aliases or keys can only be proved indirectly by using it to decrypt a value that has been encrypted with a corresponding public key. In this way, these resident keys or aliases can provide for authentication based on decryption operations instead of producing a digital signature._
-+
-_If [.underline]#non-specialized cryptographic keys used for algorithms in FCS_COP# is selected, it is expected that when used in the context of the RoT for Reporting, these keys are not visible to full DSC scope as described above. While it is possible for a group of components to share a single unique group identifier, it is important to ensure that individual components have their own unique identifiers relative to each other._
-+
-_The DSC will not expose the private portions of resident keys or aliases outside the subset of DSC scope containing the RoT services. Therefore, possession of such aliases or keys can only be proved indirectly by using it to decrypt a value that has been encrypted with a corresponding public key. In this way, these resident keys or aliases can provide for authentication based on decryption operations instead of producing a digital signature._
 +
 _The DSC responds to requests from an external entity to attest to the provenance and integrity of platform characteristics contained within the DSC._
 +
@@ -2582,11 +2591,11 @@ _Application Note {counter:remark_count}_:: _It is not expected that a single ke
 +
 _There are several reasons for granting access to keys or restricting access to keys. The list below enumerates typical actions for keys in a typical lifecycle of a key. Further on in this note are listed some methods used to authenticate roles and to authorize them to perform these actions._
 +
-*_Creation of cryptographic keys* - It may be the case that during the creation of the key certain attributes are assigned to it that controls future access to the key, such as who is allowed to use it or restricted from using it, when they are allowed to use it or restricted from using it, who is allowed to backup and recover keys, who is allowed to destroy them, and who is allowed to modify attributes associated with the keys. This SFR imposes no requirements on the creation of cryptographic keys, other than those specified already in FCS_CKM.1. However, once created, this SFR does impose requirements to access keys for the purposes outlined in the first assignment._
+*_Creation of cryptographic keys* - It may be the case that during the creation of the key certain attributes are assigned to it that control future access to the key, such as who is allowed to use it or restricted from using it, when they are allowed to use it or restricted from using it, who is allowed to backup and recover keys, who is allowed to destroy them, and who is allowed to modify attributes associated with the keys. This SFR imposes no requirements on the creation of cryptographic keys, other than those specified already in FCS_CKM.1. However, once created, this SFR does impose requirements to access keys for the purposes outlined in the first assignment._
 +
-*_Cryptographic key usage in cryptographic operations* - Depending on the application, a cryptographic key could be root key which by virtue of being a root key, cannot be encrypted with another key. It is often stored in plain sight, sometimes with hardware protections, sometimes obfuscated in clever ways, such as in physically unclonable functions. Other than root keys, it is expected that other cryptographic keys should be protected with encryption, often using other keys, which leads to a chain or hierarchy of cryptographic keys that encrypt other keys often anchored by a root key. Additionally, it is expected that an entity authenticate itself self as an authorized user of the key. This latter requirement is in addition to the recommended requirements of the Common Criteria Part 2 for FCS_CKM.3._
+*_Cryptographic key usage in cryptographic operations* - Depending on the application, a cryptographic key could be a root key which by virtue of being a root key, cannot be encrypted with another key. It is often stored in plain sight, sometimes with hardware protections, sometimes obfuscated in clever ways, such as in physically unclonable functions. Other than root keys, it is expected that other cryptographic keys should be protected with encryption, often using other keys, which leads to a chain or hierarchy of cryptographic keys that encrypt other keys often anchored by a root key. Additionally, it is expected that an entity authenticates itself as an authorized user of the key. This latter requirement is in addition to the recommended requirements of the Common Criteria Part 2 for FCS_CKM.3._
 + 
-*_Cryptographic key storage* - _The TOE may utilize storage external to the DSC. This external storage requires the protection of the keys that are considered under the control of the TOE._
+*_Cryptographic key storage* - The TOE may utilize storage external to the DSC. This external storage requires the protection of the keys that are considered under the control of the TOE._
 +
 *_Cryptographic key recovery* - This refers to the retrieval of cryptographic keys from either archival, backup, or escrow locations. In each case, the TOE uses the agreed upon cryptographic key access method agreed upon._
 +
@@ -2706,7 +2715,7 @@ _If deriving a KMAC key, select [.underline]#KDF-CTR, KDF-FB, KDF-DPI , KDF-SHA,
 +
 _If deriving a secret IV, select [.underline]#KDF-SHA, KDF-MAC-1S, or KDF-MAC-2S#._
 +
-+If deriving a seed, select [.underline]#KDF-SHA, KDF-MAC-1S, or KDF-MAC-2S#._
+_If deriving a seed, select [.underline]#KDF-SHA, KDF-MAC-1S, or KDF-MAC-2S#._
 +
 _The key size to be used in the HMAC falls into a range between L1 and L2 defined in ISO/IEC 10118 for the appropriate hash function (for example for SHA-256 L1 = 512, L2 =256) where L2 ≤ k ≤ L1._
 
@@ -2759,7 +2768,7 @@ FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrap
 
 FCS_COP.1.1/KeyWrap:: The TSF shall perform _key wrapping_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
 
-.Allowed choices for completion of the selection operations of FCS_COP.1/KeyEncap.
+.Allowed choices for completion of the selection operations of FCS_COP.1/KeyWrap.
 [[KeyWrapAlgorithms]]
 [cols=".^1,.^1,.^1,.^2",options=header]
 |===
@@ -2863,7 +2872,7 @@ IV length must be equal to 96 bits; the deterministic IV construction method [SP
 |===
 
 === User Data Protection
-==== FDP_DAU.1/Prove Basic Data Authentication (for Use with The Prove Service)
+==== FDP_DAU.1/Prove Basic Data Authentication (for Use with the Prove Service)
 
 FDP_DAU.1/Prove Basic Data Authentication (for Use with the Prove Service)
 
@@ -2959,7 +2968,7 @@ _The TSF data is used as a guarantee of the ordinal identifier of the firmware i
 
 FPT_STM_EXT.1 Reliable Time Counting
 
-FPT_STM_EXT.1.1:: The TSF shall be able to provide reliable a [*selection*: internal time stamp, external time stamp, monotonically increasing counter] to measure the passage of time.
+FPT_STM_EXT.1.1:: The TSF shall be able to provide a reliable [*selection*: internal time stamp, external time stamp, monotonically increasing counter] to measure the passage of time.
 
 _Application Note {counter:remark_count}_:: _It is acceptable for the TSF to provide timestamp data either through an internal clock or a counter. It is also permissible for the TSF to obtain time data from a clock contained within the same physical enclosure in which the TOE is embedded (e.g. a mobile device)._
 
@@ -3316,7 +3325,7 @@ FCS_OTV_EXT.1.1:: The TSF shall perform _cryptographic one-time value generation
 
 |XTS
 |SP 800-38E, IEEE Std 1619-2007
-Tweak values shall be non-negative integers, assigned consecutively, and starting at an arbitrary non-negative integer (i.e., sequential nonces).
+|Tweak values shall be non-negative integers, assigned consecutively, and starting at an arbitrary non-negative integer (i.e., sequential nonces).
 
 |CMAC
 |SP 800-38B
@@ -3926,7 +3935,7 @@ Dependencies:: No dependencies.
 
 FPT_STM_EXT.1 Reliable Time Counting
 
-FPT_STM_EXT.1.1:: The TSF shall be able to provide reliable a [*selection*: internal time stamp, external time stamp, monotonically increasing counter] to measure the passage of time.
+FPT_STM_EXT.1.1:: The TSF shall be able to provide a reliable [*selection*: internal time stamp, external time stamp, monotonically increasing counter] to measure the passage of time.
 
 === Class FTP: Trusted Path/Channels
 ==== FTP_CCMP_EXT CCM Protocol
@@ -5145,7 +5154,7 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [FIPS-SHA] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 180-4, Secure Hash Standard (SHS)_, National Institute of Standards and Technology, March 2012.
 
-[GD] Grawrock, David. Dynamics of a Trusted Platform: A building block approach. Intel Press, 2009.
+[GD] Grawrock, David. _Dynamics of a Trusted Platform: A building block approach_. Intel Press, 2009.
 
 [GP_ROT] GlobalPlatform Technology. _Root of Trust Definitions and Requirements Version 1.1_. GlobalPlatform, June 2018.
 
@@ -5163,7 +5172,7 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [NIST-KDRV] Barker, Elaine, Lily Chen, and Rich Davis. _NIST Special Publication 800-56C, Recommendation for Key-Derivation Methods in Key-Establishment Schemes_, National Institute of Standards and Technology, April 2018.
 
-[NIST-KDV] Kelsey, John, Shu-jen Chang, and Ray Perlner_. NIST Special Publication 800-185 SHA-3 Derived Functions: cSHAKE, KMAC, TupleHash, and ParallelHash_, National Institute of Standards and Technology, December 2016.
+[NIST-KDV] Kelsey, John, Shu-jen Chang, and Ray Perlner. _NIST Special Publication 800-185 SHA-3 Derived Functions: cSHAKE, KMAC, TupleHash, and ParallelHash_, National Institute of Standards and Technology, December 2016.
 
 [NIST-ROTM] Chen, Lily, Joshua Franklin, and Andrew Regenscheid. _National Institute of Standards and Technology (NIST) Special Publication 800-164 (Draft), Guidelines on Hardware Rooted Security in Mobile Devices (Draft)_, National Institute of Standards and Technology, October 2012.
 
