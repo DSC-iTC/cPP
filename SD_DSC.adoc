@@ -1325,7 +1325,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS to ensure that it describes how it protects the SDO references, authorization data, against access from unauthorized entities. If [.underline]#the TSF# is selected, then it should describe how it provides confidentiality of the data while it resides outside the TOE. 
+The evaluator shall examine the TSS to ensure that it describes how it protects the SDO references, authorization data, against access from unauthorized entities. In particular, it should describe how it provides confidentiality of the data while it resides outside the TOE after export.
 
 ====== AGD
 

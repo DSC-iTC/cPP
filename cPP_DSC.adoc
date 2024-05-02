@@ -1479,9 +1479,9 @@ _The DSC may contain pre-installed SDOs. The DSC will enforce access control for
 
 FDP_ETC_EXT.2 Propagation of SDOs
 
-FDP_ETC_EXT.2.1:: The TSF shall propagate only SDO references, wrapped authorization data, and wrapped SDOs such that only [.underline]#[selection: the TSF, authorized users]# can access them.
+FDP_ETC_EXT.2.1:: The TSF shall propagate only SDO references, wrapped authorization data, and wrapped SDOs such that only [.underline]#[selection: the TOE, authorized users]# can access them.
 
-_Application Note {counter:remark_count}_:: _The "SDO reference" is a pointer to an object that resides in the TOE; this can be thought of as a token to the object. The "only the TSF can unwrap the data" selection refers to data that is stored outside the TOE boundary (i.e., data that has been propagated)._
+_Application Note {counter:remark_count}_:: _This SFR imposes security requirements on data being propagated (exported) outside the TOE. The "SDO reference" is a pointer to an object that resides in the TOE; this can be thought of as a token to the object. The "users" in the "authorized users" selection includes all roles (i.e. ADM-R, MFGADM-R, CApp-R)._
 
 ==== FDP_FRS_EXT.1 Factory Reset
 
@@ -3428,7 +3428,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: FCS_COP.1 Cryptographic Operation
 [vertical]
-FDP_ETC_EXT.2.1:: The TSF shall propagate only SDO references, wrapped authorization data, and wrapped SDOs such that only [.underline]#[selection: the TSF, authorized users]# can access them.
+FDP_ETC_EXT.2.1:: The TSF shall propagate only SDO references, wrapped authorization data, and wrapped SDOs such that only [.underline]#[selection: the TOE, authorized users]# can access them.
 
 ==== FDP_FRS_EXT Factory Reset
 
