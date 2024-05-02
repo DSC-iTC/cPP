@@ -3165,6 +3165,18 @@ When evaluating that the TOE has been provided and is labelled with a unique ref
 
 When evaluating the developer's coverage of the TOE in their CM system, the evaluator performs the work units as presented in the CEM.
 
+==== Basic Flaw Remediation (ALC_FLR.1) (optional)
+
+When evaluating the developer’s procedures regarding basic flaw remediation, the evaluator performs the work units as presented in the CEM.
+
+==== Flaw Reporting Procedures (ALC_FLR.2) (optional)
+
+When evaluating the developer’s flaw reporting procedures, the evaluator performs the work units as presented in the CEM.
+
+==== Systematic Flaw Remediation (ALC_FLR.3) (optional)
+
+When evaluating the developer’s procedures regarding systematic flaw remediation, the evaluator performs the work units as presented in the CEM.
+
 === ATE: Tests
 
 ==== Independent Testing - Conformance (ATE_IND.1)
