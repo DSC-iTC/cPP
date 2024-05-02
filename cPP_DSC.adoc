@@ -60,19 +60,48 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 
 === Related Documents
 
-*Common Criteria* footnote:[For details see https://www.commoncriteriaportal.org]
+.Related Documents
+[[RelatedDocs]]
+[cols=".^1,.^6,.^3",options=header]
+|===
 
-* [CC1] - Common Criteria for Information Technology Security Evaluation, Part 1: Introduction and General Model, CCMB-2017-04-001, Version 3.1 Revision 5, April 2017.
+|ID
+|Title
+|Source
 
-* [CC2] - Common Criteria for Information Technology Security Evaluation, Part 2: Security Functional Components, CCMB-2017-04-002, Version 3.1 Revision 5, April 2017.
+|[CC1] 
+|Common Criteria for Information Technology Security Evaluation, Part 1: Introduction and General Model CCMB-2022-11-001, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-* [CC3] - Common Criteria for Information Technology Security Evaluation, Part 3: Security Assurance Components, CCMB-2017-04-003, Version 3.1 Revision 5, April 2017.
+|[CC2]
+|Common Criteria for Information Technology Security Evaluation, Part 2: Security Functional Components, CCMB-2022-11-002, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-* [CEM] - Common Methodology for Information Technology Security Evaluation, Evaluation Methodology, CCMB-2017-04-004, Version 3.1, Revision 5, April 2017.
+|[CC3]
+|Common Criteria for Information Technology Security Evaluation, Part 3: Security Assurance Components, CCMB-2022-11-003, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-*Other Documents*
+|[CC4]
+|Common Criteria for Information Technology Security Evaluation, Part 4: Framework for the specification of evaluation methods and activities, CCMB-2022-11-004, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-* [SD] - Evaluation Activities for Dedicated Security Component cPP, Version 1.0, September 10, 2020
+|[CC5]
+|Common Criteria for Information Technology Security Evaluation, Part 5: Pre-defined packages of security requirements, CCMB-2022-11-005, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[CEM]
+|Common Methodology for Information Technology Security Evaluation, CCMB-2022-11-006, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[CC-E&I]
+|Errata and Interpretation for CC:2022 (Release 1) and CEM:2022 (Release 1), 001, Version 1.1, February 1, 2024
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[DSC SD]
+|Supporting Document: Evaluation Activities for collaborative Protection Profile for Dedicated Security Component: Mandatory Technical Document, Version 2.0-PRD-2, May 24, 2024
+|https://dsc-itc.github.io
+
+|===
 
 === Revision History
 
@@ -419,9 +448,9 @@ Some DSCs may want to distinguish between SDEs created within itself from SDEs i
 
 == CC Conformance Claims
 
-As defined by the references [CC1], [CC2] and [CC3], this cPP:
+As defined by the references [CC1], [CC2], [CC3], [CC4], [CC5] and [CC-E&I] this cPP:
 
-* conforms to the requirements of Common Criteria v3.1, Release 5
+* conforms to the requirements of Common Criteria CC:2022, Release 1
 * is Part 2 extended, Part 3 conformant
 * does not claim conformance to any other PP or package.
 
