@@ -1827,9 +1827,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall ensure that the TSS describes either a pre-installed identity (contained within an SDO), or a process on how the TOE creates an identity. IEEE 802.1ar is one example of a standard which a device can use to create such an identity. 
-
-The evaluator shall additionally examine the TSS to ensure that it describes how the Root of Trust is immutable or otherwise mutable if and only if controlled by a unique identifiable owner, the roles this owner assumes in doing so (manufacturer administrator, owner administrator, etc.), as well as the circumstances in which the Root of Trust is mutable.
+The evaluator shall examine the TSS to ensure that it describes how the Root of Trust is immutable or otherwise mutable if and only if controlled by a unique identifiable owner, the roles this owner assumes in doing so (manufacturer administrator, owner administrator, etc.), as well as the circumstances in which the Root of Trust is mutable.
 
 [conditional] For an immutable Root of Trust, the evaluator shall ensure there are no RoT update functions. 
 
@@ -1855,7 +1853,7 @@ For a mutable Root of Trust identity, the evaluator shall perform the following 
 
 ====== KMD
 
-There are no KMD evaluation activities for this component.
+The evaluator shall ensure that the KMD describes either a pre-installed identity (contained within an SDO), or a process on how the TOE creates an identity. IEEE 802.1ar is one example of a standard which a device can use to create such an identity. 
 
 ==== Root of Trust Services (Extended - FPT_ROT_EXT)
 
@@ -1863,7 +1861,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall ensure that the TSS identifies the Roots of Trust it uses (including but not limited to the Roots of Trust identified in the selections in this requirement) and describes their function in the context of the TOE.
+The evaluator shall ensure that the TSS identifies the Roots of Trust it uses (including but not limited to the Roots of Trust identified in the selections in this requirement) and describes their function in the context of the TOE. The TSS shall describe the cryptographic algorithms in use for the Roots of Trust.
 
 ====== AGD
 
@@ -1873,19 +1871,19 @@ There are no AGD evaluation activities for this component.
 
 *_Root of Trust for Storage_*
 
-The evaluator shall confirm a successful evaluation of FCS_CKM.1, FCS_STG_EXT.1, FCS_STG_EXT.2, FCS_STG_EXT.3, FPT_PHP.3.
+Testing for this component is performed through evaluation of FCS_CKM.1, FCS_STG_EXT.1, FCS_STG_EXT.2, FCS_STG_EXT.3 and FPT_PHP.3.
 
 *_Root of Trust for Authorization_*
 
-The evaluator shall confirm a successful evaluation of FIA_AFL_EXT.1.
+Testing for this component is performed through evaluation of FIA_AFL_EXT.1.
 
 *_Root of Trust for Measurement_*
 
-The evaluator shall confirm a successful evaluation of FCS_COP.1/Hash.
+Testing for this component is performed through evaluation of FCS_COP.1/Hash.
 
 *_Root of Trust for Reporting_*
 
-The evaluator shall confirm a successful evaluation of FCS_COP.1/SigGen.
+Testing for this component is performed through evaluation of FCS_COP.1/SigGen.
 
 ====== KMD
 
@@ -1903,7 +1901,7 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-Testing for this component is completed through evaluation of FCS_CKM.1, FCS_STG_EXT.1, FCS_STG_EXT.2, FCS_STG_EXT.3, and FPT_PHP.3.
+Testing for this component is performed through evaluation of FCS_CKM.1, FCS_STG_EXT.1, FCS_STG_EXT.2, FCS_STG_EXT.3, FDP_SDI.2 and FPT_PHP.3.
 
 ====== KMD
 
