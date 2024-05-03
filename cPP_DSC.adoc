@@ -2487,6 +2487,23 @@ _The DSC responds to requests from an external entity to attest to the provenanc
 +
 _Integrity reporting is the process of attesting to platform characteristics (including those recorded in status registers in a DSC). The philosophy behind integrity measurement, logging, and reporting is that a platform may enter any state possible—including undesirable or insecure states—but can still accurately report measurements derived from data attributing to those states. In this context, data can include, but is not limited to, code, security-critical configurations, values of registers, including status registers. An independent process may evaluate the integrity states and determine an appropriate response._
 
+=== Flaw Remediation
+
+The following SARs for ALC_FLR are purely optional and are not required to be added to any ST conformant to this collaborative Protection Profile. If the ST author decides to add ALC_FLR to the ST, only one out of the following SAR components shall be selected.
+
+==== ALC_FLR.1 Basic flaw remediation
+
+This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. The evaluator performs the CEM work units associated with ALC_FLR.1.
+
+==== ALC_FLR.2 Flaw reporting procedures
+
+This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. In addition, the developer's flaw remediation guidance is analysed to ensure that users are aware how to correctly report security flaws to the developer. The evaluator performs the CEM work units associated with ALC_FLR.2.
+
+==== ALC_FLR.3 Systematic flaw remediation
+
+This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. In addition, the developer's flaw remediation guidance is analysed to ensure that users are aware how to correctly report security flaws to the developer. Flaw remediation procedures of the developer need to describe how users can register to receive flaw reports and corrections. The procedures also need to ensure timely responses to reports of security flaws and automatic distribution of security flaw reports. The evaluator performs the CEM work units associated with ALC_FLR.3.
+
+
 [appendix]
 == Selection-Based Requirements
 
