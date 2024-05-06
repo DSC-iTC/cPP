@@ -1353,7 +1353,19 @@ The evaluator shall examine the operational guidance to ensure that it describes
 
 ====== Test
 
-The evaluator shall identify all functions that resets the DSC to factory setting. For each function, the evaluator shall identify all methods for authorizing the factory reset. For each function and for each authorization method, the evaluator shall create an SDE or SDO. The evaluator shall then verify the presence of the item just created. The evaluator shall initiate a factory reset using the selected function and authorization method and verify the item no longer exists.
+Test 1 [conditional]: If [.underline]#activation by external interface# is selected in FDP_FRS_EXT.1.1, the evaluator shall identify all external interfaces that reset the DSC to factory settings. For each external interface, the evaluator shall perform the following steps:
+
+. Create an SDE or SDO.
+. Verify the presence of the item created in the previous step.
+. Initiate the factory reset using the given external interface.
+. Verify the item created in Step #1. no longer exists.
+
+Test 2 [conditional]: If [.underline]#presentation of ...# is selected in FDP_FRS_EXT.1.1, the evaluator shall identify all functions that reset the DSC to factory settings and their respective required authorization data. For each function and for each authorization method (i.e., type of requured authorization data), the evaluator shall perform the following steps:
+
+. Create an SDE or SDO.
+. Verify the presence of the item created in the previous step.
+. Initiate the factory reset using the given function and authorization data.
+. Verify the item created in Step #1. no longer exists.
 
 ====== KMD
 
