@@ -5,8 +5,8 @@
 :sectnums:
 :sectnumlevels: 5
 :imagesdir: images
-:revnumber: 1.0.1
-:revdate: December 13, 2022
+:revnumber: 2.0-PRD-2
+:revdate: May 24, 2024
 :xrefstyle: full
 :doctype: book
 :chapter-refsig: Section
@@ -19,33 +19,50 @@
 :sectnums!:
 
 == Foreword
-This is a Supporting Document (SD), intended to complement the Common Criteria Version 3.1 Release 5 and the associated Common Evaluation Methodology for Information Technology Security Evaluation.
+This is a Supporting Document (SD), intended to complement the Common Criteria CC:2022 Release 1 and the associated Common Evaluation Methodology for Information Technology Security Evaluation.
 
 SDs may be "Guidance Documents," that highlight specific approaches and application of the standard to areas where no mutual recognition of its application is required, and as such, are not of normative nature. SDs may also be "Mandatory Technical Documents," that have a mandatory application for evaluations where the scope is covered by that of the SD. The usage of SDs of the latter class is not only mandatory, but certificates issued as a result of their application are recognized under the CCRA.
 
 This supporting document has been developed by the _Dedicated Security Component_ iTC and is designed to be used to support the evaluations of products against the cPPs identified in section 1.1.
 
-*Technical Editor:*
+=== Technical Editor
 
-DSC iTC
+Dedicated Security Component iTC
 
-*Document history:*
-
-v1.0, September 10, 2020 - initial draft
-
-v1.0.1, December 13, 2022 - conversion to asciidoc
-
-*General Purpose:*
+=== General Purpose
 
 The purpose of a DSC is to provide seven security services to devices that incorporate them: Parse, Provision, Protect, Process, Prove, Purge, and Propagate. The DSC acts as a secure and separate processing area that stores and manipulates SDOs and SDEs that are isolated from the remainder of the device.
 
-*Field of special use:*
+=== Field of special use
 
 Vendors and integrators of mobile devices and other hardware devices that use DSCs.
 
-*Acknowledgements:*
+=== Acknowledgements
 
 This Supporting Document was developed by the DSC international Technical Community with representatives from industry, government agencies, Common Criteria Test Laboratories, and members of academia.
+
+=== Revision History
+
+[cols=".^1,.^1,.^2",options=header]
+|===
+
+|Version
+|Date
+|Description
+
+|1.0
+|September 10, 2020
+|Initial publication
+
+|1.0.1
+|December 13, 2022
+|conversion to asciidoc
+
+|2.0-PRD-2
+|May 24, 2024
+|Public Review Draft 2 for v2.0
+
+|===
 
 :sectnums:
 
@@ -3273,17 +3290,52 @@ The supplementary information required by this SD are:
 
 == References
 
-[CC1] Common Criteria for Information Technology Security Evaluation, Part 1: Introduction and General Model CCMB-2017-04-001, Version 3.1 Revision 5, April 2017
+.Reference Documents
+[[RefDocs]]
+[cols=".^1,.^6,.^3",options=header]
+|===
 
-[CC2] Common Criteria for Information Technology Security Evaluation, Part 2: Security Functional Components, CCMB-2017-04-002, Version 3.1 Revision 5, April 2017
+|ID
+|Title
+|Source
 
-[CC3] Common Criteria for Information Technology Security Evaluation, Part 3: Security Assurance Components, CCMB-2017-04-003, Version 3.1 Revision 5, April 2017
+|[CC1] 
+|Common Criteria for Information Technology Security Evaluation, Part 1: Introduction and General Model CCMB-2022-11-001, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-[CEM] Common Methodology for Information Technology Security Evaluation, CCMB-2017-04-004, Version 3.1 Revision 5, April 2017
+|[CC2]
+|Common Criteria for Information Technology Security Evaluation, Part 2: Security Functional Components, CCMB-2022-11-002, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-[DSC cPP] collaborative Protection Profile for Dedicated Security Component, Version 1.0.1, December 13, 2022
+|[CC3]
+|Common Criteria for Information Technology Security Evaluation, Part 3: Security Assurance Components, CCMB-2022-11-003, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-[ISO-TR] ISO/IEC. _ISO/IEC 24759-3:2017 Information Technology - Security Techniques - Test Requirements for Cryptographic Modules_, ISO/IEC, 2017
+|[CC4]
+|Common Criteria for Information Technology Security Evaluation, Part 4: Framework for the specification of evaluation methods and activities, CCMB-2022-11-004, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[CC5]
+|Common Criteria for Information Technology Security Evaluation, Part 5: Pre-defined packages of security requirements, CCMB-2022-11-005, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[CEM]
+|Common Methodology for Information Technology Security Evaluation, CCMB-2022-11-006, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[CC-E&I]
+|Errata and Interpretation for CC:2022 (Release 1) and CEM:2022 (Release 1), 001, Version 1.1, February 1, 2024
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[ISO-TR]
+|ISO/IEC. ISO/IEC 24759-3:2017 Information Technology - Security Techniques - Test Requirements for Cryptographic Modules, ISO/IEC, 2017
+|https://www.iso.org/standard/72515.html
+
+|[DSC cPP]
+|collaborative Protection Profile for Dedicated Security Component, Version 2.0-PRD-2, May 24, 2024
+|https://dsc-itc.github.io
+
+|===
 
 [appendix]
 == Vulnerability Analysis

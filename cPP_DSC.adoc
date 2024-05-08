@@ -46,7 +46,7 @@ UK IT Security Evaluation and Certificate Scheme (NCSC)
 
 === Objectives of Document
 
-This document presents the Common Criteria (CC) collaborative Protection Profile (cPP) to express the Security Functional Requirements (SFRs) and Security Assurance Requirements (SARs) for a Dedicated Security Component (DSC). The Evaluation Activities that specify the actions an evaluator performs to determine if a product satisfies the SFRs and SARs captured within this cPP are described in the Evaluation Activities for Dedicated Security Component cPP Supporting Document [SD].
+This document presents the Common Criteria (CC) collaborative Protection Profile (cPP) to express the Security Functional Requirements (SFRs) and Security Assurance Requirements (SARs) for a Dedicated Security Component (DSC). The Evaluation Activities that specify the actions an evaluator performs to determine if a product satisfies the SFRs and SARs captured within this cPP are described in the Evaluation Activities for Dedicated Security Component cPP Supporting Document [DSC SD].
 
 The DSC international Technical Community (iTC) designed the DSC cPP as a standalone PP so that vendors may evaluate a DSC once and re-use this evidence across multiple devices that contain identical DSCs. Vendors may also combine this cPP with a platform solution cPP for CC consumers.
 
@@ -60,19 +60,48 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 
 === Related Documents
 
-*Common Criteria* footnote:[For details see https://www.commoncriteriaportal.org]
+.Related Documents
+[[RelatedDocs]]
+[cols=".^1,.^6,.^3",options=header]
+|===
 
-* [CC1] - Common Criteria for Information Technology Security Evaluation, Part 1: Introduction and General Model, CCMB-2017-04-001, Version 3.1 Revision 5, April 2017.
+|ID
+|Title
+|Source
 
-* [CC2] - Common Criteria for Information Technology Security Evaluation, Part 2: Security Functional Components, CCMB-2017-04-002, Version 3.1 Revision 5, April 2017.
+|[CC1] 
+|Common Criteria for Information Technology Security Evaluation, Part 1: Introduction and General Model CCMB-2022-11-001, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-* [CC3] - Common Criteria for Information Technology Security Evaluation, Part 3: Security Assurance Components, CCMB-2017-04-003, Version 3.1 Revision 5, April 2017.
+|[CC2]
+|Common Criteria for Information Technology Security Evaluation, Part 2: Security Functional Components, CCMB-2022-11-002, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-* [CEM] - Common Methodology for Information Technology Security Evaluation, Evaluation Methodology, CCMB-2017-04-004, Version 3.1, Revision 5, April 2017.
+|[CC3]
+|Common Criteria for Information Technology Security Evaluation, Part 3: Security Assurance Components, CCMB-2022-11-003, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-*Other Documents*
+|[CC4]
+|Common Criteria for Information Technology Security Evaluation, Part 4: Framework for the specification of evaluation methods and activities, CCMB-2022-11-004, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-* [SD] - Evaluation Activities for Dedicated Security Component cPP, Version 1.0, September 10, 2020
+|[CC5]
+|Common Criteria for Information Technology Security Evaluation, Part 5: Pre-defined packages of security requirements, CCMB-2022-11-005, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[CEM]
+|Common Methodology for Information Technology Security Evaluation, CCMB-2022-11-006, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[CC-E&I]
+|Errata and Interpretation for CC:2022 (Release 1) and CEM:2022 (Release 1), 001, Version 1.1, February 1, 2024
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[DSC SD]
+|Supporting Document: Evaluation Activities for collaborative Protection Profile for Dedicated Security Component: Mandatory Technical Document, Version 2.0-PRD-2, May 24, 2024
+|https://dsc-itc.github.io
+
+|===
 
 === Revision History
 
@@ -419,13 +448,13 @@ Some DSCs may want to distinguish between SDEs created within itself from SDEs i
 
 == CC Conformance Claims
 
-As defined by the references [CC1], [CC2] and [CC3], this cPP:
+As defined by the references [CC1], [CC2], [CC3], [CC4], [CC5] and [CC-E&I], this cPP:
 
-* conforms to the requirements of Common Criteria v3.1, Release 5
+* conforms to the requirements of Common Criteria CC:2022, Release 1
 * is Part 2 extended, Part 3 conformant
 * does not claim conformance to any other PP or package.
 
-The methodology applied for the cPP evaluation is defined in [CEM] and refined by the Evaluation Activities in [SD]. This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_INT.1, APE_OBJ.2, APE_REQ.2 and APE_SPD.1.
+The methodology applied for the cPP evaluation is defined in [CEM] and refined by the Evaluation Activities in [DSC SD]. This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_INT.1, APE_OBJ.2, APE_REQ.2 and APE_SPD.1.
 
 In order to be conformant to this cPP, a TOE must demonstrate Exact Conformance. Exact Conformance is defined as the ST containing all of the requirements in <<Security Objectives>> of this cPP (these are the mandatory SFRs), and potentially requirements from <<Optional Requirements>> (these are optional SFRs) or <<Selection-Based Requirements>> (these are selection-based SFRs, some of which will be mandatory according to the selections made in other SFRs) of this cPP. While iteration is allowed, no additional requirements (from CC Parts 2 or 3, or definitions of extended components not already included in this cPP) are allowed to be included in the ST. Further, no requirements in <<Security Objectives>> of this cPP are allowed to be omitted.
 
@@ -604,7 +633,7 @@ The objectives can map to multiple assumptions or threats to fully define the ob
 
 The individual security functional requirements are specified in the sections below. Based on selections made in these SFRs it will also be necessary to include some of the selection-based SFRs in Appendix B. Additional optional SFRs may also be adopted from those listed in Appendix A for those functions that are provided by the TOE instead of its Operational Environment.
 
-The Evaluation Activities defined in [SD] describe actions that the evaluator shall take in order to determine compliance of a particular TOE with the SFRs. The content of these Evaluation Activities will therefore provide more insight into deliverables required from TOE Developers.
+The Evaluation Activities defined in [DSC SD] describe actions that the evaluator shall take in order to determine compliance of a particular TOE with the SFRs. The content of these Evaluation Activities will therefore provide more insight into deliverables required from TOE Developers.
 
 === Conventions
 
@@ -691,7 +720,7 @@ _If [.underline]#Derived keys generated in accordance with FCS_CKM.5# is selecte
 
 FCS_CKM.2 Cryptographic Key Distribution
 
-FCS_CKM.2.1:: The TSF shall distribute cryptographic keys in accordance with a specified cryptographic key distribution method [*selection*: _key encapsulation as specified in FCS_COP.1/KeyEncap, physically protected channels as specified in FTP_ITP_EXT.1, encrypted data buffers as specified in FTP_ITE_EXT.1, cryptographically protected data channels as specified in FTP_ITC_EXT.1_] that meets the following: [_none_].
+FCS_CKM.2.1:: The TSF shall distribute cryptographic keys in accordance with a specified cryptographic key distribution method [*selection*: _key encapsulation, physically protected channels as specified in FTP_ITP_EXT.1, encrypted data buffers as specified in FTP_ITE_EXT.1, cryptographically protected data channels as specified in FTP_ITC_EXT.1_] that meets the following: [_none_].
 
 _Application Note {counter:remark_count}_:: _This SFR assumes there is no pre-shared key between the parties. If key encapsulation is chosen, then FCS_COP.1/KeyEncap SHALL be included which specifies the relevant list of standards._
 
@@ -2273,7 +2302,7 @@ The following rationale provides justification for each security objective for t
 
 This cPP identifies the Security Assurance Requirements (SARs) to frame the extent to which the evaluator assesses the documentation applicable for the evaluation and performs independent testing.
 
-This section lists the set of SARs from CC part 3 that are required in evaluations against this cPP. Individual Evaluation Activities to be performed are specified in [SD].
+This section lists the set of SARs from CC part 3 that are required in evaluations against this cPP. Individual Evaluation Activities to be performed are specified in [DSC SD].
 
 The general model for evaluation of TOEs against STs written to conform to this cPP is as follows:
 
