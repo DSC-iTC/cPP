@@ -1631,7 +1631,7 @@ FIA_AFL_EXT.1.3:: When the failed authorization attempt counters [.underline]#[s
 * [.underline]#prevent future authorization attempts for a static prescribed amount of time as determined using FPT_STM_EXT.1;# 
 * [.underline]#prevent future authorization attempts for an administrator configurable amount of time as determined using FPT_STM_EXT.1;#
 * [.underline]#prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2;#
-* [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2#
+* [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2#
 +
 ] for these *SDOs*.
 
@@ -1645,7 +1645,7 @@ _If [.underline]#prevent all future authorization attempts indefinitely (i.e., l
 +
 _If either [.underline]#prevent future authorization attempts for a static prescribed amount of time as determined using FPT_STM_EXT.1# or [.underline]#prevent future authorization attempts for an administrator configurable amount of time as determined using FPT_STM_EXT.1# is selected, then the selection-based SFR FPT_STM_EXT.1 must be claimed._
 +
-_If [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
+_If [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
 
 ==== FIA_SOS.2 TSF Generation of Secrets
 
@@ -2935,9 +2935,9 @@ _For data that is validity-stamped, the DSC does nothing but respond to a reques
 
 FDP_FRS_EXT.2 Factory Reset Behavior
 
-FDP_FRS_EXT.2.1:: Upon initiation of a factory reset, the TSF shall destroy [_all non-permanent SDOs_] and restore the following *pre-installed SDOs* to their factory settings: [_assignment: pre-installed SDOs to be restored during a factory reset_].
+FDP_FRS_EXT.2.1:: Upon initiation of a factory reset, the TSF shall destroy [_all non-permanent SDEs and SDOs_] and restore the following *pre-installed SDOs* to their factory settings: [_assignment: pre-installed SDOs to be restored during a factory reset_].
 
-_Application Note {counter:remark_count}_:: _Not all DSCs permit a factory reset of the TOE, or perform a factory reset in response to excessive failed authentication or authorization attempts. Those that do are expected to perform a factory reset in a manner that prevents any inadvertent disclosure of security-relevant data that was present on the DSC prior to the factory reset. For DSCs that permit factory reset functionality (as indicated by selection of [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2# in FIA_AFL_EXT.1.3, or by [.underline]#no actions or conditions# NOT being selected in FDP_FRS_EXT.1.1), this SFR must be included in the TOE boundary._
+_Application Note {counter:remark_count}_:: _Not all DSCs permit factory reset functionality. Those that do are expected to perform a factory reset in a manner that prevents any inadvertent disclosure of security-relevant data that was present on the DSC prior to the factory reset. For DSCs that permit factory reset functionality (as indicated by selection of [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2# in FIA_AFL_EXT.1.3, or by [.underline]#no actions or conditions# NOT being selected in FDP_FRS_EXT.1.1), this SFR must be included in the TOE boundary._
 
 === Identification and Authentication
 ==== FIA_AFL_EXT.2 Authorization Failure Response
