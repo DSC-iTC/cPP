@@ -2057,9 +2057,11 @@ Test 1: The evaluator shall ensure that all communications between distributed T
 
 Test 2: The evaluator shall ensure, for each communication channel, that the channel data is not sent in plaintext or that there is no interface by which it is possible to extract the channel data.
 
-Test 3 [conditional]: The evaluator shall, where possible, physically interrupt communications between TOE components. The evaluator shall ensure that when physical connectivity is restored, communications are appropriately protected. 
+Test 3 [conditional]: If [.underline]#modification# is selected in FPT_ITT.1.1, the evaluator shall ensure, for each communication channel, that the channel data is authenticated using an approved message authentication code, digital signature, or authenticated encryption mechanism, or that there is no interface by which it is possible to modify the channel data.
 
-Note that test 3 shall only be performed for those interfaces where physical interruption of communications is typical operational behavior. If the TOE consists of multiple components embedded within the same physical chassis such that interrupting communications requires physical destruction of the device (as opposed to disconnecting a re-connectable wire or temporarily disabling a radio), this test is not applicable.
+Test 4 [conditional]: The evaluator shall, where possible, physically interrupt communications between TOE components. The evaluator shall ensure that when physical connectivity is restored, communications are appropriately protected.
+
+Note that test 4 shall only be performed for those interfaces where physical interruption of communications is typical operational behavior. If the TOE consists of multiple components embedded within the same physical chassis such that interrupting communications requires physical destruction of the device (as opposed to disconnecting a re-connectable wire or temporarily disabling a radio), this test is not applicable.
 
 ====== KMD
 
