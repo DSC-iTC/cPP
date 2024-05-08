@@ -1961,7 +1961,7 @@ FPT_RPL.1.1/Authorization:: The TSF shall detect replay for the following entiti
 
 FPT_RPL.1.2/Authorization:: The TSF shall perform [_denial of the requested operation on the SDO_] when a replay is detected *using the following methods [.underline]#[selection: monotonic counters, random nonces, [_assignment: other methods as specified_]]#*.
 
-_Application Note {counter:remark_count}_:: _The TSF receives authorization from an external source to the DSC to perform an operation on an SDO. If the operation on the SDO is restricted to authorized users, then anyone observing the communication to the DSC can copy the authorization and replay it. Random nonces and monotonic counters are but two mechanisms the TSF can use to mitigate replay. In this requirement, operations on SDOs include generating, using, modifying, propagating, and destroying. Besides monotonic counters and random nonces, the TSF could employ other methods to prevent replay of user authorizations, which the Security Target should describe._
+_Application Note {counter:remark_count}_:: _The TSF receives authorization from an external source to the TOE to perform an operation on an SDO. If the operation on the SDO is restricted to authorized users, then anyone observing the communication to the TOE can copy the authorization and replay it. Random nonces and monotonic counters are but two mechanisms the TSF can use to mitigate replay. In this requirement, operations on SDOs include generating, using, modifying, propagating, and destroying. Besides monotonic counters and random nonces, the TSF could employ other methods to prevent replay of user authorizations, which the Security Target should describe._
 
 ==== FPT_TST.1 TSF Testing
 
