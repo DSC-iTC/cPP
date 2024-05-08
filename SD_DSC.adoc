@@ -484,7 +484,7 @@ The following tests require the developer to provide access to a test platform t
 
 The evaluator shall perform the following tests:
 
-*Test 1:* Applicable only if the TOE supports directly examining the SDO/SDE memory. This test is applied to each key or keying material held as plaintext in volatile memory and subject to destruction by overwrite by the TOE (whether or not the plaintext value is subsequently encrypted for storage in volatile or non-volatile memory).
+Test 1 [conditional]: If the TOE supports directly examining the SDO/SDE memory, this test is applied to each key or keying material held as plaintext in volatile memory and subject to destruction by overwrite by the TOE (whether or not the plaintext value is subsequently encrypted for storage in volatile or non-volatile memory).
 
 . Record the value of the key or keying material.
 . Cause the TOE to dump the SDO/SDE memory of the TOE into a binary file.
@@ -502,7 +502,7 @@ Steps #1.-8. ensure that the complete key does not exist anywhere in volatile me
 
 Step #9 ensures that partial key fragments do not remain in memory. If the evaluator finds a 32-or-greater-consecutive-bit fragment, then fail immediately. Otherwise, there is a chance that it is not within the context of a key (e.g., some random bits that happen to match). If this is the case the test should be repeated with a different key in Step #1. If a fragment is also found in this repeated run then the test fails unless the developer provides a reasonable explanation for the collision, then the evaluator may give a pass on this test.
 
-*Test 2:* Applicable only if the TOE supports directly examining the non-volatile memory. This test is applied to each key and keying material held in non-volatile memory and subject to destruction by overwrite by the TOE.
+Test 2 [conditional]: If the TOE supports directly examining the non-volatile memory, this test is applied to each key and keying material held in non-volatile memory and subject to destruction by overwrite by the TOE.
 
 . Record the value of the key or keying material.
 . Cause the TOE to perform normal cryptographic processing with the key from Step #1.
@@ -515,7 +515,7 @@ Note that the primary purpose of Step #3. is to demonstrate that appropriate sea
 
 Step #6 ensures that partial key fragments do not remain in non-volatile memory. If the evaluator finds a 32-or-greater-consecutive-bit fragment, then fail immediately. Otherwise, there is a chance that it is not within the context of a key (e.g., some random bits that happen to match). If this is the case the test should be repeated with a different key in Step #1. If a fragment is also found in this repeated run then the test fails unless the developer provides a reasonable explanation for the collision, then the evaluator may give a pass on this test.
 
-*Test 3:* Applicable only if the TOE supports directly examining the non-volatile memory. This test is applied to each key and keying material held in non-volatile memory and subject to destruction by overwrite by the TOE.
+Test 3 [conditional]: If the TOE the TOE supports directly examining the non-volatile memory, this test is applied to each key and keying material held in non-volatile memory and subject to destruction by overwrite by the TOE.
 
 . Record the memory location of the key or keying material.
 . Cause the TOE to perform normal cryptographic processing with the key from Step #1.
@@ -524,7 +524,7 @@ Step #6 ensures that partial key fragments do not remain in non-volatile memory.
 
 The test succeeds if correct pattern is found at the memory location. If the pattern is not found, then the test fails.
 
-*Test 4:* Applicable only if the TOE does not support directly examining the SDO/SDE memory or non-volatile memory. This test is applied to each key and keying material held in volatile and non-volatile memory.
+Test 4 [conditional]: If the TOE does not support directly examining the SDO/SDE memory or non-volatile memory, this test is applied to each key and keying material held in volatile memory or non-volatile memory.
 
 . Record the value or a corresponding checksum value of the key or keying material for a given key reference.
 +
@@ -535,6 +535,8 @@ The checksum value must be deterministically computed by the TOE on the entire k
 . Verify that the values (or corresponding checksum values) obtained from Step #1. and Step #4. are different.
 
 The test succeeds if the values (or corresponding checksum values) are found to be different. If they are found to be identical, then the test fails.
+
+Note that each key and keying material held in volatile or non-volatile memory must be tested using either Test 1, Test 2 and 3, or Test 4. Tests 1 through 3 are preferred and shall be performed where possible.
 
 ====== KMD
 
