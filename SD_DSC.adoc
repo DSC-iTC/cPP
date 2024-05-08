@@ -5,8 +5,8 @@
 :sectnums:
 :sectnumlevels: 5
 :imagesdir: images
-:revnumber: 1.0.1
-:revdate: December 13, 2022
+:revnumber: 2.0-PRD-2
+:revdate: May 24, 2024
 :xrefstyle: full
 :doctype: book
 :chapter-refsig: Section
@@ -19,33 +19,50 @@
 :sectnums!:
 
 == Foreword
-This is a Supporting Document (SD), intended to complement the Common Criteria Version 3.1 Release 5 and the associated Common Evaluation Methodology for Information Technology Security Evaluation.
+This is a Supporting Document (SD), intended to complement the Common Criteria CC:2022 Release 1 and the associated Common Evaluation Methodology for Information Technology Security Evaluation.
 
 SDs may be "Guidance Documents," that highlight specific approaches and application of the standard to areas where no mutual recognition of its application is required, and as such, are not of normative nature. SDs may also be "Mandatory Technical Documents," that have a mandatory application for evaluations where the scope is covered by that of the SD. The usage of SDs of the latter class is not only mandatory, but certificates issued as a result of their application are recognized under the CCRA.
 
 This supporting document has been developed by the _Dedicated Security Component_ iTC and is designed to be used to support the evaluations of products against the cPPs identified in section 1.1.
 
-*Technical Editor:*
+=== Technical Editor
 
-DSC iTC
+Dedicated Security Component iTC
 
-*Document history:*
-
-v1.0, September 10, 2020 - initial draft
-
-v1.0.1, December 13, 2022 - conversion to asciidoc
-
-*General Purpose:*
+=== General Purpose
 
 The purpose of a DSC is to provide seven security services to devices that incorporate them: Parse, Provision, Protect, Process, Prove, Purge, and Propagate. The DSC acts as a secure and separate processing area that stores and manipulates SDOs and SDEs that are isolated from the remainder of the device.
 
-*Field of special use:*
+=== Field of special use
 
 Vendors and integrators of mobile devices and other hardware devices that use DSCs.
 
-*Acknowledgements:*
+=== Acknowledgements
 
 This Supporting Document was developed by the DSC international Technical Community with representatives from industry, government agencies, Common Criteria Test Laboratories, and members of academia.
+
+=== Revision History
+
+[cols=".^1,.^1,.^2",options=header]
+|===
+
+|Version
+|Date
+|Description
+
+|1.0
+|September 10, 2020
+|Initial publication
+
+|1.0.1
+|December 13, 2022
+|conversion to asciidoc
+
+|2.0-PRD-2
+|May 24, 2024
+|Public Review Draft 2 for v2.0
+
+|===
 
 :sectnums:
 
@@ -1353,7 +1370,19 @@ The evaluator shall examine the operational guidance to ensure that it describes
 
 ====== Test
 
-The evaluator shall identify all functions that resets the DSC to factory setting. For each function, the evaluator shall identify all methods for authorizing the factory reset. For each function and for each authorization method, the evaluator shall create an SDE or SDO. The evaluator shall then verify the presence of the item just created. The evaluator shall initiate a factory reset using the selected function and authorization method and verify the item no longer exists.
+Test 1 [conditional]: If [.underline]#activation by external interface# is selected in FDP_FRS_EXT.1.1, the evaluator shall identify all external interfaces that reset the DSC to factory settings. For each external interface, the evaluator shall perform the following steps:
+
+. Create an SDE or SDO.
+. Verify the presence of the item created in the previous step.
+. Initiate the factory reset using the given external interface.
+. Verify the item created in Step #1. no longer exists.
+
+Test 2 [conditional]: If [.underline]#presentation of ...# is selected in FDP_FRS_EXT.1.1, the evaluator shall identify all functions that reset the DSC to factory settings and their respective required authorization data. For each function and for each authorization method (i.e., type of requured authorization data), the evaluator shall perform the following steps:
+
+. Create an SDE or SDO.
+. Verify the presence of the item created in the previous step.
+. Initiate the factory reset using the given function and authorization data.
+. Verify the item created in Step #1. no longer exists.
 
 ====== KMD
 
@@ -1497,7 +1526,7 @@ Test 1: The evaluator shall use the operational guidance to configure the number
 
 Test 2: After reaching the limit for unsuccessful authorization attempts as in Test 1 above, the evaluator shall proceed as follows. If the action selected in FIA_AFL_EXT.1.3 is included in the ST then the evaluator shall confirm by testing that following the operational guidance and performing each action specified in the ST to re-enable access results in successful access. If the time period selection in FIA_AFL_EXT.1.3 is included in the ST, then the evaluator shall wait for just less than the time period configured in Test 1 and show that an authorization attempt using valid credentials does not result in successful access. The evaluator shall then wait until just after the time period configured in Test 1 and show that an authorization attempt using valid credentials results in successful access.
 
-Test 3 [conditional]: If [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2# is selected in FIA_AFL_EXT.1.3, the evaluator shall perform the test required by FDP_FRS_EXT.2 with step 5 replaced with "The evaluator shall initiate a factory reset by deliberately meeting or surpassing the threshold for unsuccessful authorization attempts, depending on whether [.underline]#meets# or [.underline]#surpasses# is selected in FIA_AFL_EXT.1.3."
+Test 3 [conditional]: If [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2# is selected in FIA_AFL_EXT.1.3, the evaluator shall perform the test required by FDP_FRS_EXT.2 with step 5 replaced with "The evaluator shall initiate a factory reset by deliberately meeting or surpassing the threshold for unsuccessful authorization attempts, depending on whether [.underline]#meets# or [.underline]#surpasses# is selected in FIA_AFL_EXT.1.3."
 
 ====== KMD
 
@@ -1513,13 +1542,7 @@ The evaluator shall ensure that the TSS describes for each of the TSF functions 
 
 The evaluator shall ensure that the TSS states that the quality metrics provided is based on the assumption of sufficient entropy being provided in accordance with the information given in [DSC cPP] Annex D.
 
-The evaluator shall ensure that the TSS describes the restrictions implemented in order to restrict consecutive authentication attempts. (Authentication throttling)
-
-The evaluator shall ensure that the TSS describes the mechanism used to generate authorization values and documents the quality metric that the mechanism provides. The information provided in the TSS shall demonstrate that:
-
-[loweralpha]
-. The probability that a random single authentication attempt will be successful is less than one in 1,000,000; and
-. The probability that random multiple authentication attempts during a one (1) minute period will be successful is less than one in 100,000.
+The evaluator shall ensure that the TSS describes the mechanism used to generate authorization values and documents the quality metric that the mechanism provides. The information provided in the TSS shall demonstrate that the probability that a random single authentication attempt will be successful is less than one in 1,000,000.
 
 ====== AGD
 
@@ -1713,9 +1736,9 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS to verify that it describes the actions taken when the TOE experiences fault injection and how the DSC preserves a secure state.
+The evaluator shall examine the TSS to verify that it describes the actions taken when the TOE experiences fault injection and how the TOE preserves a secure state.
 
-The evaluator shall verify that the TSS describes the state of the DSC when the firmware validity checks fail, including the various failure modes assumed.
+The evaluator shall verify that the TSS describes the state of the TOE when the firmware validity checks fail, including the various failure modes assumed.
 
 ====== AGD
 
@@ -1723,7 +1746,7 @@ The evaluator shall examine the operational guidance to verify that it describes
 
 ====== Test
 
-Refer to the testing for FPT_PHP.3.
+This component is tested as part of FPT_PHP.3.
 
 ====== KMD
 
@@ -1787,13 +1810,13 @@ There are no AGD evaluation activities for this component.
 
 All tests here are based on an attempted Fault Injection. 
 
-The evaluator shall perform fault injection on the DSC and attempt to extract a known SDO/SDE. 
+The evaluator shall perform fault injection on the TOE and attempt to extract a known SDO/SDE. 
 
-The evaluator shall cause the DSC to parse or generate an SDO/SDE with a known value. The evaluator will then cause the TOE to process the SDO/SDE, possibly multiple times, while injecting faults on the TOE.
+The evaluator shall cause the TOE to parse or generate an SDO/SDE with a known value. The evaluator will then cause the TOE to process the SDO/SDE, possibly multiple times, while injecting faults on the TOE.
 
 This test is repeated for each type of Fault Injection.
 
-If the evaluator is able to acquire the original SDO/SDE or a known result from the DSC processing the SDO/SDE, the test is a 'Fail', otherwise, the test is a 'Pass'.
+If the evaluator is able to acquire the original SDO/SDE or a known result from the TOE processing the SDO/SDE, the test is a 'Fail', otherwise, the test is a 'Pass'.
 
 *Test 1: Temperature*
 
@@ -1933,7 +1956,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS and other vendor documentation and ensure they describe the methods used to verify integrity of the TSF and TSF data. The evaluator shall also verify that the TSS describes how the tests are performed automatically and autonomously (without intervention). 
+The evaluator shall examine the TSS and other vendor documentation and ensure they describe the methods used to verify integrity of the TSF and TSF data, both automatic checks and if supported, checks requested by the user. If more than the power-on check is selected, then each condition for the self test shall be examined.
 
 ====== AGD
 
@@ -1944,6 +1967,8 @@ The evaluator shall examine the operational guidance to ensure it provides autho
 Test 1: The evaluator shall verify that the DSC performs an integrity check of all TSF, including data, as well as performing KATs for those functions. The evaluator shall verify failures using malformed known answer test data (for example, unexpected input or output values).
 
 Test 2: The evaluator shall ensure that when an integrity check failure occurs specific to failing KATs and failure to verify the integrity of the TSF, the TOE will prevent any further processing of the current TSF and user data. 
+
+Test 3 [conditional]: For each condition where a self test may be initiated, the evaluator shall verify that the self tests are run as specified.
 
 ====== KMD
 
@@ -2639,7 +2664,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS to determine the pre-installed SDOs that are reverted to their factory settings when a factory reset occurs, what the factory settings are for those SDOs, and that the TSS states that all non-permanent SDOs are destroyed.
+The evaluator shall examine the TSS to determine the pre-installed SDOs that are reverted to their factory settings when a factory reset occurs, what the factory settings are for those SDOs, and that the TSS states that all non-permanent SDEs and SDOs are destroyed.
 
 ====== AGD
 
@@ -2651,10 +2676,10 @@ The evaluator shall perform the following test:
 
 . The evaluator shall use each supported role to create or import an SDE or SDO that has known data. 
 . The evaluator shall then verify that the created SDE/SDO resides either within the DSC, or under the control of the DSC. 
-. The evaluator shall perform some action for each created or imported SDE/SDO in step 1 that demonstrates that the SDE/SDO has been set to the indicated value.
-. For each pre-installed SDO that is identified in FDP_FRS_EXT.2.1, the evaluator shall perform some action to verify what the current value of that SDO is.
+. The evaluator shall perform some operation for each created or imported SDE/SDO in step 1 that demonstrates that the SDE/SDO has been set to the indicated value.
+. For each pre-installed SDO that is identified in FDP_FRS_EXT.2.1, the evaluator shall perform some operation to verify what the current value of that SDO is.
 . The evaluator shall initiate a factory reset.
-. For each operation in step 3, the evaluator shall re-attempt the operation and verify that it no longer completes successfully because the SDE/SDO data has been erased.
+. For each created or imported SDE/SDO that is identified in step 3, the evaluator shall re-attempt the operation and verify that it no longer completes successfully because the SDE/SDO data has been erased.
 . For each pre-installed SDO that is identified in step 4, the evaluator shall re-attempt the operation and verify that the SDOs have been set to their factory default values.
 
 ====== KMD
@@ -3163,6 +3188,18 @@ When evaluating that the TOE has been provided and is labelled with a unique ref
 
 When evaluating the developer's coverage of the TOE in their CM system, the evaluator performs the work units as presented in the CEM.
 
+==== Basic Flaw Remediation (ALC_FLR.1) (optional)
+
+When evaluating the developer's procedures regarding basic flaw remediation, the evaluator performs the work units as presented in the CEM.
+
+==== Flaw Reporting Procedures (ALC_FLR.2) (optional)
+
+When evaluating the developer's flaw reporting procedures, the evaluator performs the work units as presented in the CEM.
+
+==== Systematic Flaw Remediation (ALC_FLR.3) (optional)
+
+When evaluating the developer's procedures regarding systematic flaw remediation, the evaluator performs the work units as presented in the CEM.
+
 === ATE: Tests
 
 ==== Independent Testing - Conformance (ATE_IND.1)
@@ -3263,17 +3300,52 @@ The supplementary information required by this SD are:
 
 == References
 
-[CC1] Common Criteria for Information Technology Security Evaluation, Part 1: Introduction and General Model CCMB-2017-04-001, Version 3.1 Revision 5, April 2017
+.Reference Documents
+[[RefDocs]]
+[cols=".^1,.^6,.^3",options=header]
+|===
 
-[CC2] Common Criteria for Information Technology Security Evaluation, Part 2: Security Functional Components, CCMB-2017-04-002, Version 3.1 Revision 5, April 2017
+|ID
+|Title
+|Source
 
-[CC3] Common Criteria for Information Technology Security Evaluation, Part 3: Security Assurance Components, CCMB-2017-04-003, Version 3.1 Revision 5, April 2017
+|[CC1] 
+|Common Criteria for Information Technology Security Evaluation, Part 1: Introduction and General Model CCMB-2022-11-001, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-[CEM] Common Methodology for Information Technology Security Evaluation, CCMB-2017-04-004, Version 3.1 Revision 5, April 2017
+|[CC2]
+|Common Criteria for Information Technology Security Evaluation, Part 2: Security Functional Components, CCMB-2022-11-002, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-[DSC cPP] collaborative Protection Profile for Dedicated Security Component, Version 1.0.1, December 13, 2022
+|[CC3]
+|Common Criteria for Information Technology Security Evaluation, Part 3: Security Assurance Components, CCMB-2022-11-003, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-[ISO-TR] ISO/IEC. _ISO/IEC 24759-3:2017 Information Technology - Security Techniques - Test Requirements for Cryptographic Modules_, ISO/IEC, 2017
+|[CC4]
+|Common Criteria for Information Technology Security Evaluation, Part 4: Framework for the specification of evaluation methods and activities, CCMB-2022-11-004, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[CC5]
+|Common Criteria for Information Technology Security Evaluation, Part 5: Pre-defined packages of security requirements, CCMB-2022-11-005, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[CEM]
+|Common Methodology for Information Technology Security Evaluation, CCMB-2022-11-006, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[CC-E&I]
+|Errata and Interpretation for CC:2022 (Release 1) and CEM:2022 (Release 1), 001, Version 1.1, February 1, 2024
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[ISO-TR]
+|ISO/IEC. ISO/IEC 24759-3:2017 Information Technology - Security Techniques - Test Requirements for Cryptographic Modules, ISO/IEC, 2017
+|https://www.iso.org/standard/72515.html
+
+|[DSC cPP]
+|collaborative Protection Profile for Dedicated Security Component, Version 2.0-PRD-2, May 24, 2024
+|https://dsc-itc.github.io
+
+|===
 
 [appendix]
 == Vulnerability Analysis

@@ -46,7 +46,7 @@ UK IT Security Evaluation and Certificate Scheme (NCSC)
 
 === Objectives of Document
 
-This document presents the Common Criteria (CC) collaborative Protection Profile (cPP) to express the Security Functional Requirements (SFRs) and Security Assurance Requirements (SARs) for a Dedicated Security Component (DSC). The Evaluation Activities that specify the actions an evaluator performs to determine if a product satisfies the SFRs and SARs captured within this cPP are described in the Evaluation Activities for Dedicated Security Component cPP Supporting Document [SD].
+This document presents the Common Criteria (CC) collaborative Protection Profile (cPP) to express the Security Functional Requirements (SFRs) and Security Assurance Requirements (SARs) for a Dedicated Security Component (DSC). The Evaluation Activities that specify the actions an evaluator performs to determine if a product satisfies the SFRs and SARs captured within this cPP are described in the Evaluation Activities for Dedicated Security Component cPP Supporting Document [DSC SD].
 
 The DSC international Technical Community (iTC) designed the DSC cPP as a standalone PP so that vendors may evaluate a DSC once and re-use this evidence across multiple devices that contain identical DSCs. Vendors may also combine this cPP with a platform solution cPP for CC consumers.
 
@@ -60,19 +60,48 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 
 === Related Documents
 
-*Common Criteria* footnote:[For details see https://www.commoncriteriaportal.org]
+.Related Documents
+[[RelatedDocs]]
+[cols=".^1,.^6,.^3",options=header]
+|===
 
-* [CC1] - Common Criteria for Information Technology Security Evaluation, Part 1: Introduction and General Model, CCMB-2017-04-001, Version 3.1 Revision 5, April 2017.
+|ID
+|Title
+|Source
 
-* [CC2] - Common Criteria for Information Technology Security Evaluation, Part 2: Security Functional Components, CCMB-2017-04-002, Version 3.1 Revision 5, April 2017.
+|[CC1] 
+|Common Criteria for Information Technology Security Evaluation, Part 1: Introduction and General Model CCMB-2022-11-001, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-* [CC3] - Common Criteria for Information Technology Security Evaluation, Part 3: Security Assurance Components, CCMB-2017-04-003, Version 3.1 Revision 5, April 2017.
+|[CC2]
+|Common Criteria for Information Technology Security Evaluation, Part 2: Security Functional Components, CCMB-2022-11-002, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-* [CEM] - Common Methodology for Information Technology Security Evaluation, Evaluation Methodology, CCMB-2017-04-004, Version 3.1, Revision 5, April 2017.
+|[CC3]
+|Common Criteria for Information Technology Security Evaluation, Part 3: Security Assurance Components, CCMB-2022-11-003, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-*Other Documents*
+|[CC4]
+|Common Criteria for Information Technology Security Evaluation, Part 4: Framework for the specification of evaluation methods and activities, CCMB-2022-11-004, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
 
-* [SD] - Evaluation Activities for Dedicated Security Component cPP, Version 1.0, September 10, 2020
+|[CC5]
+|Common Criteria for Information Technology Security Evaluation, Part 5: Pre-defined packages of security requirements, CCMB-2022-11-005, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[CEM]
+|Common Methodology for Information Technology Security Evaluation, CCMB-2022-11-006, CC:2022 Revision 1, November 2022
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[CC-E&I]
+|Errata and Interpretation for CC:2022 (Release 1) and CEM:2022 (Release 1), 001, Version 1.1, February 1, 2024
+|https://www.commoncriteriaportal.org/cc/index.cfm
+
+|[DSC SD]
+|Supporting Document: Evaluation Activities for collaborative Protection Profile for Dedicated Security Component: Mandatory Technical Document, Version 2.0-PRD-2, May 24, 2024
+|https://dsc-itc.github.io
+
+|===
 
 === Revision History
 
@@ -419,13 +448,13 @@ Some DSCs may want to distinguish between SDEs created within itself from SDEs i
 
 == CC Conformance Claims
 
-As defined by the references [CC1], [CC2] and [CC3], this cPP:
+As defined by the references [CC1], [CC2], [CC3], [CC4], [CC5] and [CC-E&I], this cPP:
 
-* conforms to the requirements of Common Criteria v3.1, Release 5
+* conforms to the requirements of Common Criteria CC:2022, Release 1
 * is Part 2 extended, Part 3 conformant
 * does not claim conformance to any other PP or package.
 
-The methodology applied for the cPP evaluation is defined in [CEM] and refined by the Evaluation Activities in [SD]. This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_INT.1, APE_OBJ.2, APE_REQ.2 and APE_SPD.1.
+The methodology applied for the cPP evaluation is defined in [CEM] and refined by the Evaluation Activities in [DSC SD]. This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_INT.1, APE_OBJ.2, APE_REQ.2 and APE_SPD.1.
 
 In order to be conformant to this cPP, a TOE must demonstrate Exact Conformance. Exact Conformance is defined as the ST containing all of the requirements in <<Security Objectives>> of this cPP (these are the mandatory SFRs), and potentially requirements from <<Optional Requirements>> (these are optional SFRs) or <<Selection-Based Requirements>> (these are selection-based SFRs, some of which will be mandatory according to the selections made in other SFRs) of this cPP. While iteration is allowed, no additional requirements (from CC Parts 2 or 3, or definitions of extended components not already included in this cPP) are allowed to be included in the ST. Further, no requirements in <<Security Objectives>> of this cPP are allowed to be omitted.
 
@@ -604,7 +633,7 @@ The objectives can map to multiple assumptions or threats to fully define the ob
 
 The individual security functional requirements are specified in the sections below. Based on selections made in these SFRs it will also be necessary to include some of the selection-based SFRs in Appendix B. Additional optional SFRs may also be adopted from those listed in Appendix A for those functions that are provided by the TOE instead of its Operational Environment.
 
-The Evaluation Activities defined in [SD] describe actions that the evaluator shall take in order to determine compliance of a particular TOE with the SFRs. The content of these Evaluation Activities will therefore provide more insight into deliverables required from TOE Developers.
+The Evaluation Activities defined in [DSC SD] describe actions that the evaluator shall take in order to determine compliance of a particular TOE with the SFRs. The content of these Evaluation Activities will therefore provide more insight into deliverables required from TOE Developers.
 
 === Conventions
 
@@ -1489,7 +1518,7 @@ FDP_FRS_EXT.1 Factory Reset
 
 FDP_FRS_EXT.1.1:: The TSF shall permit a factory reset of the TOE upon: [.underline]#[selection: activation by external interface, presentation of [_assignment: types of authorization data required and reference to their specification_], no actions or conditions]#.
 
-_Application Note {counter:remark_count}_:: _If the DSC provides factory reset and requires an authorization to carry out the operation then the ST author selects either [.underline]#presentation of…# and fills in the authorization data accepted (e.g. a PIN or a cryptographic token based on some specification referenced in the assigned value). If the DSC provides factory reset external to the DSC without requiring authorization then the ST author selects [.underline]#activation by external interface#. This selection is intended for use when the device containing the DSC takes responsibility for obtaining and checking the authorization for factory reset._
+_Application Note {counter:remark_count}_:: _If the DSC provides factory reset and requires an authorization to carry out the operation, then the ST author selects [.underline]#presentation of ...# and fills in the authorization data accepted (e.g. a PIN or a cryptographic token based on some specification referenced in the assigned value). If the DSC provides factory reset external to the DSC without requiring authorization, then the ST author selects [.underline]#activation by external interface#. This selection is intended for use when the device containing the DSC takes responsibility for obtaining and checking the authorization for factory reset._
 +
 _If any selection other than [.underline]#no actions or conditions# is made in FDP_FRS_EXT.1.1, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
 
@@ -1602,7 +1631,7 @@ FIA_AFL_EXT.1.3:: When the failed authorization attempt counters [.underline]#[s
 * [.underline]#prevent future authorization attempts for a static prescribed amount of time as determined using FPT_STM_EXT.1;# 
 * [.underline]#prevent future authorization attempts for an administrator configurable amount of time as determined using FPT_STM_EXT.1;#
 * [.underline]#prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2;#
-* [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2#
+* [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2#
 +
 ] for these *SDOs*.
 
@@ -1616,16 +1645,13 @@ _If [.underline]#prevent all future authorization attempts indefinitely (i.e., l
 +
 _If either [.underline]#prevent future authorization attempts for a static prescribed amount of time as determined using FPT_STM_EXT.1# or [.underline]#prevent future authorization attempts for an administrator configurable amount of time as determined using FPT_STM_EXT.1# is selected, then the selection-based SFR FPT_STM_EXT.1 must be claimed._
 +
-_If [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
+_If [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
 
 ==== FIA_SOS.2 TSF Generation of Secrets
 
 FIA_SOS.2 TSF Generation of Secrets
 
-FIA_SOS.2.1:: The TSF shall provide a mechanism to generate *authorization data* that meet [_the following quality metrics:_
-+
-* _For each authentication attempt, the probability shall be less than one in 1,000,000 that a random attempt will be successful_
-* _For multiple attempts to authenticate during a one-minute period, the probability shall be less than one in 100,000 that a series of random attempts will be successful_].
+FIA_SOS.2.1:: The TSF shall provide a mechanism to generate *authorization data* that meet [_the metric where for each authentication attempt, the probability shall be less than one in 1,000,000 that a random attempt will be successful_].
 
 FIA_SOS.2.2:: The TSF shall be able to enforce the use of TSF generated *authorization data* for [_assignment: non-empty list of TSF functions_].
 
@@ -1961,7 +1987,7 @@ FPT_RPL.1.1/Authorization:: The TSF shall detect replay for the following entiti
 
 FPT_RPL.1.2/Authorization:: The TSF shall perform [_denial of the requested operation on the SDO_] when a replay is detected *using the following methods [.underline]#[selection: monotonic counters, random nonces, [_assignment: other methods as specified_]]#*.
 
-_Application Note {counter:remark_count}_:: _The TSF receives authorization from an external source to the DSC to perform an operation on an SDO. If the operation on the SDO is restricted to authorized users, then anyone observing the communication to the DSC can copy the authorization and replay it. Random nonces and monotonic counters are but two mechanisms the TSF can use to mitigate replay. In this requirement, operations on SDOs include generating, using, modifying, propagating, and destroying. Besides monotonic counters and random nonces, the TSF could employ other methods to prevent replay of user authorizations, which the Security Target should describe._
+_Application Note {counter:remark_count}_:: _The TSF receives authorization from an external source to the TOE to perform an operation on an SDO. If the operation on the SDO is restricted to authorized users, then anyone observing the communication to the TOE can copy the authorization and replay it. Random nonces and monotonic counters are but two mechanisms the TSF can use to mitigate replay. In this requirement, operations on SDOs include generating, using, modifying, propagating, and destroying. Besides monotonic counters and random nonces, the TSF could employ other methods to prevent replay of user authorizations, which the Security Target should describe._
 
 ==== FPT_TST.1 TSF Testing
 
@@ -2276,7 +2302,7 @@ The following rationale provides justification for each security objective for t
 
 This cPP identifies the Security Assurance Requirements (SARs) to frame the extent to which the evaluator assesses the documentation applicable for the evaluation and performs independent testing.
 
-This section lists the set of SARs from CC part 3 that are required in evaluations against this cPP. Individual Evaluation Activities to be performed are specified in [SD].
+This section lists the set of SARs from CC part 3 that are required in evaluations against this cPP. Individual Evaluation Activities to be performed are specified in [DSC SD].
 
 The general model for evaluation of TOEs against STs written to conform to this cPP is as follows:
 
@@ -2486,6 +2512,23 @@ _Resident keys or aliases are designed such that they are never visible outside 
 _The DSC responds to requests from an external entity to attest to the provenance and integrity of platform characteristics contained within the DSC._
 +
 _Integrity reporting is the process of attesting to platform characteristics (including those recorded in status registers in a DSC). The philosophy behind integrity measurement, logging, and reporting is that a platform may enter any state possible—including undesirable or insecure states—but can still accurately report measurements derived from data attributing to those states. In this context, data can include, but is not limited to, code, security-critical configurations, values of registers, including status registers. An independent process may evaluate the integrity states and determine an appropriate response._
+
+=== Flaw Remediation
+
+The following SARs for ALC_FLR are purely optional and are not required to be added to any ST conformant to this collaborative Protection Profile. If the ST author decides to add ALC_FLR to the ST, only one out of the following SAR components shall be selected.
+
+==== ALC_FLR.1 Basic flaw remediation
+
+This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. The evaluator performs the CEM work units associated with ALC_FLR.1.
+
+==== ALC_FLR.2 Flaw reporting procedures
+
+This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. In addition, the developer's flaw remediation guidance is analysed to ensure that users are aware how to correctly report security flaws to the developer. The evaluator performs the CEM work units associated with ALC_FLR.2.
+
+==== ALC_FLR.3 Systematic flaw remediation
+
+This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. In addition, the developer's flaw remediation guidance is analysed to ensure that users are aware how to correctly report security flaws to the developer. Flaw remediation procedures of the developer need to describe how users can register to receive flaw reports and corrections. The procedures also need to ensure timely responses to reports of security flaws and automatic distribution of security flaw reports. The evaluator performs the CEM work units associated with ALC_FLR.3.
+
 
 [appendix]
 == Selection-Based Requirements
@@ -2892,9 +2935,9 @@ _For data that is validity-stamped, the DSC does nothing but respond to a reques
 
 FDP_FRS_EXT.2 Factory Reset Behavior
 
-FDP_FRS_EXT.2.1:: Upon initiation of a factory reset, the TSF shall destroy [_all non-permanent SDOs_] and restore the following *pre-installed SDOs* to their factory settings: [_assignment: pre-installed SDOs to be restored during a factory reset_].
+FDP_FRS_EXT.2.1:: Upon initiation of a factory reset, the TSF shall destroy [_all non-permanent SDEs and SDOs_] and restore the following *pre-installed SDOs* to their factory settings: [_assignment: pre-installed SDOs to be restored during a factory reset_].
 
-_Application Note {counter:remark_count}_:: _Not all DSCs permit a factory reset of the TOE, or perform a factory reset in response to excessive failed authentication or authorization attempts. Those that do are expected to perform a factory reset in a manner that prevents any inadvertent disclosure of security-relevant data that was present on the DSC prior to the factory reset. For DSCs that permit factory reset functionality (as indicated by selection of [.underline]#factory reset the TOE wiping out all non-permanent SDOs, as described by FDP_FRS_EXT.2# in FIA_AFL_EXT.1.3, or by [.underline]#no actions or conditions# NOT being selected in FDP_FRS_EXT.1.1), this SFR must be included in the TOE boundary._
+_Application Note {counter:remark_count}_:: _Not all DSCs permit factory reset functionality. Those that do are expected to perform a factory reset in a manner that prevents any inadvertent disclosure of security-relevant data that was present on the DSC prior to the factory reset. For DSCs that permit factory reset functionality (as indicated by selection of [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2# in FIA_AFL_EXT.1.3, or by [.underline]#no actions or conditions# NOT being selected in FDP_FRS_EXT.1.1), this SFR must be included in the TOE boundary._
 
 === Identification and Authentication
 ==== FIA_AFL_EXT.2 Authorization Failure Response
