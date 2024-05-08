@@ -27,7 +27,7 @@ This supporting document has been developed by the _Dedicated Security Component
 
 === Technical Editor
 
-Dedicated Security Components iTC
+Dedicated Security Component iTC
 
 === General Purpose
 
