@@ -2068,6 +2068,8 @@ There are no KMD evaluation activities for this component.
 
 The evaluator shall examine the TSS to determine that it describes the TOE in terms of its distributed components and identifies the communications that take place between these components. The evaluator shall also examine the TSS to ensure that it describes the methods by which each of these communications are protected.
 
+The evaluator shall examine the TSS to determine that is describes the type of separation between distributed components, such as physical connections (circuit, ports, etc) or protocols that may need configuration.
+
 ====== AGD
 
 If applicable, the evaluator shall confirm that the guidance documentation contains instructions for establishing the relevant allowed communication channels between TOE components, and that it contains recovery instructions should a connection be unintentionally broken.
@@ -2076,11 +2078,15 @@ If applicable, the evaluator shall confirm that the guidance documentation conta
 
 The evaluator shall perform the following tests:
 
-Test 1: The evaluator shall ensure that all communications between distributed TOE components is tested during the course of the evaluation, setting up the connections as described in the guidance documentation (if applicable) and ensuring that communication is successful.
+Test 1: The evaluator shall ensure that all communications between distributed TOE components are tested. If communications channels require configuration, the guidance documentation shall be followed and ensure that communication is successful.
 
 Test 2: The evaluator shall ensure, for each communication channel, that the channel data is not sent in plaintext or that there is no interface by which it is possible to extract the channel data.
 
-Test 3: The evaluator shall, where possible, physically interrupt communications between TOE components. The evaluator shall ensure that when physical connectivity is restored, communications are appropriately protected. Note that this test shall only be performed for those interfaces where physical interruption of communications is typical operational behavior. If the TOE consists of multiple components embedded within the same physical chassis such that interrupting communications requires physical destruction of the device (as opposed to disconnecting a re-connectable wire or temporarily disabling a radio), this test is not applicable.
+Test 3 [conditional]: If [.underline]#modification# is selected in FPT_ITT.1.1, the evaluator shall ensure, for each communication channel, that the channel data is authenticated using an approved message authentication code, digital signature, or authenticated encryption mechanism, or that there is no interface by which it is possible to modify the channel data.
+
+Test 4 [conditional]: The evaluator shall, where possible, physically interrupt communications between TOE components. The evaluator shall ensure that when physical connectivity is restored, communications are appropriately protected.
+
+Note that test 4 shall only be performed for those interfaces where physical interruption of communications is typical operational behavior. If the TOE consists of multiple components embedded within the same physical chassis such that interrupting communications requires physical destruction of the device (as opposed to disconnecting a re-connectable wire or temporarily disabling a radio), this test is not applicable.
 
 ====== KMD
 
