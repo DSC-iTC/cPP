@@ -2650,11 +2650,11 @@ _There are several reasons for granting access to keys or restricting access to 
 +
 _This SFR lists several methods for protecting the confidentiality of keys prior to authorizing their use, archival, backup, escrow, or recovery. This protection is often afforded only to the private or secret portion of cryptographic keys. Some methods offer integrity protection as well. These methods may not apply to modification of attributes especially if the attributes do not need confidentiality. These methods may not apply to destruction since a TOE can only destroy keys within its boundaries, and it is premused these keys are already in the boundary._
 +
-*_Key encapsulation* - If the STF claims key encapsulation, then it should use approved methods such as those listed in FCS_CKM.2._
+*_Key encapsulation* - If the TSF claims key encapsulation, then it should use approved methods such as those listed in FCS_CKM.2._
 +
-*_Key wrapping* - If the STF claims key wrapping, then it should use approved methods such as KW, or KWP._
+*_Key wrapping* - If the TSF claims key wrapping, then it should use approved methods such as those listed in FCS_COP.1/KeyWrap._
 +
-*_Key encryption* - If the STF claims key encryption, then it should use approved methods such as those in FCS_COP.1/SKC combined with either a hash using approved methods such as those in FCS_COP.1/Hash or a keyed hash using approved methods such as those in FCS_COP.2/KeyedHash._
+*_Key encryption* - If the TSF claims key encryption, then it should use approved methods such as those in FCS_COP.1/SKC combined with either a hash using approved methods such as those in FCS_COP.1/Hash or a keyed hash using approved methods such as those in FCS_COP.2/KeyedHash._
 
 ==== FCS_CKM.5 Cryptographic Key Derivation
 
@@ -4253,12 +4253,6 @@ FCS_CKM.6
 FCS_CKM.6 
 |FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
 
-|FCS_COP.1/KAT 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
-
-FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
-
 |FCS_COP.1/KeyWrap
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
 
@@ -4302,8 +4296,8 @@ FCS_CKM.6
 |FDP_ACF.1 
 |FDP_ACC.1 
 
-FMT_MSA.1 
-|FDP_ACC.1 and FMT_MSA.1 are required by the PP.
+FMT_MSA.3
+|FDP_ACC.1 and FMT_MSA.3 are required by the PP.
 
 |FDP_ETC_EXT.2 
 |FCS_COP.1 
@@ -4325,19 +4319,13 @@ FMT_MSA.1
 [FTP_ITC_EXT.1, FTP_ITE_EXT.1, or FTP_ITP_EXT.1] 
 |FCS_COP.1 is required by the PP. FTP_ITC_EXT.1, FTP_ITE_EXT.1, and FTP_ITP_EXT.1 are each selection-based SFRs in the PP but the PP's definition of FDP_ITC_EXT.1 requires at least one of them to be selected so the dependency is always addressed.
 
-|FPT_MFW_EXT.1 
-|No dependencies. 
-|N/A
-
 |FDP_RIP.1 
 |No dependencies. 
 |N/A
 
 |FDP_SDC.2 
-|FCS_COP.1 or FPT_PHP.3
+|FCS_COP.1
 |FCS_COP.1 is required by this PP.
-
-When Protected storage is used for storing SDEs and SDOs, FPT_PHP.3 provides equivalent protection by ensuring data storage is tamper resistant instead of cryptogrpahic storage.
 
 |FDP_SDI.2 
 |No dependencies. 
@@ -4393,6 +4381,10 @@ FMT_SMR.1
 |No dependencies. 
 |N/A
 
+|FPT_MFW_EXT.1
+|No dependencies.
+|N/A
+
 |FPT_MOD_EXT.1 
 |No dependencies. 
 |N/A
@@ -4414,10 +4406,6 @@ FMT_SMR.1
 |FPT_PRO_EXT.1 is required by this PP.
 
 |FPT_RPL.1/Authorization
-|No dependencies. 
-|N/A
-
-|FPT_STM_EXT.1 
 |No dependencies. 
 |N/A
 
@@ -4524,6 +4512,14 @@ FCS_CKM.6
 |FDP_FRS_EXT.1 
 |FDP_FRS_EXT.1 is required by the PP.
 
+|FIA_AFL_EXT.2
+|FIA_AFL_EXT.1
+|FIA_AFL_EXT.1 is required by the PP.
+
+|FPT_FLS.1/FW
+|No dependencies.
+|N/A
+
 |FPT_MFW_EXT.2 
 |FPT_MFW_EXT.1 
 
@@ -4536,16 +4532,12 @@ FCS_COP.1
 FCS_COP.1 
 |FPT_MFW_EXT.1 and FCS_COP.1 are required by the PP.
 
-|FIA_AFL_EXT.2 
-|FIA_AFL_EXT.1 
-|FIA_AFL_EXT.1 is required by the PP.
-
-|FPT_FLS.1/FW 
+|FPT_RPL.1/Rollback 
 |No dependencies. 
 |N/A
 
-|FPT_RPL.1/Rollback 
-|No dependencies. 
+|FPT_STM_EXT.1
+|No dependencies.
 |N/A
 
 |FTP_CCMP_EXT.1 
