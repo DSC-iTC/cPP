@@ -2650,7 +2650,7 @@ _There are several reasons for granting access to keys or restricting access to 
 +
 _This SFR lists several methods for protecting the confidentiality of keys prior to authorizing their use, archival, backup, escrow, or recovery. This protection is often afforded only to the private or secret portion of cryptographic keys. Some methods offer integrity protection as well. These methods may not apply to modification of attributes especially if the attributes do not need confidentiality. These methods may not apply to destruction since a TOE can only destroy keys within its boundaries, and it is premused these keys are already in the boundary._
 +
-*_Key encapsulation* - If the TSF claims key encapsulation, then it should use approved methods such as those listed in FCS_CKM.2._
+*_Key encapsulation* - If the TSF claims key encapsulation, then it should use approved methods such as those listed in FCS_COP.1/KeyEncap._
 +
 *_Key wrapping* - If the TSF claims key wrapping, then it should use approved methods such as those listed in FCS_COP.1/KeyWrap._
 +
