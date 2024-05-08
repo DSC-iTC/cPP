@@ -1947,7 +1947,7 @@ Test 1: The evaluator shall verify that the DSC performs an integrity check of a
 
 Test 2: The evaluator shall ensure that when an integrity check failure occurs specific to failing KATs and failure to verify the integrity of the TSF, the TOE will prevent any further processing of the current TSF and user data. 
 
-Test 3: [CONDITIONAL] For each condition where a self test may be initiated, the evalautor shall verify that the self tests are run as specified.
+Test 3 [conditional]: For each condition where a self test may be initiated, the evaluator shall verify that the self tests are run as specified.
 
 ====== KMD
 
