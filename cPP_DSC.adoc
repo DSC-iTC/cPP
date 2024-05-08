@@ -4219,10 +4219,17 @@ The dependencies between SFRs implemented by the TOE are addressed as follows.
 |Rationale Statement
 
 |FCS_CKM.1 
-|[FCS_CKM_EXT.7 or FCS_COP.1] 
+|[FCS_CKM.2, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_COP.1] 
+
+[FCS_RBG.1 or FCS_RNG.1]
 
 FCS_CKM.6 
-|All of FCS_CKM_EXT.7, FCS_CKM.6, and FCS_COP.1 are required by the PP.
+|FCS_CKM.2, FCS_CKM.6, FCS_CKM_EXT.7, FCS_COP.1 and FCS_RBG.1 are required by the PP.
+
+|FCS_CKM.2
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1 or FCS_CKM.5] 
+
+|FCS_CKM.1 is required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
 
 |FCS_CKM_EXT.7 
 |[FDP_ITC.1, FDP_ITC.2, or FCS_CKM.1] 
@@ -4231,41 +4238,41 @@ FCS_CKM.6
 |FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
 
 |FCS_CKM.6 
-|[FDP_ITC.1, FDP_ITC.2, or FCS_CKM.1] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
 |FCS_CKM.1 is required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
 
 |FCS_COP.1/Hash 
-|[FDP_ITC.1, FDP_ITC.2, or FCS_CKM.1] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
 
 FCS_CKM.6 
 |FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
 
 |FCS_COP.1/KeyedHash 
-|[FDP_ITC.1, FDP_ITC.2, or FCS_CKM.1] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
 
 FCS_CKM.6 
 |FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
 
 |FCS_COP.1/KeyWrap
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
 
 FCS_CKM.6 
 |FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
 
 |FCS_COP.1/SigGen 
-|[FDP_ITC.1, FDP_ITC.2, or FCS_CKM.1] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
 
 FCS_CKM.6 
 |FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
 
 |FCS_COP.1/SigVer 
-|[FDP_ITC.1, FDP_ITC.2, or FCS_CKM.1] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
 
 FCS_CKM.6 
 |FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
 
 |FCS_COP.1/SKC 
-|[FDP_ITC.1, FDP_ITC.2, or FCS_CKM.1] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
 
 FCS_CKM.6 
 |FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
