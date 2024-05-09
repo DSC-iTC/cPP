@@ -1675,7 +1675,7 @@ FIA_UAU.5 Multiple Authentication Mechanisms
 
 FIA_UAU.5.1:: The TSF shall provide [.underline]#*[selection: no mechanism, an authentication token mechanism, a cryptographic signature mechanism, [_assignment: list of authentication mechanisms_]]*# to support user authentication.
 
-FIA_UAU.5.2:: The TSF shall authenticate any user's claimed identity according to the *following rules: [.underline]#[selection: all subject users and SDO owners shall successfully authenticate themselves using one of the mechanisms listed in FIA_UAU.5.1, the Prove service shall not accept "no mechanism" as an authentication method, [_assignment: rules describing how each authentication mechanism provides authentication_]]#*.
+FIA_UAU.5.2:: The TSF shall authenticate any user's claimed identity according to the *following rule(s): [.underline]#[selection: all subject users and SDO owners shall successfully authenticate themselves using one of the mechanisms listed in FIA_UAU.5.1, the Prove service shall not accept "no mechanism" as an authentication method, [_assignment: rules describing how each authentication mechanism provides authentication_]]#*.
 
 _Application Note {counter:remark_count}_:: _This SFR describes the authentication mechanisms required for any user of any service as a precondition for providing authorization to execute the service. This includes the authentication of the owner of the SDOs of the service._
 
