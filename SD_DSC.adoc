@@ -1594,15 +1594,15 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS and ensure that it describes the authentication mechanisms used to support user authentication for the Prove service as well as how each authentication mechanism provides authentication for the Prove service.
+The evaluator shall examine the TSS and ensure that it describes the authentication mechanisms used to support user authentication, including how each mechanism enforces the authentication.
 
 ====== AGD
 
-If the supported authentication mechanisms are configurable, the evaluator shall examine the operational guidance to verify that it describes how to configure the authentication mechanisms used to provide authentication for the Prove service.
+If the supported authentication mechanisms are configurable, the evaluator shall examine the operational guidance to verify that it describes how to configure the authentication mechanisms used to provide authentication.
 
 ====== Test
 
-For each supported authentication mechanism, the evaluator shall verify that valid credentials result in successful authentication and invalid credentials result in a rejected authentication attempt. If the supported authentication mechanisms are configurable, the evaluator shall follow the operational guidance to enable/disable the various mechanisms and ensure that valid credentials do not result in successful authentication if that mechanism is disabled, or that there is no interface to provide authentication credentials over an external interface when that mechanism is disabled.
+For each supported authentication mechanism, the evaluator shall verify that valid credentials result in successful authentication and invalid credentials result in a rejected authentication attempt. If the supported authentication mechanisms are configurable, the evaluator shall follow the operational guidance to enable/disable the various mechanisms and ensure that valid credentials do not result in successful authentication if that mechanism is disabled, or that there is no interface to provide authentication credentials if that mechanism is disabled.
 
 ====== KMD
 
