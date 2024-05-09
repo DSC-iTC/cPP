@@ -1402,7 +1402,12 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-For each supported import method selected in FDP_ITC_EXT.1.1 and for each supported integrity verification method selected in FDP_ITC_EXT.1.2. used by the selected import method, provide one SDE with valid integrity credentials, one with invalid integrity credentials (e.g. hash). The operations with invalid integrity credentials must result in error. The operations with valid integrity credentials must return an SDO with valid security attributes in accordance with FDP_ITC_EXT.1.4.
+For each supported import method selected in FDP_ITC_EXT.1.1 and for each supported integrity verification method selected in FDP_ITC_EXT.1.2. used by the selected import method, the evaluator shall perform the following steps:
+
+. Import one SDE with valid integrity data (e.g. valid hash, MAC tag, or signature).
+. Verify that an SDO is created with valid security attributes in accordance with FDP_ITC_EXT.1.3 and FDP_ITC_EXT.1.4.
+. Import one SDE with invalid integrity data.
+. Verify that the operation results in an error and no SDO is created.
 
 ====== KMD
 
@@ -1420,7 +1425,12 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-For each supported import method selected in FDP_ITC_EXT.2.1 and for each supported integrity verification method selected in FDP_ITC_EXT.2.2 used by the selected import method, provide one SDO with valid integrity credentials, one with invalid integrity credentials (e.g. hash). The operations with invalid integrity credentials must result in error. The operations with valid integrity credentials must return an SDO with valid security attributes in accordance with FDP_ITC_EXT.2.3, FDP_ITC_EXT.2.4, and FDP_ITC_EXT.2.5.
+For each supported import method selected in FDP_ITC_EXT.2.1 and for each supported integrity verification method selected in FDP_ITC_EXT.2.2. used by the selected import method, the evaluator shall perform the following steps:
+
+. Import one SDO with valid integrity data (e.g. valid hash, MAC tag, or signature).
+. Verify that an SDO is created with valid security attributes in accordance with FDP_ITC_EXT.2.3, FDP_ITC_EXT.2.4, and FDP_ITC_EXT.2.5.
+. Import one SDO with invalid integrity data.
+. Verify that the operation results in an error and no SDO is created.
 
 ====== KMD
 
@@ -1594,15 +1604,15 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS and ensure that it describes the authentication mechanisms used to support user authentication for the Prove service as well as how each authentication mechanism provides authentication for the Prove service.
+The evaluator shall examine the TSS and ensure that it describes the authentication mechanisms used to support user authentication, including how each mechanism enforces the authentication.
 
 ====== AGD
 
-If the supported authentication mechanisms are configurable, the evaluator shall examine the operational guidance to verify that it describes how to configure the authentication mechanisms used to provide authentication for the Prove service.
+If the supported authentication mechanisms are configurable, the evaluator shall examine the operational guidance to verify that it describes how to configure the authentication mechanisms used to provide authentication.
 
 ====== Test
 
-For each supported authentication mechanism, the evaluator shall verify that valid credentials result in successful authentication and invalid credentials result in a rejected authentication attempt. If the supported authentication mechanisms are configurable, the evaluator shall follow the operational guidance to enable/disable the various mechanisms and ensure that valid credentials do not result in successful authentication if that mechanism is disabled, or that there is no interface to provide authentication credentials over an external interface when that mechanism is disabled.
+For each supported authentication mechanism, the evaluator shall verify that valid credentials result in successful authentication and invalid credentials result in a rejected authentication attempt. If the supported authentication mechanisms are configurable, the evaluator shall follow the operational guidance to enable/disable the various mechanisms and ensure that valid credentials do not result in successful authentication if that mechanism is disabled, or that there is no interface to provide authentication credentials if that mechanism is disabled.
 
 ====== KMD
 
@@ -1850,9 +1860,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall ensure that the TSS describes either a pre-installed identity (contained within an SDO), or a process on how the TOE creates an identity. IEEE 802.1ar is one example of a standard which a device can use to create such an identity. 
-
-The evaluator shall additionally examine the TSS to ensure that it describes how the Root of Trust is immutable or otherwise mutable if and only if controlled by a unique identifiable owner, the roles this owner assumes in doing so (ADM-R or MFGADM-R roles, etc.), as well as the circumstances in which the Root of Trust is mutable.
+The evaluator shall examine the TSS to ensure that it describes how the Root of Trust is immutable or otherwise mutable if and only if controlled by a unique identifiable owner, the roles this owner assumes in doing so (manufacturer administrator, owner administrator, etc.), as well as the circumstances in which the Root of Trust is mutable.
 
 [conditional] For an immutable Root of Trust, the evaluator shall ensure there are no RoT update functions. 
 
@@ -1878,7 +1886,7 @@ For a mutable Root of Trust identity, the evaluator shall perform the following 
 
 ====== KMD
 
-There are no KMD evaluation activities for this component.
+The evaluator shall ensure that the KMD describes either a pre-installed identity (contained within an SDO), or a process on how the TOE creates an identity. IEEE 802.1ar is one example of a standard which a device can use to create such an identity. 
 
 ==== Root of Trust Services (Extended - FPT_ROT_EXT)
 
@@ -1886,7 +1894,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall ensure that the TSS identifies the Roots of Trust it uses (including but not limited to the Roots of Trust identified in the selections in this requirement) and describes their function in the context of the TOE.
+The evaluator shall ensure that the TSS identifies the Roots of Trust it uses (including but not limited to the Roots of Trust identified in the selections in this requirement) and describes their function in the context of the TOE. The TSS shall describe the cryptographic algorithms in use for the Roots of Trust.
 
 ====== AGD
 
@@ -1896,19 +1904,19 @@ There are no AGD evaluation activities for this component.
 
 *_Root of Trust for Storage_*
 
-The evaluator shall confirm a successful evaluation of FCS_CKM.1, FCS_STG_EXT.1, FCS_STG_EXT.2, FCS_STG_EXT.3, FPT_PHP.3.
+Testing for this component is performed through evaluation of FCS_CKM.1, FCS_STG_EXT.1 and FPT_PHP.3.
 
 *_Root of Trust for Authorization_*
 
-The evaluator shall confirm a successful evaluation of FIA_AFL_EXT.1.
+Testing for this component is performed through evaluation of FIA_AFL_EXT.1.
 
 *_Root of Trust for Measurement_*
 
-The evaluator shall confirm a successful evaluation of FCS_COP.1/Hash.
+Testing for this component is performed through evaluation of FCS_COP.1/Hash.
 
 *_Root of Trust for Reporting_*
 
-The evaluator shall confirm a successful evaluation of FCS_COP.1/SigGen.
+Testing for this component is performed through evaluation of FCS_COP.1/SigGen.
 
 ====== KMD
 
@@ -1926,7 +1934,7 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-Testing for this component is completed through evaluation of FCS_CKM.1, FCS_STG_EXT.1, FCS_STG_EXT.2, FCS_STG_EXT.3, and FPT_PHP.3.
+Testing for this component is performed through evaluation of FCS_CKM.1, FCS_STG_EXT.1, FDP_SDI.2 and FPT_PHP.3.
 
 ====== KMD
 
@@ -2068,6 +2076,8 @@ There are no KMD evaluation activities for this component.
 
 The evaluator shall examine the TSS to determine that it describes the TOE in terms of its distributed components and identifies the communications that take place between these components. The evaluator shall also examine the TSS to ensure that it describes the methods by which each of these communications are protected.
 
+The evaluator shall examine the TSS to determine that is describes the type of separation between distributed components, such as physical connections (circuit, ports, etc) or protocols that may need configuration.
+
 ====== AGD
 
 If applicable, the evaluator shall confirm that the guidance documentation contains instructions for establishing the relevant allowed communication channels between TOE components, and that it contains recovery instructions should a connection be unintentionally broken.
@@ -2076,11 +2086,15 @@ If applicable, the evaluator shall confirm that the guidance documentation conta
 
 The evaluator shall perform the following tests:
 
-Test 1: The evaluator shall ensure that all communications between distributed TOE components is tested during the course of the evaluation, setting up the connections as described in the guidance documentation (if applicable) and ensuring that communication is successful.
+Test 1: The evaluator shall ensure that all communications between distributed TOE components are tested. If communications channels require configuration, the guidance documentation shall be followed and ensure that communication is successful.
 
 Test 2: The evaluator shall ensure, for each communication channel, that the channel data is not sent in plaintext or that there is no interface by which it is possible to extract the channel data.
 
-Test 3: The evaluator shall, where possible, physically interrupt communications between TOE components. The evaluator shall ensure that when physical connectivity is restored, communications are appropriately protected. Note that this test shall only be performed for those interfaces where physical interruption of communications is typical operational behavior. If the TOE consists of multiple components embedded within the same physical chassis such that interrupting communications requires physical destruction of the device (as opposed to disconnecting a re-connectable wire or temporarily disabling a radio), this test is not applicable.
+Test 3 [conditional]: If [.underline]#modification# is selected in FPT_ITT.1.1, the evaluator shall ensure, for each communication channel, that the channel data is authenticated using an approved message authentication code, digital signature, or authenticated encryption mechanism, or that there is no interface by which it is possible to modify the channel data.
+
+Test 4 [conditional]: The evaluator shall, where possible, physically interrupt communications between TOE components. The evaluator shall ensure that when physical connectivity is restored, communications are appropriately protected.
+
+Note that test 4 shall only be performed for those interfaces where physical interruption of communications is typical operational behavior. If the TOE consists of multiple components embedded within the same physical chassis such that interrupting communications requires physical destruction of the device (as opposed to disconnecting a re-connectable wire or temporarily disabling a radio), this test is not applicable.
 
 ====== KMD
 
