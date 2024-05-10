@@ -1840,12 +1840,12 @@ FMT_SMF.1 Specification of Management Functions
 
 FMT_SMF.1.1:: The TSF shall be capable of performing the following management functions: [
 +
-* _Set authorization failure parameters for FIA_AFL_EXT.1_
 * _Reset TOE to factory state for FDP_FRS_EXT.1_
 * _Configure authorization policies for TOE resources_
 +
 _[.underline]#[selection:#_
 +
+** _[.underline]#Set authorization failure parameters for FIA_AFL_EXT.1,#_
 ** _[.underline]#update TOE firmware,#_
 ** _[.underline]#update pre-installed SDOs,#_
 ** _[.underline]#unlock access to SDO following excessive failed authorization attempts,#_
