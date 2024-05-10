@@ -3015,7 +3015,7 @@ The documents to be examined for this assurance component in an evaluation are t
 |<<FSPEval3>>: _The evaluator shall examine the interface documentation to develop a mapping of the interfaces to SFRs._
 
 |ADV_FSP.1-4 The evaluator *_shall examine_* the rationale provided by the developer for the implicit categorisation of interfaces as SFR-non-interfering to determine that it is accurate. 
-|Paragraph 609 from the CEM: "In the case where the developer has provided adequate documentation to perform the analysis called for by the rest of the work units for this component without explicitly identifying SFR-enforcing and SFR-supporting interfaces, this work unit should be considered satisfied."Since the rest of the ADV_FSP.1 work units will have been satisfied upon completion of the EAs, it follows that this work unit is satisfied as well.
+|Paragraph 609 from the CEM: "In the case where the developer has provided adequate documentation to perform the analysis called for by the rest of the work units for this component without explicitly identifying SFR-enforcing and SFR-supporting interfaces, this work unit should be considered satisfied." Since the rest of the ADV_FSP.1 work units will have been satisfied upon completion of the EAs, it follows that this work unit is satisfied as well.
 
 |ADV_FSP.1-5 The evaluator *_shall check_* that the tracing links the SFRs to the corresponding TSFIs. 
 |<<FSPEval4>>: _The evaluator shall examine the interface documentation to develop a mapping of the interfaces to SFRs._
@@ -3066,67 +3066,76 @@ However, if the evaluator is unable to perform some other required EA because th
 |Service
 |DSC SFR
 
-|Asymmetric-Key Generation 
+|Asymmetric Key Generation
 |[FCS_CKM.1/AKG]
 
-|Symmetric-Key Generation 
+|Symmetric Key Generation
 |[FCS_CKM.1/SKG]
 
-|Private-Key Cryptography 
+|Cryptographic Key Distribution
 |FCS_CKM.2
 
-|Public-Key Cryptography 
-|FCS_CKM.2
+|Cryptographic Key Derivation
+|[FCS_CKM.5]
+
+|Cryptographic Key Destruction
+|FCS_CKM.6
+
+|Cryptographic Key Agreement
+|FCS_CKM_EXT.7
+
+|Password-Based Key Derivation
+|[FCS_CKM_EXT.8]
+
+|CMAC
+|[FCS_COP.1/CMAC]
+
+|Cryptographic Hashing
+|FCS_COP.1/Hash
+
+|Cryptographic Keyed Hash
+|FCS_COP.1/KeyedHash
+
+|Cryptographic Key Encapsulation
+|[FCS_COP.1/KeyEncap]
+
+|Cryptographic Key Wrapping
+|[FCS_COP.1/KeyWrap]
+
+|Cryptographic Signature Generation
+|FCS_COP.1/SigGen
+
+|Cryptographic Signature Verification
+|FCS_COP.1/SigVer
 
 |Symmetric-Key Cryptography 
 |FCS_COP.1/SKC, [FTP_CCMP_EXT.1, FTP_GCMP_EXT.1]
 
-|Key Creation 
-|FCS_CKM.1
+|Random Bit Generation
+|FCS_RBG.1, [FCS_RBG.6]
 
-|Random-Bit Generation 
-|FCS_RBG_EXT.1, [FCS_ENT_EXT.1]
+|RBG Seeding
+|[FCS_RBG.2]
 
-|RNG Seeding 
-|FCS_RBG_EXT.1, [FCS_RBG_EXT.2]
+|Cryptographic One-Time Value Generation
+|FCS_OTV_EXT.1
 
-|Key Wrapping 
-|FCS_COP.1/KeyEnc
-
-|Cryptographic Hashing 
-|FCS_COP.1/Hash
-
-|Cryptographic Keyed Hash 
-|FCS_COP.1/HMAC
-
-|Password Hashing (PBKDF) 
-|[FCS_COP.1/PBKDF]
-
-|Signature Generation 
-|FCS_COP.1/SigGen
-
-|Signature Verification 
-|FCS_COP.1/SigVer
-
-|Factory Reset 
-|FDP_FRS_EXT.1, [FDP_FRS_EXT.2]
-
-|Destroy Persistent Secrets 
-|FCS_CKM.4
-
-|Set Root Encryption Key (mutable H/W) 
+|Protected Storage
 |FCS_STG_EXT.1
 
-|Store Persistent Secrets 
-|FCS_STG_EXT.1-3
+|Factory Reset
+|FDP_FRS_EXT.1, [FDP_FRS_EXT.2]
 
-|Wrap Transient Secrets 
-|FCS_STG_EXT.1-3
+|Generation of Data Integrity Measurements
+|[FPT_PRO_EXT.2]
 
-|Get Time Stamp 
-|FPT_STM.1
+|Generation of Secrets
+|FIA_SOS.2
 
-|Cryptographic Self-Tests 
+|Get Time Stamp
+|[FPT_STM_EXT.1]
+
+|Cryptographic Self-Tests
 |FPT_TST.1
 
 |===
