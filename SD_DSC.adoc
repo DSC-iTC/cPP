@@ -1906,7 +1906,7 @@ The evaluator shall ensure that the KMD describes either a pre-installed identit
 
 ====== TSS
 
-The evaluator shall ensure that the TSS identifies the Roots of Trust it uses (including but not limited to the Roots of Trust identified in the selections in this requirement) and describes their function in the context of the TOE. The TSS shall describe the cryptographic algorithms in use for the Roots of Trust.
+The evaluator shall ensure that the TSS identifies the Roots of Trust it provides (including but not limited to the Roots of Trust identified in the selections in this requirement) and describes their function in the context of the TOE. The TSS shall describe the cryptographic algorithms in use for the Roots of Trust.
 
 ====== AGD
 
