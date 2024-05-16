@@ -1938,7 +1938,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall ensure that the TSS describes how the Root of Trust for Storage prevents unauthorized access (including unauthorized disclosure and unauthorized modification) to SDOs. The evaluator shall also examine the TSS to verify that it uses approved mechanisms to protect the confidentiality of secret SDOs and to protect the integrity of secret and non-secret SDOs.
+The evaluator shall ensure that the TSS describes how the Root of Trust for Storage prevents unauthorized access (including unauthorized disclosure and unauthorized modification) to SDOs. The evaluator shall also examine the TSS to verify that it uses approved mechanisms to protect the confidentiality of secret SDOs and to protect the integrity of SDOs.
 
 ====== AGD
 
