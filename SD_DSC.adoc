@@ -1916,7 +1916,7 @@ There are no AGD evaluation activities for this component.
 
 *_Root of Trust for Storage_*
 
-Testing for this component is performed through evaluation of FCS_STG_EXT.1 and FPT_PHP.3.
+Testing for this component is performed through evaluation of FCS_CKM.1, FCS_STG_EXT.1 and FPT_PHP.3.
 
 *_Root of Trust for Authorization_*
 
@@ -1946,7 +1946,7 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-Testing for this component is performed through evaluation of FCS_STG_EXT.1, FDP_SDC.2, FDP_SDI.2 and FPT_PHP.3.
+Testing for this component is performed through evaluation of FCS_CKM.1, FCS_STG_EXT.1, FDP_SDC.2, FDP_SDI.2 and FPT_PHP.3.
 
 ====== KMD
 
