@@ -1975,9 +1975,9 @@ _If both [.underline]#Root of Trust for Measurement# and [.underline]#Root of Tr
 
 FPT_ROT_EXT.2 Root of Trust for Storage
 
-FPT_ROT_EXT.2.1:: The TSF shall prevent unauthorized access to SDOs associated with the Root of Trust for Storage.
+FPT_ROT_EXT.2.1:: The TSF shall prevent unauthorized access to SDOs stored in the Root of Trust for Storage.
 
-_Application Note {counter:remark_count}_:: _TOEs may use shielded locations or cryptographic protections to prevent unauthorized access to SDOs. Use FDP_SDI.2 to protect the integrity of SDOs stored in the RoT for Storage._
+_Application Note {counter:remark_count}_:: _TOEs may use shielded locations or cryptographic protections to prevent unauthorized access to SDOs. Unauthorized access includes unauthorized disclosure of secret SDOs (e.g. secret keys, private keys) and unauthorized modification of both secret and non-secret SDOs (e.g. public keys, certificates). Use FDP_SDC.2 to protect the confidentiality of secret SDOs stored in the RoT for Storage. Use FDP_SDI.2 to protect the integrity of SDOs stored in the RoT for Storage._
 
 ==== FPT_RPL.1/Authorization Replay Prevention
 
@@ -3902,7 +3902,7 @@ This family defines requirements for individual Root of Trust services that the 
 
 FPT_ROT_EXT.1 Root of Trust Services, requires the TSF to identify the specific Roots of Trust it provides.
 
-FPT_ROT_EXT.2 Root of Trust for Storage, requires the TSF to prevent unauthorized access to data associated with its Root of Trust for Storage.
+FPT_ROT_EXT.2 Root of Trust for Storage, requires the TSF to prevent unauthorized access to SDOs stored in its Root of Trust for Storage.
 
 FPT_ROT_EXT.3 Root of Trust for Reporting Mechanisms, requires the TSF to implement a Root of Trust for Reporting in the specified manner.
 
@@ -3928,7 +3928,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: FPT_PRO_EXT.1 Root of Trust
 [vertical]
-FPT_ROT_EXT.2.1:: The TSF shall prevent unauthorized access to SDOs associated with the Root of Trust for Storage.
+FPT_ROT_EXT.2.1:: The TSF shall prevent unauthorized access to SDOs stored in the Root of Trust for Storage.
 
 *FPT_ROT_EXT.3 Root of Trust for Reporting Mechanisms*
 [horizontal]
