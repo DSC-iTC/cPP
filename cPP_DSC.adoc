@@ -2144,7 +2144,7 @@ The following rationale provides justification for each security objective for t
 |This requirement ensures that confidentiality and integrity is maintained in cases where data is transmitted between physically separate parts of a distributed TOE.
 
 |FPT_PRO_EXT.2 (optional)
-|This requirement ensures that the TSF can produce attestation of the integrity of its stored data.
+|This requirement ensures that the TSF can measure the integrity of its stored data.
 
 |FPT_ROT_EXT.3 (optional)
 |This requirement allows the TSF to provide a RoT for Reporting that can provide assured information about the stored SDEs.
@@ -2489,15 +2489,15 @@ FPT_ITT.1.1:: The TSF shall protect TSF data from [.underline]#[disclosure]# *an
 
 FPT_PRO_EXT.2 Data Integrity Measurements
 
-FPT_PRO_EXT.2.1:: The TSF shall be able to quantify the integrity of the data protected by the TOE by generating integrity measurements and assertions making them available to authorized entities.
+FPT_PRO_EXT.2.1:: The TSF shall be able to quantify the integrity of the data protected by the TOE by generating integrity measurements and assertions.
 
 _Application Note {counter:remark_count}_:: _The generation of these integrity measurements and assertions is the creation of OB.Pstate._
 +
-_Data protected by the TOE includes DSC firmware, DSC configuration data, and user data. DSC configuration data may include permanent SDEs or SDOs such as immutable or mutable root keys, authorization values, and authentication tokens (i.e. DSC.ID, OB.P_SDO, OB.FAACntr, OB.AntiReplay, and OB.Context). User data may include transient SDEs and SDOs as well as authorization values and authentication tokens bound to these SDEs and SDOs (i.e. OB.T_SDO). Integrity reporting is the process of attesting to integrity measurements (including those recorded in status registers in a DSC)._
+_Data protected by the TOE includes DSC firmware, DSC configuration data, and user data. DSC configuration data may include permanent SDEs or SDOs such as immutable or mutable root keys, authorization values, and authentication tokens (i.e. DSC.ID, OB.P_SDO, OB.FAACntr, OB.AntiReplay, and OB.Context). User data may include transient SDEs and SDOs as well as authorization values and authentication tokens bound to these SDEs and SDOs (i.e. OB.T_SDO)._
 
-FPT_PRO_EXT.2.2:: The TSF shall accumulate platform characteristics using a consistent [_assignment: description of process for accumulating platform characteristics_] process in which verified quantifiable measurements are accumulated to prove the integrity of its SDOs.
+FPT_PRO_EXT.2.2:: The TSF shall accumulate platform characteristics using a consistent [_assignment: description of process for accumulating platform characteristics_] process in which verified quantifiable measurements and assertions are accumulated by the RoT for Measurement to prove the integrity of its SDOs.
 
-_Application Note {counter:remark_count}_:: _Although a platform may enter any state possible—including undesirable or insecure states—it can use platform characteristics, including integrity measurements and assertions, along with logging and reporting to accurately report the state derived from data attributing to those states. In this context, platform characteristics can include, but is not limited to, cryptographic hashes of binary data, security-critical configurations, register values (including status registers) and milestones, such as verification of firmware, or transitioning from a boot phase to an operational phase. A platform characteristic may also represent the state of some entity outside the DSC. A process independent from the DSC or the host containing the DSC may evaluate the platform characteristics and determine an appropriate action._
+_Application Note {counter:remark_count}_:: _Although a platform may enter any state possible — including undesirable or insecure states — it can use platform characteristics, including integrity measurements and assertions, along with logging and reporting to accurately report the state derived from data attributing to those states. In this context, platform characteristics can include, but is not limited to, cryptographic hashes of binary data, security-critical configurations, register values (including status registers) and milestones, such as verification of firmware, or transitioning from a boot phase to an operational phase. A platform characteristic may also represent the state of some entity outside the DSC. A process independent from the DSC or the host containing the DSC may evaluate the platform characteristics and determine an appropriate action._
 
 ==== FPT_ROT_EXT.3 Root of Trust for Reporting Mechanisms 
 
@@ -3872,9 +3872,9 @@ Hierarchical to:: No other components.
 
 Dependencies:: No dependencies.
 [vertical]
-FPT_PRO_EXT.2.1:: The TSF shall be able to quantify the integrity of the data protected by the TOE by generating integrity measurements and assertions making them available to authorized entities.
+FPT_PRO_EXT.2.1:: The TSF shall be able to quantify the integrity of the data protected by the TOE by generating integrity measurements and assertions.
 
-FPT_PRO_EXT.2.2:: The TSF shall accumulate platform characteristics using a consistent [_assignment: description of process for accumulating platform characteristics_] process in which verified quantifiable measurements are accumulated to prove the integrity of its SDOs.
+FPT_PRO_EXT.2.2:: The TSF shall accumulate platform characteristics using a consistent [_assignment: description of process for accumulating platform characteristics_] process in which verified quantifiable measurements and assertions are accumulated by the RoT for Measurement to prove the integrity of its SDOs.
 
 ==== FPT_ROT_EXT Root of Trust Services
 
