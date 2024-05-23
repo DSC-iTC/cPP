@@ -2118,7 +2118,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS and ensure that it describes the contents and structure of any quantifiable measures of integrity (including but not limited to cryptographic self-tests) as well as the contents and structure of any reports generated, if any, that are used to quantify the integrity of the data integrity measurements stored in the DSC and establish trust. The evaluator shall also ensure that the TSS describes the order and importance of integrity measurements and records that comprise attestation to prove the integrity of the SDOs in the DSC. In addition, the evaluator shall ensure the TSS gives justification as to how the process in accumulating measurements is consistent between restarts.
+The evaluator shall examine the TSS and ensure that it describes the contents and structure of any measurements (including but not limited to cryptographic self-tests) and assertions that are used to quantify the integrity of the data protected by the DSC and establish trust. The evaluator shall also ensure that the TSS describes the order and importance of integrity measurements and records that comprise platform characteristics to prove the integrity of the SDOs in the DSC. In addition, the evaluator shall ensure the TSS lists the possible values for the platform characteristics and how these values relate to the integrity of the data protected by the DSC. Finally, the evaluator shall ensure that the TSS gives justification as to how the process in accumulating platform characteristics is consistent between restarts.
 
 ====== AGD
 
@@ -2126,7 +2126,27 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-The tests for FDP_ITC_EXT and FMT_MSA.3 shall suffice for this component.
+For each platform characteristic described in the TSS, the evaluator shall perform the following steps:
+
+. Identify the integrity measurements and assertions that comprise the platform characteristic.
+
+. Start the DSC and record the value of the platform characteristic.
+
+. Shut down the DSC.
+
+. Modify the data protected by the integrity measurements and assertions identified in Step 1.
+
+. Start the DSC and record the value of the platform characteristic. The evaluator shall verify the newly obtained value is different from the value obtained in Step 2.
+
+. Shut down the DSC.
+
+. Revert the modifications made in Step 4.
+
+. Start the DSC and record the value of the platform characteristic. The evaluator shall verify the newly obtained value is equal to the value obtained in Step 2.
+
+. Shut down the DSC.
+
+Refer to [DSC cPP] for more information about what could constitute DSC data or platform characteristics.
 
 ====== KMD
 
