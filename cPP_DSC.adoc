@@ -3107,29 +3107,31 @@ This Appendix provides a definition for all of the extended components introduce
 
 | FCS_OTV_EXT One-Time Value
 
-| FCS_STG_EXT Security Audit Event Storage
+| FCS_STG_EXT Cryptographic Key Storage
 
-.4+| User Data Protection (FDP) 
+.3+| User Data Protection (FDP) 
 | FDP_ETC_EXT Export from the TOE
 
 | FDP_FRS_EXT Factory Reset
 
 | FDP_ITC_EXT Import from Outside of the TOE
 
-| FPT_MFW_EXT Firmware
-
 | Identification and Authentication (FIA) 
-| FIA_AFL_EXT Authorization Failures
+| FIA_AFL_EXT Authorization Failure Handling
 
 | Security Management (FMT) 
 | FMT_MOF_EXT Management of Functions in TSF
 
-.3+| Protection of the TSF (FPT) 
+.5+| Protection of the TSF (FPT) 
+| FPT_MFW_EXT Mutable/Immutable Firmware
+
 | FPT_MOD_EXT Debug Modes
 
 | FPT_PRO_EXT Root of Trust
 
 | FPT_ROT_EXT Root of Trust Services
+
+| FPT_STM_EXT Reliable Time Counting
 
 .5+| Trusted Path/Channels (FTP) 
 | FTP_CCMP_EXT CCM Protocol
