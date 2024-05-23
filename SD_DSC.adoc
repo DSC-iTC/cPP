@@ -1938,7 +1938,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall ensure that the TSS describes how the Root of Trust for Storage prevents unauthorized access to SDOs. The evaluator shall also examine the TSS to verify that it uses approved mechanisms to protect the integrity of SDOs. 
+The evaluator shall ensure that the TSS describes how the Root of Trust for Storage prevents unauthorized access (including unauthorized disclosure and unauthorized modification) to SDOs. The evaluator shall also examine the TSS to verify that it uses approved mechanisms to protect the confidentiality of secret SDOs and to protect the integrity of SDOs.
 
 ====== AGD
 
@@ -1946,7 +1946,7 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-Testing for this component is performed through evaluation of FCS_CKM.1, FCS_STG_EXT.1, FDP_SDI.2 and FPT_PHP.3.
+Testing for this component is performed through evaluation of FCS_CKM.1, FCS_STG_EXT.1, FDP_SDC.2, FDP_SDI.2 and FPT_PHP.3.
 
 ====== KMD
 
