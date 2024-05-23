@@ -1872,11 +1872,11 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS to ensure that it describes how the Root of Trust is immutable or otherwise mutable if and only if controlled by a unique identifiable owner, the roles this owner assumes in doing so (manufacturer administrator, owner administrator, etc.), as well as the circumstances in which the Root of Trust is mutable.
+The evaluator shall examine the TSS to ensure that it describes how Root of Trust data is immutable or otherwise mutable if and only if controlled by a unique identifiable owner, the roles this owner assumes in doing so (manufacturer administrator, owner administrator, etc.), as well as the circumstances in which Root of Trust data is mutable.
 
-[conditional] For an immutable Root of Trust, the evaluator shall ensure there are no RoT update functions. 
+[conditional] For immutable Root of Trust data, the evaluator shall ensure there are no mechanisms to update the Root of Trust.
 
-[conditional] For a mutable Root of Trust, the evaluator shall ensure the Root of Trust update mechanism uses an approved method for authenticating the source of the update. 
+[conditional] For mutable Root of Trust data, the evaluator shall ensure the Root of Trust update mechanism uses an approved method for authenticating the source of the update.
 
 ====== AGD
 
@@ -1886,11 +1886,11 @@ For mutable Root of Trust data, the evaluator shall confirm the AGD contains an 
 
 *_Immutability_*
 
-For immutable Root of Trust identity, the evaluator shall confirm a successful evaluation of FPT_PHP.3 (Resistance to Physical Attack).
+For immutable Root of Trust data, the evaluator shall confirm a successful evaluation of FPT_PHP.3 (Resistance to Physical Attack).
 
 *_Mutability_*
 
-For a mutable Root of Trust identity, the evaluator shall perform the following tests:
+For mutable Root of Trust data, the evaluator shall perform the following tests:
 
 . Create or use an authenticated Root of Trust identity, confirm the authenticated method for modifying the Root of Trust identity succeeds.
 
