@@ -663,25 +663,29 @@ If the selection or assignment is to be completed by the ST author, it is preced
 
 Some SFRs include selections that determine or constrain other assignments or selections. In these cases, a table follows the requirement in which each row of the table defines a permitted set of choices. Individual entries in these tables may also require further selections or assignments. Within the tables, the selections and assignments just follow the normal conventions as the specific modifications applied to the SFR are included in the SFR itself, and the table will only follow the normal conventions under that specified within the SFR.
 
-e.g. for FCS_CKM.1/AKG (see <<SampleCrypto>>), the ST for a TOE that supports RSA keys must include the entries for 'Cryptographic Key Generation Algorithm', 'Cryptographic Algorithm Parameters', and 'List of Standards'. For 'Cryptographic Algorithm Parameters', the ST author must further select which of the required parameter information are supported. Likewise, if the TOE supports ECC the ST must include the entries from row for ECC along with the appropriate selections.
+e.g. for FCS_CKM.1/AKG (see <<SampleCrypto>>), the ST for a TOE that supports RSA keys must include the entries for 'Cryptographic Key Generation Algorithm', 'Cryptographic Algorithm Parameters', and 'List of Standards'. For 'Cryptographic Algorithm Parameters', the ST author must further select which of the required parameter information are supported. Likewise, if the TOE supports ECC the ST must include the entries from row for ECC along with the appropriate selections. The row identifiers (where applicable) are merely intended as quick reference handles; there is no expectation that the TSF actually refer internally to RSA keys using this identifier.
 
 .Sample Cryptographic Table
 [[SampleCrypto]]
-[cols=".^1,.^2,.^2",options=header]
+[cols=".^1,.^2,.^2,.^2",options=header]
 |===
 
+|Identifier
 |Cryptographic Key Generation Algorithm
 |Cryptographic Algorithm Parameters
 |List of Standards
 
+|AKG1
 |RSA
 |[selection: 2048 bit, 3072 bit] 
 |FIPS PUB 186-4 (Section B.3)
 
+|AKG2
 |ECC
 |[selection: 256 (P-256), 384 (P-384), 512 (P-521)]
 |FIPS PUB 186-4 (Section B.4 & D.1.2)
 
+|AKG3
 |BPC
 |[selection: 256 (brainpoolP256r1), 384 (brainpoolP384r1), 512 (brainpoolP512r1)]
 |RFC5639 (Section 3) [Brainpool Curves]
@@ -767,47 +771,57 @@ The following table provides the allowed choices for completion of the selection
 
 .Cryptographic Key Agreement
 [[KeyAgreement]]
-[cols=".^2,.^2,.^2",options=header]
+[cols=".^1,.^2,.^2,.^2",options=header]
 |===
 
+|Identifier
 |Cryptographic Algorithm
 |Key Sizes
 |List of Standards
 
+|KAS2
 |RSA
 |[selection: 2048, 3072, 4096, 6144, 8192] bits
 |NIST SP 800-56B Rev 2 (Section 8.3)
 
+|DH
 |Diffie-Hellman
 |[selection: 2048, 3072, 4096, 6144, 8192] bits
 |NIST SP 800-56A Rev 3, [selection: RFC 3526 (Section [selection: 3, 4, 5, 6, 7]), RFC 7919 (Appendixes [selection: A.1, A.2, A.3, A.4, A.5])]
 
+|ECDH-NIST
 |ECDH with NIST curves
 |[selection: 256 (P-256), 384 (P-384), 512 (P-521)] bits
 |NIST SP 800-56Ar3, NIST SP 800-186 (Appendix G.1)
 
+|ECDH-BPC
 |ECDH with Brainpool curves
 |[selection: 256 (brainpoolP256r1), 384 (brainpoolP384r1), 512 (brainpoolP512r1)] bits
 |NIST SP 800-56Ar3, NIST SP 800-186 (Appendix H.1)
 
+|ECDH-Ed
 |ECDH with Edwards Curves
 |[selection: 255, 448] bits
 |RFC 7748
 
 |ECIES
+|ECIES
 |[selection: 256, 384, 512] bits
 |[selection: ANSI X9.63, IEEE 1363a, ISO/IEC 18033-2 Part 2, SECG SEC1 sec 5.1]
 
+|KAS-KDF-X
 |[selection: KDF-CTR, KDF-FB, KDF-DPI] with concatenated keys as input using [selection: AES-128-CMAC; AES-192-CMAC; AES-256-CMAC, HMAC-SHA-1; HMAC-SHA-256; HMAC-SHA-512] as the PRF.
 |[selection: 128, 192, 256] bits
 |NIST SP 800-108 Rev 1 (Section 4) [KDF]
 
 [selection: ISO/IEC 9797-1:2011 (CMAC), NIST SP 800-38B (CMAC), ISO/IEC 18033-3:2010 (AES), FIPS PUB 197 (AES),  ISO/IEC 9797-2:2021 (HMAC), FIPS PUB 198-1 (HMAC), ISO/IEC 10118-3:2018 (SHA), FIPS PUB 180-4 (SHA)] 
 
+|KAS-KDF-KEK
 |Encrypting one key with another using algorithm specified in FCS_COP.1/SKC
 |[selection: 128, 192, 256] bits
 |N/A
 
+|KAS-KDF-XOR
 |exclusive OR (XOR)
 |[selection: 128, 192, 256] bits
 |N/A
@@ -1081,7 +1095,7 @@ FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
 
 FCS_COP.1.1/SKC:: The TSF shall perform _symmetric-key encryption/decryption_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
 
-.The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/SKC.
+.Symmetric-Key Cryptography
 [[SymmetricKeys]]
 [cols=".^1,.^2,.^2,.^2",options=header]
 |===
@@ -1093,187 +1107,122 @@ FCS_COP.1.1/SKC:: The TSF shall perform _symmetric-key encryption/decryption_ in
 
 |AES-CBC
 |AES in CBC mode with non-repeating and unpredictable IVs
-|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
-|{empty}[*selection*: [.underline]#ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197]# [AES]
+|[selection: 128, 192, 256] bits
+|[selection: ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197] [AES]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A#] [CBC]
-
-|AES-CCM
-|AES in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
-|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
-|{empty}[*selection*: [.underline]#ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197]# [AES]
-
-{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C]# [CCM]
-
-|AES-GCM
-|AES in GCM mode with non-repeating IVs
-
-IV length must be equal to 96 bits; the deterministic IV construction method [SP800-38D, Section 8.2.1] must be used; the MAC length t must be one of the values 96, 104, 112, 120, and 128 bits.
-|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
-|{empty}[*selection*: [.underline]#ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197]# [AES] 
-
-{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D]# [GCM]
+[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |XTS-AES
-|AES in XTS mode with unique [*selection*: [.underline]#consecutive non-negative integers starting at an arbitrary non-negative integer, data unit sequence numbers#] tweak values
-|{empty}[*selection*: [.underline]#256 bits, 512 bits#]
-|{empty}[*selection*: [.underline]#ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197]# [AES] 
+|AES in XTS mode with unique tweak values that are consecutive non-negative integers starting at an arbitrary non-negative integer
+|[selection: 256, 512] bits
+|[selection: ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197] [AES] 
 
-{empty}[*selection*: [.underline]#IEEE Std. 1619-2018, NIST SP 800-38E#] [XTS]
+[selection: IEEE Std. 1619-2018, NIST SP 800-38E] [XTS]
 
 |AES-CTR
-|AES in Counter Mode with a non-repeating initial counter and with no repeated use of counter values across multiple messages with the same secret key.
-|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
-|{empty}[*selection*: [.underline]#ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197]# [AES] 
+|AES in Counter Mode with a non-repeating initial counter and with no repeated use of counter values across multiple messages with the same secret key
+|[selection: 128, 192, 256] bits
+|[selection: ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197] [AES] 
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A#] [CTR]
+[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |CAM-CBC
 |Camellia in CBC mode with non-repeating and unpredictable IVs
-|{empty}[*selection*: [.underline]#128 bits, 256 bits#]
+|[selection: 128, 192, 256] bits
 |ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A#] [CBC]
-
-|CAM-CCM
-|Camellia in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
-|{empty}[*selection*: [.underline]#128 bits, 256 bits#]
-|ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
-
-{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C#] [CCM]
-
-|CAM-GCM
-|Camellia in GCM mode with non-repeating IVs
-
-the IV length must be equal to 96 bits; the deterministic IV construction method [SP800-38D, Section 8.2.1] must be used; the MAC length t must be one of the values 96, 104, 112, 120, and 128 bits.
-|{empty}[*selection*: [.underline]#128 bits, 256 bits#]
-|ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
-
-{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D#] [GCM]
+[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |XTS-CAM
-|Camellia in XTS mode with unique [selection: consecutive non-negative integers starting at an arbitrary non-negative integer, data unit sequence numbers] tweak values
-|{empty}[*selection*: [.underline]#256 bits, 512 bits#]
+|Camellia in XTS mode with unique tweak values that are consecutive non-negative integers starting at an arbitrary non-negative integer
+|[selection: 256, 512] bits
 |ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
 
-{empty}[*selection*: [.underline]#IEEE Std. 1619-2018, NIST SP 800-38E#] [XTS]
+[selection: IEEE Std. 1619-2018, NIST SP 800-38E] [XTS]
 
 |SEED-CBC
 |SEED in CBC mode with non-repeating and unpredictable IVs
 |128 bits
 |ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A#] [CBC]
+[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |SEED-CFB
 |SEED in CFB mode with non-repeating and unpredictable IVs
 |128 bits
 |ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A#] [CFB]
+[selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
 
 |SEED-OFB
 |SEED in OFB mode with unique IVs
 |128 bits
 |ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A#] [OFB]
+[selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
 
 |SEED-CTR
 |SEED in CTR mode with unique, incremental counter
 |128 bits
 |ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A#] [CTR]
-
-|SEED-CCM
-|SEED in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
-|128 bits
-|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
-
-{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C#] [CCM]
-
-|SEED-GCM
-|SEED in GCM mode with non-repeating IVs
-
-IV length must be equal to 96 bits; the deterministic IV construction method [SP800-38D, Section 8.2.1] must be used; the MAC length t must be one of the values 96, 104, 112, 120, and 128 bits.
-|128 bits
-|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
-
-{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D#] [GCM]
+[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |HIGHT-CBC
 |HIGHT in CBC mode with non-repeating and unpredictable IVs
 |128 bits
 |ISO/IEC 18033-3:2010 (Sub Clause 4.5) [HIGHT]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A#] [CBC]
+[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |HIGHT-CFB
 |HIGHT in CFB mode with non-repeating and unpredictable IVs
 |128 bits
 |ISO/IEC 18033-3:2010 (Sub Clause 4.5) [HIGHT]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A#] [CFB]
+[selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
 
 |HIGHT-OFB
 |HIGHT in OFB mode with unique IVs
 |128 bits
 |ISO/IEC 18033-3:2010 (Sub Clause 4.5) [HIGHT]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A#] [OFB]
+[selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
 
 |HIGHT-CTR
 |HIGHT in CTR mode with unique, incremental counter
 |128 bits
 |ISO/IEC 18033-3:2010 (Sub Clause 4.5) [HIGHT]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A#] [CTR]
+[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |LEA-CBC
 |LEA in CBC mode with non-repeating and unpredictable IVs
-|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
+|[selection: 128, 192, 256] bits
 |ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A#] [CBC]
+[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |LEA-CFB
 |LEA in CFB mode with non-repeating and unpredictable IVs
-|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
+|[selection: 128, 192, 256] bits
 |ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A#] [CFB]
+[selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
 
 |LEA-OFB
 |LEA in OFB mode with unique IVs
-|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
+|[selection: 128, 192, 256] bits
 |ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A#] [OFB]
+[selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
 
 |LEA-CTR
 |LEA in CTR mode with unique, incremental counter
-|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
+|[selection: 128, 192, 256] bits
 |ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
 
-{empty}[*selection*: [.underline]#ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A#] [CTR]
-
-|LEA-CCM
-|LEA in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
-|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
-|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
-
-{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C#] [CCM]
-
-|LEA-GCM
-|LEA in GCM mode with non-repeating IVs
-
-IV length must be equal to 96 bits; the deterministic IV construction method [SP800-38D, Section 8.2.1] must be used; the MAC length t must be one of the values 96, 104, 112, 120, and 128 bits.
-
-|{empty}[*selection*: [.underline]#128 bits, 192 bits, 256 bits#]
-|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
-
-{empty}[*selection*: [.underline]#ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D#] [GCM]
+[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |===
 
