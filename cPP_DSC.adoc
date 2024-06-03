@@ -844,74 +844,70 @@ _For cPP/ST authors, please consider the assumptions that opposite parties in th
 
 FCS_COP.1/Hash Cryptographic Operation (Hashing)
 
-FCS_COP.1.1/Hash:: The TSF shall perform [_cryptographic hashing_] in accordance with a specified cryptographic algorithm {empty}[*selection*: [.underline]#SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, SHA-512/256, SHA3-224, SHA3-256, SHA3-384, SHA3-512]#* that meets the following: {empty}[*selection*: [.underline]#ISO/IEC 10118-3:2018, FIPS PUB 180-4, FIPS PUB 202]#*.
+FCS_COP.1.1/Hash:: The TSF shall perform [_cryptographic hashing_] in accordance with a specified cryptographic algorithm {empty}[*selection*: [.underline]#_SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, SHA-512/256, SHA3-224, SHA3-256, SHA3-384, SHA3-512_]# that meets the following: {empty}[*selection*: [.underline]#_ISO/IEC 10118-3:2018, FIPS PUB 180-4, FIPS PUB 202_]#.
 
-_Application Note {counter:remark_count}_:: _The hash selection should be consistent with the overall strength of the algorithm used for signature generation. For example, the TOE should choose SHA-256 for 2048-bit RSA or ECC with P-256, SHA-384 for 3072-bit RSA, 4096-bit RSA, or ECC with P-384, and SHA-512 for ECC with P-521. The ST author selects the standard based on the algorithms selected._
-+
-_SHA-1 may be used for the following applications: generating and verifying hash-based message authentication codes (HMACs), key derivation functions (KDFs), and random bit/number generation_.footnote:[In certain cases, SHA-1 may also be used for verifying old digital signatures and time stamps, provided that this is explicitly allowed by the application domain.]
-+
-_Since there are no keys involved with hashing, there are no cryptographic key-based dependencies necessary for this SFR._
+_Application Note {counter:remark_count}_:: _The hash selection should be consistent with the overall strength of the algorithm used for signature generation. For example, the TOE should choose SHA-256 for 2048-bit RSA or ECC with P-256; SHA-384 for 3072-bit RSA, 4096-bit RSA, or ECC with P-384; and SHA-512 for ECC with P-521. The ST author selects the standard based on the algorithms selected. SHA-1 may be used as a general hash function and for the following applications: generating and verifying hash-based message authentication codes (HMACs), key derivation functions (KDFs), and random bit/number generation. SHA-1 may also be used for verifying old digital signatures and time stamps, if this is explicitly allowed by the application domain. SHA-1 should not be used in applications in which collision resistance is needed._
 
 ==== FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash)
 
 FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash)
 
-FCS_COP.1.1/KeyedHash:: The TSF shall perform [_keyed hash message authentication_] in accordance with a specified cryptographic algorithm [*selection*: _keyed hash algorithm_] and cryptographic key sizes [*selection*: _minimum key size (in bits)_] that meet the following: [*selection*: _list of standards_].
+FCS_COP.1.1/KeyedHash:: The TSF shall perform [_keyed hash message authentication_] in accordance with a specified cryptographic algorithm [*selection*: _keyed hash algorithm_] and cryptographic key sizes [*selection*: _cryptographic key size_] that meet the following: [*selection*: _list of standards_].
 
-.Allowed choices for completion of the selection operations of FCS_COP.1/KeyedHash.
+.Keyed Hash
 [[KeyedHashAlgorithms]]
-[cols=".^1,.^1,.^1,.^3",options=header]
+[cols=".^1,.^1,.^3",options=header]
 |===
 
-|keyed hash algorithm 
-|minimum key size (in bits) (ISO) 
-|minimum key size (in bits) (not ISO) 
+|Keyed Hash Algorithm 
+|Cryptographic Key Sizes 
 |List of Standards
 
 |HMAC-SHA-1
-|160
-|128
-|{empty}[*selection*: [.underline]#ISO/IEC 9797-2:2021 (Section 7 “MAC Algorithm 2”); FIPS PUB 198-1]# [HMAC] 
+|[selection: (ISO, FIPS) 160, (FIPS) 128] bits
+|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"), FIPS PUB 198-1] [HMAC] 
 
-{empty}[*selection*: [.underline]#ISO/IEC 10118-3:2018, FIPS PUB 180-4]# [SHA] 
+[selection: ISO/IEC 10118-3:2018, FIPS PUB 180-4] [SHA] 
 
 |HMAC-SHA-224
-|224
-|128
-|{empty}[*selection*: [.underline]#ISO/IEC 9797-2:2021 (Section 7 “MAC Algorithm 2”); FIPS PUB 198-1]# [HMAC] 
+|[selection: (ISO, FIPS) 224, (FIPS)  192, 128] bits
+|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"), FIPS PUB 198-1] [HMAC] 
 
-{empty}[*selection*: [.underline]#ISO/IEC 10118-3:2018, FIPS PUB 180-4]# [SHA] 
+[selection: ISO/IEC 10118-3:2018, FIPS PUB 180-4] [SHA] 
 
 |HMAC-SHA-256
-|256
-|128
-|{empty}[*selection*: [.underline]#ISO/IEC 9797-2:2021 (Section 7 “MAC Algorithm 2”); FIPS PUB 198-1]# [HMAC] 
+|[selection: (ISO, FIPS) 256, (FIPS) 192, 128] bits
+|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"), FIPS PUB 198-1] [HMAC] 
 
-{empty}[*selection*: [.underline]#ISO/IEC 10118-3:2018, FIPS PUB 180-4]# [SHA] 
+[selection: ISO/IEC 10118-3:2018, FIPS PUB 180-4] [SHA] 
 
 |HMAC-SHA-384
-|384
-|128
-|{empty}[*selection*: [.underline]#ISO/IEC 9797-2:2021 (Section 7 “MAC Algorithm 2”); FIPS PUB 198-1]# [HMAC] 
+|[selection: (ISO, FIPS) 384, (FIPS) 256, 192, 128] bits
+|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"), FIPS PUB 198-1] [HMAC] 
 
-{empty}[*selection*: [.underline]#ISO/IEC 10118-3:2018, FIPS PUB 180-4]# [SHA] 
+[selection: ISO/IEC 10118-3:2018, FIPS PUB 180-4] [SHA] 
 
 |HMAC-SHA-512
-|512
-|128
-|{empty}[*selection*: [.underline]#ISO/IEC 9797-2:2021 (Section 7 “MAC Algorithm 2”); FIPS PUB 198-1]# [HMAC] 
+|[selection: (ISO, FIPS) 512, (FIPS) 384, 256, 192, 128] bits
+|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"), FIPS PUB 198-1] [HMAC] 
 
-{empty}[*selection*: [.underline]#ISO/IEC 10118-3:2018, FIPS PUB 180-4]# [SHA] 
+[selection: ISO/IEC 10118-3:2018, FIPS PUB 180-4] [SHA] 
 
 |KMAC128
-|128
-|128
-|{empty}[*selection*: [.underline]#ISO/IEC 9797-2:2021 (Section 9 “MAC Algorithm 4”); NIST SP 800-185 (Section 4 “KMAC”)]#
+|128 bits
+|[selection: ISO/IEC 9797-2:2021 (Section 9 "MAC Algorithm 4"), NIST SP 800-185 (Section 4 "KMAC")]
 
 |KMAC256
-|256
-|256
-|{empty}[*selection*: [.underline]#ISO/IEC 9797-2:2021 (Section 9 “MAC Algorithm 4”); NIST SP 800-185 (Section 4 “KMAC”)]#
+|256 bits
+|[selection: ISO/IEC 9797-2:2021 (Section 9 "MAC Algorithm 4"), NIST SP 800-185 (Section 4 "KMAC")]
+
+|KMACXOF128
+|128 bits	
+|[selection: ISO/IEC 9797-2:2021, Section 9 "MAC Algorithm 4", NIST SP 800-185, section 4 "KMAC"]
+
+|KMACXOF256
+|256 bits
+|[selection: ISO/IEC 9797-2:2021, Section 9 "MAC Algorithm 4", NIST SP 800-185, section 4 "KMAC"]
 
 |===
 
@@ -2697,6 +2693,80 @@ FCS_CKM_EXT.8 Password-Based Key Derivation
 FCS_CKM_EXT.8.1:: The TSF shall perform password-based key derivation functions in accordance with a specified cryptographic algorithm {empty}[_HMAC-[selection: SHA-256, SHA-384, SHA-512]_], with iteration count of _[assignment: number of iterations]_ using a randomly generated salt of length _[selection: 128, [assignment: greater than 128]]_ and output cryptographic key sizes _[selection: 128, 192, 256]_ bits that meet the following standard: [NIST SP 800-132 Section 5.3 (PBKDF2)].
 
 _Application Note {counter:remark_count}_:: _The TSF must condition a password into a string of bits prior to using it as input to algorithms that form SKs and KEKs. The TSF can perform conditioning using one of the identified hash functions or the process described in NIST SP 800-132 Section 5.3 (PBKDF2); the ST author selects the method used. NIST SP 800-132 Section 5.3 (PBKDF2) requires the use of a pseudo-random function (PRF) consisting of HMAC with an approved hash function._
+
+==== FCS_COP.1/AEAD Authenticated Encryption with Associated Data
+
+FCS_COP.1/AEAD Authenticated Encryption with Associated Data
+
+FCS_COP.1.1/AEAD:: The TSF shall perform _authenticated encryption with associated data_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
+
+.AEAD Symmetric-Key Cryptography
+[[AEADSymmetricKeys]]
+[cols=".^1,.^2,.^2,.^2",options=header]
+|===
+
+|Identifier
+|Cryptographic Algorithm
+|Cryptographic Key Sizes
+|List of Standards
+
+|AES-CCM
+|AES in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|[selection: 128, 192, 256] bits
+|[selection: ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197] [AES] 
+
+[selection: ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C] [CCM]
+
+|AES-GCM
+|AES in GCM mode with non-repeating IVs using [selection: deterministic, RBG-based] IV construction; the tag must be of length [selection:  96, 104, 112, 120, or 128] bits.
+|[selection: 128, 192, 256], bits
+|[selection: ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197] [AES] 
+
+[selection: ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D] [GCM]
+
+|CAM-CCM
+|Camellia in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|[selection: 128, 192, 256] bits
+|ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
+
+[selection: ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C] [CCM]
+
+|CAM-GCM
+|Camellia in GCM mode with non-repeating IVs using [selection: deterministic, RBG-based] IV construction; the tag must be of length [selection:  96, 104, 112, 120, or 128] bits.
+|[selection: 128, 192, 256] bits
+|ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia] 
+
+[selection: ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D] [GCM]
+
+|SEED-CCM
+|SEED in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|128 bits
+|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
+
+[selection: ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C] [CCM]
+
+|SEED-GCM
+|SEED in GCM mode with non-repeating IVs using [selection: deterministic, RBG-based] IV construction; the tag must be of length [selection:  96, 104, 112, 120, or 128] bits.
+|128 bits
+|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
+
+[selection: ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D] [GCM]
+
+|LEA-CCM
+|LEA in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|[selection: 128, 192, 256] bits
+|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
+
+[selection: ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C] [CCM]
+
+|LEA-GCM
+|LEA in GCM mode with non-repeating IVs using [selection: deterministic, RBG-based] IV construction; the tag must be of length [selection:  96, 104, 112, 120, or 128] bits.
+|[selection: 128, 192, 256] bits
+|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
+
+[selection: ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D] [GCM]
+
+|===
 
 ==== FCS_COP.1/CMAC Cryptographic Operation (CMAC)
 
