@@ -931,7 +931,7 @@ FCS_COP.1/SigGen Cryptographic Operation (Signature Generation)
 
 FCS_COP.1.1/SigGen:: The TSF shall perform _digital signature generation_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [.line-through]#key sizes# {empty}[*selection*: _cryptographic *algorithm parameters* [.line-through]#key sizes#_] that meet the following: [*Selection*: _list of standards_].
 
-.SigGen (Signature Generation)
+.Signature Generation
 [[SigGenOps]]
 [cols=".^1,.^2,.^2,.^2",options=header]
 |===
@@ -1014,7 +1014,7 @@ FCS_COP.1/SigVer Cryptographic Operation (Signature Verification)
 
 FCS_COP.1.1/SigVer:: The TSF shall perform _digital signature verification_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [.line-through]#key sizes# {empty}[*selection*: _cryptographic *algorithm parameters* [.line-through]#key sizes#_] that meet the following: [*selection*: _list of standards_].
 
-.SigVer (Signature Verification)
+.Signature Verification
 [[SigVerOps]]
 [cols=".^1,.^2,.^2,.^2",options=header]
 |===
@@ -1235,7 +1235,7 @@ FCS_RBG.1 Random Bit Generation (RBG)
 
 FCS_RBG.1.1:: The TSF shall perform deterministic random bit generation services using [*selection*: _RBG algorithm_] in accordance with [*selection*: _list of standards_] after initialization with a seed.
 
-.Supported Methods for Random Bit Generation
+.Random Bit Generation
 [[RBGs]]
 [cols=".^1,.^2,.^2",options=header]
 |===
@@ -2496,7 +2496,7 @@ FCS_CKM.1/AKG Cryptographic Key Generation (Asymmetric Keys)
 
 FCS_CKM.1.1/AKG:: The TSF shall generate *asymmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm [*selection*: _cryptographic key generation algorithm_] and specified cryptographic *algorithm parameters* [.line-through]#key sizes# {empty}[*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
 
-.AKG Asymmetric Cryptographic Key Generation
+.Asymmetric Cryptographic Key Generation
 [[AsymKeyGen]]
 [cols=".^1,.^2,.^2",options=header]
 |===
@@ -2572,7 +2572,7 @@ FCS_CKM.1/SKG Cryptographic Key Generation (Symmetric Key)
 
 FCS_CKM.1.1/SKG:: The TSF shall generate *symmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm [*selection*: _cryptographic key generation algorithm_] and specified cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
 
-.SKG Symmetric Cryptographic Key Generation
+.Symmetric Cryptographic Key Generation
 [[SymKeyGen]]
 [cols=".^1,.^2,.^2",options=header]
 |===
@@ -2605,7 +2605,7 @@ FCS_CKM.5 Cryptographic Key Derivation
 
 FCS_CKM.5.1:: The TSF shall derive cryptographic keys [*selection*: _key type_] from [*selection*: _input parameters_], in accordance with a specified cryptographic key derivation algorithm [*selection*: _key derivation algorithm_] and specified cryptographic key sizes [*selection*: _key sizes_] that meet the following: [*selection*: _list of standards_].
 
-.Recommended choices for completion of the selection operations of FCS_CKM.5.
+.Cryptographic Key Derivation
 [[KeyDerivation]]
 [cols=".^1,.^2,.^2,.^1,.^2",options=header]
 |===
@@ -2830,7 +2830,7 @@ FCS_COP.1/KeyWrap Cryptographic Operation (Key Wrap)
 
 FCS_COP.1.1/KeyWrap:: The TSF shall perform _key wrapping_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
 
-.Key Wrap Algorithm Standards
+.Key Wrap
 [[KeyWrapAlgorithms]]
 [cols=".^1,.^2,.^2,.^2",options=header]
 |===
