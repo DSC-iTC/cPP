@@ -5,8 +5,8 @@
 :sectnums:
 :sectnumlevels: 5
 :imagesdir: images
-:revnumber: 2.0-PRD-1
-:revdate: October 31, 2023
+:revnumber: 2.0-PRD-2
+:revdate: May 24, 2024
 :xrefstyle: full
 :doctype: book
 :chapter-refsig: Section
@@ -123,6 +123,18 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 |2.0-PRD-1
 |October 31, 2023
 |Public Review Draft 1 for v2.0
+
+|2.0-PRD-2
+|May 24, 2024
+|Public Review Draft 2 for v2.0
+
+|2.0-Proposed Draft
+|
+|Proposed Final Draft for v2.0
+
+|2.0
+|
+|Final publication for v2.0
 
 |===
 
