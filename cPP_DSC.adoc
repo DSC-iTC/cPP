@@ -2707,9 +2707,9 @@ FCS_CKM_EXT.8.1:: The TSF shall perform password-based key derivation functions 
 
 _Application Note {counter:remark_count}_:: _The TSF must condition a password into a string of bits prior to using it as input to algorithms that form SKs and KEKs. The TSF can perform conditioning using one of the identified hash functions or the process described in NIST SP 800-132 Section 5.3 (PBKDF2); the ST author selects the method used. NIST SP 800-132 Section 5.3 (PBKDF2) requires the use of a pseudo-random function (PRF) consisting of HMAC with an approved hash function._
 
-==== FCS_COP.1/AEAD Authenticated Encryption with Associated Data
+==== FCS_COP.1/AEAD Cryptographic Operation (Authenticated Encryption with Associated Data)
 
-FCS_COP.1/AEAD Authenticated Encryption with Associated Data
+FCS_COP.1/AEAD Cryptographic Operation (Authenticated Encryption with Associated Data)
 
 FCS_COP.1.1/AEAD:: The TSF shall perform _authenticated encryption with associated data_ in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
 
@@ -4329,6 +4329,14 @@ FCS_COP.1/KeyedHash
 FCS_CKM.6 
 |FCS_CKM.1/KeyedHash and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
 
+|FCS_COP.1/AEAD
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, FCS_CKM_EXT.8]
+
+FCS_CKM.6
+
+FCS_OTV_EXT.1
+|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+
 |FDP_DAU.1/Prove 
 |No dependencies. 
 |N/A
@@ -4409,6 +4417,8 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 !FCS_CKM_EXT.7 !Cryptographic Key Agreement
 
 !FCS_CKM_EXT.8 !Password-Based Key Derivation
+
+!FCS_COP.1/AEAD !Cryptographic Operation (Authenticated Encryption with Associated Data)
 
 !FCS_COP.1/Hash !Cryptographic Operation (Hashing)
 
