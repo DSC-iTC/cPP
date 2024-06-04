@@ -5027,7 +5027,7 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 [appendix]
 == References
 
-[FIPS-HMAC] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 198-1, The Keyed-Hash Message Authentication Code (HMAC)_, National Institute of Standards and Technology, July 2008
+[FIPS-HMAC] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 198-1, The Keyed-Hash Message Authentication Code (HMAC)_, National Institute of Standards and Technology, July 2008.
 
 [FIPS-SHA] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 180-4, Secure Hash Standard (SHS)_, National Institute of Standards and Technology, March 2012.
 
@@ -5035,24 +5035,24 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [GP_ROT] GlobalPlatform Technology. _Root of Trust Definitions and Requirements Version 1.1_. GlobalPlatform, June 2018.
 
-[ISO-CIPH] ISO/IEC. _ISO/IEC 18033-3:2010 Information Technology - Security Techniques - Encryption Algorithms - Part 3: Block Ciphers_, ISO/IEC, December 2012
+[ISO-CIPH] ISO/IEC. _ISO/IEC 18033-3:2010 Information Technology - Security Techniques - Encryption Algorithms - Part 3: Block Ciphers_, ISO/IEC, December 2012.
 
-[ISO-CMAC] ISO/IEC. _ISO/IEC 9797-1 Information Technology - Security Techniques - Message Authentication Codes (MACs) - Part 1: Mechanisms Using a Block Cipher,_ ISO/IEC, December 1999
+[ISO-CMAC] ISO/IEC. _ISO/IEC 9797-1 Information Technology - Security Techniques - Message Authentication Codes (MACs) - Part 1: Mechanisms Using a Block Cipher,_ ISO/IEC, December 1999.
 
-[ISO-HASH] ISO/IEC. ISO/IEC 10118-3:2018 _IT Security Techniques - Hash-Functions - Part 3: Dedicated Hash-Functions_, ISO/IEC, October 2018
+[ISO-HASH] ISO/IEC. ISO/IEC 10118-3:2018 _IT Security Techniques - Hash-Functions - Part 3: Dedicated Hash-Functions_, ISO/IEC, October 2018.
 
-[ISO-HMAC] ISO/IEC. _ISO/IEC 9797-2:2011 Information Technology - Security Techniques - Message Authentication Codes (MACs) - Part 2: Mechanisms Using a Dedicated Hash-Function_
+[ISO-HMAC] ISO/IEC. _ISO/IEC 9797-2:2011 Information Technology - Security Techniques - Message Authentication Codes (MACs) - Part 2: Mechanisms Using a Dedicated Hash-Function_, ISO/IEC, June 2011.
 
-[ISO-TR] ISO/IEC. _ISO/IEC 24759-3:2017 Information Technology - Security Techniques -Test Requirements for Cryptographic Modules,_ ISO/IEC, 2017
+[ISO-RBG] SO/IEC. _ISO/IEC 18031:2011 Information Technology - Security Techniques - Random Bit Generation_, ISO/IEC, November 2011.
 
-[NIST-CMAC] Dworkin, Morris. _National Institute of Standards and Technology (NIST) Special Publication 800-38B, Recommendation for Block Cipher Modes of Operation: The CMAC Mode for Authentication_, National Institute of Standards and Technology, December 2012.
+[ISO-TR] ISO/IEC. _ISO/IEC 24759-3:2017 Information Technology - Security Techniques -Test Requirements for Cryptographic Modules,_ ISO/IEC, 2017.
 
-[NIST-KDRV] Barker, Elaine, Lily Chen, and Rich Davis. _NIST Special Publication 800-56C, Recommendation for Key-Derivation Methods in Key-Establishment Schemes_, National Institute of Standards and Technology, April 2018.
+[NIST-CMAC] Dworkin, Morris. _National Institute of Standards and Technology (NIST) Special Publication 800-38B, Recommendation for Block Cipher Modes of Operation: The CMAC Mode for Authentication_, National Institute of Standards and Technology, October 2016.
+
+[NIST-KDRV] Barker, Elaine, Lily Chen, and Rich Davis. _NIST Special Publication 800-56C Rev2, Recommendation for Key-Derivation Methods in Key-Establishment Schemes_, National Institute of Standards and Technology, August 2020.
 
 [NIST-KDV] Kelsey, John, Shu-jen Chang, and Ray Perlner. _NIST Special Publication 800-185 SHA-3 Derived Functions: cSHAKE, KMAC, TupleHash, and ParallelHash_, National Institute of Standards and Technology, December 2016.
 
 [NIST-ROTM] Chen, Lily, Joshua Franklin, and Andrew Regenscheid. _National Institute of Standards and Technology (NIST) Special Publication 800-164 (Draft), Guidelines on Hardware Rooted Security in Mobile Devices (Draft)_, National Institute of Standards and Technology, October 2012.
-
-[NIST-RSA] Barker, Elaine, Lily Chen, Andrew Regenscheid, and Miles Smid. _National Institute of Standards and Technology (NIST) Special Publication 800-56B Revision 2, Recommendation for Pair-Wise Key Establishment Schemes Using Integer Factorization Cryptography_, National Institute of Standards and Technology, March 2019.
 
 [SA] Segall, Ariel. _Trusted Platform Modules: Why, When and How to Use Them_. The Institution of Engineering and Technology, 2016.
