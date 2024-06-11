@@ -792,22 +792,22 @@ FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from
 |KAS2
 |RSA
 |[selection: 2048, 3072, 4096, 6144, 8192] bits
-|NIST SP 800-56B Rev 2 (Section 8.3)
+|NIST SP 800-56B Rev. 2 (Section 8.3)
 
 |DH
 |Diffie-Hellman
 |[selection: 2048, 3072, 4096, 6144, 8192] bits
-|NIST SP 800-56A Rev 3, [selection: RFC 3526 (Section [selection: 3, 4, 5, 6, 7]), RFC 7919 (Appendixes [selection: A.1, A.2, A.3, A.4, A.5])]
+|NIST SP 800-56A Rev. 3, [selection: RFC 3526 (Section [selection: 3, 4, 5, 6, 7]), RFC 7919 (Appendixes [selection: A.1, A.2, A.3, A.4, A.5])]
 
 |ECDH-NIST
 |ECDH with NIST curves
 |[selection: 256 (P-256), 384 (P-384), 512 (P-521)] bits
-|NIST SP 800-56Ar3, NIST SP 800-186 (Appendix G.1)
+|NIST SP 800-56A Rev. 3, NIST SP 800-186 (Appendix G.1)
 
 |ECDH-BPC
 |ECDH with Brainpool curves
 |[selection: 256 (brainpoolP256r1), 384 (brainpoolP384r1), 512 (brainpoolP512r1)] bits
-|NIST SP 800-56Ar3, NIST SP 800-186 (Appendix H.1)
+|NIST SP 800-56A Rev. 3, NIST SP 800-186 (Appendix H.1)
 
 |ECDH-Ed
 |ECDH with Edwards Curves
@@ -822,7 +822,7 @@ FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from
 |KAS-KDF-X
 |[selection: KDF-CTR, KDF-FB, KDF-DPI] with concatenated keys as input using [selection: AES-128-CMAC; AES-192-CMAC; AES-256-CMAC, HMAC-SHA-1; HMAC-SHA-256; HMAC-SHA-512] as the PRF.
 |[selection: 128, 192, 256] bits
-|NIST SP 800-108 Rev 1 (Section 4) [KDF]
+|NIST SP 800-108 Rev. 1 (Section 4) [KDF]
 
 [selection: ISO/IEC 9797-1:2011 (CMAC), NIST SP 800-38B (CMAC), ISO/IEC 18033-3:2010 (AES), FIPS PUB 197 (AES),  ISO/IEC 9797-2:2021 (HMAC), FIPS PUB 198-1 (HMAC), ISO/IEC 10118-3:2018 (SHA), FIPS PUB 180-4 (SHA)] 
 
@@ -838,7 +838,7 @@ FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from
 
 |===
 
-_Application Note {counter:remark_count}_:: _This SFR captures methods for multi-party key agreement in which multiple parties contribute material used to derive the shared key used by each party to encrypt and decrypt ingoing and outgoing messages. TOEs can use the derived keys as symmetric keys, keyed-hash keys, or cryptographic keys for key derivation functions._
+_Application Note {counter:remark_count}_:: _This SFR captures methods for multi-party key agreement in which multiple parties contribute material used to derive the shared key used by each party to encrypt and decrypt incoming and outgoing messages. TOEs can use the derived keys as symmetric keys, keyed-hash keys, or cryptographic keys for key derivation functions._
 +
 _FCS_CKM.5 defines KDF-CTR, KDF-FB, and KDF-DPI._
 +
@@ -846,7 +846,7 @@ _For the KDF functions, when concatenating keys for AES-CMAC, the contributions 
 +
 _For the KDF functions and XOR, each party may have to use an asymmetric method from FCS_CKM_EXT.7 to transmit their shares to each other. Key shares may also come from a token, in which case, TOEs may use key access methods in FCS_CKM.3 to authorize access and use of those keys in this SFR._
 +
-_There are no standards that specify how to derive a key from two keys using KEK or XOR. For KEK, encrypting one key with another, one must use one of the algorithms listed in FCS_COP.1/SKC and indicate which of the inputs is the plaintext and which is the key If XOR is selected, the ST Author should describe this method in the documentation._
+_There are no standards that specify how to derive a key from two keys using KEK or XOR. For KEK, encrypting one key with another, one must use one of the algorithms listed in FCS_COP.1/SKC and indicate which of the inputs is the plaintext and which is the key. If XOR is selected, the ST Author should describe this method in the documentation._
 +
 _For cPP/ST authors, please consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
 
@@ -913,11 +913,11 @@ FCS_COP.1.1/KeyedHash:: The TSF shall perform [_keyed hash message authenticatio
 
 |KMACXOF128
 |128 bits	
-|[selection: ISO/IEC 9797-2:2021, Section 9 "MAC Algorithm 4", NIST SP 800-185, section 4 "KMAC"]
+|[selection: ISO/IEC 9797-2:2021, (Section 9 "MAC Algorithm 4"), NIST SP 800-185, (Section 4 "KMAC")]
 
 |KMACXOF256
 |256 bits
-|[selection: ISO/IEC 9797-2:2021, Section 9 "MAC Algorithm 4", NIST SP 800-185, section 4 "KMAC"]
+|[selection: ISO/IEC 9797-2:2021, (Section 9 "MAC Algorithm 4"), NIST SP 800-185, (Section 4 "KMAC")]
 
 |===
 
@@ -946,7 +946,7 @@ FCS_COP.1.1/SigGen:: The TSF shall perform _digital signature generation_ in acc
 |Modulus of size [selection: 2048, 3072, 4096] bits, hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE-128, SHAKE-256]
 |[selection: RFC 8017, PKCS #1 v2.2 (Section 8.2), FIPS PUB 186-5 (Section 5.4)] [RSASSA-PKCS1-v1_5]
 
-[selection: ISO/IEC 10118-3:2018, FIPS PUB 180-4 [SHA2], FIPS PUB 202] [SHA3, SHAKE]
+[selection: ISO/IEC 10118-3:2018, FIPS PUB 180-4 [SHA2], FIPS PUB 202 [SHA3, SHAKE]]
 
 |RSA-PSS
 |RSASSA-PSS
@@ -958,7 +958,7 @@ FCS_COP.1.1/SigGen:: The TSF shall perform _digital signature generation_ in acc
 
 |ECDSA
 |ECDSA
-|Elliptic curve [selection: P-256, brainpoolP256r1, P-384, brainpoolP384r1, P-521, brainpoolP512r1], per-message secret number generation [selection: extra random bits, rejection sampling, deterministic] and hash or XOF function using [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE-128, SHAKE-256]
+|Elliptic Curve [selection: brainpoolP256r1, brainpoolP384r1, brainpoolP512r1, NIST P-256, NIST P-384, NIST P-521], per-message secret number generation [selection: extra random bits, rejection sampling, deterministic] and hash or XOF function using [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE-128, SHAKE-256]
 |[selection: ISO/IEC 14888-3:2018 (Sub Clause 6.6), FIPS PUB 186-5 (Sections 6.3.1, 6.4.1)] [ECDSA]
 
 [selection: RFC 5639 (Section 3) [Brainpool Curves], NIST SP-800 186 (Section 4) [NIST Curves]]
@@ -970,16 +970,16 @@ FCS_COP.1.1/SigGen:: The TSF shall perform _digital signature generation_ in acc
 |hash or XOF function using [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE-128, SHAKE-256]
 |ISO/IEC 14888-3:2018 (Sub Clause 6.3) [KCDSA]
 
-[selection: ISO/IEC 10118-3:2018 (Clause 10, 14), FIPS PUB 180-4 SHA2], FIPS PUB 202 [SHA3]]
+[selection: ISO/IEC 10118-3:2018 (Clause 10, 14), FIPS PUB 180-4 [SHA2], FIPS PUB 202 [SHA3]]
 
 |EC-KCDSA
 |EC-KCDSA 
-|Elliptic Curve [selection: NIST P-224, NIST P-256, NIST B-233, NIST B-283, NIST K-233, NIST K-283] using hash or XOF [selection: SHA-224, SHA-256 SHA3-256, SHA3-384, SHA3-512, SHAKE-128, SHAKE-256]
+|Elliptic Curve [selection: NIST P-224, NIST P-256, NIST B-233, NIST B-283, NIST K-233, NIST K-283] using hash or XOF [selection: SHA-224, SHA-256, SHA3-256, SHA3-384, SHA3-512, SHAKE-128, SHAKE-256]
 |ISO/IEC 14888-3:2018 (Sub Clause 6.7) [EC-KCDSA]
 
 NIST SP 800-186 (Section 3) [NIST Curves]
 
-[selection: ISO/IEC 10118-3:2018 (Clause 10, 14), FIPS PUB 180-4 [SHA2], FIPS PUB 202 [SHA3]
+[selection: ISO/IEC 10118-3:2018 (Clause 10, 14), FIPS PUB 180-4 [SHA2], FIPS PUB 202 [SHA3]]
 
 |EdDSA
 |Edwards-Curve Digital Signature Algorithm
@@ -994,7 +994,7 @@ NIST SP 800-186 (Section 3) [NIST Curves]
 |NIST SP 800-208, RFC 8554
 
 |XMSS
-|WOTS+, XMSS, XMSS(TM)
+|WOTS+, XMSS, XMSS^MT^
 |Private key size = [selection: 192 bits with Hash/XOF [selection: SHA256/192, SHAKE256/192], 256 bits with Hash/XOF [selection: SHA256, SHAKE256]]
 |NIST SP 800-208, RFC 8391
 
@@ -1002,7 +1002,7 @@ NIST SP 800-186 (Section 3) [NIST Curves]
 
 _Application Note {counter:remark_count}_:: _FIPS 186-5 allows the use of SHAKE128 and SHAKE256. Implementations must use the correct number of bits of output as specified in FIPS 186-5._
 +
-_Elliptic Curve Algorithms, (e.g., ECDSA, EC-KCDSA) require random bits from an RBG per NIST FIPS PUB 186-4 sections B.5.1 and B.5.2._
+_Elliptic Curve Algorithms, (e.g., ECDSA, EC-KCDSA) require random bits from an RBG per NIST FIPS PUB 186-5 sections A.3.1 and A.3.2._
 +
 _FIPS 186-5 specifies that the same key generation algorithm applies to both ECDSA and deterministic ECDSA._
 +
@@ -1028,14 +1028,14 @@ FCS_COP.1.1/SigVer:: The TSF shall perform _digital signature verification_ in a
 |Modulus of size [selection: 2048, 3072, 4096] bits, hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE-128, SHAKE-256]
 |[selection: RFC 8017, PKCS #1 v2.2 (Section 8.2), FIPS PUB 186-5 (Section 5.4)] [RSASSA-PKCS1-v1_5]
 
-[selection: ISO/IEC 10118-3:2018, FIPS 180-4 [SHA2] FIPS PUB 202] [SHA3]
+[selection: ISO/IEC 10118-3:2018, FIPS 180-4 [SHA2], FIPS PUB 202 [SHA3]]
 
 |RSA-PSS
 |RSASSA-PSS
 |Modulus of size [selection: 2048, 3072, 4096] bits, hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE-128, SHAKE-256]
 |[selection: RFC 8017, PKCS#1 v2.2 (Section 8.1), FIPS PUB 186-5 (Section 5.4)] [RSASSA-PSS]
 
-[selection: ISO/IEC 10118-3:2018, FIPS 180-4 [SHA2] FIPS PUB 202] [SHA3]
+[selection: ISO/IEC 10118-3:2018, FIPS 180-4 [SHA2], FIPS PUB 202 [SHA3]]
 
 |DSA
 |DSA
@@ -1044,19 +1044,19 @@ FCS_COP.1.1/SigVer:: The TSF shall perform _digital signature verification_ in a
 
 |ECDSA
 |ECDSA
-|Elliptic curve [selection: brainpoolP256r1, brainpoolP384r1, brainpoolP512r1, NIST P-256, NIST P-384, NIST P-521] using hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512]
+|Elliptic Curve [selection: brainpoolP256r1, brainpoolP384r1, brainpoolP512r1, NIST P-256, NIST P-384, NIST P-521] using hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512]
 |[selection: ISO/IEC 14888-3:2018 (Sub Clause 6.6), FIPS PUB 186-5 (Section 6.4.2)] [ECDSA]
 
 [selection: RFC 5639 (Section 3) [Brainpool Curves], NIST SP 800-186 (Section 3) [NIST Curves]]
 
-[selection: ISO/IEC 10118-3:2018, FIPS 180-4 [SHA2] FIPS PUB 202] [SHA3]
+[selection: ISO/IEC 10118-3:2018, FIPS 180-4 [SHA2], FIPS PUB 202 [SHA3]]
 
 |KCDSA
 |KCDSA
 |hash or XOF function using [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE-128, SHAKE-256]
 |ISO/IEC 14888-3:2018 (Sub Clause 6.3) [KCDSA]
 
-[selection: ISO/IEC 10118-3:2018 (Clause 10, 14), FIPS 180-4 [SHA2] FIPS PUB 202] [SHA3]
+[selection: ISO/IEC 10118-3:2018 (Clause 10, 14), FIPS 180-4 [SHA2], FIPS PUB 202 [SHA3]]
 
 |EC-KCDSA
 |EC-KCDSA 
@@ -1065,14 +1065,14 @@ FCS_COP.1.1/SigVer:: The TSF shall perform _digital signature verification_ in a
 
 NIST SP 800-186 (Section 3) [NIST Curves]
 
-[selection: ISO/IEC 10118-3:2018 (Clause 10, 14), FIPS 180-4 [SHA2] FIPS PUB 202] [SHA3]
+[selection: ISO/IEC 10118-3:2018 (Clause 10, 14), FIPS 180-4 [SHA2], FIPS PUB 202 [SHA3]]
 
 |EdDSA
 |Edwards-Curve Digital Signature Algorithm
 |Domain parameters approved for elliptic curves [selection: Edwards25519, Edwards448]
 |[selection: NIST FIPS 186-5 (section 7.7), RFC 8032]
 
-[selection: ISO/IEC 10118-3:2018 (Clause 10, 14), FIPS PUB 180-4, FIPS PUB 202] [SHA]
+[selection: ISO/IEC 10118-3:2018 (Clause 10, 14), FIPS 180-4 [SHA2], FIPS PUB 202 [SHA3]]
 
 |LMS
 |LMS-OTS, LMS, HSS
@@ -1080,7 +1080,7 @@ NIST SP 800-186 (Section 3) [NIST Curves]
 |NIST SP 800-208, RFC 8554
 
 |XMSS
-|WOTS+, XMSS, XMSS(TM)
+|WOTS+, XMSS, XMSS^MT^
 |Hash/XOF [selection: SHA256/192, SHAKE256/192]
 |NIST SP 800-208, RFC 8391
 
@@ -1245,19 +1245,19 @@ FCS_RBG.1.1:: The TSF shall perform deterministic random bit generation services
 
 |HASH 
 |Hash_DRBG with [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512]
-|[selection: ISO/IEC 18031: 2011 (Section C.2.2) [Hash_DRBG], NIST SP 800-90Ar1 section 10.1.1 [Hash_DRBG], NIST SP 800-131Ar2, FIPS PUB 180-4 [SHA]]
+|[selection: ISO/IEC 18031: 2011 (Section C.2.2) [Hash_DRBG], NIST SP 800-90A Rev. 1 section 10.1.1 [Hash_DRBG], NIST SP 800-131A Rev. 2, FIPS PUB 180-4 [SHA]]
 
 FIPS PUB 202 [SHA3]
 
 |HMAC 
 |HMAC_DRBG with [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512]
-|[selection: ISO/IEC 18031: 2011 (Section C.2.3) [HMAC_DRBG], NIST SP800-90Ar1 section 10.1.2 [HMAC_DRBG], NIST SP 800-131Ar2, FIPS PUB 180-4 [SHA]]
+|[selection: ISO/IEC 18031: 2011 (Section C.2.3) [HMAC_DRBG], NIST SP800-90A Rev. 1 section 10.1.2 [HMAC_DRBG], NIST SP 800-131A Rev. 2, FIPS PUB 180-4 [SHA]]
 
 FIPS PUB 202 [SHA3]
 
 |CTR 
 |CTR_DRBG with [selection: AES-128, AES-192, AES-256, SEED-128, HIGHT-128, LEA-128, LEA-192, LEA-256]
-|[selection: ISO/IEC 18031: 2011 (Section C.3.2) [CTR_DRBG], NIST SP800-90Ar1 section 10.2.1 [CTR_DRBG], FIPS PUB 197[AES]]
+|[selection: ISO/IEC 18031: 2011 (Section C.3.2) [CTR_DRBG], NIST SP800-90A Rev. 1 section 10.2.1 [CTR_DRBG], FIPS PUB 197[AES]]
 
 ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
 
@@ -1285,7 +1285,7 @@ _If a reseeding is selected in the first selection and something other than “n
 +
 _"Uninstantiate" means that the internal state of the DRBG is no longer available for use._
 +
-_In the third selection, "on demand" means, that a TOE presents an interface to reseed as a TSFI (e.g., an API call). The interface causes the DRBG to reseed at the request of an authorized user, either with an internal source, an external source, or from input provided through the TSFI (e.g., the API call)._
+_In the third selection for FCS_RBG.1.3, "on demand" means, that a TOE presents an interface to reseed as a TSFI (e.g., an API call). The interface causes the DRBG to reseed at the request of an authorized user, either with an internal source, an external source, or from input provided through the TSFI (e.g., the API call)._
 
 ==== FCS_OTV_EXT.1 One-Time Value
 
@@ -1302,15 +1302,15 @@ FCS_OTV_EXT.1.1:: The TSF shall perform _cryptographic one-time value generation
 |Notes
 
 |HMAC 
-|FIPS 198-1, NIST SP 800-56C Rev2
+|FIPS 198-1, NIST SP 800-56C Rev. 2
 |Depending on the use case, salts can be secret or known, randomly generated, or all zero; secret IVs may be required e.g., for key derivation. Please reference the relevant standards for your use case.
 
 |KMAC 
-|NIST SP 800-185, NIST SP 800-56C Rev2
+|NIST SP 800-185, NIST SP 800-56C Rev. 2
 |Depending on the use case, salts can be secret or known, randomly generated, or all zero; secret IVs may be required e.g., for key derivation. Please reference the relevant standards for your use case. 
 
 |KDF
-|NIST SP 800-108 Rev 1, NIST SP 800-135 Rev1
+|NIST SP 800-108 Rev. 1, NIST SP 800-135 Rev. 1
 |Salts and IVs as directed in use of HMAC and AES modes. Please reference the relevant standards.
 
 |CTR 
@@ -1350,7 +1350,7 @@ FCS_OTV_EXT.1.1:: The TSF shall perform _cryptographic one-time value generation
 |For RBG-based IV construction (section 8.2.2) the number of invocations of GCM shall not exceed 2^32 for a given secret key. 
 
 |RSA-OAEP
-|SP 800-56B
+|SP 800-56B Rev. 2
 |Mask for padding shall be randomly generated.
 
 |===
@@ -1359,7 +1359,7 @@ _Application Note {counter:remark_count}_:: _TSFs frequently generate cryptograp
 +
 _Salts help protect against dictionary and other precomputation attacks. Systems often prepend or append salts to passwords and other long-term, potentially guessable, values to increase the size of a dictionary an attacker must build to attack it. Salts, once associated with a password, generally do not change for the life of that password. Salts should also be unique for each password and should not be reused. Therefore, systems should randomly generate salts with sufficient size such that the combined entropy of both the salt and the password meets the minimal key strength sizes of the chosen algorithms._
 +
-_Nonces help protect against replay attacks in cryptographic authentication protocols and some encryption modes. A nonce should never repeat. Using a sequence of nonces with a counter embedded in the value will ensure a nonce will never repeat. In protocol sessions that require multiple nonces, using sequential nonces that increment for each message, the receiver can check for and only accept an increase in the nonce value to verify that the message has not been replayed. In some protocols, the initial sequential nonce only needs to be sent once at the beginning of the session and the receiver can predict the remaining nonces in that session, which saves transmission bandwidth. Randomly generated nonces protect against attacks against sessions in which multiple keys are expected to be used. Therefore, nonces should be both randomly generated and never repeat. However, sequential nonces may be predictable. NIST provides additional guidance for the composition of a nonce in NIST SP 800-38c, NIST SP 800-56A Rev3, NIST SP 800-56B Rev2, NIST SP 800-63B, and NIST SP 800-90A Rev1._
+_Nonces help protect against replay attacks in cryptographic authentication protocols and some encryption modes. A nonce should never repeat. Using a sequence of nonces with a counter embedded in the value will ensure a nonce will never repeat. In protocol sessions that require multiple nonces, using sequential nonces that increment for each message, the receiver can check for and only accept an increase in the nonce value to verify that the message has not been replayed. In some protocols, the initial sequential nonce only needs to be sent once at the beginning of the session and the receiver can predict the remaining nonces in that session, which saves transmission bandwidth. Randomly generated nonces protect against attacks against sessions in which multiple keys are expected to be used. Therefore, nonces should be both randomly generated and never repeat. However, sequential nonces may be predictable. NIST provides additional guidance for the composition of a nonce in NIST SP 800-38C, NIST SP 800-56A Rev. 3, NIST SP 800-56B Rev. 2, NIST SP 800-63B, and NIST SP 800-90A Rev. 1._
 +
 _Initialization Vectors (IVs) help protect against attacks which depend on the reuse of static keys. Certain encryption modes often require IVs. They should be randomly generated in a nonpredictable way, cannot be sequential, and cannot repeat._
 +
@@ -2392,7 +2392,7 @@ FCS_RBG.2 Random Bit Generation (External Seeding)
 
 FCS_RBG.2.1:: The TSF shall be able to accept a minimum input of [assignment: _minimum input length greater than zero_] from a TSF interface for the purpose of seeding.
 
-_Application Note {counter:remark_count}_:: _In order to maintain compliance with NIST SP 800-90Ar1, the TSF accepts enough bits input from an external noise source to satisfy the entropy requirements of the DRBG. The TSF should also protect the integrity and confidentiality of the entropy it receives from the external noise source._
+_Application Note {counter:remark_count}_:: _In order to maintain compliance with NIST SP 800-90A Rev. 1, the TSF accepts enough bits input from an external noise source to satisfy the entropy requirements of the DRBG. The TSF should also protect the integrity and confidentiality of the entropy it receives from the external noise source._
 +
 _The TSF interface for the purpose of seeding here is the interface used to gather entropy for initializing the seed._
 
@@ -2418,7 +2418,7 @@ FCS_RBG.4.1:: The TSF shall be able to seed the RBG using [selection: _[assignme
 
 FCS_RBG.5 Random Bit Generation (Combining Noise Sources)
 
-FCS_RBG.5.1:: The TSF shall {empty}[*selection*: _[.underline]#hash, concatenate and hash, xor, input into a linear feedback shift register, [assignment: combining operation]#_] [selection: _output from TSF noise source(s), input from TSF interface(s) for seeding_] to create the entropy input into the derivation function as defined in {empty}[*selection*: _[.underline]#ISO/IEC 18031: 2011, NIST SP 800-90Ar1#_], resulting in a minimum of [assignment: _number of bits_] bits of min-entropy. 
+FCS_RBG.5.1:: The TSF shall {empty}[*selection*: _[.underline]#hash, concatenate and hash, xor, input into a linear feedback shift register, [assignment: combining operation]#_] [selection: _output from TSF noise source(s), input from TSF interface(s) for seeding_] to create the entropy input into the derivation function as defined in {empty}[*selection*: _[.underline]#ISO/IEC 18031: 2011, NIST SP 800-90A Rev. 1#_], resulting in a minimum of [assignment: _number of bits_] bits of min-entropy. 
 
 _Application Note {counter:remark_count}_:: _One can apply NIST SP 800-90B (or AIS-31) statistical tests against internal noise sources (a.k.a. raw entropy) to confirm the min-entropy of the noise sources either in aggregate or individually. One should not apply NIST SP 800-90B (or AIS-31) statistical tests against external noise sources since the TOE is unable to enforce entropy requirements or conditioning requirements against external sources of entropy. However, the TSS may include estimates for min-entropy from external sources that contribute to the overall entropy requirements for either the DRBG or for FCS_OTV_EXT.1._
 +
@@ -2506,30 +2506,30 @@ FCS_CKM.1.1/AKG:: The TSF shall generate *asymmetric* cryptographic keys in acco
 |List of Standards
 
 |RSA 
-|Modulus of size [selection2048 bit, 3072 bit]
+|Modulus of size [selection: 2048 bit, 3072 bit]
 |NIST FIPS PUB 186-5 (Section A.1.1)
 
 |ECDSA - Extra Random Bits 
-|Elliptic curve [selection: 256 bits (P-256, brainpoolP256r1), 384 bits (P-384, brainpoolP384r1), 512 bits (P-521, brainpoolP512r1)]
-|[selection: NIST FIPS PUB 186-5 (Section A.2.1), NIST SP 800-56A r3 (Section 5.6.1.2.1)]
+|Elliptic Curve [selection: 256 bits (P-256, brainpoolP256r1), 384 bits (P-384, brainpoolP384r1), 512 bits (P-521, brainpoolP512r1)]
+|[selection: NIST FIPS PUB 186-5 (Section A.2.1), NIST SP 800-56A Rev. 3 (Section 5.6.1.2.1)]
 
 [selection: NIST SP 800-186 (Section 4) [NIST Curves], RFC 5639 (section 3) [brainpool curves]]
 
 |ECDSA - Rejection Sampling
-|Elliptic curve [selection: 256 bits (P-256, brainpoolP256r1), 384 bits (P-384, brainpoolP384r1), 512 bits (P-521, brainpoolP512r1)]
-|[selection: NIST FIPS PUB 186-5 (Section A.2.2), NIST SP 800-56A r3 (Section 5.6.1.2.2)]
+|Elliptic Curve [selection: 256 bits (P-256, brainpoolP256r1), 384 bits (P-384, brainpoolP384r1), 512 bits (P-521, brainpoolP512r1)]
+|[selection: NIST FIPS PUB 186-5 (Section A.2.2), NIST SP 800-56A Rev. 3 (Section 5.6.1.2.2)]
 
 [selection: NIST SP 800-186 (Section 4) [NIST Curves], RFC 5639 (section 3) [brainpool curves]]
 
 |FFC - Extra Random Bits
 |Static domain parameters approved for [selection: IKE groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192], TLS groups [selection: ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192]]]
-|NIST SP 800-56Ar3 [approved FFC domain parameters] 
+|NIST SP 800-56A Rev. 3 [approved FFC domain parameters] 
 
 NIST SP 800-56A (Section 5.6.1.1.3) [key pair generation]
 
 |FFC - Rejection Sampling
 |Static domain parameters approved for [selection: IKE groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192], TLS groups [selection: ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192]]]
-|NIST SP 800-56Ar3 [approved FFC domain parameters]
+|NIST SP 800-56A Rev. 3 [approved FFC domain parameters]
 
 NIST SP 800-56A (Section 5.6.1.1.4) [key pair generation]
 
@@ -2542,14 +2542,14 @@ NIST SP 800-56A (Section 5.6.1.1.4) [key pair generation]
 |ISO/IEC 14888-3:2018 (subclause 6.3) [KCDSA], NIST SP 800-56A (Section 5.6.1.1.3) [Extra Random Bits], and (Section 5.6.1.1.4) [Rejection Sampling]
 
 |EC-KCDSA
-|Elliptic curves [selection: P-224, B-233, K-233, P-256, B-283, K-283]
+|Elliptic Curves [selection: P-224, B-233, K-233, P-256, B-283, K-283]
 |ISO/IEC 14888-3:2018 (subclause 6.7) [EC-KCDSA], NIST SP 800-186 (Section 3) [NIST Curves]
 
 |LM-OTS, LMS, HSS
 |Private key size = [selection: 192 bits with Hash/XOF [selection: SHA256/192, SHAKE256/192], 256 bits with Hash/XOF[selection: SHA256, SHAKE256]]
 |NIST SP 800-208, RFC 8554
 
-|WOTS+, XMSS, XMSS(TM)
+|WOTS+, XMSS, XMSS^MT^
 |Private key size = [selection: 192 bits with Hash/XOF [selection: SHA256/192, SHAKE256/192], 256 bits with Hash/XOF [selection: SHA256, SHAKE256]]
 |NIST SP 800-208, RFC 8391
 
@@ -2583,7 +2583,7 @@ FCS_CKM.1.1/SKG:: The TSF shall generate *symmetric* cryptographic keys in accor
 
 |Direct Generation from a Random Bit Generator as specified in FCS_RBG.1 
 |[selection: 128, 192, 256, 512] bits 
-|NIST SP 800-133 Rev 2 (Section 6.1).
+|NIST SP 800-133 Rev. 2 (Section 6.1).
 
 |===
 
@@ -2622,7 +2622,7 @@ FCS_CKM.5.1:: The TSF shall derive cryptographic keys [*selection*: _key type_] 
 |[selection: 128, 192, 256] bits 
 |ISO/IEC 11770-6:2016 (subclause 7.3.2) [KPF2]
 
-NIST SP 800-108 Rev 1 (Section 4.1) [KDF in Counter Mode] [selection: ISO/IEC 9797-1:2011 (CMAC), NIST SP 800-38B (CMAC)] [selection: ISO/IEC 18033-3:2010 (AES), FIPS PUB 197 (AES), ISO/IEC 18033-3:2010 (subclause 4.5) [HIGHT], ISO/IEC 29192-2:2019 (subclause 6.3) [LEA], ISO/IEC 18033-3:2010 (subclause 5.4) [SEED]],
+NIST SP 800-108 Rev. 1 (Section 4.1) [KDF in Counter Mode] [selection: ISO/IEC 9797-1:2011 (CMAC), NIST SP 800-38B (CMAC)] [selection: ISO/IEC 18033-3:2010 (AES), FIPS PUB 197 (AES), ISO/IEC 18033-3:2010 (subclause 4.5) [HIGHT], ISO/IEC 29192-2:2019 (subclause 6.3) [LEA], ISO/IEC 18033-3:2010 (subclause 5.4) [SEED]],
 
 [selection: ISO/IEC 9797-2:2021 (HMAC), FIPS PUB 198-1 (HMAC)],
 
@@ -2634,7 +2634,7 @@ NIST SP 800-108 Rev 1 (Section 4.1) [KDF in Counter Mode] [selection: ISO/IEC 97
 |[selection: 128, 192, 256] bits 
 |ISO/IEC 11770-6:2016 (subclause 7.3.3) [KPF3]
 
-NIST SP 800-108 Rev 1 (Section 4.1) [KDF in Feedback Mode] [selection: ISO/IEC 9797-1:2011 (CMAC), NIST SP 800-38B (CMAC)] [selection: ISO/IEC 18033-3:2010 (AES), FIPS PUB 197 (AES), ISO/IEC 18033-3:2010 (subclause 4.5) [HIGHT], ISO/IEC 29192-2:2019 (subclause 6.3) [LEA], ISO/IEC 18033-3:2010 (subclause 5.4) [SEED]],
+NIST SP 800-108 Rev. 1 (Section 4.2) [KDF in Feedback Mode] [selection: ISO/IEC 9797-1:2011 (CMAC), NIST SP 800-38B (CMAC)] [selection: ISO/IEC 18033-3:2010 (AES), FIPS PUB 197 (AES), ISO/IEC 18033-3:2010 (subclause 4.5) [HIGHT], ISO/IEC 29192-2:2019 (subclause 6.3) [LEA], ISO/IEC 18033-3:2010 (subclause 5.4) [SEED]],
 
 [selection: ISO/IEC 9797-2:2021 (HMAC), FIPS PUB 198-1 (HMAC)],
 
@@ -2646,7 +2646,7 @@ NIST SP 800-108 Rev 1 (Section 4.1) [KDF in Feedback Mode] [selection: ISO/IEC 9
 |[selection: 128, 192, 256] bits 
 |ISO/IEC 11770-6:2016 (subclause 7.3.4) [KPF4]
 
-NIST SP 800-108 Rev 1 (Section 4.1) [KDF in Double-Pipeline Iteration Mode] [selection: ISO/IEC 9797-1:2011 (CMAC), NIST SP 800-38B (CMAC)] [selection: ISO/IEC 18033-3:2010 (AES), FIPS PUB 197 (AES), ISO/IEC 18033-3:2010 (subclause 4.5) [HIGHT], ISO/IEC 29192-2:2019 (subclause 6.3) [LEA], ISO/IEC 18033-3:2010 (subclause 5.4) [SEED]],
+NIST SP 800-108 Rev. 1 (Section 4.3) [KDF in Double-Pipeline Iteration Mode] [selection: ISO/IEC 9797-1:2011 (CMAC), NIST SP 800-38B (CMAC)] [selection: ISO/IEC 18033-3:2010 (AES), FIPS PUB 197 (AES), ISO/IEC 18033-3:2010 (subclause 4.5) [HIGHT], ISO/IEC 29192-2:2019 (subclause 6.3) [LEA], ISO/IEC 18033-3:2010 (subclause 5.4) [SEED]],
 
 [selection: ISO/IEC 9797-2:2021 (HMAC), FIPS PUB 198-1 (HMAC)],
 
@@ -2668,38 +2668,38 @@ NIST SP 800-108 Rev 1 (Section 4.1) [KDF in Double-Pipeline Iteration Mode] [sel
 |Shared secret
 |Hash function from FCS_COP.1/Hash 
 |[selection: 128, 192, 256] bits 
-|NIST SP 800-56C Rev 2 (Section 4, Option 1)
+|NIST SP 800-56C Rev. 2 (Section 4, Option 1)
 
 |KDF-MAC-1S
 |Shared secret, salt, output length, fixed information 
 |Keyed Hash function from FCS_COP.1/KeyedHash
 |[selection: 128, 192, 256] bits 
-|NIST SP 800-56C Rev 2 (Section 4, Options 2, 3)
+|NIST SP 800-56C Rev. 2 (Section 4, Options 2, 3)
 
 |KDF-MAC-2S 
 |Shared secret, salt, IV, output length, fixed information 
 |[MAC Step]
 
-[selection: AES-128-CMAC, AES-192-CMAC, AES-256-CMAC, HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-512] as the EEF and;
+[selection: AES-128-CMAC, AES-192-CMAC, AES-256-CMAC, HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-512] as the MAC and;
 
 [KDF Step] 
 
 [selection: KDF-CTR, KDF-FB, KDF-DPI] using [selection: AES-128-CMAC, AES-192-CMAC, AES-256-CMAC, HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-512] as PRF
 
 |[selection: 128, 192, 256] bits 
-|NIST SP 800-56C Rev 2 (Section 5)
+|NIST SP 800-56C Rev. 2 (Section 5)
 
 [selection: ISO/IEC 9797-1:2011 (CMAC), NIST SP 800-38B (CMAC), ISO/IEC 18033-3:2010 (AES), FIPS PUB 197 (AES), ISO/IEC 9797-2:2021 (HMAC), FIPS PUB 198-1 (HMAC), ISO/IEC 10118-3:2018 (SHA), FIPS PUB 180-4 (SHA)] 
 
 |KDF-KMAC
-|See NIST 800-108
+|See NIST 800-108 Rev. 1, Section 4.4
 |[selection: KMAC128, KMAC256, KMACXOF128, KMACXOF256]
 |[selection: 128, 256] bits
 |[selection: ISO/IEC 9797-2:2021 (Section 9 "MAC Algorithm 4"); NIST SP 800-185 (Section 4 "KMAC")]
 
 |===
 
-_Application Note {counter:remark_count}_:: _The protocol- and application-specific KDFs specified in NIST SP 800-135r1 (e.g., IKE, TLS) and other standards should be covered by SFRs tailored for those protocols. We do expect the cryptographic primitives of application specific KDFs to be validated, e.g., HMAC, SHA. Proper parameters to protocols need to be validated by protocol testing, not cryptographic testing._
+_Application Note {counter:remark_count}_:: _The protocol- and application-specific KDFs specified in NIST SP 800-135 Rev. 1 (e.g., IKE, TLS) and other standards should be covered by SFRs tailored for those protocols. We do expect the cryptographic primitives of application specific KDFs to be validated, e.g., HMAC, SHA. Proper parameters to protocols need to be validated by protocol testing, not cryptographic testing._
 +
 _There are no standards that specify how to derive a key from two keys using XOR (KDF-XOR) or encryption (KDF-ENC). If KDF-XOR is selected, the ST Author should describe this method in the documentation. If KDF-ENC is selected, the ST Author should document the encryption algorithm used from FCS_COP.1/SKC, and which of the inputs is the plaintext and which is the key._
 +
@@ -2816,11 +2816,11 @@ FCS_COP.1.1/KeyEncap:: The TSF shall perform _key encapsulation_ in accordance w
 
 |KAS1 [RSA-single party] 
 |[*selection*: 2048, 3072, 4096, 8192] bits 
-|NIST SP 800-56B Rev 2 (Sections 6.3 & 8.2) 
+|NIST SP 800-56B Rev. 2 (Sections 6.3 & 8.2) 
 
 |KTS-OAEP [RSA-OAEP] 
 |[*selection*: 2048, 3072, 4096, 8192] bits 
-|NIST SP 800-56B Rev 2 (Sections 6.3 & 9) 
+|NIST SP 800-56B Rev. 2 (Sections 6.3 & 9) 
 
 |===
 
@@ -3223,7 +3223,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: FCS_RBG.1 Random Bit Generation (RBG)
 [vertical]
-FCS_OTV_EXT.1.1:: The TSF shall perform _cryptographic one-time value generation_ for [*selection*: _algorithm or mode_] using the output of a random bit generator as defined in FCS_RBG_EXT.1 and sizes of length that meet the following: [*selection*: _list of standards_].
+FCS_OTV_EXT.1.1:: The TSF shall perform _cryptographic one-time value generation_ for [*selection*: _algorithm or mode_] using the output of a {empty}[*selection*: _random bit generator as defined in FCS_RBG.1, deterministic IV construction, [assignment: OTV construction method]_] and sizes of length that meet the following: [*selection*: _list of standards_].
 
 ==== FCS_STG_EXT Cryptographic Key Storage
 
@@ -5061,7 +5061,7 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [NIST-CMAC] Dworkin, Morris. _National Institute of Standards and Technology (NIST) Special Publication 800-38B, Recommendation for Block Cipher Modes of Operation: The CMAC Mode for Authentication_, National Institute of Standards and Technology, October 2016
 
-[NIST-KDRV] Barker, Elaine, Lily Chen, and Rich Davis. _NIST Special Publication 800-56C Rev2, Recommendation for Key-Derivation Methods in Key-Establishment Schemes_, National Institute of Standards and Technology, August 2020
+[NIST-KDRV] Barker, Elaine, Lily Chen, and Rich Davis. _NIST Special Publication 800-56C Rev. 2, Recommendation for Key-Derivation Methods in Key-Establishment Schemes_, National Institute of Standards and Technology, August 2020
 
 [NIST-KDV] Kelsey, John, Shu-jen Chang, and Ray Perlner. _NIST Special Publication 800-185 SHA-3 Derived Functions: cSHAKE, KMAC, TupleHash, and ParallelHash_, National Institute of Standards and Technology, December 2016
 
