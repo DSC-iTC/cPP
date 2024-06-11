@@ -125,6 +125,7 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 |Public Review Draft 1 for v2.0
 
 |2.0-PRD-2
+
 |May 24, 2024
 |Public Review Draft 2 for v2.0
 
