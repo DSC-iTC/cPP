@@ -2746,7 +2746,7 @@ FCS_COP.1.1/AEAD:: The TSF shall perform _authenticated encryption with associat
 |List of Standards
 
 |AES-CCM
-|AES in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|AES in CCM mode with non-repeating nonce, minimum size of 64 bits
 |[selection: 128, 192, 256] bits
 |[selection: ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197] [AES] 
 
@@ -2760,7 +2760,7 @@ FCS_COP.1.1/AEAD:: The TSF shall perform _authenticated encryption with associat
 [selection: ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D] [GCM]
 
 |CAM-CCM
-|Camellia in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|Camellia in CCM mode with non-repeating nonce, minimum size of 64 bits
 |[selection: 128, 192, 256] bits
 |ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
 
@@ -2774,7 +2774,7 @@ FCS_COP.1.1/AEAD:: The TSF shall perform _authenticated encryption with associat
 [selection: ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D] [GCM]
 
 |SEED-CCM
-|SEED in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|SEED in CCM mode with non-repeating nonce, minimum size of 64 bits
 |128 bits
 |ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
 
@@ -2788,7 +2788,7 @@ FCS_COP.1.1/AEAD:: The TSF shall perform _authenticated encryption with associat
 [selection: ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D] [GCM]
 
 |LEA-CCM
-|LEA in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits
+|LEA in CCM mode with non-repeating nonce, minimum size of 64 bits
 |[selection: 128, 192, 256] bits
 |ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
 
