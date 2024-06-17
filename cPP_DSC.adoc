@@ -1313,6 +1313,10 @@ FCS_OTV_EXT.1.1:: The TSF shall perform _cryptographic one-time value generation
 |NIST SP 800-108 Rev. 1, NIST SP 800-135 Rev. 1
 |Salts and IVs as directed in use of HMAC and AES modes. Please reference the relevant standards.
 
+|PBKDF
+|NIST SP 800-132
+|Salts generated and used as directed in PBKDFs.
+
 |CTR 
 |SP 800-38A
 |"Initial Counter" (nonce) shall be non-repeating. No counter value shall be repeated across multiple messages with the same secret key.
