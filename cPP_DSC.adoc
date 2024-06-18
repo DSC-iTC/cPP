@@ -1088,7 +1088,7 @@ NIST SP 800-186 (Section 3) [NIST Curves]
 
 _Application Note {counter:remark_count}_:: _DSA is no longer approved for digital signature generation. DSA may be used to verify signatures generated prior to the implementation date of FIPS 186-5. The specifications and algorithms for DSA are no longer included in FIPS 186-5. They may be found in FIPS 186-4._
 +
-_FIPS 186-5 modifies RSA-PSS to allow use of SHAKE128 and SHAKE256._
+_FIPS 186-5 allows the use of SHAKE128 and SHAKE256. Implementations must use the correct number of bits of output as specified in FIPS 186-5._
 +
 _The TOE may contain a public key which is integrity protected (e.g., in hardware), in which case the FDP_ITC.1 and FDP_ITC.2 dependencies do not apply. In this case, no dependencies may be chosen. For signature verifications, private keys are not necessary, so there are no dependencies required for generating or destroying cryptographic keys._
 
