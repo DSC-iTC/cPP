@@ -460,7 +460,7 @@ As defined by the references [CC1], [CC2], [CC3], [CC4], [CC5] and [CC-E&I], thi
 
 The methodology applied for the cPP evaluation is defined in [CEM] and refined by the Evaluation Activities in [DSC SD]. This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_INT.1, APE_OBJ.2, APE_REQ.2 and APE_SPD.1.
 
-In order to be conformant to this cPP, a TOE must demonstrate Exact Conformance. Exact Conformance is defined as the ST containing all of the requirements in <<Security Objectives>> of this cPP (these are the mandatory SFRs), and potentially requirements from <<Optional Requirements>> (these are optional SFRs) or <<Selection-Based Requirements>> (these are selection-based SFRs, some of which will be mandatory according to the selections made in other SFRs) of this cPP. While iteration is allowed, no additional requirements (from CC Parts 2 or 3, or definitions of extended components not already included in this cPP) are allowed to be included in the ST. Further, no requirements in <<Security Objectives>> of this cPP are allowed to be omitted.
+In order to be conformant to this cPP, a TOE must demonstrate Exact Conformance. Exact Conformance is defined as the ST containing all of the requirements in <<Security Functional Requirements>> of this cPP (these are the mandatory SFRs), and potentially requirements from <<Optional Requirements>> (these are optional SFRs) or <<Selection-Based Requirements>> (these are selection-based SFRs, some of which will be mandatory according to the selections made in other SFRs) of this cPP. While iteration is allowed, no additional requirements (from CC Parts 2 or 3, or definitions of extended components not already included in this cPP) are allowed to be included in the ST. Further, no requirements in <<Security Functional Requirements>> of this cPP are allowed to be omitted.
 
 The PPs and PP-Modules that are allowed to be specified in a PP-Configuration with this cPP are specified on the https://dsc-itc.github.io/[DSC-iTC website] Allowed Components page.
 
@@ -512,27 +512,7 @@ This section describes the assumptions made in identification of the threats and
 
 There are no organizational security policies defined in this cPP.
 
-== Security Objectives 
-
-=== Security Objectives for the TOE
-
-*O.AUTH_FAILURES:* The TOE resists repeated attempts to guess authorization data by responding to consecutive failed attempts in a way that prevents an attacker from exploring a significant amount of the space of possible authorization data values.
-
-*O.AUTHORIZATION:* The TOE authorizes only authenticated subjects to access SDOs stored by authenticated users of the TOE, pre-installed SDOs stored in the RoT by the manufacturer of the TOE, and management functions that are used to manipulate the TSF and its stored data.
-
-*O.DATA_PROTECTION:* The TOE provides authenticity, confidentiality, and integrity services for SDOs.
-
-*O.FW_INTEGRITY:* The TOE ensures its own integrity has remained intact and attests its integrity to outside parties on request.
-
-*O.PARSE_PROTECTION:* All SDEs are received by the TOE over a secure channel for parsing, protecting confidentiality and integrity of the SDEs while in transit. The TOE authenticates the source of all SDEs received, and authenticates itself to the remote peer.
-
-*O.PURGE_PROTECTION:* The TOE provides secure destruction of SDEs when they are deleted, so that the previous value of the SDE can no longer be accessed (and cannot be restored).
-
-*O.SECURE_UPDATE:* The TOE software/firmware either does not allow update, or else implements a mechanism that ensures only authorized updates are applied. If the TOE allows updating its firmware, it is required to implement a mechanism that ensures only authorized firmware can be loaded into the TOE. A secure update mechanism ensures the firmware is authorized through verification of its integrity and authenticity while also preventing rollback to a previous and potentially vulnerable firmware instance.
-
-*O.STRONG_BINDING:* The TOE provides a mechanism for binding data to its attributes (including the identity of its owner) and prevents unauthorized changes to data attributes.
-
-*O.STRONG_CRYPTO:* The TOE implements strong cryptographic mechanisms and algorithms according to recognized standards, including support for random bit generation based on recognized standards and a source of sufficient entropy. The TOE uses key sizes that are recognized as providing sufficient resistance to current attack capabilities.
+== Security Objectives
 
 === Security Objectives for the Operational Environment
 
