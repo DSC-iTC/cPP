@@ -526,7 +526,7 @@ The Operational Environment of the TOE implements technical and procedural measu
 
 === Security Objectives Rationale
 
-<<SPDMappingtoSO>> shows the mapping of Security Objectives for the TOE Operational Environment to Threats and Assumptions, along with rationale for these mappings. This mapping is provided in compliance with CC2022 Part 1 Appendix D.4.
+<<SPDMappingtoSO>> shows the mapping of Security Objectives for the Operational Environment to Threats and Assumptions, along with rationale for these mappings. This mapping is provided in compliance with CC:2022 Part 1 Appendix B.5.
 
 .Security Problem Definition Mapping to Security Objectives
 [[SPDMappingtoSO]]
@@ -1946,7 +1946,7 @@ _Application Note {counter:remark_count}_:: _TSF data may be protected in respon
 
 === TOE Security Functional Requirements Rationale
 
-The following rationale provides justification for each security problem definition (SPD) aspect of the TOE, showing that the SFRs are suitable to meet and achieve the SPD aspect - this mapping follows CC2022 Part 1 Appendix D.4:
+The following rationale provides justification for each security problem definition (SPD) aspect of the TOE, showing that the SFRs are suitable to meet and achieve the SPD aspect - this mapping follows CC:2022 Part 1 Appendix B.5:
 
 .SFR-Objective Rationale
 [cols=".^1,.^1,.^2",options=header]
