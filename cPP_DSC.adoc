@@ -792,32 +792,32 @@ FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from
 
 |KAS2
 |RSA
-|[selection: 2048, 3072, 4096, 6144, 8192] bits
+|Modulus of size [selection: 2048, 3072, 4096, 6144, 8192] bits
 |NIST SP 800-56B Rev. 2 (Section 8.3)
 
 |DH
 |Diffie-Hellman
-|[selection: 2048, 3072, 4096, 6144, 8192] bits
+|[selection: IKE groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192], TLS groups [selection: ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192]]
 |NIST SP 800-56A Rev. 3, [selection: RFC 3526 (Section [selection: 3, 4, 5, 6, 7]), RFC 7919 (Appendixes [selection: A.1, A.2, A.3, A.4, A.5])]
 
 |ECDH-NIST
 |ECDH with NIST curves
-|[selection: 256 (P-256), 384 (P-384), 512 (P-521)] bits
+|[selection: NIST P-256, NIST P-384, NIST P-521]
 |NIST SP 800-56A Rev. 3, NIST SP 800-186 (Appendix G.1)
 
 |ECDH-BPC
 |ECDH with Brainpool curves
-|[selection: 256 (brainpoolP256r1), 384 (brainpoolP384r1), 512 (brainpoolP512r1)] bits
+|[selection: brainpoolP256r1, brainpoolP384r1, brainpoolP512r1]
 |NIST SP 800-56A Rev. 3, NIST SP 800-186 (Appendix H.1)
 
 |ECDH-Ed
 |ECDH with Edwards Curves
-|[selection: 255, 448] bits
+|[selection: Edwards25519, Edwards448]
 |RFC 7748
 
 |ECIES
 |ECIES
-|[selection: 256, 384, 512] bits
+|[selection: brainpoolP256r1, brainpoolP384r1, brainpoolP512r1, NIST P-256, NIST P-384, NIST P-521]
 |[selection: ANSI X9.63, IEEE 1363a, ISO/IEC 18033-2 Part 2, SECG SEC1 sec 5.1]
 
 |KAS-KDF
