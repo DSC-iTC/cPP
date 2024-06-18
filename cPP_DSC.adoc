@@ -1961,7 +1961,7 @@ The following rationale provides justification for each security problem definit
 |This requirement enforces authentication failure handling capabilities to ensure that brute force attacks on the TSF are not possible.
 
 |FIA_SOS.2 
-|This requirement protects against brute force authentication by generating secrets that are statistically impossible to guess.
+|This requirement protects against brute force authentication by generating secrets that are statistically difficult to guess.
 
 |FPT_STM_EXT.1 
 |This requirement provides reliable system time services that may be used to determine when excessive authentication failure attempts have been made.
@@ -2000,7 +2000,7 @@ The following rationale provides justification for each security problem definit
 |FMT_MSA.3 
 |This requirement defines the default access restrictions that are enforced on SDO attributes if not overridden by specific access control policy rules.
 
-.7+|T.UNAUTHORIZED_ACCESS
+.8+|T.UNAUTHORIZED_ACCESS
 |FMT_SMF.1 
 |This requirement defines the management functions that are provided by the TOE to authorized subjects.
 
@@ -2019,31 +2019,40 @@ The following rationale provides justification for each security problem definit
 |FPT_ROT_EXT.2 
 |This requirement enforces the RoT for Storage to enforce access control against SDOs.
 
+|FPT_RPL.1/Authorization
+|This requirement ensures that access control restrictions cannot be bypassed through replay of operations.
+
 |FIA_AFL_EXT.2 (selection-based)
 |This requirement defines the access control that is enforced on an SDO if excessive authentication failures block access to it.
 
-.4+|T.HW_ATTACK
-|FPT_FLS.1/FI
-|This requirement ensures that fault injections cannot be used to circumvent access control policy restrictions preventing a user from accessing protected functions or data.
-
+.5+|T.HW_ATTACK
 |FDP_RIP.1
 |This requirement ensures that any purged SDEs/SDOs are erased in residual memory so that their future recovery is prevented.
 
-|FDP_FRS_EXT.2 (selection-based)
-|This requirement ensures that all user-specific SDOs are purged upon factory reset and may indicate any factory default SDOs that are reset to their initial values.
+|FPT_FLS.1/FI
+|This requirement ensures that fault injections cannot be used to circumvent access control policy restrictions preventing a user from accessing protected functions or data.
+
+|FPT_PHP.3
+|This requirement ensures that some mechanism is in place to thwart physical tampering of the TOE.
 
 |FRU_FLT.1
 |This requirement ensures that fault injection attempts do not interfere with the enforcement of access control against protected data.
 
+|FDP_FRS_EXT.2 (selection-based)
+|This requirement ensures that all user-specific SDOs are purged upon factory reset and may indicate any factory default SDOs that are reset to their initial values.
+
 .11+|T.SDE_TRANSIT_COMPROMISE
+|FCS_CKM.6
+|This requirement ensures that key data is destroyed in a manner that prevents its future recovery.
+
 |FCS_COP.1/SKC
 |This requirement provides a cryptographic operation for maintaining the confidentiality of SDOs.
 
 |FDP_ETC_EXT.2
 |This requirement ensures that the confidentiality of protected data propagated outside the TOE is maintained.
 
-|FPT_ITT.1 (optional)
-|This requirement ensures that confidentiality and integrity is maintained in cases where data is transmitted between physically separate parts of a distributed TOE.
+|FDP_FRS_EXT.1
+|This requirement defines the condition in which a factory reset will be initiated, which triggers a purge of stored SDEs.
 
 |FDP_ITC_EXT.1
 |This requirement ensures that all SDEs parsed by the TOE are transmitted over a secure channel.
@@ -2054,6 +2063,9 @@ The following rationale provides justification for each security problem definit
 |FDP_SDC.2
 |This requirement ensures that the confidentiality of authorization data is protected prior to storage.
 
+|FPT_ITT.1 (optional)
+|This requirement ensures that confidentiality and integrity is maintained in cases where data is transmitted between physically separate parts of a distributed TOE.
+
 |FTP_ITC_EXT.1 (selection-based)
 |This requirement defines a cryptographically protected channel that the TSF can use to securely parse data being imported into it.
 
@@ -2063,17 +2075,7 @@ The following rationale provides justification for each security problem definit
 |FTP_ITP_EXT.1 (selection-based)
 |This requirement defines a physically protected channel that the TSF can use to securely parse data being imported into it.
 
-|FCS_CKM.6
-|This requirement ensures that key data is destroyed in a manner that prevents its future recovery.
-
-|FDP_FRS_EXT.1
-|This requirement defines the condition in which a factory reset will be initiated, which triggers a purge of stored SDEs.
-
-|T.UNAUTHORIZED_ACCESS
-|FCS_STG_EXT.1
-|This requirement ensures that key data is placed into protected storage and cannot be modified by untrusted subjects.
-
-.8+|T.WEAK_ELEMENT_BINDING
+.9+|T.WEAK_ELEMENT_BINDING
 |FCS_COP.1/Hash
 |This requirement provides a cryptographic operation for asserting the integrity of SDOs.
 
@@ -2089,16 +2091,19 @@ The following rationale provides justification for each security problem definit
 |FDP_SDI.2
 |This requirement ensures that SDEs/SDOs are monitored for integrity violations.
 
+|FPT_TST.1
+|This requirement defines the mechanisms used to verify and attest to the integrity of the TSF.
+
 |FPT_PRO_EXT.2 (optional)
 |This requirement ensures that the TSF can measure the integrity of its stored data.
 
-|FPT_TST.1
-|This requirement defines the mechanisms used to verify and attest to the integrity of the TSF.
+|FCS_COP.1/CMAC (selection-based)
+|This requirement provides a cryptographic operation for asserting the authenticity of SDOs.
 
 |FPT_FLS.1/FW (selection-based)
 |This requirement requires the TSF to take action to preserve its secure operation if any violations to its firmware integrity are detected.
 
-.12+|T.WEAK_OWNERSHIP_BINDING
+.7+|T.WEAK_OWNERSHIP_BINDING
 |FDP_ITC_EXT.1
 |This requirement ensures that all SDEs parsed by the TOE have verifiable integrity.
 
@@ -2111,8 +2116,8 @@ The following rationale provides justification for each security problem definit
 |FPT_ROT_EXT.1
 |This requirement defines the RoT services that are available for the protection of data.
 
-|FPT_RPL.1/Authorization
-|This requirement ensures that access control restrictions cannot be bypassed through replay of operations.
+|FDP_ITC_EXT.1
+|This requirement ensures that all SDEs parsed by the TOE include appropriate binding metadata.
 
 |FPT_ROT_EXT.3 (optional)
 |This requirement allows the TSF to provide a RoT for Reporting that can provide assured information about the stored SDEs.
@@ -2120,11 +2125,12 @@ The following rationale provides justification for each security problem definit
 |FDP_DAU.1/Prove (selection-based)
 |This requirement defines the Prove service that can be used to invoke the Roots of Trust for Measurement and Reporting and provide affirmation of the validity of TSF and stored data.
 
-|FPT_MFW_EXT.1
-|This requirement specifies whether the TOE's firmware is mutable or immutable, to determine the extent to which this is objective must be satisfied by other SFRs.
+.5+|T.UNAUTH_UPDATE
+|FPT_MFW_EXT.1 
+|This requirement specifies whether the TOE's firmware is mutable or immutable.
 
-|FPT_ROT_EXT.1
-|This requirement defines the RoT services that are available in the TOE, which can include Roots of Trust for measurement and reporting.
+|FPT_FLS.1/FW (selection-based)
+|This requirement requires the TSF to take action to preserve its secure operation if a rollback attempt or invalid firmware update is detected.
 
 |FPT_MFW_EXT.2 (selection-based)
 |This requirement ensures that the TSF can generate evidence that its mutable firmware integrity remains intact.
@@ -2132,22 +2138,15 @@ The following rationale provides justification for each security problem definit
 |FPT_MFW_EXT.3 (selection-based)
 |This requirement ensures that any firmware updates to the TSF are genuine.
 
-|FDP_ITC_EXT.1
-|This requirement ensures that all SDEs parsed by the TOE include appropriate binding metadata.
-
-.3+|T.UNAUTH_UPDATE
-|FPT_MFW_EXT.1 
-|This requirement specifies whether the TOE's firmware is mutable or immutable.
-
-|FPT_FLS.1/FW (selection-based)
-|This requirement requires the TSF to take action to preserve its secure operation if a rollback attempt or invalid firmware update is detected.
-
 |FPT_RPL.1/Rollback (selection-based)
 |This requirement ensures that the TSF will not permit rollback attempts of its firmware.
 
 .10+|T.WEAK_CRYPTO
 |FCS_CKM.1
 |This requirement specifies the supported methods of key generation.
+
+|FCS_CKM.2
+|This requirement specifies the supported methods of key distribution.
 
 |FCS_CKM_EXT.7 
 |This requirement ensures the use of strong key agreement mechanisms.
@@ -2158,12 +2157,6 @@ The following rationale provides justification for each security problem definit
 |FCS_COP.1/KeyedHash 
 |This requirement ensures the use of strong HMAC mechanisms.
 
-|FCS_COP.1/KeyEncap 
-|This requirement ensures the use of strong methods to perform key encapsulation.
-
-|FCS_COP.1/KeyWrap 
-|This requirement ensures the use of strong methods to perform key wrapping.
-
 |FCS_COP.1/SigGen 
 |This requirement ensures the use of strong digital signature services.
 
@@ -2173,14 +2166,13 @@ The following rationale provides justification for each security problem definit
 |FCS_COP.1/SKC 
 |This requirement ensures the use of strong methods to encrypt sensitive data.
 
-|FCS_RBG.1 
+|FCS_RBG.1
 |This requirement ensures the use of strong random bit generation mechanisms.
 
-.10+|T.WEAK_CRYPTO
-
-|FCS_OTV_EXT.1 
+|FCS_OTV_EXT.1
 |This requirement ensures that salts and nonces used by the TOE do not negatively impact key strength.
 
+.10+|T.WEAK_CRYPTO
 |FPT_STM_EXT.1 
 |This requirement provides reliable system time services that may be used as inputs to cryptographic functions.
 
@@ -2197,7 +2189,7 @@ The following rationale provides justification for each security problem definit
 |This requirement ensures that combining multiple sources of noise are combined in a way that enforces strong cryptography by requiring a minimum amount of input to the random bit generator.
 
 |FCS_RBG.6 (optional)
-|This requirement provides an interface to access entropy data so that the TSF can support the use of strong cryptography in its operational environment.
+|This requirement provides an interface to access RBG output so that the TSF can support the use of strong cryptography in its operational environment.
 
 |FCS_CKM.1/AKG (selection-based)
 |This requirement ensures the generation of strong asymmetric keys.
@@ -2205,10 +2197,22 @@ The following rationale provides justification for each security problem definit
 |FCS_CKM.1/SKG (selection-based)
 |This requirement ensures the generation of strong symmetric keys.
 
+|FCS_CKM_EXT.3 (selection-based)
+|This requirement ensures the use of strong methods to perform key encapsulation, key wrawpping, or key encryption when accessing keys.
+
 |FCS_CKM.5 (selection-based)
 |This requirement ensures the use of strong mechanisms to perform key derivation.
 
-.4+|T.WEAK_CRYPTO
+.6+|T.WEAK_CRYPTO
+|FCS_COP.1/CMAC (selection-based)
+|This requirement ensures the use of strong methods to perform CMAC.
+
+|FCS_COP.1/KeyEncap (selection-based)
+|This requirement ensures the use of strong methods to perform key encapsulation.
+
+|FCS_COP.1/KeyWrap (selection-based)
+|This requirement ensures the use of strong methods to perform key wrapping.
+
 |FCS_CKM_EXT.8 (selection-based)
 |This requirement ensures the use of strong methods to derive keys from password data.
 
@@ -2217,9 +2221,6 @@ The following rationale provides justification for each security problem definit
 
 |FTP_GCMP_EXT.1 (selection-based)
 |This requirement defines the implementation of GCMP (IEEE 802.11ad) using strong cryptography.
-
-|FTP_ITE_EXT.1 (selection-based)
-|This requirement defines the cryptographic method used to transfer data between the TOE and external entities.
 
 |===
 
