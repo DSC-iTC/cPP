@@ -458,7 +458,7 @@ As defined by the references [CC1], [CC2], [CC3], [CC4], [CC5] and [CC-E&I], thi
 * is Part 2 extended, Part 3 conformant
 * does not claim conformance to any other PP or package.
 
-The methodology applied for the cPP evaluation is defined in [CEM] and refined by the Evaluation Activities in [DSC SD]. This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_INT.1, APE_OBJ.2, APE_REQ.2 and APE_SPD.1.
+The methodology applied for the cPP evaluation is defined in [CEM] and refined by the Evaluation Activities in [DSC SD]. This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_INT.1, APE_OBJ.1, APE_REQ.1 and APE_SPD.1.
 
 In order to be conformant to this cPP, a TOE must demonstrate Exact Conformance. Exact Conformance is defined as the ST containing all of the requirements in <<Security Functional Requirements>> of this cPP (these are the mandatory SFRs), and potentially requirements from <<Optional Requirements>> (these are optional SFRs) or <<Selection-Based Requirements>> (these are selection-based SFRs, some of which will be mandatory according to the selections made in other SFRs) of this cPP. While iteration is allowed, no additional requirements (from CC Parts 2 or 3, or definitions of extended components not already included in this cPP) are allowed to be included in the ST. Further, no requirements in <<Security Functional Requirements>> of this cPP are allowed to be omitted.
 
@@ -2249,9 +2249,9 @@ The actions for ALC Class (ALC_CMC.1 and ALC_CMS.1) are specified solely within 
 
 | ST Introduction (ASE_INT.1)
 
-| Security Objectives (ASE_OBJ.2)
+| Security Objectives for the Operational Environment (ASE_OBJ.1)
 
-| Derived Security Requirements (ASE_REQ.2)
+| Direct Rationale Security Requirements (ASE_REQ.1)
 
 | Security Problem Definition (ASE_SPD.1)
 
