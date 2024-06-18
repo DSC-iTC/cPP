@@ -1948,7 +1948,7 @@ _Application Note {counter:remark_count}_:: _TSF data may be protected in respon
 
 The following rationale provides justification for each security problem definition (SPD) aspect of the TOE, showing that the SFRs are suitable to meet and achieve the SPD aspect - this mapping follows CC:2022 Part 1 Appendix B.5:
 
-.SFR-Objective Rationale
+.SFR Rationale
 [cols=".^1,.^1,.^2",options=header]
 |===
 
@@ -2000,7 +2000,7 @@ The following rationale provides justification for each security problem definit
 |FMT_MSA.3 
 |This requirement defines the default access restrictions that are enforced on SDO attributes if not overridden by specific access control policy rules.
 
-.8+|T.UNAUTHORIZED_ACCESS
+.7+|T.UNAUTHORIZED_ACCESS
 |FMT_SMF.1 
 |This requirement defines the management functions that are provided by the TOE to authorized subjects.
 
@@ -2019,13 +2019,10 @@ The following rationale provides justification for each security problem definit
 |FPT_ROT_EXT.2 
 |This requirement enforces the RoT for Storage to enforce access control against SDOs.
 
-|FRU_FLT.1 
-|This requirement ensures that fault injection attempts do not interfere with the enforcement of access control against protected data.
-
 |FIA_AFL_EXT.2 (selection-based)
 |This requirement defines the access control that is enforced on an SDO if excessive authentication failures block access to it.
 
-.3+|T.HW_ATTACK
+.4+|T.HW_ATTACK
 |FPT_FLS.1/FI
 |This requirement ensures that fault injections cannot be used to circumvent access control policy restrictions preventing a user from accessing protected functions or data.
 
@@ -2034,6 +2031,9 @@ The following rationale provides justification for each security problem definit
 
 |FDP_FRS_EXT.2 (selection-based)
 |This requirement ensures that all user-specific SDOs are purged upon factory reset and may indicate any factory default SDOs that are reset to their initial values.
+
+|FRU_FLT.1
+|This requirement ensures that fault injection attempts do not interfere with the enforcement of access control against protected data.
 
 .11+|T.SDE_TRANSIT_COMPROMISE
 |FCS_COP.1/SKC
