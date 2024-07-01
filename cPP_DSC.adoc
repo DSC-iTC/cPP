@@ -2865,7 +2865,7 @@ _Verifying the integrity of the firmware could be accomplished by guaranteeing t
 +
 _This requirement covers the case of ensuring the firmware is trustworthy in immutable form or mutable through any firmware updates, since the integrity and authenticity are checked prior to execution._
 +
-_FCS_COP.1/SigVer applies if the TOE provides the capability to update the TOE firmware and uses digital signatures and MAC verification for update verification. The ST Author should choose the algorithm implemented to perform digital signatures. For the algorithms chosen, the ST author should make the appropriate assignments/selections to specify the parameters that are implemented for that algorithm._
+_FCS_COP.1/SigVer applies if the TOE provides the capability to update the TOE firmware and uses digital signatures for update verification. FCS_COP.1/CMAC or FCS_COP.1/KeyedHash applies if the TOE provides the capability to update the TOE firmware and uses MAC verification for update verification. The ST author should choose the algorithm implemented to perform digital signatures or MAC verification. For the algorithms chosen, the ST author should make the appropriate assignments/selections to specify the parameters that are implemented for that algorithm._
 
 ==== FPT_MFW_EXT.3 Firmware Authentication with Identity of Guarantor
 
@@ -2883,7 +2883,7 @@ _Verifying the authenticity of the firmware could be accomplished by guaranteein
 +
 _This requirement covers the case of ensuring the firmware is trustworthy in immutable form or mutable through any firmware updates, since the integrity and authenticity are checked prior to execution._
 +
-_FCS_COP.1/SigVer applies if the TOE provides the capability to update the TOE firmware and uses digital signatures and MAC verification for update verification. The ST Author should choose the algorithm implemented to perform digital signatures. For the algorithms chosen, the ST author should make the appropriate assignments/selections to specify the parameters that are implemented for that algorithm._
+_FCS_COP.1/SigVer applies if the TOE provides the capability to update the TOE firmware and uses digital signatures for update verification. The ST author should choose the algorithm implemented to perform digital signatures. For the algorithms chosen, the ST author should make the appropriate assignments/selections to specify the parameters that are implemented for that algorithm._
 
 ==== FPT_RPL.1/Rollback Replay Detection (Rollback)
 
