@@ -523,6 +523,10 @@ There are no organizational security policies defined in this cPP.
 
 == Security Objectives
 
+=== Security Objectives for the TOE
+
+This cPP is a Direct Rationale PP following Appendix B.5 of CC:2022 Part 1. Accordingly, no security objectives for the TOE are defined.
+
 === Security Objectives for the Operational Environment
 
 The Operational Environment of the TOE implements technical and procedural measures to assist the TOE in correctly providing its security functionality. This section defines security objectives for the Operational Environment and consists of a set of statements describing the goals that the Operational Environment should achieve.
