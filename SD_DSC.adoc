@@ -13,7 +13,7 @@
 :appendix-refsig: Appendix
 :title-logo-image: image:cclogo_small.png[top=15%,align=center,pdfwidth=4.5in]
 
-:iTC-longame: Dediated Security Components
+:iTC-longame: Dedicated Security Components
 :iTC-shortname: DSC-iTC
 
 :sectnums!:

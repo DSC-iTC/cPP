@@ -11,7 +11,7 @@
 :doctype: book
 :chapter-refsig: Section
 
-:iTC-longame: Dediated Security Components
+:iTC-longame: Dedicated Security Components
 :iTC-shortname: DSC-iTC
 
 :sectnums!:
