@@ -70,7 +70,7 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 |Source
 
 |[CC1] 
-|Common Criteria for Information Technology Security Evaluation, Part 1: Introduction and General Model CCMB-2022-11-001, CC:2022 Revision 1, November 2022
+|Common Criteria for Information Technology Security Evaluation, Part 1: Introduction and General Model, CCMB-2022-11-001, CC:2022 Revision 1, November 2022
 |https://www.commoncriteriaportal.org/cc/index.cfm
 
 |[CC2]
