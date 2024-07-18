@@ -1463,7 +1463,7 @@ _If [.underline]#key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap
 
 FDP_RIP.1 Subset Residual Information Protection
 
-FDP_RIP.1.1:: The TSF shall ensure that any previous information content of a resource is made unavailable upon the [_deallocation of the resource from_] the following objects: [
+FDP_RIP.1.1:: The TSF shall ensure that any previous information content of a resource is made unavailable upon the [.underline]#[deallocation of the resource from]# the following objects: [
 +
 * _SDOs_
 * _SDEs_].
