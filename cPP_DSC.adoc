@@ -2226,7 +2226,7 @@ The actions for ALC Class (ALC_CMC.1 and ALC_CMS.1) are specified solely within 
 
 | Preparative Procedures (AGD_PRE.1)
 
-.2+| Life cycle Support (ALC) 
+.2+| Life-cycle Support (ALC)
 | Labelling of the TOE (ALC_CMC.1)
 
 | TOE CM Coverage (ALC_CMS.1)
