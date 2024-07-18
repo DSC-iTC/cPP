@@ -1426,6 +1426,10 @@ _If [.underline]#physically protected channels as specified in FTP_ITP_EXT.1# is
 _If [.underline]#encrypted data buffers as specified in FTP_ITE_EXT.1# is selected, the selection-based SFR FTP_ITE_EXT.1 must be claimed._
 +
 _If [.underline]#cryptographically protected data channels as specified in FTP_ITC_EXT.1# is selected, the selection-based SFR FTP_ITC_EXT.1 must be claimed._
++
+_If [.underline]#message authentication code as specified in FCS_COP.1/CMAC# is selected, the selection-based SFR FCS_COP.1/CMAC must be claimed._
++
+_If [.underline]#key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap# is selected, the selection-based SFR FCS_COP.1/KeyWrap must be claimed._
 
 ==== FDP_ITC_EXT.2 Parsing of SDOs
 
@@ -1450,6 +1454,10 @@ _If [.underline]#physically protected channels as specified in FTP_ITP_EXT.1# is
 _If [.underline]#encrypted data buffers as specified in FTP_ITE_EXT.1# is selected, the selection-based SFR FTP_ITE_EXT.1 must be claimed._
 +
 _If [.underline]#cryptographically protected data channels as specified in FTP_ITC_EXT.1# is selected, the selection-based SFR FTP_ITC_EXT.1 must be claimed._
++
+_If [.underline]#message authentication code as specified in FCS_COP.1/CMAC# is selected, the selection-based SFR FCS_COP.1/CMAC must be claimed._
++
+_If [.underline]#key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap# is selected, the selection-based SFR FCS_COP.1/KeyWrap must be claimed._
 
 ==== FDP_RIP.1 Subset Residual Information Protection
 
@@ -1488,6 +1496,10 @@ FDP_SDI.2.2:: Upon detection of a data integrity error, the TSF shall [
 _Application Note {counter:remark_count}_:: _This SFR deals with the mechanism that protects the integrity of the SDEs and security attributes within an SDO. This provides the binding data that ensures the prevention of unauthorized changes to the SDEs and attributes. It is not expected that a single key will be protected from corruption by multiple of these methods; however, a product may use one integrity-protection method for one type of key and a different method for other types of keys._
 +
 _The cryptographic requirements for cryptographic hashes and digital signatures apply here._
++
+_If [.underline]#message authentication code as specified in FCS_COP.1/CMAC# is selected, the selection-based SFR FCS_COP.1/CMAC must be claimed._
++
+_If [.underline]#key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap# is selected, the selection-based SFR FCS_COP.1/KeyWrap must be claimed._
 +
 _No specific requirement is placed here on the nature of the integrity protection data, but the Security Target shall describe this protection measure, and shall identify the iteration of FCS_COP.1/CMAC, FCS_COP.1/Hash, FCS_COP.1/KeyedHash, FCS_COP.1/KeyVer, FCS_COP.1/KeyWrap or FCS_COP.1/AEAD that covers any cryptographic algorithm used._
 +
