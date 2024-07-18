@@ -644,7 +644,7 @@ FCS_CKM.1 Cryptographic Key Generation
 
 FCS_CKM.1.1:: The TSF shall generate cryptographic keys in accordance with a specified cryptographic key generation algorithm *corresponding to [.underline]#[selection:*#
 +
-* [.underline]#*Asymmetric keys generated in accordance with FCS_CKM.1/AKG identifier AK1,*#
+* [.underline]#*Asymmetric keys generated in accordance with FCS_CKM.1/AKG,*#
 * [.underline]#*Symmetric keys generated in accordance with FCS_CKM.1/SKG,*#
 * [.underline]#*Derived keys generated in accordance with FCS_CKM.5*#
 +
