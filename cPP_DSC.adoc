@@ -52,7 +52,7 @@ The DSC international Technical Community (iTC) designed the DSC cPP as a standa
 
 === Scope of Document
 
-The scope of the cPP within the development and evaluation process is described in the Common Criteria for Information Technology Security Evaluation [CC]. In particular, a cPP defines the IT security requirements of a generic type of Target of Evaluation (TOE) and specifies the functional and assurance security measures that the ITSEF must apply to the TOE to demonstrate that it meets the cPP's stated requirements [CC1, Section C.1].
+The scope of the cPP within the development and evaluation process is described in the Common Criteria for Information Technology Security Evaluation [CC]. In particular, a cPP defines the IT security requirements of a generic type of Target of Evaluation (TOE) and specifies the functional and assurance security measures that the ITSEF must apply to the TOE to demonstrate that it meets the cPP's stated requirements [CC1, Annex B].
 
 === Intended Readership
 
