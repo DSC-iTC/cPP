@@ -609,28 +609,34 @@ For example, for the <<SampleCrypto>>, the ST for a TOE that supports RSA keys m
 
 .Sample Cryptographic Table
 [[SampleCrypto]]
-[cols=".^1,.^2,.^2,.^2",options=header]
+[cols=".^1,.^2,.^2",options=header]
 |===
 
-|Identifier
 |Cryptographic Key Generation Algorithm
 |Cryptographic Algorithm Parameters
 |List of Standards
 
-|AKG1
-|RSA
-|[selection: 2048 bit, 3072 bit] 
-|FIPS PUB 186-4 (Section B.3)
+|RSA 
+|Modulus of size [selection: 2048 bit, 3072 bit]
+|NIST FIPS PUB 186-5 (Section A.1.1)
 
-|AKG2
-|ECC
-|[selection: 256 (P-256), 384 (P-384), 512 (P-521)]
-|FIPS PUB 186-4 (Section B.4 & D.1.2)
+|ECC - Extra Random Bits 
+|Elliptic Curve [selection: P-256, brainpoolP256r1, P-384, brainpoolP384r1, P-521, brainpoolP512r1]
+|[selection: NIST FIPS PUB 186-5 (Section A.2.1), NIST SP 800-56A Rev. 3 (Section 5.6.1.2.1)]
 
-|AKG3
-|BPC
-|[selection: 256 (brainpoolP256r1), 384 (brainpoolP384r1), 512 (brainpoolP512r1)]
-|RFC5639 (Section 3) [Brainpool Curves]
+[selection: NIST SP 800-186 (Section 4) [NIST Curves], RFC 5639 (section 3) [brainpool curves]]
+
+|ECC - Rejection Sampling
+|Elliptic Curve [selection: P-256, brainpoolP256r1, P-384, brainpoolP384r1, P-521, brainpoolP512r1]
+|[selection: NIST FIPS PUB 186-5 (Section A.2.2), NIST SP 800-56A Rev. 3 (Section 5.6.1.2.2)]
+
+[selection: NIST SP 800-186 (Section 4) [NIST Curves], RFC 5639 (section 3) [brainpool curves]]
+
+|FFC - Extra Random Bits
+|Static domain parameters approved for [selection: IKE groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192], TLS groups [selection: ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192]]]
+|NIST SP 800-56A Rev. 3, RFC 3526, RFC 7919 [FFC domain parameters]
+
+NIST SP 800-56A Rev. 3 (Section 5.6.1.1.3) [key pair generation]
 
 |===
 
