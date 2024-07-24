@@ -772,9 +772,9 @@ _Application Note {counter:remark_count}_:: _This SFR captures methods for multi
 +
 _FCS_CKM.5 defines KDF-CTR, KDF-FB, and KDF-DPI._
 +
-_For the KDF functions, when concatenating keys for AES-CMAC, the contributions from each party should be an equal number of bits, resulting in the selected key size (e.g., if each share is 128 bits, then the result after concatenation is a 256-bit key, which is appropriate only for AES-256-CMAC). For HMAC functions, the shares can be any size as long as the concatenated result is equal to or greater than the nominal cryptographic strength of the chosen hash function (e.g. if each share is 128 bits, then the result after concatenation is 256 bits, which can be used in any of SHA-1, SHA-256, or SHA-512)._
+_For the KDF functions, when concatenating keys for AES-CMAC, the contributions from each party should be an equal number of bits, resulting in the selected key size (e.g., if each share is 128 bits and there are two parties, then the result after concatenation is a 256-bit key, which is appropriate only for AES-256-CMAC). For HMAC functions, the shares can be any size as long as the concatenated result is equal to or greater than the nominal cryptographic strength of the chosen hash function (e.g. if each share is 128 bits, then the result after concatenation is 256 bits, which can be used in any of SHA-1, SHA-256, or SHA-512)._
 +
-_For the KDF functions and XOR, each party may have to use an asymmetric method from FCS_CKM_EXT.7 to transmit their shares to each other. Key shares may also come from a token, in which case, TOEs may use key access methods in FCS_CKM.3 to authorize access and use of those keys in this SFR._
+_For the KDF functions and XOR, each party may have to use an asymmetric method from FCS_CKM.2 to transmit their shares to each other. Key shares may also come from a token, in which case, TOEs may use key access methods in FCS_CKM.3 to authorize access and use of those keys in this SFR._
 +
 _There are no standards that specify how to derive a key from two keys using KEK or XOR. For KEK, encrypting one key with another, one must use one of the algorithms listed in FCS_COP.1/AEAD or FCS_COP.1/SKC and indicate which of the inputs is the plaintext and which is the key. If XOR is selected, the ST Author should describe this method in the documentation._
 +
