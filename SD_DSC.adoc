@@ -2092,7 +2092,7 @@ The evaluator shall verify that the operational guidance describes the process f
 
 ====== Test
 
-The evaluator shall develop and execute or verify and observe the developer tooling which selects the seed source and provides it to the DRBG. The evaluator shall verify that the request succeeds.
+The evaluator shall develop and execute or verify and observe the developer tooling which selects the seed source and provides its output to the DRBG. The evaluator shall verify that the request succeeds.
 
 ====== KMD
 
