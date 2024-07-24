@@ -4200,10 +4200,6 @@ FMT_SMR.1
 |Dependencies
 |Rationale Statement
 
-|FCS_RBG.6 
-|FCS_RBG.1 
-|FCS_RBG.1 is required by this PP.
-
 |FCS_RBG.2 
 |FCS_RBG.1 
 |FCS_RBG.1 is required by this PP.
@@ -4213,12 +4209,20 @@ FMT_SMR.1
 |FCS_RBG.1 is required by this PP.
 
 |FCS_RBG.4 
-|FCS_RBG.1, FCS_RBG.5 
+|FCS_RBG.1
+
+FCS_RBG.5 
 |FCS_RBG.1 is required by this PP. FCS_RBG.5 is required when combining multiple entropy sources.
 
 |FCS_RBG.5
-|FCS_RBG.1 and any of FCS_RBG.2, FCS_RBG.3 or RCS_RBG.4
+|FCS_RBG.1
+
+[FCS_RBG.2 or FCS_RBG.3 or RCS_RBG.4]
 |FCS_RBG.1 is required by this PP. A second source is required for combining sources of entropy.
+
+|FCS_RBG.6 
+|FCS_RBG.1 
+|FCS_RBG.1 is required by this PP.
 
 |FPT_ITT.1 
 |No dependencies. 

@@ -439,7 +439,7 @@ The evaluator shall examine the TSS to determine whether it describes any suppor
 
 [conditional] If the key is generated according to an asymmetric key scheme, the evaluator shall review the TSS to determine that it describes how the functionality described by FCS_CKM.1/AKG is invoked. The evaluator uses the description of the key generation functionality in FCS_CKM.1/AKG or documentation available for the operational environment to determine that the key strength being requested is greater than or equal to 112 bits.
 
-[conditional] If the key is generated according to a symmetric key scheme, the evaluator shall review the TSS to determine that it describes how the functionality described by FCS_CKM.1/SKG is invoked. The evaluator uses the description of the RBG functionality in FCS_RBG_EXT.1, or the key derivation functionality in either FCS_CKM.5 or FCS_COP.1/PBKDF, depending on the key generation method claimed, to determine that the key size being requested is greater than or equal to the key size and mode to be used for the encryption/decryption of the data.
+[conditional] If the key is generated according to a symmetric key scheme, the evaluator shall review the TSS to determine that it describes how the functionality described by FCS_CKM.1/SKG is invoked. The evaluator uses the description of the RBG functionality in FCS_RBG.1, or the key derivation functionality in either FCS_CKM.5 or FCS_COP.1/PBKDF, depending on the key generation method claimed, to determine that the key size being requested is greater than or equal to the key size and mode to be used for the encryption/decryption of the data.
 
 [conditional] If the key is formed from derivation, the evaluator shall verify that the TSS describes the method of derivation and that this method is consistent with FCS_CKM.5.
 
@@ -2066,17 +2066,73 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
+The evaluator shall verify that this function is included as an interface to the RBG in the TSS or the proprietary Entropy Analysis Report and that the behavior of the RBG following a call to this interface is described. The evaluator shall also verify that the documentation of the DRBG describes how the internal seeding is initiated to the SP 800-90A specified DRBG.
+
+====== AGD
+
+The evaluator shall verify that the operational guidance describes the process for how the internally generated seed is supplied to the TOE's DRBG.
+
+====== Test
+
+The evaluator shall develop and execute or verify and observe the developer tooling which generates the internal seed and provides it to the DRBG. The evaluator shall verify that the request succeeds.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
+
 ===== FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
 
 ====== TSS
+
+The evaluator shall verify that this function is included as an interface to the RBG in the TSS or the proprietary Entropy Analysis Report and that the behavior of the RBG following a call to this interface is described. The evaluator shall also verify that the documentation of the DRBG describes how to choose the seeding source to be used and that this source used to seed the SP 800-90A specified DRBG.
+
+====== AGD
+
+The evaluator shall verify that the operational guidance describes the process for how the seed source is selected and the output from the source supplied to the TOE's DRBG.
+
+====== Test
+
+The evaluator shall develop and execute or verify and observe the developer tooling which selects the seed source and provides it to the DRBG. The evaluator shall verify that the request succeeds.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
 
 ===== FCS_RBG.5 Random Bit Generation (Combining Noise Sources)
 
 ====== TSS
 
+The evaluator shall verify that this function is included as an interface to the RBG in the TSS or the proprietary Entropy Analysis Report and that the behavior of the RBG following a call to this interface is described. The evaluator shall also verify that the documentation of the DRBG describes the seeding sources and how their outputs are combined according to the specified standard to be used and that this combined output is used to seed the SP 800-90A specified DRBG.
+
+====== AGD
+
+The evaluator shall verify that the operational guidance describes the process for how the generated seed is supplied to the TOE's DRBG.
+
+====== Test
+
+The evaluator shall develop and execute or verify and observe the developer tooling which generates each separate seed for view and then combines them before providing the output to the DRBG. The evaluator shall verify that the request succeeds.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
+
 ===== FCS_RBG.6 Random Bit Generation Service
 
 ====== TSS
+
+The evaluator shall verify the interface that is provided by the TOE for DRBG output.
+
+====== AGD
+
+The evaluator shall verify that the operational guidance describes how to access the RBG output interface including the method(s) for interacting with the service.
+
+====== Test
+
+The evaluator shall develop and execute or verify and observe the developer tooling which will access the output interface and verify the output from the interface matches the results that would be expected if used internally. The evaluator shall verify that the request succeeds.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
 
 === Protection of the TSF (FPT)
 
@@ -2250,7 +2306,7 @@ These tests are derived from The FIPS 186-4 Elliptic Curve Digital Signature Alg
 
 *ECC Key Generation Test*
 
-For each selected curve, and for each key pair generation method as described in FIPS 186-4, section B.4, the evaluator shall require the implementation under test to generate 10 private/public key pairs (d, Q). The private key, d, shall be generated using a random bit generator as specified in FCS_RBG_EXT.1. The private key, d, is used to compute the public key, Q'. The evaluator shall confirm that 0\<d\<n (where n is the order of the group), and the computed value Q' is then compared to the generated public/private key pairs' public key, Q, to confirm that Q is equal to Q'. 
+For each selected curve, and for each key pair generation method as described in FIPS 186-4, section B.4, the evaluator shall require the implementation under test to generate 10 private/public key pairs (d, Q). The private key, d, shall be generated using a random bit generator as specified in FCS_RBG.1. The private key, d, is used to compute the public key, Q'. The evaluator shall confirm that 0\<d\<n (where n is the order of the group), and the computed value Q' is then compared to the generated public/private key pairs' public key, Q, to confirm that Q is equal to Q'. 
 
 *Public Key Validation (PKV) Test*
 
@@ -2313,9 +2369,9 @@ If the TOE uses the generated key in a key chain/hierarchy then the evaluator sh
 
 ====== TSS
 
-The evaluator shall examine the TSS to verify that it describes how the TOE obtains an SK through direct generation as specified in FCS_RBG_EXT.1, FCS_CKM_EXT.5, or FCS_COP.1/PBKDF. The evaluator shall review the TSS to verify that it describes how the ST invokes the functionality described by FCS_RBG_EXT.1 and FCS_COP.1/PBKDF where applicable.
+The evaluator shall examine the TSS to verify that it describes how the TOE obtains an SK through direct generation as specified in FCS_RBG.1, FCS_CKM_EXT.5, or FCS_COP.1/PBKDF. The evaluator shall review the TSS to verify that it describes how the ST invokes the functionality described by FCS_RBG.1 and FCS_COP.1/PBKDF where applicable.
 
-[conditional] If the symmetric key is generated by an RBG, the evaluator shall review the TSS to determine that it describes how the functionality described by FCS_RBG_EXT.1 is invoked. The evaluator uses the description of the RBG functionality in FCS_RBG_EXT.1 or documentation available for the operational environment to determine that the key size being requested is greater than or equal to the key size and mode to be used for the encryption/decryption of the data.
+[conditional] If the symmetric key is generated by an RBG, the evaluator shall review the TSS to determine that it describes how the functionality described by FCS_RBG.1 is invoked. The evaluator uses the description of the RBG functionality in FCS_RBG.1 or documentation available for the operational environment to determine that the key size being requested is greater than or equal to the key size and mode to be used for the encryption/decryption of the data.
 
 ====== AGD
 
