@@ -5011,7 +5011,7 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [FIPS-HMAC] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 198-1, The Keyed-Hash Message Authentication Code (HMAC)_, National Institute of Standards and Technology, July 2008
 
-[FIPS-SHA] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 180-4, Secure Hash Standard (SHS)_, National Institute of Standards and Technology, March 2012
+[FIPS-SHA] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 180-4, Secure Hash Standard (SHS)_, National Institute of Standards and Technology, Auguest 2015
 
 [GD] Grawrock, David. _Dynamics of a Trusted Platform: A building block approach_. Intel Press, 2009
 
@@ -5019,11 +5019,11 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [ISO-CIPH] ISO/IEC. _ISO/IEC 18033-3:2010 Information Technology - Security Techniques - Encryption Algorithms - Part 3: Block Ciphers_, ISO/IEC, December 2012
 
-[ISO-CMAC] ISO/IEC. _ISO/IEC 9797-1 Information Technology - Security Techniques - Message Authentication Codes (MACs) - Part 1: Mechanisms Using a Block Cipher,_ ISO/IEC, December 1999
+[ISO-CMAC] ISO/IEC. _ISO/IEC 9797-1:2011 Information Technology - Security Techniques - Message Authentication Codes (MACs) - Part 1: Mechanisms Using a Block Cipher,_ ISO/IEC, March 2011
 
 [ISO-HASH] ISO/IEC. ISO/IEC 10118-3:2018 _IT Security Techniques - Hash-Functions - Part 3: Dedicated Hash-Functions_, ISO/IEC, October 2018
 
-[ISO-HMAC] ISO/IEC. _ISO/IEC 9797-2:2011 Information Technology - Security Techniques - Message Authentication Codes (MACs) - Part 2: Mechanisms Using a Dedicated Hash-Function_, ISO/IEC, June 2011
+[ISO-HMAC] ISO/IEC. _ISO/IEC 9797-2:2021 Information Technology - Security Techniques - Message Authentication Codes (MACs) - Part 2: Mechanisms Using a Dedicated Hash-Function_, ISO/IEC, June 2021
 
 [ISO-RBG] SO/IEC. _ISO/IEC 18031:2011 Information Technology - Security Techniques - Random Bit Generation_, ISO/IEC, November 2011
 
