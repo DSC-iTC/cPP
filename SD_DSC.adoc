@@ -2374,6 +2374,7 @@ Preconditions for testing:
 
 The following table maps the data fields in the tests below to the notations used in SP 800-108 and SP 800-56C
 
+.Data Field Notations Between SP 800-108 and SP 800-56C
 [cols=".^3,.^2,.^2",options="header",width=400]
 |===
 
