@@ -171,7 +171,14 @@ image::representationofTOE.png[]
 
 The TOE should be one or more discrete and embedded hardware components that provide well-scoped security functions that are physically inaccessible directly from the rich operating system. The DSC TOE would consist of isolated firmware and circuitry capable of executing well-defined commands against SDEs/SDOs within the TOE and outside the TOE across restricted interfaces. The DSC TOE is not intended to be a discrete, separate stand-alone component, but one which is directly embedded into a larger system.
 
-A DSC may be comprised of a single embedded component within a device, such as a Secure Enclave Processor (SEP), while in other cases it may be a multi-component system comprised of a software layer and several hardware components (which may be discrete or embedded), such as a Trusted Execution Environment (TEE). Other configurations are possible, with the key point being the DSC is embedded within a larger system and is not a discrete component. These dedicated hardware/software components are integrated into a System on Chip (SoC) and as such are isolated components of a larger physical package. <<ExofTOEInt>> below shows a block diagram of a typical example of a DSC TOE with all of its internal components.
+There are many possible configurations for a DSC. Some examples are:
+
+* A DSC may be comprised of a single embedded component within a device, such as a Secure Enclave Processor (SEP) or System on Chip (SoC)
+* A multi-component system comprised of a software layer and several hardware components (which may be discrete or embedded), such as a Trusted Execution Environment (TEE)
+
+Other configurations are possible, with the key point being the DSC is embedded within a larger system and is not a discrete component. 
+
+These dedicated hardware/software components are isolated components of a larger physical package. <<ExofTOEInt>> below shows a block diagram of a typical example of a DSC TOE with all of its internal components.
 
 .Example of TOE Internal Components
 [[ExofTOEInt]]
