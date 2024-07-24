@@ -660,6 +660,7 @@ FCS_CKM.1.1:: The TSF shall generate cryptographic keys in accordance with a spe
 * [.underline]#*Asymmetric keys generated in accordance with FCS_CKM.1/AKG,*#
 * [.underline]#*Symmetric keys generated in accordance with FCS_CKM.1/SKG,*#
 * [.underline]#*Derived keys generated in accordance with FCS_CKM.5*#
+* [.underline]#*Derived keys generated in accordance with FCS_CKM_EXT.8*#
 +
 ] [.line-through]#and specified cryptographic key sizes [_assignment: cryptographic key sizes_] that meet the following: [_assignment: list of standards_]#.
 
@@ -670,6 +671,8 @@ _If [.underline]#Asymmetric keys generated in accordance with FCS_CKM.1/AKG# is 
 _If [.underline]#Symmetric keys generated in accordance with FCS_CKM.1/SKG# is selected, the selection-based SFR FCS_CKM.1/SKG must be claimed by the TOE._
 +
 _If [.underline]#Derived keys generated in accordance with FCS_CKM.5# is selected, the selection-based SFR FCS_CKM.5 must be claimed by the TOE._
++
+_If [.underline]#Derived keys generated in accordance with FCS_CKM_EXT.8# is selected, the selection-based SFR FCS_CKM_EXT.8 must be claimed by the TOE._
 
 ==== FCS_CKM.2 Cryptographic Key Distribution
 
