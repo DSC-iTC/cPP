@@ -1288,7 +1288,7 @@ FCS_OTV_EXT.1.1:: The TSF shall perform cryptographic one-time value generation 
 
 |===
 
-_Application Note {counter:remark_count}_:: _TSFs frequently generate cryptographic one-time values, often non-secret, such as nonces, IVs, salts, and initial counters (sometimes called initial sequential nonces) using the output of an RBG specified in FCS_RBG.1. If the TSF is generating OTVs, then this SFR is used. Otherwise, the TSF may obtain OTVs through importation and use FCS_ITC_EXT.1 or FDP_ITC.1 for importing values for cryptographic operations. Table 11 contains a few examples of OTVs. TSFs that employ other algorithms or modes that require OTVs should include FCS_OTV_EXT.1._
+_Application Note {counter:remark_count}_:: _TSFs frequently generate cryptographic one-time values, often non-secret, such as nonces, IVs, salts, and initial counters (sometimes called initial sequential nonces) using the output of an RBG specified in FCS_RBG.1. If the TSF is generating OTVs, then this SFR is used. Otherwise, the TSF may obtain OTVs through importation and use FDP_ITC.1 for importing values for cryptographic operations. Table 11 contains a few examples of OTVs. TSFs that employ other algorithms or modes that require OTVs should include FCS_OTV_EXT.1._
 +
 _Salts help protect against dictionary and other precomputation attacks. Systems often prepend or append salts to passwords and other long-term, potentially guessable, values to increase the size of a dictionary an attacker must build to attack it. Salts, once associated with a password, generally do not change for the life of that password. Salts should also be unique for each password and should not be reused. Therefore, systems should randomly generate salts with sufficient size such that the combined entropy of both the salt and the password meets the minimal key strength sizes of the chosen algorithms._
 +
@@ -3127,8 +3127,7 @@ FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from
 Hierarchical to:: No other components.
 
 Dependencies:: [FDP_ITC.1 Import of user data without security attributes, or +
-FDP_ITC.2 Import of user data with security attributes, or +
-FCS_ITC_EXT.1 Import of Key] +
+FDP_ITC.2 Import of user data with security attributes] +
 [FCS_CKM.2 Cryptographic key distribution, or +
 FCS_COP.1 Cryptographic operation, or +
 FCS_CKM_EXT.7 Cryptographic Key Agreement] +
@@ -4282,7 +4281,7 @@ FDP_SDC.2
 |All of FCS_CKM.1, FCS_COP.1, and FDP_SDC.2 are required by the PP.
 
 |FCS_CKM_EXT.8 
-|[FDP_ITC.1, FDP_ITC.2, or FCS_ITC_EXT.1] 
+|[FDP_ITC.1, FDP_ITC.2] 
 
 [FCS_CKM.2 or FCS_COP.1 or FCS_CKM_EXT.7]
 
