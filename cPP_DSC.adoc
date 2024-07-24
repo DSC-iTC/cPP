@@ -2647,9 +2647,7 @@ NIST SP 800-108 Rev. 1 (Section 4.3) [KDF in Double-Pipeline Iteration Mode] [se
 
 |===
 
-_Application Note {counter:remark_count}_:: _The protocol- and application-specific KDFs specified in NIST SP 800-135 Rev. 1 (e.g., IKE, TLS) and other standards should be covered by SFRs tailored for those protocols. We do expect the cryptographic primitives of application specific KDFs to be validated, e.g., HMAC, SHA. Proper parameters to protocols need to be validated by protocol testing, not cryptographic testing._
-+
-_There are no standards that specify how to derive a key from two keys using XOR (KDF-XOR) or encryption (KDF-ENC). If KDF-XOR is selected, the ST Author should describe this method in the documentation. If KDF-ENC is selected, the ST Author should document the encryption algorithm used from FCS_COP.1/AEAD or FCS_COP.1/SKC, and which of the inputs is the plaintext and which is the key._
+_Application Note {counter:remark_count}_:: _There are no standards that specify how to derive a key from two keys using XOR (KDF-XOR) or encryption (KDF-ENC). If KDF-XOR is selected, the ST Author should describe this method in the documentation. If KDF-ENC is selected, the ST Author should document the encryption algorithm used from FCS_COP.1/AEAD or FCS_COP.1/SKC, and which of the inputs is the plaintext and which is the key._
 +
 _In KDF-MAC-2S, if a CMAC is selected in the MAC step, then select AES-128-CMAC in the KDF step and select 128 as the output key size. If HMAC is selected in the MAC step, then select the same HMAC in the KDF._
 +
