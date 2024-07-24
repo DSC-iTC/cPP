@@ -3146,7 +3146,7 @@ FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash) +
 FCS_CKM.6 Timing and event of cryptographic key destruction 
 
 [vertical]
-FCS_CKM_EXT.8.1:: The TSF shall perform password-based key derivation functions in accordance with a specified cryptographic algorithm {empty}[HMAC-[selection: _SHA-256, SHA-384, SHA-512_]], with iteration count of [assignment: _number of iterations_] using a randomly generated salt of length [selection: _128, [assignment: greater than 128]_] and output cryptographic key sizes [selection: _128, 192, 256 [assignment: greater than 128]_] bits that meet the following standard: [NIST SP 800-132 Section 5.3 (PBKDF2)].
+FCS_CKM_EXT.8.1:: The TSF shall perform password-based key derivation functions in accordance with a specified cryptographic algorithm [HMAC-[selection: _SHA-256, SHA-384, SHA-512_]], with iteration count of [assignment: _number of iterations_] using a randomly generated salt of length [selection: _128, [assignment: greater than 128]_] and output cryptographic key sizes [selection: _128, 192, 256 [assignment: greater than 128]_] bits that meet the following standard: [NIST SP 800-132 Section 5.3 (PBKDF2)].
 
 ==== FCS_OTV_EXT One-Time Value
 
@@ -3183,7 +3183,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: FCS_RBG.1 Random Bit Generation (RBG)
 [vertical]
-FCS_OTV_EXT.1.1:: The TSF shall perform cryptographic one-time value generation for [selection: _algorithm or mode_] using the output of a {empty}[selection: _random bit generator as defined in FCS_RBG.1, deterministic IV construction, [assignment: OTV construction method]_] and sizes of length that meet the following: [selection: _list of standards_].
+FCS_OTV_EXT.1.1:: The TSF shall perform cryptographic one-time value generation for [selection: _algorithm or mode_] using the output of a [selection: _random bit generator as defined in FCS_RBG.1, deterministic IV construction, [assignment: OTV construction method]_] and sizes of length that meet the following: [selection: _list of standards_].
 
 ==== FCS_STG_EXT Cryptographic Key Storage
 
@@ -3222,15 +3222,15 @@ Hierarchical to:: No other components.
 
 Dependencies:: No dependencies.
 [vertical]
-FCS_STG_EXT.1.1:: The TSF shall provide [assignment: _protection method_] protected storage for asymmetric private keys and {empty}[selection: _symmetric keys, persistent secrets, no other keys_].
+FCS_STG_EXT.1.1:: The TSF shall provide [assignment: _protection method_] protected storage for asymmetric private keys and [selection: _symmetric keys, persistent secrets, no other keys_].
 
-FCS_STG_EXT.1.2:: The TSF shall support the capability of {empty}[selection: _importing keys/secrets into the TOE, causing the TOE to generate keys/secrets_] upon request of [assignment: _authorized subject_].
+FCS_STG_EXT.1.2:: The TSF shall support the capability of [selection: _importing keys/secrets into the TOE, causing the TOE to generate keys/secrets_] upon request of [assignment: _authorized subject_].
 
 FCS_STG_EXT.1.3:: The TSF shall have the capability to allow only the user that [selection: _imported the key/secret, caused the key/secret to be generated_] to use the key/secret. Exceptions may only be explicitly authorized by [assignment: _authorized subject_].
 
-FCS_STG_EXT.1.4:: The TSF shall have the capability to allow only the user that {empty}[selection: _imported the key/secret, caused the key/secret to be generated_] to use the key/secret. Exceptions may only be explicitly authorized by [assignment: _authorized subject_].
+FCS_STG_EXT.1.4:: The TSF shall have the capability to allow only the user that [selection: _imported the key/secret, caused the key/secret to be generated_] to use the key/secret. Exceptions may only be explicitly authorized by [assignment: _authorized subject_].
 
-FCS_STG_EXT.1.5:: The TSF shall allow only the user that {empty}[selection: _imported the key/secret, caused the key/secret to be generated_] to request that the key/secret be destroyed. Exceptions may only be explicitly authorized by [assignment: _authorized subject_].
+FCS_STG_EXT.1.5:: The TSF shall allow only the user that [selection: _imported the key/secret, caused the key/secret to be generated_] to request that the key/secret be destroyed. Exceptions may only be explicitly authorized by [assignment: _authorized subject_].
 
 === Class FDP: User Data Protection
 ==== FDP_ETC_EXT Export from the TOE
@@ -3268,7 +3268,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: FCS_COP.1 Cryptographic Operation
 [vertical]
-FDP_ETC_EXT.2.1:: The TSF shall propagate only SDO references, wrapped authorization data, and wrapped SDOs such that only {empty}[selection: _the TOE, authorized users_] can access them.
+FDP_ETC_EXT.2.1:: The TSF shall propagate only SDO references, wrapped authorization data, and wrapped SDOs such that only [selection: _the TOE, authorized users_] can access them.
 
 ==== FDP_FRS_EXT Factory Reset
 
@@ -3451,7 +3451,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: No dependencies.
 [vertical]
-FIA_AFL_EXT.1.1:: The TSF shall maintain {empty}[selection: _a unique counter for [assignment: multiple separate objects each requiring authorization], one global counter covering [assignment: objects requiring authorization]_], called the failed authorization attempt counters, that counts of the number of unsuccessful authorization attempts that occur related to authorizing access to these objects.
+FIA_AFL_EXT.1.1:: The TSF shall maintain [selection: _a unique counter for [assignment: multiple separate objects each requiring authorization], one global counter covering [assignment: objects requiring authorization]_], called the failed authorization attempt counters, that counts of the number of unsuccessful authorization attempts that occur related to authorizing access to these objects.
 
 FIA_AFL_EXT.1.2:: The TSF shall maintain a [selection, choose one of: _static, administrator configurable variable_] threshold of the minimal acceptable number of unsuccessful authorization attempts that occur related to authorizing access to these objects.
 
@@ -3556,7 +3556,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: No dependencies.
 [vertical]
-FPT_MFW_EXT.1.1:: The TSF shall be maintained as {empty}[selection: _immutable, mutable_] firmware.
+FPT_MFW_EXT.1.1:: The TSF shall be maintained as [selection: _immutable, mutable_] firmware.
 
 *FPT_MFW_EXT.2 Basic Firmware Integrity*
 [horizontal]
@@ -3661,7 +3661,7 @@ Dependencies:: No dependencies.
 [vertical]
 FPT_PRO_EXT.1.1:: The TSF shall contain an SDO that contains the identity of the Root of Trust.
 
-FPT_PRO_EXT.1.2:: The TSF shall maintain Root of Trust data as {empty}[selection: _immutable, mutable if and only if its mutability is controlled by a unique identifiable owner_].
+FPT_PRO_EXT.1.2:: The TSF shall maintain Root of Trust data as [selection: _immutable, mutable if and only if its mutability is controlled by a unique identifiable owner_].
 
 *FPT_PRO_EXT.2 Data Integrity Measurements*
 [horizontal]
@@ -3717,7 +3717,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: FPT_PRO_EXT.1 Root of Trust
 [vertical]
-FPT_ROT_EXT.1.1:: The TSF shall provide a Root of Trust for Storage, a Root of Trust for Authorization, and {empty}[selection: _Root of Trust for Measurement, Root of Trust for Reporting, no others_].
+FPT_ROT_EXT.1.1:: The TSF shall provide a Root of Trust for Storage, a Root of Trust for Authorization, and [selection: _Root of Trust for Measurement, Root of Trust for Reporting, no others_].
 
 *FPT_ROT_EXT.2 Root of Trust for Storage*
 [horizontal]
@@ -3735,7 +3735,7 @@ Dependencies:: FCS_COP.1 Cryptographic Operation +
 FPT_PRO_EXT.1 Root of Trust +
 FPT_ROT_EXT.1 Root of Trust Services
 [vertical]
-FPT_ROT_EXT.3.1:: The TSF shall be able to attest to a state as represented by platform characteristics with a Root of Trust for Reporting mechanism that uses for its identity {empty}[selection: _a cryptographically verifiable identity in FPT_PRO_EXT.1, an alias key bound to the cryptographically verifiable identity in FPT_PRO_EXT.1_] and using a signature algorithm as specified in FCS_COP.1.
+FPT_ROT_EXT.3.1:: The TSF shall be able to attest to a state as represented by platform characteristics with a Root of Trust for Reporting mechanism that uses for its identity [selection: _a cryptographically verifiable identity in FPT_PRO_EXT.1, an alias key bound to the cryptographically verifiable identity in FPT_PRO_EXT.1_] and using a signature algorithm as specified in FCS_COP.1.
 
 ==== FPT_STM_EXT Reliable Time Counting
 
