@@ -2664,6 +2664,8 @@ _Application Note {counter:remark_count}_:: _There are no standards that specify
 +
 _In KDF-MAC-2S, if a CMAC is selected in the MAC step, then select AES-128-CMAC in the KDF step and select 128 as the output key size. If HMAC is selected in the MAC step, then select the same HMAC in the KDF._
 +
+_Under input parameters, if concatenated keys or intermediary keys is selected, the ST Author should describe the sources of the keys, and the order in which they are concatenated, along with any other values that are concatenated with them. This option may be chosen in instances when input keying material for the KDF comes from two independent sources, for example, a client and a server._
++
 _If deriving a symmetric key, select any of the above rows._
 +
 _If deriving an initialization vector, an authentication secret, HMAC key, or KMAC key, select KDF-CTR, KDF-FB, KDF-DPI, KDF-HASH, KDF-XOR, or KDF-ENC._
@@ -2677,8 +2679,8 @@ FCS_CKM_EXT.8 Password-Based Key Derivation
 FCS_CKM_EXT.8.1:: The TSF shall perform password-based key derivation functions in accordance with a specified cryptographic algorithm {empty}[_HMAC-[selection: SHA-256, SHA-384, SHA-512]_], with iteration count of _[assignment: number of iterations]_ using a randomly generated salt of length _[selection: 128, [assignment: greater than 128]]_ and output cryptographic key sizes _[selection: 128, 192, 256, [assignment: greater than 128]]_ bits that meet the following standard: [NIST SP 800-132 Section 5.3 (PBKDF2)].
 
 _Application Note {counter:remark_count}_:: _The TSF must condition a password into a string of bits prior to using it as input to algorithms that form SKs and KEKs. The TSF can perform conditioning using one of the identified hash functions or the process described in NIST SP 800-132 Section 5.3 (PBKDF2); the ST author selects the method used. NIST SP 800-132 Section 5.3 (PBKDF2) requires the use of a pseudo-random function (PRF) consisting of HMAC with an approved hash function._
-
-_Application Note {counter:remark_count}_:: _The TSF is allowed to use PBKDF2 to condition passwords in the context of password-based authentication. In this scenario, the output of PBKDF2 is not directly used as a cryptographic key, but only stored as a reference value (commonly called "password hash") to compare against when performing authentication. The "cryptographic key size" selected in this element must correspond to the length of the password hash._
++
+_The TSF is allowed to use PBKDF2 to condition passwords in the context of password-based authentication. In this scenario, the output of PBKDF2 is not directly used as a cryptographic key, but only stored as a reference value (commonly called "password hash") to compare against when performing authentication. The "cryptographic key size" selected in this element must correspond to the length of the password hash._
 
 ==== FCS_COP.1/AEAD Cryptographic Operation (Authenticated Encryption with Associated Data)
 
