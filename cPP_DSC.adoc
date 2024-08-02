@@ -5007,7 +5007,9 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 |===
 
 [appendix]
-== References
+== References & Standards
+
+=== Standards 
 
 [FIPS-AES] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 197, Advanced Encryption Standard (AES)_, National Institute of Standards and Technology, November 2001
 
@@ -5018,10 +5020,6 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 [FIPS-SHA3] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 202, SHA-3 Standard: Permutation-Based Hash and Extendable-Output Functions_, National Institute of Standards and Technology, August 2015
 
 [FIPS-SHS] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 180-4, Secure Hash Standard (SHS)_, National Institute of Standards and Technology, August 2015
-
-[GD] Grawrock, David. _Dynamics of a Trusted Platform: A building block approach_. Intel Press, 2009
-
-[GP_ROT] GlobalPlatform Technology. _Root of Trust Definitions and Requirements Version 1.1_. GlobalPlatform, June 2018
 
 [ISO-ACIPH] ISO/IEC. _ISO/IEC 18033-2:2006 Information Technology - Security Techniques - Encryption Algorithms - Part 3: Asymmetric Ciphers_, ISO/IEC, May 2006
 
@@ -5081,8 +5079,14 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [NIST-PBKDF] Meltem Sönmez Turan, Elaine Barker, William Burr, and Lily Chen. _NIST Special Publication 800-132, Recommendation for Password-Based Key Derivation, Part 1: Storage Applications_, National Institute of Standards and Technology, December 2010
 
-[NIST-ROTM] Lily Chen, Joshua Franklin, and Andrew Regenscheid. _NIST Special Publication 800-164 (Draft), Guidelines on Hardware Rooted Security in Mobile Devices (Draft)_, National Institute of Standards and Technology, October 2012
-
 [NIST-XTS] Morris Dworking. _NIST Special Publication 800-38E, Recommendation for Block Cipher Modes of Operation: the XTS-AES Mode for Confidentiality on Storage Devices_, National Institute of Standards and Technology, January 2010
+
+=== References
+
+[GD] Grawrock, David. _Dynamics of a Trusted Platform: A building block approach_. Intel Press, 2009
+
+[GP_ROT] GlobalPlatform Technology. _Root of Trust Definitions and Requirements Version 1.1_. GlobalPlatform, June 2018
+
+[NIST-ROTM] Lily Chen, Joshua Franklin, and Andrew Regenscheid. _NIST Special Publication 800-164 (Draft), Guidelines on Hardware Rooted Security in Mobile Devices (Draft)_, National Institute of Standards and Technology, October 2012
 
 [SA] Segall, Ariel. _Trusted Platform Modules: Why, When and How to Use Them_. The Institution of Engineering and Technology, 2016
