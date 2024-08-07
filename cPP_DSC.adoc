@@ -2205,7 +2205,7 @@ The following rationale provides justification for each security problem definit
 |This requirement ensures the use of strong methods to derive keys from password data.
 
 |FTP_CCMP_EXT.1 (selection-based)
-|This requirement defines the implementation of CCMP (IEEE 802.11i) using strong cryptography.
+|This requirement defines the implementation of CCMP (IEEE 802.11i or IEEE 802.11ac) using strong cryptography.
 
 |FTP_GCMP_EXT.1 (selection-based)
 |This requirement defines the implementation of GCMP (IEEE 802.11ad) using strong cryptography.
