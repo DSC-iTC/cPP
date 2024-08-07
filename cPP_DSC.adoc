@@ -5023,6 +5023,16 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [FIPS-SHS] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 180-4, Secure Hash Standard (SHS)_, National Institute of Standards and Technology, August 2015
 
+[IEEE-CCMP] Institute of Electrical and Electronics Engineers. _IEEE 802.11i-2004 - IEEE Standard for Information Technology-Telecommunications and information exchange between systems-Local and metropolitan area networks-Specific requirements-Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) specifications: Amendment 6: Medium Access Control (MAC) Security Enhancements_, Institute of Electrical and Electronics Engineers, July 2004
+
+[IEEE-CCMP-256] Institute of Electrical and Electronics Engineers. _802.11ac-2013 - IEEE Standard for Information Technology-Telecommunications and information exchange between systems-Local and metropolitan area networks-Specific requirements-Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) specifications: Amendment 4: Enhancements for Very High Throughput for Operation in Bands below 6 GHz._, Institute of Electrical and Electronics Engineers, December 2013
+
+[IEEE-GCMP] Institute of Electrical and Electronics Engineers. _IEEE 802.11ad-2012 - IEEE Standard for Information Technology-Telecommunications and information exchange between systems-Local and metropolitan area networks-Specific requirements-Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) specifications: Amendment 3: Enhancements for Very High Throughput in the 60 GHz Band_, Institute of Electrical and Electronics Engineers, December 2012
+
+[IEEE-PK] Institute of Electrical and Electronics Engineers. _IEEE 1363a-2004 - IEEE Standard Specifications for Public-Key Cryptography - Amendment 1: Additional Techniques_, Institute of Electrical and Electronics Engineers, September 2004
+
+[IEEE-XTS] Institute of Electrical and Electronics Engineers. _IEEE 1619-2018 - IEEE Standard for Cryptographic Protection of Data on Block-Oriented Storage Devices_, Institute of Electrical and Electronics Engineers, January 2019
+
 [ISO-ACIPH] ISO/IEC. _ISO/IEC 18033-2:2006 Information Technology - Security Techniques - Encryption Algorithms - Part 3: Asymmetric Ciphers_, ISO/IEC, May 2006
 
 [ISO-AENC] ISO/IEC. _ISO/IEC 19772:2020 Information Technology - Authenticated Encryption_, ISO/IEC, November 2020
