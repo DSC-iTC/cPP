@@ -1226,7 +1226,7 @@ in accordance with [assignment: _list of standards_].
 
 _Application Note {counter:remark_count}_:: _No rationale is acceptable for not satisfying one of these dependencies._
 +
-_If a reseeding is selected in the first selection and something other than “never” is selected in the third selection, but reseeding is not feasible, the TSF will uninstantiate RBGs, rather than produce output that is of insufficient quality. The listed standards should specify the reseed interval and procedure for uninstantiating and reseeding. The remaining selection allows the PP Author to require application-specific conditions for reseeding._
+_If a reseeding is selected in the first selection and something other than “never” is selected in the third selection, but reseeding is not feasible, the TSF will uninstantiate RBGs, rather than produce output that is of insufficient quality. The listed standards should specify the reseed interval and procedure for uninstantiating and reseeding._
 +
 _"Uninstantiate" means that the internal state of the DRBG is no longer available for use._
 +
@@ -2520,8 +2520,6 @@ NIST SP 800-56A Rev. 3 (Section 5.6.1.1.4) [key pair generation]
 |===
 
 _Application Note {counter:remark_count}_:: _For RSA the choice of the modulus implies the resulting key sizes of the public and private keys generated using the specified standard methods._
-+
-_For Finite Field Cryptography (FFC) DSA, PP authors should consult schemes for guidelines on use. FIPS PUB 186-5 does not approve DSA for digital signature generation but allows DSA for digital signature verification for legacy purposes._
 +
 _When generating ECC key pairs for key establishment, choose NIST SP 800-56A Section 5.6.1.2.1 or 5.6.1.2.2. When generating ECC key pairs for digital signature generation, choose NIST FIPS PUB 186-5 Section A.2.1 or A.2.2. The intended security strengths for elliptic curves P-224, B-233, and K-233 is 112 bits, for P-256, brainpoolP256r1, Edwards25519, B-283, and K-283 is 128 bits, for P-384 and brainpoolP384r1 is 192 bits, for Edwards448 is 224, and for P-521 and brainpool512r1 is 256 bits. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
 +
