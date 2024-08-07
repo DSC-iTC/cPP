@@ -5091,6 +5091,22 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [NIST-XTS] Morris Dworking. _NIST Special Publication 800-38E, Recommendation for Block Cipher Modes of Operation: the XTS-AES Mode for Confidentiality on Storage Devices_, National Institute of Standards and Technology, January 2010
 
+[RFC3526] Mika Kojo and Tero Kivinen. _More Modular Exponential (MODP) Diffie-Hellman groups for Internet Key Exchange (IKE)_, Internet Engineering Task Force, May 2003
+
+[RFC5639] Manfred Lochter and Johannes Merkle. _Elliptic Curve Cryptography (ECC) Brainpool Standard Curves and Curve Generation_, Internet Engineering Task Force, March 2010
+
+[RFC7748] Adam Langley, Mike Hamburg, and Sean Turner. _Elliptic Curves for Security_, Internet Engineering Task Force, January 2016
+
+[RFC7919] Daniel Kahn Gillmor. _Negotiated Finite Field Diffie-Hellman Ephemeral Parameters for Transport Layer Security (TLS)_, Internet Engineering Task Force, August 2016
+
+[RFC8017] Kathleen Moriarty, Burt Kaliski, Jakob Jonsson, and Andreas Rusch. _PKCS #1: RSA Cryptography Specifications Version 2.2_, Internet Engineering Task Force, November 2016
+
+[RFC8032] Simon Josefsson and Ilari Liusvaara. _Edwards-Curve Digital Signature Algorithm (EdDSA)_, Internet Engineering Task Force, January 2017
+
+[RFC8391] Andreas Huelsing, Denis Butin, Stefan-Lukas Gazdag, Joost Rijneveld, and Aziz Mohaisen. _XMSS: eXtended Merkle Signature Scheme_, Internet Engineering Task Force, May 2018
+
+[RFC8554] David McGrew, Michael Curcio, and Scott Fluhrer. _Leighton-Micali Hash-Based Signatures_, Internet Engineering Task Force, April 2019
+
 === References
 
 [GD] Grawrock, David. _Dynamics of a Trusted Platform: A building block approach_. Intel Press, 2009
