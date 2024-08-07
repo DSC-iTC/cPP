@@ -794,7 +794,7 @@ _For the KDF functions and XOR, each party may have to use an asymmetric method 
 +
 _There are no standards that specify how to derive a key from two keys using KEK or XOR. For KEK, encrypting one key with another, one must use one of the algorithms listed in FCS_COP.1/AEAD or FCS_COP.1/SKC and indicate which of the inputs is the plaintext and which is the key. If XOR is selected, the ST Author should describe this method in the documentation._
 +
-_For cPP/ST authors, please consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
+_For ST authors, please consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
 
 ==== FCS_COP.1/Hash Cryptographic Operation (Hashing)
 
@@ -867,7 +867,7 @@ FCS_COP.1.1/KeyedHash:: The TSF shall perform [_keyed hash message authenticatio
 
 |===
 
-_Application Note {counter:remark_count}_:: _The HMAC minimum key sizes in the table are specified in the ISO 9797-2:2021 standard, which requires that the minimum key size be equal to the digest size. The FIPS standard specifies no minimum or maximum key sizes, so if FIPS PUB 198-1 is selected, larger or smaller key sizes may be used._
+_Application Note {counter:remark_count}_:: _The HMAC minimum key sizes in the table are specified in the ISO 9797-2:2021 standard, which requires that the minimum key size be equal to the digest size. The FIPS PUB 198-1 standard specifies no minimum or maximum key sizes, so if FIPS PUB 198-1 is selected, larger or smaller key sizes may be used._
 
 :xrefstyle: full
 
