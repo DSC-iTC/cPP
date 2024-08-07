@@ -1279,7 +1279,7 @@ FCS_OTV_EXT.1.1:: The TSF shall perform cryptographic one-time value generation 
 |IVs should be non-repeating as repeating IVs leak information about the first plaintext block and about common shared prefixes in messages.
 
 |XTS
-|SP 800-38E, IEEE Std 1619-2007
+|SP 800-38E, IEEE Std. 1619-2018
 |Tweak values shall be non-negative integers, assigned consecutively, and starting at an arbitrary non-negative integer (i.e., sequential nonces).
 
 |CMAC
