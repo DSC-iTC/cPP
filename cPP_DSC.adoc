@@ -5011,6 +5011,8 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 === Standards
 
+[AIS31] Matthias Peter and Werner Schindler. _A proposal for: Functionality classes for random number generators_, Bundesamt für Sicherheit in der Informationstechnik (BSI), September 2011
+
 [ANSI-ECC] American National Standards Institute. _ANSI X9.63–2011 (R2017) Public Key Cryptography for the Financial Services Industry - Key Agreement and Key Transport Using Elliptic Curve Cryptography_, American National Standards Institute, February 2017
 
 [FIPS-AES] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 197, Advanced Encryption Standard (AES)_, National Institute of Standards and Technology, November 2001
@@ -5066,6 +5068,8 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 [NIST-CURVES] Lily Chen, Dustin Moody, Karen Randall, Andrew Regenscheid, Angela Robinson, and Karen Randall. _NIST Special Publication 800-186, Recommendations for Discrete Logarithm-based Cryptography: Elliptic Curve Domain Parameters_, National Institute of Standards and Technology, February 2023
 
 [NIST-DRBG] Elaine Barker and John Kelsey. _NIST Special Publication 800-90A Rev. 1, Recommendation for Random Number Generation Using Deterministic Random Bit Generators_, National Institute of Standards and Technology, June 2015
+
+[NIST-ES] Meltem Sönmez Turan, Elaine Barker, John Kelsey, Kerry A. McKay, Mary L. Baish, and Mike Boyle. _NIST Special Publication 800-90B, Recommendation for the Entropy Sources Used for Random Bit Generation_, National Institute of Standards and Technology, January 2018
 
 [NIST-GCM] Morris Dworkin. _NIST Special Publication 800-38D, Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) and GMAC_, National Institute of Standards and Technology, November 2007
 
