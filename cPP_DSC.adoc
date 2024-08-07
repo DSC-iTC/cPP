@@ -5107,6 +5107,8 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [RFC8554] David McGrew, Michael Curcio, and Scott Fluhrer. _Leighton-Micali Hash-Based Signatures_, Internet Engineering Task Force, April 2019
 
+[SECG-ECC] Daniel R. L. Brown. _SEC 1: Elliptic Curve Cryptography_, Certicom Corp., May 2009
+
 === References
 
 [GD] Grawrock, David. _Dynamics of a Trusted Platform: A building block approach_. Intel Press, 2009
