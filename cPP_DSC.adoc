@@ -5057,6 +5057,8 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [ISO-RBG] SO/IEC. _ISO/IEC 18031:2011 Information Technology - Security Techniques - Random Bit Generation_, ISO/IEC, November 2011
 
+[ISO-TR] ISO/IEC. _ISO/IEC 24759-3:2017 Information Technology - Security Techniques - Test Requirements for Cryptographic Modules,_ ISO/IEC, 2017
+
 [NIST-ASKDF] Quynh Dang. _NIST Special Publication 800-135 Rev. 1, Recommendation for Existing Application-Specific Key Derivation Functions_, National Institute of Standards and Technology, December 2011
 
 [NIST-CCM] Morris Dworkin. _NIST Special Publication 800-38C, Recommendation for Block Cipher Modes of Operation: The CCM Mode for Authentication and Confidentiality_, National Institute of Standards and Technology, May 2004
@@ -5118,8 +5120,6 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 [GD] Grawrock, David. _Dynamics of a Trusted Platform: A building block approach_. Intel Press, 2009
 
 [GP_ROT] GlobalPlatform Technology. _Root of Trust Definitions and Requirements Version 1.1_. GlobalPlatform, June 2018
-
-[ISO-TR] ISO/IEC. _ISO/IEC 24759-3:2017 Information Technology - Security Techniques - Test Requirements for Cryptographic Modules,_ ISO/IEC, 2017
 
 [NIST-ROTM] Lily Chen, Joshua Franklin, and Andrew Regenscheid. _NIST Special Publication 800-164 (Draft), Guidelines on Hardware Rooted Security in Mobile Devices (Draft)_, National Institute of Standards and Technology, October 2012
 
