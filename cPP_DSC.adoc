@@ -5014,34 +5014,120 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 |===
 
 [appendix]
-== References
+== References & Standards
+
+=== Standards
+
+[AIS31] Matthias Peter and Werner Schindler. _A proposal for: Functionality classes for random number generators_, Bundesamt für Sicherheit in der Informationstechnik (BSI), September 2011
+
+[ANSI-ECC] American National Standards Institute. _ANSI X9.63–2011 (R2017) Public Key Cryptography for the Financial Services Industry - Key Agreement and Key Transport Using Elliptic Curve Cryptography_, American National Standards Institute, February 2017
+
+[FIPS-AES] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 197, Advanced Encryption Standard (AES)_, National Institute of Standards and Technology, November 2001
+
+[FIPS-DSS] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 186-5, Digital Signature Standard (DSS)_, National Institute of Standards and Technology, February 2023
 
 [FIPS-HMAC] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 198-1, The Keyed-Hash Message Authentication Code (HMAC)_, National Institute of Standards and Technology, July 2008
 
-[FIPS-SHA] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 180-4, Secure Hash Standard (SHS)_, National Institute of Standards and Technology, March 2012
+[FIPS-SHA3] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 202, SHA-3 Standard: Permutation-Based Hash and Extendable-Output Functions_, National Institute of Standards and Technology, August 2015
+
+[FIPS-SHS] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 180-4, Secure Hash Standard (SHS)_, National Institute of Standards and Technology, August 2015
+
+[IEEE-CCMP] Institute of Electrical and Electronics Engineers. _IEEE 802.11i-2004 - IEEE Standard for Information Technology-Telecommunications and information exchange between systems-Local and metropolitan area networks-Specific requirements-Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) specifications: Amendment 6: Medium Access Control (MAC) Security Enhancements_, Institute of Electrical and Electronics Engineers, July 2004
+
+[IEEE-CCMP-256] Institute of Electrical and Electronics Engineers. _802.11ac-2013 - IEEE Standard for Information Technology-Telecommunications and information exchange between systems-Local and metropolitan area networks-Specific requirements-Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) specifications: Amendment 4: Enhancements for Very High Throughput for Operation in Bands below 6 GHz._, Institute of Electrical and Electronics Engineers, December 2013
+
+[IEEE-GCMP] Institute of Electrical and Electronics Engineers. _IEEE 802.11ad-2012 - IEEE Standard for Information Technology-Telecommunications and information exchange between systems-Local and metropolitan area networks-Specific requirements-Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) specifications: Amendment 3: Enhancements for Very High Throughput in the 60 GHz Band_, Institute of Electrical and Electronics Engineers, December 2012
+
+[IEEE-PK] Institute of Electrical and Electronics Engineers. _IEEE 1363a-2004 - IEEE Standard Specifications for Public-Key Cryptography - Amendment 1: Additional Techniques_, Institute of Electrical and Electronics Engineers, September 2004
+
+[IEEE-XTS] Institute of Electrical and Electronics Engineers. _IEEE 1619-2018 - IEEE Standard for Cryptographic Protection of Data on Block-Oriented Storage Devices_, Institute of Electrical and Electronics Engineers, January 2019
+
+[ISO-ACIPH] ISO/IEC. _ISO/IEC 18033-2:2006 Information Technology - Security Techniques - Encryption Algorithms - Part 3: Asymmetric Ciphers_, ISO/IEC, May 2006
+
+[ISO-AENC] ISO/IEC. _ISO/IEC 19772:2020 Information Technology - Authenticated Encryption_, ISO/IEC, November 2020
+
+[ISO-BCIPH] ISO/IEC. _ISO/IEC 18033-3:2010 Information Technology - Security Techniques - Encryption Algorithms - Part 3: Block Ciphers_, ISO/IEC, December 2012
+
+[ISO-CMAC] ISO/IEC. _ISO/IEC 9797-1:2011 Information Technology - Security Techniques - Message Authentication Codes (MACs) - Part 1: Mechanisms Using a Block Cipher,_ ISO/IEC, March 2011
+
+[ISO-DSIG] ISO/IEC. _ISO/IEC 14888-3:2018 Information Technology - Security Techniques - Digital Signatures with Appendix - Part 3: Discrete Logarithm Based Mechanisms_, ISO/IEC, November 2018
+
+[ISO-HASH] ISO/IEC. _ISO/IEC 10118-3:2018 Information Technology - Security Techniques - Hash-Functions - Part 3: Dedicated Hash-Functions_, ISO/IEC, October 2018
+
+[ISO-KDF] ISO/IEC. _ISO/IEC 11770-6:2016 Information Technology - Security Techniques - Key Management - Part 6: Key Derivation_, ISO/IEC, October 2016
+
+[ISO-LCBC] ISO/IEC. _ISO/IEC 29192-2:2019 Information Technology - Security Techniques - Lightweight Cryptography - Part 2: Block Ciphers_, ISO/IEC, December 2012
+
+[ISO-MAC] ISO/IEC. _ISO/IEC 9797-2:2021 Information Technology - Security Techniques - Message Authentication Codes (MACs) - Part 2: Mechanisms Using a Dedicated Hash-Function_, ISO/IEC, June 2021
+
+[ISO-MODES] ISO/IEC. _ISO/IEC 10116:2017 Information Technology - Security Techniques - Modes of Operation for an n-bit Block Cipher_, ISO/IEC, July 2017
+
+[ISO-RBG] SO/IEC. _ISO/IEC 18031:2011 Information Technology - Security Techniques - Random Bit Generation_, ISO/IEC, November 2011
+
+[ISO-TR] ISO/IEC. _ISO/IEC 24759-3:2017 Information Technology - Security Techniques - Test Requirements for Cryptographic Modules,_ ISO/IEC, 2017
+
+[NIST-ASKDF] Quynh Dang. _NIST Special Publication 800-135 Rev. 1, Recommendation for Existing Application-Specific Key Derivation Functions_, National Institute of Standards and Technology, December 2011
+
+[NIST-CCM] Morris Dworkin. _NIST Special Publication 800-38C, Recommendation for Block Cipher Modes of Operation: The CCM Mode for Authentication and Confidentiality_, National Institute of Standards and Technology, May 2004
+
+[NIST-CKG] Elaine Barker, Allen Roginsky, and Richard Davis. _NIST Special Publication 800-133 Rev. 2, Recommendation for Cryptographic Key Generation_, National Institute of Standards and Technology, June 2020
+
+[NIST-CMAC] Morris Dworkin. _NIST Special Publication 800-38B, Recommendation for Block Cipher Modes of Operation: The CMAC Mode for Authentication_, National Institute of Standards and Technology, October 2016
+
+[NIST-CURVES] Lily Chen, Dustin Moody, Karen Randall, Andrew Regenscheid, Angela Robinson, and Karen Randall. _NIST Special Publication 800-186, Recommendations for Discrete Logarithm-based Cryptography: Elliptic Curve Domain Parameters_, National Institute of Standards and Technology, February 2023
+
+[NIST-DRBG] Elaine Barker and John Kelsey. _NIST Special Publication 800-90A Rev. 1, Recommendation for Random Number Generation Using Deterministic Random Bit Generators_, National Institute of Standards and Technology, June 2015
+
+[NIST-ES] Meltem Sönmez Turan, Elaine Barker, John Kelsey, Kerry A. McKay, Mary L. Baish, and Mike Boyle. _NIST Special Publication 800-90B, Recommendation for the Entropy Sources Used for Random Bit Generation_, National Institute of Standards and Technology, January 2018
+
+[NIST-GCM] Morris Dworkin. _NIST Special Publication 800-38D, Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) and GMAC_, National Institute of Standards and Technology, November 2007
+
+[NIST-HBS] David Cooper, Daniel Apon, Quynh Dang, Michael Davidson, Morris Dworkin, and Carl Miller. _NIST Special Publication 800-208, Recommendation for Stateful Hash-Based Signature Schemes_, National Institute of Standards and Technology, October 2020
+
+[NIST-KBKDF] Lily Chen. _NIST Special Publication 800-108 Rev. 1, Recommendation for Key Derivation Using Pseudorandom Functions_, National Institute of Standards and Technology, August 2022
+
+[NIST-KDLC] Elaine Barker, Lily Chen, Allen Roginsky, Apostol Vassilev, and Richard Davis. _NIST Special Publication 800-56A Rev. 3, Recommendation for Pair-Wise Key-Establishment Schemes Using Discrete Logarithm Cryptography_, National Institute of Standards and Technology, April 2018
+
+[NIST-KDRV] Elaine Barker, Lily Chen, and Richard Davis. _NIST Special Publication 800-56C Rev. 2, Recommendation for Key-Derivation Methods in Key-Establishment Schemes_, National Institute of Standards and Technology, August 2020
+
+[NIST-KDV] John Kelsey, Shu-jen Chang, and Ray Perlner. _NIST Special Publication 800-185, SHA-3 Derived Functions: cSHAKE, KMAC, TupleHash, and ParallelHash_, National Institute of Standards and Technology, December 2016
+
+[NIST-KIFC] Elaine Barker, Lily Chen, Allen Roginsky, Apostol Vassilev, Richard Davis, and Scott Simon. _NIST Special Publication 800-56B Rev. 2, Recommendation for Pair-Wise Key Establishment Using Integer Factorization Cryptography_, National Institute of Standards and Technology, March 2019
+
+[NIST-KL] Elaine Barker and Allen Roginsky. _NIST Special Publication 800-131A Rev. 2, Transitioning the Use of Cryptographic Algorithms and Key Lengths_, National Institute of Standards and Technology, December 2019
+
+[NIST-KW] Morris Dworkin. _NIST Special Publication 800-38F, Recommendation for Block Cipher Modes of Operation: Methods for Key Wrapping_, National Institute of Standards and Technology, December 2012
+
+[NIST-MODES] Morris Dworkin. _NIST Special Publication 800-38A, Recommendation for Block Cipher Modes of Operation: Methods and Techniques_, National Institute of Standards and Technology, December 2001
+
+[NIST-PBKDF] Meltem Sönmez Turan, Elaine Barker, William Burr, and Lily Chen. _NIST Special Publication 800-132, Recommendation for Password-Based Key Derivation, Part 1: Storage Applications_, National Institute of Standards and Technology, December 2010
+
+[NIST-XTS] Morris Dworking. _NIST Special Publication 800-38E, Recommendation for Block Cipher Modes of Operation: the XTS-AES Mode for Confidentiality on Storage Devices_, National Institute of Standards and Technology, January 2010
+
+[RFC3526] Mika Kojo and Tero Kivinen. _More Modular Exponential (MODP) Diffie-Hellman groups for Internet Key Exchange (IKE)_, Internet Engineering Task Force, May 2003
+
+[RFC5639] Manfred Lochter and Johannes Merkle. _Elliptic Curve Cryptography (ECC) Brainpool Standard Curves and Curve Generation_, Internet Engineering Task Force, March 2010
+
+[RFC7748] Adam Langley, Mike Hamburg, and Sean Turner. _Elliptic Curves for Security_, Internet Engineering Task Force, January 2016
+
+[RFC7919] Daniel Kahn Gillmor. _Negotiated Finite Field Diffie-Hellman Ephemeral Parameters for Transport Layer Security (TLS)_, Internet Engineering Task Force, August 2016
+
+[RFC8017] Kathleen Moriarty, Burt Kaliski, Jakob Jonsson, and Andreas Rusch. _PKCS #1: RSA Cryptography Specifications Version 2.2_, Internet Engineering Task Force, November 2016
+
+[RFC8032] Simon Josefsson and Ilari Liusvaara. _Edwards-Curve Digital Signature Algorithm (EdDSA)_, Internet Engineering Task Force, January 2017
+
+[RFC8391] Andreas Huelsing, Denis Butin, Stefan-Lukas Gazdag, Joost Rijneveld, and Aziz Mohaisen. _XMSS: eXtended Merkle Signature Scheme_, Internet Engineering Task Force, May 2018
+
+[RFC8554] David McGrew, Michael Curcio, and Scott Fluhrer. _Leighton-Micali Hash-Based Signatures_, Internet Engineering Task Force, April 2019
+
+[SECG-ECC] Daniel R. L. Brown. _SEC 1: Elliptic Curve Cryptography_, Certicom Corp., May 2009
+
+=== References
 
 [GD] Grawrock, David. _Dynamics of a Trusted Platform: A building block approach_. Intel Press, 2009
 
 [GP_ROT] GlobalPlatform Technology. _Root of Trust Definitions and Requirements Version 1.1_. GlobalPlatform, June 2018
 
-[ISO-CIPH] ISO/IEC. _ISO/IEC 18033-3:2010 Information Technology - Security Techniques - Encryption Algorithms - Part 3: Block Ciphers_, ISO/IEC, December 2012
-
-[ISO-CMAC] ISO/IEC. _ISO/IEC 9797-1 Information Technology - Security Techniques - Message Authentication Codes (MACs) - Part 1: Mechanisms Using a Block Cipher,_ ISO/IEC, December 1999
-
-[ISO-HASH] ISO/IEC. ISO/IEC 10118-3:2018 _IT Security Techniques - Hash-Functions - Part 3: Dedicated Hash-Functions_, ISO/IEC, October 2018
-
-[ISO-HMAC] ISO/IEC. _ISO/IEC 9797-2:2011 Information Technology - Security Techniques - Message Authentication Codes (MACs) - Part 2: Mechanisms Using a Dedicated Hash-Function_, ISO/IEC, June 2011
-
-[ISO-RBG] SO/IEC. _ISO/IEC 18031:2011 Information Technology - Security Techniques - Random Bit Generation_, ISO/IEC, November 2011
-
-[ISO-TR] ISO/IEC. _ISO/IEC 24759-3:2017 Information Technology - Security Techniques -Test Requirements for Cryptographic Modules,_ ISO/IEC, 2017
-
-[NIST-CMAC] Dworkin, Morris. _National Institute of Standards and Technology (NIST) Special Publication 800-38B, Recommendation for Block Cipher Modes of Operation: The CMAC Mode for Authentication_, National Institute of Standards and Technology, October 2016
-
-[NIST-KDRV] Barker, Elaine, Lily Chen, and Rich Davis. _NIST Special Publication 800-56C Rev. 2, Recommendation for Key-Derivation Methods in Key-Establishment Schemes_, National Institute of Standards and Technology, August 2020
-
-[NIST-KDV] Kelsey, John, Shu-jen Chang, and Ray Perlner. _NIST Special Publication 800-185 SHA-3 Derived Functions: cSHAKE, KMAC, TupleHash, and ParallelHash_, National Institute of Standards and Technology, December 2016
-
-[NIST-ROTM] Chen, Lily, Joshua Franklin, and Andrew Regenscheid. _National Institute of Standards and Technology (NIST) Special Publication 800-164 (Draft), Guidelines on Hardware Rooted Security in Mobile Devices (Draft)_, National Institute of Standards and Technology, October 2012
+[NIST-ROTM] Lily Chen, Joshua Franklin, and Andrew Regenscheid. _NIST Special Publication 800-164 (Draft), Guidelines on Hardware Rooted Security in Mobile Devices (Draft)_, National Institute of Standards and Technology, October 2012
 
 [SA] Segall, Ariel. _Trusted Platform Modules: Why, When and How to Use Them_. The Institution of Engineering and Technology, 2016
