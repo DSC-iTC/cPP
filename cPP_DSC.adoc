@@ -22,8 +22,6 @@ This collaborative Protection Profile (cPP) was developed by the {iTC-longame} i
 [.text-center]
 *Industry*
 [.text-center]
-Apple Inc.
-[.text-center]
 Google, LLC.
 [.text-center]
 Samsung Electronics Co., Ltd.
