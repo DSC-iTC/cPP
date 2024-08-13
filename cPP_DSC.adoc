@@ -2864,7 +2864,7 @@ FIA_AFL_EXT.2 Authorization Failure Response
 
 FIA_AFL_EXT.2.1:: When the TSF locks an *SDO* (i.e. prevents authorization attempts for an *SDO*) due to a user exceeding the allowed threshold for unsuccessful authorization attempts, then only an administrator may unlock access to the *SDO* and reset the corresponding failed authorization attempt counter.
 
-_Application Note {counter:remark_count}_:: _This SFR is applicable only when the TSF's response to excessive authorization failures selects [.underline]#prevent all future authorization attempts indefinitely (i.e., lock)# as specified by FIA_AFL_EXT.1.3._
+_Application Note {counter:remark_count}_:: _This SFR is applicable only when the TSF's response to excessive authorization failures selects [.underline]#prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2# as specified by FIA_AFL_EXT.1.3._
 
 === Protection of the TSF
 ==== FPT_FLS.1/FW Failure with Preservation of Secure State (Firmware)
