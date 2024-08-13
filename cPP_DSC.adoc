@@ -4919,6 +4919,9 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 |GCM 
 |Galois Counter Mode
 
+|GCMP
+|GCM Protocol
+
 |HMAC 
 |Keyed-Hash Message Authentication Code
 
