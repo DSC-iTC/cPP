@@ -603,16 +603,24 @@ The developer shall provide sufficient information to the evaluator to properly 
 
 All test results shall be compared to a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
-The tests are based on having a representative set of test vectors that exercise the algorithm. Within a single algorithm implementation there are many possible configuration parameters for how the algorithm is implemented. Some examples of these parameters can include:
+The tests are based on having a representative set of test vectors that exercise the algorithm. Within a single algorithm implementation there are many possible configuration parameters for how the algorithm is implemented. Some examples of these parameters can include (this is not an exhaustive list):
 
 * input length
 * optional input variables 
 * output length
 * bit vs byte orientation
+* key generation method
+* role
+* hash algorithm
 
-The evaluator shall generate a set of test vectors to exercise the algorithm according to the specified implementation details. Any parameters with a range shall test, at least, the minimum and maximum values specified for the parameters. The test vectors shall test each possible combination of the parameters. For example, if the algorithm has 2 optional input variables, a range of input lengths and 1 output length, then for each input length that is tested, each configuration of the optional input variables shall be tested (if the variables can be used together, that is another combination to be tested).
+The evaluator shall generate a set of test vectors to exercise the algorithm according to the specified implementation details. The set of test vectors shall follow the following guidelines:
 
-[conditional] If the algorithm has any known edge-cases that are considered insecure (such as input parameters that should be explicitly excluded from use), the test shall include verification of the known edge-cases.
+* Any parameters with a range shall test, at least, the minimum and maximum values specified for the parameters. 
+* Each combination of variables (such as optional inputs) should be tested
+* A representative set of up to 20 test groups (at least 10, depending on the complexity of the algorithm) with random valid combinations of parameters shall be created. Each test group will contain 10 test vectors.
+* [conditional] If the algorithm has any known edge-cases that are considered insecure (such as input parameters that should be explicitly excluded from use), the test shall include verification of the known edge-cases.
+
+The evaluator shall be able to provide a rationale as to the sufficiency of the test vector set in exercising the algorithm.
 
 ====== KMD
 
