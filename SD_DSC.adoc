@@ -459,11 +459,11 @@ The evaluator shall iterate through each of the methods selected by the ST and c
 
 ====== TSS
 
-The evaluator shall examine the TSS to determine whether it describes the supported methods for key distribution functionality consistent with the claim(s) made in FCS_CKM.2.1. The evaluator shall confirm that the matching SFRs are included in the ST based on the claim(s) made in FCS_CKM.2.1.
+The evaluator shall examine the TSS to determine whether it describes the supported methods for key distribution functionality consistent with the selection(s) made in FCS_CKM.2.1. The evaluator shall confirm that the matching SFRs are included in the ST based on the selection(s) made in FCS_CKM.2.1.
 
 ====== AGD
 
-The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key distribution scheme.
+The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key distribution method.
 
 ====== Test
 
