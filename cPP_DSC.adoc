@@ -4030,6 +4030,8 @@ FCS_CKM.2 - included
 
 FCS_CKM.3 is satisfied by FAU_STG_EXT.1 which controls access to keys - included
 
+FCS_CKM.5 - (selection-based) included
+
 FCS_CKM_EXT.7 - included
 
 FCS_CKM_EXT.8 - (selection-based) included
