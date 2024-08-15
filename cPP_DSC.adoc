@@ -678,6 +678,7 @@ FCS_CKM.2 Cryptographic Key Distribution
 
 FCS_CKM.2.1:: The TSF shall distribute cryptographic keys in accordance with a specified cryptographic key distribution method [*selection*: _key encapsulation as specified in FCS_COP.1/KeyEncap, key wrapping as specified in FCS_COP.1/KeyWrap, key wrapping as specified in FCS_COP.1/AEAD, physically protected channels as specified in FTP_ITP_EXT.1, encrypted data buffers as specified in FTP_ITE_EXT.1, cryptographically protected data channels as specified in FTP_ITC_EXT.1_] that meets the following: [_none_].
 
+
 _Application Note {counter:remark_count}_:: _This SFR assumes there is no pre-shared key between the parties._
 
 ==== FCS_CKM.6 Timing and event of cryptographic key destruction
@@ -786,13 +787,13 @@ _Application Note {counter:remark_count}_:: _This SFR captures methods for multi
 +
 _FCS_CKM.5 defines KDF-CTR, KDF-FB, and KDF-DPI._
 +
-_For the KDF functions, when concatenating keys for AES-CMAC, the contributions from each party should be an equal number of bits, resulting in the selected key size (e.g., if each share is 128 bits and there are two parties, then the result after concatenation is a 256-bit key, which is appropriate only for AES-256-CMAC). For HMAC functions, the shares can be any size as long as the concatenated result is equal to or greater than the nominal cryptographic strength of the chosen hash function (e.g. if each share is 128 bits, then the result after concatenation is 256 bits, which can be used in any of SHA-1, SHA-256, or SHA-512)._
+_For the key derivation functions, when concatenating keys for AES-CMAC, the contributions from each party should be an equal number of bits, resulting in the selected key size (e.g., if each share is 128 bits and there are two parties, then the result after concatenation is a 256-bit key, which is appropriate only for AES-256-CMAC). For HMAC functions, the shares can be any size as long as the concatenated result is equal to or greater than the nominal cryptographic strength of the chosen hash function (e.g. if each share is 128 bits, then the result after concatenation is 256 bits, which can be used in any of SHA-1, SHA-256, or SHA-512)._
 +
-_For the KDF functions and XOR, each party may have to use an asymmetric method from FCS_CKM.2 to transmit their shares to each other. Key shares may also come from a token, in which case, TOEs may use key access methods in FCS_CKM.3 to authorize access and use of those keys in this SFR._
+_For the key derivation functions and XOR, each party may have to use an asymmetric method from FCS_CKM.2 to transmit their shares to each other. Key shares may also come from a token, in which case, TOEs may use key access methods in FCS_CKM.3 to authorize access and use of those keys in this SFR._
 +
 _There are no standards that specify how to derive a key from two keys using KEK or XOR. For KEK, encrypting one key with another, one must use one of the algorithms listed in FCS_COP.1/AEAD or FCS_COP.1/SKC and indicate which of the inputs is the plaintext and which is the key. If XOR is selected, the ST Author should describe this method in the documentation._
 +
-_For cPP/ST authors, please consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
+_For ST authors, please consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
 
 ==== FCS_COP.1/Hash Cryptographic Operation (Hashing)
 
@@ -865,7 +866,7 @@ FCS_COP.1.1/KeyedHash:: The TSF shall perform [_keyed hash message authenticatio
 
 |===
 
-_Application Note {counter:remark_count}_:: _The HMAC minimum key sizes in the table are specified in the ISO 9797-2:2021 standard, which requires that the minimum key size be equal to the digest size. The FIPS standard specifies no minimum or maximum key sizes, so if FIPS PUB 198-1 is selected, larger or smaller key sizes may be used._
+_Application Note {counter:remark_count}_:: _The HMAC minimum key sizes in the table are specified in the ISO 9797-2:2021 standard, which requires that the minimum key size be equal to the digest size. The FIPS PUB 198-1 standard specifies no minimum or maximum key sizes, so if FIPS PUB 198-1 is selected, larger or smaller key sizes may be used._
 
 :xrefstyle: full
 
@@ -1224,7 +1225,7 @@ in accordance with [assignment: _list of standards_].
 
 _Application Note {counter:remark_count}_:: _No rationale is acceptable for not satisfying one of these dependencies._
 +
-_If a reseeding is selected in the first selection and something other than “never” is selected in the third selection, but reseeding is not feasible, the TSF will uninstantiate RBGs, rather than produce output that is of insufficient quality. The listed standards should specify the reseed interval and procedure for uninstantiating and reseeding. The remaining selection allows the PP Author to require application-specific conditions for reseeding._
+_If a reseeding is selected in the first selection and something other than “never” is selected in the third selection, but reseeding is not feasible, the TSF will uninstantiate RBGs, rather than produce output that is of insufficient quality. The listed standards should specify the reseed interval and procedure for uninstantiating and reseeding._
 +
 _"Uninstantiate" means that the internal state of the DRBG is no longer available for use._
 +
@@ -2519,8 +2520,6 @@ NIST SP 800-56A Rev. 3 (Section 5.6.1.1.4) [key pair generation]
 
 _Application Note {counter:remark_count}_:: _For RSA the choice of the modulus implies the resulting key sizes of the public and private keys generated using the specified standard methods._
 +
-_For Finite Field Cryptography (FFC) DSA, PP authors should consult schemes for guidelines on use. FIPS PUB 186-5 does not approve DSA for digital signature generation but allows DSA for digital signature verification for legacy purposes._
-+
 _When generating ECC key pairs for key establishment, choose NIST SP 800-56A Section 5.6.1.2.1 or 5.6.1.2.2. When generating ECC key pairs for digital signature generation, choose NIST FIPS PUB 186-5 Section A.2.1 or A.2.2. The intended security strengths for elliptic curves P-224, B-233, and K-233 is 112 bits, for P-256, brainpoolP256r1, Edwards25519, B-283, and K-283 is 128 bits, for P-384 and brainpoolP384r1 is 192 bits, for Edwards448 is 224, and for P-521 and brainpool512r1 is 256 bits. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
 +
 _When generating EdDSA key pairs for digital signatures, choose NIST FIPS PUB 186-5 Section A.2.3. The chosen domain parameters determine the size of the private keys and the public keys._
@@ -2864,7 +2863,7 @@ FIA_AFL_EXT.2 Authorization Failure Response
 
 FIA_AFL_EXT.2.1:: When the TSF locks an *SDO* (i.e. prevents authorization attempts for an *SDO*) due to a user exceeding the allowed threshold for unsuccessful authorization attempts, then only an administrator may unlock access to the *SDO* and reset the corresponding failed authorization attempt counter.
 
-_Application Note {counter:remark_count}_:: _This SFR is applicable only when the TSF's response to excessive authorization failures selects [.underline]#prevent all future authorization attempts indefinitely (i.e., lock)# as specified by FIA_AFL_EXT.1.3._
+_Application Note {counter:remark_count}_:: _This SFR is applicable only when the TSF's response to excessive authorization failures selects [.underline]#prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2# as specified by FIA_AFL_EXT.1.3._
 
 === Protection of the TSF
 ==== FPT_FLS.1/FW Failure with Preservation of Secure State (Firmware)
@@ -4918,6 +4917,9 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 |GCM 
 |Galois Counter Mode
+
+|GCMP
+|GCM Protocol
 
 |HMAC 
 |Keyed-Hash Message Authentication Code
