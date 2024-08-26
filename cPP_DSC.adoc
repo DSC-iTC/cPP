@@ -96,7 +96,7 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 |https://www.commoncriteriaportal.org/cc/index.cfm
 
 |[DSC SD]
-|Supporting Document: Evaluation Activities for collaborative Protection Profile for Dedicated Security Component: Mandatory Technical Document, Version 2.0-PRD-2, May 24, 2024
+|Supporting Document: Evaluation Activities for collaborative Protection Profile for Dedicated Security Component: Mandatory Technical Document, Version 2.0-Proposed-Draft, September 4, 2024
 |https://dsc-itc.github.io
 
 |===
