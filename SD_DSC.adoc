@@ -2583,7 +2583,7 @@ Testing for this SFR is performed under the corresponding functions based on the
 
 ===== KMD
 
-The evaluator shall verifiy any additional descriptions of the key protection methods provided in the KMD. The KMD descriptions are not required.
+The evaluator shall verify any additional descriptions of the key protection methods provided in the KMD. The KMD descriptions are not required.
 
 ==== Cryptographic Operation (FCS_COP)
 
