@@ -642,10 +642,12 @@ There are no guidance evaluation activities for this component.
 The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
 The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+
 * Hash algorithm
 * MAC tag size
 
 For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+
 * Each test case shall consist of an arbitrary key, an arbitrary input message, and its corresponding MAC tag.
 * A representative sample of the domain of supported key sizes shall be tested.
 * A representative sample of the domain of supported input message sizes shall be tested.
@@ -673,6 +675,7 @@ There are no AGD evaluation activities for this component.
 The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
 The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+
 * Modulus size (RSA)
 * Curve (ECDSA, EC-KCDSA, EdDSA)
 * Group size (KCDSA)
@@ -681,6 +684,7 @@ The developer shall provide sufficient information to the evaluator to properly 
 * Hash or XOF algorithm
 
 For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+
 * Each test case shall consist of an arbitrary private key (as defined by the test group) and an arbitrary input message to be signed.
 * A representative sample of the domain of supported message sizes shall be tested.
 
@@ -707,6 +711,7 @@ There are no AGD evaluation activities for this component.
 The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
 The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+
 * Modulus size (RSA)
 * Curve (ECDSA, EC-KCDSA, EdDSA)
 * Group size (DSA, KCDSA)
@@ -715,6 +720,7 @@ The developer shall provide sufficient information to the evaluator to properly 
 * Hash or XOF algorithm
 
 For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+
 * Each test case shall consist of an arbitrary public key (as defined by the test group), an arbitrary input message, and a signature.
 * A representative sample of the domain of supported message sizes shall be tested.
 * For 5 test cases, the public key or input message is modified such that the signature is invalid.
@@ -745,11 +751,13 @@ If the product supports multiple modes, the evaluator shall examine the vendor's
 The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
 The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+
 * Mode of operation
 * Algorithm direction (encrypt/decrypt)
 * Key size
 
 For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+
 * Each test case shall consist of an arbitrary key, an arbitrary input plaintext/ciphertext, and its corresponding ciphertext/plaintext.
 * Depending on the mode of operation, an initialization vector, counter, or tweak value shall also be included in the test case.
 * A representative sample of the domain of supported input plaintext/ciphertext sizes shall be tested.
