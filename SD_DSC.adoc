@@ -597,30 +597,31 @@ The evaluator checks the AGD documents to determine that any configuration that 
 
 ====== Test
 
-The algorithm tests require the developer to provide access to a test platform that provides the evaluator with tools that are typically not found on factory products.
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
-The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. 
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+* Hash algorithm
 
-All test results shall be compared to a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
+For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+* Each test case shall consist of an arbitrary input message and its corresponding digest value.
+* A representative sample of the domain of supported input message sizes shall be tested.
 
-The tests are based on having a representative set of test vectors that exercise the algorithm. Within a single algorithm implementation there are many possible configuration parameters for how the algorithm is implemented. Some examples of these parameters can include (this is not an exhaustive list):
+For each test case in each test group, the evaluator shall verify that the TSF generates the correct digest value.
 
-* input length
-* optional input variables 
-* output length
-* bit vs byte orientation
-* key generation method
-* role
-* hash algorithm
+For each test group, the evaluator shall also generate at least one Monte Carlo Test (MCT) test case, consisting of an arbitrary seed and a list of 100 digest values. For hash algorithms, the MCT is defined as follows:
+----
+for i = 1 through 100
+    msg = seed
+    for j = 1 through 1000
+        digest = hash(msg)
+        msg = digest
+    output digest
+    seed = digest
+----
 
-The evaluator shall generate a set of test vectors to exercise the algorithm according to the specified implementation details. The set of test vectors shall follow the following guidelines:
+For each test case in each test group, the evaluator shall verify that the TSF generates the correct 100 digest values.
 
-* Any parameters with a range shall test, at least, the minimum and maximum values specified for the parameters. 
-* Each combination of variables (such as optional inputs) should be tested
-* A representative set of up to 20 test groups (at least 10, depending on the complexity of the algorithm) with random valid combinations of parameters shall be created. Each test group will contain 10 test vectors.
-* [conditional] If the algorithm has any known edge-cases that are considered insecure (such as input parameters that should be explicitly excluded from use), the test shall include verification of the known edge-cases.
-
-The evaluator shall be able to provide a rationale as to the sufficiency of the test vector set in exercising the algorithm.
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
 ====== KMD
 
@@ -638,11 +639,20 @@ There are no guidance evaluation activities for this component.
 
 ====== Test
 
-The following test requires the developer to provide access to a test platform that provides the evaluator with tools that are typically not found on factory products.
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
-This test is derived from The Keyed-Hash Message Authentication Code Validation System (HMACVS), updated 6 May 2016.
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+* Hash algorithm
+* MAC tag size
 
-The evaluator shall provide 15 sets of messages and keys for each selected hash algorithm and hash length/key size/MAC size combination. The evaluator shall have the TSF generate HMAC or KMAC tags for these sets of test data. The evaluator shall verify that the resulting HMAC or KMAC tags match the results from submitting the same inputs to a known-good implementation of the HMAC or KMAC function, having the same characteristics.
+For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+* Each test case shall consist of an arbitrary key, an arbitrary input message, and its corresponding MAC tag.
+* A representative sample of the domain of supported key sizes shall be tested.
+* A representative sample of the domain of supported input message sizes shall be tested.
+
+For each test case in each test group, the evaluator shall verify that the TSF generates the correct MAC tag.
+
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
 ====== KMD
 
@@ -660,27 +670,23 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-The following tests require the developer to provide access to a test platform that provides the evaluator with tools that are typically not found on factory products.
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
-Each section below contains tests the evaluators must perform for each selected digital signature scheme. Based on the assignments and selections in the requirement, the evaluators choose the specific activities that correspond to those selections.
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+* Modulus size (RSA)
+* Curve (ECDSA, EC-KCDSA, EdDSA)
+* Group size (KCDSA)
+* Private key size (LMS, XMSS)
+* Padding scheme (RSA)
+* Hash or XOF algorithm
 
-The following tests require the developer to provide access to a test platform that provides the evaluator with tools that are not found on the TOE in its evaluated configuration.
+For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+* Each test case shall consist of an arbitrary private key (as defined by the test group) and an arbitrary input message to be signed.
+* A representative sample of the domain of supported message sizes shall be tested.
 
-*If SigGen1: RSASSA-PKCS1-v1_5 or SigGen4: RSASSA-PSS is claimed:*
+For each test case in each test group, the evaluator shall verify that the TSF generates a signature that is structurally well-formed according to the relevant standard. Additionally, the evaluator shall use a known-good implementation to verify that the generated signature is indeed a valid signature on the input message.
 
-The below test is derived from The 186-4 RSA Validation System (RSA2VS). Updated 8 July 2014, Section 6.3, from the National Institute of Standards and Technology.
-
-To test the implementation of RSA signature generation the evaluator uses the system under test to generate signatures for 10 messages for each combination of modulus size and SHA algorithm. The evaluator then uses a known-good implementation and the associated public keys to verify the signatures.
-
-*If SigGen2: Digital Signature Scheme 2 (DSS2) or SigGen3: Digital Signature Scheme 3 (DSS3):*
-
-To test the implementation of DSS2/3 signature generation the evaluator uses the system under test to generate signatures for 10 messages for each combination of SHA algorithm, hash size and key size. The evaluator them uses a known-good implementation and the associated public keys to verify the signatures.
-
-*If SigGen5: ECDSA is claimed:*
-
-The below test is derived from The FIPS 186-4 Elliptic Curve Digital Signature Algorithm Validation System (ECDSA2VS). Updated 18 March 2014, Section 6.4, from the National Institute of Standards and Technology.
-
-To test the implementation of ECDSA signature generation the evaluator uses the system under test to generate signatures for 10 messages for each combination of curve, SHA algorithm, hash size, and key size. The evaluator then uses a known-good implementation and the associated public keys to verify the signatures.
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
 ====== KMD
 
@@ -698,113 +704,25 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-The following tests require the developer to provide access to a test platform that provides the evaluator with tools that are typically not found on factory products.
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
-Each section below contains tests the evaluators must perform for each selected digital signature scheme. Based on the assignments and selections in the requirement, the evaluators choose the specific activities that correspond to those selections.
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+* Modulus size (RSA)
+* Curve (ECDSA, EC-KCDSA, EdDSA)
+* Group size (DSA, KCDSA)
+* Public key size (LMS, XMSS)
+* Padding scheme (RSA)
+* Hash or XOF algorithm
 
-The following tests require the developer to provide access to a test platform that provides the evaluator with tools that are not found on the TOE in its evaluated configuration.
+For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+* Each test case shall consist of an arbitrary public key (as defined by the test group), an arbitrary input message, and a signature.
+* A representative sample of the domain of supported message sizes shall be tested.
+* For 5 test cases, the public key or input message is modified such that the signature is invalid.
+* For the remaining test case, the signature shall be valid.
 
-*_SigVer1: RSASSA-PKCS1-v1_5 and SigVer4: RSASSA-PSS_*
+For each test case in each test group, the evaluator shall verify that the TSF correctly reports the validity of the signature for the input message.
 
-These tests are derived from The 186-4 RSA Validation System (RSA2VS), updated 8 Jul 2014, Section 6.4.
-
-The FIPS 186-4 RSA Signature Verification Test tests the ability of the TSF to recognize valid and invalid signatures. The evaluator shall provide a modulus and three associated key pairs (d, e) for each combination of selected SHA algorithm, modulus size and hash size. Each private key d is used to sign six pseudorandom messages each of 1024 bits. For five of the six messages, the public key (e), message, IR format, padding, or signature is altered so that signature verification should fail. The test passes only if all the signatures made using unaltered parameters result in successful signature verification, and all the signatures made using altered parameters result in unsuccessful signature verification.
-
-*_SigVer5: ECDSA on NIST and Brainpool Curves_*
-
-These tests are derived from The FIPS 186-4 Elliptic Curve Digital Signature Algorithm Validation System (ECDSA2VS), updated 18 Mar 2014, Section 6.5.
-
-The FIPS 186-4 ECC Signature Verification Test tests the ability of the TSF to recognize valid and invalid signatures. The evaluator shall provide a modulus and associated key pair (x, y) for each combination of selected curve, SHA algorithm, modulus size, and hash size. Each private key (x) is used to sign 15 pseudorandom messages of 1024 bits. For eight of the fifteen messages, the message, IR format, padding, or signature is altered so that signature verification should fail. The test passes only if all the signatures made using unaltered parameters result in successful signature verification, and all the signatures made using altered parameters result in unsuccessful signature verification.
-
-*_SigVer2: Digital Signature Scheme 2_*
-
-:xrefstyle: short
-
-The following or equivalent steps shall be taken to test the TSF.
-
-For each supported modulus size, underlying hash algorithm, and length of the trailer field (1- or 2-byte), the evaluator shall generate NT sets of recoverable message (M1), non-recoverable message (M2), salt, public key and signature (Σ ).
-
-. _N_~T~ shall be greater than or equal to 20. 
-. The length of salts shall be selected from its supported length range of salt. The typical length of salt is equal to the output block length of underlying hash algorithm (see 9.2.2 of ISO/IEC 9796-2:2010). 
-. The length of recoverable messages should be selected by considering modulus size, output block length of underlying hash algorithm, and length of salt (_L_~_S_~). As described in Annex D of ISO/IEC 9796-2:2010, it is desirable to maximise the length of recoverable message. As <<Max512>> shows the maximum bit-length of recoverable message that is divisible by 512, for some combinations of modulus size, underlying hash algorithm, and length of salt.
-
-:xrefstyle: full
-
-.Maximum length of recoverable message divisible by 512
-[[Max512]]
-[cols=".^3,.^1,.^2,.^1",options="header",width=400]
-|===
-
-|Maximum length of recoverable message divisible by 512 (bits)
-|Modulus size (bits)
-|Underlying hash algorithm (bits)
-|Length of salt L~S~ (bits)
-
-|1536
-.5+|2048
-.2+|SHA-256
-|128
-
-|1024
-|256
-
-|1024
-.3+|SHA-512
-|128
-
-|1024
-|256
-
-|512
-|512
-
-|2560
-.5+|3072
-.2+|SHA-256
-|128
-
-|2048
-|256
-
-|2048
-.3+|SHA-512
-|128
-
-|2048
-|256
-
-|1536
-|512
-
-4+|None that 2-byte trailer field is assumed in calculating the maximum length of recoverable message
-
-|===
-
-[start=4]
-. The length of non-recoverable messages should be selected by considering the underlying hash algorithm and usages. If the TSF is used for verifying the authenticity of software/firmware updates, the length of non-recoverable messages should be selected greater than or equal to 2048-bit. With this length range, it means that the underlying hash algorithm is also tested for two or more input blocks.
-. The evaluator shall select approximately one half of _N_~T~ sets and shall alter one of the values (non-recoverable message, public key exponent or signature) in the sets. In altering public key exponent, the evaluator shall alter the public key exponent while keeping the exponent odd. In altering signatures, the following ways should be considered:
-[lowerroman]
-.. Altering a signature just by replacing a bit in the bit-string representation of the signature
-.. Altering a signature so that the trailer in the message representative cannot be interpreted. This can be achieved by following ways:
-*** Setting the rightmost four bits of the message representative to the values other than '1100'.
-*** In the case when 1-byte trailer is used, setting the rightmost byte of the message representative to the values other than '0xbc', while keeping the rightmost four bits to '1100'.
-*** In the case when 2-byte trailer is used, setting the rightmost byte of the message representative to the values other than '0xcc', while keeping the rightmost four bits to '1100'.
-.. In the case when 2-byte trailer is used, altering a signature so that the hash algorithm identifier in the trailer (i.e. the left most byte of the trailer) does not correspond to hash algorithms identified in the SFR. The hash algorithm identifiers are 0x34 for SHA-256 (see Clause 10 of ISO/IEC 10118-3:2018), and 0x35 for SHA-512 (see Clause 11 of ISO/IEC 10118-3:2018).
-.. Let _L_~_S_~ be the length of salt, altering a signature so that the intermediate bit string _D_ in the message representative is set to all zeroes except for the rightmost _L_~_S_~ bits of _D_.
-.. (non-conformant signature length) Altering a signature so that the length of signature _Σ_ is changed to modulus size and the most significant bit of signature _Σ_ is set equal to '1'.
-.. (non-conformant signature) Altering a signature so that the integer converted from signature _Σ_ is greater than modulus _n_.
-
-The evaluator shall supply the NT sets to the TSF and obtain in response a set of NT Verification-Success or Verification-Fail values. When the Verification-Success is obtained, the evaluator shall also obtain recovered message (M 1*).
-
-The evaluator shall verify that Verification-Success results correspond to the unaltered sets and Verification-Fail results correspond to the altered sets.
-
-For each recovered message, the evaluator shall compare the recovered message (M1*) with the corresponding recoverable message (M 1) in the unaltered sets.
-
-The test passes only if all the signatures made using unaltered sets result in Verification-Success, each recovered message (M 1*) is equal to corresponding M 1 in the unaltered sets, and all the signatures made using altered sets result in Verification-Fail.
-
-*_SigVer3: Digital Signature Scheme 3_*
-
-The evaluator shall perform the test described in SigVer2: Digital Signature Scheme 2 while using a fixed salt for NT sets.
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
 ====== KMD
 
@@ -824,328 +742,74 @@ If the product supports multiple modes, the evaluator shall examine the vendor's
 
 ====== Test
 
-The following tests require the developer to provide access to a test platform that provides the evaluator with tools that are typically not found on factory products.
-
-The following tests are conditional based upon the selections made in the SFR. The evaluator shall perform the following test or witness respective tests executed by the developer. The tests must be executed on a platform that is as close as practically possible to the operational platform (but which may be instrumented in terms of, for example, use of a debug mode). Where the test is not carried out on the TOE itself, the test platform shall be identified and the differences between test environment and TOE execution environment shall be described.
-
-Preconditions for testing:
-
-* Specification of keys as input parameter to the function to be tested
-* Specification of required input parameters such as modes
-* Specification of user data (plaintext)
-* Tapping of encrypted user data (ciphertext) directly in the non-volatile memory
-
-*AES-CBC:*
-
-For the AES-CBC tests described below, the plaintext, ciphertext, and IV values shall consist of 128-bit blocks. To determine correctness, the evaluator shall compare the resulting values to those obtained by submitting the same inputs to a known-good implementation.
-
-These tests are intended to be equivalent to those described in NIST's AES Algorithm Validation Suite (AESAVS) (http://csrc.nist.gov/groups/STM/cavp/documents/aes/AESAVS.pdf[http://csrc.nist.gov/groups/STM/cavp/documents/aes/AESAVS.pdf]). It is not recommended that evaluators use values obtained from static sources such as the example NIST's AES Known Answer Test Values from the AESAVS document, or use values not generated expressly to exercise the AES-CBC implementation.
-
-*_AES-CBC Known Answer Tests_*
-
-[.underline]#KAT-1 (GFSBox)#: To test the encrypt functionality of AES-CBC, the evaluator shall supply a set of five different plaintext values for each selected key size and obtain the ciphertext value that results from AES-CBC encryption of the given plaintext using a key value of all zeros and an IV of all zeros.
-
-To test the decrypt functionality of AES-CBC, the evaluator shall supply a set of five different ciphertext values for each selected key size and obtain the plaintext value that results from AES-CBC decryption of the given ciphertext using a key value of all zeros and an IV of all zeros.
-
-[.underline]#KAT-2 (KeySBox):# To test the encrypt functionality of AES-CBC, the evaluator shall supply a set of five different key values for each selected key size and obtain the ciphertext value that results from AES-CBC encryption of an all-zeros plaintext using the given key value and an IV of all zeros.
-
-To test the decrypt functionality of AES-CBC, the evaluator shall supply a set of five different key values for each selected key size and obtain the plaintext that results from AES-CBC decryption of an all-zeros ciphertext using the given key and an IV of all zeros. 
-
-[.underline]#KAT-3 (Variable Key):# To test the encrypt functionality of AES-CBC, the evaluator shall supply a set of keys for each selected key size (as described below) and obtain the ciphertext value that results from AES encryption of an all-zeros plaintext using each key and an IV of all zeros.
-
-Key i in each set shall have the leftmost i bits set to ones and the remaining bits to zeros, for values of i from 1 to the key size. The keys and corresponding ciphertext are listed in AESAVS, Appendix E.
-
-To test the decrypt functionality of AES-CBC, the evaluator shall use the same keys as above to decrypt the ciphertext results from above. Each decryption should result in an all-zeros plaintext.
-
-[.underline]#KAT-4 (Variable Text):# To test the encrypt functionality of AES-CBC, for each selected key size, the evaluator shall supply a set of 128-bit plaintext values (as described below) and obtain the ciphertext values that result from AES-CBC encryption of each plaintext value using a key of each size and IV consisting of all zeros.
-
-Plaintext value i shall have the leftmost i bits set to ones and the remaining bits set to zeros, for values of i from 1 to 128. The plaintext values are listed in AESAVS, Appendix D.
-
-To test the decrypt functionality of AES-CBC, for each selected key size, use the plaintext values from above as ciphertext input, and AES-CBC decrypt each ciphertext value using key of each size consisting of all zeros and an IV of all zeros.
-
-*_AES-CBC Multi-Block Message Test_*
-
-The evaluator shall test the encrypt functionality by encrypting nine i-block messages for each selected key size, for 2 ≤ i ≤ 10. For each test, the evaluator shall supply a key, an IV, and a plaintext message of length i blocks, and encrypt the message using AES-CBC. The resulting ciphertext values shall be compared to the results of encrypting the plaintext messages using a known good implementation.
-
-The evaluator shall test the decrypt functionality by decrypting nine i-block messages for each selected key size, for 2 ≤ i ≤ 10. For each test, the evaluator shall supply a key, an IV, and a ciphertext message of length i blocks, and decrypt the message using AES-CBC. The resulting plaintext values shall be compared to the results of decrypting the ciphertext messages using a known good implementation.
-
-*_AES-CBC Monte Carlo Tests_*
-
-The evaluator shall test the encrypt functionality for each selected key size using 100 3-tuples of pseudo-random values for plaintext, IVs, and keys. 
-
-The evaluator shall supply a single 3-tuple of pseudo-random values for each selected key size. This 3-tuple of plaintext, IV, and key is provided as input to the below algorithm to generate the remaining 99 3-tuples, and to run each 3-tuple through 1000 iterations of AES-CBC encryption.
-
- # Input: PT, IV, Key
- Key[0] = Key
- IV[0] = IV
- PT[0] = PT
- for i = 0 to 99 {
-    Output Key[i], IV[i], PT[0]
-    for j = 0 to 999 {
-        if (j == 0) {
-            CT[j] = AES-CBC-Encrypt(Key[i], IV[i], PT[j])
-            PT[j+1] = IV[i]
-        } else {
-            CT[j] = AES-CBC-Encrypt(Key[i], PT[j])
-            PT[j+1] = CT[j-1]
-        }
-    }
-    Output CT[j]
-    If (KeySize == 128) Key[i+1] = Key[i] xor CT[j]
-    If (KeySize == 192) Key[i+1] = Key[i] xor (last 64 bits of CT[j-1] ||CT[j])
-    If (KeySize == 256) Key[i+1] = Key[i] xor ((CT[j-1] |CT[j])
-    IV[i+1] = CT[j]
-    PT[0] = CT[j-1]
- }
-
-The ciphertext computed in the 1000th iteration (CT[999]) is the result for each of the 100 3-tuples for each selected key size. This result shall be compared to the result of running 1000 iterations with the same values using a known good implementation.
-
-The evaluator shall test the decrypt functionality using the same test as above, exchanging CT and PT, and replacing AES-CBC-Encrypt with AES-CBC-Decrypt.
-
-*AES-CCM:*
-
-These tests are intended to be equivalent to those described in the NIST document, "The CCM Validation System (CCMVS)," updated 9 Jan 2012, found at http://csrc.nist.gov/groups/STM/cavp/documents/mac/CCMVS.pdf[http://csrc.nist.gov/groups/STM/cavp/documents/mac/CCMVS.pdf].
-
-It is not recommended that evaluators use values obtained from static sources such as http://csrc.nist.gov/groups/STM/cavp/documents/mac/ccmtestvectors.zip[http://csrc.nist.gov/groups/STM/cavp/documents/mac/ccmtestvectors.zip] or use values not generated expressly to exercise the AES-CCM implementation.
-
-The evaluator shall test the generation-encryption and decryption-verification functionality of AES-CCM for the following input parameter and tag lengths:
-
-* *Keys*: All supported and selected key sizes (e.g., 128, 192, or 256 bits).
-* *Associated Data*: Two or three values for associated data length: The minimum (≥ 0 bytes) and maximum (≤ 32 bytes) supported associated data lengths, and 2^16 (65536) bytes, if supported.
-* *Payload*: Two values for payload length: The minimum (≥ 0 bytes) and maximum (≤ 32 bytes) supported payload lengths.
-* *Nonces*: All supported nonce lengths (e.g., 8, 9, 10, 11, 12, 13) in bytes.
-* *Tag*: All supported tag lengths (e.g., 4, 6, 8, 10, 12, 14, 16) in bytes.
-
-The testing for CCM consists of five tests. To determine correctness in each of the below tests, the evaluator shall compare the ciphertext with the result of encryption of the same inputs with a known good implementation.
-
-Variable Associated Data Test: For each supported key size and associated data length, and any supported payload length, nonce length, and tag length, the evaluator shall supply one key value, one nonce value, and 10 pairs of associated data and payload values, and obtain the resulting ciphertext.
-
-Variable Payload Text: For each supported key size and payload length, and any supported associated data length, nonce length, and tag length, the evaluator shall supply one key value, one nonce value, and 10 pairs of associated data and payload values, and obtain the resulting ciphertext.
-
-Variable Nonce Test: For each supported key size and nonce length, and any supported associated data length, payload length, and tag length, the evaluator shall supply one key value, one nonce value, and 10 pairs of associated data and payload values, and obtain the resulting ciphertext.
-
-Variable Tag Test: For each supported key size and tag length, and any supported associated data length, payload length, and nonce length, the evaluator shall supply one key value, one nonce value, and 10 pairs of associated data and payload values, and obtain the resulting ciphertext.
-
-Decryption-Verification Process Test: To test the decryption-verification functionality of AES-CCM, for each combination of supported associated data length, payload length, nonce length, and tag length, the evaluator shall supply a key value and 15 sets of input plus ciphertext, and obtain the decrypted payload. Ten of the 15 input sets supplied should fail verification and five should pass.
-
-*AES-GCM:*
-
-These tests are intended to be equivalent to those described in the NIST document, "The Galois/Counter Mode (GCM) and GMAC Validation System (GCMVS) with the Addition of XPN Validation Testing," rev. 15 Jun 2016, section 6.2, found at http://csrc.nist.gov/groups/STM/cavp/documents/mac/gcmvs.pdf[http://csrc.nist.gov/groups/STM/cavp/documents/mac/gcmvs.pdf].
-
-It is not recommended that evaluators use values obtained from static sources such as http://csrc.nist.gov/groups/STM/cavp/documents/mac/gcmtestvectors.zip[http://csrc.nist.gov/groups/STM/cavp/documents/mac/gcmtestvectors.zip], or use values not generated expressly to exercise the AES-GCM implementation.
-
-The evaluator shall test the authenticated encryption functionality of AES-GCM by supplying 15 sets of Key, Plaintext, AAD, IV, and Tag data for every combination of the following parameters as selected in the ST and supported by the implementation under test:
-
-* *Key size in bits:* Each selected and supported key size (e.g., 128, 192, or 256 bits). 
-* *Plaintext length in bits*: Up to four values for plaintext length: Two values that are non-zero integer multiples of 128, if supported. And two values that are non-multiples of 128, if supported.
-* *AAD length in bits:* Up to five values for AAD length: Zero-length, if supported. Two values that are non-zero integer multiples of 128, if supported. And two values that are integer non-multiples of 128, if supported.
-* *IV length in bits*: Up to three values for IV length: 96 bits. Minimum and maximum supported lengths, if different.
-* *MAC length in bits:* Each supported length (e.g., 128, 120, 112, 104, 96).
-
-To determine correctness, the evaluator shall compare the resulting values to those obtained by submitting the same inputs to a known-good implementation.
-
-The evaluator shall test the authenticated decrypt functionality of AES-GCM by supplying 15 Ciphertext-Tag pairs for every combination of the above parameters, replacing Plaintext length with Ciphertext length. For each parameter combination the evaluator shall introduce an error into either the Ciphertext or the Tag such that approximately half of the cases are correct and half the cases contain errors. To determine correctness, the evaluator shall compare the resulting pass/fail status and Plaintext values to the results obtained by submitting the same inputs to a known-good implementation.
-
-*AES-CTR:*
-
-For the AES-CTR tests described below, the plaintext and ciphertext values shall consist of 128-bit blocks. To determine correctness, the evaluator shall compare the resulting values to those obtained by submitting the same inputs to a known-good implementation.
-
-These tests are intended to be equivalent to those described in NIST's AES Algorithm Validation Suite (AESAVS) ( http://csrc.nist.gov/groups/STM/cavp/documents/aes/AESAVS.pdf[http://csrc.nist.gov/groups/STM/cavp/documents/aes/AESAVS.pdf]). It is not recommended that evaluators use values obtained from static sources such as the example NIST's AES Known Answer Test Values from the AESAVS document, or use values not generated expressly to exercise the AES-CTR implementation.
-
-*_AES-CTR Known Answer Tests_*
-
-[.underline]#KAT-1 (GFSBox):# To test the encrypt functionality of AES-CTR, the evaluator shall supply a set of five different plaintext values for each selected key size and obtain the ciphertext value that results from AES-CTR encryption of the given plaintext using a key value of all zeros.
-
-To test the decrypt functionality of AES-CTR, the evaluator shall supply a set of five different ciphertext values for each selected key size and obtain the plaintext value that results from AES-CTR decryption of the given ciphertext using a key value of all zeros.
-
-[.underline]#KAT-2 (KeySBox):# To test the encrypt functionality of AES-CTR, the evaluator shall supply a set of five different key values for each selected key size and obtain the ciphertext value that results from AES-CTR encryption of an all-zeros plaintext using the given key value.
-
-To test the decrypt functionality of AES-CTR, the evaluator shall supply a set of five different key values for each selected key size and obtain the plaintext that results from AES-CTR decryption of an all-zeros ciphertext using the given key. 
-
-[.underline]#KAT-3 (Variable Key):# To test the encrypt functionality of AES-CTR, the evaluator shall supply a set of keys for each selected key size (as described below) and obtain the ciphertext value that results from AES encryption of an all-zeros plaintext using each key.
-
-Key i in each set shall have the leftmost i bits set to ones and the remaining bits to zeros, for values of i from 1 to the key size. The keys and corresponding ciphertext are listed in AESAVS, Appendix E.
-
-To test the decrypt functionality of AES-CTR, the evaluator shall use the same keys as above to decrypt the ciphertext results from above. Each decryption should result in an all-zeros plaintext.
-
-[.underline]#KAT-4 (Variable Text):# To test the encrypt functionality of AES-CTR, for each selected key size, the evaluator shall supply a set of 128-bit plaintext values (as described below) and obtain the ciphertext values that result from AES-CTR encryption of each plaintext value using a key of each size.
-
-Plaintext value i shall have the leftmost i bits set to ones and the remaining bits set to zeros, for values of i from 1 to 128. The plaintext values are listed in AESAVS, Appendix D.
-
-To test the decrypt functionality of AES-CTR, for each selected key size, use the plaintext values from above as ciphertext input, and AES-CTR decrypt each ciphertext value using key of each size consisting of all zeros.
-
-*_AES-CTR Multi-Block Message Test_*
-
-The evaluator shall test the encrypt functionality by encrypting nine i-block messages for each selected key size, for 2 ≤ i ≤ 10. For each test, the evaluator shall supply a key and a plaintext message of length i blocks, and encrypt the message using AES-CTR. The resulting ciphertext values shall be compared to the results of encrypting the plaintext messages using a known good implementation.
-
-The evaluator shall test the decrypt functionality by decrypting nine i-block messages for each selected key size, for 2 ≤ i ≤ 10. For each test, the evaluator shall supply a key and a ciphertext message of length i blocks, and decrypt the message using AES-CTR. The resulting plaintext values shall be compared to the results of decrypting the ciphertext messages using a known good implementation.
-
-*_AES-CTR Monte Carlo Tests_*
-
-The evaluator shall test the encrypt functionality for each selected key size using 100 2-tuples of pseudo-random values for plaintext and keys. 
-
-The evaluator shall supply a single 2-tuple of pseudo-random values for each selected key size. This 2-tuple of plaintext and key is provided as input to the below algorithm to generate the remaining 99 2-tuples, and to run each 2-tuple through 1000 iterations of AES-CTR encryption.
-
- # Input: PT, Key
- Key[0] = Key
- PT[0] = PT
- for i = 0 to 99 {
-    Output Key[i], PT[0]
-    for j = 0 to 999 {
-        CT[j] = AES-CTR-Encrypt(Key[i], PT[j])
-        PT[j+1] = CT[j]
-    }
-    Output CT[j]
-    If (KeySize == 128) Key[i+1] = Key[i] xor CT[j]
-    If (KeySize == 192) Key[i+1] = Key[i] xor (last 64 bits of CT[j-1] ||CT[j])
-    If (KeySize == 256) Key[i+1] = Key[i] xor ((CT[j-1] |CT[j])
-    PT[0] = CT[j]
- }
-
-The ciphertext computed in the 1000th iteration (CT[999]) is the result for each of the 100 2-tuples for each selected key size. This result shall be compared to the result of running 1000 iterations with the same values using a known good implementation.
-
-The evaluator shall test the decrypt functionality using the same test as above, exchanging CT and PT, and replacing AES-CTR-Encrypt with AES-CTR-Decrypt.
-
-Note additional design considerations for this mode are addressed in the KMD requirements.
-
-*XTS-AES:*
-
-These tests are intended to be equivalent to those described in the NIST document, "The XTS-AES Validation System (XTSVS)," updated 5 Sept 2013, found at http://csrc.nist.gov/groups/STM/cavp/documents/aes/XTSVS.pdf[http://csrc.nist.gov/groups/STM/cavp/documents/aes/XTSVS.pdf]
-
-It is not recommended that evaluators use values obtained from static sources such as the XTS-AES test vectors at http://csrc.nist.gov/groups/STM/cavp/documents/aes/XTSTestVectors.zip[http://csrc.nist.gov/groups/STM/cavp/documents/aes/XTSTestVectors.zip] or use values not generated expressly to exercise the XTS-AES implementation.
-
-The evaluator shall generate test values as follows:
-
-For each supported key size (256 bit (for AES-128) and 512 bit (for AES-256) keys), the evaluator shall provide up to five data lengths:
-
-* Two data lengths divisible by the 128-bit block size, If data unit lengths of complete block sizes are supported.
-* Two data lengths not divisible by the 128-bit block size, if data unit lengths of partial block sizes are supported.
-* The largest data length supported by the implementation, or 2^16 (65536), whichever is larger.
-
-The evaluator shall specify whether the implementation supports tweak values of 128-bit hexadecimal strings or a data unit sequence numbers, or both.
-
-For each combination of key size and data length, the evaluator shall provide 100 sets of input data and obtain the ciphertext that results from XTS-AES encryption. If both kinds of tweak values are supported then each type of tweak value shall be used in half of every 100 sets of input data, for all combinations of key size and data length. The evaluator shall verify that the resulting ciphertext matches the results from submitting the same inputs to a known-good implementation of XTS-AES.
-
-The evaluator shall test the decrypt functionality of XTS-AES using the same test as for encrypt, replacing plaintext values with ciphertext values and XTS-AES encrypt with XTS- AES decrypt. 
-
-The evaluator shall check that the full length keys are created by methods that ensure that the two halves are different and independent.
-
-*AES-KWP:*
-
-The tests below are derived from "The Key Wrap Validation System (KWVS), Updated: June 20, 2014" from the National Institute of Standards and Technology.
-
-The evaluator shall test the authenticated-encryption functionality of AES-KWP (KWP-AE) using the same test as for AES-KW authenticated-encryption with the following change in the five plaintext lengths: 
-
-* Four lengths that are multiples of 8 bits
-* The largest supported length less than or equal to 4096 bits.
-
-The evaluator shall test the authenticated-decryption (KWP-AD) functionality of AES-KWP using the same test as for AES-KWP authenticated-encryption, replacing plaintext values with ciphertext values and AES-KWP authenticated-encryption with AES-KWP authenticated-decryption. For the Authenticated Decryption test, 20 out of the 100 trials per plaintext length have ciphertext values that fail authentication.
-
-Additionally, the evaluator shall perform the following negative tests:
-
-*Test 1: (invalid plaintext length):*
-
-Determine the valid plaintext lengths of the implementation from the TOE specification. Verify that the implementation of KWP-AE in the TOE rejects plaintexts of invalid length by testing plaintext of the following lengths: 1) plaintext with length greater than 64 semi-blocks, 2) plaintext with bit-length not divisible by 8, and 3) plaintext with length 0.
-
-*Test 2: (invalid ciphertext length):*
-
-Determine the valid ciphertext lengths of the implementation from the TOE specification. Verify that the implementation of KWP-AD in the TOE rejects ciphertexts of invalid length by testing ciphertext of the following lengths: 1) ciphertext with length greater than 65 semi-blocks, 2) ciphertext with bit-length not divisible by 64, 3) ciphertext with length 0, and 4) ciphertext with length of one semi-block.
-
-*Test 3: (invalid ICV2):*
-
-Test that the implementation detects invalid ICV2 values by encrypting any plaintext value four times using a different value for ICV2 each time as follows: Start with a base ICV2 of 0xA65959A6. For each of the four tests change a different byte of ICV2 to a different value, so that each of the four bytes is changed once. Verify that the implementation of KWP-AD in the TOE outputs FAIL for each test.
-
-*Test 4: (invalid padding length):*
-
-Generate one ciphertext using algorithm KWP-AE with substring [len(P)/8]~32~ of S replaced by each of the following 32-bit values, where len(P) is the length of P in bits and []~32~ denotes the representation of an integer in 32 bits: 
-
-* &#91;0]~32~
-* &#91;len(P)/8-8]~32~
-* &#91;len(P)/8+8]~32~
-* &#91;513]~32~.
-
-Verify that the implementation of KWP-AD in the TOE outputs FAIL on those inputs.
-
-*Test 5: (invalid padding bits):*
-
-If the implementation supports plaintext of length not a multiple of 64-bits, then 
-
-* for each PAD length [1..7]
-** for each byte in PAD set a zero PAD value;
-*** replace current byte by a non-zero value and use the resulting plaintext as input to algorithm KWP-AE to generate ciphertexts;
-*** verify that the implementation of KWP-AD in the TOE outputs FAIL on this input.
-
-*AES-KW:*
-
-The tests below are derived from "The Key Wrap Validation System (KWVS), Updated: June 20, 2014" from the National Institute of Standards and Technology.
-
-The evaluator shall test the authenticated-encryption functionality of AES-KW for each combination of the following input parameters: 
-
-* Supported key lengths selected in the ST (e.g. 128 bits, 256 bits)
-* Five plaintext lengths: 
-** Two lengths that are non-zero multiples of 128 bits (two semi-block lengths)
-** Two lengths that are odd multiples of the semi-block length (64 bits)
-** The largest supported plaintext length less than or equal to 4096 bits.
-
-For each set of the above parameters the evaluator shall generate a set of 100 key and plaintext pairs and obtain the ciphertext that results from AES-KW authenticated encryption. To determine correctness, the evaluator shall compare the results with those obtained from the AES-KW authenticated-encryption function of a known good implementation. 
-
-The evaluator shall test the authenticated-decryption functionality of AES-KW using the same test as for authenticated-encryption, replacing plaintext values with ciphertext values and AES-KW authenticated-encryption (KW-AE) with AES-KW authenticated-decryption (KW-AD). For the authenticated-decryption test, 20 out of the 100 trials per plaintext length must have ciphertext values that are not authentic; that is, they fail authentication.
-
-Additionally, the evaluator shall perform the following negative tests:
-
-*Test 1 (invalid plaintext length):*
-
-Determine the valid plaintext lengths of the implementation from the TOE specification. Verify that the implementation of KW-AE in the TOE rejects plaintexts of invalid length by testing plaintext of the following lengths: 1) plaintext length greater than 64 semi-blocks, 2) plaintext bit-length not divisible by 64, 3) plaintext with length 0, and 4) plaintext with one semi-block.
-
-*Test 2 (invalid ciphertext length):*
-
-Determine the valid ciphertext lengths of the implementation from the TOE specification. Verify that the implementation of KW-AD in the TOE rejects ciphertexts of invalid length by testing ciphertext of the following lengths: 1) ciphertext with length greater than 65 semi-blocks, 2) ciphertext with bit-length not divisible by 64, 3) ciphertext with length 0, 4) ciphertext with length of one semi-block, and 5) ciphertext with length of two semi-blocks.
-
-*Test 3 (invalid ICV1):*
-
-Test that the implementation detects invalid ICV1 values by encrypting any plaintext value eight times using a different value for ICV1 each time as follows: Start with a base ICV1 of 0xA6A6A6A6A6A6A6A6. For each of the eight tests change a different byte to a different value, so that each of the eight bytes is changed once. Verify that the implementation of KW-AD in the TOE outputs FAIL for each test.
-
-*CAM-CBC:*
-
-To test the encrypt and decrypt functionality of Camellia in CBC mode, the evaluator shall perform the tests as specified in 10.2.1.2 of ISO/IEC 18367:2016.
-
-*CAM-CCM:*
-
-To test the encrypt functionality of Camellia in CCM mode, the evaluator shall perform the tests as specified in 10.6.1.1 of ISO/IEC 18367:2016.
-
-To test the decrypt functionality of Camellia in CCM mode, the evaluator shall perform the tests as specified in 10.6.1.2 of ISO/IEC 18367:2016.
-
-As a prerequisite for these tests, the evaluator shall perform the test for encrypt functionality of Camellia in ECB mode as specified in 10.2.1.2 of ISO/IEC 18367:2016.
-
-*CAM-GCM:*
-
-To test the encrypt functionality of Camellia in GCM, the evaluator shall perform the tests as specified in 10.6.1.1 of ISO/IEC 18367:2016.
-
-To test the decrypt functionality of Camellia in GCM, the evaluator shall perform the tests as specified in 10.6.1.2 of ISO/IEC 18367:2016.
-
-As a prerequisite for these tests, the evaluator shall perform the test for encrypt functionality of Camellia in ECB mode as specified in 10.2.1.2 of ISO/IEC 18367:2016.
-
-*XTS-CAM:*
-
-These tests are intended to be equivalent to those described in the IPA document, ATR-01-B, "Specifications of Cryptographic Algorithm Implementation Testing — Symmetric-Key Cryptography", found at https://www.ipa.go.jp/security/jcmvp/jcmvp_e/documents/atr/atr01b_en.pdf[https://www.ipa.go.jp/security/jcmvp/jcmvp_e/documents/atr/atr01b_en.pdf].
-
-The evaluator shall generate test values as follows:
-
-For each supported key size (256 bit (for Camellia-128) and 512 bit (for Camellia-256) keys), the evaluator shall provide up to five data lengths:
-
-* Two data lengths divisible by the 128-bit block size, If data unit lengths of complete block sizes are supported.
-* Two data lengths not divisible by the 128-bit block size, if data unit lengths of partial block sizes are supported.
-* The largest data length supported by the implementation, or 2^16 (65536), whichever is larger.
-
-The evaluator shall specify whether the implementation supports tweak values of 128-bit hexadecimal strings or a data unit sequence numbers, or both.
-
-For each combination of key size and data length, the evaluator shall provide 100 sets of input data and obtain the ciphertext that results from XTS-Camellia encryption. If both kinds of tweak values are supported, 50 of each 100 sets of input data shall use each type of tweak value. The resulting ciphertext shall be compared to the results of a known-good implementation.
-
-As a prerequisite for this test, the evaluator shall perform the test for encrypt functionality of Camellia in ECB mode as specified in 10.2.1.2 of ISO/IEC 18367:2016.
-
-The evaluator shall test the decrypt functionality of XTS-Camellia using the same test as for encrypt, replacing plaintext values with ciphertext values and XTS-Camellia encrypt with XTS- Camellia decrypt.
-
-As a prerequisite for this test, the evaluator shall perform the test for decrypt functionality of Camellia in ECB mode as specified in 10.2.1.2 of ISO/IEC 18367:2016.
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
+
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+* Mode of operation
+* Algorithm direction (encrypt/decrypt)
+* Key size
+
+For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+* Each test case shall consist of an arbitrary key, an arbitrary input plaintext/ciphertext, and its corresponding ciphertext/plaintext.
+* Depending on the mode of operation, an initialization vector, counter, or tweak value shall also be included in the test case.
+* A representative sample of the domain of supported input plaintext/ciphertext sizes shall be tested.
+* A representative sample of the domain of supported initialization vector sizes shall be tested (CBC, CFB, OFB mode).
+* A representative sample of the domain of supported counter sizes shall be tested (CTR mode).
+* A representative sample of the domain of supported tweak sizes shall be tested (XTS modes).
+
+For each test case in each test group, the evaluator shall verify that the TSF generates the correct ciphertext/plaintext.
+
+For each test group corresponding to a CBC, CFB, or OFB mode of operation, the evaluator shall also generate at least one Monte Carlo Test (MCT) test case, consisting of an arbitrary key, an arbitrary initialization vector, an arbitrary input plaintext/ciphertext, and a list of 100 corresponding ciphertexts/plaintexts.
+
+For encryption with a 128-bit block size, the MCT is defined as follows:
+----
+for i = 1 through 100
+    output key
+    output iv
+    output pt
+    encrypt_init(key, iv)
+    ct[1] = encrypt(pt)
+    pt = iv
+    for j = 2 through 1000
+        ct[j] = encrypt(pt)
+        pt = ct[j - 1]
+    output ct[j]
+    if key_len == block_size
+        key = key xor ct[j]
+    if 2 * key_len == 3 * block_size
+        key = key xor (lsb(ct[j - 1], block_size / 2) || ct[j])
+    if key_len == 2 * block_size
+        key = key xor (ct[j - 1] || ct[j])
+    iv = ct[j]
+    pt = ct[j - 1]
+----
+
+For decryption with a 128-bit block size, the MCT is defined as follows:
+----
+for i = 1 through 100
+    output key
+    output iv
+    output ct
+    decrypt_init(key, iv)
+    pt[1] = encrypt(ct)
+    ct = iv
+    for j = 2 through 1000
+        pt[j] = encrypt(ct)
+        ct = pt[j - 1]
+    output pt[j]
+    if key_len == block_size
+        key = key xor pt[j]
+    if 2 * key_len == 3 * block_size
+        key = key xor (lsb(pt[j - 1], block_size / 2) || pt[j])
+    if key_len == 2 * block_size
+        key = key xor (pt[j - 1] || pt[j])
+    iv = pt[j]
+    ct = pt[j - 1]
+----
+
+For each test case in each test group, the evaluator shall verify that the TSF generates the correct 100 ciphertexts/plaintexts.
+
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
 ====== KMD
 
