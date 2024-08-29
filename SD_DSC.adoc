@@ -2212,6 +2212,10 @@ This is new
 
 ==== Cryptographic Operation (FCS_COP)
 
+===== FCS_COP.1/AEAD Cryptographic Operation (Authenticated Encryption with Associated Data)
+[IMPORTANT]
+This is new
+
 ===== FCS_COP.1/CMAC Cryptographic Operation (CMAC)
 [IMPORTANT]
 This is new
