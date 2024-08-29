@@ -4024,8 +4024,6 @@ FCS_CKM.1/SKG - (selection-based SFR) included
 
 FCS_CKM.2 - included
 
-FCS_CKM.3 is satisfied by FAU_STG_EXT.1 which controls access to keys - included
-
 FCS_CKM.5 - (selection-based SFR) included
 
 FCS_CKM_EXT.7 - included
@@ -4201,7 +4199,7 @@ FMT_MSA.3 - included
 
 |FDP_FRS_EXT.1 
 |FDP_FRS_EXT.2 
-|FDP_FRS_EXT.2 - (optional SFR) included
+|FDP_FRS_EXT.2 - (selection-based SFR) included
 
 |FDP_ITC_EXT.1 
 |FCS_COP.1 
