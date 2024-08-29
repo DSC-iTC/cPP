@@ -4004,8 +4004,6 @@ More specifically, all entropy source health tests and their rationale will be d
 [appendix]
 == SFR Dependencies Analysis
 
-The dependencies between SFRs implemented by the TOE are addressed as follows. Dependencies listed in _italics_ are DSC-specific dependencies.
-
 .SFR Dependencies Rationale for Mandatory SFRs
 [cols=".^1,.^2,.^3",options="header"]
 |===
@@ -4016,8 +4014,6 @@ The dependencies between SFRs implemented by the TOE are addressed as follows. D
 
 |FCS_CKM.1 
 |[FCS_CKM.1/AKG, FCS_CKM.1/SKG, FCS_CKM.2, FCS_CKM.5, FCS_CKM_EXT.7, FCS_CKM_EXT.8 or FCS_COP.1] 
-
-FCS_CKM.3
 
 [FCS_RBG.1 or FCS_RNG.1]
 
@@ -4061,12 +4057,14 @@ FCS_COP.1/KeyWrap - (selection-based SFR) included
 FCS_COP.1/AEAD - (selection-based SFR) included
 
 |FCS_CKM.6 
-|[FDP_ITC.1, FDP_ITC.2 or FCS_CKM.1] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1 or FCS_CKM.5] 
 |FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
 
 FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
 
 FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
 
 |FCS_CKM_EXT.7 
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.8]
@@ -4097,10 +4095,6 @@ FCS_CKM.6 - included
 |FCS_COP.1/KeyedHash 
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8] 
 
-FCS_COP.1/Hash
-
-FCS_CKM.3
-
 FCS_CKM.6 
 |FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
 
@@ -4110,64 +4104,14 @@ FCS_CKM.1 - included
 
 FCS_CKM.5 - (selection-based SFR) included
 
-FCS_CKM_EXT.7 - (selection-based SFR) included
+FCS_CKM_EXT.7 - included
 
 FCS_CKM_EXT.8 - (selection-based SFR) included
-
-FCS_COP.1/Hash - included
-
-FCS_CKM.3 is satisfied by FAU_STG_EXT.1 which controls access to keys - included
-
-FCS_CKM.6 - included
-
-|FCS_COP.1/KeyEncap
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
-
-FCS_CKM.3
-
-FCS_CKM.6 
-|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
-
-FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
-
-FCS_CKM.1 - included
-
-FCS_CKM.5 - (selection-based SFR) included
-
-FCS_CKM_EXT.7 - (selection-based SFR) included
-
-FCS_CKM_EXT.8 - (selection-based SFR) included
-
-FCS_CKM.3 is satisfied by FAU_STG_EXT.1 which controls access to keys - included
-
-FCS_CKM.6 - included
-
-|FCS_COP.1/KeyWrap
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
-
-FCS_CKM.3
-
-FCS_CKM.6 
-|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
-
-FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
-
-FCS_CKM.1 - included
-
-FCS_CKM.5 - (selection-based SFR) included
-
-FCS_CKM_EXT.7 - (selection-based SFR) included
-
-FCS_CKM_EXT.8 - (selection-based SFR) included
-
-FCS_CKM.3 is satisfied by FAU_STG_EXT.1 which controls access to keys - included
 
 FCS_CKM.6 - included
 
 |FCS_COP.1/SigGen 
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1/AKG, or FCS_CKM.5] 
-
-FCS_CKM.3
 
 FCS_CKM.6 
 |FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
@@ -4177,8 +4121,6 @@ FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data
 FCS_CKM.1/AKG - (selection-based SFR) included
 
 FCS_CKM.5 - (selection-based SFR) included
-
-FCS_CKM.3 is satisfied by FAU_STG_EXT.1 which controls access to keys - included
 
 FCS_CKM.6 - included
 
@@ -4196,12 +4138,8 @@ FCS_CKM.5 - (selection-based SFR) included
 
 FCS_CKM.6 - included
 
-FCS_CKM.3 is not necessary as this is only verifying a signature, not generating or storing keys
-
 |FCS_COP.1/SKC 
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8] 
-
-FCS_CKM.3
 
 FCS_CKM.6 
 
@@ -4214,11 +4152,9 @@ FCS_CKM.1 - included
 
 FCS_CKM.5 - (selection-based SFR) included
 
-FCS_CKM_EXT.7 - (selection-based SFR) included
+FCS_CKM_EXT.7 - included
 
 FCS_CKM_EXT.8 - (selection-based SFR) included
-
-FCS_CKM.3 is satisfied by FAU_STG_EXT.1 which controls access to keys - included
 
 FCS_CKM.6 - included
 
@@ -4231,9 +4167,9 @@ FPT_FLS.1
 
 FPT_TST.1
 
-|FCS_RBG.2 - (selection-based SFR) included
+|FCS_RBG.2 - (optional SFR) included
 
-FCS_RBG.3 - (selection-based SFR) included
+FCS_RBG.3 - (optional SFR) included
 
 FPT_FLS.1 - included
 
@@ -4265,7 +4201,7 @@ FMT_MSA.3 - included
 
 |FDP_FRS_EXT.1 
 |FDP_FRS_EXT.2 
-|FDP_FRS_EXT.2 - (optional-based SFR) included
+|FDP_FRS_EXT.2 - (optional SFR) included
 
 |FDP_ITC_EXT.1 
 |FCS_COP.1 
@@ -4419,7 +4355,7 @@ FMT_SMR.1 - included
 FCS_RBG.5 
 |FCS_RBG.1 - included
 
-FCS_RBG.5 - (selection-based SFR) included
+FCS_RBG.5 - (optional SFR) included
 
 |FCS_RBG.5
 |FCS_RBG.1
@@ -4427,11 +4363,11 @@ FCS_RBG.5 - (selection-based SFR) included
 [FCS_RBG.2 or FCS_RBG.3 or RCS_RBG.4]
 |FCS_RBG.1 - included
 
-FCS_RBG.2 - (selection-based SFR) included
+FCS_RBG.2 - (optional SFR) included
 
-FCS_RBG.3 - (selection-based SFR) included
+FCS_RBG.3 - (optional SFR) included
 
-FCS_RBG.4 - (selection-based SFR) included
+FCS_RBG.4 - (optional SFR) included
 
 |FCS_RBG.6 
 |FCS_RBG.1 
@@ -4453,9 +4389,9 @@ FPT_PRO_EXT.1
 FPT_ROT_EXT.1 
 |FCS_COP.1- included
 
-FPT_PRO_EXT.1- included
+FPT_PRO_EXT.1 - included
 
-FPT_ROT_EXT.1- included
+FPT_ROT_EXT.1 - included
 
 |===
 
@@ -4473,14 +4409,10 @@ FPT_ROT_EXT.1- included
 
 [FCS_RBG.1 or FCS_RNG.1]
 
-FCS_CKM.3
-
 FCS_CKM.6 
 |FCS_CKM.2 - included
 
-FCS_CKM.5 - included
-
-FCS_CKM.3 is satisfied by FAU_STG_EXT.1 which controls access to keys - included
+FCS_CKM.5 - (selection-based SFR) included
 
 FCS_COP.1 - included
 
@@ -4495,16 +4427,12 @@ FCS_CKM.6 - included
 
 [FCS_RBG.1 or FCS_RNG.1]
 
-FCS_CKM.3
-
 FCS_CKM.6 
 |FCS_CKM.2 - included
 
-FCS_CKM.3 is satisfied by FAU_STG_EXT.1 which controls access to keys - included
+FCS_CKM.5 - (selection-based SFR) included
 
-FCS_CKM.5 - included
-
-FCS_CKM_EXT.7 - (selection-based SFR) included
+FCS_CKM_EXT.7 - included
 
 FCS_COP.1 - included
 
@@ -4522,7 +4450,7 @@ FCS_CKM.6 - included
 FCS_CKM.6 
 |FCS_CKM.1 - included
 
-FCS_CKM.5 - included
+FCS_CKM.5 - (selection-based SFR) included
 
 FCS_CKM_EXT.8 - (selection-based SFR) included
 
@@ -4530,7 +4458,7 @@ FCS_COP.1/KeyEncap - (selection-based SFR) included
 
 FCS_COP.1/KeyWrap - (selection-based SFR) included
 
-FCS_COP.1/SKC - (selection-based SFR) included
+FCS_COP.1/SKC - included
 
 FCS_COP.1/AEAD - (selection-based SFR) included
 
@@ -4542,7 +4470,7 @@ FCS_CKM.6 - included
 FCS_COP.1 
 
 FCS_CKM.6
-|FCS_CKM.1 - included
+|FCS_CKM.2 - included
 
 FCS_COP.1 - included
 
@@ -4556,18 +4484,14 @@ FCS_COP.1/KeyedHash
 FCS_CKM.6 
 |FCS_CKM.2 - included
 
-FCS_COP.1 - included
+FCS_CKM_EXT.7 - included
 
-FCS_CKM_EXT.7 - (selection-based SFR) included
-
-FCS_CKM.1/KeyedHash - included
+FCS_COP.1/KeyedHash - included
 
 FCS_CKM.6 - included
 
 |FCS_COP.1/AEAD
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8]
-
-FCS_CKM.3
 
 FCS_CKM.6
 
@@ -4580,11 +4504,9 @@ FCS_CKM.1 - included
 
 FCS_CKM.5 - (selection-based SFR) included
 
-FCS_CKM_EXT.7 - (selection-based SFR) included
+FCS_CKM_EXT.7 - included
 
 FCS_CKM_EXT.8 - (selection-based SFR) included
-
-FCS_CKM.3 is satisfied by FAU_STG_EXT.1 which controls access to keys - included
 
 FCS_CKM.6 - included
 
@@ -4593,9 +4515,26 @@ FCS_OTV_EXT.1 - included
 |FCS_COP.1/CMAC
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8]
 
-FCS_CKM.3
-
 FCS_CKM.6
+
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
+
+|FCS_COP.1/KeyEncap
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
+
+FCS_CKM.6 
 
 FCS_OTV_EXT.1
 |FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
@@ -4606,15 +4545,31 @@ FCS_CKM.1 - included
 
 FCS_CKM.5 - (selection-based SFR) included
 
-FCS_CKM_EXT.7 - (selection-based SFR) included
+FCS_CKM_EXT.7 - included
 
 FCS_CKM_EXT.8 - (selection-based SFR) included
-
-FCS_CKM.3 is satisfied by FAU_STG_EXT.1 which controls access to keys - included
 
 FCS_CKM.6 - included
 
 FCS_OTV_EXT.1 - included
+
+|FCS_COP.1/KeyWrap
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
+
+FCS_CKM.6 
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
 
 |FDP_DAU.1/Prove 
 |No dependencies
@@ -4636,7 +4591,7 @@ FCS_OTV_EXT.1 - included
 |FPT_MFW_EXT.1 
 
 FCS_COP.1
-|FPT_MFW_EXT.1- included
+|FPT_MFW_EXT.1 - included
 
 FCS_COP.1 - included
 
