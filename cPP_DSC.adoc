@@ -92,7 +92,7 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 |https://www.commoncriteriaportal.org/cc/index.cfm
 
 |[CC-E&I]
-|Errata and Interpretation for CC:2022 (Release 1) and CEM:2022 (Release 1), 001, Version 1.1, February 1, 2024
+|Errata and Interpretation for CC:2022 (Release 1) and CEM:2022 (Release 1), 002, Version 1.1, July 22, 2024
 |https://www.commoncriteriaportal.org/cc/index.cfm
 
 |[DSC SD]
