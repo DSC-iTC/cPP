@@ -3106,15 +3106,14 @@ There are no auditable events foreseen.
 [horizontal]
 Hierarchical to:: No other components.
 
-Dependencies:: [FDP_ITC.1 Import of user data without security attributes, or +
-FDP_ITC.2 Import of user data with security attributes, or +
-FCS_CKM.1 Cryptographic key generation, or +
+Dependencies:: [FCS_CKM.1 Cryptographic key generation, or +
 FCS_CKM.5 Cryptographic key derivation, or +
 FCS_CKM_EXT.8 Password-based key derivation] +
 FCS_CKM.6 Timing and event of cryptographic key destruction, +
 [FCS_COP.1/KeyEncap Cryptographic Operation (Key Encapsulation), or +
 FCS_COP.1/KeyWrap Cryptographic Operation (Key Wrap), or +
-FCS_COP.1/SKC Cryptographic Operation (Symmetric-Key Cryptography)]
+FCS_COP.1/SKC Cryptographic Operation (Symmetric-Key Cryptography), or +
+FCS_COP.1/AEAD Authenticated Encryption with Associated Data]
 
 [vertical]
 FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [selection: _key encapsulation, key wrapping, key encryption_] to access keys when performing [selection: _cryptographic key usage in cryptographic operations, cryptographic key storage, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
@@ -3139,10 +3138,7 @@ FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from
 [horizontal]
 Hierarchical to:: No other components.
 
-Dependencies:: [FDP_ITC.1 Import of user data without security attributes, or +
-FDP_ITC.2 Import of user data with security attributes] +
-[FCS_CKM.2 Cryptographic key distribution, or +
-FCS_COP.1 Cryptographic operation, or +
+Dependencies:: [FCS_CKM.2 Cryptographic key distribution, or +
 FCS_CKM_EXT.7 Cryptographic Key Agreement] +
 FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash) +
 FCS_CKM.6 Timing and event of cryptographic key destruction 
@@ -4007,8 +4003,6 @@ More specifically, all entropy source health tests and their rationale will be d
 [appendix]
 == SFR Dependencies Analysis
 
-The dependencies between SFRs implemented by the TOE are addressed as follows.
-
 .SFR Dependencies Rationale for Mandatory SFRs
 [cols=".^1,.^2,.^3",options="header"]
 |===
@@ -4018,141 +4012,253 @@ The dependencies between SFRs implemented by the TOE are addressed as follows.
 |Rationale Statement
 
 |FCS_CKM.1 
-|[FCS_CKM.2, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_COP.1] 
+|[FCS_CKM.1/AKG, FCS_CKM.1/SKG, FCS_CKM.2, FCS_CKM.5, FCS_CKM_EXT.7, FCS_CKM_EXT.8 or FCS_COP.1] 
 
 [FCS_RBG.1 or FCS_RNG.1]
 
-FCS_CKM.6 
-|FCS_CKM.2, FCS_CKM.6, FCS_CKM_EXT.7, FCS_COP.1 and FCS_RBG.1 are required by the PP.
+FCS_CKM.6
+|FCS_CKM.1/AKG - (selection-based SFR) included
+
+FCS_CKM.1/SKG - (selection-based SFR) included
+
+FCS_CKM.2 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_COP.1 - included
+
+FCS_RBG.1 - included
+
+FCS_RNG.1 is satisfied by FCS_RBG.1 - included
+
+FCS_CKM.6 - included
 
 |FCS_CKM.2
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1 or FCS_CKM.5] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5 or FCS_COP.1] 
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
 
-|FCS_CKM.1 is required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
 
-|FCS_CKM_EXT.7 
-|[FDP_ITC.1, FDP_ITC.2, or FCS_CKM.1] 
+FCS_CKM.1 - included
 
-FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_COP.1/KeyEncap - (selection-based SFR) included
+
+FCS_COP.1/KeyWrap - (selection-based SFR) included
+
+FCS_COP.1/AEAD - (selection-based SFR) included
 
 |FCS_CKM.6 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
-|FCS_CKM.1 is required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1 or FCS_CKM.5] 
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+|FCS_CKM_EXT.7 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.8]
+
+[FCS_CKM.2 or FCS_COP.1]
+
+FCS_CKM.6 
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.2 - included
+
+FCS_COP.1 - included
+
+FCS_CKM.6 - included
 
 |FCS_COP.1/Hash 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
-
-FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|No dependencies.
+|There are no keys involved with hashing, so no cryptograhpic key-based dependencies are necessary.
 
 |FCS_COP.1/KeyedHash 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8] 
 
 FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
 
-|FCS_COP.1/KeyWrap
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
 
-FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
 
 |FCS_COP.1/SigGen 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1/AKG, or FCS_CKM.5] 
 
 FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1/AKG - (selection-based SFR) included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM.6 - included
 
 |FCS_COP.1/SigVer 
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
 
 FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM.6 - included
 
 |FCS_COP.1/SKC 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8] 
 
 FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+
+FCS_OTV_EXT.1
+|FDP_ITC_EXT.1 satisfies FDP_ITC.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC_EXT.2 satisfies FDP_ITC.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
+
+FCS_OTV_EXT.1 - included
 
 |FCS_RBG.1 
-|FCS_COP.1 
-|FCS_COP.1 is required by the PP.
+|[FCS_RBG.2 or FCS_RBG.3]
+
+FPT_FLS.1
+
+FPT_TST.1
+
+|FCS_RBG.2 - (optional SFR) included
+
+FCS_RBG.3 - (optional SFR) included
+
+FPT_FLS.1 - included
+
+FPT_TST.1 - included
 
 |FCS_OTV_EXT.1 
 |FCS_RBG.1 
-|FCS_RBG.1 is required by the PP.
+|FCS_RBG.1 - included
 
 |FCS_STG_EXT.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FDP_ACC.1 
 |FDP_ACF.1 
-|FDP_ACF.1 is required by the PP.
+|FDP_ACF.1 - included
 
 |FDP_ACF.1 
 |FDP_ACC.1 
 
 FMT_MSA.3
-|FDP_ACC.1 and FMT_MSA.3 are required by the PP.
+|FDP_ACC.1 - included
+
+FMT_MSA.3 - included
 
 |FDP_ETC_EXT.2 
 |FCS_COP.1 
-|FCS_COP.1 is required by the PP.
+|FCS_COP.1 - included
 
 |FDP_FRS_EXT.1 
 |FDP_FRS_EXT.2 
-|FDP_FRS_EXT.2 is an optional SFR in the PP. It does not need to be required because the PP's definition of FDP_FRS_EXT.1 allows the ST author to specify that no factory reset is possible, in which case the behavior described by FDP_FRS_EXT.2 is not triggered.
+|FDP_FRS_EXT.2 - (selection-based SFR) included
 
 |FDP_ITC_EXT.1 
 |FCS_COP.1 
 
 [FTP_ITC_EXT.1, FTP_ITE_EXT.1, or FTP_ITP_EXT.1] 
-|FCS_COP.1 is required by the PP. FTP_ITC_EXT.1, FTP_ITE_EXT.1, and FTP_ITP_EXT.1 are each selection-based SFRs in the PP but the PP's definition of FDP_ITC_EXT.1 requires at least one of them to be selected so the dependency is always addressed.
+|FCS_COP.1 - included
+
+FTP_ITC_EXT.1 - (selection-based SFR) included
+
+FTP_ITE_EXT.1 - (selection-based SFR) included
+
+FTP_ITP_EXT.1 - (selection-based SFR) included
 
 |FDP_ITC_EXT.2 
 |FCS_COP.1 
 
 [FTP_ITC_EXT.1, FTP_ITE_EXT.1, or FTP_ITP_EXT.1] 
-|FCS_COP.1 is required by the PP. FTP_ITC_EXT.1, FTP_ITE_EXT.1, and FTP_ITP_EXT.1 are each selection-based SFRs in the PP but the PP's definition of FDP_ITC_EXT.1 requires at least one of them to be selected so the dependency is always addressed.
+|FCS_COP.1 - included
+
+FTP_ITC_EXT.1 - (selection-based SFR) included
+
+FTP_ITE_EXT.1 - (selection-based SFR) included
+
+FTP_ITP_EXT.1 - (selection-based SFR) included
 
 |FDP_RIP.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FDP_SDC.2 
 |FCS_COP.1
-|FCS_COP.1 is required by this PP.
+|FCS_COP.1 - included
 
 |FDP_SDI.2 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FIA_AFL_EXT.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FIA_SOS.2 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FIA_UAU.2 
 |FIA_UID.1 
-|This dependency is not present in the PP because all of the methods used to access the TSF (physically protected channels, encrypted data buffers, or cryptographically protected data channels) all implicitly identify the subject that is attempting to authenticate to the TOE. Therefore, it is not necessary to include a separate SFR that requires subjects to be identified.
+|This dependency is not present in the PP because all of the methods used to access the TSF (physically protected channels, encrypted data buffers, or cryptographically protected data channels) all implicitly identify the subject that is attempting to authenticate to the TOE.
 
 |FIA_UAU.5 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FIA_UAU.6 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FMT_MOF_EXT.1 
 |FMT_SMF.1 
-|FMT_SMF.1 is required by this PP.
+|FMT_SMF.1 - included
 
 |FMT_MSA.1 
 |[FDP_ACC.1 or FDP_IFC.1] 
@@ -4160,24 +4266,30 @@ FMT_MSA.3
 FMT_SMR.1 
 
 FMT_SMF.1 
-|FDP_ACC.1, FMT_SMF.1 and FMT_SMR.1 are required by the PP.
+|FDP_ACC.1 - included
+
+FMT_SMF.1 - included
+
+FMT_SMR.1 - included
 
 |FMT_MSA.3 
 |FMT_MSA.1 
 
 FMT_SMR.1 
-|FMT_MSA.1 and FMT_SMR.1 are required by the PP.
+|FMT_MSA.1 - included
+
+FMT_SMR.1 - included
 
 |FMT_SMF.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FMT_SMR.1 
 |FIA_UID.1 
-|This dependency is not present in the PP because all of the methods used to access the TSF (physically protected channels, encrypted data buffers, or cryptographically protected data channels) all implicitly identify the subject that is attempting to authenticate to the TOE. Therefore, it is not necessary to include a separate SFR that requires subjects to be identified.
+|This dependency is not present in the PP because all of the methods used to access the TSF (physically protected channels, encrypted data buffers, or cryptographically protected data channels) all implicitly identify the subject that is attempting to authenticate to the TOE.
 
 |FPT_FLS.1/FI 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_MFW_EXT.1
@@ -4185,36 +4297,36 @@ FMT_SMR.1
 |N/A
 
 |FPT_MOD_EXT.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_PHP.3 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_PRO_EXT.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_ROT_EXT.1 
 |FPT_PRO_EXT.1 
-|FPT_PRO_EXT.1 is required by this PP.
+|FPT_PRO_EXT.1 - included
 
 |FPT_ROT_EXT.2 
 |FPT_PRO_EXT.1 
-|FPT_PRO_EXT.1 is required by this PP.
+|FPT_PRO_EXT.1 - included
 
 |FPT_RPL.1/Authorization
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_TST.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FRU_FLT.1 
 |FPT_FLS.1 
-|FPT_FLS.1 (as FPT_FLS.1/FI) is required by the PP.
+|FPT_FLS.1/FI - included
 
 |===
 
@@ -4228,34 +4340,42 @@ FMT_SMR.1
 
 |FCS_RBG.2 
 |FCS_RBG.1 
-|FCS_RBG.1 is required by this PP.
+|FCS_RBG.1 - included
 
 |FCS_RBG.3 
 |FCS_RBG.1 
-|FCS_RBG.1 is required by this PP.
+|FCS_RBG.1 - included
 
 |FCS_RBG.4 
 |FCS_RBG.1
 
 FCS_RBG.5 
-|FCS_RBG.1 is required by this PP. FCS_RBG.5 is required when combining multiple entropy sources.
+|FCS_RBG.1 - included
+
+FCS_RBG.5 - (optional SFR) included
 
 |FCS_RBG.5
 |FCS_RBG.1
 
 [FCS_RBG.2 or FCS_RBG.3 or RCS_RBG.4]
-|FCS_RBG.1 is required by this PP. A second source is required for combining sources of entropy.
+|FCS_RBG.1 - included
+
+FCS_RBG.2 - (optional SFR) included
+
+FCS_RBG.3 - (optional SFR) included
+
+FCS_RBG.4 - (optional SFR) included
 
 |FCS_RBG.6 
 |FCS_RBG.1 
-|FCS_RBG.1 is required by this PP.
+|FCS_RBG.1 - included
 
 |FPT_ITT.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_PRO_EXT.2 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_ROT_EXT.3 
@@ -4264,7 +4384,11 @@ FCS_RBG.5
 FPT_PRO_EXT.1 
 
 FPT_ROT_EXT.1 
-|All of FCS_COP.1, FPT_PRO_EXT.1, and FPT_ROT_EXT.1 are required by this PP.
+|FCS_COP.1- included
+
+FPT_PRO_EXT.1 - included
+
+FPT_ROT_EXT.1 - included
 
 |===
 
@@ -4278,97 +4402,230 @@ FPT_ROT_EXT.1
 |Rationale Statement
 
 |FCS_CKM.1/AKG 
-|[FCS_CKM_EXT.7 or FCS_COP.1] 
+|[FCS_CKM.2, FCS_CKM.5 or FCS_COP.1]
+
+[FCS_RBG.1 or FCS_RNG.1]
 
 FCS_CKM.6 
-|All of FCS_CKM_EXT.7, FCS_CKM.6, and FCS_COP.1 are required by the PP.
+|FCS_CKM.2 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_COP.1 - included
+
+FCS_RBG.1 - included
+
+FCS_RNG.1 is satisfied by FCS_RBG.1 - included
+
+FCS_CKM.6 - included
 
 |FCS_CKM.1/SKG 
-|[FCS_CKM_EXT.7 or FCS_COP.1] 
+|[FCS_CKM.2, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_COP.1]
+
+[FCS_RBG.1 or FCS_RNG.1]
 
 FCS_CKM.6 
-|All of FCS_CKM_EXT.7, FCS_CKM.6, and FCS_COP.1 are required by the PP.
+|FCS_CKM.2 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_COP.1 - included
+
+FCS_RBG.1 - included
+
+FCS_RNG.1 is satisfied by FCS_RBG.1 - included
+
+FCS_CKM.6 - included
+
+|FCS_CKM_EXT.3 
+|[FCS_CKM.1, FCS_CKM.5 or FCS_CKM_EXT.8]
+
+[FCS_COP.1/KeyEncap, FCS_COP.1/KeyWrap, FCS_COP.1/SKC or FCS_COP.1/AEAD]
+
+FCS_CKM.6 
+|FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_COP.1/KeyEncap - (selection-based SFR) included
+
+FCS_COP.1/KeyWrap - (selection-based SFR) included
+
+FCS_COP.1/SKC - included
+
+FCS_COP.1/AEAD - (selection-based SFR) included
+
+FCS_CKM.6 - included
 
 |FCS_CKM.5 
-|FCS_CKM.1 
+|FCS_CKM.2
 
 FCS_COP.1 
 
-FDP_SDC.2 
-|All of FCS_CKM.1, FCS_COP.1, and FDP_SDC.2 are required by the PP.
+FCS_CKM.6
+|FCS_CKM.2 - included
+
+FCS_COP.1 - included
+
+FCS_CKM.6 - included
 
 |FCS_CKM_EXT.8 
-|[FDP_ITC.1, FDP_ITC.2] 
-
-[FCS_CKM.2 or FCS_COP.1 or FCS_CKM_EXT.7]
+|[FCS_CKM.2 or FCS_CKM_EXT.7]
 
 FCS_COP.1/KeyedHash
 
 FCS_CKM.6 
-|FCS_CKM.1/KeyedHash and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|FCS_CKM.2 - included
+
+FCS_CKM_EXT.7 - included
+
+FCS_COP.1/KeyedHash - included
+
+FCS_CKM.6 - included
 
 |FCS_COP.1/AEAD
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, FCS_CKM_EXT.8]
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8]
 
 FCS_CKM.6
 
 FCS_OTV_EXT.1
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
+
+FCS_OTV_EXT.1 - included
+
+|FCS_COP.1/CMAC
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8]
+
+FCS_CKM.6
+
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
+
+|FCS_COP.1/KeyEncap
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
+
+FCS_CKM.6 
+
+FCS_OTV_EXT.1
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
+
+FCS_OTV_EXT.1 - included
+
+|FCS_COP.1/KeyWrap
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
+
+FCS_CKM.6 
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
 
 |FDP_DAU.1/Prove 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FDP_FRS_EXT.2 
 |FDP_FRS_EXT.1 
-|FDP_FRS_EXT.1 is required by the PP.
+|FDP_FRS_EXT.1 - included
 
 |FIA_AFL_EXT.2
 |FIA_AFL_EXT.1
-|FIA_AFL_EXT.1 is required by the PP.
+|FIA_AFL_EXT.1 - included
 
 |FPT_FLS.1/FW
-|No dependencies.
+|No dependencies
 |N/A
 
 |FPT_MFW_EXT.2 
 |FPT_MFW_EXT.1 
 
-FCS_COP.1 
-|FPT_MFW_EXT.1 and FCS_COP.1 are required by the PP.
+FCS_COP.1
+|FPT_MFW_EXT.1 - included
+
+FCS_COP.1 - included
 
 |FPT_MFW_EXT.3 
 |FPT_MFW_EXT.1 
 
 FCS_COP.1 
-|FPT_MFW_EXT.1 and FCS_COP.1 are required by the PP.
+|FPT_MFW_EXT.1 - included
+
+FCS_COP.1 - included
 
 |FPT_RPL.1/Rollback 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_STM_EXT.1
-|No dependencies.
+|No dependencies
 |N/A
 
 |FTP_CCMP_EXT.1 
 |FCS_COP.1 
-|FCS_COP.1 is required by the PP.
+|FCS_COP.1 - included
 
 |FTP_GCMP_EXT.1 
 |FCS_COP.1 
-|FCS_COP.1 is required by the PP.
+|FCS_COP.1 - included
 
 |FTP_ITC_EXT.1 
 |FCS_COP.1 
-|FCS_COP.1 is required by the PP.
+|FCS_COP.1 - included
 
 |FTP_ITE_EXT.1 
 |FCS_COP.1 
-|FCS_COP.1 is required by the PP.
+|FCS_COP.1 - included
 
 |FTP_ITP_EXT.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |===
