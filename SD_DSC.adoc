@@ -2571,7 +2571,7 @@ The evaluator shall examine the KMD to ensure that:
 
 ====== TSS
 
-The evaluator shall verify that for each key selected cryptograhpic method the ST contains the corresponding SFR. The evaluator shall ensure the key access operations which utilize the specified cryptographic methods. Where multiple methods may be selected, the evaluator shall verify that each methods usage is described.
+The evaluator shall verify that for each key selected cryptograhpic method the ST contains the corresponding SFR. The evaluator shall ensure the key access operations which utilize the specified cryptographic methods. Where multiple methods may be selected, the evaluator shall verify that each method's usage is described.
 
 ===== AGD
 
