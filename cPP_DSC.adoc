@@ -6,7 +6,7 @@
 :sectnumlevels: 5
 :imagesdir: images
 :revnumber: 2.0-Proposed-Draft
-:revdate: September 4, 2024
+:revdate: September 6, 2024
 :xrefstyle: full
 :doctype: book
 :chapter-refsig: Section
@@ -96,7 +96,7 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 |https://www.commoncriteriaportal.org/cc/index.cfm
 
 |[DSC SD]
-|Supporting Document: Evaluation Activities for collaborative Protection Profile for Dedicated Security Component: Mandatory Technical Document, Version 2.0-Proposed-Draft, September 4, 2024
+|Supporting Document: Evaluation Activities for collaborative Protection Profile for Dedicated Security Component: Mandatory Technical Document, Version 2.0-Proposed-Draft, September 6, 2024
 |https://dsc-itc.github.io
 
 |===
@@ -128,7 +128,7 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 |Public Review Draft 2 for v2.0
 
 |2.0-Proposed-Draft
-|September 4, 2024
+|September 6, 2024
 |Proposed Final Draft for v2.0
 
 |2.0
