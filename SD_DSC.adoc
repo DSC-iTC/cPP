@@ -767,7 +767,7 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/SKC Cryptographic Operation (Symmetric Key Cryptography) 
+===== FCS_COP.1/SKC Cryptographic Operation (Symmetric-Key Cryptography)
 
 ====== TSS
 
@@ -862,7 +862,7 @@ If support for AES-CTR is claimed and the counter value source is internal to th
 
 ==== Random Bit Generation (FCS_RBG)
 
-===== FCS_RBG.1 Random Bit Generation
+===== FCS_RBG.1 Random Bit Generation (RBG)
 
 In addition to the materials below, documentation shall be produced—and the evaluator shall perform the activities—in accordance with Appendix D of [DSC cPP].
 
@@ -1926,7 +1926,7 @@ There are no KMD evaluation activities for this component.
 
 ==== Cryptographic Key Generation (FCS_CKM)
 
-===== FCS_CKM.1/AKG Cryptographic Key Generation - Asymmetric Keys
+===== FCS_CKM.1/AKG Cryptographic Key Generation (Asymmetric Keys)
 
 ====== TSS
 
@@ -1963,7 +1963,7 @@ If the TOE uses the generated key in a key chain/hierarchy then the evaluator sh
 * If [.underline]#AK1# is selected, then the KMD describes which methods for generating p and q are used
 * How the key is used as part of the key chain/hierarchy. 
 
-===== FCS_CKM.1/SKG Cryptographic key generation - Symmetric Key
+===== FCS_CKM.1/SKG Cryptographic key generation (Symmetric Key)
 
 ====== TSS
 
@@ -2164,11 +2164,39 @@ The evaluator shall examine the KMD to ensure that:
 * The length of the key derivation key is defined by the PRF. The evaluator should check whether the key derivation key length is consistent with the length provided by the selected PRF.
 * If a key is used as an input to several KDFs, each invocation must use a distinct context string. If the output of a KDF execution is used for multiple cryptographic keys, those keys must be disjoint segments of the output.
 
-==== Cryptographic Key Management (Extended - FCS_CKM_EXT)
-
-===== FCS_CKM_EXT.3 Cryptograhpic Key Access
+===== FCS_CKM_EXT.3 Cryptographic Key Access
 [IMPORTANT]
 This is new
+
+===== FCS_CKM_EXT.8 Password-Based Key Derivation
+
+====== TSS
+
+The evaluator shall review the TSS to verify that it contains a description of the PBKDF. The evaluator shall also confirm the TSF supports the selected hash function itself. The evaluator shall confirm that the TSS contains a description of how the TOE ensures that the output of the PBKDF is at least the same length as that specified in FCS_CKM.1/SKG and for the KeyDrv4, KeyDrv5, or KeyDrv6 in FCS_CKM.5.
+
+If the ST claims iterations less than 1000 iterations, the evaluator shall verify the TSS contains a description of the workload function used to claim equivalence to at least 1000 iterations of PBKDF.
+
+If the TSF performs additional conditioning, whitening, or manipulation of the password or passphrase before applying the PBKDF, or to the output of the PBKDF, the evaluator shall ensure that the TSS describes the actions and provides assurance that the TSF does not negatively impact the entropy of the PBKDF output.
+
+If any manipulation of the key is performed in forming the submask that will be used to form the KEK, that process shall be described in the TSS.
+
+====== AGD
+
+There are no AGD evaluation activities for this component.
+
+====== Test
+
+No explicit testing of the formation of the submask from the input password is required.
+
+For the NIST SP 800-132-based conditioning of the passphrase, the required evaluation activities will be performed when doing the evaluation activities for the appropriate requirements (FCS_COP.1/HMAC).
+
+The evaluator shall verify that the iteration count for PBKDFs performed by the TOE comply with NIST SP 800-132 by ensuring that the TSS contains a description of the estimated time required to derive key material from passwords and how the TOE increases the computation time for password-based key derivation (including but not limited to increasing the iteration count).
+
+====== KMD
+
+If the ST claims less than 1000 PBKDF iterations, the evaluator shall verify the KMD contains a description of the process for increasing the workload. The description shall provide a flow diagram of the operations involved including the keys used in the operations. The evaluator shall also confirm that the TSF supports any algorithms in use for this sequence of operations.
+
+The KMD shall include an equivalency argument comparing the workload (time to completion) using at least 1000 PBKDF iterations vs the workload of the alternative process.
 
 ==== Cryptographic Operation (FCS_COP)
 
@@ -2180,7 +2208,7 @@ This is new
 [IMPORTANT]
 This is new
 
-===== FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
+===== FCS_COP.1/KeyEncap Cryptographic Operation (Key Encapsulation)
 [IMPORTANT]
 This is new
 
@@ -2272,7 +2300,7 @@ The evaluator shall verify the correctness of each TSF implementation of each su
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrap
+===== FCS_COP.1/KeyWrap Cryptographic Operation (Key Wrap)
 [IMPORTANT]
 This is new
 
@@ -2297,36 +2325,6 @@ If the implementation of the key encryption operation is the same implementation
 The evaluator shall examine the KMD to ensure that it describes when the key wrapping occurs, that the KMD description is consistent with the description in the TSS, and that for all keys that are wrapped the TOE uses a method as described in the [DSC cPP] table. No uncertainty should be left over which is the wrapping key and the key to be wrapped and where the wrapping key potentially comes from i.e. is derived from.
 
 If "AES-GCM" or "AES-CCM" is used the evaluator shall examine the KMD to ensure that it describes how the IV is generated and that the same IV is never reused to encrypt different plaintext pairs under the same key. Moreover in the case of GCM, he must ensure that, at each invocation of GCM, the length of the plaintext is at most (2^32)-2 blocks.
-
-===== FCS_CKM_EXT.8 Cryptographic Operation (Password-Based Key Derivation Functions)
-
-====== TSS
-
-The evaluator shall review the TSS to verify that it contains a description of the PBKDF. The evaluator shall also confirm the TSF supports the selected hash function itself. The evaluator shall confirm that the TSS contains a description of how the TOE ensures that the output of the PBKDF is at least the same length as that specified in FCS_CKM.1/SKG and for the KeyDrv4, KeyDrv5, or KeyDrv6 in FCS_CKM.5.
-
-If the ST claims iterations less than 1000 iterations, the evaluator shall verify the TSS contains a description of the workload function used to claim equivalence to at least 1000 iterations of PBKDF.
-
-If the TSF performs additional conditioning, whitening, or manipulation of the password or passphrase before applying the PBKDF, or to the output of the PBKDF, the evaluator shall ensure that the TSS describes the actions and provides assurance that the TSF does not negatively impact the entropy of the PBKDF output.
-
-If any manipulation of the key is performed in forming the submask that will be used to form the KEK, that process shall be described in the TSS.
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-No explicit testing of the formation of the submask from the input password is required. 
-
-For the NIST SP 800-132-based conditioning of the passphrase, the required evaluation activities will be performed when doing the evaluation activities for the appropriate requirements (FCS_COP.1/HMAC).
-
-The evaluator shall verify that the iteration count for PBKDFs performed by the TOE comply with NIST SP 800-132 by ensuring that the TSS contains a description of the estimated time required to derive key material from passwords and how the TOE increases the computation time for password-based key derivation (including but not limited to increasing the iteration count).
-
-====== KMD
-
-If the ST claims less than 1000 PBKDF iterations, the evaluator shall verify the KMD contains a description of the process for increasing the workload. The description shall provide a flow diagram of the operations involved including the keys used in the operations. The evaluator shall also confirm that the TSF supports any algorithms in use for this sequence of operations.
-
-The KMD shall include an equivalency argument comparing the workload (time to completion) using at least 1000 PBKDF iterations vs the workload of the alternative process.
 
 === User Data Protection (FDP)
 
