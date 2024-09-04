@@ -897,10 +897,11 @@ Each test group shall consist of at least 15 test cases meeting the following re
 * A representative sample of the domain of supported output sizes shall be tested.
 
 For each test case in each test group, the evaluator shall perform the following steps:
-1. Instantiate the DRBG implementation using the entropy input value, nonce (if present), and personalization string (if present).
-2. If the DRBG implementation supports prediction resistance or reseeding, reseed the DRBG using the entropy input value and additional input value.
-3. Generate bits from the DRBG matching the pseudorandom output length from the test case. Discard the generated bits.
-4. Generate bits from the DRBG matching the pseudorandom output length from the test case. Verify the generated bits are equal to the pseudorandom output.
+
+. Instantiate the DRBG implementation using the entropy input value, nonce (if present), and personalization string (if present).
+. If the DRBG implementation supports prediction resistance or reseeding, reseed the DRBG using the entropy input value and additional input value.
+. Generate bits from the DRBG matching the pseudorandom output length from the test case. Discard the generated bits.
+. Generate bits from the DRBG matching the pseudorandom output length from the test case. Verify the generated bits are equal to the pseudorandom output.
 
 The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
