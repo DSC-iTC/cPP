@@ -239,7 +239,7 @@ For definitions of standard CC terminology, see [CC] part 1.
 |In the context of cryptographic algorithm testing, a set of inputs to the algorithm and their corresponding expected outputs. Depending on the test, a test case may have one, many, or no expected outputs.
 
 |Test Group
-|In the context of cryptographic algorithm testing, a configuration of cryptographic algorithm properties (key size, hash algorithm, etc.) and a set of test cases which correspond to these properties.
+|In the context of cryptographic algorithm testing, a configuration of algorithm properties (key size, hash algorithm, etc.) and a set of test cases which correspond to these properties.
 
 |TOE Security Functionality (TSF) 
 |A set consisting of all hardware, software, and firmware of the TOE that must be relied upon for the correct enforcement of the SFRs. [CC1]
