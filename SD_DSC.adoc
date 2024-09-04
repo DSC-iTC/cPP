@@ -1985,15 +1985,6 @@ The evaluator shall confirm that the KMD describes the RBG interface and how the
 
 If the TOE uses the generated key in a key chain/hierarchy then the KMD shall describe how the ST uses the key as part of the key chain/hierarchy.
 
-====== KMD
-
-The evaluator shall confirm that the KMD describes, as applicable:
-
-* The RBG interface and how the ST uses it in symmetric key generation
-* The KDF interface and how the ST uses it in symmetric key generation
-* The PBKDF interface and how the ST uses it in symmetric key generation
-* If the TOE uses the generated key in a key chain/hierarchy then the KMD shall describe how the ST uses the key as part of the key chain/hierarchy.
-
 ===== FCS_CKM.5 Cryptographic Key Derivation
 
 ====== TSS 
