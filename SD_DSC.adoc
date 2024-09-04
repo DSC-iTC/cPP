@@ -235,6 +235,12 @@ For definitions of standard CC terminology, see [CC] part 1.
 |Target of Evaluation 
 |A set of software, firmware or hardware possibly accompanied by guidance. [CC1]
 
+|Test Case
+|In the context of cryptographic algorithm testing, a set of inputs to the algorithm and their corresponding expected outputs. Depending on the test, a test case may have one, many, or no expected outputs.
+
+|Test Group
+|In the context of cryptographic algorithm testing, a configuration of cryptographic algorithm properties (key size, hash algorithm, etc.) and a set of test cases which correspond to these properties.
+
 |TOE Security Functionality (TSF) 
 |A set consisting of all hardware, software, and firmware of the TOE that must be relied upon for the correct enforcement of the SFRs. [CC1]
 
@@ -439,9 +445,9 @@ The evaluator shall examine the TSS to determine whether it describes any suppor
 
 [conditional] If the key is generated according to an asymmetric key scheme, the evaluator shall review the TSS to determine that it describes how the functionality described by FCS_CKM.1/AKG is invoked. The evaluator uses the description of the key generation functionality in FCS_CKM.1/AKG or documentation available for the operational environment to determine that the key strength being requested is greater than or equal to 112 bits.
 
-[conditional] If the key is generated according to a symmetric key scheme, the evaluator shall review the TSS to determine that it describes how the functionality described by FCS_CKM.1/SKG is invoked. The evaluator uses the description of the RBG functionality in FCS_RBG.1, or the key derivation functionality in either FCS_CKM.5 or FCS_CKM_EXT.8, depending on the key generation method claimed, to determine that the key size being requested is greater than or equal to the key size and mode to be used for the encryption/decryption of the data.
+[conditional] If the key is generated according to a symmetric key scheme, the evaluator shall review the TSS to determine that it describes how the functionality described by FCS_CKM.1/SKG is invoked. The evaluator uses the description of the RBG functionality in FCS_RBG.1, to determine that the key size being requested is greater than or equal to the key size and mode to be used for the encryption/decryption of the data.
 
-[conditional] If the key is formed from derivation, the evaluator shall verify that the TSS describes the method of derivation and that this method is consistent with FCS_CKM.5.
+[conditional] If the key is formed from derivation, the evaluator shall verify that the TSS describes the method of derivation and that this method is consistent with FCS_CKM.5 or FCS_CKM_EXT.8, depending on the key derivation method claimed.
 
 ====== AGD
 
@@ -564,20 +570,44 @@ The evaluator shall examine the KMD to ensure that all keys and keying material 
 Note that where selections include 'destruction of reference to the key directly followed by a request for garbage collection' (for volatile memory) then the evaluator shall examine the KMD to ensure that it explains the nature of the destruction of the reference, the request for garbage collection, and of the garbage collection process itself.
 
 ===== FCS_CKM_EXT.7 Cryptographic Key Agreement
-[IMPORTANT]
-This is new (taken from old FCS_CKM.2)
 
 ====== TSS
 
-The evaluator shall examine the TSS to ensure that ST supports at least one key establishment scheme. The evaluator also ensures that for each key establishment scheme selected by the ST in FCS_CKM.2.1 it also supports one or more corresponding methods selected in FCS_COP.1/KAT. If the ST selects RSA in FCS_CKM.2.1, then the TOE must support one or more of "KAS1," or "KAS2," "KTS-OAEP," from FCS_COP.1/KAT. If the ST selects elliptic curve-based, then the TOE must support one or more of "ECDH-NIST" or "ECDH-BPC" from FCS_COP.1/KAT. If the ST selects Diffie-Hellman-based key establishment, then the TOE must support "DH" from FCS_COP.1/KAT.
+The evaluator shall ensure that the selected RSA, DH, and ECDH key agreement schemes correspond to the key generation schemes selected in FCS_CKM.1/AK. If the ST selects DH, the TSS shall describe how the implementation meets the relevant sections of RFC 3526 (Section 3-7) or RFC 7919 (Appendices A.1-A.5). If the ST selects ECIES, the TSS shall describe the key sizes and algorithms (e.g. elliptic curve point multiplication, ECDH with either NIST or Brainpool curves, a symmetric cipher permitted by FCS_COP.1/SKC, a hash algorithm permitted by FCS_COP.1/Hash, and a MAC algorithm permitted by FCS_COP.1/KeyedHash or FCS_COP.1/CMAC) that are supported for the ECIES implementation.
+
+The evaluator shall ensure that, for each key agreement scheme, the size of the derived keying material is at least the same as the intended strength of the key agreement scheme, and where feasible this should be twice the intended security strength of the key agreement scheme.
+
+For each key agreement scheme, the TSS shall list the associated key derivation function if applicable.
 
 ====== AGD
 
-The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key establishment scheme .
+The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key agreement scheme.
 
 ====== Test
 
-Testing for this SFR is performed under the corresponding functions in FCS_COP.1/KAT.
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
+
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
+
+* Modulus size (KAS2)
+* Domain parameters (DH)
+* Curve (ECDH, ECIES)
+* Key agreement role (initiator or responder)
+* Hash algorithm (if applicable)
+* Associated data pattern (if applicable)
+* KDF configuration (if applicable)
+
+Each test group shall consist of at least 10 test cases meeting the following requirements:
+
+* Test cases shall be generated according to the parameter configuration of the test group.
+* Each test case shall consist of an arbitrary "owner" private key, an arbitrary "peer" public key, an arbitrary associated data string (if applicable), and the corresponding shared secret or derived key.
+* A representative sample of the domain of supported associated data sizes shall be tested.
+* A representative sample of the domain of supported shared secret sizes shall be tested.
+* A representative sample of the domain of supported derived key sizes shall be tested.
+
+For each test case in each test group, the evaluator shall verify that the TSF generates the correct shared secret or derived key.
+
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
 ====== KMD
 
@@ -599,16 +629,19 @@ The evaluator checks the AGD documents to determine that any configuration that 
 
 The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
-The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
+
 * Hash algorithm
 
-For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+Each test group shall consist of at least 150 test cases meeting the following requirements:
+
+* Test cases shall be generated according to the parameter configuration of the test group.
 * Each test case shall consist of an arbitrary input message and its corresponding digest value.
 * A representative sample of the domain of supported input message sizes shall be tested.
 
 For each test case in each test group, the evaluator shall verify that the TSF generates the correct digest value.
 
-For each test group, the evaluator shall also generate at least one Monte Carlo Test (MCT) test case, consisting of an arbitrary seed and a list of 100 digest values. For hash algorithms, the MCT is defined as follows:
+Additionally, each test group shall contain least one Monte Carlo Test (MCT) test case, consisting of an arbitrary seed and a list of 100 digest values. For hash algorithms, the MCT is defined as follows:
 ----
 for i = 1 through 100
     msg = seed
@@ -641,13 +674,13 @@ There are no guidance evaluation activities for this component.
 
 The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
-The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
 
 * Hash algorithm
-* MAC tag size
 
-For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+Each test group shall consist of at least 75 test cases meeting the following requirements:
 
+* Test cases shall be generated according to the parameter configuration of the test group.
 * Each test case shall consist of an arbitrary key, an arbitrary input message, and its corresponding MAC tag.
 * A representative sample of the domain of supported key sizes shall be tested.
 * A representative sample of the domain of supported input message sizes shall be tested.
@@ -674,18 +707,19 @@ There are no AGD evaluation activities for this component.
 
 The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
-The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
 
 * Modulus size (RSA)
 * Curve (ECDSA, EC-KCDSA, EdDSA)
 * Group size (KCDSA)
-* Private key size (LMS, XMSS)
+* Private key size (LMS, HSS, XMSS, XMSS^MT^)
 * Padding scheme (RSA)
 * Hash or XOF algorithm
 
-For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+Each test group shall consist of at least 6 test cases meeting the following requirements:
 
-* Each test case shall consist of an arbitrary private key (as defined by the test group) and an arbitrary input message to be signed.
+* Test cases shall be generated according to the parameter configuration of the test group.
+* Each test case shall consist of an arbitrary private key and an arbitrary input message to be signed.
 * A representative sample of the domain of supported message sizes shall be tested.
 
 For each test case in each test group, the evaluator shall verify that the TSF generates a signature that is structurally well-formed according to the relevant standard. Additionally, the evaluator shall use a known-good implementation to verify that the generated signature is indeed a valid signature on the input message.
@@ -710,21 +744,20 @@ There are no AGD evaluation activities for this component.
 
 The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
-The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
 
 * Modulus size (RSA)
 * Curve (ECDSA, EC-KCDSA, EdDSA)
 * Group size (DSA, KCDSA)
-* Public key size (LMS, XMSS)
+* Private key size (LMS, HSS, XMSS, XMSS^MT^)
 * Padding scheme (RSA)
 * Hash or XOF algorithm
 
-For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+Each test group shall consist of at least 6 test cases meeting the following requirements:
 
-* Each test case shall consist of an arbitrary public key (as defined by the test group), an arbitrary input message, and a signature.
+* Test cases shall be generated according to the parameter configuration of the test group.
+* Each test case shall consist of an arbitrary public key, an arbitrary input message, and a signature. For 5 of the 6 test cases, the the public key or input message shall be modified such that the signature is invalid.
 * A representative sample of the domain of supported message sizes shall be tested.
-* For 5 test cases, the public key or input message is modified such that the signature is invalid.
-* For the remaining test case, the signature shall be valid.
 
 For each test case in each test group, the evaluator shall verify that the TSF correctly reports the validity of the signature for the input message.
 
@@ -738,7 +771,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall check that the TSS includes a description of encryption functions used for symmetric key encryption. The evaluator should check that this description of the selected encryption function includes the key sizes and modes of operations as specified in the [DSC cPP] "Table 9. Supported Methods for Symmetric Key Cryptography Operation."
+The evaluator shall check that the TSS includes a description of encryption functions used for symmetric key encryption. The evaluator should check that this description of the selected encryption function includes the key sizes and modes of operations as specified in the [DSC cPP] Table "Symmetric-Key Cryptography"
 
 The evaluator shall check that the TSS describes the means by which the TOE satisfies constraints on algorithm parameters included in the selections made for 'cryptographic algorithm' and 'list of standards'. 
 
@@ -750,13 +783,13 @@ If the product supports multiple modes, the evaluator shall examine the vendor's
 
 The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
-The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define test groups according to the implementation of the algorithm, for each combination of the following parameters:
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
 
 * Mode of operation
 * Algorithm direction (encrypt/decrypt)
 * Key size
 
-For each test group, the evaluator shall generate at least 6 test cases meeting the following requirements:
+For each test group, the evaluator shall generate at least 50 test cases meeting the following requirements:
 
 * Each test case shall consist of an arbitrary key, an arbitrary input plaintext/ciphertext, and its corresponding ciphertext/plaintext.
 * Depending on the mode of operation, an initialization vector, counter, or tweak value shall also be included in the test case.
@@ -767,7 +800,7 @@ For each test group, the evaluator shall generate at least 6 test cases meeting 
 
 For each test case in each test group, the evaluator shall verify that the TSF generates the correct ciphertext/plaintext.
 
-For each test group corresponding to a CBC, CFB, or OFB mode of operation, the evaluator shall also generate at least one Monte Carlo Test (MCT) test case, consisting of an arbitrary key, an arbitrary initialization vector, an arbitrary input plaintext/ciphertext, and a list of 100 corresponding ciphertexts/plaintexts.
+Additionally, each test group corresponding to a CBC, CFB, or OFB mode of operation shall contain least one Monte Carlo Test (MCT) test case, consisting of an arbitrary key, an arbitrary initialization vector, an arbitrary input plaintext/ciphertext, and a list of 100 corresponding ciphertexts/plaintexts.
 
 For encryption with a 128-bit block size, the MCT is defined as follows:
 ----
@@ -843,23 +876,33 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-The following tests require the developer to provide access to a test platform that provides the evaluator with tools that are typically not found on factory products.
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
-The evaluator shall perform 15 trials for the RNG implementation. If the RNG is configurable, the evaluator shall perform 15 trials for each configuration.
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
 
-If the RNG has prediction resistance enabled, each trial consists of (1) instantiate DRBG, (2) generate the first block of random bits (3) generate a second block of random bits (4) uninstantiate. The evaluator verifies that the second block of random bits is the expected value. The evaluator shall generate eight input values for each trial. The first is a count (0 - 14). The next three are entropy input, nonce, and personalization string for the instantiate operation. The next two are additional input and entropy input for the first call to generate. The final two are additional input and entropy input for the second call to generate. These values are randomly generated. "generate one block of random bits" means to generate random bits with number of returned bits equal to the Output Block Length (as defined in NIST SP800-90A).
+* Hash algorithm (Hash_DRBG or HMAC_DRBG)
+* Block cipher algorithm (CTR_DRBG)
+* Presence of a derivation function (CTR_DRBG)
+* Prediction resistance support
 
-If the RNG does not have prediction resistance, each trial consists of (1) instantiate DRBG, (2) generate the first block of random bits (3) reseed, (4) generate a second block of random bits (5) uninstantiate. The evaluator verifies that the second block of random bits is the expected value. The evaluator shall generate eight input values for each trial. The first is a count (0 - 14). The next three are entropy input, nonce, and personalization string for the instantiate operation. The fifth value is additional input to the first call to generate. The sixth and seventh are additional input and entropy input to the call to reseed. The final value is additional input to the second generate call.
+Each test group shall consist of at least 15 test cases meeting the following requirements:
 
-The following paragraphs contain more information on some of the input values to be generated/selected by the evaluator. 
+* Test cases shall be generated according to the parameter configuration of the test group.
+* Each test case shall consist of an arbitrary entropy input value, an arbitrary nonce (if supported), an arbitrary personalization string (if supported), two arbitrary additional input values (if supported), and the corresponding pseudorandom output.
+* If the DRBG implementation supports prediction resistance or reseeding, each test case shall also include one entropy input value and one additional input value for reseeding.
+* A representative sample of the domain of supported entropy input sizes shall be tested.
+* A representative sample of the domain of supported nonce sizes shall be tested.
+* A representative sample of the domain of supported personalization string sizes shall be tested.
+* A representative sample of the domain of supported additional input sizes shall be tested.
+* A representative sample of the domain of supported output sizes shall be tested.
 
-*Entropy input:* the length of the entropy input value must equal the seed length.
+For each test case in each test group, the evaluator shall perform the following steps:
+1. Instantiate the DRBG implementation using the entropy input value, nonce (if present), and personalization string (if present).
+2. If the DRBG implementation supports prediction resistance or reseeding, reseed the DRBG using the entropy input value and additional input value.
+3. Generate bits from the DRBG matching the pseudorandom output length from the test case. Discard the generated bits.
+4. Generate bits from the DRBG matching the pseudorandom output length from the test case. Verify the generated bits are equal to the pseudorandom output.
 
-*Nonce:* If a nonce is supported (CTR_DRBG with no Derivation Function does not use a nonce), the nonce bit length is one-half the seed length.
-
-*Personalization string:* The length of the personalization string must be \<= seed length. If the implementation only supports one personalization string length, then the same length can be used for both values. If more than one string length is support, the evaluator shall use personalization strings of two different lengths. If the implementation does not use a personalization string, no value needs to be supplied.
-
-*Additional input:* the additional input bit lengths have the same defaults and restrictions as the personalization string lengths.
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
 ====== KMD
 
@@ -1887,7 +1930,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS to verify that it describes how the TOE generates an asymmetric key based on the methods selected from [DSC cPP] Table 14: _Supported Methods for Asymmetric Key Generation_. The evaluator shall examine the TSS to verify that it describes how the TOE invokes the methods selected in the ST from the same table. The evaluator shall examine the TSS to verify that it identifies the usage for each row identifier (key type, key size, and list of standards) selected in the ST.
+The evaluator shall examine the TSS to verify that it describes how the TOE generates an asymmetric key based on the methods selected from the [DSC cPP] Table "Asymmetric Cryptographic Key Generation". The evaluator shall examine the TSS to verify that it describes how the TOE invokes the methods selected in the ST from the same table. The evaluator shall examine the TSS to verify that it identifies the usage for each row identifier (key type, key size, and list of standards) selected in the ST.
 
 ====== AGD
 
@@ -1895,103 +1938,23 @@ The evaluator shall verify that the AGD guidance instructs the administrator how
 
 ====== Test
 
-The following tests require the developer to provide access to a test platform that provides the evaluator with tools that are typically not found on factory products.
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
 
-*AK1: RSA Key Generation*
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
 
-The below tests are derived from The 186-4 RSA Validation System (RSA2VS), Updated 8 July 2014, Section 6.2, from the National Institute of Standards and Technology.
+* Modulus size (RSA)
+* Curve (ECC, EdDSA, EC-KCDSA)
+* Domain parameters (FFC)
+* Group size (KCDSA)
+* Private key size (LMS, HSS, XMSS, XMSS^MT^)
 
-The evaluator shall verify the implementation of RSA Key Generation by the TOE using the Key Generation test. This test verifies the ability of the TSF to correctly produce values for the key components including the public verification exponent e, the private prime factors p and q, the public modulus n and the calculation of the private signature exponent d.
+Each test group shall consist of at least 10 test cases meeting the following requirements:
 
-FIPS 186-4 Key Pair generation specifies 5 methods for generating the primes p and q. 
+* Test cases shall be generated according to the parameter configuration of the test group.
 
-These are:
+For each test case in each test group, the evaluator shall verify that the TSF generates a key pair that is structurally well-formed according to the relevant standard. Additionally, the evaluator shall use a known-good implementation to derive a public key from the private key provided by the TSF, and verify that the result matches the public key provided by the TSF.
 
-1. Random Primes:
-
-** Provable primes
-** Probable primes 
-
-2. Primes with Conditions:
-
-** Primes p1, p2, q1, q2, p and q shall all be provable primes. 
-** Primes p1, p2, q1, and q2 shall be provable primes and p and q shall be probable primes
-** Primes p1, p2, q1, q2, p and q shall all be probable primes. 
-
-To test the key generation method for the Random Provable primes method and for all the Primes with Conditions methods, the evaluator must seed the TSF key generation routine with sufficient data to deterministically generate the RSA key pair. 
-
-For each key length supported, the evaluator shall have the TSF generate 25 key pairs. The evaluator shall verify the correctness of the TSF's implementation by comparing values generated by the TSF with those generated by a known good implementation using the same input parameters.
-
-If the TOE generates Random Probable Primes then if possible, the Random Probable primes method should also be verified against a known good implementation as described above. If verification against a known good implementation is not possible, the evaluator shall have the TSF generate 25 key pairs for each supported key length nlen and verify that all of the following are true:
-
-* n = p*q
-* p and q are probably prime according to Miller-Rabin tests with error probability \<2^(-125)
-* 2^16 \< e \< 2^256 and e is an odd integer
-* GCD(p-1,e) = 1
-* GCD(q-1,e) = 1
-* |p-q|\> 2^(nlen/2 - 100)
-* p \>= squareroot(2)*( 2^(nlen/2 -1) )
-* q \>= squareroot(2)*( 2^(nlen/2 -1) )
-* 2^(nlen/2) \< d \< LCM(p-1,q-1)
-* e*d = 1 mod LCM(p-1,q-1)
-
-*AK2 & AK3: ECC Key Generation with NIST and Brainpool Curves*
-
-These tests are derived from The FIPS 186-4 Elliptic Curve Digital Signature Algorithm Validation System (ECDSA2VS), Updated 18 Mar 2014, Section 6.
-
-*ECC Key Generation Test*
-
-For each selected curve, and for each key pair generation method as described in FIPS 186-4, section B.4, the evaluator shall require the implementation under test to generate 10 private/public key pairs (d, Q). The private key, d, shall be generated using a random bit generator as specified in FCS_RBG.1. The private key, d, is used to compute the public key, Q'. The evaluator shall confirm that 0\<d\<n (where n is the order of the group), and the computed value Q' is then compared to the generated public/private key pairs' public key, Q, to confirm that Q is equal to Q'.
-
-*Public Key Validation (PKV) Test*
-
-For each supported curve, the evaluator shall generate 12 private/public key pairs using the key generation function of a known good implementation and modify six of the public key values so that they are incorrect, leaving six values unchanged (i.e., correct). To determine correctness, the evaluator shall submit the 12 key pairs to the public key validation (PKV) function of the TOE and shall confirm that the results correspond as expected to the modified and unmodified values.
-
-*AK4: DSA Key Generation using Finite-Field Cryptography (FFC)*
-
-The evaluator shall verify the implementation of the Parameters Generation and the Key Generation for FFC by the TOE using the Parameter Generation and Key Generation test. This test verifies the ability of the TSF to correctly produce values for the field prime p, the cryptographic prime q (dividing p-1), the cryptographic group generator g, and the calculation of the private key x and public key y.
-
-The Parameter generation specifies 2 ways (or methods) to generate the cryptographic prime q and the field prime p:
-
-* Primes q and p shall both be provable primes&nbsp;
-* Primes q and field prime p shall both be probable primes
-
-and two ways to generate the cryptographic group generator g:
-
-* Generator g constructed through a verifiable process
-* Generator g constructed through an unverifiable process.
-
-The Key generation specifies 2 ways to generate the private key x:
-
-* len(q) bit output of RBG where 1 \<=x \<= q-1&nbsp;
-* len(q) + 64 bit output of RBG, followed by a mod q-1 operation and a +1 operation, where 1\<= x\<=q-1.
-
-The security strength of the RBG must be at least that of the security offered by the FFC parameter set.
-
-To test the cryptographic and field prime generation method for the provable primes method or the group generator g for a verifiable process, the evaluator must seed the TSF parameter generation routine with sufficient data to deterministically generate the parameter set.
-
-For each key length supported, the evaluator shall have the TSF generate 25 parameter sets and key pairs. The evaluator shall verify the correctness of the TSF's implementation by comparing values generated by the TSF with those generated from a known good implementation. Verification must also confirm
-
-* g != 0,1
-* q divides p-1
-* g^q mod p = 1
-* g^x mod p = y
-
-for each FFC parameter set and key pair.
-
-*AK5: Curve25519 Key Generation*
-
-The evaluator shall require the implementation under test (IUT) to generate 10 private/public key pairs. The private key shall be generated as specified in RFC 7748 using an approved random bit generator (RBG) and shall be written in little-endian order (least significant byte first). To determine correctness, the evaluator shall submit the generated key pairs to the public key verification (PKV) function of a known good implementation.
-
-Note: Assuming the PKV function of the good implementation will (using little-endian order):
-
-* Confirm the private and public keys are 32-byte values
-* Confirm the three least significant bits of the first byte of the private key are zero
-* Confirm the most significant bit of the last byte is zero
-* Confirm the second most significant bit of the last byte is one
-* Calculate the expected public key from the private key and confirm it matches the supplied public key
-
-The evaluator shall generate 10 private/public key pairs using the key generation function of a known good implementation and modify 5 of the public key values so that they are incorrect, leaving five values unchanged (i.e. correct). The evaluator shall obtain in response a set of 10 PASS/FAIL values.
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
 ====== KMD
 
@@ -2014,7 +1977,13 @@ The evaluator shall verify that the AGD guidance instructs the administrator how
 
 ====== Test
 
-For each selected key generation method, the evaluator shall configure the selected generation capability. The evaluator shall use the description of the RBG interface to verify that the TOE requests and receives an amount of RBG output greater than or equal to the requested key size. The evaluator shall perform the tests as described for FCS_CKM.5 and FCS_CKM_EXT.8.
+For each selected key generation method, the evaluator shall configure the selected generation capability. The evaluator shall use the description of the RBG interface to verify that the TOE requests and receives an amount of RBG output greater than or equal to the requested key size.
+
+====== KMD
+
+The evaluator shall confirm that the KMD describes the RBG interface and how the ST uses it in symmetric key generation.
+
+If the TOE uses the generated key in a key chain/hierarchy then the KMD shall describe how the ST uses the key as part of the key chain/hierarchy.
 
 ====== KMD
 
@@ -2023,7 +1992,7 @@ The evaluator shall confirm that the KMD describes, as applicable:
 * The RBG interface and how the ST uses it in symmetric key generation
 * The KDF interface and how the ST uses it in symmetric key generation
 * The PBKDF interface and how the ST uses it in symmetric key generation
-* If the TOE uses the generated key in a key chain/hierarchy then the KMD shall describe how the ST uses the key as part of the key chain/hierarchy. 
+* If the TOE uses the generated key in a key chain/hierarchy then the KMD shall describe how the ST uses the key as part of the key chain/hierarchy.
 
 ===== FCS_CKM.5 Cryptographic Key Derivation
 

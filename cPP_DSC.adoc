@@ -721,7 +721,7 @@ _Some selections allow assignment of "some value that does not contain any CSP."
 
 FCS_CKM_EXT.7 Cryptographic Key Agreement
 
-FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from multiple parties in accordance with specified cryptographic key derivation algorithms [*selection*: _cryptographic algorithm_] and specified key sizes [*selection*: _cryptogrpahic algorithm parameters_] that meets the following: [*selection*: _list of standards_].
+FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from multiple parties in accordance with specified cryptographic key derivation algorithms [*selection*: _cryptographic algorithm_] and specified key sizes [*selection*: _cryptographic algorithm parameters_] that meets the following: [*selection*: _list of standards_].
 
 .Cryptographic Key Agreement
 [[KeyAgreement]]
