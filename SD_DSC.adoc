@@ -2583,8 +2583,7 @@ Testing for this SFR is performed under the corresponding functions based on the
 
 ===== KMD
 
-The evaluator shall verify any additional descriptions of the key protection methods provided in the KMD. The KMD descriptions are not required.
-
+The developer is allowed to provide additional details of the key access operations and cryptographic methods in the KMD. The evaluator shall verify the accuracy of any additional descriptions (if present).
 ==== Cryptographic Operation (FCS_COP)
 
 ===== FCS_COP.1/CMAC Cryptographic Operation (CMAC)
