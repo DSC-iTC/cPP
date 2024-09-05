@@ -462,22 +462,18 @@ The evaluator shall iterate through each of the methods selected by the ST and p
 The evaluator shall iterate through each of the methods selected by the ST and confirm that the KMD describes the applicable selected methods.
 
 ===== FCS_CKM.2 Cryptographic Key Distribution
-[IMPORTANT]
-====
-This has been changed from establishment to distribution
-====
 
 ====== TSS
 
-The evaluator shall examine the TSS to ensure that ST supports at least one key establishment scheme. The evaluator also ensures that for each key establishment scheme selected by the ST in FCS_CKM.2.1 it also supports one or more corresponding methods selected in FCS_COP.1/KAT. If the ST selects RSA in FCS_CKM.2.1, then the TOE must support one or more of "KAS1," or "KAS2," "KTS-OAEP," from FCS_COP.1/KAT. If the ST selects elliptic curve-based, then the TOE must support one or more of "ECDH-NIST" or "ECDH-BPC" from FCS_COP.1/KAT. If the ST selects Diffie-Hellman-based key establishment, then the TOE must support "DH" from FCS_COP.1/KAT.
+The evaluator shall examine the TSS to determine whether it describes the supported methods for key distribution functionality consistent with the selection(s) made in FCS_CKM.2.1. The evaluator shall confirm that the matching SFRs are included in the ST based on the selection(s) made in FCS_CKM.2.1.
 
 ====== AGD
 
-The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key establishment scheme .
+The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key distribution method.
 
 ====== Test
 
-Testing for this SFR is performed under the corresponding functions in FCS_COP.1/KAT.
+Testing for this SFR is performed under the corresponding functions based on the selection(s) made in the ST.
 
 ====== KMD
 
@@ -2165,9 +2161,23 @@ The evaluator shall examine the KMD to ensure that:
 * The length of the key derivation key is defined by the PRF. The evaluator should check whether the key derivation key length is consistent with the length provided by the selected PRF.
 * If a key is used as an input to several KDFs, each invocation must use a distinct context string. If the output of a KDF execution is used for multiple cryptographic keys, those keys must be disjoint segments of the output.
 
-===== FCS_CKM_EXT.3 Cryptographic Key Access
-[IMPORTANT]
-This is new
+===== FCS_CKM_EXT.3 Cryptograhpic Key Access
+
+====== TSS
+
+The evaluator shall verify that for each key selected cryptograhpic method the ST contains the corresponding SFR. The evaluator shall ensure the key access operations which utilize the specified cryptographic methods. Where multiple methods may be selected, the evaluator shall verify that each method's usage is described.
+
+===== AGD
+
+There are no guidance evaluation activities for this component.
+
+===== Test
+
+Testing for this SFR is performed under the corresponding functions based on the selection(s) made in the ST.
+
+===== KMD
+
+The developer is allowed to provide additional details of the key access operations and cryptographic methods in the KMD. The evaluator shall verify the accuracy of any additional descriptions (if present).
 
 ===== FCS_CKM_EXT.8 Password-Based Key Derivation
 

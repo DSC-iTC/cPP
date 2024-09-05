@@ -92,7 +92,7 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 |https://www.commoncriteriaportal.org/cc/index.cfm
 
 |[CC-E&I]
-|Errata and Interpretation for CC:2022 (Release 1) and CEM:2022 (Release 1), 001, Version 1.1, February 1, 2024
+|Errata and Interpretation for CC:2022 (Release 1) and CEM:2022 (Release 1), 002, Version 1.1, July 22, 2024
 |https://www.commoncriteriaportal.org/cc/index.cfm
 
 |[DSC SD]
@@ -676,9 +676,10 @@ _If [.underline]#Derived keys generated in accordance with FCS_CKM_EXT.8# is sel
 
 FCS_CKM.2 Cryptographic Key Distribution
 
-FCS_CKM.2.1:: The TSF shall distribute cryptographic keys in accordance with a specified cryptographic key distribution method [*selection*: _key encapsulation, key wrapping, physically protected channels as specified in FTP_ITP_EXT.1, encrypted data buffers as specified in FTP_ITE_EXT.1, cryptographically protected data channels as specified in FTP_ITC_EXT.1_] that meets the following: [_none_].
+FCS_CKM.2.1:: The TSF shall distribute cryptographic keys in accordance with a specified cryptographic key distribution method [*selection*: _key encapsulation as specified in FCS_COP.1/KeyEncap, key wrapping as specified in FCS_COP.1/KeyWrap, key wrapping as specified in FCS_COP.1/AEAD, physically protected channels as specified in FTP_ITP_EXT.1, encrypted data buffers as specified in FTP_ITE_EXT.1, cryptographically protected data channels as specified in FTP_ITC_EXT.1_] that meets the following: [_none_].
 
-_Application Note {counter:remark_count}_:: _This SFR assumes there is no pre-shared key between the parties. If key encapsulation is chosen, then FCS_COP.1/KeyEncap SHALL be included which specifies the relevant list of standards. If key wrapping is chosen, then FCS_COP.1/KeyWrap or FCS_COP.1/AEAD SHALL be included which specifies the relevant list of standards._
+
+_Application Note {counter:remark_count}_:: _This SFR assumes there is no pre-shared key between the parties._
 
 ==== FCS_CKM.6 Timing and event of cryptographic key destruction
 
@@ -786,13 +787,13 @@ _Application Note {counter:remark_count}_:: _This SFR captures methods for multi
 +
 _FCS_CKM.5 defines KDF-CTR, KDF-FB, and KDF-DPI._
 +
-_For the KDF functions, when concatenating keys for AES-CMAC, the contributions from each party should be an equal number of bits, resulting in the selected key size (e.g., if each share is 128 bits and there are two parties, then the result after concatenation is a 256-bit key, which is appropriate only for AES-256-CMAC). For HMAC functions, the shares can be any size as long as the concatenated result is equal to or greater than the nominal cryptographic strength of the chosen hash function (e.g. if each share is 128 bits, then the result after concatenation is 256 bits, which can be used in any of SHA-1, SHA-256, or SHA-512)._
+_For the key derivation functions, when concatenating keys for AES-CMAC, the contributions from each party should be an equal number of bits, resulting in the selected key size (e.g., if each share is 128 bits and there are two parties, then the result after concatenation is a 256-bit key, which is appropriate only for AES-256-CMAC). For HMAC functions, the shares can be any size as long as the concatenated result is equal to or greater than the nominal cryptographic strength of the chosen hash function (e.g. if each share is 128 bits, then the result after concatenation is 256 bits, which can be used in any of SHA-1, SHA-256, or SHA-512)._
 +
-_For the KDF functions and XOR, each party may have to use an asymmetric method from FCS_CKM.2 to transmit their shares to each other. Key shares may also come from a token, in which case, TOEs may use key access methods in FCS_CKM.3 to authorize access and use of those keys in this SFR._
+_For the key derivation functions and XOR, each party may have to use an asymmetric method from FCS_CKM.2 to transmit their shares to each other. Key shares may also come from a token, in which case, TOEs may use key access methods in FCS_CKM.3 to authorize access and use of those keys in this SFR._
 +
 _There are no standards that specify how to derive a key from two keys using KEK or XOR. For KEK, encrypting one key with another, one must use one of the algorithms listed in FCS_COP.1/AEAD or FCS_COP.1/SKC and indicate which of the inputs is the plaintext and which is the key. If XOR is selected, the ST Author should describe this method in the documentation._
 +
-_For cPP/ST authors, please consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
+_For ST authors, please consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
 
 ==== FCS_COP.1/Hash Cryptographic Operation (Hashing)
 
@@ -865,7 +866,7 @@ FCS_COP.1.1/KeyedHash:: The TSF shall perform [_keyed hash message authenticatio
 
 |===
 
-_Application Note {counter:remark_count}_:: _The HMAC minimum key sizes in the table are specified in the ISO 9797-2:2021 standard, which requires that the minimum key size be equal to the digest size. The FIPS standard specifies no minimum or maximum key sizes, so if FIPS PUB 198-1 is selected, larger or smaller key sizes may be used._
+_Application Note {counter:remark_count}_:: _The HMAC minimum key sizes in the table are specified in the ISO 9797-2:2021 standard, which requires that the minimum key size be equal to the digest size. The FIPS PUB 198-1 standard specifies no minimum or maximum key sizes, so if FIPS PUB 198-1 is selected, larger or smaller key sizes may be used._
 
 :xrefstyle: full
 
@@ -1176,7 +1177,7 @@ FCS_COP.1.1/SKC:: The TSF shall perform [_symmetric-key encryption/decryption_] 
 
 FCS_RBG.1 Random Bit Generation (RBG)
 
-FCS_RBG.1.1:: The TSF shall perform deterministic random bit generation services using [*selection*: _RBG algorithm_] in accordance with [*selection*: _list of standards_] after initialization with a seed.
+FCS_RBG.1.1:: The TSF shall perform deterministic random bit generation services using [*selection*: _DRBG algorithm_] in accordance with [*selection*: _list of standards_] after initialization *with a seed*.
 
 .Random Bit Generation
 [[RBGs]]
@@ -1211,9 +1212,9 @@ ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
 |===
 
 
-FCS_RBG.1.2:: The TSF shall use a [selection: _TSF noise source [assignment: name of noise source], TSF interface for seeding_] for initialized seeding.
+FCS_RBG.1.2:: The TSF shall use a [selection: _TSF entropy source [assignment: name of entropy source], TSF interface for obtaining entropy_] for initialization and reseeding.
 
-FCS_RBG.1.3:: The TSF shall update the RBG state by [selection: _reseeding, uninstantiating and re-instantiating_] using a [selection: _TSF noise source [assignment: name of noise source], TSF interface for seeding_] in the following situations: [selection:
+FCS_RBG.1.3:: The TSF shall update the DRBG state by [selection: _reseeding, uninstantiating and re-instantiating_] using a [selection: _TSF entropy source [assignment: name of entropy source], TSF interface for obtaining entropy [assignment: name of the interface]_] in the following situations: [selection:
 +
 * _never_, 
 * _on demand,_  
@@ -1224,7 +1225,7 @@ in accordance with [assignment: _list of standards_].
 
 _Application Note {counter:remark_count}_:: _No rationale is acceptable for not satisfying one of these dependencies._
 +
-_If a reseeding is selected in the first selection and something other than “never” is selected in the third selection, but reseeding is not feasible, the TSF will uninstantiate RBGs, rather than produce output that is of insufficient quality. The listed standards should specify the reseed interval and procedure for uninstantiating and reseeding. The remaining selection allows the PP Author to require application-specific conditions for reseeding._
+_If a reseeding is selected in the first selection and something other than “never” is selected in the third selection, but reseeding is not feasible, the TSF will uninstantiate RBGs, rather than produce output that is of insufficient quality. The listed standards should specify the reseed interval and procedure for uninstantiating and reseeding._
 +
 _"Uninstantiate" means that the internal state of the DRBG is no longer available for use._
 +
@@ -2172,7 +2173,7 @@ The following rationale provides justification for each security problem definit
 |This requirement provides multiple internal interfaces to seed the random bit generator that enforces strong cryptography by requiring a minimum amount of input.
 
 |FCS_RBG.5 (optional)
-|This requirement ensures that combining multiple sources of noise are combined in a way that enforces strong cryptography by requiring a minimum amount of input to the random bit generator.
+|This requirement ensures that combining multiple sources of entropy are combined in a way that enforces strong cryptography by requiring a minimum amount of input to the random bit generator.
 
 |FCS_RBG.6 (optional)
 |This requirement provides an interface to access RBG output so that the TSF can support the use of strong cryptography in its operational environment.
@@ -2352,9 +2353,9 @@ As with ATE_IND, the evaluator shall generate a report to document their finding
 
 FCS_RBG.2 Random Bit Generation (External Seeding)
 
-FCS_RBG.2.1:: The TSF shall be able to accept a minimum input of [assignment: _minimum input length greater than zero_] from a TSF interface for the purpose of seeding.
+FCS_RBG.2.1:: The TSF shall be able to accept a minimum input of [assignment: _minimum input length greater than zero_] from a TSF interface for the purpose of obtaining entropy.
 
-_Application Note {counter:remark_count}_:: _In order to maintain compliance with NIST SP 800-90A Rev. 1, the TSF accepts enough bits input from an external noise source to satisfy the entropy requirements of the DRBG. The TSF should also protect the integrity and confidentiality of the entropy it receives from the external noise source._
+_Application Note {counter:remark_count}_:: _In order to maintain compliance with NIST SP 800-90A Rev. 1, the TSF accepts enough bits input from an external entropy source to satisfy the entropy requirements of the DRBG. The TSF should also protect the integrity and confidentiality of the entropy it receives from the external entropy source._
 +
 _The TSF interface for the purpose of seeding here is the interface used to gather entropy for initializing the seed._
 
@@ -2362,27 +2363,27 @@ _The TSF interface for the purpose of seeding here is the interface used to gath
 
 FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
 
-FCS_RBG.3.1:: The TSF shall be able to seed the RBG using a [selection: choose one of: _TSF software-based noise source, TSF hardware-based noise source] [assignment: _name of noise source_] with a minimum of [assignment: _number of bits_] bits of min-entropy. 
+FCS_RBG.3.1:: The TSF shall be able to seed the DRBG using a [selection: choose one of: _TSF software-based entropy source, TSF hardware-based entropy source] [assignment: _name of entropy source_] with [assignment: _number of bits_] bits of min-entropy. 
 
-_Application Note {counter:remark_count}_:: _If an ST Author wishes to use multiple internal noise sources, they iterate this requirement for each noise source used by the TSF._
+_Application Note {counter:remark_count}_:: _If an ST Author wishes to use multiple internal entropy sources, they iterate this requirement for each entropy source used by the TSF._
 +
-_Hardware-based noise sources are entropy sources whose primary function is noise generation, such as ring oscillators, diodes, and thermal noise. While a TOE may use software to collect the noise from these hardware sources, these are not software-based. Software-based noise sources are those sources that have some other primary function, and the noise is a byproduct of their normal operation. Examples of software-based noise sources are user or system-based events, reading the least significant bits from an event timer, etc._
+_Hardware-based entropy sources are entropy sources whose primary function is entropy generation, such as ring oscillators, diodes, and thermal entropy. While a TOE may use software to collect the entropy from these hardware sources, these are not software-based. Software-based entropy sources are those sources that have some other primary function, and the entropy is a byproduct of their normal operation. Examples of software-based entropy sources are user or system-based events, reading the least significant bits from an event timer, etc._
 +
-_Hardware-based noise sources may be stochastically modelled, in which case the amount of entropy is well understood. Software-based noise sources are usually less well understood and therefore will typically take a more conservative approach, gathering larger numbers of bits than required, then performing a compression function to derive the final output. Software-based noise sources often rely on an entropy estimator._
+_Hardware-based entropy sources may be stochastically modelled, in which case the amount of entropy is well understood. Software-based entropy sources are usually less well understood and therefore will typically take a more conservative approach, gathering larger numbers of bits than required, then performing a compression function to derive the final output. Software-based entropy sources often rely on an entropy estimator._
 
 ==== FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
 
 FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
 
-FCS_RBG.4.1:: The TSF shall be able to seed the RBG using [selection: _[assignment: number] TSF software-based noise source(s), [assignment: number] TSF hardware-based noise source(s)_].
+FCS_RBG.4.1:: The TSF shall be able to seed the DRBG using [selection: _[assignment: number] TSF software-based entropy source(s), [assignment: number] TSF hardware-based entropy source(s)_].
 
-==== FCS_RBG.5 Random Bit Generation (Combining Noise Sources)
+==== FCS_RBG.5 Random Bit Generation (Combining Entropy Sources)
 
-FCS_RBG.5 Random Bit Generation (Combining Noise Sources)
+FCS_RBG.5 Random Bit Generation (Combining Entropy Sources)
 
-FCS_RBG.5.1:: The TSF shall {empty}[*selection*: _[.underline]#hash, concatenate and hash, xor, input into a linear feedback shift register, [assignment: combining operation]#_] [selection: _output from TSF noise source(s), input from TSF interface(s) for seeding_] to create the entropy input into the derivation function as defined in {empty}[*selection*: _[.underline]#ISO/IEC 18031: 2011, NIST SP 800-90A Rev. 1#_], resulting in a minimum of [assignment: _number of bits_] bits of min-entropy. 
+FCS_RBG.5.1:: The TSF shall {empty}[*selection*: _[.underline]#hash, concatenate and hash, xor, input into a linear feedback shift register, [assignment: combining operation]#_] [selection: _output from TSF entropy source(s), input from TSF interface(s) for obtaining entropy_] resulting in a minimum of [assignment: _number of bits_] bits of min-entropy to create the entropy input into the derivation function as defined in {empty}[*selection*: _[.underline]#ISO/IEC 18031: 2011, NIST SP 800-90A Rev. 1#_]. 
 
-_Application Note {counter:remark_count}_:: _One can apply NIST SP 800-90B (or AIS-31) statistical tests against internal noise sources (a.k.a. raw entropy) to confirm the min-entropy of the noise sources either in aggregate or individually. One should not apply NIST SP 800-90B (or AIS-31) statistical tests against external noise sources since the TOE is unable to enforce entropy requirements or conditioning requirements against external sources of entropy. However, the TSS may include estimates for min-entropy from external sources that contribute to the overall entropy requirements for either the DRBG or for FCS_OTV_EXT.1._
+_Application Note {counter:remark_count}_:: _One can apply NIST SP 800-90B (or AIS-31) statistical tests against internal entropy sources (a.k.a. raw entropy) to confirm the min-entropy of the entropy sources either in aggregate or individually. One should not apply NIST SP 800-90B (or AIS-31) statistical tests against external entropy sources since the TOE is unable to enforce entropy requirements or conditioning requirements against external sources of entropy. However, the TSS may include estimates for min-entropy from external sources that contribute to the overall entropy requirements for either the DRBG or for FCS_OTV_EXT.1._
 +
 _FCS_RBG.5 specifies the combining operation such that the combined min-entropy of all the internal sources and the estimated entropy of the external sources is greater than or equal to the desired entropy of the output of the combining operation. The output could be used as a nonce, or a seed for a DRBG. The combining operation should avoid crushing the entropy of the sources such that the desired entropy of the output cannot be met._
 +
@@ -2392,7 +2393,7 @@ _The TSF interface(s) for seeding here is the interface used to gather entropy f
 
 FCS_RBG.6 Random Bit Generation Service
 
-FCS_RBG.6.1:: The TSF shall provide a [selection: _hardware, software, [assignment: other interface type]_] interface to make the RBG output, as specified in FCS_RBG.1 Random Bit Generation (RBG), available as a service to entities outside of the TOE.
+FCS_RBG.6.1:: The TSF shall provide a [selection: _hardware, software, [assignment: other interface type]_] interface to make the DRBG output, as specified in FCS_RBG.1 Random Bit Generation (RBG), available as a service to entities outside of the TOE.
 
 === Protection of the TSF
 ==== FPT_ITT.1 Basic Internal TSF Data Transfer Protection
@@ -2519,8 +2520,6 @@ NIST SP 800-56A Rev. 3 (Section 5.6.1.1.4) [key pair generation]
 
 _Application Note {counter:remark_count}_:: _For RSA the choice of the modulus implies the resulting key sizes of the public and private keys generated using the specified standard methods._
 +
-_For Finite Field Cryptography (FFC) DSA, PP authors should consult schemes for guidelines on use. FIPS PUB 186-5 does not approve DSA for digital signature generation but allows DSA for digital signature verification for legacy purposes._
-+
 _When generating ECC key pairs for key establishment, choose NIST SP 800-56A Section 5.6.1.2.1 or 5.6.1.2.2. When generating ECC key pairs for digital signature generation, choose NIST FIPS PUB 186-5 Section A.2.1 or A.2.2. The intended security strengths for elliptic curves P-224, B-233, and K-233 is 112 bits, for P-256, brainpoolP256r1, Edwards25519, B-283, and K-283 is 128 bits, for P-384 and brainpoolP384r1 is 192 bits, for Edwards448 is 224, and for P-521 and brainpool512r1 is 256 bits. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
 +
 _When generating EdDSA key pairs for digital signatures, choose NIST FIPS PUB 186-5 Section A.2.3. The chosen domain parameters determine the size of the private keys and the public keys._
@@ -2559,7 +2558,7 @@ _See FCS_RBG.1 for requirements about appropriate entropy for selected cryptogra
 
 FCS_CKM_EXT.3 Cryptographic Key Access
 
-FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [selection: _key encapsulation, key wrapping, key encryption_] to access keys when performing [selection: _cryptographic key usage in cryptographic operations, cryptographic key storage, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
+FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [selection: _key encapsulation as specified in FCS_COP.1/KeyEncap, key wrapping as specified in FCS_COP.1/KeyWrap, key wrapping as specified in FCS_COP.1/AEAD_] to access keys when performing [selection: _cryptographic key usage in cryptographic operations, cryptographic key storage, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
 
 ==== FCS_CKM.5 Cryptographic Key Derivation
 
@@ -2864,7 +2863,7 @@ FIA_AFL_EXT.2 Authorization Failure Response
 
 FIA_AFL_EXT.2.1:: When the TSF locks an *SDO* (i.e. prevents authorization attempts for an *SDO*) due to a user exceeding the allowed threshold for unsuccessful authorization attempts, then only an administrator may unlock access to the *SDO* and reset the corresponding failed authorization attempt counter.
 
-_Application Note {counter:remark_count}_:: _This SFR is applicable only when the TSF's response to excessive authorization failures selects [.underline]#prevent all future authorization attempts indefinitely (i.e., lock)# as specified by FIA_AFL_EXT.1.3._
+_Application Note {counter:remark_count}_:: _This SFR is applicable only when the TSF's response to excessive authorization failures selects [.underline]#prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2# as specified by FIA_AFL_EXT.1.3._
 
 === Protection of the TSF
 ==== FPT_FLS.1/FW Failure with Preservation of Secure State (Firmware)
@@ -3107,15 +3106,14 @@ There are no auditable events foreseen.
 [horizontal]
 Hierarchical to:: No other components.
 
-Dependencies:: [FDP_ITC.1 Import of user data without security attributes, or +
-FDP_ITC.2 Import of user data with security attributes, or +
-FCS_CKM.1 Cryptographic key generation, or +
+Dependencies:: [FCS_CKM.1 Cryptographic key generation, or +
 FCS_CKM.5 Cryptographic key derivation, or +
 FCS_CKM_EXT.8 Password-based key derivation] +
 FCS_CKM.6 Timing and event of cryptographic key destruction, +
 [FCS_COP.1/KeyEncap Cryptographic Operation (Key Encapsulation), or +
 FCS_COP.1/KeyWrap Cryptographic Operation (Key Wrap), or +
-FCS_COP.1/SKC Cryptographic Operation (Symmetric-Key Cryptography)]
+FCS_COP.1/SKC Cryptographic Operation (Symmetric-Key Cryptography), or +
+FCS_COP.1/AEAD Authenticated Encryption with Associated Data]
 
 [vertical]
 FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [selection: _key encapsulation, key wrapping, key encryption_] to access keys when performing [selection: _cryptographic key usage in cryptographic operations, cryptographic key storage, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
@@ -3140,10 +3138,7 @@ FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from
 [horizontal]
 Hierarchical to:: No other components.
 
-Dependencies:: [FDP_ITC.1 Import of user data without security attributes, or +
-FDP_ITC.2 Import of user data with security attributes] +
-[FCS_CKM.2 Cryptographic key distribution, or +
-FCS_COP.1 Cryptographic operation, or +
+Dependencies:: [FCS_CKM.2 Cryptographic key distribution, or +
 FCS_CKM_EXT.7 Cryptographic Key Agreement] +
 FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash) +
 FCS_CKM.6 Timing and event of cryptographic key destruction 
@@ -4008,8 +4003,6 @@ More specifically, all entropy source health tests and their rationale will be d
 [appendix]
 == SFR Dependencies Analysis
 
-The dependencies between SFRs implemented by the TOE are addressed as follows.
-
 .SFR Dependencies Rationale for Mandatory SFRs
 [cols=".^1,.^2,.^3",options="header"]
 |===
@@ -4019,141 +4012,253 @@ The dependencies between SFRs implemented by the TOE are addressed as follows.
 |Rationale Statement
 
 |FCS_CKM.1 
-|[FCS_CKM.2, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_COP.1] 
+|[FCS_CKM.1/AKG, FCS_CKM.1/SKG, FCS_CKM.2, FCS_CKM.5, FCS_CKM_EXT.7, FCS_CKM_EXT.8 or FCS_COP.1] 
 
 [FCS_RBG.1 or FCS_RNG.1]
 
-FCS_CKM.6 
-|FCS_CKM.2, FCS_CKM.6, FCS_CKM_EXT.7, FCS_COP.1 and FCS_RBG.1 are required by the PP.
+FCS_CKM.6
+|FCS_CKM.1/AKG - (selection-based SFR) included
+
+FCS_CKM.1/SKG - (selection-based SFR) included
+
+FCS_CKM.2 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_COP.1 - included
+
+FCS_RBG.1 - included
+
+FCS_RNG.1 is satisfied by FCS_RBG.1 - included
+
+FCS_CKM.6 - included
 
 |FCS_CKM.2
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1 or FCS_CKM.5] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5 or FCS_COP.1] 
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
 
-|FCS_CKM.1 is required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
 
-|FCS_CKM_EXT.7 
-|[FDP_ITC.1, FDP_ITC.2, or FCS_CKM.1] 
+FCS_CKM.1 - included
 
-FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_COP.1/KeyEncap - (selection-based SFR) included
+
+FCS_COP.1/KeyWrap - (selection-based SFR) included
+
+FCS_COP.1/AEAD - (selection-based SFR) included
 
 |FCS_CKM.6 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
-|FCS_CKM.1 is required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1 or FCS_CKM.5] 
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+|FCS_CKM_EXT.7 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.8]
+
+[FCS_CKM.2 or FCS_COP.1]
+
+FCS_CKM.6 
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.2 - included
+
+FCS_COP.1 - included
+
+FCS_CKM.6 - included
 
 |FCS_COP.1/Hash 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
-
-FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|No dependencies.
+|There are no keys involved with hashing, so no cryptograhpic key-based dependencies are necessary.
 
 |FCS_COP.1/KeyedHash 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8] 
 
 FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
 
-|FCS_COP.1/KeyWrap
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
 
-FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
 
 |FCS_COP.1/SigGen 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1/AKG, or FCS_CKM.5] 
 
 FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1/AKG - (selection-based SFR) included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM.6 - included
 
 |FCS_COP.1/SigVer 
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
 
 FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM.6 - included
 
 |FCS_COP.1/SKC 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8] 
 
 FCS_CKM.6 
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+
+FCS_OTV_EXT.1
+|FDP_ITC_EXT.1 satisfies FDP_ITC.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC_EXT.2 satisfies FDP_ITC.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
+
+FCS_OTV_EXT.1 - included
 
 |FCS_RBG.1 
-|FCS_COP.1 
-|FCS_COP.1 is required by the PP.
+|[FCS_RBG.2 or FCS_RBG.3]
+
+FPT_FLS.1
+
+FPT_TST.1
+
+|FCS_RBG.2 - (optional SFR) included
+
+FCS_RBG.3 - (optional SFR) included
+
+FPT_FLS.1 - included
+
+FPT_TST.1 - included
 
 |FCS_OTV_EXT.1 
 |FCS_RBG.1 
-|FCS_RBG.1 is required by the PP.
+|FCS_RBG.1 - included
 
 |FCS_STG_EXT.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FDP_ACC.1 
 |FDP_ACF.1 
-|FDP_ACF.1 is required by the PP.
+|FDP_ACF.1 - included
 
 |FDP_ACF.1 
 |FDP_ACC.1 
 
 FMT_MSA.3
-|FDP_ACC.1 and FMT_MSA.3 are required by the PP.
+|FDP_ACC.1 - included
+
+FMT_MSA.3 - included
 
 |FDP_ETC_EXT.2 
 |FCS_COP.1 
-|FCS_COP.1 is required by the PP.
+|FCS_COP.1 - included
 
 |FDP_FRS_EXT.1 
 |FDP_FRS_EXT.2 
-|FDP_FRS_EXT.2 is an optional SFR in the PP. It does not need to be required because the PP's definition of FDP_FRS_EXT.1 allows the ST author to specify that no factory reset is possible, in which case the behavior described by FDP_FRS_EXT.2 is not triggered.
+|FDP_FRS_EXT.2 - (selection-based SFR) included
 
 |FDP_ITC_EXT.1 
 |FCS_COP.1 
 
 [FTP_ITC_EXT.1, FTP_ITE_EXT.1, or FTP_ITP_EXT.1] 
-|FCS_COP.1 is required by the PP. FTP_ITC_EXT.1, FTP_ITE_EXT.1, and FTP_ITP_EXT.1 are each selection-based SFRs in the PP but the PP's definition of FDP_ITC_EXT.1 requires at least one of them to be selected so the dependency is always addressed.
+|FCS_COP.1 - included
+
+FTP_ITC_EXT.1 - (selection-based SFR) included
+
+FTP_ITE_EXT.1 - (selection-based SFR) included
+
+FTP_ITP_EXT.1 - (selection-based SFR) included
 
 |FDP_ITC_EXT.2 
 |FCS_COP.1 
 
 [FTP_ITC_EXT.1, FTP_ITE_EXT.1, or FTP_ITP_EXT.1] 
-|FCS_COP.1 is required by the PP. FTP_ITC_EXT.1, FTP_ITE_EXT.1, and FTP_ITP_EXT.1 are each selection-based SFRs in the PP but the PP's definition of FDP_ITC_EXT.1 requires at least one of them to be selected so the dependency is always addressed.
+|FCS_COP.1 - included
+
+FTP_ITC_EXT.1 - (selection-based SFR) included
+
+FTP_ITE_EXT.1 - (selection-based SFR) included
+
+FTP_ITP_EXT.1 - (selection-based SFR) included
 
 |FDP_RIP.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FDP_SDC.2 
 |FCS_COP.1
-|FCS_COP.1 is required by this PP.
+|FCS_COP.1 - included
 
 |FDP_SDI.2 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FIA_AFL_EXT.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FIA_SOS.2 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FIA_UAU.2 
 |FIA_UID.1 
-|This dependency is not present in the PP because all of the methods used to access the TSF (physically protected channels, encrypted data buffers, or cryptographically protected data channels) all implicitly identify the subject that is attempting to authenticate to the TOE. Therefore, it is not necessary to include a separate SFR that requires subjects to be identified.
+|This dependency is not present in the PP because all of the methods used to access the TSF (physically protected channels, encrypted data buffers, or cryptographically protected data channels) all implicitly identify the subject that is attempting to authenticate to the TOE.
 
 |FIA_UAU.5 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FIA_UAU.6 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FMT_MOF_EXT.1 
 |FMT_SMF.1 
-|FMT_SMF.1 is required by this PP.
+|FMT_SMF.1 - included
 
 |FMT_MSA.1 
 |[FDP_ACC.1 or FDP_IFC.1] 
@@ -4161,24 +4266,30 @@ FMT_MSA.3
 FMT_SMR.1 
 
 FMT_SMF.1 
-|FDP_ACC.1, FMT_SMF.1 and FMT_SMR.1 are required by the PP.
+|FDP_ACC.1 - included
+
+FMT_SMF.1 - included
+
+FMT_SMR.1 - included
 
 |FMT_MSA.3 
 |FMT_MSA.1 
 
 FMT_SMR.1 
-|FMT_MSA.1 and FMT_SMR.1 are required by the PP.
+|FMT_MSA.1 - included
+
+FMT_SMR.1 - included
 
 |FMT_SMF.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FMT_SMR.1 
 |FIA_UID.1 
-|This dependency is not present in the PP because all of the methods used to access the TSF (physically protected channels, encrypted data buffers, or cryptographically protected data channels) all implicitly identify the subject that is attempting to authenticate to the TOE. Therefore, it is not necessary to include a separate SFR that requires subjects to be identified.
+|This dependency is not present in the PP because all of the methods used to access the TSF (physically protected channels, encrypted data buffers, or cryptographically protected data channels) all implicitly identify the subject that is attempting to authenticate to the TOE.
 
 |FPT_FLS.1/FI 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_MFW_EXT.1
@@ -4186,36 +4297,36 @@ FMT_SMR.1
 |N/A
 
 |FPT_MOD_EXT.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_PHP.3 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_PRO_EXT.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_ROT_EXT.1 
 |FPT_PRO_EXT.1 
-|FPT_PRO_EXT.1 is required by this PP.
+|FPT_PRO_EXT.1 - included
 
 |FPT_ROT_EXT.2 
 |FPT_PRO_EXT.1 
-|FPT_PRO_EXT.1 is required by this PP.
+|FPT_PRO_EXT.1 - included
 
 |FPT_RPL.1/Authorization
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_TST.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FRU_FLT.1 
 |FPT_FLS.1 
-|FPT_FLS.1 (as FPT_FLS.1/FI) is required by the PP.
+|FPT_FLS.1/FI - included
 
 |===
 
@@ -4229,34 +4340,42 @@ FMT_SMR.1
 
 |FCS_RBG.2 
 |FCS_RBG.1 
-|FCS_RBG.1 is required by this PP.
+|FCS_RBG.1 - included
 
 |FCS_RBG.3 
 |FCS_RBG.1 
-|FCS_RBG.1 is required by this PP.
+|FCS_RBG.1 - included
 
 |FCS_RBG.4 
 |FCS_RBG.1
 
 FCS_RBG.5 
-|FCS_RBG.1 is required by this PP. FCS_RBG.5 is required when combining multiple entropy sources.
+|FCS_RBG.1 - included
+
+FCS_RBG.5 - (optional SFR) included
 
 |FCS_RBG.5
 |FCS_RBG.1
 
 [FCS_RBG.2 or FCS_RBG.3 or RCS_RBG.4]
-|FCS_RBG.1 is required by this PP. A second source is required for combining sources of entropy.
+|FCS_RBG.1 - included
+
+FCS_RBG.2 - (optional SFR) included
+
+FCS_RBG.3 - (optional SFR) included
+
+FCS_RBG.4 - (optional SFR) included
 
 |FCS_RBG.6 
 |FCS_RBG.1 
-|FCS_RBG.1 is required by this PP.
+|FCS_RBG.1 - included
 
 |FPT_ITT.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_PRO_EXT.2 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_ROT_EXT.3 
@@ -4265,7 +4384,11 @@ FCS_RBG.5
 FPT_PRO_EXT.1 
 
 FPT_ROT_EXT.1 
-|All of FCS_COP.1, FPT_PRO_EXT.1, and FPT_ROT_EXT.1 are required by this PP.
+|FCS_COP.1- included
+
+FPT_PRO_EXT.1 - included
+
+FPT_ROT_EXT.1 - included
 
 |===
 
@@ -4279,97 +4402,230 @@ FPT_ROT_EXT.1
 |Rationale Statement
 
 |FCS_CKM.1/AKG 
-|[FCS_CKM_EXT.7 or FCS_COP.1] 
+|[FCS_CKM.2, FCS_CKM.5 or FCS_COP.1]
+
+[FCS_RBG.1 or FCS_RNG.1]
 
 FCS_CKM.6 
-|All of FCS_CKM_EXT.7, FCS_CKM.6, and FCS_COP.1 are required by the PP.
+|FCS_CKM.2 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_COP.1 - included
+
+FCS_RBG.1 - included
+
+FCS_RNG.1 is satisfied by FCS_RBG.1 - included
+
+FCS_CKM.6 - included
 
 |FCS_CKM.1/SKG 
-|[FCS_CKM_EXT.7 or FCS_COP.1] 
+|[FCS_CKM.2, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_COP.1]
+
+[FCS_RBG.1 or FCS_RNG.1]
 
 FCS_CKM.6 
-|All of FCS_CKM_EXT.7, FCS_CKM.6, and FCS_COP.1 are required by the PP.
+|FCS_CKM.2 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_COP.1 - included
+
+FCS_RBG.1 - included
+
+FCS_RNG.1 is satisfied by FCS_RBG.1 - included
+
+FCS_CKM.6 - included
+
+|FCS_CKM_EXT.3 
+|[FCS_CKM.1, FCS_CKM.5 or FCS_CKM_EXT.8]
+
+[FCS_COP.1/KeyEncap, FCS_COP.1/KeyWrap, FCS_COP.1/SKC or FCS_COP.1/AEAD]
+
+FCS_CKM.6 
+|FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_COP.1/KeyEncap - (selection-based SFR) included
+
+FCS_COP.1/KeyWrap - (selection-based SFR) included
+
+FCS_COP.1/SKC - included
+
+FCS_COP.1/AEAD - (selection-based SFR) included
+
+FCS_CKM.6 - included
 
 |FCS_CKM.5 
-|FCS_CKM.1 
+|FCS_CKM.2
 
 FCS_COP.1 
 
-FDP_SDC.2 
-|All of FCS_CKM.1, FCS_COP.1, and FDP_SDC.2 are required by the PP.
+FCS_CKM.6
+|FCS_CKM.2 - included
+
+FCS_COP.1 - included
+
+FCS_CKM.6 - included
 
 |FCS_CKM_EXT.8 
-|[FDP_ITC.1, FDP_ITC.2] 
-
-[FCS_CKM.2 or FCS_COP.1 or FCS_CKM_EXT.7]
+|[FCS_CKM.2 or FCS_CKM_EXT.7]
 
 FCS_COP.1/KeyedHash
 
 FCS_CKM.6 
-|FCS_CKM.1/KeyedHash and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|FCS_CKM.2 - included
+
+FCS_CKM_EXT.7 - included
+
+FCS_COP.1/KeyedHash - included
+
+FCS_CKM.6 - included
 
 |FCS_COP.1/AEAD
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, FCS_CKM_EXT.8]
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8]
 
 FCS_CKM.6
 
 FCS_OTV_EXT.1
-|FCS_CKM.1 and FCS_CKM.6 are required by the PP. FDP_ITC_EXT.1 and FDP_ITC_EXT.2 are also required by the PP and equivalent to FDP_ITC.1 in this case because they all relate to a mechanism by which key data can be imported into the TSF.
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
+
+FCS_OTV_EXT.1 - included
+
+|FCS_COP.1/CMAC
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8]
+
+FCS_CKM.6
+
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
+
+|FCS_COP.1/KeyEncap
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
+
+FCS_CKM.6 
+
+FCS_OTV_EXT.1
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
+
+FCS_OTV_EXT.1 - included
+
+|FCS_COP.1/KeyWrap
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
+
+FCS_CKM.6 
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
 
 |FDP_DAU.1/Prove 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FDP_FRS_EXT.2 
 |FDP_FRS_EXT.1 
-|FDP_FRS_EXT.1 is required by the PP.
+|FDP_FRS_EXT.1 - included
 
 |FIA_AFL_EXT.2
 |FIA_AFL_EXT.1
-|FIA_AFL_EXT.1 is required by the PP.
+|FIA_AFL_EXT.1 - included
 
 |FPT_FLS.1/FW
-|No dependencies.
+|No dependencies
 |N/A
 
 |FPT_MFW_EXT.2 
 |FPT_MFW_EXT.1 
 
-FCS_COP.1 
-|FPT_MFW_EXT.1 and FCS_COP.1 are required by the PP.
+FCS_COP.1
+|FPT_MFW_EXT.1 - included
+
+FCS_COP.1 - included
 
 |FPT_MFW_EXT.3 
 |FPT_MFW_EXT.1 
 
 FCS_COP.1 
-|FPT_MFW_EXT.1 and FCS_COP.1 are required by the PP.
+|FPT_MFW_EXT.1 - included
+
+FCS_COP.1 - included
 
 |FPT_RPL.1/Rollback 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |FPT_STM_EXT.1
-|No dependencies.
+|No dependencies
 |N/A
 
 |FTP_CCMP_EXT.1 
 |FCS_COP.1 
-|FCS_COP.1 is required by the PP.
+|FCS_COP.1 - included
 
 |FTP_GCMP_EXT.1 
 |FCS_COP.1 
-|FCS_COP.1 is required by the PP.
+|FCS_COP.1 - included
 
 |FTP_ITC_EXT.1 
 |FCS_COP.1 
-|FCS_COP.1 is required by the PP.
+|FCS_COP.1 - included
 
 |FTP_ITE_EXT.1 
 |FCS_COP.1 
-|FCS_COP.1 is required by the PP.
+|FCS_COP.1 - included
 
 |FTP_ITP_EXT.1 
-|No dependencies. 
+|No dependencies
 |N/A
 
 |===
@@ -4465,7 +4721,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_RBG.4 !FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
 
-!FCS_RBG.5 !Random Bit Generation (Combining Noise Sources)
+!FCS_RBG.5 !Random Bit Generation (Combining Entropy Sources)
 
 !FCS_CKM.1/SKG !Cryptographic key generation - Symmetric Key
 
@@ -4593,7 +4849,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_RBG.4 !FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
 
-!FCS_RBG.5 !Random Bit Generation (Combining Noise Sources)
+!FCS_RBG.5 !Random Bit Generation (Combining Entropy Sources)
 
 !FPT_ROT_EXT.3 !Root of Trust for Reporting Mechanisms
 
@@ -4637,7 +4893,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_RBG.4 !FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
 
-!FCS_RBG.5 !Random Bit Generation (Combining Noise Sources)
+!FCS_RBG.5 !Random Bit Generation (Combining Entropy Sources)
 
 !FPT_ITT.1 !Basic Internal TSF Data Transfer Protection
 
@@ -4669,7 +4925,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_RBG.4 !FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
 
-!FCS_RBG.5 !Random Bit Generation (Combining Noise Sources)
+!FCS_RBG.5 !Random Bit Generation (Combining Entropy Sources)
 
 !FDP_FRS_EXT.2 !Factory Reset Behavior
 
@@ -4918,6 +5174,9 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 |GCM 
 |Galois Counter Mode
+
+|GCMP
+|GCM Protocol
 
 |HMAC 
 |Keyed-Hash Message Authentication Code
