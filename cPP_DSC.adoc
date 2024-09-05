@@ -2558,7 +2558,7 @@ _See FCS_RBG.1 for requirements about appropriate entropy for selected cryptogra
 
 FCS_CKM_EXT.3 Cryptographic Key Access
 
-FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [selection: _key encapsulation, key wrapping, key encryption_] to access keys when performing [selection: _cryptographic key usage in cryptographic operations, cryptographic key storage, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
+FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [selection: _key encapsulation as specified in FCS_COP.1/KeyEncap, key wrapping as specified in FCS_COP.1/KeyWrap, key wrapping as specified in FCS_COP.1/AEAD_] to access keys when performing [selection: _cryptographic key usage in cryptographic operations, cryptographic key storage, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
 
 ==== FCS_CKM.5 Cryptographic Key Derivation
 

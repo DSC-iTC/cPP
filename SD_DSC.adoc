@@ -2568,9 +2568,22 @@ The evaluator shall examine the KMD to ensure that:
 ==== Cryptographic Key Management (Extended - FCS_CKM_EXT)
 
 ===== FCS_CKM_EXT.3 Cryptograhpic Key Access
-[IMPORTANT]
-This is new
 
+====== TSS
+
+The evaluator shall verify that for each key selected cryptograhpic method the ST contains the corresponding SFR. The evaluator shall ensure the key access operations which utilize the specified cryptographic methods. Where multiple methods may be selected, the evaluator shall verify that each method's usage is described.
+
+===== AGD
+
+There are no guidance evaluation activities for this component.
+
+===== Test
+
+Testing for this SFR is performed under the corresponding functions based on the selection(s) made in the ST.
+
+===== KMD
+
+The developer is allowed to provide additional details of the key access operations and cryptographic methods in the KMD. The evaluator shall verify the accuracy of any additional descriptions (if present).
 ==== Cryptographic Operation (FCS_COP)
 
 ===== FCS_COP.1/CMAC Cryptographic Operation (CMAC)
