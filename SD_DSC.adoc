@@ -2098,6 +2098,10 @@ For each test case in each test group, the evaluator shall verify that the TSF g
 
 The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
+====== KMD
+
+There are no KMD evaluation activities for this component.
+
 ==== Cryptographic Operation (FCS_COP)
 
 ===== FCS_COP.1/AEAD Cryptographic Operation (Authenticated Encryption with Associated Data)
