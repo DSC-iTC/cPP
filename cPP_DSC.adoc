@@ -693,28 +693,28 @@ _This SFR does not apply to the public component of asymmetric key pairs or to k
 
 FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material specified by FCS_CKM.6.1 in accordance with a specified cryptographic key destruction method [.underline]#[*selection*:#
 
-. [.underline]#For volatile memory, the destruction shall be executed by a [*selection*:# 
-.. [.underline]#single overwrite consisting of [*selection*:# 
+. [.underline]#For volatile memory, the destruction shall be executed by a [*selection*:#
+.. [.underline]#single overwrite consisting of [*selection*:#
 ... [.underline]#a pseudo-random pattern using the TSF's RBG,#
 ... [.underline]#zeroes,#
 ... [.underline]#ones,#
 ... [.underline]#a new value of a key,#
 ... [.underline]#[*_assignment*: some value that does not contain any CSP_]],#
-.. [.underline]#removal of power to the memory,#
-.. [.underline]#removal of all references to the key directly followed by a request for garbage collection];#
+.. [.underline]#removal of power to the memory, if that can be done reliably,#
+.. [.underline]#removal of all references to the key directly followed by a request for garbage collection that includes the immediate erasure of the collected data objects];#
 . [.underline]#For non-volatile memory [*selection*:#
 .. [.underline]#that employs a wear-leveling algorithm, the destruction shall be executed by a [*selection*:#
-... [.underline]#single overwrite consisting of [*selection*: zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any CSP_]],# 
-... [.underline]#block erase];#
+... [.underline]#overwrite of the block containing the key with data consisting of [*selection*: zeroes, ones, pseudo-random pattern, [*_assignment*: some value that does not contain any CSP_] using a method that meets the requirements of FDP_RIP.1, followed by a read-verify operation on the overwritten block (See the Application Note)],#
+... [.underline]#erasure of all logical blocks in the memory device (all physical blocks except the index blocks, if they can be reliably identified) followed by a read-verify operation on all logical blocks];#
 .. [.underline]#that does not employ a wear-leveling algorithm, the destruction shall be executed by a [*selection*:#
-... [.underline]#[*selection*: single, [*_assignment:* ST author defined multi-pass_]] overwrite consisting of [*selection*: zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any CSP_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated again up to [*_assignment:* number of times to attempt overwrite_] times, whereupon an error is returned.#
-... [.underline]#block erase]#
+... [.underline]#[*selection*: single, [*_assignment*: ST author defined multi-pass_]] overwrite consisting of [*selection*: zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment*: some value that does not contain any CSP_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated up to [*_assignment*: number of times to attempt overwrite_] times, whereupon an error is returned.#
+... [.underline]#block erase followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated up to [*_assignment*: number of times to attempt overwrite_] times, whereupon an error is returned.]#
 +
 ]] that meets the following: [_no standard_].
 
 _Application Note {counter:remark_count}_:: _In the case of volatile memory, the selection "removal of all references to the key directly followed by a request for garbage collection" is used in a situation where the TSF cannot address the specific physical memory locations holding the data to be erased and therefore relies on addressing logical addresses (which frees the relevant physical addresses holding the old data) and then requesting the platform to ensure that the data in the physical addresses is no longer available for reading (i.e. the "garbage collection" referred to in the SFR text)._
 +
-_The selection for destruction of data in non-volatile memory includes block erase as an option, and this option applies only to flash memory. A block erase does not require a read verify, since the mappings of logical addresses to the erased memory locations are erased as well as the data itself._
+_In the case of wear-leveled non-volatile memory, the entire memory must be erased when a key is deleted unless the TOE has an erasure mechanism that meets FDP_RIP.1 and the vendor provides a rationale that the TOE uses it in a conformant way.  FDP_RIP.1 requires that keys not remain in unallocated memory after a key delete operation, a capability that wear-leveled non-volatile memory normally does not provide._
 +
 _Some selections allow assignment of "some value that does not contain any CSP." This means that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG requirements, and not being any of the particular values listed as other selection options. The point of the phrase "does not contain any sensitive data" is to ensure that the overwritten data is carefully selected, and not taken from a general pool that might contain data that itself requires confidentiality protection._
 
