@@ -1994,7 +1994,7 @@ If [.underline]#Concatenated key5# is selected for any key derivation function, 
 
 [conditional] If a KDF is used to form a KEK, the evaluator shall ensure that the TSS includes a description of the key derivation function and shall verify the key derivation uses an approved derivation mode and key expansion algorithm according to SP 800-108 Rev. 1 or SP 800-56C Rev. 2.
 
-[conditional] If key concatenation is used to derive KEKs, the evaluator shall ensure the TSS includes a description of the randomness extraction step, including the following:
+[conditional] If [.underline]#KDF-MAC-2S# is selected, the evaluator shall ensure the TSS includes a description of the randomness extraction step, including the following:
 
 * The description must include how an approved untruncated MAC function is being used for the randomness extraction step and the evaluator must verify the TSS describes that the output length (in bits) of the MAC function is at least as large as the targeted security strength (in bits) of the parameter set employed by the key establishment scheme (see Tables 1-3 of SP 800-56C Rev. 2).
 * The description must include how the MAC function being used for the randomness extraction step is related to the PRF used in the key expansion and verify the TSS description includes the correct MAC function:
