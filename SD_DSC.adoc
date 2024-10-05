@@ -1145,7 +1145,7 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-Testing for FCS_CKM.4 is sufficient to address this component.
+Testing for FCS_CKM.6 is sufficient to address this component.
 
 ====== KMD
 
