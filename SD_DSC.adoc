@@ -1703,28 +1703,6 @@ There are no KMD evaluation activities for this component.
 
 == Evaluation Activities for Optional Requirements 
 
-=== Cryptographic Support (FCS)
-
-==== Entropy for External IT Entities (Extended - FCS_ENT_EXT)
-
-===== FCS_ENT_EXT.1 Entropy for External IT Entities
-
-====== TSS
-
-The evaluator shall verify that the TSS identifies one or more APIs to obtain entropy data from the TOE.
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-The evaluator shall develop and execute or verify and observe the developer tooling which requests entropy data from the TSF. The evaluator shall verify that the results from the operation match the expected results according to the API documentation. The evaluator shall also test the entropy data using the Entropy Analysis Report requirements to determine that the entropy is of comparable quality (in terms of min-entropy estimate) to what is documented in the report.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
 ==== Random Bit Generation (FCS_RBG)
 
 ===== FCS_RBG.2 Random Bit Generation (External Seeding)
