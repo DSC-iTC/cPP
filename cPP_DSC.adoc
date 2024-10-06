@@ -2157,7 +2157,7 @@ The following rationale provides justification for each security problem definit
 |This requirement ensures the use of strong random bit generation mechanisms.
 
 |FCS_OTV_EXT.1
-|This requirement ensures that salts and nonces used by the TOE do not negatively impact key strength.
+|This requirement ensures that one-time values used by the TOE do not negatively impact key strength.
 
 .10+|T.WEAK_CRYPTO
 |FPT_STM_EXT.1 
@@ -3150,7 +3150,7 @@ FCS_CKM_EXT.8.1:: The TSF shall perform password-based key derivation functions 
 
 *Family Behavior*
 
-This family defines requirements for salt and nonce usage.
+This family defines requirements for salt, nonce, and other one-time value usage.
 
 *Component Leveling*
 
@@ -3165,7 +3165,7 @@ This family defines requirements for salt and nonce usage.
     +--------------------------------------------+ 
 ....
 
-FCS_OTV_EXT.1 One-Time Value, requires the TSF to use salts and nonces that are created by the TOE's deterministic random bit generator.
+FCS_OTV_EXT.1 One-Time Value, requires the TSF to use salts, nonces, and other one-time values that are created by the TOE's deterministic random bit generator.
 
 *Management: FCS_OTV_EXT.1*
 

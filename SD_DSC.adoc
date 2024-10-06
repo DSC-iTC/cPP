@@ -919,7 +919,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall ensure the TSS describes how salts are generated using the RBG.
+The evaluator shall ensure the TSS describes how salts, nonces, and other one-time values are generated using the RBG.
 
 ====== AGD
 
@@ -927,7 +927,7 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-The evaluator shall confirm by testing that the salts obtained in the cryptographic operations that use the salts are of the length specified in FCS_SLT_EXT.1, are obtained from the RBG, and are fresh on each invocation.
+The evaluator shall confirm by testing that the one-time values used by cryptographic operations are of the length specified in FCS_OTV_EXT.1, are obtained from the RBG, and are fresh on each invocation.
 
 Note: in general these tests may be carried out as part of the tests of the relevant cryptographic operations. 
 
