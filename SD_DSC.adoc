@@ -1159,9 +1159,7 @@ There are no KMD evaluation activities for this component.
 
 The evaluator shall examine the TSS to determine that it describes the protection for SDEs and authorization data and the methods of protection (e.g. protected storage, symmetric encryption, key wrapping, etc.).
 
-The evaluator shall also examine the TSS to determine whether the TSF stores this data inside the TOE boundary or in its operational environment. If the TSF stores this data inside the TOE boundary, the evaluator shall ensure that TSF uses one of the listed methods to provide confidentiality. If the data is stored in the TOE's operational environment, the evaluator shall ensure that the TSF uses key wrapping to provide confidentiality.
-
-The evaluator shall examine the TSS to confirm it sufficiently describes each method used to provide confidentiality for SDEs. The evaluator shall also confirm that the TOE supports all encryption methods selected.
+The evaluator shall also examine the TSS to determine whether the TSF stores this data inside the TOE boundary or in its operational environment. The evaluator shall examine that the methods of protection used for the various SDEs and authorization data are specified based on where the data resides (inside or outside the TOE boundary), and that the protection method is appropariate to provide confidentiality.
 
 ====== AGD
 
@@ -1169,11 +1167,7 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-If the TOE stores SDEs and authorization data inside the TSF, the evaluator shall ensure that external interfaces cannot extract this data in plaintext. 
-
-In this case, use the evaluation activities of the FPT_PHP.3 if [.underline]#protected storage# is selected, FCS_COP.1/SKC if [.underline]#symmetric encryption using…# is selected, and FCS_COP.1/KeyWrap if [.underline]#key wrapping using…# is selected.
-
-If the TOE stores authentication data inside the operational environment, the evaluator shall ensure that plaintext data is not visible on the interface between the TOE and the operational environment.
+The tests for FCS_COP.1 (as applicable), FPT_PHP.3 and FCS_STG_EXT.1 shall suffice for this component.
 
 ====== KMD
 
