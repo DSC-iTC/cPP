@@ -3080,7 +3080,7 @@ This family defines requirements for key life cycle operations.
                                                     |  +---+
     +--------------------------------------------+  |
     |                                            |  |  +---+
-    | FCS_STG_EXT Cryptographic Key Storage      +--+->| 7 |
+    | FCS_CKM_EXT Cryptographic Key Storage      +--+->| 7 |
     |                                            |  |  +---+
     +--------------------------------------------+  |
                                                     |  +---+
