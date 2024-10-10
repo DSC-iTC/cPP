@@ -1377,13 +1377,13 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall confirm that the TSS describes the initialization process for importing and generating SDOs. The TSS shall describe each type of SDO.Type and any additional attributes that are beyond the ones listed. Additionally, list any further restrictions of the allowed values for the minimum list of attributes.
+The evaluator shall confirm that the TSS describes the initialization process for importing and generating SDOs. The TSS shall describe each type of SDO.Type and any additional attributes that are beyond the ones listed. In particular, it shall describe all attributes assigned to the SDO during parsing. Additionally, list any further restrictions of the allowed values for the minimum list of attributes.
 
 The evaluator shall confirm that the TSS describes the allowed values for each of the attributes.
 
 ====== AGD
 
-There are no AGD evaluation activities for this component.
+The evaluator shall confirm that the user guidance describes all attributes assigned by the TOE to any parsed SDOs.
 
 ====== Test
 
