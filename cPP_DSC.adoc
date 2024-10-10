@@ -1762,7 +1762,7 @@ _The SDO.Conf attribute indicates which SDEs, if any, the TOE should encrypt whe
 +
 _The SDO.Integrity attribute includes evidence that the TSF can use to protect and verify the integrity of the SDO._
 +
-_Attributes assigned by the TOE to any parsed SDOs must be described in the Security Target and in operational user guidance._
+_Attributes assigned by the TOE to any parsed SDOs must be described in the Security Target. Where attributes may be assigned by authorized roles, the information should also be described in operational user guidance._
 +
 _The TOE uses the Binding Data for an SDO to strongly link the SDO to the TOE, a parent SDO in a hierarchy, or to nothing at all. SDOs bound to nothing may freely travel from one TOE to another without restrictions. If bound to another SDO as a child to a parent in a hierarchy, it may travel only where the parent SDO travels. If bound to the TOE, it may travel to any other TOE for any reason, even if the TOE moves its parent to another TOE. Note that vendors will initialize attributes of pre-installed SDOs with default values. However, authorization values to change the attributes of pre-installed SDOs may differ from the authorization value required to use the pre-installed SDO._
 +

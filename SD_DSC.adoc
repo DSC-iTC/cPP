@@ -1383,7 +1383,7 @@ The evaluator shall confirm that the TSS describes the allowed values for each o
 
 ====== AGD
 
-The evaluator shall confirm that the user guidance describes all attributes assigned by the TOE to any parsed SDOs.
+When applicable, the evaluator shall confirm that the user guidance describes all attributes assigned by the TOE to any parsed SDOs.
 
 ====== Test
 
