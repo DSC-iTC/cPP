@@ -495,7 +495,7 @@ The evaluator shall examine the TSS to ensure it lists all relevant keys and key
 
 The evaluator shall check that the TSS identifies any configurations or circumstances that may not conform to the key destruction requirement (see further discussion in the AGD section below). Note that reference may be made to the AGD for description of the detail of such cases where destruction may be prevented or delayed. 
 
-Where the ST specifies the use of "a value that does not contain any sensitive data" to overwrite keys, the evaluator shall examine the TSS to ensure that it describes how that pattern is obtained and used, and that this justifies the claim that the pattern does not contain any sensitive data. 
+Where the ST specifies the use of "some value that does not contain any CSP" to overwrite keys, the evaluator shall examine the TSS to ensure that it describes how that pattern is obtained and used, and that this justifies the claim that the pattern does not contain any sensitive data.
 
 ====== AGD
 
