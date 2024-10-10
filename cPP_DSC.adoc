@@ -302,7 +302,7 @@ Security Attributes: The following list contains the minimum security attributes
 ** SDO.Type - SDO Type
 ** SDO.AuthData - SDO Reference authorization data
 ** SDO.Reauth - SDO re-authorization conditions
-** SDO.Conf - SDO Confidential SDE list
+** SDO.Conf - SDO confidential SDE list
 ** SDO.Export - SDO export flag
 ** SDO.Integrity - SDO integrity protection data
 ** SDO.Bind - SDO binding data
@@ -1489,7 +1489,7 @@ _Application Note {counter:remark_count}_:: _When an SDE is a key then it is als
 
 FDP_SDC.2 Stored data confidentiality with dedicated method
 
-FDP_SDC.2.1:: The TSF shall ensure the confidentiality of the [.underline]#[authorization data and the following user data [assignment: _list of internally and externally stored SDEs_]#] according to {empty}[assignment: [.underline]#_SDEs identified in the Confidential SDE List attribute of an SDO_#] while it is stored under the control of the TSF.
+FDP_SDC.2.1:: The TSF shall ensure the confidentiality of the [.underline]#[authorization data and the following user data [assignment: _list of internally and externally stored SDEs_]#] according to {empty}[assignment: [.underline]#_SDEs identified in the confidential SDE list attribute of an SDO_#] while it is stored under the control of the TSF.
 
 FDP_SDC.2.2:: The TSF shall ensure the confidentiality of the user data specified in FDP_SDC.2.1 without user intervention.
 
@@ -1643,10 +1643,10 @@ FMT_MSA.1.1:: The TSF shall enforce the [_Access Control SFP_] to restrict the a
 |[_selection_: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify re-authorization conditions
 
 |SDO.Conf 
-|[_selection_: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify confidential SDE-list
+|[_selection_: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify the confidential SDE list
 
 |SDO.Export 
-|[_selection_: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify export flag
+|[_selection_: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify the export flag
 
 |SDO.Integrity 
 |Cannot be modified by users (maintained automatically by TSF)
