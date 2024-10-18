@@ -663,14 +663,6 @@ FCS_CKM.1.1:: The TSF shall generate cryptographic keys in accordance with a spe
 ] [.line-through]#and specified cryptographic key sizes [_assignment: cryptographic key sizes_] that meet the following: [_assignment: list of standards_]#.
 
 _Application Note {counter:remark_count}_:: _Cryptographic keys can include KEKs that protect keys as well as the keys used to protect SDEs and SDOs. DSCs should use key strengths commensurate with protecting the chosen symmetric encryption key strengths._
-+
-_If [.underline]#Asymmetric keys generated in accordance with FCS_CKM.1/AKG# is selected, the selection-based SFR FCS_CKM.1/AKG must be claimed by the TOE._
-+
-_If [.underline]#Symmetric keys generated in accordance with FCS_CKM.1/SKG# is selected, the selection-based SFR FCS_CKM.1/SKG must be claimed by the TOE._
-+
-_If [.underline]#Derived keys generated in accordance with FCS_CKM.5# is selected, the selection-based SFR FCS_CKM.5 must be claimed by the TOE._
-+
-_If [.underline]#Derived keys generated in accordance with FCS_CKM_EXT.8# is selected, the selection-based SFR FCS_CKM_EXT.8 must be claimed by the TOE._
 
 ==== FCS_CKM.2 Cryptographic Key Distribution
 
@@ -1433,16 +1425,6 @@ FDP_ITC_EXT.1.4:: The TSF shall bind SDEs to security attributes using [_assignm
 _Application Note {counter:remark_count}_:: _The way the TSF checks the integrity of the SDE depends on the method of importation. For example, the encrypted data channel may provide data integrity as part of its service._
 +
 _When a TSF parses an SDE, it should generate security attributes and create an SDO by binding the security attributes to the SDE._
-+
-_If [.underline]#physically protected channels as specified in FTP_ITP_EXT.1# is selected, the selection-based SFR FTP_ITP_EXT.1 must be claimed._
-+
-_If [.underline]#encrypted data buffers as specified in FTP_ITE_EXT.1# is selected, the selection-based SFR FTP_ITE_EXT.1 must be claimed._
-+
-_If [.underline]#cryptographically protected data channels as specified in FTP_ITC_EXT.1# is selected, the selection-based SFR FTP_ITC_EXT.1 must be claimed._
-+
-_If [.underline]#message authentication code as specified in FCS_COP.1/CMAC# is selected, the selection-based SFR FCS_COP.1/CMAC must be claimed._
-+
-_If [.underline]#key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap# is selected, the selection-based SFR FCS_COP.1/KeyWrap must be claimed._
 
 ==== FDP_ITC_EXT.2 Parsing of SDOs
 
@@ -1461,16 +1443,6 @@ FDP_ITC_EXT.2.5:: The TSF shall ensure that interpretation of the security attri
 _Application Note {counter:remark_count}_:: _The way the TSF checks the integrity of the SDO depends on the method of importation. For example, the encrypted data channel may provide data integrity as part of its service._
 +
 _When a TSF parses an SDO, it should already have a set of security attributes. However, the TSF may modify these attributes, if authorized, to comply with security policies on the TOE._
-+
-_If [.underline]#physically protected channels as specified in FTP_ITP_EXT.1# is selected, the selection-based SFR FTP_ITP_EXT.1 must be claimed._
-+
-_If [.underline]#encrypted data buffers as specified in FTP_ITE_EXT.1# is selected, the selection-based SFR FTP_ITE_EXT.1 must be claimed._
-+
-_If [.underline]#cryptographically protected data channels as specified in FTP_ITC_EXT.1# is selected, the selection-based SFR FTP_ITC_EXT.1 must be claimed._
-+
-_If [.underline]#message authentication code as specified in FCS_COP.1/CMAC# is selected, the selection-based SFR FCS_COP.1/CMAC must be claimed._
-+
-_If [.underline]#key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap# is selected, the selection-based SFR FCS_COP.1/KeyWrap must be claimed._
 
 ==== FDP_RIP.1 Subset Residual Information Protection
 
@@ -1508,10 +1480,6 @@ _Application Note {counter:remark_count}_:: _This SFR deals with the mechanism t
 +
 _The cryptographic requirements for cryptographic hashes and digital signatures apply here._
 +
-_If [.underline]#message authentication code as specified in FCS_COP.1/CMAC# is selected, the selection-based SFR FCS_COP.1/CMAC must be claimed._
-+
-_If [.underline]#key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap# is selected, the selection-based SFR FCS_COP.1/KeyWrap must be claimed._
-+
 _No specific requirement is placed here on the nature of the integrity protection data, but the Security Target shall describe this protection measure, and shall identify the iteration of FCS_COP.1/CMAC, FCS_COP.1/Hash, FCS_COP.1/KeyedHash, FCS_COP.1/KeyVer, FCS_COP.1/KeyWrap or FCS_COP.1/AEAD that covers any cryptographic algorithm used._
 +
 _The integrity protection data in FDP_SDI.2.1 is included in the list of attributes identified in FMT_MSA.1, and protects the value of the SDEs and of the SDO security attributes._
@@ -1546,12 +1514,6 @@ FIA_AFL_EXT.1.4:: The TSF shall increment the failed authorization attempt count
 _Application Note {counter:remark_count}_:: _The product validates the authorization factors prior to determining whether user (administrator or client application) access to the SDE/SDO is permitted. In cases where validation of the authorization factors fails, the product will not allow access to SDE/SDO. The product validates the authorization factors in such a way that it does not allow an attacker to circumvent the other requirements to gain knowledge about the SDE/SDO or other keying material that protects them from inadvertent exposure._
 +
 _It is possible for the TOE to have different rules for the treatment of different SDOs or groups of SDOs. For example, some SDOs may trigger a factory reset in the event of excessive authorization failures while others may only temporarily block future authorization attempts. The ST author should iterate this SFR for each distinct response the TSF can make (as defined by the selections in FIA_AFL_EXT.1.3) and the SDOs whose authorization failures will trigger these responses._
-+
-_If [.underline]#prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FIA_AFL_EXT.2 must be claimed._
-+
-_If either [.underline]#prevent future authorization attempts for a static prescribed amount of time as determined using FPT_STM_EXT.1# or [.underline]#prevent future authorization attempts for an administrator configurable amount of time as determined using FPT_STM_EXT.1# is selected, then the selection-based SFR FPT_STM_EXT.1 must be claimed._
-+
-_If [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2# is selected in FIA_AFL_EXT.1.3, the selection-based SFR FDP_FRS_EXT.2 must be claimed._
 
 ==== FIA_SOS.2 TSF Generation of Secrets
 
@@ -1821,7 +1783,7 @@ FPT_MFW_EXT.1 Mutable/Immutable Firmware
 
 FPT_MFW_EXT.1.1:: The TSF shall be maintained as {empty}[selection: [.underline]#immutable, mutable]# firmware.
 
-_Application Note {counter:remark_count}_:: _The ST author must include FPT_MFW_EXT.2, FPT_MFW_EXT.3, FPT_FLS.1/FW, and FPT_RPL.1/Rollback if [.underline]#mutable# is selected._
+_Application Note {counter:remark_count}_:: _If [.underline]#mutable# is selected in FPT_MFW_EXT.1.1, the selection-based SFRs FPT_FLS.1/FW, FPT_MFW_EXT.2, FPT_MFW_EXT.3, and FPT_RPL.1/Rollback must be claimed._
 
 ==== FPT_MOD_EXT.1 Debug Modes
 
@@ -1873,7 +1835,7 @@ FPT_ROT_EXT.1.1:: The TSF shall provide a Root of Trust for Storage, a Root of T
 
 _Application Note {counter:remark_count}_:: _This document uses the [GP_ROT] definitions for RoT for Storage (denoted as the combination of RoT for Confidentiality and RoT for Integrity), Authorization, Measurement, and Reporting. DSCs use Roots of Trust for Storage to protect SDOs. <<Identification and Authentication>> has a number of requirements for ensuring the TSF has functionality to authorize a user in order to access an SDO, including FIA_UAU.6._
 +
-_If both [.underline]#Root of Trust for Measurement# and [.underline]#Root of Trust for Reporting# are selected in FPT_ROT_EXT.1.1, the selection-based SFR FDP_DAU.1/Prove must also be claimed._
+_If both [.underline]#Root of Trust for Measurement# and [.underline]#Root of Trust for Reporting# are selected in FPT_ROT_EXT.1.1, the selection-based SFR FDP_DAU.1/Prove must be claimed._
 
 :xrefstyle: full
 
@@ -2520,7 +2482,7 @@ _When generating ECC key pairs for key establishment, choose NIST SP 800-56A Sec
 +
 _When generating EdDSA key pairs for digital signatures, choose NIST FIPS PUB 186-5 Section A.2.3. The chosen domain parameters determine the size of the private keys and the public keys._
 +
-_For hash-based signatures, the choice of the hash or XOF determines the security of the system. For 192 bits of security strength, choose SHA256/192 or SHAKE256/192. For 256 bits of security strength, choose SHA256 or SHAKE 256._
+_For hash-based signatures, the choice of the hash or XOF determines the security of the system. For 192 bits of security strength, choose SHA256/192 or SHAKE256/192. For 256 bits of security strength, choose SHA256 or SHAKE256._
 
 
 ==== FCS_CKM.1/SKG Cryptographic Key Generation (Symmetric Key)
@@ -2836,9 +2798,9 @@ FDP_DAU.1.1/Prove:: The TSF shall provide a capability to generate evidence that
 
 FDP_DAU.1.2/Prove:: The TSF shall provide [_assignment: list of subjects_] with the ability to verify evidence of the validity of the indicated information.
 
-_Application Note {counter:remark_count}_:: _This SFR describes the output of the Prove service provided by the DSC. The evidence of validity or authenticity, or other evidence derived, is expected to be processed by the RoT for Measurement. Additionally, the use of a RoT for Reporting presupposes a logging capability or other means of generating state information that could be conveyed to external entities. Therefore, FDP_DAU.1.1/Prove must be selected if-and-only-if the RoT for Measurement and the RoT for Reporting are both selected in FPT_ROT_EXT.1.1. An 'authenticated user' in the sense of the selection in FDP_DAU.1.1/Prove means a user who has been authenticated by the DSC according to the mechanisms of FIA_UAU.5._
+_Application Note {counter:remark_count}_:: _This SFR describes the output of the Prove service provided by the DSC. The evidence of validity or authenticity, or other evidence derived, is expected to be processed by the RoT for Measurement. Additionally, the use of a RoT for Reporting presupposes a logging capability or other means of generating state information that could be conveyed to external entities. Therefore, FDP_DAU.1.1/Prove must be claimed if-and-only-if [.underline]#Root of Trust for Measurement# and [.underline]#Root of Trust for Reporting# are both selected in FPT_ROT_EXT.1.1. An 'authenticated user' in the sense of the selection in FDP_DAU.1.1/Prove means a user who has been authenticated by the DSC according to the mechanisms of FIA_UAU.5._
 +
-_In FDP_DAU.1.1/Prove, the DSC will issue a validity-stamped or authenticity-stamped piece of data. In this case, validity-stamped means that the form of the issued data enables an external entity to verify that the data has been issued via the DSC's Prove service. The implementation_ _might be via a DSC cryptographic signature, or a MAC using a symmetric key shared with the receiver, for example. Authenticity-stamped means that the receiver of the data can verify that the user providing this data is authentic._
+_In FDP_DAU.1.1/Prove, the DSC will issue a validity-stamped or authenticity-stamped piece of data. In this case, validity-stamped means that the form of the issued data enables an external entity to verify that the data has been issued via the DSC's Prove service. The implementation might be via a DSC cryptographic signature, or a MAC using a symmetric key shared with the receiver, for example. Authenticity-stamped means that the receiver of the data can verify that the user providing this data is authentic._
 +
 _Data that would need to be validity-stamped includes data over which the DSC is the authority, such as the state of its own firmware. Data that would need to be authenticity-stamped includes data about which the DSC knows nothing, but where it will issue the data with a statement that the DSC has authenticated the source of this data._
 +
@@ -2850,7 +2812,7 @@ FDP_FRS_EXT.2 Factory Reset Behavior
 
 FDP_FRS_EXT.2.1:: Upon initiation of a factory reset, the TSF shall destroy [_all non-permanent SDEs and SDOs_] and restore the following *pre-installed SDOs* to their factory settings: [_assignment: pre-installed SDOs to be restored during a factory reset_].
 
-_Application Note {counter:remark_count}_:: _Not all DSCs permit factory reset functionality. Those that do are expected to perform a factory reset in a manner that prevents any inadvertent disclosure of security-relevant data that was present on the DSC prior to the factory reset. For DSCs that permit factory reset functionality (as indicated by selection of [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2# in FIA_AFL_EXT.1.3, or by [.underline]#no actions or conditions# NOT being selected in FDP_FRS_EXT.1.1), this SFR must be included in the TOE boundary._
+_Application Note {counter:remark_count}_:: _Not all DSCs permit factory reset functionality. Those that do are expected to perform a factory reset in a manner that prevents any inadvertent disclosure of security-relevant data that was present on the DSC prior to the factory reset. For DSCs that permit factory reset functionality (as indicated by selection of [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2# in FIA_AFL_EXT.1.3, or by [.underline]#no actions or conditions# NOT being selected in FDP_FRS_EXT.1.1), this SFR must be claimed._
 
 === Identification and Authentication
 ==== FIA_AFL_EXT.2 Authorization Failure Response
@@ -2941,7 +2903,7 @@ FTP_CCMP_EXT.1.3:: The TSF shall discard incoming messages that are malformed or
 
 _Application Note {counter:remark_count}_:: _This SFR must be claimed if [.underline]#CCMP# is selected in FTP_ITC_EXT.1._
 +
-_Inclusion of this SFR requires inclusion of AES-CCM or CAM-CCM in FCS_COP.1/AEAD._
+_Inclusion of this SFR requires inclusion of AES-CCM in FCS_COP.1/AEAD._
 +
 _CCMP is defined in IEEE 802.11i. CCMP-256 is defined in IEEE 802.11ac._
 
@@ -2957,21 +2919,17 @@ FTP_GCMP_EXT.1.3:: The TSF shall discard incoming messages that are malformed or
 
 _Application Note {counter:remark_count}_:: _This SFR must be claimed if [.underline]#GCMP# is selected in FTP_ITC_EXT.1._
 +
-_Inclusion of this SFR requires inclusion of AES-GCM or CAM-GCM in FCS_COP.1/AEAD._
+_Inclusion of this SFR requires inclusion of AES-GCM in FCS_COP.1/AEAD._
 
 ==== FTP_ITC_EXT.1 Cryptographically Protected Communications Channels
 
 FTP_ITC_EXT.1 Cryptographically Protected Communications Channels
 
-FTP_ITC_EXT.1.1:: The TSF shall use {empty}[selection: [.underline]#CCMP, GCMP]# protocol to provide a communication channel between itself and [_assignment: list of entities external to the TOE_] that protects channel data from disclosure and ensures the integrity of channel data.
+FTP_ITC_EXT.1.1:: The TSF shall use {empty}[selection: [.underline]#CCMP as specified in FTP_CCMP_EXT.1, GCMP as specified in FTP_GCMP_EXT.1]# protocol to provide a communication channel between itself and [_assignment: list of entities external to the TOE_] that protects channel data from disclosure and ensures the integrity of channel data.
 
 _Application Note {counter:remark_count}_:: _This SFR must be claimed if [.underline]#cryptographically protected data channels as specified in FTP_ITC_EXT.1# is selected in either FDP_ITC_EXT.1 or FDP_ITC_EXT.2._
 +
 _Entities external to the TOE include applications that communicate with the TOE such as authentication capabilities (e.g. biometrics reader), external storage, and interfaces with an external DSC._
-+
-_If [.underline]#CCMP# is selected, the ST author must include FTP_CCMP_EXT.1._
-+
-_If [.underline]#GCMP# is selected, the ST author must include FTP_GCMP_EXT.1._
 
 ==== FTP_ITE_EXT.1 Encrypted Data Communications
 
