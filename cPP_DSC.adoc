@@ -3177,7 +3177,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: FCS_RBG.1 Random Bit Generation (RBG)
 [vertical]
-FCS_OTV_EXT.1.1:: The TSF shall perform cryptographic one-time value generation for [assignment: _algorithm or mode_] using the output of a {empty}[selection: _random bit generator as defined in FCS_RBG.1, deterministic IV construction, [assignment: OTV construction method]_] and sizes of length that meet the following: [selection: _list of standards_].
+FCS_OTV_EXT.1.1:: The TSF shall perform cryptographic one-time value generation for [assignment: _algorithm or mode_] using the output of a {empty}[selection: _random bit generator as defined in FCS_RBG.1, deterministic IV construction, [assignment: OTV construction method]_] and sizes of length that meet the following: [assignment: _list of standards_].
 
 ==== FCS_STG_EXT Cryptographic Key Storage
 
