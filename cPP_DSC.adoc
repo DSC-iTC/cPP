@@ -2830,7 +2830,7 @@ FPT_FLS.1/FW:: Failure with Preservation of Secure State (Firmware)
 
 FPT_FLS.1.1/FW:: The TSF shall preserve a secure state when the following types of *firmware* failures occur: [_authenticity violation, integrity violation, rollback violation_].
 
-_Application Note {counter:remark_count}_:: _A DSC's ability to handle failures related to authenticity, integrity, and invalid versions of firmware is not applicable in all cases because some DSCs will have immutable firmware. This SFR must be claimed if [.underline]#mutable# is selected in FPT_MFW_EXT.1.1._
+_Application Note {counter:remark_count}_:: _A DSC's ability to handle failures related to authenticity, integrity, and invalid versions of firmware is not applicable in all cases because some DSCs will have immutable firmware._
 +
 _The phrase "secure state" refers to a state in which the TOE has consistent TSF data and a TSF that can correctly enforce the policy. The TOE must ensure that no further processing of TSF or user data takes place while in an insecure state. This state may be the initial "boot" of a clean system, or it might be some check-pointed state. It is expected that in most cases, the TOE will halt and require a reset or re-initialization to return to a known secure state._
 
@@ -2842,7 +2842,7 @@ FPT_MFW_EXT.2.1:: The TSF shall have the ability to verify the integrity of the 
 
 FPT_MFW_EXT.2.2:: The TSF shall provide a capability to generate evidence of the integrity of the firmware.
 
-_Application Note {counter:remark_count}_:: _Data and firmware integrity is not a required component of this cPP in all cases because some DSCs will have immutable firmware. This SFR must be claimed if [.underline]#mutable# is selected in FPT_MFW_EXT.1.1._
+_Application Note {counter:remark_count}_:: _Data and firmware integrity is not a required component of this cPP in all cases because some DSCs will have immutable firmware._
 +
 _The TOE guarantees the integrity of the firmware by verifying its integrity._
 +
@@ -2860,7 +2860,7 @@ FPT_MFW_EXT.3.1:: The TSF shall have the ability to verify the authenticity of t
 
 FPT_MFW_EXT.3.2:: The TSF shall provide a capability to generate evidence of the authenticity of the firmware.
 
-_Application Note {counter:remark_count}_:: _Firmware authentication is not a required component of this cPP in all cases because some DSCs will have immutable firmware. This SFR must be claimed if [.underline]#mutable# is selected in FPT_MFW_EXT.1.1._
+_Application Note {counter:remark_count}_:: _Firmware authentication is not a required component of this cPP in all cases because some DSCs will have immutable firmware._
 +
 _The TOE guarantees the authenticity of the firmware by verifying its signature._
 +
@@ -2878,9 +2878,7 @@ FPT_RPL.1.1/Rollback:: The TSF shall detect replay for the following entities: [
 
 FPT_RPL.1.2/Rollback:: The TSF shall *prevent the execution of the loaded firmware and* perform *[.underline]#[selection, choose one of: [_assignment: other actions_], no other actions]*# when replay is detected.
 
-_Application Note {counter:remark_count}_:: _This SFR must be claimed if [.underline]#mutable# is selected in FPT_MFW_EXT.1.1._
-+
-_The TSF data is used as a guarantee of the ordinal identifier of the firmware instance. When a firmware load is requested, the TSF ensures the authenticated firmware ordinal identifier is greater than or equal to the previously authenticated firmware identifier. For example, this could be accomplished by ensuring the validated instance of the firmware to be loaded is greater than or equal to the instance previously validated and loaded into the TOE. By loading a previous instance of firmware, it potentially opens up the device to known vulnerabilities._
+_Application Note {counter:remark_count}_:: _The TSF data is used as a guarantee of the ordinal identifier of the firmware instance. When a firmware load is requested, the TSF ensures the authenticated firmware ordinal identifier is greater than or equal to the previously authenticated firmware identifier. For example, this could be accomplished by ensuring the validated instance of the firmware to be loaded is greater than or equal to the instance previously validated and loaded into the TOE. By loading a previous instance of firmware, it potentially opens up the device to known vulnerabilities._
 
 ==== FPT_STM_EXT.1 Reliable Time Counting
 
@@ -2901,9 +2899,7 @@ FTP_CCMP_EXT.1.2:: The TSF shall discard incoming messages if authentication fai
 
 FTP_CCMP_EXT.1.3:: The TSF shall discard incoming messages that are malformed or invalid.
 
-_Application Note {counter:remark_count}_:: _This SFR must be claimed if [.underline]#CCMP# is selected in FTP_ITC_EXT.1._
-+
-_Inclusion of this SFR requires inclusion of AES-CCM in FCS_COP.1/AEAD._
+_Application Note {counter:remark_count}_:: _Inclusion of this SFR requires inclusion of AES-CCM in FCS_COP.1/AEAD._
 +
 _CCMP is defined in IEEE 802.11i. CCMP-256 is defined in IEEE 802.11ac._
 
@@ -2917,9 +2913,7 @@ FTP_GCMP_EXT.1.2:: The TSF shall discard incoming messages if authentication fai
 
 FTP_GCMP_EXT.1.3:: The TSF shall discard incoming messages that are malformed or invalid.
 
-_Application Note {counter:remark_count}_:: _This SFR must be claimed if [.underline]#GCMP# is selected in FTP_ITC_EXT.1._
-+
-_Inclusion of this SFR requires inclusion of AES-GCM in FCS_COP.1/AEAD._
+_Application Note {counter:remark_count}_:: _Inclusion of this SFR requires inclusion of AES-GCM in FCS_COP.1/AEAD._
 
 ==== FTP_ITC_EXT.1 Cryptographically Protected Communications Channels
 
@@ -2927,9 +2921,7 @@ FTP_ITC_EXT.1 Cryptographically Protected Communications Channels
 
 FTP_ITC_EXT.1.1:: The TSF shall use {empty}[selection: [.underline]#CCMP as specified in FTP_CCMP_EXT.1, GCMP as specified in FTP_GCMP_EXT.1]# protocol to provide a communication channel between itself and [_assignment: list of entities external to the TOE_] that protects channel data from disclosure and ensures the integrity of channel data.
 
-_Application Note {counter:remark_count}_:: _This SFR must be claimed if [.underline]#cryptographically protected data channels as specified in FTP_ITC_EXT.1# is selected in either FDP_ITC_EXT.1 or FDP_ITC_EXT.2._
-+
-_Entities external to the TOE include applications that communicate with the TOE such as authentication capabilities (e.g. biometrics reader), external storage, and interfaces with an external DSC._
+_Application Note {counter:remark_count}_:: _Entities external to the TOE include applications that communicate with the TOE such as authentication capabilities (e.g. biometrics reader), external storage, and interfaces with an external DSC._
 
 ==== FTP_ITE_EXT.1 Encrypted Data Communications
 
@@ -2943,17 +2935,13 @@ FTP_ITE_EXT.1.1:: The TSF shall encrypt data for transfer between the TOE and [_
 +
 ].
 
-_Application Note {counter:remark_count}_:: _This SFR must be claimed if [.underline]#encrypted data buffers as specified in FTP_ITE_EXT.1# is selected in either FDP_ITC_EXT.1 or FDP_ITC_EXT.2._
-+
-_This requirement applies to encrypted data communications between the TOE and external entities that do not use a physically protected mechanism conforming to FTP_ITP_EXT.1, or a cryptographically protected data channel as conforming to FTP_ITC_EXT.1. For example, if data is transferred through encrypted buffers (or blobs) then this requirement applies. If data is transferred through a physically protected channel, then FTP_ITP_EXT.1 applies. This requirement would apply, for example, for communications implemented through a shared data buffer._
+_Application Note {counter:remark_count}_:: _This requirement applies to encrypted data communications between the TOE and external entities that do not use a physically protected mechanism conforming to FTP_ITP_EXT.1, or a cryptographically protected data channel as conforming to FTP_ITC_EXT.1. For example, if data is transferred through encrypted buffers (or blobs) then this requirement applies. If data is transferred through a physically protected channel, then FTP_ITP_EXT.1 applies. This requirement would apply, for example, for communications implemented through a shared data buffer._
 
 ==== FTP_ITP_EXT.1 Physically Protected Channel
 
 FTP_ITP_EXT.1 Physically Protected Channel
 
 FTP_ITP_EXT.1.1:: The TSF shall provide a *physically protected* communication channel between itself and [_assignment: list of other IT entities within the same platform_].
-
-_Application Note {counter:remark_count}_:: _This SFR must be claimed if [.underline]#physically protected channels as specified in FTP_ITP_EXT.1# is selected in either FDP_ITC_EXT.1 or FDP_ITC_EXT.2._
 
 [appendix]
 == Extended Component Definitions
