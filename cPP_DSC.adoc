@@ -3074,7 +3074,7 @@ or FCS_COP.1 Cryptographic operation] +
 FCS_CKM.6 Timing and event of cryptographic key destruction 
 
 [vertical]
-FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from multiple parties in accordance with specified cryptographic key derivation algorithms [selection: _cryptographic algorithm_] and specified key sizes [selection: _key sizes_] that meets the following: [selection: _list of standards_].
+FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from multiple parties in accordance with specified cryptographic key derivation algorithms [assignment: _cryptographic algorithm_] and specified key sizes [assignment: _key sizes_] that meet the following: [assignment: _list of standards_].
 
 *FCS_CKM_EXT.8 Password-Based Key Derivation*
 [horizontal]
@@ -3086,7 +3086,7 @@ FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash) +
 FCS_CKM.6 Timing and event of cryptographic key destruction 
 
 [vertical]
-FCS_CKM_EXT.8.1:: The TSF shall perform password-based key derivation functions in accordance with a specified cryptographic algorithm [HMAC-[selection: _SHA-256, SHA-384, SHA-512_]], with iteration count of [assignment: _number of iterations_] using a randomly generated salt of length [selection: _128, [assignment: greater than 128]_] and output cryptographic key sizes [selection: _128, 192, 256 [assignment: greater than 128]_] bits that meet the following standard: [NIST SP 800-132 Section 5.3 (PBKDF2)].
+FCS_CKM_EXT.8.1:: The TSF shall perform password-based key derivation functions in accordance with a specified cryptographic algorithm HMAC-[selection: _SHA-256, SHA-384, SHA-512_], with iteration count of [assignment: _number of iterations_] using a randomly generated salt of length {empty}[selection: _128, [assignment: greater than 128]_] and output cryptographic key sizes {empty}[selection: _128, 192, 256 [assignment: greater than 128]_] bits that meet the following: [assignment: _list of standards_].
 
 ==== FCS_OTV_EXT One-Time Value
 
@@ -3123,7 +3123,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: FCS_RBG.1 Random Bit Generation (RBG)
 [vertical]
-FCS_OTV_EXT.1.1:: The TSF shall perform cryptographic one-time value generation for [selection: _algorithm or mode_] using the output of a [selection: _random bit generator as defined in FCS_RBG.1, deterministic IV construction, [assignment: OTV construction method]_] and sizes of length that meet the following: [selection: _list of standards_].
+FCS_OTV_EXT.1.1:: The TSF shall perform cryptographic one-time value generation for [assignment: _algorithm or mode_] using the output of a {empty}[selection: _random bit generator as defined in FCS_RBG.1, deterministic IV construction, [assignment: OTV construction method]_] and sizes of length that meet the following: [assignment: _list of standards_].
 
 ==== FCS_STG_EXT Cryptographic Key Storage
 
