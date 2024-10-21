@@ -1305,7 +1305,7 @@ _Each algorithm and mode have varying guidance on the lengths of the salts, nonc
 
 FCS_STG_EXT.1 Protected Storage
 
-FCS_STG_EXT.1.1:: The TSF shall provide {empty}[selection: [.underline]#mutable hardware-based, immutable hardware-based, software-based in accordance to FCS_CKM_EXT.3]# protected storage for {empty}[selection: [.underline]#asymmetric private keys, symmetric keys]# and {empty}[selection: [.underline]#persistent secrets, no other keys]#.
+FCS_STG_EXT.1.1:: The TSF shall provide [*selection*: _mutable hardware-based, immutable hardware-based, software-based in accordance to FCS_CKM_EXT.3_] protected storage for asymmetric private keys, symmetric keys and [selection: _persistent secrets, no other keys_].
 
 FCS_STG_EXT.1.2:: The TSF shall support the capability of [selection: _importing keys/secrets into the TOE, causing the TOE to generate keys/secrets_] upon request of [*selection*: _a client application, an administrator_].
 
@@ -3154,7 +3154,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: No dependencies.
 [vertical]
-FCS_STG_EXT.1.1:: The TSF shall provide [assignment: _protection method_] protected storage for asymmetric private keys and [selection: _symmetric keys, persistent secrets, no other keys_].
+FCS_STG_EXT.1.1:: The TSF shall provide [assignment: _protection method_] protected storage for asymmetric private keys, symmetric keys and [selection: _persistent secrets, no other keys_].
 
 FCS_STG_EXT.1.2:: The TSF shall support the capability of [selection: _importing keys/secrets into the TOE, causing the TOE to generate keys/secrets_] upon request of [assignment: _authorized subject_].
 
