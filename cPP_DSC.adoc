@@ -589,22 +589,18 @@ The conventions used in descriptions of the SFRs are as follows:
 * Unaltered SFRs are stated in the form used in [CC2] or their extended component definition (ECD);
 * Refinement made in the PP: the added/removed text is indicated with *bold text*/[.line-through]#strikethroughs#. When text is substituted (i.e. some text is added in place of some other text, which is then deleted), only the added text is included;
 
-Note that a refinement is also used to indicate cases where the PP replaces an assignment defined for an SFR in [CC2] and replaces it with a selection;
-
-* Selections:
-
-** Wholly or partially completed in the PP: the selection values (i.e. the selection values adopted in the PP or the remaining selection values available for the ST) are indicated with [.underline]#underlined text#;
+* Selections wholly or partially completed in the PP: the selection values (i.e. the selection values adopted in the PP or the remaining selection values available for the ST) are indicated with [.underline]#underlined text#;
 +
-For example, "[_selection: disclosure, modification, loss of use_]" in [CC2] or an ECD might become "[.underline]#disclosure#" (completion) or "selection: [.underline]#disclosure, modification#" (partial completion) in the PP;
+For example, "[selection: _disclosure, modification, loss of use_]" in [CC2] or an ECD might become "{empty}[[.underline]#disclosure#]" (completion) or "{empty}[selection: [.underline]#disclosure, modification#]" (partial completion) in the PP;
 
 * Assignment wholly or partially completed in the PP: indicated with _italicized text_;
 * Assignment completed within a selection in the PP: the completed assignment text is indicated with _[.underline]#italicized and underlined text#_
 +
-For example, "{empty}[selection: [.underline]#change_default, query, modify, delete, [_assignment: other operations_#]]" in [CC2] or an ECD might become "[.underline]#[change_default, [_select_tag_#]]" (completion of both selection and assignment) or "{empty}[selection: [.underline]#change_default, select_tag, [_select_value_#]]" (partial completion of selection, and completion of assignment) in the PP;
+For example, "{empty}[selection: _change_default, query, modify, delete, [assignment: other operations]_]" in [CC2] or an ECD might become "[.underline]#[change_default, [_select_tag_]#]" (completion of both selection and assignment) or "{empty}[selection: [.underline]#change_default, select_tag, [_select_value_#]]" (partial completion of selection, and completion of assignment) in the PP;
 
 * Iteration: indicated by adding a string starting with "/" (e.g. "FCS_COP.1/Hash").
 
-SFR text that is bold, italicized, and underlined indicates that the original SFR defined an assignment operation but the PP author completed that assignment by redefining it as a selection operation, which is also considered to be a refinement of the original SFR.
+If the original SFR defined an assignment operation which was completed by the PP author by redefining it as a selection operation, this is considered to be a refinement of the original SFR, and the word "selection" will be indicated with *bold text*. The selection options will be indicated with _italicized text_ to indicate the completion of the original assignment.
 
 If the selection or assignment is to be completed by the ST author, it is preceded by 'selection:' or 'assignment:'. If the selection or assignment has been completed by the PP author and the ST author does not have the ability to modify it, the proper formatting convention is applied but the preceding word is not included. The exception to this is if the SFR definition includes multiple options in a selection or assignment and the PP has excluded certain options but at least two remain. In this case, the selection or assignment operations that are not permitted by this PP are removed without applying additional formatting and the 'selection:' or 'assignment:' text is preserved to show that the ST author still has the ability to choose from the reduced set of options.
 
@@ -653,12 +649,12 @@ Extended SFRs (i.e. those SFRs that are not defined in [CC2]) are identified by 
 
 FCS_CKM.1 Cryptographic Key Generation
 
-FCS_CKM.1.1:: The TSF shall generate cryptographic keys in accordance with a specified cryptographic key generation algorithm *corresponding to [.underline]#[selection:*#
+FCS_CKM.1.1:: The TSF shall generate cryptographic keys in accordance with a specified cryptographic key generation algorithm *corresponding to* [*selection*:
 +
-* [.underline]#*Asymmetric keys generated in accordance with FCS_CKM.1/AKG,*#
-* [.underline]#*Symmetric keys generated in accordance with FCS_CKM.1/SKG,*#
-* [.underline]#*Derived keys generated in accordance with FCS_CKM.5*#
-* [.underline]#*Derived keys generated in accordance with FCS_CKM_EXT.8*#
+* _Asymmetric keys generated in accordance with FCS_CKM.1/AKG,_
+* _Symmetric keys generated in accordance with FCS_CKM.1/SKG,_
+* _Derived keys generated in accordance with FCS_CKM.5_
+* _Derived keys generated in accordance with FCS_CKM_EXT.8_
 +
 ] [.line-through]#and specified cryptographic key sizes [_assignment: cryptographic key sizes_] that meet the following: [_assignment: list of standards_]#.
 
@@ -677,30 +673,30 @@ _Application Note {counter:remark_count}_:: _This SFR assumes there is no pre-sh
 
 FCS_CKM.6 Timing and event of cryptographic key destruction
 
-FCS_CKM.6.1:: The TSF shall destroy [*assignment*: _list of cryptographic keys (including keying material)_] when [*selection*: _no longer needed, [*assignment*: other circumstances for key or keying material destruction]_].
+FCS_CKM.6.1:: The TSF shall destroy [assignment: _list of cryptographic keys (including keying material)_] when [selection: _no longer needed, [assignment: other circumstances for key or keying material destruction]_].
 
 _Application Note {counter:remark_count}_:: _The TOE will have mechanisms to destroy keys, including intermediate keys and key material, by using an approved method as specified in FCS_CKM.6.2. Examples of keys include intermediate keys, leaf keys, encryption keys, and signing keys. Key material includes seeds, authentication secrets, passwords, PINs, and other secret values used to derive keys. The ST Author shall list all such keys and keying material that are subject to destruction in the first assignment._
 +
 _This SFR does not apply to the public component of asymmetric key pairs or to keys that are permitted to remain stored, such as device identification keys._
 
-FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material specified by FCS_CKM.6.1 in accordance with a specified cryptographic key destruction method [.underline]#[*selection*:#
+FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material specified by FCS_CKM.6.1 in accordance with a specified cryptographic key destruction method [*selection*:
 
-. [.underline]#For volatile memory, the destruction shall be executed by a [*selection*:# 
-.. [.underline]#single overwrite consisting of [*selection*:# 
-... [.underline]#a pseudo-random pattern using the TSF's RBG,#
-... [.underline]#zeroes,#
-... [.underline]#ones,#
-... [.underline]#a new value of a key,#
-... [.underline]#[*_assignment*: some value that does not contain any CSP_]],#
-.. [.underline]#removal of power to the memory,#
-.. [.underline]#removal of all references to the key directly followed by a request for garbage collection];#
-. [.underline]#For non-volatile memory [*selection*:#
-.. [.underline]#that employs a wear-leveling algorithm, the destruction shall be executed by a [*selection*:#
-... [.underline]#single overwrite consisting of [*selection*: zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any CSP_]],# 
-... [.underline]#block erase];#
-.. [.underline]#that does not employ a wear-leveling algorithm, the destruction shall be executed by a [*selection*:#
-... [.underline]#[*selection*: single, [*_assignment:* ST author defined multi-pass_]] overwrite consisting of [*selection*: zeros, ones, pseudo-random pattern, a new value of a key of the same size, [*_assignment:* some value that does not contain any CSP_]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated again up to [*_assignment:* number of times to attempt overwrite_] times, whereupon an error is returned.#
-... [.underline]#block erase]#
+. _For volatile memory, the destruction shall be executed by a [selection:_
+.. _single overwrite consisting of [selection:_
+... _a pseudo-random pattern using the TSF's RBG,_
+... _zeroes,_
+... _ones,_
+... _a new value of a key,_
+... _[assignment: some value that does not contain any CSP]],_
+.. _removal of power to the memory,_
+.. _removal of all references to the key directly followed by a request for garbage collection];_
+. _For non-volatile memory [selection:_
+.. _that employs a wear-leveling algorithm, the destruction shall be executed by a [selection:_
+... _single overwrite consisting of [selection: zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [assignment: some value that does not contain any CSP_]],_
+... _block erase];_
+.. _that does not employ a wear-leveling algorithm, the destruction shall be executed by a [selection:_
+... _[selection: single, [assignment: ST author defined multi-pass]] overwrite consisting of [selection: zeros, ones, pseudo-random pattern, a new value of a key of the same size, [assignment: some value that does not contain any CSP]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated again up to [assignment: number of times to attempt overwrite] times, whereupon an error is returned._
+... _block erase]_
 +
 ]] that meets the following: [_no standard_].
 
@@ -714,7 +710,7 @@ _Some selections allow assignment of "some value that does not contain any CSP."
 
 FCS_CKM_EXT.7 Cryptographic Key Agreement
 
-FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from multiple parties in accordance with specified cryptographic key derivation algorithms [*selection*: _cryptographic algorithm_] and specified key sizes [*selection*: _cryptographic algorithm parameters_] that meets the following: [*selection*: _list of standards_].
+FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from multiple parties in accordance with specified cryptographic key derivation algorithms [*selection*: _cryptographic algorithm_] and specified key sizes [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
 
 .Cryptographic Key Agreement
 [[KeyAgreement]]
@@ -791,7 +787,7 @@ _For ST authors, please consider the assumptions that opposite parties in the op
 
 FCS_COP.1/Hash Cryptographic Operation (Hashing)
 
-FCS_COP.1.1/Hash:: The TSF shall perform [_cryptographic hashing_] in accordance with a specified cryptographic algorithm {empty}[*selection*: [.underline]#_SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, SHA-512/256, SHA3-224, SHA3-256, SHA3-384, SHA3-512_]# that meets the following: {empty}[*selection*: [.underline]#_ISO/IEC 10118-3:2018, FIPS PUB 180-4, FIPS PUB 202_]#.
+FCS_COP.1.1/Hash:: The TSF shall perform [_cryptographic hashing_] in accordance with a specified cryptographic algorithm [*selection*: _SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, SHA-512/256, SHA3-224, SHA3-256, SHA3-384, SHA3-512_] that meets the following: [*selection*: _ISO/IEC 10118-3:2018, FIPS PUB 180-4, FIPS PUB 202_].
 
 _Application Note {counter:remark_count}_:: _The hash selection should be consistent with the overall strength of the algorithm used for signature generation. For example, the TOE should choose SHA-256 for 2048-bit RSA or ECC with P-256; SHA-384 for 3072-bit RSA, 4096-bit RSA, or ECC with P-384; and SHA-512 for ECC with P-521. The ST author selects the standard based on the algorithms selected. SHA-1 may be used as a general hash function and for the following applications: generating and verifying hash-based message authentication codes (HMACs), key derivation functions (KDFs), and random bit/number generation. SHA-1 may also be used for verifying old digital signatures and time stamps, if this is explicitly allowed by the application domain. SHA-1 should not be used in applications in which collision resistance is needed._
 
@@ -799,7 +795,7 @@ _Application Note {counter:remark_count}_:: _The hash selection should be consis
 
 FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash)
 
-FCS_COP.1.1/KeyedHash:: The TSF shall perform [_keyed hash message authentication_] in accordance with a specified cryptographic algorithm [*selection*: _keyed hash algorithm_] and cryptographic key sizes [*selection*: _cryptographic key size_] that meet the following: [*selection*: _list of standards_].
+FCS_COP.1.1/KeyedHash:: The TSF shall perform [_keyed hash message authentication_] in accordance with a specified cryptographic algorithm [*selection*: _keyed hash algorithm_] and cryptographic *algorithm parameters* [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
 
 .Keyed Hash
 [[KeyedHashAlgorithms]]
@@ -866,7 +862,7 @@ _Application Note {counter:remark_count}_:: _The HMAC minimum key sizes in the t
 
 FCS_COP.1/SigGen Cryptographic Operation (Signature Generation)
 
-FCS_COP.1.1/SigGen:: The TSF shall perform [_digital signature generation_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [.line-through]#key sizes# {empty}[*selection*: _cryptographic *algorithm parameters* [.line-through]#key sizes#_] that meet the following: [*Selection*: _list of standards_].
+FCS_COP.1.1/SigGen:: The TSF shall perform [_digital signature generation_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
 
 .Signature Generation
 [[SigGenOps]]
@@ -948,7 +944,7 @@ _For LMS and XMSS, the key sizes do not represent the expected security strength
 
 FCS_COP.1/SigVer Cryptographic Operation (Signature Verification)
 
-FCS_COP.1.1/SigVer:: The TSF shall perform [_digital signature verification_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [.line-through]#key sizes# {empty}[*selection*: _cryptographic *algorithm parameters* [.line-through]#key sizes#_] that meet the following: [*selection*: _list of standards_].
+FCS_COP.1.1/SigVer:: The TSF shall perform [_digital signature verification_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
 
 .Signature Verification
 [[SigVerOps]]
@@ -1169,14 +1165,14 @@ FCS_COP.1.1/SKC:: The TSF shall perform [_symmetric-key encryption/decryption_] 
 
 FCS_RBG.1 Random Bit Generation (RBG)
 
-FCS_RBG.1.1:: The TSF shall perform deterministic random bit generation services using [*selection*: _DRBG algorithm_] in accordance with [*selection*: _list of standards_] after initialization *with a seed*.
+FCS_RBG.1.1:: The TSF shall perform deterministic random bit generation services using [*selection*: _DRBG algorithm_] in accordance with [*selection*: _list of standards_] after initialization with a seed.
 
 .Random Bit Generation
 [[RBGs]]
 [cols=".^1,.^2,.^2",options=header]
 |===
 |Identifier
-|RBG Algorithm
+|DRBG Algorithm
 |List of Standards
 
 |HASH 
@@ -1204,9 +1200,9 @@ ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
 |===
 
 
-FCS_RBG.1.2:: The TSF shall use a [selection: _TSF entropy source [assignment: name of entropy source], TSF interface for obtaining entropy_] for initialization and reseeding.
+FCS_RBG.1.2:: The TSF shall use a {empty}[selection: _TSF *entropy* source [assignment: name of *entropy* source], TSF interface for obtaining entropy_] for initialization and reseeding.
 
-FCS_RBG.1.3:: The TSF shall update the DRBG state by [selection: _reseeding, uninstantiating and re-instantiating_] using a [selection: _TSF entropy source [assignment: name of entropy source], TSF interface for obtaining entropy [assignment: name of the interface]_] in the following situations: [selection:
+FCS_RBG.1.3:: The TSF shall update the *DRBG* state by [selection: _reseeding, uninstantiating and re-instantiating_] using a {empty}[selection: _TSF *entropy* source [assignment: name of *entropy* source], TSF interface for obtaining entropy [assignment: name of the interface]_] in the following situations: [selection:
 +
 * _never_, 
 * _on demand,_  
@@ -1217,7 +1213,7 @@ in accordance with [assignment: _list of standards_].
 
 _Application Note {counter:remark_count}_:: _No rationale is acceptable for not satisfying one of these dependencies._
 +
-_If a reseeding is selected in the first selection and something other than “never” is selected in the third selection, but reseeding is not feasible, the TSF will uninstantiate RBGs, rather than produce output that is of insufficient quality. The listed standards should specify the reseed interval and procedure for uninstantiating and reseeding._
+_If a reseeding is selected in the first selection and something other than "never" is selected in the third selection, but reseeding is not feasible, the TSF will uninstantiate RBGs, rather than produce output that is of insufficient quality. The listed standards should specify the reseed interval and procedure for uninstantiating and reseeding._
 +
 _"Uninstantiate" means that the internal state of the DRBG is no longer available for use._
 +
@@ -1227,7 +1223,7 @@ _In the third selection for FCS_RBG.1.3, "on demand" means, that a TOE presents 
 
 FCS_OTV_EXT.1 One-Time Value
 
-FCS_OTV_EXT.1.1:: The TSF shall perform cryptographic one-time value generation for [*selection*: _algorithm or mode_] using the output of a {empty}[*selection*: _random bit generator as defined in FCS_RBG.1, deterministic IV construction, [assignment: OTV construction method]_] and sizes of length that meet the following: [*selection*: _list of standards_].
+FCS_OTV_EXT.1.1:: The TSF shall perform cryptographic one-time value generation for [*selection*: _algorithm or mode_] using the output of a {empty}[selection: _random bit generator as defined in FCS_RBG.1, deterministic IV construction, [assignment: OTV construction method]_] and sizes of length that meet the following: [*selection*: _list of standards_].
 
 .One-Time Value
 [[OTVs]]
@@ -1311,13 +1307,13 @@ FCS_STG_EXT.1 Protected Storage
 
 FCS_STG_EXT.1.1:: The TSF shall provide {empty}[selection: [.underline]#mutable hardware-based, immutable hardware-based, software-based in accordance to FCS_CKM_EXT.3]# protected storage for {empty}[selection: [.underline]#asymmetric private keys, symmetric keys]# and {empty}[selection: [.underline]#persistent secrets, no other keys]#.
 
-FCS_STG_EXT.1.2:: The TSF shall support the capability of {empty}[selection: [.underline]#importing keys/secrets into the TOE, causing the TOE to generate keys/secrets]# upon request of {empty}[selection: [.underline]#a client application, an administrator]#.
+FCS_STG_EXT.1.2:: The TSF shall support the capability of [selection: _importing keys/secrets into the TOE, causing the TOE to generate keys/secrets_] upon request of [*selection*: _a client application, an administrator_].
 
-FCS_STG_EXT.1.3:: The TSF shall be capable of destroying keys/secrets in the protected storage upon request of {empty}[selection: [.underline]#a client application, an administrator]#.
+FCS_STG_EXT.1.3:: The TSF shall be capable of destroying keys/secrets in the protected storage upon request of [*selection*: _a client application, an administrator_].
 
-FCS_STG_EXT.1.4:: The TSF shall have the capability to allow only the user that {empty}[selection: [.underline]#imported the key/secret, caused the key/secret to be generated]# to use the key/secret. Exceptions may only be explicitly authorized by {empty}[selection: [.underline]#the client application, the administrator]#.
+FCS_STG_EXT.1.4:: The TSF shall have the capability to allow only the user that [selection: _imported the key/secret, caused the key/secret to be generated_] to use the key/secret. Exceptions may only be explicitly authorized by [*selection*: _the client application, the administrator_].
 
-FCS_STG_EXT.1.5:: The TSF shall allow only the user that {empty}[selection: [.underline]#imported the key/secret, caused the key/secret to be generated]# to request that the key/secret be destroyed. Exceptions may only be explicitly authorized by {empty}[selection: [.underline]#the client application, the administrator]#.
+FCS_STG_EXT.1.5:: The TSF shall allow only the user that [selection: _imported the key/secret, caused the key/secret to be generated_] to request that the key/secret be destroyed. Exceptions may only be explicitly authorized by [*selection*: _the client application, the administrator_].
 
 _Application Note {counter:remark_count}_:: _Not all conformant TOEs will have the ability to import pre-generated keys into the TOE. In these cases, the TOE's ability to receive commands to perform key generation is considered to be its implementation of the Parse service. A subject that caused a key to be generated is considered to be the 'owner' of that key in the same manner as they would be if they had imported it directly._
 
@@ -1364,21 +1360,19 @@ _The following are the SFP-relevant security attributes that are associated with
 * _OB.Pstate - none_
 * _OB.FAACntr - none_
 * _OB.AntiReplay - none_
-* _OB.Context- none_
-+
-].
+* _OB.Context- none_].
 
-FDP_ACF.1.2:: The TSF shall enforce the following rules to determine if an operation among controlled subjects and controlled objects is allowed:
+FDP_ACF.1.2:: The TSF shall enforce the following rules to determine if an operation among controlled subjects and controlled objects is allowed: [
 
-* [_Any subject that has been authorized to perform any operation against any OB.P_SDO or OB.T_SDO object can continue to perform this operation if one of the following conditions is true:_
+* _Any subject that has been authorized to perform any operation against any OB.P_SDO or OB.T_SDO object can continue to perform this operation if one of the following conditions is true:_
 ** _The object's SDO.Reauth attribute has a value of 'none', indicating that re-authorization is not required for subsequent interactions with the SDO;_
 ** _The object's SDO.Reauth attribute has a value of 'each use', indicating that re-authorization is required for each interaction with the SDO, and the subject has supplied valid authorization data to the TOE_
 * _[assignment: rules automatically enforced by the TSF that always prohibit certain subject-object-operation actions]_
 * _[assignment: rules automatically enforced by the TSF that always permit certain subject-object-operation actions]_
 * _[assignment: rules automatically enforced by the TSF that conditionally permit certain subject-object-operation actions based on subject security attributes, object security attributes, or other conditions]_
-* _{empty}[selection: [.underline]#[assignment: any configurable rules or parameters that can be modified to affect the behavior of the Access Control SFP], no configurable rules]#_].
+* _[selection: [assignment: any configurable rules or parameters that can be modified to affect the behavior of the Access Control SFP], no configurable rules]]_].
 
-FDP_ACF.1.3:: The TSF shall explicitly authorize access of subjects to objects based on the following additional rules: [_assignment: rules, based on security attributes, that explicitly authorize access of subjects to objects_].
+FDP_ACF.1.3:: The TSF shall explicitly authorize access of subjects to objects based on the following additional rules: [assignment: _rules, based on security attributes, that explicitly authorize access of subjects to objects_].
 
 FDP_ACF.1.4:: The TSF shall explicitly deny access of subjects to objects based on the following additional rules: [_client applications can only access their own data, [assignment: rules, based on security attributes, that explicitly deny access of subjects to objects]_].
 
@@ -1396,7 +1390,7 @@ _The DSC may contain pre-installed SDOs. The DSC will enforce access control for
 
 FDP_ETC_EXT.2 Propagation of SDOs
 
-FDP_ETC_EXT.2.1:: The TSF shall propagate only SDO references, wrapped authorization data, and wrapped SDOs such that only {empty}[selection: [.underline]#the TOE, authorized users]# can access them.
+FDP_ETC_EXT.2.1:: The TSF shall propagate only SDO references, wrapped authorization data, and wrapped SDOs such that only [selection: _the TOE, authorized users_] can access them.
 
 _Application Note {counter:remark_count}_:: _This SFR imposes security requirements on data being propagated (exported) outside the TOE. The "SDO reference" is a pointer to an object that resides in the TOE; this can be thought of as a token to the object. The "users" in the "authorized users" selection includes all roles (i.e. ADM-R, MFGADM-R, CApp-R)._
 
@@ -1404,7 +1398,7 @@ _Application Note {counter:remark_count}_:: _This SFR imposes security requireme
 
 FDP_FRS_EXT.1 Factory Reset
 
-FDP_FRS_EXT.1.1:: The TSF shall permit a factory reset of the TOE upon: {empty}[selection: [.underline]#activation by external interface, presentation of [_assignment: types of authorization data required and reference to their specification_], no actions or conditions]#.
+FDP_FRS_EXT.1.1:: The TSF shall permit a factory reset of the TOE upon: [*selection*: _activation by external interface, presentation of [assignment: types of authorization data required and reference to their specification], no actions or conditions_].
 
 _Application Note {counter:remark_count}_:: _If the DSC provides factory reset and requires an authorization to carry out the operation, then the ST author selects [.underline]#presentation of ...# and fills in the authorization data accepted (e.g. a PIN or a cryptographic token based on some specification referenced in the assigned value). If the DSC provides factory reset external to the DSC without requiring authorization, then the ST author selects [.underline]#activation by external interface#. This selection is intended for use when the device containing the DSC takes responsibility for obtaining and checking the authorization for factory reset._
 +
@@ -1414,13 +1408,13 @@ _If any selection other than [.underline]#no actions or conditions# is made in F
 
 FDP_ITC_EXT.1 Parsing of SDEs
 
-FDP_ITC_EXT.1.1:: The TSF shall support importing SDEs using {empty}[selection: [.underline]#physically protected channels as specified in FTP_ITP_EXT.1, encrypted data buffers as specified in FTP_ITE_EXT.1, cryptographically protected data channels as specified in FTP_ITC_EXT.1]#.
+FDP_ITC_EXT.1.1:: The TSF shall support importing SDEs using [*selection*: _physically protected channels as specified in FTP_ITP_EXT.1, encrypted data buffers as specified in FTP_ITE_EXT.1, cryptographically protected data channels as specified in FTP_ITC_EXT.1_].
 
-FDP_ITC_EXT.1.2:: The TSF shall verify the integrity of the SDE using {empty}[selection: [.underline]#message authentication code as specified in FCS_COP.1/CMAC, cryptographic hash as specified in FCS_COP.1/Hash, keyed hash as specified in FCS_COP.1/KeyedHash, key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap, authenticated encryption algorithm as specified in FCS_COP.1/AEAD, digital signature as specified in FCS_COP.1/SigVer, integrity verification supported by FDP_ITC_EXT.1.1]#.
+FDP_ITC_EXT.1.2:: The TSF shall verify the integrity of the SDE using [*selection*: _message authentication code as specified in FCS_COP.1/CMAC, cryptographic hash as specified in FCS_COP.1/Hash, keyed hash as specified in FCS_COP.1/KeyedHash, key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap, authenticated encryption algorithm as specified in FCS_COP.1/AEAD, digital signature as specified in FCS_COP.1/SigVer, integrity verification supported by FDP_ITC_EXT.1.1_].
 
 FDP_ITC_EXT.1.3:: The TSF shall ignore any security attributes associated with the user data when imported from outside the TOE.
 
-FDP_ITC_EXT.1.4:: The TSF shall bind SDEs to security attributes using [_assignment: list of ways the TSF generates security attributes and binds them to the SDEs_].
+FDP_ITC_EXT.1.4:: The TSF shall bind SDEs to security attributes using [assignment: _list of ways the TSF generates security attributes and binds them to the SDEs_].
 
 _Application Note {counter:remark_count}_:: _The way the TSF checks the integrity of the SDE depends on the method of importation. For example, the encrypted data channel may provide data integrity as part of its service._
 +
@@ -1430,9 +1424,9 @@ _When a TSF parses an SDE, it should generate security attributes and create an 
 
 FDP_ITC_EXT.2 Parsing of SDOs
 
-FDP_ITC_EXT.2.1:: The TSF shall support importing SDOs using {empty}[selection: [.underline]#physically protected channels as specified in FTP_ITP_EXT.1, encrypted data buffers as specified in FTP_ITE_EXT.1, cryptographically protected data channels as specified in FTP_ITC_EXT.1]#.
+FDP_ITC_EXT.2.1:: The TSF shall support importing SDOs using [*selection*: _physically protected channels as specified in FTP_ITP_EXT.1, encrypted data buffers as specified in FTP_ITE_EXT.1, cryptographically protected data channels as specified in FTP_ITC_EXT.1_].
 
-FDP_ITC_EXT.2.2:: The TSF shall verify the integrity of the SDO using {empty}[selection: [.underline]#message authentication code as specified in FCS_COP.1/CMAC, cryptographic hash as specified in FCS_COP.1/Hash, keyed hash as specified in FCS_COP.1/KeyedHash, key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap, authenticated encryption algorithm as specified in FCS_COP.1/AEAD, digital signature as specified in FCS_COP.1/SigVer, integrity verification supported by FDP_ITC_EXT.2.1]#.
+FDP_ITC_EXT.2.2:: The TSF shall verify the integrity of the SDO using [*selection*: _message authentication code as specified in FCS_COP.1/CMAC, cryptographic hash as specified in FCS_COP.1/Hash, keyed hash as specified in FCS_COP.1/KeyedHash, key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap, authenticated encryption algorithm as specified in FCS_COP.1/AEAD, digital signature as specified in FCS_COP.1/SigVer, integrity verification supported by FDP_ITC_EXT.2.1_].
 
 FDP_ITC_EXT.2.3:: The TSF shall use the security attributes associated with the imported user data.
 
@@ -1448,7 +1442,7 @@ _When a TSF parses an SDO, it should already have a set of security attributes. 
 
 FDP_RIP.1 Subset Residual Information Protection
 
-FDP_RIP.1.1:: The TSF shall ensure that any previous information content of a resource is made unavailable upon the [.underline]#[deallocation of the resource from]# the following objects: [
+FDP_RIP.1.1:: The TSF shall ensure that any previous information content of a resource is made unavailable upon the {empty}[[.underline]#deallocation of the resource from#] the following objects: [
 +
 * _SDOs_
 * _SDEs_].
@@ -1459,7 +1453,7 @@ _Application Note {counter:remark_count}_:: _When an SDE is a key then it is als
 
 FDP_SDC.2 Stored data confidentiality with dedicated method
 
-FDP_SDC.2.1:: The TSF shall ensure the confidentiality of the [.underline]#[authorization data and the following user data [assignment: _list of internally and externally stored SDEs_]#] according to {empty}[assignment: [.underline]#_SDEs identified in the confidential SDE list attribute of an SDO_#] while it is stored under the control of the TSF.
+FDP_SDC.2.1:: The TSF shall ensure the confidentiality of [.line-through]#the# {empty}[[.underline]#the following user data [_authorization data, [assignment: SDEs identified in the confidential SDE list attribute of an SDO]_]#] according to [assignment: *SDEs identified in the confidential SDE list attribute of an SDO*] while it is stored under the control of the TSF.
 
 FDP_SDC.2.2:: The TSF shall ensure the confidentiality of the user data specified in FDP_SDC.2.1 without user intervention.
 
@@ -1469,7 +1463,7 @@ _Application Note {counter:remark_count}_:: _This SFR applies to SDOs with the c
 
 FDP_SDI.2 Stored Data Integrity Monitoring and Action
 
-FDP_SDI.2.1:: The TSF shall monitor *SDOs and SDEs* controlled by the TSF for [_integrity errors_] on all objects, based on the following attributes: [.underline]#*[selection: [_assignment: attribute associated with presence in protected storage_], message authentication code as specified in FCS_COP.1/CMAC, cryptographic hash as specified in FCS_COP.1/Hash, keyed hash as specified in FCS_COP.1/KeyedHash, digital signature as specified in FCS_COP.1/SigVer, key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap, authenticated encryption algorithm as specified in FCS_COP.1/AEAD]*#.
+FDP_SDI.2.1:: The TSF shall monitor *SDOs and SDEs* controlled by the TSF for [_integrity errors_] on all objects, based on the following attributes: [*selection*: _[assignment: attribute associated with presence in protected storage], message authentication code as specified in FCS_COP.1/CMAC, cryptographic hash as specified in FCS_COP.1/Hash, keyed hash as specified in FCS_COP.1/KeyedHash, digital signature as specified in FCS_COP.1/SigVer, key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap, authenticated encryption algorithm as specified in FCS_COP.1/AEAD_].
 
 FDP_SDI.2.2:: Upon detection of a data integrity error, the TSF shall [
 +
@@ -1496,16 +1490,16 @@ Requirements related to the strength, quality, and performance of externally-gen
 
 FIA_AFL_EXT.1 Authorization Failure Handling
 
-FIA_AFL_EXT.1.1:: The TSF shall maintain {empty}[selection: [.underline]#a unique counter for [selection, choose one of: each SDO, the following SDOs [_assignment: list of SDOs_]], one global counter covering [selection, choose one of: all SDOs, the following SDOs [_assignment: list of SDOs_]]]#, called the failed authorization attempt counters, that counts of the number of unsuccessful authorization attempts that occur related to authorizing access to these *SDOs*.
+FIA_AFL_EXT.1.1:: The TSF shall maintain [selection: _a unique counter for [*selection, choose one of*: each SDO, the following SDOs [assignment: list of SDOs]], one global counter covering [*selection, choose one of*: all SDOs, the following SDOs [assignment: list of SDOs_]], called the failed authorization attempt counters, that counts of the number of unsuccessful authorization attempts that occur related to authorizing access to these *SDOs*.
 
-FIA_AFL_EXT.1.2:: The TSF shall maintain a [.underline]#[selection, choose one of: static, administrator configurable variable]# threshold of the minimal acceptable number of unsuccessful authorization attempts that occur related to authorizing access to these *SDOs*.
+FIA_AFL_EXT.1.2:: The TSF shall maintain a [selection, choose one of: _static, administrator configurable variable_] threshold of the minimal acceptable number of unsuccessful authorization attempts that occur related to authorizing access to these *SDOs*.
 
-FIA_AFL_EXT.1.3:: When the failed authorization attempt counters [.underline]#[selection, choose one of: meets, surpasses]# the threshold for unsuccessful authorization attempts, the TSF shall [.underline]#[selection, choose one of:#
+FIA_AFL_EXT.1.3:: When the failed authorization attempt counters [selection, choose one of: _meets, surpasses_] the threshold for unsuccessful authorization attempts, the TSF shall [*selection, choose one of*:
 +
-* [.underline]#prevent future authorization attempts for a static prescribed amount of time as determined using FPT_STM_EXT.1;# 
-* [.underline]#prevent future authorization attempts for an administrator configurable amount of time as determined using FPT_STM_EXT.1;#
-* [.underline]#prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2;#
-* [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2#
+* _prevent future authorization attempts for a static prescribed amount of time as determined using FPT_STM_EXT.1;_
+* _prevent future authorization attempts for an administrator configurable amount of time as determined using FPT_STM_EXT.1;_
+* _prevent all future authorization attempts indefinitely (i.e., lock), as described by FIA_AFL_EXT.2;_
+* _factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2_
 +
 ] for these *SDOs*.
 
@@ -1521,7 +1515,7 @@ FIA_SOS.2 TSF Generation of Secrets
 
 FIA_SOS.2.1:: The TSF shall provide a mechanism to generate *authorization data* that meet [_the metric where for each authentication attempt, the probability shall be less than one in 1,000,000 that a random attempt will be successful_].
 
-FIA_SOS.2.2:: The TSF shall be able to enforce the use of TSF generated *authorization data* for [_assignment: non-empty list of TSF functions_].
+FIA_SOS.2.2:: The TSF shall be able to enforce the use of TSF generated *authorization data* for [_assignment: *non-empty* list of TSF functions_].
 
 _Application Note {counter:remark_count}_:: _This SFR expects the TSF must generate authorization data from a sufficiently large key space to ensure that users cannot employ random guessing as a statistically plausible method of authorizing actions within the TOE, both for a single event and over a session._
 
@@ -1541,9 +1535,9 @@ _The means of validation may vary based on the type of authentication token._
 
 FIA_UAU.5 Multiple Authentication Mechanisms
 
-FIA_UAU.5.1:: The TSF shall provide [.underline]#*[selection: no mechanism, an authentication token mechanism, a cryptographic signature mechanism, [_assignment: list of authentication mechanisms_]]*# to support user authentication.
+FIA_UAU.5.1:: The TSF shall provide [*selection*: _no mechanism, an authentication token mechanism, a cryptographic signature mechanism, [assignment: list of authentication mechanisms]_] to support user authentication.
 
-FIA_UAU.5.2:: The TSF shall authenticate any user's claimed identity according to the *following rule(s): {empty}[selection: [.underline]#all subject users and SDO owners shall successfully authenticate themselves using one of the mechanisms listed in FIA_UAU.5.1, the Prove service shall not accept "no mechanism" as an authentication method, [_assignment: rules describing how each authentication mechanism provides authentication_]]#*.
+FIA_UAU.5.2:: The TSF shall authenticate any user's claimed identity according to the *following rule(s):* [*selection*: _all subject users and SDO owners shall successfully authenticate themselves using one of the mechanisms listed in FIA_UAU.5.1, the Prove service shall not accept "no mechanism" as an authentication method, [assignment: rules describing how each authentication mechanism provides authentication]_].
 
 _Application Note {counter:remark_count}_:: _This SFR describes the authentication mechanisms required for any user of any service as a precondition for providing authorization to execute the service. This includes the authentication of the owner of the SDOs of the service._
 
@@ -1551,7 +1545,7 @@ _Application Note {counter:remark_count}_:: _This SFR describes the authenticati
 
 FIA_UAU.6 Re-Authenticating
 
-FIA_UAU.6.1:: The TSF shall re-authenticate the user *for access to an SDO* under the conditions: *according to the policy specified in SDO.Reauth*.
+FIA_UAU.6.1:: The TSF shall re-authenticate the user *for access to an SDO* under the conditions [_according to the policy specified in SDO.Reauth_].
 
 _Application Note {counter:remark_count}_:: _The allowed values for the SDO.Reauth attribute of an SDO are defined in FMT_MSA.3 and the SDO Attributes Initialization Table. The rules in FDP_ACF.1.2 and also ensure that the need for re-authorization has been checked before access to an SDO._
 +
@@ -1578,7 +1572,7 @@ FMT_MOF_EXT.1.1:: The TSF shall restrict the ability to perform the functions in
 
 FMT_MSA.1 Management of Security Attributes
 
-FMT_MSA.1.1:: The TSF shall enforce the [_Access Control SFP_] to restrict the ability to [.underline]#[modify]# the security attributes *[_assignment: list of security attributes, to include attributes as specified in <<SDOAttrib>>_] to [_the authorized identified roles as specified in <<SDOAttrib>>_]*.
+FMT_MSA.1.1:: The TSF shall enforce the [_Access Control SFP_] to restrict the ability to {empty}[[.underline]#modify#] the security attributes *[assignment: _list of security attributes, to include attributes as specified in <<SDOAttrib>>_]* to [_the authorized identified roles as specified in <<SDOAttrib>>_].
 
 .Supported Methods for SDO Attributes
 [[SDOAttrib]]
@@ -1595,16 +1589,16 @@ FMT_MSA.1.1:: The TSF shall enforce the [_Access Control SFP_] to restrict the a
 |Cannot be modified
 
 |SDO.AuthData 
-|[_selection_: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify SDO reference authorization data
+|[selection: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify SDO reference authorization data
 
 |SDO.Reauth 
-|[_selection_: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify re-authorization conditions
+|[selection: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify re-authorization conditions
 
 |SDO.Conf 
-|[_selection_: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify the confidential SDE list
+|[selection: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify the confidential SDE list
 
 |SDO.Export 
-|[_selection_: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify the export flag
+|[selection: _ADM-R, MFGADM-R, CApp-R_] roles that are authorized to modify the export flag
 
 |SDO.Integrity 
 |Cannot be modified by users (maintained automatically by TSF)
@@ -1643,7 +1637,7 @@ The TSF provides the capability to protect the contents of an SDO (i.e. the set 
 
 FMT_MSA.3 Static Attribute Initialization
 
-FMT_MSA.3.1:: The TSF shall enforce the [_Access Control SFP_] to provide [.underline]#[selection, choose one of: restrictive, permissive, [_assignment: other property_]]# default values for security attributes that are used to enforce the SFP.
+FMT_MSA.3.1:: The TSF shall enforce the [_Access Control SFP_] to provide [selection, choose one of: _restrictive, permissive, [assignment: other property]_] default values for security attributes that are used to enforce the SFP.
 
 FMT_MSA.3.2:: The TSF shall allow the [_authorized identified roles, according to <<SDOAttribInit>>_] to specify alternative initial values to override the default values when an object or information is created.
 
@@ -1660,17 +1654,17 @@ FMT_MSA.3.2:: The TSF shall allow the [_authorized identified roles, according t
 |SDO.ID 
 |None 
 |Import and generation process 
-|[_assignment: range of allowed values_]
+|[assignment: _range of allowed values_]
 
 |SDO.Type 
 |None 
 |Import and generation process 
-|[_assignment: list of allowed types_]
+|[assignment: _list of allowed types_]
 
 .2+|SDO.AuthData 
-|{empty}[selection: [.underline]#ADM-R, MFGADM-R, CApp-R]#
+|[selection: _ADM-R, MFGADM-R, CApp-R_]
 |Import process 
-.2+|{empty}[selection: [.underline]#none, [_assignment: list of types of authentication tokens allowed_], [_assignment: range of authorization values allowed_]]#
+.2+|[selection: _none, [assignment: list of types of authentication tokens allowed], [assignment: range of authorization values allowed]_]
 
 |None 
 |Generation process
@@ -1678,27 +1672,27 @@ FMT_MSA.3.2:: The TSF shall allow the [_authorized identified roles, according t
 |SDO.Reauth 
 |None 
 |Import and generation process 
-|{empty}[selection: [.underline]#none, each access, policy]#
+|[selection: _none, each access, policy_]
 
 |SDO.Conf 
 |None 
 |Import and generation process 
-|[_assignment: list of SDEs of which the TOE must provide a confidentiality service_]
+|[assignment: _list of SDEs of which the TOE must provide a confidentiality service_]
 
 |SDO.Export 
 |None 
 |Import and generation process 
-|{empty}[selection: [.underline]#exportable, non-exportable]#
+|[selection: _exportable, non-exportable_]
 
 |SDO.Integrity
 |None 
 |Import and generation process 
-|[_assignment: range of allowed values_]
+|[assignment: _range of allowed values_]
 
 |SDO.Bind 
 |None 
 |Import and generation process 
-|[_assignment: range of allowed values_]
+|[assignment: _range of allowed values_]
 
 |===
 
@@ -1743,13 +1737,13 @@ FMT_SMF.1.1:: The TSF shall be capable of performing the following management fu
 * _Reset TOE to factory state for FDP_FRS_EXT.1_
 * _Configure authorization policies for TOE resources_
 +
-_[.underline]#[selection:#_
+_[selection:_
 +
-** _[.underline]#set authorization failure parameters for FIA_AFL_EXT.1,#_
-** _[.underline]#update TOE firmware,#_
-** _[.underline]#update pre-installed SDOs,#_
-** _[.underline]#unlock access to SDO following excessive failed authorization attempts,#_
-** _[.underline]#no other functions]#_].
+** _set authorization failure parameters for FIA_AFL_EXT.1,_
+** _update TOE firmware,_
+** _update pre-installed SDOs,_
+** _unlock access to SDO following excessive failed authorization attempts,_
+** _no other functions]_].
 
 _Application Note {counter:remark_count}_:: _If FPT_MFW_EXT.1 selects [.underline]#mutable firmware#, then FMT_SMF.1 must select [.underline]#Update TOE firmware and pre-installed SDOs#._
 +
@@ -1781,7 +1775,7 @@ _Application Note {counter:remark_count}_:: _Note that a secure state does not i
 
 FPT_MFW_EXT.1 Mutable/Immutable Firmware
 
-FPT_MFW_EXT.1.1:: The TSF shall be maintained as {empty}[selection: [.underline]#immutable, mutable]# firmware.
+FPT_MFW_EXT.1.1:: The TSF shall be maintained as [selection: _immutable, mutable_] firmware.
 
 _Application Note {counter:remark_count}_:: _If [.underline]#mutable# is selected in FPT_MFW_EXT.1.1, the selection-based SFRs FPT_FLS.1/FW, FPT_MFW_EXT.2, FPT_MFW_EXT.3, and FPT_RPL.1/Rollback must be claimed._
 
@@ -1797,7 +1791,7 @@ _Application Note {counter:remark_count}_:: '_Debug modes' may include, but are 
 
 FPT_PHP.3 Resistance to Physical Attack
 
-FPT_PHP.3.1:: The TSF shall resist [_data extraction via fault injection from extreme temperatures and abnormal voltage_] to the {empty}[_TSF storage elements that contain {empty}[selection: [.underline]#SDEs, SDOs, firmware]#_] by responding automatically such that the SFRs are always enforced.
+FPT_PHP.3.1:: The TSF shall resist [_data extraction via fault injection from extreme temperatures and abnormal voltage_] to the [_TSF storage elements that contain [selection: SDEs, SDOs, firmware]_] by responding automatically such that the SFRs are always enforced.
 
 _Application Note {counter:remark_count}_:: _Physical protection mechanisms as envisioned by this requirement are mechanisms that protect communications to the extent that encryption or other logical protections are not required to ensure confidentiality, integrity, and assured identification of endpoints. Such mechanisms may include, for example, physically isolated traces, or mechanisms that take advantage of physical properties of signals to ensure that communications are receivable only by the intended endpoint._
 +
@@ -1817,7 +1811,7 @@ _Depending on the use case and the way status registers are used, unique identit
 +
 _The sole presence of unique identity keys linking to the RoT does not prove authenticity without the use of digital signatures._
 
-FPT_PRO_EXT.1.2:: The TSF shall maintain Root of Trust data as {empty}[selection: [.underline]#immutable, mutable if and only if its mutability is controlled by a unique identifiable owner]#.
+FPT_PRO_EXT.1.2:: The TSF shall maintain Root of Trust data as [selection: _immutable, mutable if and only if its mutability is controlled by a unique identifiable owner_].
 
 _Application Note {counter:remark_count}_:: _One expects that only authorized sources can modify the single RoT, such as through a secure update._
 +
@@ -1829,7 +1823,7 @@ _A unique identifiable owner is assumed to be one with an ADM-R role; however, t
 
 FPT_ROT_EXT.1 Root of Trust Services
 
-FPT_ROT_EXT.1.1:: The TSF shall provide a Root of Trust for Storage, a Root of Trust for Authorization, and {empty}[selection: [.underline]#Root of Trust for Measurement, Root of Trust for Reporting, no others]# based on the Root of Trust identified in FPT_PRO_EXT.1.1.
+FPT_ROT_EXT.1.1:: The TSF shall provide a Root of Trust for Storage, a Root of Trust for Authorization, and [selection: _Root of Trust for Measurement, Root of Trust for Reporting, no others_] based on the Root of Trust identified in FPT_PRO_EXT.1.1.
 
 :xrefstyle: short
 
@@ -1853,7 +1847,7 @@ FPT_RPL.1/Authorization Replay Prevention
 
 FPT_RPL.1.1/Authorization:: The TSF shall detect replay for the following entities: [_user authorization of operations on SDOs_].
 
-FPT_RPL.1.2/Authorization:: The TSF shall perform [_denial of the requested operation on the SDO_] when a replay is detected *using the following methods {empty}[selection: [.underline]#monotonic counters, random nonces, [_assignment: other methods as specified_]]#*.
+FPT_RPL.1.2/Authorization:: The TSF shall perform [_denial of the requested operation on the SDO_] when a replay is detected *using the following methods [selection: _monotonic counters, random nonces, [assignment: other methods as specified]_]*.
 
 _Application Note {counter:remark_count}_:: _The TSF receives authorization from an external source to the TOE to perform an operation on an SDO. If the operation on the SDO is restricted to authorized users, then anyone observing the communication to the TOE can copy the authorization and replay it. Random nonces and monotonic counters are but two mechanisms the TSF can use to mitigate replay. In this requirement, operations on SDOs include generating, using, modifying, propagating, and destroying. Besides monotonic counters and random nonces, the TSF could employ other methods to prevent replay of user authorizations, which the Security Target should describe._
 
@@ -1861,11 +1855,11 @@ _Application Note {counter:remark_count}_:: _The TSF receives authorization from
 
 FPT_TST.1 TSF Testing
 
-FPT_TST.1.1:: The TSF shall run a suite of self tests *during power-on start-up*, {empty}[selection: [.underline]#periodically during normal operation, at the request of the authorized user, *at no other condition,* at the conditions [_assignment: conditions under which self test should occur_]]# to demonstrate the correct operation of [the TSF].
+FPT_TST.1.1:: The TSF shall run a suite of the following self-tests *during power-on start-up* {empty}[selection: [.underline]#periodically during normal operation, at the request of the authorized user, *at no other condition,* at the conditions [_assignment: conditions under which self-test should occur_]]# to demonstrate the correct operation of {empty}[[.underline]#the TSF#]: [assignment: _list of self-tests run by the TSF_].
 
-FPT_TST.1.2:: The TSF shall provide authorized users with the capability to verify the integrity of [.underline]#[TSF data]#.
+FPT_TST.1.2:: The TSF shall provide authorized users with the capability to verify the integrity of {empty}[[.underline]#TSF data#].
 
-FPT_TST.1.3:: The TSF shall provide authorized users with the capability to verify the integrity of *the* [.underline]#[TSF]#.
+FPT_TST.1.3:: The TSF shall provide authorized users with the capability to verify the integrity of *the* {empty}[[.underline]#TSF#].
 
 _Application Note {counter:remark_count}_:: _This requirement intends to cover integrity of the TSF functionality (i.e. runtime checks)._
 +
@@ -2311,7 +2305,7 @@ As with ATE_IND, the evaluator shall generate a report to document their finding
 
 FCS_RBG.2 Random Bit Generation (External Seeding)
 
-FCS_RBG.2.1:: The TSF shall be able to accept a minimum input of [assignment: _minimum input length greater than zero_] from a TSF interface for the purpose of obtaining entropy.
+FCS_RBG.2.1:: The TSF shall be able to accept a minimum input of [assignment: _minimum input length greater than zero_] from a TSF interface for the purpose of *obtaining entropy*.
 
 _Application Note {counter:remark_count}_:: _In order to maintain compliance with NIST SP 800-90A Rev. 1, the TSF accepts enough bits input from an external entropy source to satisfy the entropy requirements of the DRBG. The TSF should also protect the integrity and confidentiality of the entropy it receives from the external entropy source._
 +
@@ -2321,7 +2315,7 @@ _The TSF interface for the purpose of seeding here is the interface used to gath
 
 FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
 
-FCS_RBG.3.1:: The TSF shall be able to seed the DRBG using a [selection: choose one of: _TSF software-based entropy source, TSF hardware-based entropy source] [assignment: _name of entropy source_] with [assignment: _number of bits_] bits of min-entropy. 
+FCS_RBG.3.1:: The TSF shall be able to seed the *DRBG* using a [selection: choose one of: _TSF software-based *entropy* source, TSF hardware-based *entropy* source_] [assignment: _name of *entropy* source_] with [assignment: _number of bits_] bits of min-entropy.
 
 _Application Note {counter:remark_count}_:: _If an ST Author wishes to use multiple internal entropy sources, they iterate this requirement for each entropy source used by the TSF._
 +
@@ -2333,13 +2327,13 @@ _Hardware-based entropy sources may be stochastically modelled, in which case th
 
 FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
 
-FCS_RBG.4.1:: The TSF shall be able to seed the DRBG using [selection: _[assignment: number] TSF software-based entropy source(s), [assignment: number] TSF hardware-based entropy source(s)_].
+FCS_RBG.4.1:: The TSF shall be able to seed the *DRBG* using [selection: _[assignment: number] TSF software-based *entropy* source(s), [assignment: number] TSF hardware-based *entropy* source(s)_].
 
 ==== FCS_RBG.5 Random Bit Generation (Combining Entropy Sources)
 
 FCS_RBG.5 Random Bit Generation (Combining Entropy Sources)
 
-FCS_RBG.5.1:: The TSF shall {empty}[*selection*: _[.underline]#hash, concatenate and hash, xor, input into a linear feedback shift register, [assignment: combining operation]#_] [selection: _output from TSF entropy source(s), input from TSF interface(s) for obtaining entropy_] resulting in a minimum of [assignment: _number of bits_] bits of min-entropy to create the entropy input into the derivation function as defined in {empty}[*selection*: _[.underline]#ISO/IEC 18031: 2011, NIST SP 800-90A Rev. 1#_]. 
+FCS_RBG.5.1:: The TSF shall {empty}[*selection*: _hash, concatenate and hash, xor, input into a linear feedback shift register, [assignment: combining operation]_] [selection: _output from TSF *entropy* source(s), input from TSF interface(s) for_ *_obtaining entropy_*] to create the entropy input into the derivation function as defined in [*selection*: _ISO/IEC 18031: 2011, NIST SP 800-90A Rev. 1_] resulting in a minimum of [assignment: _number of bits_] bits of min-entropy.
 
 _Application Note {counter:remark_count}_:: _One can apply NIST SP 800-90B (or AIS-31) statistical tests against internal entropy sources (a.k.a. raw entropy) to confirm the min-entropy of the entropy sources either in aggregate or individually. One should not apply NIST SP 800-90B (or AIS-31) statistical tests against external entropy sources since the TOE is unable to enforce entropy requirements or conditioning requirements against external sources of entropy. However, the TSS may include estimates for min-entropy from external sources that contribute to the overall entropy requirements for either the DRBG or for FCS_OTV_EXT.1._
 +
@@ -2351,14 +2345,14 @@ _The TSF interface(s) for seeding here is the interface used to gather entropy f
 
 FCS_RBG.6 Random Bit Generation Service
 
-FCS_RBG.6.1:: The TSF shall provide a [selection: _hardware, software, [assignment: other interface type]_] interface to make the DRBG output, as specified in FCS_RBG.1 Random Bit Generation (RBG), available as a service to entities outside of the TOE.
+FCS_RBG.6.1:: The TSF shall provide a [selection: _hardware, software, [assignment: other interface type]_] interface to make the *DRBG* output, as specified in FCS_RBG.1 Random Bit Generation (RBG), available as a service to entities outside of the TOE.
 
 === Protection of the TSF
 ==== FPT_ITT.1 Basic Internal TSF Data Transfer Protection
 
 FPT_ITT.1 Basic Internal TSF Data Transfer Protection
 
-FPT_ITT.1.1:: The TSF shall protect TSF data from [.underline]#[disclosure]# *and {empty}[selection: [.underline]#modification, no other actions]*# when it is transmitted between separate parts of the TOE.
+FPT_ITT.1.1:: The TSF shall protect TSF data from {empty}[[.underline]#disclosure#] *and [selection: _modification, no other actions_]* when it is transmitted between separate parts of the TOE.
 
 ==== FPT_PRO_EXT.2 Data Integrity Measurements
 
@@ -2370,7 +2364,7 @@ _Application Note {counter:remark_count}_:: _The generation of these integrity m
 +
 _Data protected by the TOE includes DSC firmware, DSC configuration data, and user data. DSC configuration data may include permanent SDEs or SDOs such as immutable or mutable root keys, authorization values, and authentication tokens (i.e. DSC.ID, OB.P_SDO, OB.FAACntr, OB.AntiReplay, and OB.Context). User data may include transient SDEs and SDOs as well as authorization values and authentication tokens bound to these SDEs and SDOs (i.e. OB.T_SDO)._
 
-FPT_PRO_EXT.2.2:: The TSF shall accumulate platform characteristics using a consistent [_assignment: description of process for accumulating platform characteristics_] process in which verified quantifiable measurements and assertions are accumulated by the RoT for Measurement to prove the integrity of its SDOs.
+FPT_PRO_EXT.2.2:: The TSF shall accumulate platform characteristics using a consistent [assignment: _description of process for accumulating platform characteristics_] process in which verified quantifiable measurements and assertions are accumulated by the RoT for Measurement to prove the integrity of its SDOs.
 
 _Application Note {counter:remark_count}_:: _Although a platform may enter any state possible — including undesirable or insecure states — it can use platform characteristics, including integrity measurements and assertions, along with logging and reporting to accurately report the state derived from data attributing to those states. In this context, platform characteristics can include, but is not limited to, cryptographic hashes of binary data, security-critical configurations, register values (including status registers) and milestones, such as verification of firmware, or transitioning from a boot phase to an operational phase. A platform characteristic may also represent the state of some entity outside the DSC. A process independent from the DSC or the host containing the DSC may evaluate the platform characteristics and determine an appropriate action._
 
@@ -2378,7 +2372,7 @@ _Application Note {counter:remark_count}_:: _Although a platform may enter any s
 
 FPT_ROT_EXT.3 Root of Trust for Reporting Mechanisms
 
-FPT_ROT_EXT.3.1:: The TSF shall be able to attest to a state as represented by platform characteristics with a Root of Trust for Reporting mechanism that uses for its identity {empty}[selection: [.underline]#a cryptographically verifiable identity in FPT_PRO_EXT.1, an alias key bound to the cryptographically verifiable identity in FPT_PRO_EXT.1]# and using a signature algorithm as specified in FCS_COP.1**/SigGen**.
+FPT_ROT_EXT.3.1:: The TSF shall be able to attest to a state as represented by platform characteristics with a Root of Trust for Reporting mechanism that uses for its identity [selection: _a cryptographically verifiable identity in FPT_PRO_EXT.1, an alias key bound to the cryptographically verifiable identity in FPT_PRO_EXT.1_] and using a signature algorithm as specified in FCS_COP.1**/SigGen**.
 
 _Application Note {counter:remark_count}_:: _While it is possible for a group of components to share a single unique group identifier, it is important to ensure that individual components have their own unique identifiers relative to each other._
 +
@@ -2415,7 +2409,7 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 
 FCS_CKM.1/AKG Cryptographic Key Generation (Asymmetric Keys)
 
-FCS_CKM.1.1/AKG:: The TSF shall generate *asymmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm [*selection*: _cryptographic key generation algorithm_] and specified cryptographic *algorithm parameters* [.line-through]#key sizes# {empty}[*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
+FCS_CKM.1.1/AKG:: The TSF shall generate *asymmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm [*selection*: _cryptographic key generation algorithm_] and specified cryptographic *algorithm parameters* [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
 
 .Asymmetric Cryptographic Key Generation
 [[AsymKeyGen]]
@@ -2516,7 +2510,7 @@ _See FCS_RBG.1 for requirements about appropriate entropy for selected cryptogra
 
 FCS_CKM_EXT.3 Cryptographic Key Access
 
-FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [selection: _key encapsulation as specified in FCS_COP.1/KeyEncap, key wrapping as specified in FCS_COP.1/KeyWrap, key wrapping as specified in FCS_COP.1/AEAD_] to access keys when performing [selection: _cryptographic key usage in cryptographic operations, cryptographic key storage, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
+FCS_CKM_EXT.3.1:: The TSF shall use specified cryptographic key access methods [selection: _key encapsulation *as specified in FCS_COP.1/KeyEncap*, key wrapping *as specified in FCS_COP.1/KeyWrap*, key wrapping_ *_as specified in FCS_COP.1/AEAD_*] to access keys when performing [selection: _cryptographic key usage in cryptographic operations, cryptographic key storage, cryptographic key recovery, modifications to attributes of cryptographic keys, cryptographic key destruction_].
 
 ==== FCS_CKM.5 Cryptographic Key Derivation
 
@@ -2634,7 +2628,7 @@ _If deriving a secret IV or seed, select KDF-HASH, KDF-MAC-1S, or KDF-MAC-2S._
 
 FCS_CKM_EXT.8 Password-Based Key Derivation
 
-FCS_CKM_EXT.8.1:: The TSF shall perform password-based key derivation functions in accordance with a specified cryptographic algorithm {empty}[_HMAC-[selection: SHA-256, SHA-384, SHA-512]_], with iteration count of _[assignment: number of iterations]_ using a randomly generated salt of length _[selection: 128, [assignment: greater than 128]]_ and output cryptographic key sizes _[selection: 128, 192, 256, [assignment: greater than 128]]_ bits that meet the following standard: [NIST SP 800-132 Section 5.3 (PBKDF2)].
+FCS_CKM_EXT.8.1:: The TSF shall perform password-based key derivation functions in accordance with a specified cryptographic algorithm HMAC-[selection: _SHA-256, SHA-384, SHA-512_], with iteration count of [assignment: _number of iterations_] using a randomly generated salt of length {empty}[selection: _128, [assignment: greater than 128]_] and output cryptographic key sizes {empty}[selection: _128, 192, 256, [assignment: greater than 128]_] bits that meet the following: [_NIST SP 800-132 Section 5.3 (PBKDF2)_].
 
 _Application Note {counter:remark_count}_:: _The TSF must condition a password into a string of bits prior to using it as input to algorithms that form SKs and KEKs. The TSF can perform conditioning using one of the identified hash functions or the process described in NIST SP 800-132 Section 5.3 (PBKDF2); the ST author selects the method used. NIST SP 800-132 Section 5.3 (PBKDF2) requires the use of a pseudo-random function (PRF) consisting of HMAC with an approved hash function._
 +
@@ -2718,7 +2712,7 @@ FCS_COP.1.1/AEAD:: The TSF shall perform [_authenticated encryption with associa
 
 FCS_COP.1/CMAC Cryptographic Operation (CMAC)
 
-FCS_COP.1.1/CMAC:: The TSF shall perform [_CMAC_] in accordance with a specified cryptographic algorithm [_AES-CMAC_] and cryptographic key sizes [*selection*: 128 bits, 192 bits, 256 bits] that meet the following: [*selection*: ISO/IEC 9797-1:2011 sub clause 7.6 (CMAC) and ISO/IEC 18033-3:2010 sub clause 5.2 (AES), NIST SP 800-38B (CMAC) and NIST FIPS 197 (AES)].
+FCS_COP.1.1/CMAC:: The TSF shall perform [_CMAC_] in accordance with a specified cryptographic algorithm [_AES-CMAC_] and cryptographic key sizes [*selection*: _128 bits, 192 bits, 256 bits_] that meet the following: [*selection*: _ISO/IEC 9797-1:2011 sub clause 7.6 (CMAC) and ISO/IEC 18033-3:2010 sub clause 5.2 (AES), NIST SP 800-38B (CMAC) and NIST FIPS 197 (AES)_].
 
 ==== FCS_COP.1/KeyEncap Cryptographic Operation (Key Encapsulation)
 
@@ -2794,9 +2788,9 @@ ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
 
 FDP_DAU.1/Prove Basic Data Authentication (for Use with the Prove Service)
 
-FDP_DAU.1.1/Prove:: The TSF shall provide a capability to generate evidence that can be used as a guarantee of the validity of {empty}[selection: [.underline]#[_assignment: list of objects or information types_] declared valid by the TSF, [_assignment: list of objects or information types_] declared valid by an authenticated user]#.
+FDP_DAU.1.1/Prove:: The TSF shall provide a capability to generate evidence that can be used as a guarantee of the validity of [*selection*: _[assignment: list of objects or information types] declared valid by the TSF, [assignment: list of objects or information types] declared valid by an authenticated user_].
 
-FDP_DAU.1.2/Prove:: The TSF shall provide [_assignment: list of subjects_] with the ability to verify evidence of the validity of the indicated information.
+FDP_DAU.1.2/Prove:: The TSF shall provide [assignment: _list of subjects_] with the ability to verify evidence of the validity of the indicated information.
 
 _Application Note {counter:remark_count}_:: _This SFR describes the output of the Prove service provided by the DSC. The evidence of validity or authenticity, or other evidence derived, is expected to be processed by the RoT for Measurement. Additionally, the use of a RoT for Reporting presupposes a logging capability or other means of generating state information that could be conveyed to external entities. Therefore, FDP_DAU.1.1/Prove must be claimed if-and-only-if [.underline]#Root of Trust for Measurement# and [.underline]#Root of Trust for Reporting# are both selected in FPT_ROT_EXT.1.1. An 'authenticated user' in the sense of the selection in FDP_DAU.1.1/Prove means a user who has been authenticated by the DSC according to the mechanisms of FIA_UAU.5._
 +
@@ -2810,7 +2804,7 @@ _For data that is validity-stamped, the DSC does nothing but respond to a reques
 
 FDP_FRS_EXT.2 Factory Reset Behavior
 
-FDP_FRS_EXT.2.1:: Upon initiation of a factory reset, the TSF shall destroy [_all non-permanent SDEs and SDOs_] and restore the following *pre-installed SDOs* to their factory settings: [_assignment: pre-installed SDOs to be restored during a factory reset_].
+FDP_FRS_EXT.2.1:: Upon initiation of a factory reset, the TSF shall destroy [_all non-permanent SDEs and SDOs_] and restore the following *pre-installed SDOs* to their factory settings: [_assignment: *pre-installed SDOs to be* restored by a factory reset_].
 
 _Application Note {counter:remark_count}_:: _Not all DSCs permit factory reset functionality. Those that do are expected to perform a factory reset in a manner that prevents any inadvertent disclosure of security-relevant data that was present on the DSC prior to the factory reset. For DSCs that permit factory reset functionality (as indicated by selection of [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2# in FIA_AFL_EXT.1.3, or by [.underline]#no actions or conditions# NOT being selected in FDP_FRS_EXT.1.1), this SFR must be claimed._
 
@@ -2876,7 +2870,7 @@ FPT_RPL.1/Rollback Replay Detection (Rollback)
 
 FPT_RPL.1.1/Rollback:: The TSF shall detect replay for the following entities: [_previous firmware builds_].
 
-FPT_RPL.1.2/Rollback:: The TSF shall *prevent the execution of the loaded firmware and* perform *[.underline]#[selection, choose one of: [_assignment: other actions_], no other actions]*# when replay is detected.
+FPT_RPL.1.2/Rollback:: The TSF shall *prevent the execution of the loaded firmware and* perform [*selection, choose one of*: _[assignment: other actions], no other actions_] when replay is detected.
 
 _Application Note {counter:remark_count}_:: _The TSF data is used as a guarantee of the ordinal identifier of the firmware instance. When a firmware load is requested, the TSF ensures the authenticated firmware ordinal identifier is greater than or equal to the previously authenticated firmware identifier. For example, this could be accomplished by ensuring the validated instance of the firmware to be loaded is greater than or equal to the instance previously validated and loaded into the TOE. By loading a previous instance of firmware, it potentially opens up the device to known vulnerabilities._
 
@@ -2884,7 +2878,7 @@ _Application Note {counter:remark_count}_:: _The TSF data is used as a guarantee
 
 FPT_STM_EXT.1 Reliable Time Counting
 
-FPT_STM_EXT.1.1:: The TSF shall be able to provide a reliable [*selection*: internal time stamp, external time stamp, monotonically increasing counter] to measure the passage of time.
+FPT_STM_EXT.1.1:: The TSF shall be able to provide a reliable [selection: _internal time stamp, external time stamp, monotonically increasing counter_] to measure the passage of time.
 
 _Application Note {counter:remark_count}_:: _It is acceptable for the TSF to provide timestamp data either through an internal clock or a counter. It is also permissible for the TSF to obtain time data from a clock contained within the same physical enclosure in which the TOE is embedded (e.g. a mobile device)._
 
@@ -2893,7 +2887,7 @@ _Application Note {counter:remark_count}_:: _It is acceptable for the TSF to pro
 
 FTP_CCMP_EXT.1 CCM Protocol
 
-FTP_CCMP_EXT.1.1:: The TSF shall implement CCMP using AES in CCM mode and key size {empty}[selection: [.underline]#128-bits, 256-bits]# as defined in {empty}[selection: [.underline]#IEEE 802.11i, IEEE 802.11ac]#.
+FTP_CCMP_EXT.1.1:: The TSF shall implement CCMP using AES in CCM mode and key size [*selection*: _128 bits, 256 bits_] as defined in [*selection*: _IEEE 802.11i, IEEE 802.11ac_].
 
 FTP_CCMP_EXT.1.2:: The TSF shall discard incoming messages if authentication fails.
 
@@ -2907,7 +2901,7 @@ _CCMP is defined in IEEE 802.11i. CCMP-256 is defined in IEEE 802.11ac._
 
 FTP_GCMP_EXT.1 GCM Mode Protocol
 
-FTP_GCMP_EXT.1.1:: The TSF shall implement GCMP using AES in GCM mode and key size {empty}[selection: [.underline]#128-bits, 256-bits]# as defined in [_IEEE 802.11ad_].
+FTP_GCMP_EXT.1.1:: The TSF shall implement GCMP using AES in GCM mode and key size [*selection*: _128 bits, 256 bits_] as defined in [_IEEE 802.11ad_].
 
 FTP_GCMP_EXT.1.2:: The TSF shall discard incoming messages if authentication fails.
 
@@ -2919,7 +2913,7 @@ _Application Note {counter:remark_count}_:: _Inclusion of this SFR requires incl
 
 FTP_ITC_EXT.1 Cryptographically Protected Communications Channels
 
-FTP_ITC_EXT.1.1:: The TSF shall use {empty}[selection: [.underline]#CCMP as specified in FTP_CCMP_EXT.1, GCMP as specified in FTP_GCMP_EXT.1]# protocol to provide a communication channel between itself and [_assignment: list of entities external to the TOE_] that protects channel data from disclosure and ensures the integrity of channel data.
+FTP_ITC_EXT.1.1:: The TSF shall use [*selection*: _CCMP as specified in FTP_CCMP_EXT.1, GCMP as specified in FTP_GCMP_EXT.1_] protocol to provide a communication channel between itself and [_assignment: list of entities external to the TOE_] that protects channel data from disclosure and ensures the integrity of channel data.
 
 _Application Note {counter:remark_count}_:: _Entities external to the TOE include applications that communicate with the TOE such as authentication capabilities (e.g. biometrics reader), external storage, and interfaces with an external DSC._
 
@@ -2927,13 +2921,11 @@ _Application Note {counter:remark_count}_:: _Entities external to the TOE includ
 
 FTP_ITE_EXT.1 Encrypted Data Communications
 
-FTP_ITE_EXT.1.1:: The TSF shall encrypt data for transfer between the TOE and [_assignment: list of entities external to the TOE_] using a cryptographic algorithm and key size as specified in FCS_COP.1**/SKC**, and using [.underline]#[selection:#
+FTP_ITE_EXT.1.1:: The TSF shall encrypt data for transfer between the TOE and [_assignment: list of entities external to the TOE_] using a cryptographic algorithm and key size as specified in FCS_COP.1**/SKC**, and using [*selection*:
 +
-* [.underline]#Pre-shared keys;#
-* [.underline]#Key agreement according to FCS_CKM_EXT.7;#
-* [.underline]#Keys exchanged using a physically protected communication mechanism conformant with FTP_ITP_EXT.1#
-+
-].
+* _Pre-shared keys;_
+* _Key agreement according to FCS_CKM_EXT.7;_
+* _Keys exchanged using a physically protected communication mechanism conformant with FTP_ITP_EXT.1_].
 
 _Application Note {counter:remark_count}_:: _This requirement applies to encrypted data communications between the TOE and external entities that do not use a physically protected mechanism conforming to FTP_ITP_EXT.1, or a cryptographically protected data channel as conforming to FTP_ITC_EXT.1. For example, if data is transferred through encrypted buffers (or blobs) then this requirement applies. If data is transferred through a physically protected channel, then FTP_ITP_EXT.1 applies. This requirement would apply, for example, for communications implemented through a shared data buffer._
 
@@ -2941,7 +2933,7 @@ _Application Note {counter:remark_count}_:: _This requirement applies to encrypt
 
 FTP_ITP_EXT.1 Physically Protected Channel
 
-FTP_ITP_EXT.1.1:: The TSF shall provide a *physically protected* communication channel between itself and [_assignment: list of other IT entities within the same platform_].
+FTP_ITP_EXT.1.1:: The TSF shall provide a physically protected communication channel between itself and [_assignment: list of other IT entities within the same platform_].
 
 [appendix]
 == Extended Component Definitions
