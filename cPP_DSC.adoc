@@ -1855,7 +1855,7 @@ _Application Note {counter:remark_count}_:: _The TSF receives authorization from
 
 FPT_TST.1 TSF Testing
 
-FPT_TST.1.1:: The TSF shall run a suite of self tests *during power-on start-up*, {empty}[selection: [.underline]#periodically during normal operation, at the request of the authorized user, *at no other condition,* at the conditions [_assignment: conditions under which self test should occur_]]# to demonstrate the correct operation of [the TSF].
+FPT_TST.1.1:: The TSF shall run a suite of the following self-tests *during power-on start-up* {empty}[selection: [.underline]#periodically during normal operation, at the request of the authorized user, *at no other condition,* at the conditions [_assignment: conditions under which self-test should occur_]]# to demonstrate the correct operation of {empty}[[.underline]#the TSF#]: [assignment: _list of self-tests run by the TSF_].
 
 FPT_TST.1.2:: The TSF shall provide authorized users with the capability to verify the integrity of {empty}[[.underline]#TSF data#].
 
