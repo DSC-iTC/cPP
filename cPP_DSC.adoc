@@ -675,7 +675,7 @@ FCS_CKM.6 Timing and event of cryptographic key destruction
 
 FCS_CKM.6.1:: The TSF shall destroy [assignment: _list of cryptographic keys (including keying material)_] when [selection: _no longer needed, [assignment: other circumstances for key or keying material destruction]_].
 
-_Application Note {counter:remark_count}_:: _The TOE will have mechanisms to destroy keys, including intermediate keys and key material, by using an approved method as specified in FCS_CKM.6.2. Examples of keys include intermediate keys, leaf keys, encryption keys, and signing keys. Key material includes seeds, authentication secrets, passwords, PINs, and other secret values used to derive keys. The ST Author shall list all such keys and keying material that are subject to destruction in the first assignment._
+_Application Note {counter:remark_count}_:: _The TOE will have mechanisms to destroy keys, including intermediate keys and key material, by using an approved method as specified in FCS_CKM.6.2. Examples of keys include intermediate keys, leaf keys, encryption keys, and signing keys. Key material includes seeds, authentication secrets, passwords, PINs, and other secret values used to derive keys. The ST author must list all such keys and keying material that are subject to destruction in the first assignment._
 +
 _This SFR does not apply to the public component of asymmetric key pairs or to keys that are permitted to remain stored, such as device identification keys._
 
@@ -779,7 +779,7 @@ _For the key derivation functions, when concatenating keys for AES-CMAC, the con
 +
 _For the key derivation functions and XOR, each party may have to use an asymmetric method from FCS_CKM.2 to transmit their shares to each other. Key shares may also come from a token, in which case, TOEs may use key access methods in FCS_CKM_EXT.3 to authorize access and use of those keys in this SFR._
 +
-_There are no standards that specify how to derive a key from two keys using KEK or XOR. For KEK, encrypting one key with another, one must use one of the algorithms listed in FCS_COP.1/AEAD or FCS_COP.1/SKC and indicate which of the inputs is the plaintext and which is the key. If XOR is selected, the ST Author should describe this method in the documentation._
+_There are no standards that specify how to derive a key from two keys using KEK or XOR. For KEK, encrypting one key with another, one must use one of the algorithms listed in FCS_COP.1/AEAD or FCS_COP.1/SKC and indicate which of the inputs is the plaintext and which is the key. If XOR is selected, the ST author should describe this method in the documentation._
 +
 _For ST authors, please consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
 
@@ -1551,7 +1551,7 @@ _Application Note {counter:remark_count}_:: _The allowed values for the SDO.Reau
 +
 _An SDO.Reauth value of 'none' indicates that no authentication of the subject user nor of the SDO owners is necessary. It also indicates that no reauthorization for operations using the SDO is necessary._
 +
-_An SDO.Reauth value of policy indicates that there may be a more complicated set of circumstances that trigger a re-auth (re-authentication of the users and owners as well as re-authorization of the operation). This could be a policy of a time limit for which a user can use an SDO before re-authentication (e.g. 10 minutes or 24 hours). The ST should indicate the policies allowed, and how the TOE evaluates the policies. The ST should also indicate the location of those policies, and how the TOE protects the integrity of those policies._
+_An SDO.Reauth value of policy indicates that there may be a more complicated set of circumstances that trigger a re-auth (re-authentication of the users and owners as well as re-authorization of the operation). This could be a policy of a time limit for which a user can use an SDO before re-authentication (e.g. 10 minutes or 24 hours). The ST author should indicate the policies allowed, and how the TOE evaluates the policies. The ST author should also indicate the location of those policies, and how the TOE protects the integrity of those policies._
 +
 _When the TSF binds a user to access an SDO, this means that the TSF has authenticated the user and that the TSF authorized the user to have the right to exercise one or more of the following actions: generate the SDO, modify the SDO, including its security attributes, use the SDO in a TOE operation, propagate or duplicate the SDO for use by a device external to the DSC, or destroy the SDO. The user may not have exclusive rights to exercise the operations listed._
 +
@@ -2317,7 +2317,7 @@ FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
 
 FCS_RBG.3.1:: The TSF shall be able to seed the *DRBG* using a [selection: choose one of: _TSF software-based *entropy* source, TSF hardware-based *entropy* source_] [assignment: _name of *entropy* source_] with [assignment: _number of bits_] bits of min-entropy.
 
-_Application Note {counter:remark_count}_:: _If an ST Author wishes to use multiple internal entropy sources, they iterate this requirement for each entropy source used by the TSF._
+_Application Note {counter:remark_count}_:: _If an ST author wishes to use multiple internal entropy sources, they iterate this requirement for each entropy source used by the TSF._
 +
 _Hardware-based entropy sources are entropy sources whose primary function is entropy generation, such as ring oscillators, diodes, and thermal entropy. While a TOE may use software to collect the entropy from these hardware sources, these are not software-based. Software-based entropy sources are those sources that have some other primary function, and the entropy is a byproduct of their normal operation. Examples of software-based entropy sources are user or system-based events, reading the least significant bits from an event timer, etc._
 +
@@ -2612,11 +2612,11 @@ NIST SP 800-108 Rev. 1 (Section 4.3) [KDF in Double-Pipeline Iteration Mode] [se
 
 |===
 
-_Application Note {counter:remark_count}_:: _There are no standards that specify how to derive a key from two keys using XOR (KDF-XOR) or encryption (KDF-ENC). If KDF-XOR is selected, the ST Author should describe this method in the documentation. If KDF-ENC is selected, the ST Author should document the encryption algorithm used from FCS_COP.1/AEAD or FCS_COP.1/SKC, and which of the inputs is the plaintext and which is the key._
+_Application Note {counter:remark_count}_:: _There are no standards that specify how to derive a key from two keys using XOR (KDF-XOR) or encryption (KDF-ENC). If KDF-XOR is selected, the ST author should describe this method in the documentation. If KDF-ENC is selected, the ST author should document the encryption algorithm used from FCS_COP.1/AEAD or FCS_COP.1/SKC, and which of the inputs is the plaintext and which is the key._
 +
 _In KDF-MAC-2S, if a CMAC is selected in the MAC step, then select AES-128-CMAC in the KDF step and select 128 as the output key size. If HMAC is selected in the MAC step, then select the same HMAC in the KDF._
 +
-_Under input parameters, if concatenated keys or intermediary keys is selected, the ST Author should describe the sources of the keys, and the order in which they are concatenated, along with any other values that are concatenated with them. This option may be chosen in instances when input keying material for the KDF comes from two independent sources, for example, a client and a server._
+_Under input parameters, if concatenated keys or intermediary keys is selected, the ST author should describe the sources of the keys, and the order in which they are concatenated, along with any other values that are concatenated with them. This option may be chosen in instances when input keying material for the KDF comes from two independent sources, for example, a client and a server._
 +
 _If deriving a symmetric key, select any of the above rows._
 +
