@@ -451,7 +451,7 @@ Some DSCs may want to distinguish between SDEs created within itself from SDEs i
 
 As defined by the references [CC1], [CC2], [CC3], [CC4], [CC5] and [CC-E&I], this cPP:
 
-* conforms to the requirements of Common Criteria CC:2022, Release 1
+* conforms to the requirements of Common Criteria CC:2022, Release 1 and the Errata and Interpretation, Version 1.1
 * is Part 2 extended, Part 3 conformant
 * does not claim conformance to any other PP or package.
 
