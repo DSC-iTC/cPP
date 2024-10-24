@@ -5,8 +5,8 @@
 :sectnums:
 :sectnumlevels: 5
 :imagesdir: images
-:revnumber: 2.0-Proposed-Draft
-:revdate: September 6, 2024
+:revnumber: 2.0
+:revdate: October 28, 2024
 :xrefstyle: full
 :doctype: book
 :chapter-refsig: Section
@@ -96,7 +96,7 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 |https://www.commoncriteriaportal.org/cc/index.cfm
 
 |[DSC SD]
-|Supporting Document: Evaluation Activities for collaborative Protection Profile for Dedicated Security Component: Mandatory Technical Document, Version 2.0-Proposed-Draft, September 6, 2024
+|Supporting Document: Evaluation Activities for collaborative Protection Profile for Dedicated Security Component: Mandatory Technical Document, Version 2.0, October 28, 2024
 |https://dsc-itc.github.io
 
 |===
@@ -114,26 +114,9 @@ The target audiences of this cPP are developers, CC consumers, system integrator
 |9/10/20
 |Initial publication
 
-|1.0.1
-|December 13, 2022
-|conversion to asciidoc
-
-|2.0-PRD-1
-|October 31, 2023
-|Public Review Draft 1 for v2.0
-
-|2.0-PRD-2
-
-|May 24, 2024
-|Public Review Draft 2 for v2.0
-
-|2.0-Proposed-Draft
-|September 6, 2024
-|Proposed Final Draft for v2.0
-
 |2.0
-|
-|Final publication for v2.0
+|October 28, 2024
+|Final publication for v2.0 (conversion to asciidoc, respond to CCDB comments)
 
 |===
 
@@ -5211,7 +5194,7 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [AIS31] Matthias Peter and Werner Schindler. _A proposal for: Functionality classes for random number generators_, Bundesamt für Sicherheit in der Informationstechnik (BSI), September 2011
 
-[ANSI-ECC] American National Standards Institute. _ANSI X9.63–2011 (R2017) Public Key Cryptography for the Financial Services Industry - Key Agreement and Key Transport Using Elliptic Curve Cryptography_, American National Standards Institute, February 2017
+[ANSI-ECC] American National Standards Institute. _ANSI X9.63-2011 (R2017) Public Key Cryptography for the Financial Services Industry - Key Agreement and Key Transport Using Elliptic Curve Cryptography_, American National Standards Institute, February 2017
 
 [FIPS-AES] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 197, Advanced Encryption Standard (AES)_, National Institute of Standards and Technology, November 2001
 
