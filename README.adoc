@@ -2,9 +2,6 @@
 
 image::https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg[link="https://github.com/DSC-iTC/Governance/blob/Working/code_of_conduct.adoc"]
 
-== NOTE ABOUT BRANCHES
-As the cPP and SD have only recently been ported to asciidoc format the Main branch does not have approved copies of the published v1.0 documentation. The https://github.com/DSC-iTC/cPP/tree/Main[Main] branch will be targeted to include the v1.1 release. In the meantime work is ongoing in the https://github.com/DSC-iTC/cPP/tree/Working[Working] branch.
-
 == Introduction
 This is the primary repository for the Dedicated Security Components iTC and its work on creating collaborative Protection Profiles and related supporting documents. The Common Criteria Portal page can be found https://www.commoncriteriaportal.org/communities/dedicated_security_components.cfm[here].
 
