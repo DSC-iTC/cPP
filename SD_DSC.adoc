@@ -1685,95 +1685,95 @@ There are no KMD evaluation activities for this component.
 
 == Evaluation Activities for Optional Requirements 
 
-==== Random Bit Generation (FCS_RBG)
+=== Random Bit Generation (FCS_RBG)
 
-===== FCS_RBG.2 Random Bit Generation (External Seeding)
+==== FCS_RBG.2 Random Bit Generation (External Seeding)
 
-====== TSS
+===== TSS
 
 The evaluator shall verify that this function is included as an interface to the RBG in the TSS or the proprietary Entropy Analysis Report and that the behavior of the RBG following a call to this interface is described. The evaluator shall also verify that the documentation of the DRBG describes the conditions of use and possible values for the Personalization String input to the SP 800-90A specified DRBG.
 
-====== AGD
+===== AGD
 
 The evaluator shall verify that the operational guidance describes the process for supplying an external seed to the TOE's DRBG.
 
-====== Test
+===== Test
 
 The evaluator shall develop and execute or verify and observe the developer tooling which adds data to the RBG via the Personalization String. The evaluator shall verify that the request succeeds.
 
-====== KMD
+===== KMD
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
+==== FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
 
-====== TSS
+===== TSS
 
 The evaluator shall verify that this function is included as an interface to the RBG in the TSS or the proprietary Entropy Analysis Report and that the behavior of the RBG following a call to this interface is described. The evaluator shall also verify that the documentation of the DRBG describes how the internal seeding is initiated to the SP 800-90A specified DRBG.
 
-====== AGD
+===== AGD
 
 The evaluator shall verify that the operational guidance describes the process for how the internally generated seed is supplied to the TOE's DRBG.
 
-====== Test
+===== Test
 
 The evaluator shall develop and execute or verify and observe the developer tooling which generates the internal seed and provides it to the DRBG. The evaluator shall verify that the request succeeds.
 
-====== KMD
+===== KMD
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
+==== FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
 
-====== TSS
+===== TSS
 
 The evaluator shall verify that this function is included as an interface to the RBG in the TSS or the proprietary Entropy Analysis Report and that the behavior of the RBG following a call to this interface is described. The evaluator shall also verify that the documentation of the DRBG describes how to choose the seeding source to be used and that this source used to seed the SP 800-90A specified DRBG.
 
-====== AGD
+===== AGD
 
 The evaluator shall verify that the operational guidance describes the process for how the seed source is selected and the output from the source supplied to the TOE's DRBG.
 
-====== Test
+===== Test
 
 The evaluator shall develop and execute or verify and observe the developer tooling which selects the seed source and provides its output to the DRBG. The evaluator shall verify that the request succeeds.
 
-====== KMD
+===== KMD
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_RBG.5 Random Bit Generation (Combining Noise Sources)
+==== FCS_RBG.5 Random Bit Generation (Combining Noise Sources)
 
-====== TSS
+===== TSS
 
 The evaluator shall verify that this function is included as an interface to the RBG in the TSS or the proprietary Entropy Analysis Report and that the behavior of the RBG following a call to this interface is described. The evaluator shall also verify that the documentation of the DRBG describes the seeding sources and how their outputs are combined according to the specified standard to be used and that this combined output is used to seed the SP 800-90A specified DRBG.
 
-====== AGD
+===== AGD
 
 The evaluator shall verify that the operational guidance describes the process for how the generated seed is supplied to the TOE's DRBG.
 
-====== Test
+===== Test
 
 The evaluator shall develop and execute or verify and observe the developer tooling which generates each separate seed for view and then combines them before providing the output to the DRBG. The evaluator shall verify that the request succeeds.
 
-====== KMD
+===== KMD
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_RBG.6 Random Bit Generation Service
+==== FCS_RBG.6 Random Bit Generation Service
 
-====== TSS
+===== TSS
 
 The evaluator shall verify the interface that is provided by the TOE for DRBG output.
 
-====== AGD
+===== AGD
 
 The evaluator shall verify that the operational guidance describes how to access the RBG output interface including the method(s) for interacting with the service.
 
-====== Test
+===== Test
 
 The evaluator shall develop and execute or verify and observe the developer tooling which will access the output interface and verify the output from the interface matches the results that would be expected if used internally. The evaluator shall verify that the request succeeds.
 
-====== KMD
+===== KMD
 
 There are no KMD evaluation activities for this component.
 
