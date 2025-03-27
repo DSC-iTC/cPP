@@ -652,7 +652,7 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash)
+===== FCS_COP.1/KeyedHash Cryptographic Operation - Keyed Hash
 
 ====== TSS
 
