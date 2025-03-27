@@ -2388,79 +2388,119 @@ This component is targeted at the flaw remediation procedures applied by the dev
 As indicated in the introduction to this cPP, the baseline requirements (those that must be performed by the TOE or its underlying platform) are contained in the body of this cPP. There are additional requirements based on selections in the body of the cPP: if certain selections are made, then additional requirements below will need to be included.
 
 === Cryptographic Support
-==== FCS_CKM.1/AKG Cryptographic Key Generation (Asymmetric Keys)
+==== FCS_CKM.1/AKG Cryptographic Key Generation - Asymmetric Key
 
-FCS_CKM.1/AKG Cryptographic Key Generation (Asymmetric Keys)
+FCS_CKM.1/AKG Cryptographic Key Generation - Asymmetric Key
 
 FCS_CKM.1.1/AKG:: The TSF shall generate *asymmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm [*selection*: _cryptographic key generation algorithm_] and specified cryptographic *algorithm parameters* [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
 
-.Asymmetric Cryptographic Key Generation
+The following table provides the allowed choices for completion of the selection operations of FCS_CKM.1/AKG:
+
+.Allowed choices for FCS_CKM.1/AKG
 [[AsymKeyGen]]
 [cols=".^1,.^2,.^2",options=header]
 |===
 
+|Identifier
 |Cryptographic Key Generation Algorithm
 |Cryptographic Algorithm Parameters
 |List of Standards
 
+|RSA
 |RSA 
 |Modulus of size [selection: 2048 bit, 3072 bit]
 |NIST FIPS PUB 186-5 (Section A.1.1)
 
+|ECC-ERB
 |ECC - Extra Random Bits 
 |Elliptic Curve [selection: P-256, brainpoolP256r1, P-384, brainpoolP384r1, P-521, brainpoolP512r1]
-|[selection: NIST FIPS PUB 186-5 (Section A.2.1), NIST SP 800-56A Rev. 3 (Section 5.6.1.2.1)]
+|NIST FIPS PUB 186-5 (Section A.2.1)
 
-[selection: NIST SP 800-186 (Section 4) [NIST Curves], RFC 5639 (section 3) [brainpool curves]]
+[selection: NIST SP 800-186 (Section 3) [NIST Curves], RFC 5639 (Section 3) [Brainpool curves]]
 
+|ECC-RS
 |ECC - Rejection Sampling
 |Elliptic Curve [selection: P-256, brainpoolP256r1, P-384, brainpoolP384r1, P-521, brainpoolP512r1]
-|[selection: NIST FIPS PUB 186-5 (Section A.2.2), NIST SP 800-56A Rev. 3 (Section 5.6.1.2.2)]
+|NIST FIPS PUB 186-5 (Section A.2.2)
 
-[selection: NIST SP 800-186 (Section 4) [NIST Curves], RFC 5639 (section 3) [brainpool curves]]
+[selection: NIST SP 800-186 (Section 3) [NIST Curves], RFC 5639 (Section 3) [Brainpool curves]]
 
+|FFC-ERB
 |FFC - Extra Random Bits
 |Static domain parameters approved for [selection: IKE groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192], TLS groups [selection: ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192]]
-|NIST SP 800-56A Rev. 3, RFC 3526, RFC 7919 [FFC domain parameters]
+|NIST SP 800-56A Revision 3 (Section 5.6.1.1.3) [key pair generation]
 
-NIST SP 800-56A Rev. 3 (Section 5.6.1.1.3) [key pair generation]
+[selection: RFC 3526 [IKE groups], RFC 7919 [TLS groups]]
 
+|FFC-RSA
 |FFC - Rejection Sampling
 |Static domain parameters approved for [selection: IKE groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192], TLS groups [selection: ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192]]
-|NIST SP 800-56A Rev. 3, RFC 3526, RFC 7919 [FFC domain parameters]
+|NIST SP 800-56A Revision 3 (Section 5.6.1.1.4) [key pair generation]
 
-NIST SP 800-56A Rev. 3 (Section 5.6.1.1.4) [key pair generation]
+[selection: RFC 3526 [IKE groups], RFC 7919 [TLS groups]]
 
+|EdDSA
 |EdDSA 
 |Domain parameters approved for elliptic curves [selection: Edwards25519, Edwards448]
-|[selection: FIPS PUB 186-5 (Section A.2.3), RFC 8032]
+|FIPS PUB 186-5 (Section 6.2.1) [key-pair generation]
+
+NIST SP 800-186 (Section 3.2.3) [Edwards Curves]
 
 |KCDSA
-|Domain parameters generation with (L, N) = [selection: (2048, 224), (2048, 256)] bits, and key generation using FCC - [selection: Extra Random Bits, Rejection Sampling]
-|ISO/IEC 14888-3:2018 (subclause 6.3) [KCDSA], NIST SP 800-56A Rev. 3 (Section 5.6.1.1.3) [Extra Random Bits], and (Section 5.6.1.1.4) [Rejection Sampling]
+|KCDSA
+|Domain parameters generation with (L, N) = [selection: (2048, 224), (2048, 256), (3072, 256)] bits
+|ISO/IEC 14888-3:2018 (Subclause 6.3) [KCDSA]
 
 |EC-KCDSA
+|EC-KCDSA
 |Elliptic Curves [selection: P-224, B-233, K-233, P-256, B-283, K-283]
-|ISO/IEC 14888-3:2018 (subclause 6.7) [EC-KCDSA], NIST SP 800-186 (Section 3) [NIST Curves]
+|ISO/IEC 14888-3:2018 (Subclause 6.7) [EC-KCDSA]
 
-|LMS, HSS
-|Private key size = [selection: 192 bits with Hash/XOF [selection: SHA256/192, SHAKE256/192], 256 bits with Hash/XOF [selection: SHA256, SHAKE256]]
-|NIST SP 800-208, RFC 8554
+NIST SP 800-186 (Section 3) [NIST Curves]
 
-|XMSS, XMSS^MT^
-|Private key size = [selection: 192 bits with Hash/XOF [selection: SHA256/192, SHAKE256/192], 256 bits with Hash/XOF [selection: SHA256, SHAKE256]]
-|NIST SP 800-208, RFC 8391
+|LMS
+|LMS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], Winternitz parameter = [selection: 1, 2, 4, 8], and tree height [selection: 5, 10, 15, 20, 25]
+|RFC 8554 [LMS]
+
+NIST SP 800-208 [parameters]
+
+|HSS
+|HSS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], Winternitz parameter = [selection: 1, 2, 4, 8], tree height [selection: 5, 10, 15, 20, 25], and number of levels = [selection: 1, 2, 3, 4, 5, 6, 7, 8]
+|RFC 8554 [HSS]
+
+NIST SP 800-208 [parameters]
+
+|XMSS
+|XMSS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], tree height [selection: 10, 16, 20]
+|RFC 8391 [XMSS]
+
+NIST SP 800-208 [parameters]
+
+|XMSS^MT^
+|XMSS^MT^
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], (total tree height, number of levels) = [selection: (20, 2), (20, 4), (40, 2), (40, 4), (40, 8), (60, 3), (60, 6), (60, 12)]
+|RFC 8391 [XMSS^MT^]
+
+NIST SP 800-208 [parameters]
 
 |===
 
 _Application Note {counter:remark_count}_:: _For RSA the choice of the modulus implies the resulting key sizes of the public and private keys generated using the specified standard methods._
 +
-_When generating ECC key pairs for key establishment, choose NIST SP 800-56A Section 5.6.1.2.1 or 5.6.1.2.2. When generating ECC key pairs for digital signature generation, choose NIST FIPS PUB 186-5 Section A.2.1 or A.2.2. The intended security strengths for elliptic curves P-224, B-233, and K-233 is 112 bits, for P-256, brainpoolP256r1, Edwards25519, B-283, and K-283 is 128 bits, for P-384 and brainpoolP384r1 is 192 bits, for Edwards448 is 224, and for P-521 and brainpool512r1 is 256 bits. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
+_For Finite Field Cryptography (FFC) DSA, ST authors should consult schemes for guidelines on use. FIPS PUB 186-5 does not approve DSA for digital signature generation but allows DSA for digital signature verification for legacy purposes. "FFC-ERB" or "FFC-RS" may be claimed only for generating private and public keys when "DH" is claimed in FCS_CKM_EXT.7._
 +
-_When generating EdDSA key pairs for digital signatures, choose NIST FIPS PUB 186-5 Section A.2.3. The chosen domain parameters determine the size of the private keys and the public keys._
+_When generating ECC keys pairs for key agreement and if "ECDH" or "ECDH-Ed" is claimed in FCS_CKM_EXT.7, then "ECC-ERB" or "ECC-RS" shall be claimed. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
 +
-_For hash-based signatures, the choice of the hash or XOF determines the security of the system. For 192 bits of security strength, choose SHA256/192 or SHAKE256/192. For 256 bits of security strength, choose SHA256 or SHAKE256._
-
+_When generating ECC key pairs for digital signature generation and if "ECDSA" or "EC-KCDSA" are claimed in FCS_COP.1/SigGen, then "ECC-ERB" or "ECC-RS" shall be claimed. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
++
+_When generating EdDSA key pairs for digital signatures and if "EdDSA" is claimed in FCS_COP.1/SigGen, then "EdDSA" shall be claimed here. The chosen domain parameters determine the size of the private keys and the public keys._
++
+_For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
++
+_For HSS and XMSS^MT^ the same hash or XOF function shall be used at each level. Within each level, the same Winternitz parameter shall be used but can be different for each level. For HSS, within each level, the same tree height shall be used but can be different for each level._
 
 ==== FCS_CKM.1/SKG Cryptographic Key Generation (Symmetric Key)
 
@@ -4606,7 +4646,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 !===
 
-!FCS_CKM.1/AKG !Cryptographic key generation - Asymmetric Key
+!FCS_CKM.1/AKG !Cryptographic Key Generation - Asymmetric Key
 
 !FCS_CKM.5 !Cryptographic Key Derivation
 
