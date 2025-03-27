@@ -2515,19 +2515,19 @@ The following table provides the allowed choices for completion of the selection
 |List of Standards
 
 |KDF-CTR
-|[selection: Direct Generation from a Random Bit Generator as specified in FCS_RBG.1, Concatenated keys]
+|Input key(s), label, context, output length
 |KPF2 - KDF in Counter Mode using [selection: AES-128-CMAC, AES-192-CMAC, AES-256-CMAC, Camellia-128-CMAC, Camellia-192-CMAC, Camellia-256-CMAC, CMAC-HIGHT-128, CMAC-LEA-128, CMAC-LEA-256, CMAC-SEED-128, HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-512] as the PRF
 |[selection: 128, 192, 256, 512] bits
 |[selection: ISO/IEC 11770-6:2016 (Subclause 7.3.2) [KPF2], NIST SP 800-108 Revision 1 Update 1 (Section 4.1) [KDF in Counter Mode]]
 
 |KDF-FB
-|[selection: Direct Generation from a Random Bit Generator as specified in FCS_RBG.1, Concatenated keys]
+|Input key(s), label, context, IV output length
 |KPF3 - KDF in Feedback Mode using [selection: AES-128-CMAC, AES-192-CMAC, AES-256-CMAC, Camellia-128-CMAC, Camellia-192-CMAC, Camellia-256-CMAC, CMAC-HIGHT-128, CMAC-LEA-128, CMAC-LEA-256, CMAC-SEED-128, HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-512] as the PRF
 |[selection: 128, 192, 256, 512] bits
 |[selection: ISO/IEC 11770-6:2016 (Subclause 7.3.3) [KPF3], NIST SP 800-108 Revision 1 Update 1 (Section 4.2) [KDF in Feedback Mode]]
 
 |KDF-DPI
-|[selection: Direct Generation from a Random Bit Generator as specified in FCS_RBG.1, Concatenated keys]
+|Input key(s), label, context, output length
 |KPF4 - KDF in Double-Pipeline Iteration Mode using [selection: AES-128-CMAC, AES-192-CMAC, AES-256-CMAC, Camellia-128-CMAC, Camellia-192-CMAC, Camellia-256-CMAC, CMAC-HIGHT-128, CMAC-LEA-128, CMAC-LEA-256, CMAC-SEED-128, HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-512] as the PRF
 |[selection: 128, 192, 256, 512] bits
 |[selection: ISO/IEC 11770-6:2016 (Subclause 7.3.4) [KPF3], NIST SP 800-108 Revision 1 Update 1 (Section 4.3) [KDF in Double-Pipeline Iteration Mode]]
@@ -2570,7 +2570,7 @@ KDF Step
 |NIST SP 800-56C Revision 2 (Section 5) [Two-Step Key Derivation]
 
 |KDF-KMAC
-|Key, context string, output length, label
+|Input key(s), label, context, output length
 |[selection: KMAC128, KMAC256]
 |[selection: 128, 192, 256, 512] bits
 |NIST SP 800-108 Revision 1 Update 1 (Section 4.4 "KDF Using KMAC")
@@ -2582,12 +2582,7 @@ _Application Note {counter:remark_count}_:: _There are no standards that specify
 _In KDF-MAC-2S, if AES-N-CMAC or Camellia-N-CMAC is selected in the MAC step, then select CMAC with the same cipher and a 128-bit key in the KDF step, and select 128 as the output key size. If HMAC is selected in the MAC step, then select the same HMAC in the KDF._
 +
 _Under input parameters, if concatenated keys or intermediary keys is selected, the ST Author should describe the sources of the keys, and the order in which they are concatenated, along with any other values that are concatenated with them. This option may be chosen in instances when input keying material for the KDF comes from two independent sources, for example, a client and a server._
-+
-_If deriving a symmetric key, select any of the above rows._
-+
-_If deriving an initialization vector, an authentication secret, HMAC key, or KMAC key, select KDF-CTR, KDF-FB, KDF-DPI, KDF-HASH, KDF-XOR, or KDF-ENC._
-+
-_If deriving a secret IV or seed, select KDF-HASH, KDF-MAC-1S, or KDF-MAC-2S._
+
 
 ==== FCS_CKM_EXT.8 Password-Based Key Derivation
 
