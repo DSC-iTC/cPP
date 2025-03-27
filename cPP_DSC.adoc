@@ -2617,14 +2617,16 @@ _Application Note {counter:remark_count}_:: _The TSF must condition a password i
 +
 _The TSF is allowed to use PBKDF2 to condition passwords in the context of password-based authentication. In this scenario, the output of PBKDF2 is not directly used as a cryptographic key, but only stored as a reference value (commonly called "password hash") to compare against when performing authentication. The "cryptographic key size" selected in this element must correspond to the length of the password hash._
 
-==== FCS_COP.1/AEAD Cryptographic Operation (Authenticated Encryption with Associated Data)
+==== FCS_COP.1/AEAD Cryptographic Operation - Authenticated Encryption with Associated Data
 
-FCS_COP.1/AEAD Cryptographic Operation (Authenticated Encryption with Associated Data)
+FCS_COP.1/AEAD Cryptographic Operation - Authenticated Encryption with Associated Data
 
 FCS_COP.1.1/AEAD:: The TSF shall perform [_authenticated encryption with associated data_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
 
-.AEAD Symmetric-Key Cryptography
-[[AEADSymmetricKeys]]
+The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/AEAD.
+
+.Allowed choices for FCS_COP.1/AEAD
+[[AEADCrypto]]
 [cols=".^1,.^2,.^2,.^2",options=header]
 |===
 
@@ -2636,56 +2638,56 @@ FCS_COP.1.1/AEAD:: The TSF shall perform [_authenticated encryption with associa
 |AES-CCM
 |AES in CCM mode with non-repeating nonce, minimum size of 64 bits
 |[selection: 128, 192, 256] bits
-|[selection: ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197] [AES] 
+|[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
 
 [selection: ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C] [CCM]
 
 |AES-GCM
-|AES in GCM mode with non-repeating IVs using [selection: deterministic, RBG-based] IV construction; the tag must be of length [selection:  96, 104, 112, 120, or 128] bits.
+|AES in GCM mode with non-repeating IVs using [selection: deterministic, RBG-based] IV construction; the tag must be of length [selection: 96, 104, 112, 120, or 128] bits
 |[selection: 128, 192, 256], bits
-|[selection: ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197] [AES] 
+|[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
 
 [selection: ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D] [GCM]
 
 |CAM-CCM
 |Camellia in CCM mode with non-repeating nonce, minimum size of 64 bits
 |[selection: 128, 192, 256] bits
-|ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
+|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
 
 [selection: ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C] [CCM]
 
 |CAM-GCM
-|Camellia in GCM mode with non-repeating IVs using [selection: deterministic, RBG-based] IV construction; the tag must be of length [selection:  96, 104, 112, 120, or 128] bits.
+|Camellia in GCM mode with non-repeating IVs using [selection: deterministic, RBG-based] IV construction; the tag must be of length [selection: 96, 104, 112, 120, or 128] bits
 |[selection: 128, 192, 256] bits
-|ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia] 
+|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
 
 [selection: ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D] [GCM]
 
 |SEED-CCM
 |SEED in CCM mode with non-repeating nonce, minimum size of 64 bits
 |128 bits
-|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
+|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
 
 [selection: ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C] [CCM]
 
 |SEED-GCM
-|SEED in GCM mode with non-repeating IVs using [selection: deterministic, RBG-based] IV construction; the tag must be of length [selection:  96, 104, 112, 120, or 128] bits.
+|SEED in GCM mode with non-repeating IVs using [selection: deterministic, RBG-based] IV construction; the tag must be of length [selection: 96, 104, 112, 120, or 128] bits
 |128 bits
-|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
+|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
 
 [selection: ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D] [GCM]
 
 |LEA-CCM
 |LEA in CCM mode with non-repeating nonce, minimum size of 64 bits
 |[selection: 128, 192, 256] bits
-|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
+|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
 
 [selection: ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C] [CCM]
 
 |LEA-GCM
-|LEA in GCM mode with non-repeating IVs using [selection: deterministic, RBG-based] IV construction; the tag must be of length [selection:  96, 104, 112, 120, or 128] bits.
+|LEA in GCM mode with non-repeating IVs using [selection: deterministic, RBG-based] IV construction; the tag must be of length [selection:  96, 104, 112, 120, or 128] bits
 |[selection: 128, 192, 256] bits
-|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
+|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
 
 [selection: ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D] [GCM]
 
