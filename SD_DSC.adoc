@@ -1982,10 +1982,10 @@ The algorithm tests might require access to a development version of the TOE or 
 
 The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
 
-* PRF (KDF-CTR, KDF-FB, KDF-DPI)
+* PRF (KDF-CTR, KDF-FB, KDF-DPI, KDF-KMAC)
 * Encryption algorithm (KDF-ENC)
 * Hash algorithm (KDF-HASH)
-* MAC algorithm (KDF-MAC-1S, KDF-MAC-2S, KDF-KMAC)
+* MAC algorithm (KDF-MAC-1S, KDF-MAC-2S)
 * Counter size (KDF-CTR, KDF-FB, KDF-DPI)
 * Counter location (KDF-CTR, KDF-FB, KDF-DPI)
 * Salt length (KDF-MAC-1S, KDF-MAC-2S)
