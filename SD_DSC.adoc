@@ -759,7 +759,7 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/SKC Cryptographic Operation (Symmetric-Key Cryptography)
+===== FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
 
 ====== TSS
 

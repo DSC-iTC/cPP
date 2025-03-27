@@ -1007,14 +1007,16 @@ _FIPS 186-5 allows the use of SHAKE128 and SHAKE256. Implementations must use th
 +
 _The TOE may contain a public key which is integrity protected (e.g., in hardware), in which case the FDP_ITC.1 and FDP_ITC.2 dependencies do not apply. In this case, no dependencies may be chosen. For signature verifications, private keys are not necessary, so there are no dependencies required for generating or destroying cryptographic keys._
 
-==== FCS_COP.1/SKC Cryptographic Operation (Symmetric-Key Cryptography)
+==== FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
 
-FCS_COP.1/SKC Cryptographic Operation (Symmetric-Key Cryptography)
+FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
 
 FCS_COP.1.1/SKC:: The TSF shall perform [_symmetric-key encryption/decryption_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
 
-.Symmetric-Key Cryptography
-[[SymmetricKeys]]
+The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/SKC.
+
+.Allowed choices for FCS_COP.1/SKC
+[[SymmetricKeyCrypto]]
 [cols=".^1,.^2,.^2,.^2",options=header]
 |===
 
@@ -1026,123 +1028,146 @@ FCS_COP.1.1/SKC:: The TSF shall perform [_symmetric-key encryption/decryption_] 
 |AES-CBC
 |AES in CBC mode with non-repeating and unpredictable IVs
 |[selection: 128, 192, 256] bits
-|[selection: ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197] [AES]
+|[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
 
 [selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |XTS-AES
 |AES in XTS mode with unique tweak values that are consecutive non-negative integers starting at an arbitrary non-negative integer
 |[selection: 256, 512] bits
-|[selection: ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197] [AES] 
+|[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
 
 [selection: IEEE Std. 1619-2018, NIST SP 800-38E] [XTS]
 
 |AES-CTR
-|AES in Counter Mode with a non-repeating initial counter and with no repeated use of counter values across multiple messages with the same secret key
+|AES in CTR mode with a non-repeating initial counter and with no repeated use of counter values across multiple messages with the same secret key
 |[selection: 128, 192, 256] bits
-|[selection: ISO/IEC 18033-3 (Sub Clause 5.2), FIPS PUB 197] [AES] 
+|[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
 
 [selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |CAM-CBC
 |Camellia in CBC mode with non-repeating and unpredictable IVs
 |[selection: 128, 192, 256] bits
-|ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
+|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
 
 [selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
+
+|CAM-CFB
+|Camellia in CFB mode with non-repeating and unpredictable IVs
+|[selection: 128, 192, 256] bits
+|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
+
+[selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
+
+|CAM-OFB
+|Camellia in OFB mode with unique IVs
+|[selection: 128, 192, 256] bits
+|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
+
+[selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [CFB]
 
 |XTS-CAM
 |Camellia in XTS mode with unique tweak values that are consecutive non-negative integers starting at an arbitrary non-negative integer
 |[selection: 256, 512] bits
-|ISO/IEC 18033-3:2010 (Sub Clause 5.3) [Camellia]
+|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
 
 [selection: IEEE Std. 1619-2018, NIST SP 800-38E] [XTS]
+
+|CAM-CTR
+|Camellia in CTR mode with a non-repeating initial counter and with no repeated use of counter values across multiple messages with the same secret key
+|[selection: 128, 192, 256] bits
+|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
+
+[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |SEED-CBC
 |SEED in CBC mode with non-repeating and unpredictable IVs
 |128 bits
-|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
+|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
 
 [selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |SEED-CFB
 |SEED in CFB mode with non-repeating and unpredictable IVs
 |128 bits
-|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
+|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
 
 [selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
 
 |SEED-OFB
 |SEED in OFB mode with unique IVs
 |128 bits
-|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
+|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
 
 [selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
 
 |SEED-CTR
 |SEED in CTR mode with unique, incremental counter
 |128 bits
-|ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
+|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
 
 [selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |HIGHT-CBC
 |HIGHT in CBC mode with non-repeating and unpredictable IVs
 |128 bits
-|ISO/IEC 18033-3:2010 (Sub Clause 4.5) [HIGHT]
+|ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
 
 [selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |HIGHT-CFB
 |HIGHT in CFB mode with non-repeating and unpredictable IVs
 |128 bits
-|ISO/IEC 18033-3:2010 (Sub Clause 4.5) [HIGHT]
+|ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
 
 [selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
 
 |HIGHT-OFB
 |HIGHT in OFB mode with unique IVs
 |128 bits
-|ISO/IEC 18033-3:2010 (Sub Clause 4.5) [HIGHT]
+|ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
 
 [selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
 
 |HIGHT-CTR
 |HIGHT in CTR mode with unique, incremental counter
 |128 bits
-|ISO/IEC 18033-3:2010 (Sub Clause 4.5) [HIGHT]
+|ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
 
 [selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |LEA-CBC
 |LEA in CBC mode with non-repeating and unpredictable IVs
 |[selection: 128, 192, 256] bits
-|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
+|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
 
 [selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |LEA-CFB
 |LEA in CFB mode with non-repeating and unpredictable IVs
 |[selection: 128, 192, 256] bits
-|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
+|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
 
 [selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
 
 |LEA-OFB
 |LEA in OFB mode with unique IVs
 |[selection: 128, 192, 256] bits
-|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
+|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
 
 [selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
 
 |LEA-CTR
 |LEA in CTR mode with unique, incremental counter
 |[selection: 128, 192, 256] bits
-|ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
+|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
 
 [selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |===
+
+_Application Note {counter:remark_count}_:: _If the selected cryptographic algorithm requires an IV, counter, or tweak value, then FCS_OTV_EXT.1 shall be claimed._
 
 ==== FCS_RBG.1 Random Bit Generation (RBG)
 
@@ -3029,7 +3054,7 @@ FCS_CKM_EXT.8 Password-based key derivation] +
 FCS_CKM.6 Timing and event of cryptographic key destruction, +
 [FCS_COP.1/KeyEncap Cryptographic Operation (Key Encapsulation), or +
 FCS_COP.1/KeyWrap Cryptographic Operation (Key Wrap), or +
-FCS_COP.1/SKC Cryptographic Operation (Symmetric-Key Cryptography), or +
+FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography, or +
 FCS_COP.1/AEAD Authenticated Encryption with Associated Data]
 
 [vertical]
@@ -4580,7 +4605,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/KeyWrap !Cryptographic Operation (Key Wrap)
 
-!FCS_COP.1/SKC !Cryptographic Operation (Symmetric-Key Cryptography)
+!FCS_COP.1/SKC !Cryptographic Operation - Symmetric-Key Cryptography
 
 !FDP_ACC.1 !Subset Access Control
 
@@ -4616,7 +4641,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation (Keyed Hash)
 
-!FCS_COP.1/SKC !Cryptographic Operation (Symmetric-Key Cryptography)
+!FCS_COP.1/SKC !Cryptographic Operation - Symmetric-Key Cryptography
 
 !FCS_RBG.1 !Random Bit Generation (RBG)
 
@@ -4654,7 +4679,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation (Keyed Hash)
 
-!FCS_COP.1/SKC !Cryptographic Operation (Symmetric-Key Cryptography)
+!FCS_COP.1/SKC !Cryptographic Operation - Symmetric-Key Cryptography
 
 !FCS_STG_EXT.1 !Protected Storage
 
@@ -4702,7 +4727,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/SigVer !Cryptographic Operation (Signature Verification)
 
-!FCS_COP.1/SKC !Cryptographic Operation (Symmetric-Key Cryptography)
+!FCS_COP.1/SKC !Cryptographic Operation - Symmetric-Key Cryptography
 
 !FCS_OTV_EXT.1 !One-Time Value
 
@@ -4792,7 +4817,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/KeyEnc !Cryptographic Operation (Key Encryption)
 
-!FCS_COP.1/SKC !Cryptographic Operation (Symmetric-Key Cryptography)
+!FCS_COP.1/SKC !Cryptographic Operation - Symmetric-Key Cryptography
 
 !FCS_RBG.1 !Random Bit Generation (RBG)
 
