@@ -2532,6 +2532,12 @@ The following table provides the allowed choices for completion of the selection
 |[selection: 128, 192, 256, 512] bits
 |[selection: ISO/IEC 11770-6:2016 (Subclause 7.3.4) [KPF3], NIST SP 800-108 Revision 1 Update 1 (Section 4.3) [KDF in Double-Pipeline Iteration Mode]]
 
+|KDF-KMAC
+|Input key(s), label, context, output length
+|[selection: KMAC128, KMAC256]
+|[selection: 128, 192, 256, 512] bits
+|NIST SP 800-108 Revision 1 Update 1 (Section 4.4 "KDF Using KMAC")
+
 |KDF-XOR
 |More than one intermediary keys
 |exclusive OR (XOR)
@@ -2569,12 +2575,6 @@ KDF Step
 |[selection: 128, 192, 256, 512] bits
 |NIST SP 800-56C Revision 2 (Section 5) [Two-Step Key Derivation]
 
-|KDF-KMAC
-|Input key(s), label, context, output length
-|[selection: KMAC128, KMAC256]
-|[selection: 128, 192, 256, 512] bits
-|NIST SP 800-108 Revision 1 Update 1 (Section 4.4 "KDF Using KMAC")
-
 |===
 
 _Application Note {counter:remark_count}_:: _There are no standards that specify how to derive a key from two keys using XOR (KDF-XOR) or encryption (KDF-ENC). If KDF-XOR is selected, the ST Author should describe this method in the documentation. If KDF-ENC is selected, the ST Author should document the encryption algorithm used from FCS_COP.1/AEAD or FCS_COP.1/SKC, and which of the inputs is the plaintext and which is the key._
@@ -2582,7 +2582,6 @@ _Application Note {counter:remark_count}_:: _There are no standards that specify
 _In KDF-MAC-2S, if AES-N-CMAC or Camellia-N-CMAC is selected in the MAC step, then select CMAC with the same cipher and a 128-bit key in the KDF step, and select 128 as the output key size. If HMAC is selected in the MAC step, then select the same HMAC in the KDF._
 +
 _Under input parameters, if concatenated keys or intermediary keys is selected, the ST Author should describe the sources of the keys, and the order in which they are concatenated, along with any other values that are concatenated with them. This option may be chosen in instances when input keying material for the KDF comes from two independent sources, for example, a client and a server._
-
 
 ==== FCS_CKM_EXT.8 Password-Based Key Derivation
 
