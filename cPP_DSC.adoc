@@ -841,13 +841,15 @@ _Application Note {counter:remark_count}_:: _The HMAC minimum key sizes in the t
 
 :xrefstyle: full
 
-==== FCS_COP.1/SigGen Cryptographic Operation (Signature Generation)
+==== FCS_COP.1/SigGen Cryptographic Operation - Signature Generation
 
-FCS_COP.1/SigGen Cryptographic Operation (Signature Generation)
+FCS_COP.1/SigGen Cryptographic Operation - Signature Generation
 
 FCS_COP.1.1/SigGen:: The TSF shall perform [_digital signature generation_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
 
-.Signature Generation
+The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/SigGen.
+
+.Allowed choices for FCS_COP.1/SigGen
 [[SigGenOps]]
 [cols=".^1,.^2,.^2,.^2",options=header]
 |===
@@ -860,68 +862,80 @@ FCS_COP.1.1/SigGen:: The TSF shall perform [_digital signature generation_] in a
 |RSA-PKCS
 |RSASSA-PKCS1-v1_5
 |Modulus of size [selection: 2048, 3072, 4096] bits, hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512]
-|[selection: RFC 8017, PKCS #1 v2.2 (Section 8.2), FIPS PUB 186-5 (Section 5.4)] [RSASSA-PKCS1-v1_5]
+|RFC 8017 (Section 8.2) [PKCS #1 v2.2]
 
-[selection: ISO/IEC 10118-3:2018, FIPS PUB 180-4 [SHA2], FIPS PUB 202 [SHA3]]
+FIPS PUB 186-5 (Section 5.4) [RSASSA-PKCS1-v1_5]
 
 |RSA-PSS
 |RSASSA-PSS
 |Modulus of size [selection: 2048, 3072, 4096] bits, hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE128, SHAKE256]
-|[selection: RFC 8017, PKCS#1v2.2 (Section 8.1); FIPS PUB 186-5 (Section 5.4)] [RSASSA-PSS]
+|RFC 8017 (Section 8.1) [PKCS #1 v2.2]
 
-[selection: ISO/IEC 10118-3:2018, FIPS PUB 180-4 [SHA2], FIPS PUB 202 [SHA3, SHAKE]]
+FIPS PUB 186-5 (Section 5.4) [RSASSA-PSS]
 
 |ECDSA
 |ECDSA
-|Elliptic Curve [selection: brainpoolP256r1, brainpoolP384r1, brainpoolP512r1, NIST P-256, NIST P-384, NIST P-521], per-message secret number generation [selection: extra random bits, rejection sampling, deterministic] and hash or XOF function using [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE128, SHAKE256]
-|[selection: ISO/IEC 14888-3:2018 (Sub Clause 6.6), FIPS PUB 186-5 (Sections 6.3.1, 6.4.1)] [ECDSA]
+|Elliptic Curve [selection: P-256, brainpoolP256r1, P-384, brainpoolP384r1, P-521, brainpoolP512r1], per-message secret number generation [selection: extra random bits, rejection sampling, deterministic] and hash or XOF function using [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE128, SHAKE256]
+|[selection: ISO/IEC 14888-3:2018 (Subclause 6.6), FIPS PUB 186-5 (Sections 6.3.1, 6.4.1)] [ECDSA]
 
 [selection: RFC 5639 (Section 3) [Brainpool Curves], NIST SP-800 186 (Section 4) [NIST Curves]]
 
-[selection: ISO/IEC 10118-3:2018, FIPS PUB 180-4 [SHA2], FIPS PUB 202 [SHA3, SHAKE], FIPS PUB 186-5 Appendix A3 [per-message secret number generation]]
-
 |KCDSA
 |KCDSA
-|hash or XOF function using [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE128, SHAKE256]
-|ISO/IEC 14888-3:2018 (Sub Clause 6.3) [KCDSA]
-
-[selection: ISO/IEC 10118-3:2018 (Clause 10, 14), FIPS PUB 180-4 [SHA2], FIPS PUB 202 [SHA3, SHAKE]]
+|hash function using [selection: SHA-224, SHA-256, SHA-384, SHA-512]
+|ISO/IEC 14888-3:2018 (Subclause 6.3) [KCDSA]
 
 |EC-KCDSA
 |EC-KCDSA 
-|Elliptic Curve [selection: NIST P-224, NIST P-256, NIST B-233, NIST B-283, NIST K-233, NIST K-283] using hash or XOF [selection: SHA-224, SHA-256, SHA3-256, SHA3-384, SHA3-512, SHAKE128, SHAKE256]
-|ISO/IEC 14888-3:2018 (Sub Clause 6.7) [EC-KCDSA]
+|Elliptic Curve [selection: P-224, P-256, B-233, B-283, K-233, K-283] using hash [selection: SHA-224, SHA-256, SHA-384, SHA-512]
+|ISO/IEC 14888-3:2018 (Subclause 6.7) [EC-KCDSA]
 
 NIST SP 800-186 (Section 3) [NIST Curves]
-
-[selection: ISO/IEC 10118-3:2018 (Clause 10, 14), FIPS PUB 180-4 [SHA2], FIPS PUB 202 [SHA3, SHAKE]]
 
 |EdDSA
 |Edwards-Curve Digital Signature Algorithm
 |Domain parameters approved for elliptic curves [selection: Edwards25519, Edwards448]
-|[selection: NIST FIPS 186-5 (section 7.6), RFC 8032)
+|NIST FIPS PUB 186-5 (Section 7.6) [EdDSA]
 
-[selection: ISO/IEC 10118-3:2018 (Clause 10, 14), FIPS PUB 180-4 [SHA2], FIPS PUB 202 [SHAKE]]
+RFC 8032 [Edwards Curves]
 
 |LMS
-|LMS, HSS
-|Private key size = [selection: 192 bits with Hash/XOF [selection: SHA256/192, SHAKE256/192], 256 bits with Hash/XOF [selection: SHA256, SHAKE256]]
-|NIST SP 800-208, RFC 8554
+|LMS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], Winternitz parameter = [selection: 1, 2, 4, 8], and tree height = [selection: 5, 10, 15, 20, 25]
+|RFC 8554 [LMS]
+
+NIST SP 800-208 [parameters]
+
+|HSS
+|Multitree version of LMS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], Winternitz parameter = [selection: 1, 2, 4, 8], tree height = [selection: 5, 10, 15, 20, 25], and number of levels = [selection: 1, 2, 3, 4, 5, 6, 7, 8]
+|RFC 8554 [HSS]
+
+NIST SP 800-208 [parameters]
 
 |XMSS
-|XMSS, XMSS^MT^
-|Private key size = [selection: 192 bits with Hash/XOF [selection: SHA256/192, SHAKE256/192], 256 bits with Hash/XOF [selection: SHA256, SHAKE256]]
-|NIST SP 800-208, RFC 8391
+|XMSS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], tree height = [selection: 10, 16, 20]
+|RFC 8391 [XMSS]
+
+NIST SP 800-208 [parameters]
+
+|XMSS^MT^
+|Multitree version of XMSS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], (total tree height, number of levels) = [selection: (20, 2), (20, 4), (40, 2), (40, 4), (40, 8), (60, 3), (60, 6), (60, 12)]
+|RFC 8391 [XMSS^MT^]
+
+NIST SP 800-208 [parameters]
 
 |===
 
-_Application Note {counter:remark_count}_:: _FIPS 186-5 allows the use of SHAKE128 and SHAKE256. Implementations must use the correct number of bits of output as specified in FIPS 186-5._
+_Application Note {counter:remark_count}_:: _FIPS 186-5 allows the use of SHAKE128 and SHAKE256. Implementations shall use the correct number of bits of output as specified in FIPS 186-5._
 +
-_Elliptic Curve Algorithms, (e.g., ECDSA, EC-KCDSA) require random bits from an RBG per NIST FIPS PUB 186-5 sections A.3.1 and A.3.2._
+_The dependency on FCS_OTV_EXT.1 is needed only for signature schemes that require random bits, such as ECDSA, KCDSA, or EC-KCDSA._
 +
-_FIPS 186-5 specifies that the same key generation algorithm applies to both ECDSA and deterministic ECDSA._
+_For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
 +
-_For LMS and XMSS, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
+_For HSS and XMSS^MT^ the same hash or XOF function shall be used at each level. Within each level, the same Winternitz parameter shall be used but can be different for each level. For HSS, within each level, the same tree height shall be used but can be different for each level._
 
 ==== FCS_COP.1/SigVer Cryptographic Operation (Signature Verification)
 
@@ -4698,7 +4712,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/KeyEnc !Cryptographic Operation (Key Encryption)
 
-!FCS_COP.1/SigGen !Cryptographic Operation (Signature Generation)
+!FCS_COP.1/SigGen !Cryptographic Operation - Signature Generation
 
 !FCS_COP.1/SigVer !Cryptographic Operation (Signature Verification)
 
