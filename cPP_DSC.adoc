@@ -1026,148 +1026,146 @@ The following table provides the allowed choices for completion of the selection
 |List of Standards
 
 |AES-CBC
-|AES in CBC mode with non-repeating and unpredictable IVs
+|AES in CBC mode with IVs generated according to FCS_OTV_EXT.1
 |[selection: 128, 192, 256] bits
 |[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
 
 [selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |XTS-AES
-|AES in XTS mode with unique tweak values that are consecutive non-negative integers starting at an arbitrary non-negative integer
+|AES in XTS mode with tweak values generated according to FCS_OTV_EXT.1
 |[selection: 256, 512] bits
 |[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
 
 [selection: IEEE Std. 1619-2018, NIST SP 800-38E] [XTS]
 
 |AES-CTR
-|AES in CTR mode with a non-repeating initial counter and with no repeated use of counter values across multiple messages with the same secret key
+|AES in CTR mode with counter values generated according to FCS_OTV_EXT.1
 |[selection: 128, 192, 256] bits
 |[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
 
 [selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |CAM-CBC
-|Camellia in CBC mode with non-repeating and unpredictable IVs
+|Camellia in CBC mode with IVs generated according to FCS_OTV_EXT.1
 |[selection: 128, 192, 256] bits
 |ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
 
 [selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |CAM-CFB
-|Camellia in CFB mode with non-repeating and unpredictable IVs
+|Camellia in CFB mode with IVs generated according to FCS_OTV_EXT.1
 |[selection: 128, 192, 256] bits
 |ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
 
 [selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
 
 |CAM-OFB
-|Camellia in OFB mode with unique IVs
+|Camellia in OFB mode with IVs generated according to FCS_OTV_EXT.1
 |[selection: 128, 192, 256] bits
 |ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
 
 [selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [CFB]
 
 |XTS-CAM
-|Camellia in XTS mode with unique tweak values that are consecutive non-negative integers starting at an arbitrary non-negative integer
+|Camellia in XTS mode with tweak values generated according to FCS_OTV_EXT.1
 |[selection: 256, 512] bits
 |ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
 
 [selection: IEEE Std. 1619-2018, NIST SP 800-38E] [XTS]
 
 |CAM-CTR
-|Camellia in CTR mode with a non-repeating initial counter and with no repeated use of counter values across multiple messages with the same secret key
+|Camellia in CTR mode with counter values generated according to FCS_OTV_EXT.1
 |[selection: 128, 192, 256] bits
 |ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
 
 [selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |SEED-CBC
-|SEED in CBC mode with non-repeating and unpredictable IVs
+|SEED in CBC mode with IVs generated according to FCS_OTV_EXT.1
 |128 bits
 |ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
 
 [selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |SEED-CFB
-|SEED in CFB mode with non-repeating and unpredictable IVs
+|SEED in CFB mode with IVs generated according to FCS_OTV_EXT.1
 |128 bits
 |ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
 
 [selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
 
 |SEED-OFB
-|SEED in OFB mode with unique IVs
+|SEED in OFB mode with IVs generated according to FCS_OTV_EXT.1
 |128 bits
 |ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
 
 [selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
 
 |SEED-CTR
-|SEED in CTR mode with unique, incremental counter
+|SEED in CTR mode with counter values generated according to FCS_OTV_EXT.1
 |128 bits
 |ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
 
 [selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |HIGHT-CBC
-|HIGHT in CBC mode with non-repeating and unpredictable IVs
+|HIGHT in CBC mode with IVs generated according to FCS_OTV_EXT.1
 |128 bits
 |ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
 
 [selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |HIGHT-CFB
-|HIGHT in CFB mode with non-repeating and unpredictable IVs
+|HIGHT in CFB mode with IVs generated according to FCS_OTV_EXT.1
 |128 bits
 |ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
 
 [selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
 
 |HIGHT-OFB
-|HIGHT in OFB mode with unique IVs
+|HIGHT in OFB mode with IVs generated according to FCS_OTV_EXT.1
 |128 bits
 |ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
 
 [selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
 
 |HIGHT-CTR
-|HIGHT in CTR mode with unique, incremental counter
+|HIGHT in CTR mode with counter values generated according to FCS_OTV_EXT.1
 |128 bits
 |ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
 
 [selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |LEA-CBC
-|LEA in CBC mode with non-repeating and unpredictable IVs
+|LEA in CBC mode with IVs generated according to FCS_OTV_EXT.1
 |[selection: 128, 192, 256] bits
 |ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
 
 [selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
 
 |LEA-CFB
-|LEA in CFB mode with non-repeating and unpredictable IVs
+|LEA in CFB mode with IVs generated according to FCS_OTV_EXT.1
 |[selection: 128, 192, 256] bits
 |ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
 
 [selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
 
 |LEA-OFB
-|LEA in OFB mode with unique IVs
+|LEA in OFB mode with IVs generated according to FCS_OTV_EXT.1
 |[selection: 128, 192, 256] bits
 |ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
 
 [selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
 
 |LEA-CTR
-|LEA in CTR mode with unique, incremental counter
+|LEA in CTR mode with counter values generated according to FCS_OTV_EXT.1
 |[selection: 128, 192, 256] bits
 |ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
 
 [selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |===
-
-_Application Note {counter:remark_count}_:: _If the selected cryptographic algorithm requires an IV, counter, or tweak value, then FCS_OTV_EXT.1 shall be claimed._
 
 ==== FCS_RBG.1 Random Bit Generation (RBG)
 
