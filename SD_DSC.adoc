@@ -644,7 +644,7 @@ for i = 1 through 100
     seed = digest
 ----
 
-For each test case in each test group, the evaluator shall verify that the TSF generates the correct 100 digest values.
+For each MCT test case in each test group, the evaluator shall verify that the TSF generates the correct 100 digest values.
 
 The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
@@ -840,7 +840,7 @@ for i = 1 through 100
     ct = pt[j - 1]
 ----
 
-For each test case in each test group, the evaluator shall verify that the TSF generates the correct 100 ciphertexts/plaintexts.
+For each MCT test case in each test group, the evaluator shall verify that the TSF generates the correct 100 ciphertexts/plaintexts.
 
 The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
@@ -2226,6 +2226,60 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 The evaluator shall examine the KMD to ensure that it describes when the key wrapping occurs, that the KMD description is consistent with the description in the TSS, and that for all keys that are wrapped the TOE uses a method as described in the [DSC cPP] table. No uncertainty should be left over which is the wrapping key and the key to be wrapped and where the wrapping key potentially comes from i.e. is derived from.
 
+===== FCS_COP.1/XOF Extendable-Output Function
+
+====== TSS
+
+The evaluator shall check that the association of the extendable-output function with other TSF cryptographic functions (for example, the digital signature verification function) is documented in the TSS.
+
+====== AGD
+
+The evaluator checks the AGD documents to determine that any configuration that is required to configure the output sizes is present. The evaluator also checks the AGD documents to confirm that the instructions for establishing the evaluated configuration use only those hash algorithms selected in the ST.
+
+====== Test
+
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
+
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
+
+* XOF algorithm
+
+Each test group shall consist of at least 100 test cases meeting the following requirements:
+
+* Test cases shall be generated according to the parameter configuration of the test group.
+* For SHAKE, each test case shall consist of an arbitrary input message, output length, and the corresponding digest value.
+* For cSHAKE, each test case shall consist of an arbitrary input message, customization string, output length, and the corresponding digest value.
+* For KMACXOF, each test case shall consist of an arbitrary input message, key, customization string, output length, and the corresponding MAC value.
+* A representative sample of the domain of supported input message sizes, key sizes, customization string sizes, and output lengths shall be tested.
+
+For each test case in each test group, the evaluator shall verify that the TSF generates the correct digest or MAC value.
+
+Additionally, each SHAKE and cSHAKE test group shall contain least one Monte Carlo Test (MCT) test case, consisting of an arbitrary seed and a list of 100 digest values. For XOF algorithms, the MCT is defined as follows (note: customization is only used for cSHAKE):
+----
+range = max_out_len - min_out_len + 1
+out_len = max_out_len
+customization = ""
+for i = 1 through 100
+    digest = seed
+    for j = 1 through 1000
+        msg = 128 leftmost bits of digest
+        right-pad msg with "0" bits until msg is at least 128 bits long
+        digest = XOF(msg, customization) to out_len bytes
+        offset = 16 rightmost bits of digest as an integer
+        out_len = min_out_len + (offset % range)
+        customization = (msg) || (16 rightmost bits of digest)
+    output digest
+    seed = digest
+----
+
+For each MCT test case in each test group, the evaluator shall verify that the TSF generates the correct 100 digest values.
+
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
+
 === User Data Protection (FDP)
 
 ==== Data Authentication (FDP_DAU)
@@ -2693,6 +2747,9 @@ However, if the evaluator is unable to perform some other required EA because th
 
 |Cryptographic Signature Verification
 |FCS_COP.1/SigVer
+
+|Extendable-Output Function
+|FCS_COP.1/XOF
 
 |Symmetric-Key Cryptography 
 |FCS_COP.1/SKC, [FTP_CCMP_EXT.1, FTP_GCMP_EXT.1]
