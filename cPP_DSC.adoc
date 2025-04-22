@@ -2398,7 +2398,7 @@ The following table provides the allowed choices for completion of the selection
 
 .Allowed choices for FCS_CKM.1/AKG
 [[AsymKeyGen]]
-[cols=".^1,.^2,.^2",options=header]
+[cols=".^1,.^2,.^2,.^2",options=header]
 |===
 
 |Identifier
