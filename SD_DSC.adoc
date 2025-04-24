@@ -607,7 +607,7 @@ There are no KMD evaluation activities for this component.
 
 ==== Cryptographic Operation (FCS_COP)
 
-===== FCS_COP.1/Hash Cryptographic Operation (Hashing) 
+===== FCS_COP.1/Hash Cryptographic Operation - Hashing
 
 ====== TSS
 
