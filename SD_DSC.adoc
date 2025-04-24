@@ -1928,7 +1928,7 @@ If the TOE uses the generated key in a key chain/hierarchy then the evaluator sh
 * If [.underline]#AK1# is selected, then the KMD describes which methods for generating p and q are used
 * How the key is used as part of the key chain/hierarchy. 
 
-===== FCS_CKM.1/SKG Cryptographic key generation (Symmetric Key)
+===== FCS_CKM.1/SKG Cryptographic Key Generation - Symmetric Key
 
 ====== TSS
 

@@ -2532,24 +2532,28 @@ _For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected s
 +
 _For HSS and XMSS^MT^ the same hash or XOF function shall be used at each level. Within each level, the same Winternitz parameter shall be used but can be different for each level. For HSS, within each level, the same tree height shall be used but can be different for each level._
 
-==== FCS_CKM.1/SKG Cryptographic Key Generation (Symmetric Key)
+==== FCS_CKM.1/SKG Cryptographic Key Generation - Symmetric Key
 
-FCS_CKM.1/SKG Cryptographic Key Generation (Symmetric Key)
+FCS_CKM.1/SKG Cryptographic Key Generation - Symmetric Key
 
 FCS_CKM.1.1/SKG:: The TSF shall generate *symmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm [*selection*: _cryptographic key generation algorithm_] and specified cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
 
-.Symmetric Cryptographic Key Generation
+The following table provides the allowed choices for completion of the selection operations of FCS_CKM.1/SKG:
+
+.Allowed choices for FCS_CKM.1/SKG
 [[SymKeyGen]]
-[cols=".^1,.^2,.^2",options=header]
+[cols=".^1,.^2,.^2,.^2",options=header]
 |===
 
+|Identifier
 |Cryptographic Key Generation Algorithm
 |Cryptographic Key Sizes
 |List of Standards
 
-|Direct Generation from a Random Bit Generator as specified in FCS_RBG.1 
-|[selection: 128, 192, 256, 512] bits 
-|NIST SP 800-133 Rev. 2 (Section 6.1).
+|RSK
+|Direct Generation from a Random Bit Generator as specified in FCS_RBG.1
+|[selection: 128, 192, 256, 512] bits
+|NIST SP 800-133 Revision 2 (Section 6.1). [Direct generation of symmetric keys]
 
 |===
 
@@ -4710,7 +4714,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_RBG.5 !Random Bit Generation (Combining Entropy Sources)
 
-!FCS_CKM.1/SKG !Cryptographic key generation - Symmetric Key
+!FCS_CKM.1/SKG !Cryptographic Key Generation - Symmetric Key
 
 !===
 
