@@ -607,7 +607,7 @@ There are no KMD evaluation activities for this component.
 
 ==== Cryptographic Operation (FCS_COP)
 
-===== FCS_COP.1/Hash Cryptographic Operation (Hashing) 
+===== FCS_COP.1/Hash Cryptographic Operation - Hashing
 
 ====== TSS
 
@@ -685,7 +685,7 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/SigGen Cryptographic Operation (Signature Generation)
+===== FCS_COP.1/SigGen Cryptographic Operation - Signature Generation
 
 ====== TSS
 
@@ -722,7 +722,7 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/SigVer Cryptographic Operation (Signature Verification)
+===== FCS_COP.1/SigVer Cryptographic Operation - Signature Verification
 
 ====== TSS
 
@@ -759,7 +759,7 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/SKC Cryptographic Operation (Symmetric-Key Cryptography)
+===== FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
 
 ====== TSS
 
@@ -1891,7 +1891,7 @@ There are no KMD evaluation activities for this component.
 
 ==== Cryptographic Key Generation (FCS_CKM)
 
-===== FCS_CKM.1/AKG Cryptographic Key Generation (Asymmetric Keys)
+===== FCS_CKM.1/AKG Cryptographic Key Generation - Asymmetric Key
 
 ====== TSS
 
@@ -1928,7 +1928,7 @@ If the TOE uses the generated key in a key chain/hierarchy then the evaluator sh
 * If [.underline]#AK1# is selected, then the KMD describes which methods for generating p and q are used
 * How the key is used as part of the key chain/hierarchy. 
 
-===== FCS_CKM.1/SKG Cryptographic key generation (Symmetric Key)
+===== FCS_CKM.1/SKG Cryptographic Key Generation - Symmetric Key
 
 ====== TSS
 
@@ -2072,7 +2072,7 @@ There are no KMD evaluation activities for this component.
 
 ==== Cryptographic Operation (FCS_COP)
 
-===== FCS_COP.1/AEAD Cryptographic Operation (Authenticated Encryption with Associated Data)
+===== FCS_COP.1/AEAD Cryptographic Operation - Authenticated Encryption with Associated Data
 
 ====== TSS
 
@@ -2115,7 +2115,7 @@ Assessment of the complete data path for authenticated encryption with associate
 
 The evaluator shall examine the KMD to ensure that it describes how the IV is generated and that the same initialization vector is never reused to encrypt different plaintext pairs under the same key. Moreover in the case of GCM, the evaluator must ensure that, at each invocation of GCM, the length of the plaintext is at most (2^32)-2 blocks.
 
-===== FCS_COP.1/CMAC Cryptographic Operation (CMAC)
+===== FCS_COP.1/CMAC Cryptographic Operation - CMAC
 
 ====== TSS
 
