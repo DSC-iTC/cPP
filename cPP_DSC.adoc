@@ -1182,7 +1182,9 @@ FCS_RBG.1 Random Bit Generation (RBG)
 
 FCS_RBG.1.1:: The TSF shall perform deterministic random bit generation services using [*selection*: _DRBG algorithm_] in accordance with [*selection*: _list of standards_] after initialization with a seed.
 
-.Random Bit Generation
+The following table provides the recommended choices for completion of the selection operations of FCS_RBG.1.
+
+.Allowed choices for FCS_RBG.1
 [[RBGs]]
 [cols=".^1,.^2,.^2",options=header]
 |===
@@ -1190,27 +1192,21 @@ FCS_RBG.1.1:: The TSF shall perform deterministic random bit generation services
 |DRBG Algorithm
 |List of Standards
 
-|HASH 
+|HASH_DRBG
 |Hash_DRBG with [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512]
-|[selection: ISO/IEC 18031: 2011 (Section C.2.2) [Hash_DRBG], NIST SP 800-90A Rev. 1 section 10.1.1 [Hash_DRBG], NIST SP 800-131A Rev. 2, FIPS PUB 180-4 [SHA]]
+|[selection: ISO/IEC 18031: 2011 (Section C.2.2), NIST SP 800-90A Revision 1 Section 10.1.1]
 
 FIPS PUB 202 [SHA3]
 
-|HMAC 
+|HMAC_DRBG
 |HMAC_DRBG with [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512]
-|[selection: ISO/IEC 18031: 2011 (Section C.2.3) [HMAC_DRBG], NIST SP800-90A Rev. 1 section 10.1.2 [HMAC_DRBG], NIST SP 800-131A Rev. 2, FIPS PUB 180-4 [SHA]]
+|[selection: ISO/IEC 18031: 2011 (Section C.2.3), NIST SP 800-90A Revision 1 Section 10.1.2]
 
 FIPS PUB 202 [SHA3]
 
-|CTR 
+|CTR_DRBG
 |CTR_DRBG with [selection: AES-128, AES-192, AES-256, SEED-128, HIGHT-128, LEA-128, LEA-192, LEA-256]
-|[selection: ISO/IEC 18031: 2011 (Section C.3.2) [CTR_DRBG], NIST SP800-90A Rev. 1 section 10.2.1 [CTR_DRBG], FIPS PUB 197[AES]]
-
-ISO/IEC 18033-3:2010 (Sub Clause 5.4) [SEED]
-
-ISO/IEC 18033-3:2010 (Sub Clause 4.5) [HIGHT]
-
-ISO/IEC 29192-2:2019 (Sub Clause 6.3) [LEA]
+|[selection: ISO/IEC 18031: 2011 (Section C.3.2), NIST SP 800-90A Revision 1 Section 10.2.1]
 
 |===
 
@@ -1219,20 +1215,20 @@ FCS_RBG.1.2:: The TSF shall use a {empty}[selection: _TSF *entropy* source [assi
 
 FCS_RBG.1.3:: The TSF shall update the *DRBG* state by [selection: _reseeding, uninstantiating and re-instantiating_] using a {empty}[selection: _TSF *entropy* source [assignment: name of *entropy* source], TSF interface for obtaining entropy [assignment: name of the interface]_] in the following situations: [selection:
 +
-* _never_, 
-* _on demand,_  
-* _on the condition: [assignment: condition],_ 
-* _after [assignment: time as supplied according to FPT_STM_EXT.1]_] 
+* _never_,
+* _on demand,_
+* _on the condition: [assignment: condition],_
+* _after [assignment: time as supplied according to FPT_STM_EXT.1]_]
 +
 in accordance with [assignment: _list of standards_]. 
 
 _Application Note {counter:remark_count}_:: _No rationale is acceptable for not satisfying one of these dependencies._
 +
-_If a reseeding is selected in the first selection and something other than "never" is selected in the third selection, but reseeding is not feasible, the TSF will uninstantiate RBGs, rather than produce output that is of insufficient quality. The listed standards should specify the reseed interval and procedure for uninstantiating and reseeding._
+_If a reseeding is selected in the first selection and something other than "never" is selected in the third selection of FCS_RBG.1.3, but reseeding is not feasible, the TSF will uninstantiate RBGs, rather than produce output that is of insufficient quality. The listed standards should specify the reseed interval and procedure for uninstantiating and reseeding._
 +
 _"Uninstantiate" means that the internal state of the DRBG is no longer available for use._
 +
-_In the third selection for FCS_RBG.1.3, "on demand" means, that a TOE presents an interface to reseed as a TSFI (e.g., an API call). The interface causes the DRBG to reseed at the request of an authorized user, either with an internal source, an external source, or from input provided through the TSFI (e.g., the API call)._
+_In the third selection for FCS_RBG.1.3, "on demand" means that a TOE presents an interface to reseed as a TSFI (e.g., an API call). The interface causes the DRBG to reseed at the request of an authorized user, either with an internal source, an external source, or from input provided through the TSFI (e.g., the API call)._
 
 ==== FCS_OTV_EXT.1 One-Time Value
 
@@ -2322,7 +2318,7 @@ FCS_RBG.2 Random Bit Generation (External Seeding)
 
 FCS_RBG.2.1:: The TSF shall be able to accept a minimum input of [assignment: _minimum input length greater than zero_] from a TSF interface for the purpose of *obtaining entropy*.
 
-_Application Note {counter:remark_count}_:: _In order to maintain compliance with NIST SP 800-90A Rev. 1, the TSF accepts enough bits input from an external entropy source to satisfy the entropy requirements of the DRBG. The TSF should also protect the integrity and confidentiality of the entropy it receives from the external entropy source._
+_Application Note {counter:remark_count}_:: _In order to maintain compliance with NIST SP 800-90A Revision 1, the TSF accepts enough bits input from an external entropy source to satisfy the entropy requirements of the DRBG. The TSF should also protect the integrity and confidentiality of the entropy it receives from the external entropy source._
 +
 _The TSF interface for the purpose of seeding here is the interface used to gather entropy for initializing the seed._
 
@@ -2348,7 +2344,7 @@ FCS_RBG.4.1:: The TSF shall be able to seed the *DRBG* using [selection: _[assig
 
 FCS_RBG.5 Random Bit Generation (Combining Entropy Sources)
 
-FCS_RBG.5.1:: The TSF shall {empty}[*selection*: _hash, concatenate and hash, xor, input into a linear feedback shift register, [assignment: combining operation]_] [selection: _output from TSF *entropy* source(s), input from TSF interface(s) for_ *_obtaining entropy_*] to create the entropy input into the derivation function as defined in [*selection*: _ISO/IEC 18031: 2011, NIST SP 800-90A Rev. 1_] resulting in a minimum of [assignment: _number of bits_] bits of min-entropy.
+FCS_RBG.5.1:: The TSF shall {empty}[*selection*: _hash, concatenate and hash, xor, input into a linear feedback shift register, [assignment: combining operation]_] [selection: _output from TSF *entropy* source(s), input from TSF interface(s) for_ *_obtaining entropy_*] to create the entropy input into the derivation function as defined in [*selection*: _ISO/IEC 18031: 2011, NIST SP 800-90A Revision 1_] resulting in a minimum of [assignment: _number of bits_] bits of min-entropy.
 
 _Application Note {counter:remark_count}_:: _One can apply NIST SP 800-90B (or AIS-31) statistical tests against internal entropy sources (a.k.a. raw entropy) to confirm the min-entropy of the entropy sources either in aggregate or individually. One should not apply NIST SP 800-90B (or AIS-31) statistical tests against external entropy sources since the TOE is unable to enforce entropy requirements or conditioning requirements against external sources of entropy. However, the TSS may include estimates for min-entropy from external sources that contribute to the overall entropy requirements for either the DRBG or for FCS_OTV_EXT.1._
 +
