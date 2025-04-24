@@ -2115,7 +2115,7 @@ Assessment of the complete data path for authenticated encryption with associate
 
 The evaluator shall examine the KMD to ensure that it describes how the IV is generated and that the same initialization vector is never reused to encrypt different plaintext pairs under the same key. Moreover in the case of GCM, the evaluator must ensure that, at each invocation of GCM, the length of the plaintext is at most (2^32)-2 blocks.
 
-===== FCS_COP.1/CMAC Cryptographic Operation (CMAC)
+===== FCS_COP.1/CMAC Cryptographic Operation - CMAC
 
 ====== TSS
 

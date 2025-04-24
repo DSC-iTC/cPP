@@ -2767,11 +2767,39 @@ The following table provides the allowed choices for completion of the selection
 
 |===
 
-==== FCS_COP.1/CMAC Cryptographic Operation (CMAC)
+==== FCS_COP.1/CMAC Cryptographic Operation - CMAC
 
-FCS_COP.1/CMAC Cryptographic Operation (CMAC)
+FCS_COP.1/CMAC Cryptographic Operation - CMAC
 
-FCS_COP.1.1/CMAC:: The TSF shall perform [_CMAC_] in accordance with a specified cryptographic algorithm [_AES-CMAC_] and cryptographic key sizes [*selection*: _128 bits, 192 bits, 256 bits_] that meet the following: [*selection*: _ISO/IEC 9797-1:2011 sub clause 7.6 (CMAC) and ISO/IEC 18033-3:2010 sub clause 5.2 (AES), NIST SP 800-38B (CMAC) and NIST FIPS 197 (AES)_].
+FCS_COP.1.1/CMAC:: The TSF shall perform [_CMAC_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
+
+The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/CMAC.
+
+.Allowed choices for FCS_COP.1/CMAC
+[[CMACAlgorithms]]
+[cols=".^1,.^2,.^2,.^2",options=header]
+|===
+
+|Identifier
+|Cryptographic Algorithm
+|Cryptographic Key Sizes
+|List of Standards
+
+|AES-CMAC
+|AES using CMAC mode
+|[selection: 128, 192, 256] bits
+|[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
+
+[selection: ISO/IEC 9797-1:2011 Subclause 7.6, NIST SP 800-38B] [CMAC]
+
+|CAM-CMAC
+|Camellia using CMAC mode
+|[selection: 128, 192, 256] bits
+|ISO/IEC 18033-3:2010 Subclause 5.3 [Camellia]
+
+[selection: ISO/IEC 9797-1:2011 Subclause 7.6, NIST SP 800-38B] [CMAC]
+
+|===
 
 ==== FCS_COP.1/KeyEncap Cryptographic Operation (Key Encapsulation)
 
@@ -4652,6 +4680,8 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation (Keyed Hash)
 
+!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
+
 !FCS_COP.1/KeyEncap !Cryptographic Operation (Key Encapsulation)
 
 !FCS_COP.1/KeyWrap !Cryptographic Operation (Key Wrap)
@@ -4692,6 +4722,8 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation (Keyed Hash)
 
+!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
+
 !FCS_COP.1/SKC !Cryptographic Operation - Symmetric-Key Cryptography
 
 !FCS_RBG.1 !Random Bit Generation (RBG)
@@ -4729,6 +4761,8 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 !FCS_COP.1/Hash !Cryptographic Operation - Hashing
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation (Keyed Hash)
+
+!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
 
 !FCS_COP.1/SKC !Cryptographic Operation - Symmetric-Key Cryptography
 
@@ -4771,6 +4805,8 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 !FCS_COP.1/Hash !Cryptographic Operation - Hashing
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation (Keyed Hash)
+
+!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
 
 !FCS_COP.1/KeyEnc !Cryptographic Operation (Key Encryption)
 
@@ -4822,6 +4858,8 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation (Keyed Hash)
 
+!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
+
 !FCS_RBG.1 !Random Bit Generation (RBG)
 
 !FCS_OTV_EXT.1 !One-Time Value
@@ -4865,6 +4903,8 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 !FCS_COP.1/Hash !Cryptographic Operation - Hashing
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation (Keyed Hash)
+
+!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
 
 !FCS_COP.1/KeyEnc !Cryptographic Operation (Key Encryption)
 
