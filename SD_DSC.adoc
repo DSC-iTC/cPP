@@ -1967,10 +1967,10 @@ If [.underline]#Concatenated key5# is selected for any key derivation function, 
 * The description must include how an approved untruncated MAC function is being used for the randomness extraction step and the evaluator must verify the TSS describes that the output length (in bits) of the MAC function is at least as large as the targeted security strength (in bits) of the parameter set employed by the key establishment scheme (see Tables 1-3 of SP 800-56C Rev. 2).
 * The description must include how the MAC function being used for the randomness extraction step is related to the PRF used in the key expansion and verify the TSS description includes the correct MAC function:
 ** If an HMAC-hash is used in the randomness extraction step, then the same HMAC-hash (with the same hash function hash) is used as the PRF in the key expansion step.
-** If an AES-CMAC (with key length 128, 192, or 256 bits) is used in the randomness extraction step, then AES-CMAC with a 128-bit key is used as the PRF in the key expansion step.
+** If an AES-N-CMAC or Camellia-N-CMAC (with N equal to 128, 192, or 256 bits) is used in the randomness extraction step, then CMAC with the same cipher and a 128-bit key is used as the PRF in the key expansion step.
 * The description must include the lengths of the salt values being used in the randomness extraction step and the evaluator shall verify the TSS description includes correct salt lengths:
 ** If an HMAC-hash is being used as the MAC, the salt length can be any value up to the maximum bit length permitted for input to the hash function hash.
-** If an AES-CMAC is being used as the MAC, the salt length shall be the same length as the AES key (i.e. 128, 192, or 256 bits).
+** If an CMAC is being used as the MAC, the salt length shall be the same length as the CMAC cipher key (i.e. 128, 192, or 256 bits).
 
 ====== AGD
 
@@ -1982,10 +1982,10 @@ The algorithm tests might require access to a development version of the TOE or 
 
 The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
 
-* PRF (KDF-CTR, KDF-FB, KDF-DPI)
+* PRF (KDF-CTR, KDF-FB, KDF-DPI, KDF-KMAC)
 * Encryption algorithm (KDF-ENC)
 * Hash algorithm (KDF-HASH)
-* MAC algorithm (KDF-MAC-1S, KDF-MAC-2S, KDF-KMAC)
+* MAC algorithm (KDF-MAC-1S, KDF-MAC-2S)
 * Counter size (KDF-CTR, KDF-FB, KDF-DPI)
 * Counter location (KDF-CTR, KDF-FB, KDF-DPI)
 * Salt length (KDF-MAC-1S, KDF-MAC-2S)
