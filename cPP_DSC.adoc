@@ -693,9 +693,11 @@ _Some selections allow assignment of "some value that does not contain any CSP."
 
 FCS_CKM_EXT.7 Cryptographic Key Agreement
 
-FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from multiple parties in accordance with specified cryptographic key derivation algorithms [*selection*: _cryptographic algorithm_] and specified key sizes [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
+FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from multiple parties in accordance with specified cryptographic key agreement algorithms [*selection*: _cryptographic algorithm_] and specified cryptographic parameters [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
 
-.Cryptographic Key Agreement
+The following table provides the allowed choices for completion of the selection operations of FCS_CKM_EXT.7.
+
+.Allowed choices for FCS_CKM_EXT.7
 [[KeyAgreement]]
 [cols=".^1,.^2,.^2,.^2",options=header]
 |===
@@ -708,63 +710,32 @@ FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from
 |KAS2
 |RSA
 |Modulus of size [selection: 2048, 3072, 4096, 6144, 8192] bits
-|NIST SP 800-56B Rev. 2 (Section 8.3)
+|NIST SP 800-56B Revision 2 (Section 8.3) [KAS2]
 
 |DH
-|Diffie-Hellman
-|[selection: IKE groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192], TLS groups [selection: ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192]]
-|NIST SP 800-56A Rev. 3, [selection: RFC 3526 (Section [selection: 3, 4, 5, 6, 7]), RFC 7919 (Appendixes [selection: A.1, A.2, A.3, A.4, A.5])]
+|Finite Field Cryptography Diffie-Hellman
+|Static domain parameters approved for [selection: IKE groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192], TLS groups [selection: ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192]]
+|NIST SP 800-56A Revision 3 (Section 5.7.1.1) [DH]
 
-|ECDH-NIST
-|ECDH with NIST curves
-|[selection: NIST P-256, NIST P-384, NIST P-521]
-|NIST SP 800-56A Rev. 3, NIST SP 800-186 (Appendix G.1)
+[selection: RFC 3526 [IKE Groups], RFC 7919 [TLS Groups]]
 
-|ECDH-BPC
-|ECDH with Brainpool curves
-|[selection: brainpoolP256r1, brainpoolP384r1, brainpoolP512r1]
-|NIST SP 800-56A Rev. 3, NIST SP 800-186 (Appendix H.1)
+|ECDH
+|Elliptic Curve Diffie-Hellman
+|Elliptic Curve [selection: P-256, brainpoolP256r1, P-384, brainpoolP384r1, P-521, brainpoolP512r1]
+|NIST SP 800-56A Revision 3 (Section 5.7.1.2) [ECDH]
+
+[selection: NIST SP 800-186 (Section 3.2.1) [NIST Curves], RFC 5639 (Section 3) [Brainpool curves]]
 
 |ECDH-Ed
-|ECDH with Edwards Curves
-|[selection: Edwards25519, Edwards448]
-|RFC 7748
+|ECDH with Montgomery Curves
+|Domain parameters approved for elliptic curves [selection: curve25519, curve448]
+|RFC 7748 (Section 5) [ECDH-Ed]
 
-|ECIES
-|ECIES
-|[selection: brainpoolP256r1, brainpoolP384r1, brainpoolP512r1, NIST P-256, NIST P-384, NIST P-521]
-|[selection: ANSI X9.63, IEEE 1363a, ISO/IEC 18033-2 Part 2, SECG SEC1 sec 5.1]
-
-|KAS-KDF
-|[selection: KDF-CTR, KDF-FB, KDF-DPI] with concatenated keys as input using [selection: AES-128-CMAC; AES-192-CMAC; AES-256-CMAC, HMAC-SHA-1; HMAC-SHA-256; HMAC-SHA-512] as the PRF.
-|[selection: 128, 192, 256] bits
-|NIST SP 800-108 Rev. 1 (Section 4) [KDF]
-
-[selection: ISO/IEC 9797-1:2011 (CMAC), NIST SP 800-38B (CMAC), ISO/IEC 18033-3:2010 (AES), FIPS PUB 197 (AES),  ISO/IEC 9797-2:2021 (HMAC), FIPS PUB 198-1 (HMAC), ISO/IEC 10118-3:2018 (SHA), FIPS PUB 180-4 (SHA)] 
-
-|KAS-KDF-KEK
-|Encrypting one key with another using algorithm specified in FCS_COP.1/AEAD or FCS_COP.1/SKC
-|[selection: 128, 192, 256] bits
-|N/A
-
-|KAS-KDF-XOR
-|exclusive OR (XOR)
-|[selection: 128, 192, 256] bits
-|N/A
+NIST SP 800-186 (Section 3.2.2) [Montgomery Curves]
 
 |===
 
-_Application Note {counter:remark_count}_:: _This SFR captures methods for multi-party key agreement in which multiple parties contribute material used to derive the shared key used by each party to encrypt and decrypt incoming and outgoing messages. TOEs can use the derived keys as symmetric keys, keyed-hash keys, or cryptographic keys for key derivation functions._
-+
-_FCS_CKM.5 defines KDF-CTR, KDF-FB, and KDF-DPI._
-+
-_For the key derivation functions, when concatenating keys for AES-CMAC, the contributions from each party should be an equal number of bits, resulting in the selected key size (e.g., if each share is 128 bits and there are two parties, then the result after concatenation is a 256-bit key, which is appropriate only for AES-256-CMAC). For HMAC functions, the shares can be any size as long as the concatenated result is equal to or greater than the nominal cryptographic strength of the chosen hash function (e.g. if each share is 128 bits, then the result after concatenation is 256 bits, which can be used in any of SHA-1, SHA-256, or SHA-512)._
-+
-_For the key derivation functions and XOR, each party may have to use an asymmetric method from FCS_CKM.2 to transmit their shares to each other. Key shares may also come from a token, in which case, TOEs may use key access methods in FCS_CKM_EXT.3 to authorize access and use of those keys in this SFR._
-+
-_There are no standards that specify how to derive a key from two keys using KEK or XOR. For KEK, encrypting one key with another, one must use one of the algorithms listed in FCS_COP.1/AEAD or FCS_COP.1/SKC and indicate which of the inputs is the plaintext and which is the key. If XOR is selected, the ST Author should describe this method in the documentation._
-+
-_For ST authors, please consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
+_Application Note {counter:remark_count}_:: _ST authors should consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
 
 ==== FCS_COP.1/Hash Cryptographic Operation (Hashing)
 
@@ -3007,7 +2978,7 @@ This family defines requirements for key life cycle operations.
 
 FCS_CKM_EXT.3 The cryptographic key access applies primarily to the storage of keys for future use and retrieval of keys for immediate use by the TOE. There may be some overlap in primitives used in other SFRs, but the end goals here are to protect the confidentiality and authenticity of the keys while in storage.
 
-FCS_CKM_EXT.7 This SFR captures methods for key agreement in which multiple parties contribute material used to derive the shared key used by each party to encrypt and decrypt messages to and from each other. The derived key can be used either as a symmetric key, keyed-hash key, or cryptographic key for key derivation functions.
+FCS_CKM_EXT.7 This SFR contains methods for multi-party key agreement in which two or more parties contribute material used to derive the shared key used by each party to encrypt and decrypt incoming and outgoing messages. TOEs can use the keys as symmetric keys, keyed-hash keys, or cryptographic keys for key derivation functions.
 
 FCS_CKM_EXT.8 Password key derivation is different from regular key derivation since for key derivation it is expected that the input parameters have full entropy compared to the expected key strength and the passwords for password-based key derivation have limited entropy. One must add additional constraints, work, or entropy to increase the security of password-based key derivation algorithms that suffer from a lack of entropy induced by passwords sourced by human memory. These password-based key derivation algorithms should result in derived keys that have sufficient security.
 
@@ -3046,10 +3017,10 @@ FCS_CKM.5 Cryptographic key derivation, or +
 FCS_CKM_EXT.8 Password-based key derivation] +
 [FCS_CKM.2 Cryptographic key distribution, +
 or FCS_COP.1 Cryptographic operation] +
-FCS_CKM.6 Timing and event of cryptographic key destruction 
+FCS_CKM.6 Timing and event of cryptographic key destruction
 
 [vertical]
-FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from multiple parties in accordance with specified cryptographic key derivation algorithms [assignment: _cryptographic algorithm_] and specified key sizes [assignment: _key sizes_] that meet the following: [assignment: _list of standards_].
+FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from multiple parties in accordance with specified cryptographic key agreement algorithms [assignment: _cryptographic algorithm_] and specified cryptographic parameters [assignment: _cryptographic parameters_] that meet the following: [assignment: _list of standards_].
 
 *FCS_CKM_EXT.8 Password-Based Key Derivation*
 [horizontal]
