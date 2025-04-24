@@ -2801,30 +2801,37 @@ The following table provides the allowed choices for completion of the selection
 
 |===
 
-==== FCS_COP.1/KeyEncap Cryptographic Operation (Key Encapsulation)
+==== FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
 
-FCS_COP.1/KeyEncap Cryptographic Operation (Key Encapsulation)
+FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
 
 FCS_COP.1.1/KeyEncap:: The TSF shall perform [_key encapsulation_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
 
-.Key Encapsulation
+The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/KeyEncap.
+
+.Allowed choices for FCS_COP.1/KeyEncap
 [[KeyEncapAlgorithms]]
-[cols=".^1,.^2,.^2",options=header]
+[cols=".^1,.^2,.^2,.^2",options=header]
 |===
 
+|Identifier
 |Cryptographic Algorithm 
 |Cryptographic Key Sizes
 |List of Standards
 
+|KAS1
 |KAS1 [RSA-single party] 
-|[*selection*: 2048, 3072, 4096, 8192] bits 
-|NIST SP 800-56B Rev. 2 (Sections 6.3 & 8.2) 
+|[selection: 2048, 3072, 4096, 8192] bits
+|NIST SP 800-56B Revision 2 (Sections 6.3 & 8.2)
 
+|KTS-OAEP
 |KTS-OAEP [RSA-OAEP] 
-|[*selection*: 2048, 3072, 4096, 8192] bits 
-|NIST SP 800-56B Rev. 2 (Sections 6.3 & 9) 
+|[selection: 2048, 3072, 4096, 8192] bits
+|NIST SP 800-56B Revision 2 (Sections 6.3 & 9)
 
 |===
+
+_Application Note {counter:remark_count}_:: _NIST SP 800-57 Part 1 Revision 5 Section 5.6.2 specifies that the size of key used to protect the key being transported should be at least the security strength of the key it is protecting._
 
 ==== FCS_COP.1/KeyWrap Cryptographic Operation (Key Wrap)
 
@@ -3131,7 +3138,7 @@ Dependencies:: [FCS_CKM.1 Cryptographic key generation, or +
 FCS_CKM.5 Cryptographic key derivation, or +
 FCS_CKM_EXT.8 Password-based key derivation] +
 FCS_CKM.6 Timing and event of cryptographic key destruction, +
-[FCS_COP.1/KeyEncap Cryptographic Operation (Key Encapsulation), or +
+[FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation, or +
 FCS_COP.1/KeyWrap Cryptographic Operation (Key Wrap), or +
 FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography, or +
 FCS_COP.1/AEAD Authenticated Encryption with Associated Data]
@@ -4682,7 +4689,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/CMAC !Cryptographic Operation - CMAC
 
-!FCS_COP.1/KeyEncap !Cryptographic Operation (Key Encapsulation)
+!FCS_COP.1/KeyEncap !Cryptographic Operation - Key Encapsulation
 
 !FCS_COP.1/KeyWrap !Cryptographic Operation (Key Wrap)
 
