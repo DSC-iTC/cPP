@@ -2340,33 +2340,11 @@ There are no KMD evaluation activities for this component.
 
 ==== Mutable/Immutable Firmware (Extended - FPT_MFW_EXT)
 
-===== FPT_MFW_EXT.2 Basic Firmware Integrity
+===== FPT_MFW_EXT.2 Firmware Integrity
 
 ====== TSS
 
-The evaluator shall verify that the TSS describes which critical memory is measured for these integrity values and how the measurement is performed (including which TOE software measures the memory integrity values, how that software accesses the critical memory, and which algorithms are used).
-
-====== AGD
-
-If the integrity values are provided to the administrator, the evaluator shall verify that the AGD guidance contains instructions for retrieving these values and information for interpreting them. For example, if multiple measurements are taken, what those measurements are and how changes to those values relate to changes in the device state.
-
-====== Test
-
-Note that the following test may require the developer to provide access to a test platform that provides the evaluator with tools that are not typically available to end users.
-
-The evaluator shall repeat the following test for each measurement:
-
-The evaluator shall boot the TOE in an approved state and record the measurement taken. The evaluator shall modify the critical memory or value that is measured. The evaluator shall reboot the TOE and verify that the measurement changed.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
-===== FPT_MFW_EXT.3 Firmware Authentication with Identity of Guarantor
-
-====== TSS
-
-The evaluator shall examine the TSS to ensure it describes the methods and identities used to verify integrity and authenticity of the firmware. The TSS shall identify the Guarantor and how to verify its identity.
+The evaluator shall examine the TSS to ensure it describes the methods (i.e., cryptographic algorithms) and identities (e.g., code signing certificates) used to verify integrity and authenticity of the firmware. The TSS shall identify the Guarantor (e.g., root certificate authority or trusted public key) and how to verify its identity.
 
 ====== AGD
 
@@ -2378,13 +2356,23 @@ The TOE guarantees the authenticity of the firmware using the identity of the Gu
 
 *Test 1: Verify Authentic Firmware*
 
-The evaluator shall trigger the TOE to load and evaluate the authenticity of authentic firmware according the methods described in the TSS. The evaluator shall ensure that the TOE provides a clear indication of the success of the evaluation to consider the test a 'Pass', otherwise, the test is a 'Fail'.
+The evaluator shall trigger the TOE to load and evaluate the integrity and authenticity of authentic firmware before execution, according the methods described in the TSS. The evaluator shall ensure that the TOE provides a clear indication of the success of the evaluation to consider the test a 'Pass', otherwise, the test is a 'Fail'.
 
-*Test 2: Verify Unauthentic Firmware*
+*Test 1: Verify Authentic Firmware*
 
-The evaluator shall deliberately modify authentic firmware. 
+The evaluator shall deliberately modify the authentic firmware.
 
-The evaluator shall trigger the TOE to load and evaluate the authenticity of the deliberately modified firmware according the methods described in the TSS. The evaluator shall ensure that the TOE provides a clear indication of the failure of the evaluation to consider the test a 'Pass', otherwise, the test is a 'Fail'.
+The evaluator shall trigger the TOE to load and evaluate the integrity and authenticity of the deliberately modified firmware before execution, according the methods described in the TSS. The evaluator shall ensure that the TOE provides a clear indication of the failure of the evaluation to consider the test a 'Pass', otherwise, the test is a 'Fail'.
+
+*Test 3: Verify Authentic Firmware Updates*
+
+The evaluator shall trigger the TOE to load and evaluate the integrity and authenticity of an authentic firmware update, according the methods described in the TSS. The evaluator shall ensure that the TOE provides a clear indication of the success of the evaluation to consider the test a 'Pass', otherwise, the test is a 'Fail'.
+
+*Test 4: Verify Unauthentic Firmware Updates*
+
+The evaluator shall deliberately modify the authentic firmware update.
+
+The evaluator shall trigger the TOE to load and evaluate the authenticity of the deliberately modified firmware update, according the methods described in the TSS. The evaluator shall ensure that the TOE provides a clear indication of the failure of the evaluation to consider the test a 'Pass', otherwise, the test is a 'Fail'.
 
 ====== KMD
 
