@@ -689,54 +689,6 @@ _The selection for destruction of data in non-volatile memory includes block era
 +
 _Some selections allow assignment of "some value that does not contain any CSP." This means that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG requirements, and not being any of the particular values listed as other selection options. The point of the phrase "does not contain any sensitive data" is to ensure that the overwritten data is carefully selected, and not taken from a general pool that might contain data that itself requires confidentiality protection._
 
-==== FCS_CKM_EXT.7 Cryptographic Key Agreement
-
-FCS_CKM_EXT.7 Cryptographic Key Agreement
-
-FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from multiple parties in accordance with specified cryptographic key agreement algorithms [*selection*: _cryptographic algorithm_] and specified cryptographic parameters [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
-
-The following table provides the allowed choices for completion of the selection operations of FCS_CKM_EXT.7.
-
-.Allowed choices for FCS_CKM_EXT.7
-[[KeyAgreement]]
-[cols=".^1,.^2,.^2,.^2",options=header]
-|===
-
-|Identifier
-|Cryptographic Algorithm
-|Cryptographic Algorithm Parameters
-|List of Standards
-
-|KAS2
-|RSA
-|Modulus of size [selection: 2048, 3072, 4096, 6144, 8192] bits
-|NIST SP 800-56B Revision 2 (Section 8.3) [KAS2]
-
-|DH
-|Finite Field Cryptography Diffie-Hellman
-|Static domain parameters approved for [selection: IKE groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192], TLS groups [selection: ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192]]
-|NIST SP 800-56A Revision 3 (Section 5.7.1.1) [DH]
-
-[selection: RFC 3526 [IKE Groups], RFC 7919 [TLS Groups]]
-
-|ECDH
-|Elliptic Curve Diffie-Hellman
-|Elliptic Curve [selection: P-256, brainpoolP256r1, P-384, brainpoolP384r1, P-521, brainpoolP512r1]
-|NIST SP 800-56A Revision 3 (Section 5.7.1.2) [ECDH]
-
-[selection: NIST SP 800-186 (Section 3.2.1) [NIST Curves], RFC 5639 (Section 3) [Brainpool curves]]
-
-|ECDH-Ed
-|ECDH with Montgomery Curves
-|Domain parameters approved for elliptic curves [selection: curve25519, curve448]
-|RFC 7748 (Section 5) [ECDH-Ed]
-
-NIST SP 800-186 (Section 3.2.2) [Montgomery Curves]
-
-|===
-
-_Application Note {counter:remark_count}_:: _ST authors should consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
-
 ==== FCS_COP.1/Hash Cryptographic Operation - Hashing
 
 FCS_COP.1/Hash Cryptographic Operation - Hashing
@@ -2657,6 +2609,54 @@ _In KDF-MAC-2S, if AES-N-CMAC or Camellia-N-CMAC is selected in the MAC step, th
 +
 _Under input parameters, if concatenated keys or intermediary keys is selected, the ST Author should describe the sources of the keys, and the order in which they are concatenated, along with any other values that are concatenated with them. This option may be chosen in instances when input keying material for the KDF comes from two independent sources, for example, a client and a server._
 
+==== FCS_CKM_EXT.7 Cryptographic Key Agreement
+
+FCS_CKM_EXT.7 Cryptographic Key Agreement
+
+FCS_CKM_EXT.7.1:: The TSF shall derive shared cryptographic keys with input from multiple parties in accordance with specified cryptographic key agreement algorithms [*selection*: _cryptographic algorithm_] and specified cryptographic parameters [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
+
+The following table provides the allowed choices for completion of the selection operations of FCS_CKM_EXT.7.
+
+.Allowed choices for FCS_CKM_EXT.7
+[[KeyAgreement]]
+[cols=".^1,.^2,.^2,.^2",options=header]
+|===
+
+|Identifier
+|Cryptographic Algorithm
+|Cryptographic Algorithm Parameters
+|List of Standards
+
+|KAS2
+|RSA
+|Modulus of size [selection: 2048, 3072, 4096, 6144, 8192] bits
+|NIST SP 800-56B Revision 2 (Section 8.3) [KAS2]
+
+|DH
+|Finite Field Cryptography Diffie-Hellman
+|Static domain parameters approved for [selection: IKE groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192], TLS groups [selection: ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192]]
+|NIST SP 800-56A Revision 3 (Section 5.7.1.1) [DH]
+
+[selection: RFC 3526 [IKE Groups], RFC 7919 [TLS Groups]]
+
+|ECDH
+|Elliptic Curve Diffie-Hellman
+|Elliptic Curve [selection: P-256, brainpoolP256r1, P-384, brainpoolP384r1, P-521, brainpoolP512r1]
+|NIST SP 800-56A Revision 3 (Section 5.7.1.2) [ECDH]
+
+[selection: NIST SP 800-186 (Section 3.2.1) [NIST Curves], RFC 5639 (Section 3) [Brainpool curves]]
+
+|ECDH-Ed
+|ECDH with Montgomery Curves
+|Domain parameters approved for elliptic curves [selection: curve25519, curve448]
+|RFC 7748 (Section 5) [ECDH-Ed]
+
+NIST SP 800-186 (Section 3.2.2) [Montgomery Curves]
+
+|===
+
+_Application Note {counter:remark_count}_:: _ST authors should consider the assumptions that opposite parties in the operational environment contribute keying material that meets the same requirements._
+
 ==== FCS_CKM_EXT.8 Password-Based Key Derivation
 
 FCS_CKM_EXT.8 Password-Based Key Derivation
@@ -2995,6 +2995,7 @@ FTP_ITE_EXT.1.1:: The TSF shall encrypt data for transfer between the TOE and [_
 +
 * _Pre-shared keys;_
 * _Key agreement according to FCS_CKM_EXT.7;_
+* _Key encapsulation according to FCS_COP.1/KeyEncap;_
 * _Keys exchanged using a physically protected communication mechanism conformant with FTP_ITP_EXT.1_].
 
 _Application Note {counter:remark_count}_:: _This requirement applies to encrypted data communications between the TOE and external entities that do not use a physically protected mechanism conforming to FTP_ITP_EXT.1, or a cryptographically protected data channel as conforming to FTP_ITC_EXT.1. For example, if data is transferred through encrypted buffers (or blobs) then this requirement applies. If data is transferred through a physically protected channel, then FTP_ITP_EXT.1 applies. This requirement would apply, for example, for communications implemented through a shared data buffer._
@@ -4029,7 +4030,7 @@ FCS_CKM.2 - included
 
 FCS_CKM.5 - (selection-based SFR) included
 
-FCS_CKM_EXT.7 - included
+FCS_CKM_EXT.7 - (selection-based SFR) included
 
 FCS_CKM_EXT.8 - (selection-based SFR) included
 
@@ -4067,28 +4068,6 @@ FCS_CKM.1 - included
 
 FCS_CKM.5 - (selection-based SFR) included
 
-|FCS_CKM_EXT.7 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.8]
-
-[FCS_CKM.2 or FCS_COP.1]
-
-FCS_CKM.6 
-|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
-
-FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
-
-FCS_CKM.1 - included
-
-FCS_CKM.5 - (selection-based SFR) included
-
-FCS_CKM_EXT.8 - (selection-based SFR) included
-
-FCS_CKM.2 - included
-
-FCS_COP.1 - included
-
-FCS_CKM.6 - included
-
 |FCS_COP.1/Hash 
 |No dependencies.
 |There are no keys involved with hashing, so no cryptograhpic key-based dependencies are necessary.
@@ -4105,7 +4084,7 @@ FCS_CKM.1 - included
 
 FCS_CKM.5 - (selection-based SFR) included
 
-FCS_CKM_EXT.7 - included
+FCS_CKM_EXT.7 - (selection-based SFR) included
 
 FCS_CKM_EXT.8 - (selection-based SFR) included
 
@@ -4153,7 +4132,7 @@ FCS_CKM.1 - included
 
 FCS_CKM.5 - (selection-based SFR) included
 
-FCS_CKM_EXT.7 - included
+FCS_CKM_EXT.7 - (selection-based SFR) included
 
 FCS_CKM_EXT.8 - (selection-based SFR) included
 
@@ -4433,7 +4412,7 @@ FCS_CKM.6
 
 FCS_CKM.5 - (selection-based SFR) included
 
-FCS_CKM_EXT.7 - included
+FCS_CKM_EXT.7 - (selection-based SFR) included
 
 FCS_COP.1 - included
 
@@ -4477,6 +4456,28 @@ FCS_COP.1 - included
 
 FCS_CKM.6 - included
 
+|FCS_CKM_EXT.7
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.8]
+
+[FCS_CKM.2 or FCS_COP.1]
+
+FCS_CKM.6
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.2 - included
+
+FCS_COP.1 - included
+
+FCS_CKM.6 - included
+
 |FCS_CKM_EXT.8 
 |[FCS_CKM.2 or FCS_CKM_EXT.7]
 
@@ -4485,7 +4486,7 @@ FCS_COP.1/KeyedHash
 FCS_CKM.6 
 |FCS_CKM.2 - included
 
-FCS_CKM_EXT.7 - included
+FCS_CKM_EXT.7 - (selection-based SFR) included
 
 FCS_COP.1/KeyedHash - included
 
@@ -4505,7 +4506,7 @@ FCS_CKM.1 - included
 
 FCS_CKM.5 - (selection-based SFR) included
 
-FCS_CKM_EXT.7 - included
+FCS_CKM_EXT.7 - (selection-based SFR) included
 
 FCS_CKM_EXT.8 - (selection-based SFR) included
 
@@ -4526,7 +4527,7 @@ FCS_CKM.1 - included
 
 FCS_CKM.5 - (selection-based SFR) included
 
-FCS_CKM_EXT.7 - included
+FCS_CKM_EXT.7 - (selection-based SFR) included
 
 FCS_CKM_EXT.8 - (selection-based SFR) included
 
@@ -4546,7 +4547,7 @@ FCS_CKM.1 - included
 
 FCS_CKM.5 - (selection-based SFR) included
 
-FCS_CKM_EXT.7 - included
+FCS_CKM_EXT.7 - (selection-based SFR) included
 
 FCS_CKM_EXT.8 - (selection-based SFR) included
 
@@ -4566,7 +4567,7 @@ FCS_CKM.1 - included
 
 FCS_CKM.5 - (selection-based SFR) included
 
-FCS_CKM_EXT.7 - included
+FCS_CKM_EXT.7 - (selection-based SFR) included
 
 FCS_CKM_EXT.8 - (selection-based SFR) included
 
