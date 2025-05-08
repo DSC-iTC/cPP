@@ -561,50 +561,6 @@ The evaluator shall examine the KMD to ensure that all keys and keying material 
 
 Note that where selections include 'destruction of reference to the key directly followed by a request for garbage collection' (for volatile memory) then the evaluator shall examine the KMD to ensure that it explains the nature of the destruction of the reference, the request for garbage collection, and of the garbage collection process itself.
 
-===== FCS_CKM_EXT.7 Cryptographic Key Agreement
-
-====== TSS
-
-The evaluator shall ensure that the selected RSA, DH, and ECDH key agreement schemes correspond to the key generation schemes selected in FCS_CKM.1/AKG. If the ST selects DH, the TSS shall describe how the implementation meets the relevant sections of RFC 3526 (Section 3-7) or RFC 7919 (Appendices A.1-A.5). If the ST selects ECIES, the TSS shall describe the key sizes and algorithms (e.g. elliptic curve point multiplication, ECDH with either NIST or Brainpool curves, a symmetric cipher permitted by FCS_COP.1/SKC, a hash algorithm permitted by FCS_COP.1/Hash, and a MAC algorithm permitted by FCS_COP.1/KeyedHash or FCS_COP.1/CMAC) that are supported for the ECIES implementation.
-
-The evaluator shall ensure that, for each key agreement scheme, the size of the derived keying material is at least the same as the intended strength of the key agreement scheme, and where feasible this should be twice the intended security strength of the key agreement scheme.
-
-For each key agreement scheme, the TSS shall list the associated key derivation function if applicable.
-
-====== AGD
-
-The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key agreement scheme.
-
-====== Test
-
-The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
-
-The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
-
-* Modulus size (KAS2)
-* Domain parameters (DH)
-* Curve (ECDH, ECIES)
-* Key agreement role (initiator or responder)
-* Hash algorithm (if applicable)
-* Associated data pattern (if applicable)
-* KDF configuration (if applicable)
-
-Each test group shall consist of at least 10 test cases meeting the following requirements:
-
-* Test cases shall be generated according to the parameter configuration of the test group.
-* Each test case shall consist of an arbitrary "owner" private key, an arbitrary "peer" public key, an arbitrary associated data string (if applicable), and the corresponding shared secret or derived key.
-* A representative sample of the domain of supported associated data sizes shall be tested.
-* A representative sample of the domain of supported shared secret sizes shall be tested.
-* A representative sample of the domain of supported derived key sizes shall be tested.
-
-For each test case in each test group, the evaluator shall verify that the TSF generates the correct shared secret or derived key.
-
-The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
 ==== Cryptographic Operation (FCS_COP)
 
 ===== FCS_COP.1/Hash Cryptographic Operation - Hashing
@@ -2031,6 +1987,50 @@ Testing for this SFR is performed under the corresponding functions based on the
 ===== KMD
 
 The developer is allowed to provide additional details of the key access operations and cryptographic methods in the KMD. The evaluator shall verify the accuracy of any additional descriptions (if present).
+
+===== FCS_CKM_EXT.7 Cryptographic Key Agreement
+
+====== TSS
+
+The evaluator shall ensure that the selected RSA, DH, and ECDH key agreement schemes correspond to the key generation schemes selected in FCS_CKM.1/AKG. If the ST selects DH, the TSS shall describe how the implementation meets the relevant sections of RFC 3526 (Section 3-7) or RFC 7919 (Appendices A.1-A.5). If the ST selects ECIES, the TSS shall describe the key sizes and algorithms (e.g. elliptic curve point multiplication, ECDH with either NIST or Brainpool curves, a symmetric cipher permitted by FCS_COP.1/SKC, a hash algorithm permitted by FCS_COP.1/Hash, and a MAC algorithm permitted by FCS_COP.1/KeyedHash or FCS_COP.1/CMAC) that are supported for the ECIES implementation.
+
+The evaluator shall ensure that, for each key agreement scheme, the size of the derived keying material is at least the same as the intended strength of the key agreement scheme, and where feasible this should be twice the intended security strength of the key agreement scheme.
+
+For each key agreement scheme, the TSS shall list the associated key derivation function if applicable.
+
+====== AGD
+
+The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key agreement scheme.
+
+====== Test
+
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
+
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
+
+* Modulus size (KAS2)
+* Domain parameters (DH)
+* Curve (ECDH, ECIES)
+* Key agreement role (initiator or responder)
+* Hash algorithm (if applicable)
+* Associated data pattern (if applicable)
+* KDF configuration (if applicable)
+
+Each test group shall consist of at least 10 test cases meeting the following requirements:
+
+* Test cases shall be generated according to the parameter configuration of the test group.
+* Each test case shall consist of an arbitrary "owner" private key, an arbitrary "peer" public key, an arbitrary associated data string (if applicable), and the corresponding shared secret or derived key.
+* A representative sample of the domain of supported associated data sizes shall be tested.
+* A representative sample of the domain of supported shared secret sizes shall be tested.
+* A representative sample of the domain of supported derived key sizes shall be tested.
+
+For each test case in each test group, the evaluator shall verify that the TSF generates the correct shared secret or derived key.
+
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
 
 ===== FCS_CKM_EXT.8 Password-Based Key Derivation
 
