@@ -2155,7 +2155,7 @@ The following rationale provides justification for each security problem definit
 |FCS_CKM.5 (selection-based)
 |This requirement ensures the use of strong mechanisms to perform key derivation.
 
-.6+|T.WEAK_CRYPTO
+.7+|T.WEAK_CRYPTO
 |FCS_COP.1/CMAC (selection-based)
 |This requirement ensures the use of strong methods to perform CMAC.
 
@@ -2164,6 +2164,9 @@ The following rationale provides justification for each security problem definit
 
 |FCS_COP.1/KeyWrap (selection-based)
 |This requirement ensures the use of strong methods to perform key wrapping.
+
+|FCS_COP.1/XOF (selection-based)
+|This requirement ensures the use of strong methods to perform XOF.
 
 |FCS_CKM_EXT.8 (selection-based)
 |This requirement ensures the use of strong methods to derive keys from password data.
@@ -2852,6 +2855,41 @@ IV length must be equal to 96 bits; the deterministic IV construction method [SP
 |[selection: ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38C] [CCM mode]
 
 |===
+
+==== FCS_COP.1/XOF Extendable-Output Function
+
+FCS_COP.1/XOF Extendable-Output Function
+
+FCS_COP.1.1/XOF:: The TSF shall perform [_extendable-output function_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and *parameters* [*selection*: _parameters_] that meet the following: [*selection*: _list of standards_].
+
+The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/XOF.
+
+.Allowed choices for FCS_COP.1/XOF
+[[XOFAlgorithms]]
+[cols=".^1,.^2,.^2",options=header]
+|===
+
+|Cryptographic Algorithm
+|Parameters
+|List of Standards
+
+|cSHAKE
+|Output length d = [selection: 128, 256] bits and function [selection: SHAKEd, KECCAK[2d]]
+|NIST SP 800-185 Section 3 [cSHAKE], Section 6.2 [SHAKE]
+
+NIST FIPS PUB 202 Section 5 [KECCAK]
+
+|KMACXOF
+|Output length d = [selection: 128, 256] bits
+|NIST SP 800-185 Section 4.3.1 [KMACXOF]
+
+|SHAKE
+|Output length d = [selection: 128, 256] bits
+|NIST FIPS PUB 202 Section 6.2 [SHAKE]
+
+|===
+
+_Application Note {counter:remark_count}_:: _The functions in cSHAKE depend on the output length d., i.e. SHAKEd is either SHAKE128 for d = 128 or SHAKE256 for d = 256. Similarly, KECCAK[2d] is either KECCAK[256] for d = 128 or KECCAK[512] for d = 256. Note that KECCAK is a cryptographic primitive which should have no direct interface exposed to the user of the TOE._
 
 === User Data Protection
 ==== FDP_DAU.1/Prove Basic Data Authentication (for Use with the Prove Service)
