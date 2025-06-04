@@ -1912,9 +1912,11 @@ If the TOE uses the generated key in a key chain/hierarchy then the KMD shall de
 
 The evaluator shall check that the TSS includes a description of the key derivation functions and shall check that this uses a key derivation algorithm and key sizes according to the specification selected in the ST out of the [DSC cPP] Table "Cryptographic Key Derivation" per row. The evaluator shall confirm that the TSS supports the selected methods.
 
-If [.underline]#Concatenated key5# is selected for any key derivation function, the evaluator shall verify that the TSS shows that the total length of the concatenated keys used as input to the KDF is greater than or equal to the length of the output from the KDF.
+[conditional] If intermediary or concatenated keys are used as part of key derivation, the evaluator shall verify that the TSS describes the sources of the keys, the order in which they are concatenated (if applicable), along with any other values that are concatenated with them. The evaluator shall also verify that the TSS shows that the total length of these keys used as input to the derivation algorithm is greater than or equal to the length of the output from the algorithm.
 
-[conditional] If key combination is used to form a KEK, the evaluator shall verify that the TSS describes the method of combination and that this method is either an XOR, a KDF, or encryption.
+[conditional] If [.underline]#KDF-XOR# is selected, the evaluator shall verify that the TSS describes the method used to derive a key from more than one intermediary key using XOR.
+
+[conditional] If [.underline]#KDF-ENC# is selected, the evaluator shall verify that the TSS describes the encryption algorithm used (from FCS_COP.1/AEAD or FCS_COP.1/SKC), and identify which of the two inputs is used as the plaintext and the key in the encryption algorithm.
 
 [conditional] If a KDF is used to form a KEK, the evaluator shall ensure that the TSS includes a description of the key derivation function and shall verify the key derivation uses an approved derivation mode and key expansion algorithm according to SP 800-108 Rev. 1 or SP 800-56C Rev. 2.
 
