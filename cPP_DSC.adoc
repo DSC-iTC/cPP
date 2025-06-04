@@ -4509,6 +4509,8 @@ FCS_CKM.6 - included
 FCS_COP.1/KeyedHash
 
 FCS_CKM.6 
+
+FCS_OTV_EXT.1
 |FCS_CKM.2 - included
 
 FCS_CKM_EXT.7 - (selection-based SFR) included
@@ -4516,6 +4518,8 @@ FCS_CKM_EXT.7 - (selection-based SFR) included
 FCS_COP.1/KeyedHash - included
 
 FCS_CKM.6 - included
+
+FCS_OTV_EXT.1 - included
 
 |FCS_COP.1/AEAD
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8]
