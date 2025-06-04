@@ -220,7 +220,7 @@ DSCs provide seven core security services to a platform as illustrated in <<Core
 |Description
 
 |Parse
-|The DSC shall ingest pre-installed keys, credentials, tokens, attributes, etc. from trusted components or services external to its boundary either across a secured channel or in a manner that the objects are protected for use only by the DSC.
+|The DSC shall ingest SDEs (e.g., pre-installed keys, credentials, tokens) and attributes from trusted components or services external to its boundary either across a secured channel or in a manner that the objects are protected for use only by the DSC.
 
 |Provision
 |The DSC shall create SDOs from parsed or generated SDEs and attributes using binding mechanisms to apply integrity protection to the SDEs together with their attributes.
