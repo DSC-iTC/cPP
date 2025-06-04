@@ -187,7 +187,7 @@ Vendors may pre-install keys and other material in the DSC during the manufactur
 * These keys may persist over a factory reset; and 
 * They may not be accessible to administrators. 
 
-If the SDOs have been erased (e.g. due to a tamper response), then a factory reset may not be possible. Following an initial boot (e.g. first boot by end-user, or following a factory reset), a DSC may generate SDEs unique to an instance of a DSC that are persisted across user sessions. These are considered to be pre-installed SDEs.
+If the SDEs have been erased (e.g. due to a tamper response), then a factory reset may not be possible. Following an initial boot (e.g. first boot by end-user, or following a factory reset), a DSC may generate SDEs unique to an instance of a DSC that are persisted across user sessions. These are considered to be pre-installed SDEs.
 
 Pre-installed SDOs (i.e., SDEs with implicit binding installed by the vendor at manufacturing time) are typically not accessible by non-administrative users of the platform (i.e., client applications) and are reserved for use by the DSC itself to manage its sub-components, keys, and, indirectly, user content. Pre-installed SDOs typically have implicitly bound attributes. Since pre-installed SDOs rarely, if ever, leave the DSC, they may have no formal structure containing attributes. That does not mean these attributes do not exist; only that there exists no structure in which one would find them all in one place.
 
