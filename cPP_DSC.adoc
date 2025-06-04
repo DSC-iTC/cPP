@@ -2097,7 +2097,7 @@ The following rationale provides justification for each security problem definit
 |FCS_CKM.5 (selection-based)
 |This requirement ensures the use of strong mechanisms to perform key derivation.
 
-.7+|T.WEAK_CRYPTO
+.5+|T.WEAK_CRYPTO
 |FCS_COP.1/CMAC (selection-based)
 |This requirement ensures the use of strong methods to perform CMAC.
 
@@ -2112,12 +2112,6 @@ The following rationale provides justification for each security problem definit
 
 |FCS_CKM_EXT.8 (selection-based)
 |This requirement ensures the use of strong methods to derive keys from password data.
-
-|FTP_CCMP_EXT.1 (selection-based)
-|This requirement defines the implementation of CCMP (IEEE 802.11i or IEEE 802.11ac) using strong cryptography.
-
-|FTP_GCMP_EXT.1 (selection-based)
-|This requirement defines the implementation of GCMP (IEEE 802.11ad) using strong cryptography.
 
 |===
 
@@ -2981,37 +2975,11 @@ FPT_STM_EXT.1.1:: The TSF shall be able to provide a reliable [selection: _inter
 _Application Note {counter:remark_count}_:: _It is acceptable for the TSF to provide timestamp data either through an internal clock or a counter. It is also permissible for the TSF to obtain time data from a clock contained within the same physical enclosure in which the TOE is embedded (e.g. a mobile device)._
 
 === Trusted Path/Channels
-==== FTP_CCMP_EXT.1 CCM Protocol
-
-FTP_CCMP_EXT.1 CCM Protocol
-
-FTP_CCMP_EXT.1.1:: The TSF shall implement CCMP using AES in CCM mode and key size [*selection*: _128 bits, 256 bits_] as defined in [*selection*: _IEEE 802.11i, IEEE 802.11ac_].
-
-FTP_CCMP_EXT.1.2:: The TSF shall discard incoming messages if authentication fails.
-
-FTP_CCMP_EXT.1.3:: The TSF shall discard incoming messages that are malformed or invalid.
-
-_Application Note {counter:remark_count}_:: _Inclusion of this SFR requires inclusion of AES-CCM in FCS_COP.1/AEAD._
-+
-_CCMP is defined in IEEE 802.11i. CCMP-256 is defined in IEEE 802.11ac._
-
-==== FTP_GCMP_EXT.1 GCM Protocol
-
-FTP_GCMP_EXT.1 GCM Mode Protocol
-
-FTP_GCMP_EXT.1.1:: The TSF shall implement GCMP using AES in GCM mode and key size [*selection*: _128 bits, 256 bits_] as defined in [_IEEE 802.11ad_].
-
-FTP_GCMP_EXT.1.2:: The TSF shall discard incoming messages if authentication fails.
-
-FTP_GCMP_EXT.1.3:: The TSF shall discard incoming messages that are malformed or invalid.
-
-_Application Note {counter:remark_count}_:: _Inclusion of this SFR requires inclusion of AES-GCM in FCS_COP.1/AEAD._
-
 ==== FTP_ITC_EXT.1 Cryptographically Protected Communications Channels
 
 FTP_ITC_EXT.1 Cryptographically Protected Communications Channels
 
-FTP_ITC_EXT.1.1:: The TSF shall use [*selection*: _CCMP as specified in FTP_CCMP_EXT.1, GCMP as specified in FTP_GCMP_EXT.1_] protocol to provide a communication channel between itself and [_assignment: list of entities external to the TOE_] that protects channel data from disclosure and ensures the integrity of channel data.
+FTP_ITC_EXT.1.1:: The TSF shall use [_assignment: cryptographic protocol_] to provide a communication channel between itself and [_assignment: list of entities external to the TOE_] that protects channel data from disclosure and ensures the integrity of channel data.
 
 _Application Note {counter:remark_count}_:: _Entities external to the TOE include applications that communicate with the TOE such as authentication capabilities (e.g. biometrics reader), external storage, and interfaces with an external DSC._
 
@@ -3083,11 +3051,7 @@ This Appendix provides a definition for all of the extended components introduce
 
 | FPT_STM_EXT Reliable Time Counting
 
-.5+| Trusted Path/Channels (FTP) 
-| FTP_CCMP_EXT CCM Protocol
-
-| FTP_GCMP_EXT GCM Protocol
-
+.3+| Trusted Path/Channels (FTP)
 | FTP_ITC_EXT Inter-TSF Trusted Channel
 
 | FTP_ITE_EXT Encrypted Data Communications
@@ -3809,88 +3773,6 @@ FPT_STM_EXT.1 Reliable Time Counting
 FPT_STM_EXT.1.1:: The TSF shall be able to provide a reliable [selection: _internal time stamp, external time stamp, monotonically increasing counter_] to measure the passage of time.
 
 === Class FTP: Trusted Path/Channels
-==== FTP_CCMP_EXT CCM Protocol
-
-*Family Behavior*
-
-This family defines requirements for the implementation of CCMP.
-
-*Component Leveling*
-
-[#img-FTP_CCMP_EXT] 
-[ditaa,"FTP_CCMP_EXT"]
-....
-
-    +--------------------------------------------+ 
-    |                                            |     +---+
-    | FTP_CCMP_EXT CCM Protocol                  +---->| 1 |
-    |                                            |     +---+
-    +--------------------------------------------+ 
-....
-
-FTP_CCMP_EXT.1 CCM Protocol, requires the TSF to implement CCMP in the specified manner.
-
-*Management: FTP_CCMP_EXT.1*
-
-No specific management functions are identified.
-
-*Audit: FTP_CCMP_EXT.1*
-
-There are no auditable events foreseen.
-
-*FTP_CCMP_EXT.1 CCM Protocol*
-[horizontal]
-Hierarchical to:: No other components.
-
-Dependencies:: FCS_COP.1 Cryptographic Operation
-[vertical]
-FTP_CCMP_EXT.1.1:: The TSF shall implement CCMP using AES in CCM mode and key size [assignment: _key sizes_] as defined in [assignment: _list of standards_].
-
-FTP_CCMP_EXT.1.2:: The TSF shall discard incoming messages if authentication fails.
-
-FTP_CCMP_EXT.1.3:: The TSF shall discard incoming messages that are malformed or invalid.
-
-==== FTP_GCMP_EXT GCM Protocol
-
-*Family Behavior*
-
-This family defines requirements for the implementation of GCMP.
-
-*Component Leveling*
-
-[#img-FTP_GCMP_EXT] 
-[ditaa,"FTP_GCMP_EXT"]
-....
-
-    +--------------------------------------------+ 
-    |                                            |     +---+
-    | FTP_CCMP_EXT GCM Protocol                  +---->| 1 |
-    |                                            |     +---+
-    +--------------------------------------------+ 
-....
-
-FTP_GCMP_EXT GCM Protocol, requires the TSF to implement GCMP in the specified manner.
-
-*Management: FTP_GCMP_EXT.1*
-
-No specific management functions are identified.
-
-*Audit: FTP_GCMP_EXT.1*
-
-There are no auditable events foreseen.
-
-*FTP_GCMP_EXT.1 GCM Protocol*
-[horizontal]
-Hierarchical to:: No other components.
-
-Dependencies:: FCS_COP.1 Cryptographic Operation
-[vertical]
-FTP_GCMP_EXT.1.1:: The TSF shall implement GCMP using AES in GCM mode and key size [assignment: _key sizes_] as defined in [assignment: _list of standards_].
-
-FTP_GCMP_EXT.1.2:: The TSF shall discard incoming messages if authentication fails.
-
-FTP_GCMP_EXT.1.3:: The TSF shall discard incoming messages that are malformed or invalid.
-
 ==== FTP_ITC_EXT Inter-TSF Trusted Channel
 
 *Family Behavior*
@@ -3910,7 +3792,7 @@ This family defines requirements for the implementation of trusted communication
     +--------------------------------------------+ 
 ....
 
-FTP_ITC_EXT.1 Cryptographically Protected Communications Channels, requires the TSF to implement either CCMP or GCMP as a method of communicating securely with external entities.
+FTP_ITC_EXT.1 Cryptographically Protected Communications Channels, requires the TSF to implement a cryptographic protocol as a method of communicating securely with external entities.
 
 *Management: FTP_ITC_EXT.1*
 
@@ -3926,7 +3808,7 @@ Hierarchical to:: No other components.
 
 Dependencies:: FCS_COP.1 Cryptographic Operation
 [vertical]
-FTP_ITC_EXT.1.1:: The TSF shall use [assignment: _cryptographic protocol_] protocol to provide a communication channel between itself and [assignment: _list of entities external to the TOE_] that protects channel data from disclosure and ensures the integrity of channel data.
+FTP_ITC_EXT.1.1:: The TSF shall use [assignment: _cryptographic protocol_] to provide a communication channel between itself and [assignment: _list of entities external to the TOE_] that protects channel data from disclosure and ensures the integrity of channel data.
 
 ==== FTP_ITE_EXT Encrypted Data Communications
 
@@ -4641,14 +4523,6 @@ FCS_COP.1 - included
 |No dependencies
 |N/A
 
-|FTP_CCMP_EXT.1 
-|FCS_COP.1 
-|FCS_COP.1 - included
-
-|FTP_GCMP_EXT.1 
-|FCS_COP.1 
-|FCS_COP.1 - included
-
 |FTP_ITC_EXT.1 
 |FCS_COP.1 
 |FCS_COP.1 - included
@@ -4711,10 +4585,6 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 !FTP_ITP_EXT.1 !Physically Protected Channel
 
 !FTP_ITC_EXT.1 !Cryptographically Protected Communications Channels
-
-!FTP_CCMP_EXT.1 !CCM Protocol
-
-!FTP_GCMP_EXT.1 !GCM Protocol
 
 !FTP_ITE_EXT.1 !Encrypted Data Communications
 
@@ -4945,10 +4815,6 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 !FTP_ITP_EXT.1 !Physically Protected Channel
 
 !FTP_ITC_EXT.1 !Cryptographically Protected Communications Channels
-
-!FTP_CCMP_EXT.1 !CCM Protocol
-
-!FTP_GCMP_EXT.1 !GCM Protocol
 
 !FTP_ITE_EXT.1 !Encrypted Data Communications
 
@@ -5181,9 +5047,6 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 |CCM 
 |Counter with CBC-Message Authentication Code
 
-|CCMP 
-|CCM Protocol
-
 |CPU 
 |Central Processing Unit
 
@@ -5219,9 +5082,6 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 |GCM 
 |Galois Counter Mode
-
-|GCMP
-|GCM Protocol
 
 |HMAC 
 |Keyed-Hash Message Authentication Code
@@ -5333,12 +5193,6 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 [FIPS-SHA3] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 202, SHA-3 Standard: Permutation-Based Hash and Extendable-Output Functions_, National Institute of Standards and Technology, August 2015
 
 [FIPS-SHS] National Institute of Standards and Technology. _Federal Information Processing Standard Publication (FIPS-PUB) 180-4, Secure Hash Standard (SHS)_, National Institute of Standards and Technology, August 2015
-
-[IEEE-CCMP] Institute of Electrical and Electronics Engineers. _IEEE 802.11i-2004 - IEEE Standard for Information Technology-Telecommunications and information exchange between systems-Local and metropolitan area networks-Specific requirements-Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) specifications: Amendment 6: Medium Access Control (MAC) Security Enhancements_, Institute of Electrical and Electronics Engineers, July 2004
-
-[IEEE-CCMP-256] Institute of Electrical and Electronics Engineers. _802.11ac-2013 - IEEE Standard for Information Technology-Telecommunications and information exchange between systems-Local and metropolitan area networks-Specific requirements-Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) specifications: Amendment 4: Enhancements for Very High Throughput for Operation in Bands below 6 GHz._, Institute of Electrical and Electronics Engineers, December 2013
-
-[IEEE-GCMP] Institute of Electrical and Electronics Engineers. _IEEE 802.11ad-2012 - IEEE Standard for Information Technology-Telecommunications and information exchange between systems-Local and metropolitan area networks-Specific requirements-Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) specifications: Amendment 3: Enhancements for Very High Throughput in the 60 GHz Band_, Institute of Electrical and Electronics Engineers, December 2012
 
 [IEEE-PK] Institute of Electrical and Electronics Engineers. _IEEE 1363a-2004 - IEEE Standard Specifications for Public-Key Cryptography - Amendment 1: Additional Techniques_, Institute of Electrical and Electronics Engineers, September 2004
 
