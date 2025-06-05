@@ -275,7 +275,7 @@ Objects: The following list contains objects the DSC expects to use during the e
 * OB.AntiReplay - Anti-replay tokens (e.g. counters, nonces, etc.)
 * OB.Context - Session Context (The DSC may maintain one or more sessions with a CApp involving one or more of SDOs, Authorization Data, Platform State, Failed Authorization Counters, and Anti-Replay Tokens. The DSC may represent internally the state of these objects at any given time in a Session Context) - See <<Sessions>> for more discussion on sessions.
 
-Security Attributes: The following list contains the minimum security attributes for a DSC. Individual DSCs may implement additional security attributes beyond this (whether they are additional standalone attributes or additional attributes that are associated with SDOs); the ST author is expected to identify these.
+Security Attributes: The following list contains the minimum security attributes for a DSC. Individual DSCs may implement additional security attributes beyond this (whether they are additional standalone attributes or additional attributes that are associated with SDOs).
 
 * DSC.ID - The DSC identifier. It may also serve as the identifier for the DSC RoT.
 * CApp.ID - The Client Application identifier.
