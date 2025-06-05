@@ -658,6 +658,7 @@ The developer shall provide sufficient information to the evaluator to properly 
 * Curve (ECDSA, EC-KCDSA, EdDSA)
 * Group size (KCDSA)
 * Private key size (LMS, HSS, XMSS, XMSS^MT^)
+* Parameter set (ML-DSA, HashML-DSA)
 * Padding scheme (RSA)
 * Hash or XOF algorithm
 
@@ -695,6 +696,7 @@ The developer shall provide sufficient information to the evaluator to properly 
 * Curve (ECDSA, EC-KCDSA, EdDSA)
 * Group size (DSA, KCDSA)
 * Private key size (LMS, HSS, XMSS, XMSS^MT^)
+* Parameter set (ML-DSA, HashML-DSA)
 * Padding scheme (RSA)
 * Hash or XOF algorithm
 
@@ -1865,6 +1867,7 @@ The developer shall provide sufficient information to the evaluator to properly 
 * Domain parameters (FFC)
 * Group size (KCDSA)
 * Private key size (LMS, HSS, XMSS, XMSS^MT^)
+* Parameter set (ML-KEM, ML-DSA)
 
 Each test group shall consist of at least 10 test cases meeting the following requirements:
 
@@ -2167,8 +2170,9 @@ The algorithm tests might require access to a development version of the TOE or 
 
 The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
 
-* Modulus size
-* Key agreement role (initiator or responder)
+* Modulus size (RSA)
+* Parameter set (ML-KEM)
+* Key agreement role (initiator or responder) or operation (encapsulation or decapsulation)
 * Hash algorithm (if applicable)
 * Associated data pattern (if applicable)
 * KDF configuration (if applicable)

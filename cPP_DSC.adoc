@@ -830,6 +830,16 @@ NIST SP 800-208 [parameters]
 
 NIST SP 800-208 [parameters]
 
+|ML-DSA
+|ML-DSA.Sign
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87]
+|NIST FIPS 204 (Section 5.2)
+
+|HashML-DSA
+|HashML-DSA.Sign
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87] and hash function [selection: SHA-256, SHA-512/256, SHA3-256, SHAKE128, SHA-384, SHA3-384, SHA-512, SHA3-512, SHAKE256]
+|NIST FIPS 204 (Section 5.4)
+
 |===
 
 _Application Note {counter:remark_count}_:: _FIPS 186-5 allows the use of SHAKE128 and SHAKE256. Implementations shall use the correct number of bits of output as specified in FIPS 186-5._
@@ -839,6 +849,8 @@ _The dependency on FCS_OTV_EXT.1 is needed only for signature schemes that requi
 _For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
 +
 _For HSS and XMSS^MT^ the same hash or XOF function shall be used at each level. Within each level, the same Winternitz parameter shall be used but can be different for each level. For HSS, within each level, the same tree height shall be used but can be different for each level._
++
+_Per Section 5.4 of NIST FIPS 204, the collision strength of the hash function selected for the pre-hash of HashML-DSA must be at least the strength of the signature algorithm._
 
 ==== FCS_COP.1/SigVer Cryptographic Operation - Signature Verification
 
@@ -932,6 +944,16 @@ NIST SP 800-208 [parameters]
 
 NIST SP 800-208 [parameters]
 
+|ML-DSA
+|ML-DSA.Verify
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87]
+|NIST FIPS 204 (Section 5.3)
+
+|HashML-DSA
+|HashML-DSA.Verify
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87] and hash function [selection: SHA-256, SHA-512/256, SHA3-256, SHAKE128, SHA-384, SHA3-384, SHA-512, SHA3-512, SHAKE256]
+|NIST FIPS 204 (Section 5.4)
+
 |===
 
 _Application Note {counter:remark_count}_:: _FIPS 186-5 allows the use of SHAKE128 and SHAKE256. Implementations shall use the correct number of bits of output as specified in FIPS 186-5._
@@ -945,6 +967,8 @@ _For signature verifications, private keys are not necessary, so there are no de
 _For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
 +
 _For HSS and XMSS^MT^ the same hash or XOF function shall be used at each level. Within each level, the same Winternitz parameter shall be used but can be different for each level. For HSS, within each level, the same tree height shall be used but can be different for each level._
++
+_Per Section 5.4 of NIST FIPS 204, the collision strength of the hash function selected for the pre-hash of HashML-DSA must be at least the strength of the signature algorithm._
 
 ==== FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
 
@@ -2443,6 +2467,16 @@ NIST SP 800-208 [parameters]
 
 NIST SP 800-208 [parameters]
 
+|ML-KEM
+|ML-KEM
+|Parameter set = [selection: ML-KEM-512, ML-KEM-768, ML-KEM-1024]
+|NIST FIPS 203 (Section 7.1)
+
+|ML-DSA
+|ML-DSA
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87]
+|NIST FIPS 204 (Section 5.1)
+
 |===
 
 _Application Note {counter:remark_count}_:: _For RSA the choice of the modulus implies the resulting key sizes of the public and private keys generated using the specified standard methods._
@@ -2756,7 +2790,7 @@ The following table provides the allowed choices for completion of the selection
 
 FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
 
-FCS_COP.1.1/KeyEncap:: The TSF shall perform [_key encapsulation_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
+FCS_COP.1.1/KeyEncap:: The TSF shall perform [_key encapsulation_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
 
 The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/KeyEncap.
 
@@ -2767,18 +2801,23 @@ The following table provides the allowed choices for completion of the selection
 
 |Identifier
 |Cryptographic Algorithm 
-|Cryptographic Key Sizes
+|Cryptographic Algorithm Parameters
 |List of Standards
 
 |KAS1
-|KAS1 [RSA-single party] 
-|[selection: 2048, 3072, 4096, 8192] bits
-|NIST SP 800-56B Revision 2 (Sections 6.3 & 8.2)
+|RSASVE.Generate & RSASVE.Recover [RSA-single party]
+|Key size = [selection: 2048, 3072, 4096, 8192] bits
+|NIST SP 800-56B Revision 2 (Section 7.2.1.2 & 7.2.1.3)
 
 |KTS-OAEP
-|KTS-OAEP [RSA-OAEP] 
-|[selection: 2048, 3072, 4096, 8192] bits
-|NIST SP 800-56B Revision 2 (Sections 6.3 & 9)
+|RSA-OAEP.Encrypt & RSA-OAEP.Decrypt [RSA-OAEP]
+|Key size = [selection: 2048, 3072, 4096, 8192] bits
+|NIST SP 800-56B Revision 2 (Section 7.2.2.3 & 7.2.2.4)
+
+|ML-KEM
+|ML-KEM.Encaps
+|Parameter set = [selection: ML-KEM-512, ML-KEM-768, ML-KEM-1024]
+|NIST FIPS 203 (Section 7.2)
 
 |===
 
@@ -2788,7 +2827,7 @@ _Application Note {counter:remark_count}_:: _NIST SP 800-57 Part 1 Revision 5 Se
 
 FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrapping
 
-FCS_COP.1.1/KeyWrap:: The TSF shall perform [_key wrapping_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
+FCS_COP.1.1/KeyWrap:: The TSF shall perform [_key wrapping_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
 
 .Key Wrap
 [[KeyWrapAlgorithms]]
