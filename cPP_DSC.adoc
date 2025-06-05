@@ -2540,13 +2540,13 @@ The following table provides the allowed choices for completion of the selection
 |NIST SP 800-108 Revision 1 Update 1 (Section 4.4 "KDF Using KMAC")
 
 |KDF-XOR
-|More than one intermediary keys
+|More than one intermediary key
 |exclusive OR (XOR)
 |[selection: 128, 192, 256, 512] bits
 |N/A
 
 |KDF-ENC
-|Two keys
+|Two intermediary keys
 |Encrypting using an algorithm specified in [selection: FCS_COP.1/AEAD, FCS_COP.1/SKC]
 |[selection: 128, 192, 256, 512] bits
 |N/A
@@ -2578,11 +2578,7 @@ KDF Step
 
 |===
 
-_Application Note {counter:remark_count}_:: _There are no standards that specify how to derive a key from two keys using XOR (KDF-XOR) or encryption (KDF-ENC). If KDF-XOR is selected, the ST Author should describe this method in the documentation. If KDF-ENC is selected, the ST Author should document the encryption algorithm used from FCS_COP.1/AEAD or FCS_COP.1/SKC, and which of the inputs is the plaintext and which is the key._
-+
-_In KDF-MAC-2S, if AES-N-CMAC or Camellia-N-CMAC is selected in the MAC step, then select CMAC with the same cipher and a 128-bit key in the KDF step, and select 128 as the output key size. If HMAC is selected in the MAC step, then select the same HMAC in the KDF._
-+
-_Under input parameters, if concatenated keys or intermediary keys is selected, the ST Author should describe the sources of the keys, and the order in which they are concatenated, along with any other values that are concatenated with them. This option may be chosen in instances when input keying material for the KDF comes from two independent sources, for example, a client and a server._
+_Application Note {counter:remark_count}_:: _In KDF-MAC-2S, if AES-N-CMAC or Camellia-N-CMAC is selected in the MAC step, then select CMAC with the same cipher and a 128-bit key in the KDF step, and select 128 as the output key size. If HMAC is selected in the MAC step, then select the same HMAC in the KDF._
 
 ==== FCS_CKM_EXT.7 Cryptographic Key Agreement
 
