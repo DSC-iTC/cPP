@@ -2592,7 +2592,7 @@ There are no AGD evaluation activities for this component.
 
 The evaluator shall configure the TOE to communicate with each external entity identified in the TSS. The evaluator shall initiate a transaction that will result in data being transferred to the TOE through the mechanism and other data returned to the initiating entity through the mechanism. The evaluator must verify that the data returned to the entity was encrypted using the documented mechanism when received.
 
-====== 4KMD
+====== KMD
 
 There are no KMD evaluation activities for this component.
 
