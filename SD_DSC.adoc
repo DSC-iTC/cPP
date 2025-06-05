@@ -273,9 +273,6 @@ For definitions of standard CC terminology, see [CC] part 1.
 |CCM 
 |Counter with CBC-Message Authentication Code
 
-|CCMP 
-|CCM Protocol
-
 |CPU 
 |Central Processing Unit
 
@@ -2500,62 +2497,6 @@ There are no KMD evaluation activities for this component.
 
 === Trusted Path/Channels (FTP)
 
-==== CCM Protocol (Extended - FTP_CCMP_EXT)
-
-===== FTP_CCMP_EXT.1 CCM Protocol
-
-====== TSS
-
-The evaluator shall verify that the TSS includes a description of the TOE's expected responses to CCMP authentication failures and malformed or invalid CCMP data units.
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-The evaluator shall perform the following tests:
-
-Test 1: The evaluator shall attempt to establish a CCMP connection to the TOE from an external entity, observe the return traffic with a network traffic analyzer, and verify that the connection succeeds and that the traffic is identified as properly constructed CCMP data units.
-
-Test 2: The evaluator shall attempt to establish a CCMP connection to the TOE using five messages with incorrect or invalid authentication factors and verify that an authentication failure or error status is returned.
-
-Test 3: The evaluator shall attempt to establish a CCMP connection to the TOE using five different messages that are malformed or invalid due to noncompliance with the CCMP standard and observe that all connection attempts are unsuccessful.
-
-Test 4: The evaluator shall establish a valid CCMP connection to the TOE. Once this has been established, the evaluator shall send ten different messages that are malformed or invalid due to noncompliance with the CCMP standard and observe that each of these messages are rejected.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
-==== GCM Protocol (Extended - FTP_GCMP_EXT)
-
-===== FTP_GCMP_EXT.1 GCM Protocol
-
-====== TSS
-
-The evaluator shall verify that the TSS includes a description of the TOE's expected responses to GCMP authentication failures and malformed or invalid GCMP data units.
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-The evaluator shall perform the following tests:
-
-Test 1: The evaluator shall attempt to establish a GCMP connection to the TOE from an external entity, observe the return traffic with a network traffic analyzer, and verify that the connection succeeds and that the traffic is identified as properly constructed GCMP data units.
-
-Test 2: The evaluator shall attempt to establish a GCMP connection to the TOE using five messages with incorrect or invalid authentication factors and verify that an authentication failure or error status is returned.
-
-Test 3: The evaluator shall attempt to establish a GCMP connection to the TOE using five different messages that are malformed or invalid due to noncompliance with the GCMP standard and observe that all connection attempts are unsuccessful.
-
-Test 4: The evaluator shall establish a valid GCMP connection to the TOE. Once this has been established, the evaluator shall send ten different messages that are malformed or invalid due to noncompliance with the GCMP standard and observe that each of these messages are rejected.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
 ==== Inter-TSF Trusted Channel (Extended - FTP_ITC_EXT)
 
 ===== FTP_ITC_EXT.1 Cryptographically Protected Communications Channels
@@ -2570,7 +2511,7 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-The evaluator shall configure the TOE to communicate with each external IT entity or type of remote user identified in the TSS. The evaluator shall monitor network traffic while the TSF performs communication with each of these destinations. The evaluator shall ensure that for each session a trusted channel was established in conformance with the protocols identified in the selection.
+The evaluator shall configure the TOE to communicate with each external IT entity or type of remote user identified in the TSS. The evaluator shall monitor network traffic while the TSF performs communication with each of these destinations. The evaluator shall ensure that for each session a trusted channel was established in conformance with the protocols identified in the assignment.
 
 ====== KMD
 
@@ -2752,7 +2693,7 @@ However, if the evaluator is unable to perform some other required EA because th
 |FCS_COP.1/XOF
 
 |Symmetric-Key Cryptography 
-|FCS_COP.1/SKC, [FTP_CCMP_EXT.1, FTP_GCMP_EXT.1]
+|FCS_COP.1/SKC, [FCS_COP.1/AEAD]
 
 |Random Bit Generation
 |FCS_RBG.1, [FCS_RBG.6]
