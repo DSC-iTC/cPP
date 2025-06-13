@@ -842,9 +842,9 @@ NIST SP 800-208 [parameters]
 
 |===
 
-_Application Note {counter:remark_count}_:: _FIPS 186-5 allows the use of SHAKE128 and SHAKE256. Implementations shall use the correct number of bits of output as specified in FIPS 186-5._
+_Application Note {counter:remark_count}_:: _FIPS 186-5 allows the use of SHAKE128 and SHAKE256._
 +
-_The dependency on FCS_OTV_EXT.1 is needed only for signature schemes that require random bits, such as ECDSA, KCDSA, or EC-KCDSA._
+_The dependency on FCS_OTV_EXT.1 is only used for signature schemes that require random bits, such as ECDSA, KCDSA, or EC-KCDSA._
 +
 _For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
 +
