@@ -1345,11 +1345,11 @@ FDP_ACF.1.4:: The TSF shall explicitly deny access of subjects to objects based 
 
 _Application Note {counter:remark_count}_:: _The expectation of this SFR is that the reader is given sufficient information to determine, for each object controlled by the TOE, the operations that can be performed on it based on the subject attempting to perform the operation, and whether this is conditional based on attribute values or any other circumstances._
 +
-_It is expected that many of the subject-object-operation combinations will always be prohibited by the TSF, either because the target object is not externally modifiable or because the subject lacks the ability to perform the operation in question._
+_Many of the subject-object-operation combinations in the TOE will always be prohibited by the TSF, either because the target object is not externally modifiable or because the subject lacks the ability to perform the operation in question._
 +
-_The ST author is not expected to create an exhaustive list of subject-object-operation combinations; it is sufficient to list those that are always permitted and those that are conditionally permitted with the expectation that all remaining combinations are prohibited._
+_Subject-object-operation combinations that are always permitted and those that are conditionally permitted, combined with rules about the remaining combinations such as blacket prohibition of access is sufficient._
 +
-_FDP_ACF.1.3 and FDP_ACF.1.4 allow the ST author to optionally specify override conditions to resolve otherwise contradictory Access Control SFP rules. For example, the rule "S.Admin may always modify the SDO.Conf attribute of any OB.P_SDO or OB.T_SDO object" may be overridden by a statement in FDP_ACF.1.4 that identifies any particular SDO objects as non-modifiable regardless of subject authorizations._
+_FDP_ACF.1.3 and FDP_ACF.1.4 allow for optional override conditions to resolve otherwise contradictory Access Control SFP rules. For example, the rule "S.Admin may always modify the SDO.Conf attribute of any OB.P_SDO or OB.T_SDO object" may be overridden by a statement in FDP_ACF.1.4 that identifies any particular SDO objects as non-modifiable regardless of subject authorizations._
 +
 _The DSC may contain pre-installed SDOs. The DSC will enforce access control for pre-installed SDOs like any other SDO it contains or manages._
 
