@@ -616,6 +616,8 @@ Extended SFRs (i.e. those SFRs that are not defined in [CC2]) are identified by 
 
 === Cryptographic Support
 
+The DSC ensures that the cryptography used is commensurate with the with the SDEs and SDOs that are being protected based on the selections made in the SFRs. The shortest key strength determines the overall security strength for the DSC.
+
 ==== FCS_CKM.1 Cryptographic Key Generation
 
 FCS_CKM.1 Cryptographic Key Generation
@@ -629,7 +631,7 @@ FCS_CKM.1.1:: The TSF shall generate cryptographic keys in accordance with a spe
 +
 ] [.line-through]#and specified cryptographic key sizes [_assignment: cryptographic key sizes_] that meet the following: [_assignment: list of standards_]#.
 
-_Application Note {counter:remark_count}_:: _Cryptographic keys can include KEKs that protect keys as well as the keys used to protect SDEs and SDOs. DSCs should use key strengths commensurate with protecting the chosen symmetric encryption key strengths._
+_Application Note {counter:remark_count}_:: _Cryptographic keys can include KEKs that protect keys as well as the keys used to protect SDEs and SDOs._
 
 ==== FCS_CKM.2 Cryptographic Key Distribution
 
@@ -638,7 +640,7 @@ FCS_CKM.2 Cryptographic Key Distribution
 FCS_CKM.2.1:: The TSF shall distribute cryptographic keys in accordance with a specified cryptographic key distribution method [*selection*: _key encapsulation as specified in FCS_COP.1/KeyEncap, key wrapping as specified in FCS_COP.1/KeyWrap, physically protected channels as specified in FTP_ITP_EXT.1, encrypted data buffers as specified in FTP_ITE_EXT.1, cryptographically protected data channels as specified in FTP_ITC_EXT.1_] that meets the following: [_none_].
 
 
-_Application Note {counter:remark_count}_:: _This SFR assumes there is no pre-shared key between the parties._
+_Application Note {counter:remark_count}_:: _This SFR is for cases where there are no pre-shared key between the parties._
 
 ==== FCS_CKM.6 Timing and event of cryptographic key destruction
 
@@ -646,7 +648,7 @@ FCS_CKM.6 Timing and event of cryptographic key destruction
 
 FCS_CKM.6.1:: The TSF shall destroy [assignment: _list of cryptographic keys (including keying material)_] when [selection: _no longer needed, [assignment: other circumstances for key or keying material destruction]_].
 
-_Application Note {counter:remark_count}_:: _The TOE will have mechanisms to destroy keys, including intermediate keys and key material, by using an approved method as specified in FCS_CKM.6.2. Examples of keys include intermediate keys, leaf keys, encryption keys, and signing keys. Key material includes seeds, authentication secrets, passwords, PINs, and other secret values used to derive keys. The ST Author shall list all such keys and keying material that are subject to destruction in the first assignment._
+_Application Note {counter:remark_count}_:: _The TOE will have mechanisms to destroy keys, including intermediate keys and key material, by using an approved method as specified in FCS_CKM.6.2. Examples of keys include intermediate keys, leaf keys, encryption keys, and signing keys. Key material includes seeds, authentication secrets, passwords, PINs, and other secret values used to derive keys. All such keys and keying material that are subject to destruction in the first assignment._
 +
 _This SFR does not apply to the public component of asymmetric key pairs or to keys that are permitted to remain stored, such as device identification keys._
 
@@ -683,9 +685,7 @@ FCS_COP.1/Hash Cryptographic Operation - Hashing
 
 FCS_COP.1.1/Hash:: The TSF shall perform [_cryptographic hashing_] in accordance with a specified cryptographic algorithm [*selection*: _SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, SHA-512/256, SHA3-224, SHA3-256, SHA3-384, SHA3-512_] that meets the following: [*selection*: _ISO/IEC 10118-3:2018 [SHA, SHA3], FIPS PUB 180-4 [SHA], FIPS PUB 202 [SHA3]_].
 
-_Application Note {counter:remark_count}_:: _The hash selection shall be consistent with the overall strength of the algorithm used for signature generation. For example, the TOE should choose SHA-256 for 2048-bit RSA or ECC with P-256; SHA-384 for 3072-bit RSA, 4096-bit RSA, or ECC with P-384; and SHA-512 for ECC with P-521. The ST author selects the standard based on the algorithms selected._
-+
-_SHA-1 may be used as a general hash function and for the following applications: generating and verifying hash-based message authentication codes (HMACs), key derivation functions (KDFs), and random bit/number generation. SHA-1 may also be used for verifying old digital signatures and time stamps, if this is explicitly allowed by the application domain. SHA-1 shall not be used in applications in which collision resistance is needed._
+_Application Note {counter:remark_count}_:: _SHA-1 may be used as a general hash function and for the following applications: generating and verifying hash-based message authentication codes (HMACs), key derivation functions (KDFs), and random bit/number generation. SHA-1 may also be used for verifying old digital signatures and time stamps, if this is explicitly allowed by the application domain. SHA-1 shall not be used in applications in which collision resistance is needed._
 
 ==== FCS_COP.1/KeyedHash Cryptographic Operation - Keyed Hash
 
