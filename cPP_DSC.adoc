@@ -648,7 +648,7 @@ FCS_CKM.6 Timing and event of cryptographic key destruction
 
 FCS_CKM.6.1:: The TSF shall destroy [assignment: _list of cryptographic keys (including keying material)_] when [selection: _no longer needed, [assignment: other circumstances for key or keying material destruction]_].
 
-_Application Note {counter:remark_count}_:: _The TOE will have mechanisms to destroy keys, including intermediate keys and key material, by using an approved method as specified in FCS_CKM.6.2. Examples of keys include intermediate keys, leaf keys, encryption keys, and signing keys. Key material includes seeds, authentication secrets, passwords, PINs, and other secret values used to derive keys. All such keys and keying material that are subject to destruction in the first assignment._
+_Application Note {counter:remark_count}_:: _The TOE will have mechanisms to destroy keys, including intermediate keys and key material, by using an approved method as specified in FCS_CKM.6.2. Examples of keys include intermediate keys, leaf keys, encryption keys, and signing keys. Key material includes seeds, authentication secrets, passwords, PINs, and other secret values used to derive keys. All such keys and keying material are subject to destruction in the first assignment._
 +
 _This SFR does not apply to the public component of asymmetric key pairs or to keys that are permitted to remain stored, such as device identification keys._
 
