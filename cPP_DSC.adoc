@@ -2269,7 +2269,7 @@ FCS_RBG.2 Random Bit Generation (External Seeding)
 
 FCS_RBG.2.1:: The TSF shall be able to accept a minimum input of [assignment: _minimum input length greater than zero_] from a TSF interface for the purpose of *obtaining entropy*.
 
-_Application Note {counter:remark_count}_:: _In order to maintain compliance with NIST SP 800-90A Revision 1, the TSF accepts enough bits input from an external entropy source to satisfy the entropy requirements of the DRBG. The TSF should also protect the integrity and confidentiality of the entropy it receives from the external entropy source._
+_Application Note {counter:remark_count}_:: _In order to maintain compliance with NIST SP 800-90A Revision 1, the TSF accepts enough bits input from an external entropy source to satisfy the entropy requirements of the DRBG._
 +
 _The TSF interface for the purpose of seeding here is the interface used to gather entropy for initializing the seed._
 
@@ -2280,10 +2280,6 @@ FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
 FCS_RBG.3.1:: The TSF shall be able to seed the *DRBG* using a [selection: choose one of: _TSF software-based *entropy* source, TSF hardware-based *entropy* source_] [assignment: _name of *entropy* source_] with [assignment: _number of bits_] bits of min-entropy.
 
 _Application Note {counter:remark_count}_:: _If an ST Author wishes to use multiple internal entropy sources, they iterate this requirement for each entropy source used by the TSF._
-+
-_Hardware-based entropy sources are entropy sources whose primary function is entropy generation, such as ring oscillators, diodes, and thermal entropy. While a TOE may use software to collect the entropy from these hardware sources, these are not software-based. Software-based entropy sources are those sources that have some other primary function, and the entropy is a byproduct of their normal operation. Examples of software-based entropy sources are user or system-based events, reading the least significant bits from an event timer, etc._
-+
-_Hardware-based entropy sources may be stochastically modelled, in which case the amount of entropy is well understood. Software-based entropy sources are usually less well understood and therefore will typically take a more conservative approach, gathering larger numbers of bits than required, then performing a compression function to derive the final output. Software-based entropy sources often rely on an entropy estimator._
 
 ==== FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
 
@@ -2297,9 +2293,9 @@ FCS_RBG.5 Random Bit Generation (Combining Entropy Sources)
 
 FCS_RBG.5.1:: The TSF shall {empty}[*selection*: _hash, concatenate and hash, xor, input into a linear feedback shift register, [assignment: combining operation]_] [selection: _output from TSF *entropy* source(s), input from TSF interface(s) for_ *_obtaining entropy_*] to create the entropy input into the derivation function as defined in [*selection*: _ISO/IEC 18031: 2011, NIST SP 800-90A Revision 1_] resulting in a minimum of [assignment: _number of bits_] bits of min-entropy.
 
-_Application Note {counter:remark_count}_:: _One can apply NIST SP 800-90B (or AIS-31) statistical tests against internal entropy sources (a.k.a. raw entropy) to confirm the min-entropy of the entropy sources either in aggregate or individually. One should not apply NIST SP 800-90B (or AIS-31) statistical tests against external entropy sources since the TOE is unable to enforce entropy requirements or conditioning requirements against external sources of entropy. However, the TSS may include estimates for min-entropy from external sources that contribute to the overall entropy requirements for either the DRBG or for FCS_OTV_EXT.1._
+_Application Note {counter:remark_count}_:: _One can apply NIST SP 800-90B (or AIS-31) statistical tests against internal entropy sources (a.k.a. raw entropy) to confirm the min-entropy of the entropy sources either in aggregate or individually. NIST SP 800-90B (or AIS-31) statistical tests against external entropy sources are not needed since the TOE is unable to enforce entropy requirements or conditioning requirements against external sources of entropy. However, the TSS may include estimates for min-entropy from external sources that contribute to the overall entropy requirements for either the DRBG or for FCS_OTV_EXT.1._
 +
-_FCS_RBG.5 specifies the combining operation such that the combined min-entropy of all the internal sources and the estimated entropy of the external sources is greater than or equal to the desired entropy of the output of the combining operation. The output could be used as a nonce, or a seed for a DRBG. The combining operation should avoid crushing the entropy of the sources such that the desired entropy of the output cannot be met._
+_FCS_RBG.5 specifies the combining operation such that the combined min-entropy of all the internal sources and the estimated entropy of the external sources is greater than or equal to the desired entropy of the output of the combining operation. The output could be used as a nonce, or a seed for a DRBG._
 +
 _The TSF interface(s) for seeding here is the interface used to gather entropy for initializing the seed._
 
