@@ -1575,11 +1575,11 @@ FMT_MSA.1.1:: The TSF shall enforce the [_Access Control SFP_] to restrict the a
 
 |===
 
-_Application Note {counter:remark_count}_:: _<<SDOAttrib>> defines the required constraints on security attribute modification. The Security Target completes the other parts not specified here (along with any other information for other security attributes relevant to a particular TOE)._
+_Application Note {counter:remark_count}_:: _<<SDOAttrib>> defines the required constraints on security attribute modification._
 +
 _The assignments of authorized subjects in <<SDOAttrib>> may be defined by the ST author in terms of roles or in terms of an action such as presentation of a valid authentication token of a particular type (in this case the ST author identifies in an Application Note the other SFRs that govern the action)._
 +
-_The TSF vendor may pre-install SDOs with default attributes. The Security Target should make clear which attributes may be changed or are prohibited from changing based on the ADM-R and MFGADM-R roles (as applicable). It should also distinguish between authorization values required to use pre-installed SDOs and authorization values required to change the attributes of pre-installed SDOs._
+_The TSF vendor may pre-install SDOs with default attributes. The ST author explains which attributes may be changed or are prohibited from changing based on the ADM-R and MFGADM-R roles (as applicable). The ST author also distinguishes between authorization values required to use pre-installed SDOs and authorization values required to change the attributes of pre-installed SDOs._
 +
 _<<SDOAttrib>> lists SDO ID as "cannot be modified". In some cases, a change in the attributes may cause a change in the SDO ID. In these cases, a change in the SDO ID causes the creation of a new SDO and possibly the loss of the old SDO._
 +
@@ -1671,21 +1671,19 @@ _An imported object contains the default values for each attribute, where allowe
 +
 _Unless otherwise noted, both the ADM-R and CApp-R roles can initiate the generation process. The ADM-R and CApp-R roles will provide the default values for the attributes. This SFR assumes the TSF checks SDO.Type, SDO.AuthData, SDO.Reauth, SDO.Conf, and SDO.Export for compliance with established security policies and refuses to create objects which do not comply with overriding the value of any of these attributes. In the cases of the SDO.ID and SDO.Integrity, the TSF generates these values and therefore there is no need or ability to override._
 +
-_In the case of SDO.Bind for both import and generation processes, the TSF may override values that denote a binding to the TOE, but it should not override values that denote a binding to other keys. In the case of the import process, the defined roles cannot override the default values for any binding._
+_In the case of SDO.Bind for both import and generation processes, the TSF may override values that denote a binding to the TOE, but not those values that denote a binding to other keys. In the case of the import process, the defined roles cannot override the default values for any binding._
 +
 _The SDO.AuthData attribute is data that is required in order to validate authorization of a subject to access the SDO (in each of the modes relevant to that SDO). The nature of this data will depend on the authorization mechanism used in the TOE, as described in FIA_UAU.2._
 +
 _The SDO.Reauth attribute for an individual SDO specifies the conditions where access to the SDO will require reauthorization to continue access to the SDO. Examples of TOE-specified events might be explicit revocation of authorization by a user, expiry of a time interval, or completion of a fixed number of uses since the last authorization. The re-authorization conditions are used in FIA_UAU.6 and FDP_ACF.1. These determine whether a single authorization by the SDO owner will allow any number of uses of the SDO until the end of the user's session (value 'none'), or whether each use of the SDO must be individually authorized (value 'each access'), or whether re-authorization must happen each time one of the TOE-specified events occurs._
 +
-_The SDO.Conf attribute indicates which SDEs, if any, the TOE should encrypt when not in operational use. The TOE should use the methods in FCS_COP.1/AEAD, FCS_COP.1/SKC, FCS_STG_EXT.1, or FCS_CKM_EXT.3 to protect the SDEs in this list._
+_The SDO.Conf attribute indicates which SDEs, if any, the TOE encrypts when not in operational use. The TOE should use the methods in FCS_COP.1/AEAD, FCS_COP.1/SKC, FCS_STG_EXT.1, or FCS_CKM_EXT.3 to protect the SDEs in this list._
 +
 _The SDO.Integrity attribute includes evidence that the TSF can use to protect and verify the integrity of the SDO._
 +
-_Attributes assigned by the TOE to any parsed SDOs must be described in the Security Target. Where attributes may be assigned by authorized roles, the information should also be described in operational user guidance._
+_Attributes assigned by the TOE to any parsed SDOs are described in the ST. Where attributes may be assigned by authorized roles, the information should also be described in operational user guidance._
 +
 _The TOE uses the Binding Data for an SDO to strongly link the SDO to the TOE, a parent SDO in a hierarchy, or to nothing at all. SDOs bound to nothing may freely travel from one TOE to another without restrictions. If bound to another SDO as a child to a parent in a hierarchy, it may travel only where the parent SDO travels. If bound to the TOE, it may travel to any other TOE for any reason, even if the TOE moves its parent to another TOE. Note that vendors will initialize attributes of pre-installed SDOs with default values. However, authorization values to change the attributes of pre-installed SDOs may differ from the authorization value required to use the pre-installed SDO._
-+
-_The vendor should document the implicit attributes for pre-installed SDOs and SDOs stored in special locations._
 +
 _In cases in which the SDO.ID is a cryptographic hash of the attributes and SDEs, that value may act as both SDO.ID and SDO.Integrity for the SDO._
 +
@@ -1712,7 +1710,7 @@ _[selection:_
 ** _unlock access to SDO following excessive failed authorization attempts,_
 ** _no other functions]_].
 
-_Application Note {counter:remark_count}_:: _If FPT_MFW_EXT.1 selects [.underline]#mutable firmware#, then FMT_SMF.1 must select [.underline]#Update TOE firmware and pre-installed SDOs#._
+_Application Note {counter:remark_count}_:: _If FPT_MFW_EXT.1 selects [.underline]#mutable firmware#, then FMT_SMF.1 must select [.underline]#update TOE firmware# and [.underline]#update pre-installed SDOs#._
 +
 _Recall that resetting a TOE to factory state also wipes all user data, but may not wipe out pre-installed SDOs. Configuring authorization policies includes setting policies for allowed access to SDOs._
 +
