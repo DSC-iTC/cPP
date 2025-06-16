@@ -1472,9 +1472,9 @@ FIA_AFL_EXT.1.3:: When the failed authorization attempt counters [selection, cho
 
 FIA_AFL_EXT.1.4:: The TSF shall increment the failed authorization attempt counter before it verifies the authorization.
 
-_Application Note {counter:remark_count}_:: _The product validates the authorization factors prior to determining whether user (administrator or client application) access to the SDE/SDO is permitted. In cases where validation of the authorization factors fails, the product will not allow access to SDE/SDO. The product validates the authorization factors in such a way that it does not allow an attacker to circumvent the other requirements to gain knowledge about the SDE/SDO or other keying material that protects them from inadvertent exposure._
+_Application Note {counter:remark_count}_:: _The TOE validates the authorization factors prior to determining whether user (administrator or client application) access to the SDE/SDO is permitted. In cases where validation of the authorization factors fails, the TOE blocks access to SDE/SDO. The TOE validates the authorization factors in such a way that it does not allow an attacker to circumvent the other requirements to gain knowledge about the SDE/SDO or other keying material that protects them from inadvertent exposure._
 +
-_It is possible for the TOE to have different rules for the treatment of different SDOs or groups of SDOs. For example, some SDOs may trigger a factory reset in the event of excessive authorization failures while others may only temporarily block future authorization attempts. The ST author should iterate this SFR for each distinct response the TSF can make (as defined by the selections in FIA_AFL_EXT.1.3) and the SDOs whose authorization failures will trigger these responses._
+_It is possible for the TOE to have different rules for the treatment of different SDOs or groups of SDOs. For example, some SDOs may trigger a factory reset in the event of excessive authorization failures while others may only temporarily block future authorization attempts. Iterations of this SFR for each distinct response can be used for each action the TSF can make (as defined by the selections in FIA_AFL_EXT.1.3) and the SDOs whose authorization failures will trigger these responses._
 
 ==== FIA_SOS.2 TSF Generation of Secrets
 
@@ -1484,7 +1484,7 @@ FIA_SOS.2.1:: The TSF shall provide a mechanism to generate *authorization data*
 
 FIA_SOS.2.2:: The TSF shall be able to enforce the use of TSF generated *authorization data* for [_assignment: *non-empty* list of TSF functions_].
 
-_Application Note {counter:remark_count}_:: _This SFR expects the TSF must generate authorization data from a sufficiently large key space to ensure that users cannot employ random guessing as a statistically plausible method of authorizing actions within the TOE, both for a single event and over a session._
+_Application Note {counter:remark_count}_:: _The TSF generates authorization data from a sufficiently large key space to ensure that users cannot employ random guessing as a statistically plausible method of authorizing actions within the TOE, both for a single event and over a session._
 
 ==== FIA_UAU.2 User Authentication before Any Action
 
@@ -1518,13 +1518,13 @@ _Application Note {counter:remark_count}_:: _The allowed values for the SDO.Reau
 +
 _An SDO.Reauth value of 'none' indicates that no authentication of the subject user nor of the SDO owners is necessary. It also indicates that no reauthorization for operations using the SDO is necessary._
 +
-_An SDO.Reauth value of policy indicates that there may be a more complicated set of circumstances that trigger a re-auth (re-authentication of the users and owners as well as re-authorization of the operation). This could be a policy of a time limit for which a user can use an SDO before re-authentication (e.g. 10 minutes or 24 hours). The ST should indicate the policies allowed, and how the TOE evaluates the policies. The ST should also indicate the location of those policies, and how the TOE protects the integrity of those policies._
+_An SDO.Reauth value of policy indicates that there may be a more complicated set of circumstances that trigger a re-auth (re-authentication of the users and owners as well as re-authorization of the operation). This could be a policy of a time limit for which a user can use an SDO before re-authentication (e.g. 10 minutes or 24 hours)._
 +
 _When the TSF binds a user to access an SDO, this means that the TSF has authenticated the user and that the TSF authorized the user to have the right to exercise one or more of the following actions: generate the SDO, modify the SDO, including its security attributes, use the SDO in a TOE operation, propagate or duplicate the SDO for use by a device external to the DSC, or destroy the SDO. The user may not have exclusive rights to exercise the operations listed._
 +
-_Policy as represented by the attributes in the SDO dictates whether or not a user must authenticate itself in order to authorize access to the SDO._
+_Policy as represented by the attributes in the SDO dictates whether or not a user authenticates itself in order to authorize access to the SDO._
 +
-_It is possible that the attributes of some SDOs should remain unchanged, and that the attributes of other SDOs may be changed by authorized users. If this is the case, then the ST author should iterate this SFR and indicate in the TSS which SDOs apply to each iteration._
+_It is possible that the attributes of some SDOs remain unchanged, and that the attributes of other SDOs may be changed by authorized users. Iterations of this SFR can be using to document the SDOs and how they apply to different policies._
 
 === Security Management
 
