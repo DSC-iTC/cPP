@@ -913,6 +913,16 @@ NIST SP 800-186 (Section 3) [NIST Curves]
 |Private key size = [selection: 192 bits with Hash/XOF [selection: SHA256/192, SHAKE256/192], 256 bits with Hash/XOF [selection: SHA256, SHAKE256]]
 |NIST SP 800-208, RFC 8391
 
+|ML-DSA
+|ML-DSA.Sign
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87]
+|NIST FIPS 204 (Section 5.2)
+
+|HashML-DSA
+|HashML-DSA.Sign
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87] and hash function [selection: SHA-256, SHA-512/256, SHA3-256, SHAKE128, SHA-384, SHA3-384, SHA-512, SHA3-512, SHAKE256]
+|NIST FIPS 204 (Section 5.4)
+
 |===
 
 _Application Note {counter:remark_count}_:: _FIPS 186-5 allows the use of SHAKE128 and SHAKE256. Implementations must use the correct number of bits of output as specified in FIPS 186-5._
@@ -922,6 +932,8 @@ _Elliptic Curve Algorithms, (e.g., ECDSA, EC-KCDSA) require random bits from an 
 _FIPS 186-5 specifies that the same key generation algorithm applies to both ECDSA and deterministic ECDSA._
 +
 _For LMS and XMSS, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
++
+_Per Section 5.4 of NIST FIPS 204, the collision strength of the hash function selected for the pre-hash of HashML-DSA must be at least the strength of the signature algorithm._
 
 ==== FCS_COP.1/SigVer Cryptographic Operation (Signature Verification)
 
@@ -999,6 +1011,16 @@ NIST SP 800-186 (Section 3) [NIST Curves]
 |Hash/XOF [selection: SHA256/192, SHAKE256/192]
 |NIST SP 800-208, RFC 8391
 
+|ML-DSA
+|ML-DSA.Verify
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87]
+|NIST FIPS 204 (Section 5.3)
+
+|HashML-DSA
+|HashML-DSA.Verify
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87] and hash function [selection: SHA-256, SHA-512/256, SHA3-256, SHAKE128, SHA-384, SHA3-384, SHA-512, SHA3-512, SHAKE256]
+|NIST FIPS 204 (Section 5.4)
+
 |===
 
 _Application Note {counter:remark_count}_:: _DSA is no longer approved for digital signature generation. DSA may be used to verify signatures generated prior to the implementation date of FIPS 186-5. The specifications and algorithms for DSA are no longer included in FIPS 186-5. They may be found in FIPS 186-4._
@@ -1006,6 +1028,8 @@ _Application Note {counter:remark_count}_:: _DSA is no longer approved for digit
 _FIPS 186-5 allows the use of SHAKE128 and SHAKE256. Implementations must use the correct number of bits of output as specified in FIPS 186-5._
 +
 _The TOE may contain a public key which is integrity protected (e.g., in hardware), in which case the FDP_ITC.1 and FDP_ITC.2 dependencies do not apply. In this case, no dependencies may be chosen. For signature verifications, private keys are not necessary, so there are no dependencies required for generating or destroying cryptographic keys._
++
+_Per Section 5.4 of NIST FIPS 204, the collision strength of the hash function selected for the pre-hash of HashML-DSA must be at least the strength of the signature algorithm._
 
 ==== FCS_COP.1/SKC Cryptographic Operation (Symmetric-Key Cryptography)
 
@@ -2451,6 +2475,14 @@ NIST SP 800-56A Rev. 3 (Section 5.6.1.1.4) [key pair generation]
 |Private key size = [selection: 192 bits with Hash/XOF [selection: SHA256/192, SHAKE256/192], 256 bits with Hash/XOF [selection: SHA256, SHAKE256]]
 |NIST SP 800-208, RFC 8391
 
+|ML-KEM
+|Parameter set = [selection: ML-KEM-512, ML-KEM-768, ML-KEM-1024]
+|NIST FIPS 203 (Section 7.1)
+
+|ML-DSA
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87]
+|NIST FIPS 204 (Section 5.1)
+
 |===
 
 _Application Note {counter:remark_count}_:: _For RSA the choice of the modulus implies the resulting key sizes of the public and private keys generated using the specified standard methods._
@@ -2719,6 +2751,10 @@ FCS_COP.1.1/KeyEncap:: The TSF shall perform [_key encapsulation_] in accordance
 |KTS-OAEP [RSA-OAEP] 
 |[*selection*: 2048, 3072, 4096, 8192] bits 
 |NIST SP 800-56B Rev. 2 (Sections 6.3 & 9) 
+
+|ML-KEM
+|Parameters set [*selection*: ML-KEM-512, ML-KEM-768, ML-KEM-1024]
+|NIST FIPS 203 (Section 7.2)
 
 |===
 
