@@ -1254,7 +1254,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS to determine that it describes each of the options for reauthorization.
+The evaluator shall examine the TSS to determine that it describes each of the policy options for reauthorization.
 
 ====== AGD
 
