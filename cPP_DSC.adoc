@@ -663,7 +663,7 @@ FCS_CKM.6.2:: The TSF shall destroy cryptographic keys and keying material speci
 .. _removal of all references to the key directly followed by a request for garbage collection];_
 . _For non-volatile memory [selection:_
 .. _that employs a wear-leveling algorithm, the destruction shall be executed by a [selection:_
-... _single overwrite consisting of [selection: zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [assignment: some value that does not contain any CSP_]],_
+... _single overwrite consisting of [selection: zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [assignment: some value that does not contain any CSP]],_
 ... _block erase];_
 .. _that does not employ a wear-leveling algorithm, the destruction shall be executed by a [selection:_
 ... _[selection: single, [assignment: ST author defined multi-pass]] overwrite consisting of [selection: zeros, ones, pseudo-random pattern, a new value of a key of the same size, [assignment: some value that does not contain any CSP]] followed by a read-verify. If the read-verification of the overwritten data fails, the process shall be repeated again up to [assignment: number of times to attempt overwrite] times, whereupon an error is returned._
