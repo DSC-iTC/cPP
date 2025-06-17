@@ -616,7 +616,7 @@ Extended SFRs (i.e. those SFRs that are not defined in [CC2]) are identified by 
 
 === Cryptographic Support
 
-The DSC ensures that the cryptography used is commensurate with the with the SDEs and SDOs that are being protected based on the selections made in the SFRs. The shortest key strength determines the overall security strength for the DSC.
+The DSC ensures that the cryptography used is commensurate with the SDEs and SDOs that are being protected based on the selections made in the SFRs. The shortest key strength determines the overall security strength for the DSC.
 
 ==== FCS_CKM.1 Cryptographic Key Generation
 
