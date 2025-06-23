@@ -956,9 +956,7 @@ NIST SP 800-208 [parameters]
 
 |===
 
-_Application Note {counter:remark_count}_:: _FIPS 186-5 allows the use of SHAKE128 and SHAKE256._
-+
-_DSA may only be used to verify signatures generated prior to the implementation date of FIPS 186-5._
+_Application Note {counter:remark_count}_::_DSA may only be used for verifying old digital signatures and time stamps, if this is explicitly allowed by the application domain._
 +
 _For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
 +
