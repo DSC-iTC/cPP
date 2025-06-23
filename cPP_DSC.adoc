@@ -956,15 +956,7 @@ NIST SP 800-208 [parameters]
 
 |===
 
-_Application Note {counter:remark_count}_:: _FIPS 186-5 allows the use of SHAKE128 and SHAKE256._
-+
-_DSA may only be used to verify signatures generated prior to the implementation date of FIPS 186-5._
-+
-_For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
-+
-_For HSS and XMSS^MT^ the same hash or XOF function shall be used at each level. Within each level, the same Winternitz parameter shall be used but can be different for each level. For HSS, within each level, the same tree height shall be used but can be different for each level._
-+
-_Per Section 5.4 of NIST FIPS 204, the collision strength of the hash function selected for the pre-hash of HashML-DSA must be at least the strength of the signature algorithm._
+_Application Note {counter:remark_count}_:: _DSA may only be used for verifying old digital signatures and time stamps, if this is explicitly allowed by the application domain._
 
 ==== FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
 
