@@ -2935,9 +2935,9 @@ FPT_FLS.1/FW:: Failure with Preservation of Secure State (Firmware)
 
 FPT_FLS.1.1/FW:: The TSF shall preserve a secure state when the following types of *firmware* failures occur: [_authenticity violation, integrity violation, rollback violation_].
 
-_Application Note {counter:remark_count}_:: _A DSC's ability to handle failures related to authenticity, integrity, and invalid versions of firmware is not applicable in all cases because some DSCs will have immutable firmware._
+_Application Note {counter:remark_count}_:: _A DSC's ability to handle failures related to authenticity, integrity, and invalid versions of firmware is not applicable for immutable firmware._
 +
-_The phrase "secure state" refers to a state in which the TOE has consistent TSF data and a TSF that can correctly enforce the policy. The TOE must ensure that no further processing of TSF or user data takes place while in an insecure state. This state may be the initial "boot" of a clean system, or it might be some check-pointed state. It is expected that in most cases, the TOE will halt and require a reset or re-initialization to return to a known secure state._
+_The phrase "secure state" refers to a state in which the TOE has consistent TSF data and a TSF that can correctly enforce the policy. The TOE ensures that no further processing of TSF or user data takes place while in an insecure state. This state may be the initial "boot" of a clean system, or it might be some check-pointed state. It is expected that in most cases, the TOE will halt and require a reset or re-initialization to return to a known secure state._
 
 ==== FPT_MFW_EXT.2 Basic Firmware Integrity
 
@@ -2947,7 +2947,7 @@ FPT_MFW_EXT.2.1:: The TSF shall have the ability to verify the integrity of the 
 
 FPT_MFW_EXT.2.2:: The TSF shall provide a capability to generate evidence of the integrity of the firmware.
 
-_Application Note {counter:remark_count}_:: _Data and firmware integrity is not a required component of this cPP in all cases because some DSCs will have immutable firmware._
+_Application Note {counter:remark_count}_:: _Data and firmware integrity is not applicable for immutable firmware._
 +
 _The TOE guarantees the integrity of the firmware by verifying its integrity._
 +
@@ -2965,7 +2965,7 @@ FPT_MFW_EXT.3.1:: The TSF shall have the ability to verify the authenticity of t
 
 FPT_MFW_EXT.3.2:: The TSF shall provide a capability to generate evidence of the authenticity of the firmware.
 
-_Application Note {counter:remark_count}_:: _Firmware authentication is not a required component of this cPP in all cases because some DSCs will have immutable firmware._
+_Application Note {counter:remark_count}_:: _Firmware authentication is not applicable for immutable firmware._
 +
 _The TOE guarantees the authenticity of the firmware by verifying its signature._
 +
