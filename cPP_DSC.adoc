@@ -2477,17 +2477,17 @@ NIST SP 800-208 [parameters]
 
 _Application Note {counter:remark_count}_:: _For RSA the choice of the modulus implies the resulting key sizes of the public and private keys generated using the specified standard methods._
 +
-_For Finite Field Cryptography (FFC) DSA, ST authors should consult schemes for guidelines on use. FIPS PUB 186-5 does not approve DSA for digital signature generation but allows DSA for digital signature verification for legacy purposes. "FFC-ERB" or "FFC-RS" may be claimed only for generating private and public keys when "DH" is claimed in FCS_CKM_EXT.7._
+_Finite Field Cryptography (FFC) DSA may only be used for verifying old digital signatures and time stamps, if this is explicitly allowed by the application domain. "FFC-ERB" or "FFC-RS" may be claimed only for generating private and public keys when "DH" is claimed in FCS_CKM_EXT.7._
 +
-_When generating ECC keys pairs for key agreement and if "ECDH" or "ECDH-Ed" is claimed in FCS_CKM_EXT.7, then "ECC-ERB" or "ECC-RS" shall be claimed. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
+_When generating ECC keys pairs for key agreement and if "ECDH" or "ECDH-Ed" is claimed in FCS_CKM_EXT.7, then "ECC-ERB" or "ECC-RS" is also claimed. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
 +
-_When generating ECC key pairs for digital signature generation and if "ECDSA" or "EC-KCDSA" are claimed in FCS_COP.1/SigGen, then "ECC-ERB" or "ECC-RS" shall be claimed. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
+_When generating ECC key pairs for digital signature generation and if "ECDSA" or "EC-KCDSA" are claimed in FCS_COP.1/SigGen, then "ECC-ERB" or "ECC-RS" is claimed. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
 +
-_When generating EdDSA key pairs for digital signatures and if "EdDSA" is claimed in FCS_COP.1/SigGen, then "EdDSA" shall be claimed here. The chosen domain parameters determine the size of the private keys and the public keys._
+_When generating EdDSA key pairs for digital signatures and if "EdDSA" is claimed in FCS_COP.1/SigGen, then "EdDSA" is claimed here. The chosen domain parameters determine the size of the private keys and the public keys._
 +
 _For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
 +
-_For HSS and XMSS^MT^ the same hash or XOF function shall be used at each level. Within each level, the same Winternitz parameter shall be used but can be different for each level. For HSS, within each level, the same tree height shall be used but can be different for each level._
+_For HSS and XMSS^MT^ the same hash or XOF function is used at each level. Within each level, the same Winternitz parameter is used but can be different for each level. For HSS, within each level, the same tree height is used but can be different for each level._
 
 ==== FCS_CKM.1/SKG Cryptographic Key Generation - Symmetric Key
 
