@@ -1730,9 +1730,11 @@ _Application Note {counter:remark_count}_:: _Note that a secure state does not i
 
 FPT_MFW_EXT.1 Mutable/Immutable Firmware
 
-FPT_MFW_EXT.1.1:: The TSF shall be maintained as [selection: _immutable, mutable_] firmware.
-
-_Application Note {counter:remark_count}_:: _If [.underline]#mutable# is selected in FPT_MFW_EXT.1.1, the selection-based SFRs FPT_FLS.1/FW, FPT_MFW_EXT.2, FPT_MFW_EXT.3, and FPT_RPL.1/Rollback must be claimed._
+FPT_MFW_EXT.1.1:: The TSF shall be maintained as [selection:
++
+* _immutable firmware_
+* _mutable firmware conforming to FPT_FLS.1/FW, FPT_MFW_EXT.2, FPT_MFW_EXT.3, and FPT_RPL.1/Rollback_
+].
 
 ==== FPT_MOD_EXT.1 Debug Modes
 
