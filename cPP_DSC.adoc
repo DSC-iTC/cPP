@@ -2481,7 +2481,7 @@ _Finite Field Cryptography (FFC) DSA may only be used for verifying old digital 
 +
 _When generating ECC keys pairs for key agreement and if "ECDH" or "ECDH-Ed" is claimed in FCS_CKM_EXT.7, then "ECC-ERB" or "ECC-RS" is also claimed. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
 +
-_When generating ECC key pairs for digital signature generation and if "ECDSA" or "EC-KCDSA" are claimed in FCS_COP.1/SigGen, then "ECC-ERB" or "ECC-RS" is claimed. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
+_When generating ECC key pairs for digital signature generation and if "ECDSA" or "EC-KCDSA" are claimed in FCS_COP.1/SigGen, then "ECC-ERB" or "ECC-RS" is also claimed. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
 +
 _When generating EdDSA key pairs for digital signatures and if "EdDSA" is claimed in FCS_COP.1/SigGen, then "EdDSA" is claimed here. The chosen domain parameters determine the size of the private keys and the public keys._
 +
