@@ -956,13 +956,7 @@ NIST SP 800-208 [parameters]
 
 |===
 
-_Application Note {counter:remark_count}_::_DSA may only be used for verifying old digital signatures and time stamps, if this is explicitly allowed by the application domain._
-+
-_For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
-+
-_For HSS and XMSS^MT^ the same hash or XOF function shall be used at each level. Within each level, the same Winternitz parameter shall be used but can be different for each level. For HSS, within each level, the same tree height shall be used but can be different for each level._
-+
-_Per Section 5.4 of NIST FIPS 204, the collision strength of the hash function selected for the pre-hash of HashML-DSA must be at least the strength of the signature algorithm._
+_Application Note {counter:remark_count}_:: _DSA may only be used for verifying old digital signatures and time stamps, if this is explicitly allowed by the application domain._
 
 ==== FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
 
@@ -1252,15 +1246,7 @@ The following table provides the allowed choices for completion of the selection
 
 |===
 
-_Application Note {counter:remark_count}_:: _TSFs frequently generate cryptographic one-time values, often non-secret, such as nonces, IVs, salts, and initial counters (sometimes called initial sequential nonces) using the output of an RBG specified in FCS_RBG.1. If the TSF is generating OTVs, then this SFR is used._
-+
-_Salts help protect against dictionary and other precomputation attacks. Systems often prepend or append salts to passwords and other long-term, potentially guessable values to increase the size of a dictionary an attacker must build to attack it. Salts, once associated with a password, generally do not change for the life of that password. Salts should also be unique for each password and should not be reused. Therefore, systems should randomly generate salts with sufficient size such that the combined entropy of both the salt and the password meets the minimal key strength sizes of the chosen algorithms._
-+
-_Nonces help protect against replay attacks in cryptographic authentication protocols and some encryption modes. A nonce should never repeat. Using a sequence of nonces with a counter embedded in the value will ensure a nonce will never repeat. In protocol sessions that require multiple nonces, using sequential nonces that increment for each message—the receiver can check for and accept only an increase in the nonce value to verify that the message has not been replayed. In some protocols, the initial sequential nonce needs only to be sent once at the beginning of the session and the receiver can predict the remaining nonces in that session, which saves transmission bandwidth. Randomly generated nonces protect against attacks against sessions in which multiple keys are expected to be used. Therefore, nonces should be both randomly generated and never repeat. However, sequential nonces may be predictable. NIST provides additional guidance for the composition of a nonce in NIST SP 800-38c, NIST SP 800-56A Revision 3, NIST SP 800-56B Revision 2, NIST SP 800-63B, and NIST SP 800-90A Revision 1._
-+
-_Initialization Vectors (IVs) help protect against attacks which depend on the reuse of static keys. Certain encryption modes often require IVs. They should be randomly generated in a nonpredictable way, cannot be sequential, and cannot repeat._
-+
-_Each algorithm and mode have varying guidance on the lengths of the salts, nonces, and initialization vectors used therein. Please consult the referenced standards documents for the appropriate guidance for each._
+_Application Note {counter:remark_count}_:: _Each algorithm and mode have varying guidance on the lengths of the salts, nonces, and initialization vectors used therein. Please consult the referenced standards documents for the appropriate guidance for each._
 
 ==== FCS_STG_EXT.1 Protected Storage
 
