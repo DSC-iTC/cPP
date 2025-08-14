@@ -981,7 +981,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS to ensure that it describes how it protects the SDO references, authorization data, against access from unauthorized entities. In particular, it should describe how it provides confidentiality of the data while it resides outside the TOE after export.
+The evaluator shall examine the TSS to ensure that it describes how it protects the wrapped authorization data and wrapped SDOs against access from unauthorized entities. In particular, it should describe how it provides confidentiality of the data while it resides outside the TOE after export.
 
 ====== AGD
 
@@ -989,7 +989,7 @@ There are no guidance evaluation activities for this component.
 
 ====== Test
 
-There are no test evaluation activities for this component.
+Testing for this SFR is performed as part of FCS_CKM.2.
 
 ====== KMD
 
