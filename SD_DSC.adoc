@@ -5,8 +5,8 @@
 :sectnums:
 :sectnumlevels: 5
 :imagesdir: images
-:revnumber: 2.0
-:revdate: October 28, 2024
+:revnumber: 2.1-Proposed-Draft
+:revdate: August 25, 2025
 :xrefstyle: full
 :doctype: book
 :chapter-refsig: Section
