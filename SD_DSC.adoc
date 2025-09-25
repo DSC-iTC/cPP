@@ -1598,7 +1598,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS and other vendor documentation and ensure they describe the methods used to verify integrity of the TSF and TSF data, both automatic checks and if supported, checks requested by the user. If more than the power-on check is selected, then each condition for the self test shall be examined.
+The evaluator shall examine the TSS and other vendor documentation and ensure they describe the methods used to demonstrate the correct operation of the TSF, verify the integrity of the TSF and its data, both automatic checks and if supported, checks requested by the user. The TSS shall also describe how the TSF responds to self-test failures. Each condition for the self-tests shall be described and examined.
 
 ====== AGD
 
@@ -1606,11 +1606,9 @@ The evaluator shall examine the operational guidance to ensure it provides autho
 
 ====== Test
 
-Test 1: The evaluator shall verify that the DSC performs an integrity check of all TSF, including data, as well as performing KATs for those functions. The evaluator shall verify failures using malformed known answer test data (for example, unexpected input or output values).
+Test 1: For each implemented self-test, the evaluator shall cause the self-test to fail and verify the TSF responds as described in the TSS.
 
-Test 2: The evaluator shall ensure that when an integrity check failure occurs specific to failing KATs and failure to verify the integrity of the TSF, the TOE will prevent any further processing of the current TSF and user data. 
-
-Test 3 [conditional]: For each condition where a self test may be initiated, the evaluator shall verify that the self tests are run as specified.
+Test 2 [conditional]: For each condition where a self-test may be initiated, the evaluator shall verify that the self-tests are performed as specified.
 
 ====== KMD
 

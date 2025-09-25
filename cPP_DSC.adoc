@@ -1818,7 +1818,7 @@ _Application Note {counter:remark_count}_:: _The TSF receives authorization from
 
 FPT_TST.1 TSF Testing
 
-FPT_TST.1.1:: The TSF shall run a suite of the following self-tests *during power-on start-up* {empty}[selection: [.underline]#periodically during normal operation, at the request of the authorized user, *at no other condition,* at the conditions [_assignment: conditions under which self-test should occur_]]# to demonstrate the correct operation of {empty}[[.underline]#the TSF#]: [assignment: _list of self-tests run by the TSF_].
+FPT_TST.1.1:: The TSF shall run a suite of the following self-tests *during initial start-up* and {empty}[selection: [.underline]#*at no other condition,* periodically during normal operation, at the request of the authorized user, at the conditions [_assignment: conditions under which self-test should occur_]]# to demonstrate the correct operation of {empty}[[.underline]#the TSF#]: [assignment: _list of self-tests run by the TSF_].
 
 FPT_TST.1.2:: The TSF shall provide authorized users with the capability to verify the integrity of {empty}[[.underline]#TSF data#].
 
@@ -1828,7 +1828,7 @@ _Application Note {counter:remark_count}_:: _This requirement intends to cover i
 +
 _TSF integrity testing provides the ability to test the TSF's correct operation. These tests are expected to be performed automatically and autonomously at start-up but may also be performed periodically during operation, at the request of the authorized user, or when other conditions are met. It also provides the ability to verify the integrity of TSF data and executable code._
 +
-_All cryptographic functions come with known answer tests (KATs). In addition to verifying the integrity of the firmware executing the TSF, the DSC should also verify the integrity of any data associated with the TSF (such as constants for cryptographic algorithms) as well as performing the KATs._
+_All cryptographic algorithms come with known answer tests (KATs). In addition to verifying the integrity of the firmware executing the TSF, the DSC should also verify the integrity of any data associated with the TSF (such as constants for cryptographic algorithms) as well as performing the KATs._
 
 === Resource Utilization
 
