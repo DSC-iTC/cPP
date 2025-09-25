@@ -2437,7 +2437,7 @@ There are no KMD evaluation activities for this component.
 
 ==== Replay Detection (FPT_RPL)
 
-===== FPT_RPL.1/Rollback Replay Detection (Rollback)
+===== FPT_RPL.1/FW Replay Detection (Firmware)
 
 ====== TSS
 
@@ -2451,7 +2451,7 @@ There are no AGD evaluation activities for this component.
 
 The evaluator shall repeat the following tests to cover all allowed firmware verification mechanisms as described in the TSS. For example, if the firmware verification mechanism replaces an entire partition or subset of the DSC scope containing many separate code files, the evaluator does not need to repeat the test for each individual file.
 
-Test 1: The evaluator shall attempt to execute an earlier instance or build of the software (as determined by the vendor). The evaluator shall verify that this attempt fails by checking the version identifiers or cryptographic hashes of the firmware against those previously recorded and checking that the values do not correspond to an unauthorized build.
+Test 1: The evaluator shall attempt to execute an earlier instance or build of the firmware (as determined by the vendor). The evaluator shall verify that this attempt fails by checking the version identifiers or cryptographic hashes of the firmware against those previously recorded and checking that the values do not correspond to an unauthorized build.
 
 Test 2: The evaluator shall attempt to execute a current or later instance and shall verify that the firmware execution succeeds.
 

@@ -1739,7 +1739,7 @@ FPT_MFW_EXT.1 Mutable/Immutable Firmware
 FPT_MFW_EX.1.1:: The TSF shall be maintained as [selection:
 +
 * _immutable firmware_
-* _mutable firmware conforming to FPT_FLS.1/FW, FPT_MFW_EXT.2, and FPT_RPL.1/Rollback_
+* _mutable firmware conforming to FPT_FLS.1/FW, FPT_MFW_EXT.2, and FPT_RPL.1/FW_
 ].
 
 ==== FPT_MOD_EXT.1 Debug Modes
@@ -2034,8 +2034,8 @@ The following rationale provides justification for each security problem definit
 |FPT_MFW_EXT.2 (selection-based)
 |This requirement ensures that the TSF can verify that its mutable firmware integrity remains intact and any firmware updates to the TSF are genuine.
 
-|FPT_RPL.1/Rollback (selection-based)
-|This requirement ensures that the TSF will not permit rollback attempts of its firmware.
+|FPT_RPL.1/FW (selection-based)
+|This requirement ensures that the TSF will not permit loading earlier versions of its firmware.
 
 .11+|T.WEAK_CRYPTO
 |FCS_CKM.1
@@ -2940,17 +2940,17 @@ FPT_MFW_EXT.2.1:: The TSF shall verify the integrity and authenticity of its fir
 
 FPT_MFW_EXT.2.1:: The TSF shall verify the integrity and authenticity of its firmware updates using [selection: _a cryptographic hash as specified in FCS_COP.1/Hash, a keyed hash as specified in FCS_COP.1/KeyedHash, a message authentication code as specified in FCS_COP.1/CMAC, a digital signature as specified in FCS_COP.1/SigVer, authenticated encryption as specified in FCS_COP.1/AEAD_].
 
-_Application Note {counter:remark_count}_:: _Data and firmware integrity is not applicable for immutable firmware._
+_Application Note {counter:remark_count}_:: _Firmware integrity and authenticity is not applicable for immutable firmware._
 
-==== FPT_RPL.1/Rollback Replay Detection (Rollback)
+==== FPT_RPL.1/FW Replay Detection (Firmware)
 
-FPT_RPL.1/Rollback Replay Detection (Rollback)
+FPT_RPL.1/FW Replay Detection (Firmware)
 
-FPT_RPL.1.1/Rollback:: The TSF shall detect replay for the following entities: [_previous firmware builds_].
+FPT_RPL.1.1/FW:: The TSF shall detect replay for the following entities: [_earlier firmware builds_].
 
-FPT_RPL.1.2/Rollback:: The TSF shall *prevent the execution of the loaded firmware and* perform [*selection, choose one of*: _[assignment: other actions], no other actions_] when replay is detected.
+FPT_RPL.1.2/FW:: The TSF shall *prevent the execution of the earlier firmware and* perform [*selection, choose one of*: _[assignment: other actions], no other actions_] when replay is detected.
 
-_Application Note {counter:remark_count}_:: _The TSF data is used as a guarantee of the ordinal identifier of the firmware instance. When a firmware load is requested, the TSF ensures the authenticated firmware ordinal identifier is greater than or equal to the previously authenticated firmware identifier. For example, this could be accomplished by ensuring the validated instance of the firmware to be loaded is greater than or equal to the instance previously validated and loaded into the TOE. By loading a previous instance of firmware, it potentially opens up the device to known vulnerabilities._
+_Application Note {counter:remark_count}_:: _The TSF data is used as a guarantee of the ordinal identifier of the firmware instance. When a firmware load is requested, the TSF ensures the authenticated firmware ordinal identifier is greater than or equal to the previously authenticated firmware identifier. For example, this could be accomplished by ensuring the validated instance of the firmware to be loaded is greater than or equal to the instance previously validated and loaded into the TOE. By loading an earlier instance of firmware, it potentially opens up the device to known vulnerabilities._
 
 ==== FPT_STM_EXT.1 Reliable Time Counting
 
@@ -4481,7 +4481,7 @@ FCS_COP.1
 
 FCS_COP.1 - included
 
-|FPT_RPL.1/Rollback 
+|FPT_RPL.1/FW
 |No dependencies
 |N/A
 
@@ -4834,7 +4834,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FPT_FLS.1/FW !Failure with Preservation of Secure State (Firmware)
 
-!FPT_RPL.1/Rollback !Replay Detection (Rollback)
+!FPT_RPL.1/FW !Replay Detection (Firmware)
 
 !===
 
