@@ -189,32 +189,23 @@ For definitions of standard CC terminology, see [CC] part 1.
 |Root Encryption Key 
 |An encryption key that serves as the anchor of a hierarchy of keys.
 
-|Root of Trust 
-|A root of trust performs one or more security specific functions; establishing the foundation on which all trust in a system is placed. [NIST-ROTM]
+|Root of Trust (RoT)
+|A RoT performs one or more security specific functions; establishing the foundation on which all trust in a system is placed. [NIST-ROTM]
 
-|Root of Trust for Authorization 
-|(As defined by [GP_ROT]) The Root of Trust for Authorization provides reliable capabilities to assess authorization tokens and determine whether or not they satisfy policies for access control.
-
-|Root of Trust for Confidentiality 
+|Root of Trust for Confidentiality
 |(As defined by [GP_ROT]) The Root of Trust for Confidentiality maintains shielded locations for the purpose of storing sensitive data, such as secret keys and passwords.
 
-|Root of Trust for Integrity 
+|Root of Trust for Integrity
 |(As defined by [GP_ROT]) The Root of Trust for Integrity maintains shielded locations for the purpose of storing and protecting the integrity of non-secret critical security parameters and platform characteristics. Critical security parameters include, but are not limited to, authorization values, public keys, and public key certificates.
 
-|Root of Trust for Measurement 
+|Root of Trust for Measurement
 |(As defined by [GP_ROT]) The Root of Trust for Measurement provides the ability to reliably create platform characteristics.
 
-|Root of Trust for Reporting 
+|Root of Trust for Reporting
 |(As defined by [GP_ROT]) The Root of Trust for Reporting reliably reports platform characteristics. It provides an interface that limits its services to providing reports on its platform characteristics authenticated by a platform identity.
 
-|Root of Trust for Storage 
-|A root of trust that acts as the Root of Trust for Confidentiality and the Root of Trust for Integrity.
-
-|Root of Trust for Update 
-|A root of trust responsible for updating the firmware.
-
-|Root of Trust for Verification 
-|A root of trust responsible for verifying digital signatures.
+|Root of Trust for Verification
+|(As defined by [GP_ROT]) The Root of Trust for Verification verifies the integrity and authenticity of signed objects. Objects may include, but are not limited to, public keys, code, and data.
 
 |Security Data Element 
 |A Critical Security Parameter, such as a cryptographic key or authorization token.
@@ -1486,9 +1477,9 @@ The evaluator shall then induce a voltage glitch outside of the specified normal
 
 There are no KMD evaluation activities for this component.
 
-==== Root of Trust (Extended - FPT_PRO_EXT)
+==== Root of Trust (Extended - FPT_ROT_EXT)
 
-===== FPT_PRO_EXT.1 Root of Trust
+===== FPT_ROT_EXT.1 Root of Trust
 
 ====== TSS
 
@@ -1497,6 +1488,10 @@ The evaluator shall examine the TSS to ensure that it describes how Root of Trus
 [conditional] For immutable Root of Trust data, the evaluator shall ensure there are no mechanisms to update the Root of Trust.
 
 [conditional] For mutable Root of Trust data, the evaluator shall ensure the Root of Trust update mechanism uses an approved method for authenticating the source of the update.
+
+The evaluator shall ensure that the TSS describes how the Root of Trust prevents unauthorized disclosure and unauthorized modification to SDOs. The evaluator shall also examine the TSS to verify that it uses approved mechanisms to protect the confidentiality of secret SDOs and to protect the integrity of SDOs.
+
+The evaluator shall ensure that the TSS identifies the Roots of Trust it provides (including but not limited to the Roots of Trust identified in the selections in this requirement) and describes their function in the context of the TOE. The TSS shall describe the cryptographic algorithms in use for the Roots of Trust.
 
 ====== AGD
 
@@ -1519,58 +1514,6 @@ For mutable Root of Trust data, the evaluator shall perform the following tests:
 ====== KMD
 
 The evaluator shall ensure that the KMD describes either a pre-installed identity (contained within an SDO), or a process on how the TOE creates an identity. IEEE 802.1ar is one example of a standard which a device can use to create such an identity. 
-
-==== Root of Trust Services (Extended - FPT_ROT_EXT)
-
-===== FPT_ROT_EXT.1 Root of Trust Services
-
-====== TSS
-
-The evaluator shall ensure that the TSS identifies the Roots of Trust it provides (including but not limited to the Roots of Trust identified in the selections in this requirement) and describes their function in the context of the TOE. The TSS shall describe the cryptographic algorithms in use for the Roots of Trust.
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-*_Root of Trust for Storage_*
-
-Testing for this component is performed through evaluation of FCS_CKM.1, FCS_STG_EXT.1 and FPT_PHP.3.
-
-*_Root of Trust for Authorization_*
-
-Testing for this component is performed through evaluation of FIA_AFL_EXT.1.
-
-*_Root of Trust for Measurement_*
-
-Testing for this component is performed through evaluation of FCS_COP.1/Hash.
-
-*_Root of Trust for Reporting_*
-
-Testing for this component is performed through evaluation of FCS_COP.1/SigGen.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
-===== FPT_ROT_EXT.2 Root of Trust for Storage
-
-====== TSS
-
-The evaluator shall ensure that the TSS describes how the Root of Trust for Storage prevents unauthorized access (including unauthorized disclosure and unauthorized modification) to SDOs. The evaluator shall also examine the TSS to verify that it uses approved mechanisms to protect the confidentiality of secret SDOs and to protect the integrity of SDOs.
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-Testing for this component is performed through evaluation of FCS_CKM.1, FCS_STG_EXT.1, FDP_SDC.2, FDP_SDI.2 and FPT_PHP.3.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
 
 ==== Replay Prevention (FPT_RPL)
 
@@ -1764,9 +1707,9 @@ Note that test 4 shall only be performed for those interfaces where physical int
 
 There are no KMD evaluation activities for this component.
 
-==== Root of Trust (Extended - FPT_PRO_EXT)
+==== Root of Trust (Extended - FPT_ROT_EXT)
 
-===== FPT_PRO_EXT.2 Data Integrity Measurements
+===== FPT_ROT_EXT.2 Root of Trust for Measurement
 
 ====== TSS
 
@@ -1804,9 +1747,7 @@ Refer to [DSC cPP] for more information about what could constitute DSC data or 
 
 There are no KMD evaluation activities for this component.
 
-==== Root of Trust Services (Extended - FPT_ROT_EXT)
-
-===== FPT_ROT_EXT.3 Root of Trust for Reporting Mechanisms
+===== FPT_ROT_EXT.3 Root of Trust for Reporting
 
 ====== TSS
 
@@ -1818,7 +1759,7 @@ In addition, the evaluator shall examine the TSS and ensure that it describes ho
 
 ====== AGD
 
-The evaluator shall examine the guidance documentation to confirm it describes how to enable the root of trust for reporting mechanism on the TOE, how to generate a report, and how reports are verified as genuine.
+The evaluator shall examine the guidance documentation to confirm it describes how to enable the Root of Trust for Reporting mechanism on the TOE, how to generate a report, and how reports are verified as genuine.
 
 ====== Test
 
@@ -1826,13 +1767,37 @@ Note that the following test may require the developer to provide access to a te
 
 The evaluator shall perform the following tests:
 
-Test 1: The evaluator shall enable the root of trust for reporting mechanism on the TOE and generate a report.
+Test 1: The evaluator shall enable the Root of Trust for Reporting mechanism on the TOE and generate a report.
 
 Test 2: The evaluator shall confirm the generated report is valid.
 
 Test 3: The evaluator shall modify the signature of a valid report and confirm the report is invalid. 
 
 Test 4: The evaluator shall modify the contents of a valid report and confirm the report is invalid.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
+
+===== FPT_ROT_EXT.4 Root of Trust for Verification
+
+====== TSS
+
+The evaluator shall examine the TSS and ensure that it describes the cryptographically verifiable identities for the Root of Trust for Verification, how they relate to the Root of Trust identified in FPT_ROT_EXT.1.1, and how they are used.
+
+====== AGD
+
+[conditional] If the DSC provides a service to perform the verification, the evaluator shall examine the guidance documentation to confirm it describes how to access this service.
+
+====== Test
+
+Note that the following test may require the developer to provide access to a test platform that provides the evaluator with tools that are not typically available to end users.
+
+The evaluator shall perform the following tests:
+
+Test 1: The evaluator shall confirm that an object with a valid signature is successfully verified by the Root of Trust for Verification.
+
+Test 2: The evaluator shall modify the signature on any object verified by the Root of Trust for Verification and confirm the verification fails.
 
 ====== KMD
 
@@ -2702,8 +2667,8 @@ However, if the evaluator is unable to perform some other required EA because th
 |Factory Reset
 |FDP_FRS_EXT.1, [FDP_FRS_EXT.2]
 
-|Generation of Data Integrity Measurements
-|[FPT_PRO_EXT.2]
+|Root of Trust for Reporting
+|[FPT_ROT_EXT.3]
 
 |Generation of Secrets
 |FIA_SOS.2

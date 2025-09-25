@@ -244,7 +244,7 @@ DSCs provide seven core security services to a platform as illustrated in <<Core
 
 ==== Roots of Trust
 
-This collaborative Protection Profile (cPP) assumes a DSC will contain a Root of Trust (RoT) that is comprised of the compute engine, one set of firmware code, and pre-installed SDOs, including a unique identity bound to the hardware. The firmware code may be immutable, or it may be mutable but with controlled, authenticated, and authorized updates allowed to ensure continued integrity of the RoT. This code may provide one or more RoT services, such as a RoT for Measurement, Verification, or Reporting. The unique identity bound to the hardware should be immutable and third parties should be able to authenticate the manufacturer of the Root of Trust through its unique identity (e.g., the unique identity may be a credential signed by the manufacturer).
+This collaborative Protection Profile (cPP) assumes a DSC will contain a Root of Trust (RoT) that is comprised of the compute engine, one set of firmware code, and pre-installed SDOs, including a unique identity bound to the hardware. The firmware code may be immutable, or it may be mutable but with controlled, authenticated, and authorized updates allowed to ensure continued integrity of the RoT. This code may provide one or more RoT services, such as a RoT for Measurement, Reporting, or Verification. The unique identity bound to the hardware should be immutable and third parties should be able to authenticate the manufacturer of the Root of Trust through its unique identity (e.g., the unique identity may be a credential signed by the manufacturer).
 
 ==== DSC Characteristics
 
@@ -1762,47 +1762,52 @@ _Any physical external casing or potting material of the TOE is considered an 'e
 +
 _The TOE's protection against abnormal temperature and voltage can be considered equivalent to what is required by assertion AS07.77 of [ISO-TR]._
 
-==== FPT_PRO_EXT.1 Root of Trust
+==== FPT_ROT_EXT.1 Root of Trust
 
-FPT_PRO_EXT.1 Root of Trust
+FPT_ROT_EXT.1 Root of Trust
 
-FPT_PRO_EXT.1.1:: The TSF shall contain an SDO that contains the identity of the Root of Trust.
+FPT_ROT_EXT.1.1:: The TSF shall contain an SDO that contains the identity of the Root of Trust.
 
-_Application Note {counter:remark_count}_:: _Every DSC is expected to have a single RoT that comprises the DSC hardware and pre-installed SDOs, from which services (e.g. Storage, Authorization, etc.) can be offered._
+_Application Note {counter:remark_count}_:: _Every DSC is expected to have a single RoT that comprises the DSC hardware and pre-installed SDOs, from which services (e.g. Confidentiality, Integrity, Measurement, etc.) can be offered._
 +
 _Depending on the use case and the way status registers are used, unique identity keys may be bound to the TOE, the TOE platform, or both._
 +
 _The sole presence of unique identity keys linking to the RoT does not prove authenticity without the use of digital signatures._
 
-FPT_PRO_EXT.1.2:: The TSF shall maintain Root of Trust data as [selection: _immutable, mutable if and only if its mutability is controlled by a unique identifiable owner_].
+FPT_ROT_EXT.1.2:: The TSF shall maintain Root of Trust data as [selection: _immutable, mutable if and only if its mutability is controlled by a unique identifiable owner_].
 
-_Application Note {counter:remark_count}_:: _One expects that only authorized sources can modify the single RoT, such as through a secure update._
+_Application Note {counter:remark_count}_:: _One expects that only authorized sources can modify the single RoT, such as through a secure firmware update._
+
+FPT_ROT_EXT.1.3:: The TSF shall provide a Root of Trust for Confidentiality to prevent unauthorized disclosure of SDOs, using the following techniques: [selection:
 +
-_The process of authenticating the source of a secure update may involve querying the identity of the manufacturer, contained on a pre-installed SDO. If this identity is in the form of an X.509 certificate containing a signature verification key signed by the manufacturer, then the authentication process is sufficient._
+* _Authenticated encryption as defined in FCS_COP.1/AEAD_,
+* _Key encapsulation as defined in FCS_COP.1/KeyEncap_,
+* _Key wrapping as defined in FCS_COP.1/KeyWrap_,
+* _Symmetric-key cryptography as defined in FCS_COP.1/SKC,_
 +
-_A unique identifiable owner is assumed to be one with an ADM-R role; however, there may be circumstances where the owner does not take on an ADM-R role, which should be documented._
+].
 
-==== FPT_ROT_EXT.1 Root of Trust Services
-
-FPT_ROT_EXT.1 Root of Trust Services
-
-FPT_ROT_EXT.1.1:: The TSF shall provide a Root of Trust for Storage, a Root of Trust for Authorization, and [selection: _Root of Trust for Measurement, Root of Trust for Reporting, no others_] based on the Root of Trust identified in FPT_PRO_EXT.1.1.
-
-:xrefstyle: short
-
-_Application Note {counter:remark_count}_:: _This document uses the [GP_ROT] definitions for RoT for Storage (denoted as the combination of RoT for Confidentiality and RoT for Integrity), Authorization, Measurement, and Reporting. DSCs use Roots of Trust for Storage to protect SDOs. <<Identification and Authentication>> has a number of requirements for ensuring the TSF has functionality to authorize a user in order to access an SDO, including FIA_UAU.6._
+FPT_ROT_EXT.1.4:: The TSF shall provide a Root of Trust for Integrity to prevent unauthorized modification of SDOs, using the following techniques: [selection:
 +
-_If both [.underline]#Root of Trust for Measurement# and [.underline]#Root of Trust for Reporting# are selected in FPT_ROT_EXT.1.1, the selection-based SFR FDP_DAU.1/Prove must be claimed._
+* _Authenticated encryption as defined in FCS_COP.1/AEAD_,
+* _CMAC as defined in FCS_COP.1/CMAC_,
+* _Hashing as defined in FCS_COP.1/Hash_,
+* _Keyed hashing as defined in FCS_COP.1/KeyedHash_,
+* _Key encapsulation as defined in FCS_COP.1/KeyEncap_,
+* _Key wrapping as defined in FCS_COP.1/KeyWrap_,
+* _Signature verification as defined in FCS_COP.1/SigVer_,
+* _XOF as defined in FCS_COP.1/XOF_
++
+].
 
-:xrefstyle: full
-
-==== FPT_ROT_EXT.2 Root of Trust for Storage
-
-FPT_ROT_EXT.2 Root of Trust for Storage
-
-FPT_ROT_EXT.2.1:: The TSF shall prevent unauthorized access to SDOs associated with the Root of Trust for Storage.
-
-_Application Note {counter:remark_count}_:: _TOEs may use shielded locations or cryptographic protections to prevent unauthorized access to SDOs. Unauthorized access includes unauthorized disclosure of secret SDOs (e.g. secret keys, private keys) and unauthorized modification of both secret and non-secret SDOs (e.g. public keys, certificates). Use FDP_SDC.2 to protect the confidentiality of secret SDOs associated with the RoT for Storage. Use FDP_SDI.2 to protect the integrity of SDOs associated with the RoT for Storage._
+FPT_ROT_EXT.1.5:: The TSF shall provide the following additional Root of Trust services: [selection:
++
+* _Measurement as defined in FPT_ROT_EXT.2_,
+* _Reporting as defined in FPT_ROT_EXT.3_,
+* _Verification as defined in FPT_ROT_EXT.4_,
+* _no additional services_
++
+] based on the identity identified in FPT_ROT_EXT.1.1.
 
 ==== FPT_RPL.1/Authorization Replay Prevention
 
@@ -1896,7 +1901,7 @@ The following rationale provides justification for each security problem definit
 |FMT_MSA.3 
 |This requirement defines the default access restrictions that are enforced on SDO attributes if not overridden by specific access control policy rules.
 
-.8+|T.UNAUTHORIZED_ACCESS
+.7+|T.UNAUTHORIZED_ACCESS
 |FMT_SMF.1 
 |This requirement defines the management functions that are provided by the TOE to authorized subjects.
 
@@ -1909,11 +1914,8 @@ The following rationale provides justification for each security problem definit
 |FPT_PHP.3 
 |This requirement ensures that some mechanism is in place to thwart unauthorized attempts to access protected functions or data through physical tampering of the TOE.
 
-|FPT_PRO_EXT.1 
+|FPT_ROT_EXT.1
 |This requirement defines the RoT for the TOE, which is used to derive all access control functionality.
-
-|FPT_ROT_EXT.2 
-|This requirement enforces the RoT for Storage to enforce access control against SDOs.
 
 |FPT_RPL.1/Authorization
 |This requirement ensures that access control restrictions cannot be bypassed through replay of operations.
@@ -1993,7 +1995,7 @@ The following rationale provides justification for each security problem definit
 |FPT_TST.1
 |This requirement defines the mechanisms used to verify and attest to the integrity of the TSF.
 
-|FPT_PRO_EXT.2 (optional)
+|FPT_ROT_EXT.2 (selection-based)
 |This requirement ensures that the TSF can measure the integrity of its stored data.
 
 |FCS_COP.1/CMAC (selection-based)
@@ -2002,7 +2004,7 @@ The following rationale provides justification for each security problem definit
 |FPT_FLS.1/FW (selection-based)
 |This requirement requires the TSF to take action to preserve its secure operation if any violations to its firmware integrity are detected.
 
-.7+|T.WEAK_OWNERSHIP_BINDING
+.6+|T.WEAK_OWNERSHIP_BINDING
 |FDP_ITC_EXT.1
 |This requirement ensures that all SDEs parsed by the TOE have verifiable integrity.
 
@@ -2012,19 +2014,16 @@ The following rationale provides justification for each security problem definit
 |FDP_SDC.2
 |This requirement ensures that SDEs/SDOs are stored with confidentiality and that all authorization data is protected prior to storage.
 
-|FPT_ROT_EXT.1
-|This requirement defines the RoT services that are available for the protection of data.
-
 |FDP_ITC_EXT.1
 |This requirement ensures that all SDEs parsed by the TOE include appropriate binding metadata.
 
-|FPT_ROT_EXT.3 (optional)
-|This requirement allows the TSF to provide a RoT for Reporting that can provide assured information about the stored SDEs.
+|FPT_ROT_EXT.3 (selection-based)
+|This requirement allows the TSF to provide a Root of Trust for Reporting that can provide assured information about the stored data.
 
 |FDP_DAU.1/Prove (selection-based)
 |This requirement defines the Prove service that can be used to invoke the Roots of Trust for Measurement and Reporting and provide affirmation of the validity of TSF and stored data.
 
-.4+|T.UNAUTH_UPDATE
+.5+|T.UNAUTH_UPDATE
 |FPT_MFW_EXT.1 
 |This requirement specifies whether the TOE's firmware is mutable or immutable.
 
@@ -2033,6 +2032,9 @@ The following rationale provides justification for each security problem definit
 
 |FPT_MFW_EXT.2 (selection-based)
 |This requirement ensures that the TSF can verify that its mutable firmware integrity remains intact and any firmware updates to the TSF are genuine.
+
+|FPT_ROT_EXT.4 (selection-based)
+|This requirement allows the TSF to provide a Root of Trust for Verification that can ensure the integrity and authenticity of signed firmware.
 
 |FPT_RPL.1/FW (selection-based)
 |This requirement ensures that the TSF will not permit loading earlier versions of its firmware.
@@ -2306,34 +2308,6 @@ FCS_RBG.6.1:: The TSF shall provide a [selection: _hardware, software, [assignme
 FPT_ITT.1 Basic Internal TSF Data Transfer Protection
 
 FPT_ITT.1.1:: The TSF shall protect TSF data from {empty}[[.underline]#disclosure#] *and [selection: _modification, no other actions_]* when it is transmitted between separate parts of the TOE.
-
-==== FPT_PRO_EXT.2 Data Integrity Measurements
-
-FPT_PRO_EXT.2 Data Integrity Measurements
-
-FPT_PRO_EXT.2.1:: The TSF shall be able to quantify the integrity of the data protected by the TOE by generating integrity measurements and assertions.
-
-_Application Note {counter:remark_count}_:: _The generation of these integrity measurements and assertions is the creation of OB.Pstate._
-+
-_Data protected by the TOE includes DSC firmware, DSC configuration data, and user data. DSC configuration data may include permanent SDEs or SDOs such as immutable or mutable root keys, authorization values, and authentication tokens (i.e. DSC.ID, OB.P_SDO, OB.FAACntr, OB.AntiReplay, and OB.Context). User data may include transient SDEs and SDOs as well as authorization values and authentication tokens bound to these SDEs and SDOs (i.e. OB.T_SDO)._
-
-FPT_PRO_EXT.2.2:: The TSF shall accumulate platform characteristics using a consistent [assignment: _description of process for accumulating platform characteristics_] process in which verified quantifiable measurements and assertions are accumulated by the RoT for Measurement to prove the integrity of its SDOs.
-
-_Application Note {counter:remark_count}_:: _Although a platform may enter any state possible — including undesirable or insecure states — it can use platform characteristics, including integrity measurements and assertions, along with logging and reporting to accurately report the state derived from data attributing to those states. In this context, platform characteristics can include, but is not limited to, cryptographic hashes of binary data, security-critical configurations, register values (including status registers) and milestones, such as verification of firmware, or transitioning from a boot phase to an operational phase. A platform characteristic may also represent the state of some entity outside the DSC. A process independent from the DSC or the host containing the DSC may evaluate the platform characteristics and determine an appropriate action._
-
-==== FPT_ROT_EXT.3 Root of Trust for Reporting Mechanisms 
-
-FPT_ROT_EXT.3 Root of Trust for Reporting Mechanisms
-
-FPT_ROT_EXT.3.1:: The TSF shall be able to attest to a state as represented by platform characteristics with a Root of Trust for Reporting mechanism that uses for its identity [selection: _a cryptographically verifiable identity in FPT_PRO_EXT.1, an alias key bound to the cryptographically verifiable identity in FPT_PRO_EXT.1_] and using a signature algorithm as specified in FCS_COP.1**/SigGen**.
-
-_Application Note {counter:remark_count}_:: _While it is possible for a group of components to share a single unique group identifier, it is important to ensure that individual components have their own unique identifiers relative to each other._
-+
-_Resident keys or aliases are designed such that they are never visible outside the subset of DSC scope containing the RoT services and are only to be used for encryption. Therefore, possession of such aliases or keys can only be proved indirectly by using it to decrypt a value that has been encrypted with a corresponding public key. In this way, these resident keys or aliases can provide for authentication based on decryption operations instead of producing a digital signature._
-+
-_The DSC responds to requests from an external entity to attest to the provenance and integrity of platform characteristics contained within the DSC._
-+
-_Integrity reporting is the process of attesting to platform characteristics (including those recorded in status registers in a DSC). The philosophy behind integrity measurement, logging, and reporting is that a platform may enter any state possible—including undesirable or insecure states—but can still accurately report measurements derived from data attributing to those states. In this context, data can include, but is not limited to, code, security-critical configurations, values of registers, including status registers. An independent process may evaluate the integrity states and determine an appropriate response._
 
 === Flaw Remediation
 
@@ -2896,7 +2870,7 @@ FDP_DAU.1.1/Prove:: The TSF shall provide a capability to generate evidence that
 
 FDP_DAU.1.2/Prove:: The TSF shall provide [assignment: _list of subjects_] with the ability to verify evidence of the validity of the indicated information.
 
-_Application Note {counter:remark_count}_:: _This SFR describes the output of the Prove service provided by the DSC. The evidence of validity or authenticity, or other evidence derived, is expected to be processed by the RoT for Measurement. Additionally, the use of a RoT for Reporting presupposes a logging capability or other means of generating state information that could be conveyed to external entities. Therefore, FDP_DAU.1.1/Prove is claimed if-and-only-if [.underline]#Root of Trust for Measurement# and [.underline]#Root of Trust for Reporting# are both selected in FPT_ROT_EXT.1.1. An 'authenticated user' in the sense of the selection in FDP_DAU.1.1/Prove means a user who has been authenticated by the DSC according to the mechanisms of FIA_UAU.5._
+_Application Note {counter:remark_count}_:: _This SFR describes the output of the Prove service provided by the DSC. The evidence of validity or authenticity, or other evidence derived, is expected to be processed by the Root of Trust for Measurement. Additionally, the use of a Root of Trust for Reporting presupposes a logging capability or other means of generating state information that could be conveyed to external entities. Therefore, FDP_DAU.1.1/Prove is claimed if-and-only-if FPT_ROT_EXT.2 and FPT_ROT_EXT.3 are both included. An 'authenticated user' in the sense of the selection in FDP_DAU.1.1/Prove means a user who has been authenticated by the DSC according to the mechanisms of FIA_UAU.5._
 +
 _In FDP_DAU.1.1/Prove, the DSC will issue a validity-stamped or authenticity-stamped piece of data. In this case, validity-stamped means that the form of the issued data enables an external entity to verify that the data has been issued via the DSC's Prove service. The implementation might be via a DSC cryptographic signature, or a MAC using a symmetric key shared with the receiver, for example. Authenticity-stamped means that the receiver of the data can verify that the user providing this data is authentic._
 +
@@ -2951,6 +2925,40 @@ FPT_RPL.1.1/FW:: The TSF shall detect replay for the following entities: [_earli
 FPT_RPL.1.2/FW:: The TSF shall *prevent the execution of the earlier firmware and* perform [*selection, choose one of*: _[assignment: other actions], no other actions_] when replay is detected.
 
 _Application Note {counter:remark_count}_:: _The TSF data is used as a guarantee of the ordinal identifier of the firmware instance. When a firmware load is requested, the TSF ensures the authenticated firmware ordinal identifier is greater than or equal to the previously authenticated firmware identifier. For example, this could be accomplished by ensuring the validated instance of the firmware to be loaded is greater than or equal to the instance previously validated and loaded into the TOE. By loading an earlier instance of firmware, it potentially opens up the device to known vulnerabilities._
+
+==== FPT_ROT_EXT.2 Root of Trust for Measurement
+
+FPT_ROT_EXT.2 Root of Trust for Measurement
+
+FPT_ROT_EXT.2.1:: The TSF shall be able to quantify the integrity of the data protected by the TOE by generating integrity measurements and assertions.
+
+_Application Note {counter:remark_count}_:: _The generation of these integrity measurements and assertions is the creation of OB.Pstate._
++
+_Data protected by the TOE includes DSC firmware, DSC configuration data, and user data. DSC configuration data may include permanent SDEs or SDOs such as immutable or mutable root keys, authorization values, and authentication tokens (i.e. DSC.ID, OB.P_SDO, OB.FAACntr, OB.AntiReplay, and OB.Context). User data may include transient SDEs and SDOs as well as authorization values and authentication tokens bound to these SDEs and SDOs (i.e. OB.T_SDO)._
+
+FPT_ROT_EXT.2.2:: The TSF shall accumulate platform characteristics using a consistent [assignment: _description of process for accumulating platform characteristics_] process in which verified quantifiable measurements and assertions are accumulated by the Root of Trust for Measurement.
+
+_Application Note {counter:remark_count}_:: _Although a platform may enter any state possible — including undesirable or insecure states — it can use platform characteristics, including integrity measurements and assertions, along with logging and reporting to accurately report the state derived from data attributing to those states. In this context, platform characteristics can include, but is not limited to, cryptographic hashes of binary data, security-critical configurations, register values (including status registers) and milestones, such as verification of firmware, or transitioning from a boot phase to an operational phase. A platform characteristic may also represent the state of some entity outside the DSC. A process independent from the DSC or the host containing the DSC may evaluate the platform characteristics and determine an appropriate action._
+
+==== FPT_ROT_EXT.3 Root of Trust for Reporting
+
+FPT_ROT_EXT.3 Root of Trust for Reporting
+
+FPT_ROT_EXT.3.1:: The TSF shall be able to attest to a state as represented by platform characteristics with a Root of Trust for Reporting mechanism that uses for its identity [selection: _a cryptographically verifiable identity in FPT_ROT_EXT.1, a key bound to the cryptographically verifiable identity in FPT_ROT_EXT.1_] and using a signature algorithm as defined in FCS_COP.1/SigGen.
+
+_Application Note {counter:remark_count}_:: _While it is possible for a group of components to share a single unique group identifier, it is important to ensure that individual components have their own unique identifiers relative to each other._
++
+_Resident keys or aliases are designed such that they are never visible outside the subset of DSC scope containing the RoT services and are only to be used for encryption. Therefore, possession of such aliases or keys can only be proved indirectly by using it to decrypt a value that has been encrypted with a corresponding public key. In this way, these resident keys or aliases can provide for authentication based on decryption operations instead of producing a digital signature._
++
+_The DSC responds to requests from an external entity to attest to the provenance and integrity of platform characteristics contained within the DSC._
++
+_Integrity reporting is the process of attesting to platform characteristics (including those recorded in status registers in a DSC). The philosophy behind integrity measurement, logging, and reporting is that a platform may enter any state possible—including undesirable or insecure states—but can still accurately report measurements derived from data attributing to those states. In this context, data can include, but is not limited to, code, security-critical configurations, values of registers, including status registers. An independent process may evaluate the integrity states and determine an appropriate response._
+
+==== FPT_ROT_EXT.4 Root of Trust for Verification
+
+FPT_ROT_EXT.4 Root of Trust for Verification
+
+FPT_ROT_EXT.4.1:: The TSF shall [selection: _verify the integrity and authenticity, provide a service to verify the integrity and authenticity_] of signed objects using [selection: _a cryptographically verifiable identity in FPT_ROT_EXT.1, a key bound to the cryptographically verifiable identity in FPT_ROT_EXT.1_] and using a signature algorithm as defined in FCS_COP.1/SigVer.
 
 ==== FPT_STM_EXT.1 Reliable Time Counting
 
@@ -3026,14 +3034,12 @@ This Appendix provides a definition for all of the extended components introduce
 | Security Management (FMT) 
 | FMT_MOF_EXT Management of Functions in TSF
 
-.5+| Protection of the TSF (FPT) 
+.4+| Protection of the TSF (FPT)
 | FPT_MFW_EXT Mutable/Immutable Firmware
 
 | FPT_MOD_EXT Debug Modes
 
-| FPT_PRO_EXT Root of Trust
-
-| FPT_ROT_EXT Root of Trust Services
+| FPT_ROT_EXT Root of Trust
 
 | FPT_STM_EXT Reliable Time Counting
 
@@ -3582,125 +3588,120 @@ Dependencies:: No dependencies.
 [vertical]
 FPT_MOD_EXT.1.1:: The TSF shall provide no access to debug modes.
 
-==== FPT_PRO_EXT Root of Trust
+==== FPT_ROT_EXT Root of Trust
 
 *Family Behavior*
 
-This family defines requirements for the TOE's implementation of a Root of Trust and its ability to use this to assert the integrity of its stored data.
-
-*Component Leveling*
-
-[#img-FPT_PRO_EXT] 
-[ditaa,"FPT_PRO_EXT"]
-....
-                                                     
-                                                    
-                                                       +---+
-    +--------------------------------------------+  |->| 1 |
-    |                                            |  |  +---+
-    | FPT_PRO_EXT Root of Trust                  +--+
-    |                                            |  |  +---+
-    +--------------------------------------------+  |->| 2 |
-                                                       +---+
-                                                    
-                                                    
-....
-
-FPT_PRO_EXT.1 Root of Trust, requires the TSF to maintain a Root of Trust and identify how it is stored in memory.
-
-FPT_PRO_EXT.2 Data Integrity Measurements, requires the TSF to generate integrity measurements to assert its own integrity.
-
-*Management: FPT_PRO_EXT.1, FPT_PRO_EXT.2*
-
-No specific management functions are identified.
-
-*Audit: FPT_PRO_EXT.1, FPT_PRO_EXT.2*
-
-There are no auditable events foreseen.
-
-*FPT_PRO_EXT.1 Root of Trust*
-[horizontal]
-Hierarchical to:: No other components.
-
-Dependencies:: No dependencies.
-[vertical]
-FPT_PRO_EXT.1.1:: The TSF shall contain an SDO that contains the identity of the Root of Trust.
-
-FPT_PRO_EXT.1.2:: The TSF shall maintain Root of Trust data as [selection: _immutable, mutable if and only if its mutability is controlled by a unique identifiable owner_].
-
-*FPT_PRO_EXT.2 Data Integrity Measurements*
-[horizontal]
-Hierarchical to:: No other components.
-
-Dependencies:: No dependencies.
-[vertical]
-FPT_PRO_EXT.2.1:: The TSF shall be able to quantify the integrity of the data protected by the TOE by generating integrity measurements and assertions.
-
-FPT_PRO_EXT.2.2:: The TSF shall accumulate platform characteristics using a consistent [assignment: _description of process for accumulating platform characteristics_] process in which verified quantifiable measurements and assertions are accumulated by the RoT for Measurement to prove the integrity of its SDOs.
-
-==== FPT_ROT_EXT Root of Trust Services
-
-*Family Behavior*
-
-This family defines requirements for individual Root of Trust services that the TSF may implement.
+This family defines requirements for the Root of Trust and Root of Trust services that the TSF may implement.
 
 *Component Leveling*
 
 [#img-FPT_ROT_EXT] 
 [ditaa,"FPT_ROT_EXT"]
 ....
+
                                                        +---+
                                                     +->| 1 |
                                                     |  +---+
-    +--------------------------------------------+  |
-    |                                            |  |  +---+
-    | FPT_ROT_EXT Root of Trust Services         +--+->| 2 |
-    |                                            |  |  +---+
-    +--------------------------------------------+  |
+                                                    |
                                                     |  +---+
-                                                    +->| 3 |
+    +--------------------------------------------+  +->| 2 |
+    |                                            |  |  +---+
+    | FPT_ROT_EXT Root of Trust                  +--+
+    |                                            |  |  +---+
+    +--------------------------------------------+  +->| 3 |
                                                        +---+
+                                                    |
+                                                    |  +---+
+                                                    +->| 4 |
+                                                       +---+
+
 ....
 
-FPT_ROT_EXT.1 Root of Trust Services, requires the TSF to identify the specific Roots of Trust it provides.
+FPT_ROT_EXT.1 Root of Trust, requires the TSF to maintain a Root of Trust and prevent the unauthorized disclosure or modification of protected SDOs.
 
-FPT_ROT_EXT.2 Root of Trust for Storage, requires the TSF to prevent unauthorized access to SDOs associated with its Root of Trust for Storage.
+FPT_ROT_EXT.2 Root of Trust for Measurement, requires the TSF to collect measurements about the TSF and its platform.
 
-FPT_ROT_EXT.3 Root of Trust for Reporting Mechanisms, requires the TSF to implement a Root of Trust for Reporting in the specified manner.
+FPT_ROT_EXT.3 Root of Trust for Reporting, requires the TSF to report the collected measurements.
 
-*Management: FPT_ROT_EXT.1, FPT_ROT_EXT.2, FPT_ROT_EXT.3*
+FPT_ROT_EXT.4 Root of Trust for Verification, requires the TSF to verify the integrity and authenticity of signed objects.
+
+*Management: FPT_ROT_EXT.1, FPT_ROT_EXT.2, FPT_ROT_EXT.3, FPT_ROT_EXT.4*
 
 No specific management functions are identified.
 
-*Audit: FPT_ROT_EXT.1, FPT_ROT_EXT.2, FPT_ROT_EXT.3*
+*Audit: FPT_ROT_EXT.1, FPT_ROT_EXT.2, FPT_ROT_EXT.3, FPT_ROT_EXT.4*
 
 There are no auditable events foreseen.
 
-*FPT_ROT_EXT.1 Root of Trust Services*
+*FPT_ROT_EXT.1 Root of Trust*
 [horizontal]
 Hierarchical to:: No other components.
 
-Dependencies:: FPT_PRO_EXT.1 Root of Trust
+Dependencies:: No dependencies.
 [vertical]
-FPT_ROT_EXT.1.1:: The TSF shall provide a Root of Trust for Storage, a Root of Trust for Authorization, and [selection: _Root of Trust for Measurement, Root of Trust for Reporting, no others_].
+FPT_ROT_EXT.1.1:: The TSF shall contain an SDO that contains the identity of the Root of Trust.
 
-*FPT_ROT_EXT.2 Root of Trust for Storage*
+FPT_ROT_EXT.1.2:: The TSF shall maintain Root of Trust data as [selection: _immutable, mutable if and only if its mutability is controlled by a unique identifiable owner_].
+
+FPT_ROT_EXT.1.3:: The TSF shall provide a Root of Trust for Confidentiality to prevent unauthorized disclosure of SDOs, using the following techniques: [selection:
++
+* _Authenticated encryption as defined in FCS_COP.1/AEAD_,
+* _Key encapsulation as defined in FCS_COP.1/KeyEncap_,
+* _Key wrapping as defined in FCS_COP.1/KeyWrap_,
+* _Symmetric-key cryptography as defined in FCS_COP.1/SKC,_
++
+].
+
+FPT_ROT_EXT.1.4:: The TSF shall provide a Root of Trust for Integrity to prevent unauthorized modification of SDOs, using the following techniques: [selection:
++
+* _Authenticated encryption as defined in FCS_COP.1/AEAD_,
+* _CMAC as defined in FCS_COP.1/CMAC_,
+* _Hashing as defined in FCS_COP.1/Hash_,
+* _Keyed hashing as defined in FCS_COP.1/KeyedHash_,
+* _Key encapsulation as defined in FCS_COP.1/KeyEncap_,
+* _Key wrapping as defined in FCS_COP.1/KeyWrap_,
+* _Signature verification as defined in FCS_COP.1/SigVer_,
+* _XOF as defined in FCS_COP.1/XOF_
++
+].
+
+FPT_ROT_EXT.1.5:: The TSF shall provide the following additional Root of Trust services: [selection:
++
+* _Measurement as defined in FPT_ROT_EXT.2_,
+* _Reporting as defined in FPT_ROT_EXT.3_,
+* _Verification as defined in FPT_ROT_EXT.4_,
+* _no additional services_
++
+] based on the identity identified in FPT_ROT_EXT.1.1.
+
+*FPT_ROT_EXT.2 Root of Trust for Measurement*
 [horizontal]
 Hierarchical to:: No other components.
 
-Dependencies:: FPT_PRO_EXT.1 Root of Trust
+Dependencies:: FPT_ROT_EXT.1 Root of Trust
 [vertical]
-FPT_ROT_EXT.2.1:: The TSF shall prevent unauthorized access to SDOs associated with the Root of Trust for Storage.
+FPT_ROT_EXT.2.1:: The TSF shall be able to quantify the integrity of the data protected by the TOE by generating integrity measurements and assertions.
 
-*FPT_ROT_EXT.3 Root of Trust for Reporting Mechanisms*
+FPT_ROT_EXT.2.2:: The TSF shall accumulate platform characteristics using a consistent [assignment: _description of process for accumulating platform characteristics_] process in which verified quantifiable measurements and assertions are accumulated by the Root of Trust for Measurement.
+
+*FPT_ROT_EXT.3 Root of Trust for Reporting*
 [horizontal]
 Hierarchical to:: No other components.
 
-Dependencies:: FCS_COP.1 Cryptographic Operation +
-FPT_PRO_EXT.1 Root of Trust +
-FPT_ROT_EXT.1 Root of Trust Services
+Dependencies:: FPT_ROT_EXT.2 Root of Trust for Measurement +
+FCS_COP.1 Cryptographic Operation
 [vertical]
-FPT_ROT_EXT.3.1:: The TSF shall be able to attest to a state as represented by platform characteristics with a Root of Trust for Reporting mechanism that uses for its identity [selection: _a cryptographically verifiable identity in FPT_PRO_EXT.1, an alias key bound to the cryptographically verifiable identity in FPT_PRO_EXT.1_] and using a signature algorithm as specified in FCS_COP.1.
+FPT_ROT_EXT.3.1:: The TSF shall be able to attest to a state as represented by platform characteristics with a Root of Trust for Reporting mechanism that uses for its identity [selection: _a cryptographically verifiable identity in FPT_ROT_EXT.1, a key bound to the cryptographically verifiable identity in FPT_ROT_EXT.1_] and using a signature algorithm as defined in FCS_COP.1/SigGen.
+
+*FPT_ROT_EXT.4 Root of Trust for Verification*
+[horizontal]
+Hierarchical to:: No other components.
+
+Dependencies:: FPT_ROT_EXT.1 Root of Trust +
+FCS_COP.1 Cryptographic Operation
+[vertical]
+FPT_ROT_EXT.4.1:: The TSF shall [selection: _verify the integrity and authenticity, provide a service to verify the integrity and authenticity_] of signed objects using [selection: _a cryptographically verifiable identity in FPT_ROT_EXT.1, a key bound to the cryptographically verifiable identity in FPT_ROT_EXT.1_] and using a signature algorithm as defined in FCS_COP.1/SigVer.
 
 ==== FPT_STM_EXT Reliable Time Counting
 
@@ -4167,17 +4168,9 @@ FMT_SMR.1 - included
 |No dependencies
 |N/A
 
-|FPT_PRO_EXT.1 
+|FPT_ROT_EXT.1
 |No dependencies
 |N/A
-
-|FPT_ROT_EXT.1 
-|FPT_PRO_EXT.1 
-|FPT_PRO_EXT.1 - included
-
-|FPT_ROT_EXT.2 
-|FPT_PRO_EXT.1 
-|FPT_PRO_EXT.1 - included
 
 |FPT_RPL.1/Authorization
 |No dependencies
@@ -4236,22 +4229,6 @@ FCS_RBG.4 - (optional SFR) included
 |FPT_ITT.1 
 |No dependencies
 |N/A
-
-|FPT_PRO_EXT.2 
-|No dependencies
-|N/A
-
-|FPT_ROT_EXT.3 
-|FCS_COP.1 
-
-FPT_PRO_EXT.1 
-
-FPT_ROT_EXT.1 
-|FCS_COP.1- included
-
-FPT_PRO_EXT.1 - included
-
-FPT_ROT_EXT.1 - included
 
 |===
 
@@ -4481,6 +4458,26 @@ FCS_COP.1
 
 FCS_COP.1 - included
 
+|FPT_ROT_EXT.2
+|FPT_ROT_EXT.1
+|FPT_ROT_EXT.1 - included
+
+|FPT_ROT_EXT.3
+|FPT_ROT_EXT.2
+
+FCS_COP.1
+|FPT_ROT_EXT.2 - (selection-based SFR) included
+
+FCS_COP.1 - included
+
+|FPT_ROT_EXT.4
+|FPT_ROT_EXT.1
+
+FCS_COP.1
+|FPT_ROT_EXT.1 - included
+
+FCS_COP.1 - included
+
 |FPT_RPL.1/FW
 |No dependencies
 |N/A
@@ -4628,11 +4625,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FPT_PHP.3 !Resistance to Physical Attack
 
-!FPT_ROT_EXT.1 !Root of Trust Services
-
-!FPT_ROT_EXT.2 !Root of Trust for Storage
-
-!FPT_PRO_EXT.2 !Data Integrity Measurements
+!FPT_ROT_EXT.1 !Root of Trust
 
 !FDP_FRS_EXT.2 !Factory Reset Behavior
 
@@ -4688,13 +4681,15 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FMT_SMR.1 !Separation of Roles
 
-!FPT_ROT_EXT.1 !Root of Trust Services
-
 !FPT_RPL.1/Authorization !Replay Prevention
 
-!FPT_STM.1 !Reliable Time Counting
+!FPT_STM_EXT.1 !Reliable Time Counting
 
 !FIA_AFL_EXT.2 !Authorization Failure Response
+
+!FPT_ROT_EXT.2 !Root of Trust for Measurements
+
+!FPT_ROT_EXT.4 !Root of Trust for Verification
 
 !===
 
@@ -4716,7 +4711,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FDP_ACF.1 !Security Attribute Based Access Control
 
-!FPT_PRO_EXT.1 !Root of Trust
+!FPT_ROT_EXT.1 !Root of Trust
 
 !FPT_RPL.1/Authorization !Replay Prevention
 
@@ -4730,13 +4725,13 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_RBG.5 !Random Bit Generation (Combining Entropy Sources)
 
-!FPT_ROT_EXT.3 !Root of Trust for Reporting Mechanisms
-
 !FDP_DAU.1/Prove !Basic Data Authentication (for Use with the Prove Service)
 
 !FPT_MFW_EXT.1 !Mutable/Immutable Firmware
 
 !FPT_MFW_EXT.2 !Firmware Integrity
+
+!FPT_ROT_EXT.3 !Root of Trust for Reporting
 
 !===
 
@@ -4826,8 +4821,6 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FRU_FLT.1 !Degraded Fault Tolerance
 
-!FPT_PRO_EXT.2 !Data Integrity Measurements
-
 !FPT_MFW_EXT.2 !Firmware Integrity
 
 !FDP_FRS_EXT.2 !Factory Reset Behavior
@@ -4835,6 +4828,10 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 !FPT_FLS.1/FW !Failure with Preservation of Secure State (Firmware)
 
 !FPT_RPL.1/FW !Replay Detection (Firmware)
+
+!FPT_ROT_EXT.2 !Root of Trust for Measurements
+
+!FPT_ROT_EXT.4 !Root of Trust for Verification
 
 !===
 
@@ -4876,7 +4873,7 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 |A shortened name for Authentication Token.
 
 |Boot Critical Data 
-|Critical data that persists across power cycles and determines characteristics of the DSC. Examples of boot critical data can be DSC configuration settings, certificates, and the results of measurements obtained by the RoT for measurement.
+|Critical data that persists across power cycles and determines characteristics of the DSC. Examples of boot critical data can be DSC configuration settings, certificates, and the results of measurements obtained by the Root of Trust for measurement.
 
 |Boot Firmware 
 |The first firmware that executes during the boot process.
@@ -4941,29 +4938,20 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 |Root of Trust (RoT) 
 |A RoT performs one or more security specific functions; establishing the foundation on which all trust in a system is placed. [NIST-ROTM]
 
-|RoT for Authorization 
-|(As defined by [GP_ROT]) The RoT for Authorization provides reliable capabilities to assess authorization tokens and determine whether or not they satisfy policies for access control.
+|Root of Trust for Confidentiality
+|(As defined by [GP_ROT]) The Root of Trust for Confidentiality maintains shielded locations for the purpose of storing sensitive data, such as secret keys and passwords.
 
-|RoT for Confidentiality 
-|(As defined by [GP_ROT]) The RoT for Confidentiality maintains shielded locations for the purpose of storing sensitive data, such as secret keys and passwords.
+|Root of Trust for Integrity
+|(As defined by [GP_ROT]) The Root of Trust for Integrity maintains shielded locations for the purpose of storing and protecting the integrity of non-secret critical security parameters and platform characteristics. Critical security parameters include, but are not limited to, authorization values, public keys, and public key certificates.
 
-|RoT for Integrity 
-|(As defined by [GP_ROT]) The RoT for Integrity maintains shielded locations for the purpose of storing and protecting the integrity of non-secret critical security parameters and platform characteristics. Critical security parameters include, but are not limited to, authorization values, public keys, and public key certificates.
+|Root of Trust for Measurement
+|(As defined by [GP_ROT]) The Root of Trust for Measurement provides the ability to reliably create platform characteristics.
 
-|RoT for Measurement 
-|(As defined by [GP_ROT]) The RoT for Measurement provides the ability to reliably create platform characteristics.
+|Root of Trust for Reporting
+|(As defined by [GP_ROT]) The Root of Trust for Reporting reliably reports platform characteristics. It provides an interface that limits its services to providing reports on its platform characteristics authenticated by a platform identity.
 
-|RoT for Reporting 
-|(As defined by [GP_ROT]) The RoT for Reporting reliably reports platform characteristics. It provides an interface that limits its services to providing reports on its platform characteristics authenticated by a platform identity.
-
-|RoT for Storage 
-|A RoT that acts as the RoT for Confidentiality and the RoT for Integrity.
-
-|RoT for Update 
-|A RoT responsible for updating the firmware.
-
-|RoT for Verification 
-|A RoT responsible for verifying digital signatures.
+|Root of Trust for Verification
+|(As defined by [GP_ROT]) The Root of Trust for Verification verifies the integrity and authenticity of signed objects. Objects may include, but are not limited to, public keys, code, and data.
 
 |Security Data Element (SDE) 
 |A Critical Security Parameter, such as a cryptographic key or authorization token.
@@ -5244,7 +5232,7 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [GD] Grawrock, David. _Dynamics of a Trusted Platform: A building block approach_. Intel Press, 2009
 
-[GP_ROT] GlobalPlatform Technology. _Root of Trust Definitions and Requirements Version 1.1_. GlobalPlatform, June 2018
+[GP_ROT] GlobalPlatform Technology. _Root of Trust Definitions and Requirements Version 1.1.1_. GlobalPlatform, June 2022
 
 [NIST-ROTM] Lily Chen, Joshua Franklin, and Andrew Regenscheid. _NIST Special Publication 800-164 (Draft), Guidelines on Hardware Rooted Security in Mobile Devices (Draft)_, National Institute of Standards and Technology, October 2012
 
