@@ -549,255 +549,6 @@ The evaluator shall examine the KMD to ensure that all keys and keying material 
 
 Note that where selections include 'destruction of reference to the key directly followed by a request for garbage collection' (for volatile memory) then the evaluator shall examine the KMD to ensure that it explains the nature of the destruction of the reference, the request for garbage collection, and of the garbage collection process itself.
 
-==== Cryptographic Operation (FCS_COP)
-
-===== FCS_COP.1/Hash Cryptographic Operation - Hashing
-
-====== TSS
-
-The evaluator shall check that the association of the hash function with other TSF cryptographic functions (for example, the digital signature verification function) is documented in the TSS. The evaluator shall also check that the TSS identifies whether the implementation is bit-oriented or byte-oriented.
-
-====== AGD
-
-The evaluator checks the AGD documents to determine that any configuration that is required to configure the required hash sizes is present. The evaluator also checks the AGD documents to confirm that the instructions for establishing the evaluated configuration use only those hash algorithms selected in the ST.
-
-====== Test
-
-The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
-
-The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
-
-* Hash algorithm
-
-Each test group shall consist of at least 150 test cases meeting the following requirements:
-
-* Test cases shall be generated according to the parameter configuration of the test group.
-* Each test case shall consist of an arbitrary input message and its corresponding digest value.
-* A representative sample of the domain of supported input message sizes shall be tested.
-
-For each test case in each test group, the evaluator shall verify that the TSF generates the correct digest value.
-
-Additionally, each test group shall contain least one Monte Carlo Test (MCT) test case, consisting of an arbitrary seed and a list of 100 digest values. For hash algorithms, the MCT is defined as follows:
-----
-for i = 1 through 100
-    msg = seed
-    for j = 1 through 1000
-        digest = hash(msg)
-        msg = digest
-    output digest
-    seed = digest
-----
-
-For each MCT test case in each test group, the evaluator shall verify that the TSF generates the correct 100 digest values.
-
-The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
-===== FCS_COP.1/KeyedHash Cryptographic Operation - Keyed Hash
-
-====== TSS
-
-The evaluator shall examine the TSS to ensure that it specifies the following values used by the HMAC and KMAC functions: output MAC length used.
-
-====== AGD
-
-There are no guidance evaluation activities for this component.
-
-====== Test
-
-The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
-
-The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
-
-* Hash algorithm
-
-Each test group shall consist of at least 75 test cases meeting the following requirements:
-
-* Test cases shall be generated according to the parameter configuration of the test group.
-* Each test case shall consist of an arbitrary key, an arbitrary input message, and its corresponding MAC tag.
-* A representative sample of the domain of supported key sizes shall be tested.
-* A representative sample of the domain of supported input message sizes shall be tested.
-
-For each test case in each test group, the evaluator shall verify that the TSF generates the correct MAC tag.
-
-The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
-===== FCS_COP.1/SigGen Cryptographic Operation - Signature Generation
-
-====== TSS
-
-The evaluator shall examine the TSS to ensure that all signature generation functions use the approved algorithms and key sizes.
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
-
-The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
-
-* Modulus size (RSA)
-* Curve (ECDSA, EC-KCDSA, EdDSA)
-* Group size (KCDSA)
-* Private key size (LMS, HSS, XMSS, XMSS^MT^)
-* Parameter set (ML-DSA, HashML-DSA)
-* Padding scheme (RSA)
-* Hash or XOF algorithm
-
-Each test group shall consist of at least 6 test cases meeting the following requirements:
-
-* Test cases shall be generated according to the parameter configuration of the test group.
-* Each test case shall consist of an arbitrary private key and an arbitrary input message to be signed.
-* A representative sample of the domain of supported message sizes shall be tested.
-
-For each test case in each test group, the evaluator shall verify that the TSF generates a signature that is structurally well-formed according to the relevant standard. Additionally, the evaluator shall use a known-good implementation to verify that the generated signature is indeed a valid signature on the input message.
-
-The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
-===== FCS_COP.1/SigVer Cryptographic Operation - Signature Verification
-
-====== TSS
-
-The evaluator shall check the TSS to ensure that it describes the overall flow of the signature verification. This should at least include identification of the format and general location (e.g., "firmware on the hard drive device" rather than "memory location 0x00007A4B") of the data to be used in verifying the digital signature; how the data received from the operational environment are brought onto the device; and any processing that is performed that is not part of the digital signature algorithm (for instance, checking of certificate revocation lists).
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
-
-The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
-
-* Modulus size (RSA)
-* Curve (ECDSA, EC-KCDSA, EdDSA)
-* Group size (DSA, KCDSA)
-* Private key size (LMS, HSS, XMSS, XMSS^MT^)
-* Parameter set (ML-DSA, HashML-DSA)
-* Padding scheme (RSA)
-* Hash or XOF algorithm
-
-Each test group shall consist of at least 6 test cases meeting the following requirements:
-
-* Test cases shall be generated according to the parameter configuration of the test group.
-* Each test case shall consist of an arbitrary public key, an arbitrary input message, and a signature. For 5 of the 6 test cases, the public key or input message shall be modified such that the signature is invalid.
-* A representative sample of the domain of supported message sizes shall be tested.
-
-For each test case in each test group, the evaluator shall verify that the TSF correctly reports the validity of the signature for the input message.
-
-The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
-===== FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
-
-====== TSS
-
-The evaluator shall check that the TSS includes a description of encryption functions used for symmetric key encryption. The evaluator should check that this description of the selected encryption function includes the key sizes and modes of operations as specified in the [DSC cPP] Table "Symmetric-Key Cryptography"
-
-The evaluator shall check that the TSS describes the means by which the TOE satisfies constraints on algorithm parameters included in the selections made for 'cryptographic algorithm' and 'list of standards'. 
-
-====== AGD
-
-If the product supports multiple modes, the evaluator shall examine the vendor's documentation to determine that the method of choosing a specific mode/key size by the end user is described. 
-
-====== Test
-
-The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
-
-The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
-
-* Mode of operation
-* Algorithm direction (encrypt/decrypt)
-* Key size
-
-For each test group, the evaluator shall generate at least 50 test cases meeting the following requirements:
-
-* Each test case shall consist of an arbitrary key, an arbitrary input plaintext/ciphertext, and its corresponding ciphertext/plaintext.
-* Depending on the mode of operation, an initialization vector, counter, or tweak value shall also be included in the test case.
-* A representative sample of the domain of supported input plaintext/ciphertext sizes shall be tested.
-* A representative sample of the domain of supported initialization vector sizes shall be tested (CBC, CFB, OFB mode).
-* A representative sample of the domain of supported counter sizes shall be tested (CTR mode).
-* A representative sample of the domain of supported tweak sizes shall be tested (XTS modes).
-
-For each test case in each test group, the evaluator shall verify that the TSF generates the correct ciphertext/plaintext.
-
-Additionally, each test group corresponding to a CBC, CFB, or OFB mode of operation shall contain least one Monte Carlo Test (MCT) test case, consisting of an arbitrary key, an arbitrary initialization vector, an arbitrary input plaintext/ciphertext, and a list of 100 corresponding ciphertexts/plaintexts.
-
-For encryption with a 128-bit block size, the MCT is defined as follows:
-----
-for i = 1 through 100
-    output key
-    output iv
-    output pt
-    encrypt_init(key, iv)
-    ct[1] = encrypt(pt)
-    pt = iv
-    for j = 2 through 1000
-        ct[j] = encrypt(pt)
-        pt = ct[j - 1]
-    output ct[j]
-    if key_len == block_size
-        key = key xor ct[j]
-    if 2 * key_len == 3 * block_size
-        key = key xor (lsb(ct[j - 1], block_size / 2) || ct[j])
-    if key_len == 2 * block_size
-        key = key xor (ct[j - 1] || ct[j])
-    iv = ct[j]
-    pt = ct[j - 1]
-----
-
-For decryption with a 128-bit block size, the MCT is defined as follows:
-----
-for i = 1 through 100
-    output key
-    output iv
-    output ct
-    decrypt_init(key, iv)
-    pt[1] = encrypt(ct)
-    ct = iv
-    for j = 2 through 1000
-        pt[j] = encrypt(ct)
-        ct = pt[j - 1]
-    output pt[j]
-    if key_len == block_size
-        key = key xor pt[j]
-    if 2 * key_len == 3 * block_size
-        key = key xor (lsb(pt[j - 1], block_size / 2) || pt[j])
-    if key_len == 2 * block_size
-        key = key xor (pt[j - 1] || pt[j])
-    iv = pt[j]
-    ct = pt[j - 1]
-----
-
-For each MCT test case in each test group, the evaluator shall verify that the TSF generates the correct 100 ciphertexts/plaintexts.
-
-The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
-
-====== KMD
-
-The evaluator shall examine the KMD to ensure that the points at which symmetric key encryption and decryption occurs are described, and that the complete data path for symmetric key encryption is described. The evaluator checks that this description is consistent with the relevant parts of the TSS.
-
-Assessment of the complete data path for symmetric key encryption includes confirming that the KMD describes the data flow from the device's host interface to the device's non-volatile memory storing the data, and gives information enabling the user data datapath to be distinguished from those situations in which data bypasses the data encryption engine (e.g. read-write operations to an unencrypted Master Boot Record area). The evaluator shall ensure that the documentation of the data path is detailed enough that it thoroughly describes the parts of the TOE that the data passes through (e.g. different memory types, processors and co-processors), its encryption state (i.e. encrypted or unencrypted) in each part, and any places where the data is stored. For example, any caching or buffering of the data should be identified and distinguished from the final destination in non-volatile memory (the latter represents the location from which the host will expect to retrieve the data in future).
-
-If support for AES-CTR is claimed and the counter value source is internal to the TOE, the evaluator shall verify that the KMD describes the internal counter mechanism used to ensure that it provides unique counter block values.
-
 ==== Random Bit Generation (FCS_RBG)
 
 ===== FCS_RBG.1 Random Bit Generation (RBG)
@@ -2081,6 +1832,84 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 There are no KMD evaluation activities for this component.
 
+===== FCS_COP.1/Hash Cryptographic Operation - Hashing
+
+====== TSS
+
+The evaluator shall check that the association of the hash function with other TSF cryptographic functions (for example, the digital signature verification function) is documented in the TSS. The evaluator shall also check that the TSS identifies whether the implementation is bit-oriented or byte-oriented.
+
+====== AGD
+
+The evaluator checks the AGD documents to determine that any configuration that is required to configure the required hash sizes is present. The evaluator also checks the AGD documents to confirm that the instructions for establishing the evaluated configuration use only those hash algorithms selected in the ST.
+
+====== Test
+
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
+
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
+
+* Hash algorithm
+
+Each test group shall consist of at least 150 test cases meeting the following requirements:
+
+* Test cases shall be generated according to the parameter configuration of the test group.
+* Each test case shall consist of an arbitrary input message and its corresponding digest value.
+* A representative sample of the domain of supported input message sizes shall be tested.
+
+For each test case in each test group, the evaluator shall verify that the TSF generates the correct digest value.
+
+Additionally, each test group shall contain least one Monte Carlo Test (MCT) test case, consisting of an arbitrary seed and a list of 100 digest values. For hash algorithms, the MCT is defined as follows:
+----
+for i = 1 through 100
+    msg = seed
+    for j = 1 through 1000
+        digest = hash(msg)
+        msg = digest
+    output digest
+    seed = digest
+----
+
+For each MCT test case in each test group, the evaluator shall verify that the TSF generates the correct 100 digest values.
+
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
+
+===== FCS_COP.1/KeyedHash Cryptographic Operation - Keyed Hash
+
+====== TSS
+
+The evaluator shall examine the TSS to ensure that it specifies the following values used by the HMAC and KMAC functions: output MAC length used.
+
+====== AGD
+
+There are no guidance evaluation activities for this component.
+
+====== Test
+
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
+
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
+
+* Hash algorithm
+
+Each test group shall consist of at least 75 test cases meeting the following requirements:
+
+* Test cases shall be generated according to the parameter configuration of the test group.
+* Each test case shall consist of an arbitrary key, an arbitrary input message, and its corresponding MAC tag.
+* A representative sample of the domain of supported key sizes shall be tested.
+* A representative sample of the domain of supported input message sizes shall be tested.
+
+For each test case in each test group, the evaluator shall verify that the TSF generates the correct MAC tag.
+
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
+
 ===== FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
 
 ====== TSS
@@ -2159,6 +1988,175 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 ====== KMD
 
 The evaluator shall examine the KMD to ensure that it describes when the key wrapping occurs, that the KMD description is consistent with the description in the TSS, and that for all keys that are wrapped the TOE uses a method as described in the [DSC cPP] table. No uncertainty should be left over which is the wrapping key and the key to be wrapped and where the wrapping key potentially comes from i.e. is derived from.
+
+===== FCS_COP.1/SigGen Cryptographic Operation - Signature Generation
+
+====== TSS
+
+The evaluator shall examine the TSS to ensure that all signature generation functions use the approved algorithms and key sizes.
+
+====== AGD
+
+There are no AGD evaluation activities for this component.
+
+====== Test
+
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
+
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
+
+* Modulus size (RSA)
+* Curve (ECDSA, EC-KCDSA, EdDSA)
+* Group size (KCDSA)
+* Private key size (LMS, HSS, XMSS, XMSS^MT^)
+* Parameter set (ML-DSA, HashML-DSA)
+* Padding scheme (RSA)
+* Hash or XOF algorithm
+
+Each test group shall consist of at least 6 test cases meeting the following requirements:
+
+* Test cases shall be generated according to the parameter configuration of the test group.
+* Each test case shall consist of an arbitrary private key and an arbitrary input message to be signed.
+* A representative sample of the domain of supported message sizes shall be tested.
+
+For each test case in each test group, the evaluator shall verify that the TSF generates a signature that is structurally well-formed according to the relevant standard. Additionally, the evaluator shall use a known-good implementation to verify that the generated signature is indeed a valid signature on the input message.
+
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
+
+===== FCS_COP.1/SigVer Cryptographic Operation - Signature Verification
+
+====== TSS
+
+The evaluator shall check the TSS to ensure that it describes the overall flow of the signature verification. This should at least include identification of the format and general location (e.g., "firmware on the hard drive device" rather than "memory location 0x00007A4B") of the data to be used in verifying the digital signature; how the data received from the operational environment are brought onto the device; and any processing that is performed that is not part of the digital signature algorithm (for instance, checking of certificate revocation lists).
+
+====== AGD
+
+There are no AGD evaluation activities for this component.
+
+====== Test
+
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
+
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
+
+* Modulus size (RSA)
+* Curve (ECDSA, EC-KCDSA, EdDSA)
+* Group size (DSA, KCDSA)
+* Private key size (LMS, HSS, XMSS, XMSS^MT^)
+* Parameter set (ML-DSA, HashML-DSA)
+* Padding scheme (RSA)
+* Hash or XOF algorithm
+
+Each test group shall consist of at least 6 test cases meeting the following requirements:
+
+* Test cases shall be generated according to the parameter configuration of the test group.
+* Each test case shall consist of an arbitrary public key, an arbitrary input message, and a signature. For 5 of the 6 test cases, the public key or input message shall be modified such that the signature is invalid.
+* A representative sample of the domain of supported message sizes shall be tested.
+
+For each test case in each test group, the evaluator shall verify that the TSF correctly reports the validity of the signature for the input message.
+
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
+
+===== FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
+
+====== TSS
+
+The evaluator shall check that the TSS includes a description of encryption functions used for symmetric key encryption. The evaluator should check that this description of the selected encryption function includes the key sizes and modes of operations as specified in the [DSC cPP] Table "Symmetric-Key Cryptography"
+
+The evaluator shall check that the TSS describes the means by which the TOE satisfies constraints on algorithm parameters included in the selections made for 'cryptographic algorithm' and 'list of standards'.
+
+====== AGD
+
+If the product supports multiple modes, the evaluator shall examine the vendor's documentation to determine that the method of choosing a specific mode/key size by the end user is described.
+
+====== Test
+
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
+
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
+
+* Mode of operation
+* Algorithm direction (encrypt/decrypt)
+* Key size
+
+For each test group, the evaluator shall generate at least 50 test cases meeting the following requirements:
+
+* Each test case shall consist of an arbitrary key, an arbitrary input plaintext/ciphertext, and its corresponding ciphertext/plaintext.
+* Depending on the mode of operation, an initialization vector, counter, or tweak value shall also be included in the test case.
+* A representative sample of the domain of supported input plaintext/ciphertext sizes shall be tested.
+* A representative sample of the domain of supported initialization vector sizes shall be tested (CBC, CFB, OFB mode).
+* A representative sample of the domain of supported counter sizes shall be tested (CTR mode).
+* A representative sample of the domain of supported tweak sizes shall be tested (XTS modes).
+
+For each test case in each test group, the evaluator shall verify that the TSF generates the correct ciphertext/plaintext.
+
+Additionally, each test group corresponding to a CBC, CFB, or OFB mode of operation shall contain least one Monte Carlo Test (MCT) test case, consisting of an arbitrary key, an arbitrary initialization vector, an arbitrary input plaintext/ciphertext, and a list of 100 corresponding ciphertexts/plaintexts.
+
+For encryption with a 128-bit block size, the MCT is defined as follows:
+----
+for i = 1 through 100
+    output key
+    output iv
+    output pt
+    encrypt_init(key, iv)
+    ct[1] = encrypt(pt)
+    pt = iv
+    for j = 2 through 1000
+        ct[j] = encrypt(pt)
+        pt = ct[j - 1]
+    output ct[j]
+    if key_len == block_size
+        key = key xor ct[j]
+    if 2 * key_len == 3 * block_size
+        key = key xor (lsb(ct[j - 1], block_size / 2) || ct[j])
+    if key_len == 2 * block_size
+        key = key xor (ct[j - 1] || ct[j])
+    iv = ct[j]
+    pt = ct[j - 1]
+----
+
+For decryption with a 128-bit block size, the MCT is defined as follows:
+----
+for i = 1 through 100
+    output key
+    output iv
+    output ct
+    decrypt_init(key, iv)
+    pt[1] = encrypt(ct)
+    ct = iv
+    for j = 2 through 1000
+        pt[j] = encrypt(ct)
+        ct = pt[j - 1]
+    output pt[j]
+    if key_len == block_size
+        key = key xor pt[j]
+    if 2 * key_len == 3 * block_size
+        key = key xor (lsb(pt[j - 1], block_size / 2) || pt[j])
+    if key_len == 2 * block_size
+        key = key xor (pt[j - 1] || pt[j])
+    iv = pt[j]
+    ct = pt[j - 1]
+----
+
+For each MCT test case in each test group, the evaluator shall verify that the TSF generates the correct 100 ciphertexts/plaintexts.
+
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
+
+====== KMD
+
+The evaluator shall examine the KMD to ensure that the points at which symmetric key encryption and decryption occurs are described, and that the complete data path for symmetric key encryption is described. The evaluator checks that this description is consistent with the relevant parts of the TSS.
+
+Assessment of the complete data path for symmetric key encryption includes confirming that the KMD describes the data flow from the device's host interface to the device's non-volatile memory storing the data, and gives information enabling the user data datapath to be distinguished from those situations in which data bypasses the data encryption engine (e.g. read-write operations to an unencrypted Master Boot Record area). The evaluator shall ensure that the documentation of the data path is detailed enough that it thoroughly describes the parts of the TOE that the data passes through (e.g. different memory types, processors and co-processors), its encryption state (i.e. encrypted or unencrypted) in each part, and any places where the data is stored. For example, any caching or buffering of the data should be identified and distinguished from the final destination in non-volatile memory (the latter represents the location from which the host will expect to retrieve the data in future).
+
+If support for AES-CTR is claimed and the counter value source is internal to the TOE, the evaluator shall verify that the KMD describes the internal counter mechanism used to ensure that it provides unique counter block values.
 
 ===== FCS_COP.1/XOF Extendable-Output Function
 

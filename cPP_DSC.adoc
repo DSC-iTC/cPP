@@ -679,453 +679,6 @@ _The selection for destruction of data in non-volatile memory includes block era
 +
 _Some selections allow assignment of "some value that does not contain any CSP." This means that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG requirements, and not being any of the particular values listed as other selection options. The point of the phrase "does not contain any sensitive data" is to ensure that the overwritten data is carefully selected, and not taken from a general pool that might contain data that itself requires confidentiality protection._
 
-==== FCS_COP.1/Hash Cryptographic Operation - Hashing
-
-FCS_COP.1/Hash Cryptographic Operation - Hashing
-
-FCS_COP.1.1/Hash:: The TSF shall perform [_cryptographic hashing_] in accordance with a specified cryptographic algorithm [*selection*: _SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, SHA-512/256, SHA3-224, SHA3-256, SHA3-384, SHA3-512_] that meets the following: [*selection*: _ISO/IEC 10118-3:2018 [SHA, SHA3], FIPS PUB 180-4 [SHA], FIPS PUB 202 [SHA3]_].
-
-_Application Note {counter:remark_count}_:: _SHA-1 is allowed in cases where collision resistance is not required. SHA-1 may be used for the following applications: generating and verifying hash-based message authentication codes (HMACs), key derivation functions (KDFs), and random bit/number generation. SHA-1 may also be used for verifying old digital signatures and time stamps, if this is explicitly allowed by the application domain._
-
-==== FCS_COP.1/KeyedHash Cryptographic Operation - Keyed Hash
-
-FCS_COP.1/KeyedHash Cryptographic Operation - Keyed Hash
-
-FCS_COP.1.1/KeyedHash:: The TSF shall perform [_keyed hash message authentication_] in accordance with a specified cryptographic algorithm [*selection*: _keyed hash algorithm_] and cryptographic key sizes [*selection*: _cryptographic key size_] that meet the following: [*selection*: _list of standards_].
-
-The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/KeyedHash.
-
-.Allowed choices for FCS_COP.1/KeyedHash
-[[KeyedHashAlgorithms]]
-[cols=".^1,.^1,.^3",options=header]
-|===
-
-|Keyed Hash Algorithm
-|Cryptographic Key Sizes
-|List of Standards
-
-|HMAC-SHA-1
-|[selection: (ISO, FIPS) 160, (FIPS) 128] bits
-|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"); FIPS PUB 198-1]
-
-|HMAC-SHA-224
-|[selection: (ISO, FIPS) 224, (FIPS) 192, 128] bits
-|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"); FIPS PUB 198-1]
-
-|HMAC-SHA-256
-|[selection: (ISO, FIPS) 256, (FIPS) 192, 128] bits
-|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"); FIPS PUB 198-1]
-
-|HMAC-SHA-384
-|[selection: (ISO, FIPS) 384, (FIPS) 256, 192, 128] bits
-|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"); FIPS PUB 198-1]
-
-|HMAC-SHA-512
-|[selection: (ISO, FIPS) 512, (FIPS) 384, 256, 192, 128] bits
-|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"); FIPS PUB 198-1]
-
-|KMAC128
-|128 bits
-|[selection: ISO/IEC 9797-2:2021 (Section 9 "MAC Algorithm 4"); NIST SP 800-185 (Section 4 "KMAC")]
-
-|KMAC256
-|256 bits
-|[selection: ISO/IEC 9797-2:2021 (Section 9 "MAC Algorithm 4"); NIST SP 800-185 (Section 4 "KMAC")]
-
-|KMACXOF128
-|[assignment: integer 256 <= Lk < 2^2040^]
-|[selection: ISO/IEC 9797-2:2021 (Section 9 "MAC Algorithm 4"); NIST SP 800-185 (Section 4 "KMAC")]
-
-|KMACXOF256
-|[assignment: integer 256 <= Lk < 2^2040^]
-|[selection: ISO/IEC 9797-2:2021 (Section 9 "MAC Algorithm 4"); NIST SP 800-185 (Section 4 "KMAC")]
-
-|===
-
-_Application Note {counter:remark_count}_:: _The HMAC minimum key sizes in the table are specified in ISO/IEC 9797-2:2021, which requires that the minimum key size be equal to the digest size. The FIPS standard specifies no minimum or maximum key sizes, so if FIPS PUB 198-1 is selected, larger or smaller key sizes may be used. This is indicted by the parenthesized annotations in the Cryptographic Key Sizes column._
-
-==== FCS_COP.1/SigGen Cryptographic Operation - Signature Generation
-
-FCS_COP.1/SigGen Cryptographic Operation - Signature Generation
-
-FCS_COP.1.1/SigGen:: The TSF shall perform [_digital signature generation_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
-
-The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/SigGen.
-
-.Allowed choices for FCS_COP.1/SigGen
-[[SigGenOps]]
-[cols=".^1,.^2,.^2,.^2",options=header]
-|===
-
-|Identifier
-|Cryptographic Algorithm
-|Cryptographic Algorithm Parameters
-|List of Standards
-
-|RSA-PKCS
-|RSASSA-PKCS1-v1_5
-|Modulus of size [selection: 2048, 3072, 4096] bits, hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512]
-|RFC 8017 (Section 8.2) [PKCS #1 v2.2]
-
-FIPS PUB 186-5 (Section 5.4) [RSASSA-PKCS1-v1_5]
-
-|RSA-PSS
-|RSASSA-PSS
-|Modulus of size [selection: 2048, 3072, 4096] bits, hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE128 with 256-bit output, SHAKE256 with 512-bit output]
-|RFC 8017 (Section 8.1) [PKCS #1 v2.2]
-
-FIPS PUB 186-5 (Section 5.4) [RSASSA-PSS]
-
-|ECDSA
-|ECDSA
-|Elliptic Curve [selection: P-256, brainpoolP256r1, P-384, brainpoolP384r1, P-521, brainpoolP512r1], per-message secret number generation [selection: extra random bits, rejection sampling, deterministic] and hash or XOF function using [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE128 with 256-bit output, SHAKE256 with 512-bit output]
-|[selection: ISO/IEC 14888-3:2018 (Subclause 6.6), FIPS PUB 186-5 (Sections 6.3.1, 6.4.1)] [ECDSA]
-
-[selection: RFC 5639 (Section 3) [Brainpool Curves], NIST SP-800 186 (Section 4) [NIST Curves]]
-
-|KCDSA
-|KCDSA
-|hash function using [selection: SHA-224, SHA-256, SHA-384, SHA-512]
-|ISO/IEC 14888-3:2018 (Subclause 6.3) [KCDSA]
-
-|EC-KCDSA
-|EC-KCDSA 
-|Elliptic Curve [selection: P-224, P-256, B-233, B-283, K-233, K-283] using hash [selection: SHA-224, SHA-256, SHA-384, SHA-512]
-|ISO/IEC 14888-3:2018 (Subclause 6.7) [EC-KCDSA]
-
-NIST SP 800-186 (Section 3) [NIST Curves]
-
-|EdDSA
-|Edwards-Curve Digital Signature Algorithm
-|Domain parameters approved for elliptic curves [selection: Edwards25519, Edwards448]
-|NIST FIPS PUB 186-5 (Section 7.6) [EdDSA]
-
-RFC 8032 [Edwards Curves]
-
-|LMS
-|LMS
-|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], Winternitz parameter = [selection: 1, 2, 4, 8], and tree height = [selection: 5, 10, 15, 20, 25]
-|RFC 8554 [LMS]
-
-NIST SP 800-208 [parameters]
-
-|HSS
-|Multitree version of LMS
-|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], Winternitz parameter = [selection: 1, 2, 4, 8], tree height = [selection: 5, 10, 15, 20, 25], and number of levels = [selection: 1, 2, 3, 4, 5, 6, 7, 8]
-|RFC 8554 [HSS]
-
-NIST SP 800-208 [parameters]
-
-|XMSS
-|XMSS
-|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], tree height = [selection: 10, 16, 20]
-|RFC 8391 [XMSS]
-
-NIST SP 800-208 [parameters]
-
-|XMSS^MT^
-|Multitree version of XMSS
-|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], (total tree height, number of levels) = [selection: (20, 2), (20, 4), (40, 2), (40, 4), (40, 8), (60, 3), (60, 6), (60, 12)]
-|RFC 8391 [XMSS^MT^]
-
-NIST SP 800-208 [parameters]
-
-|ML-DSA
-|ML-DSA.Sign
-|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87]
-|NIST FIPS 204 (Section 5.2)
-
-|HashML-DSA
-|HashML-DSA.Sign
-|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87] and hash function [selection: SHA-256, SHA-512/256, SHA3-256, SHAKE128, SHA-384, SHA3-384, SHA-512, SHA3-512, SHAKE256]
-|NIST FIPS 204 (Section 5.4)
-
-|===
-
-_Application Note {counter:remark_count}_:: _The dependency on FCS_OTV_EXT.1 is needed only for signature schemes that require random bits, such as ECDSA, KCDSA, or EC-KCDSA._
-+
-_For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
-+
-_For HSS and XMSS^MT^ the same hash or XOF function shall be used at each level. Within each level, the same Winternitz parameter shall be used but can be different for each level. For HSS, within each level, the same tree height shall be used but can be different for each level._
-+
-_Per Section 5.4 of NIST FIPS 204, the collision strength of the hash function selected for the pre-hash of HashML-DSA must be at least the strength of the signature algorithm._
-
-==== FCS_COP.1/SigVer Cryptographic Operation - Signature Verification
-
-FCS_COP.1/SigVer Cryptographic Operation - Signature Verification
-
-FCS_COP.1.1/SigVer:: The TSF shall perform [_digital signature verification_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
-
-
-The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/SigVer.
-
-.Allowed choices for FCS_COP.1/SigVer
-[[SigVerOps]]
-[cols=".^1,.^2,.^2,.^2",options=header]
-|===
-
-|Identifier
-|Cryptographic Algorithm
-|Cryptographic Algorithm Parameters
-|List of Standards
-
-|RSA-PKCS
-|RSASSA-PKCS1-v1_5
-|Modulus of size [selection: 2048, 3072, 4096] bits, hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512]
-|RFC 8017 (Section 8.2) [PKCS #1 v2.2]
-
-FIPS PUB 186-5 (Section 5.4) [RSASSA-PKCS1-v1_5]
-
-|RSA-PSS
-|RSASSA-PSS
-|Modulus of size [selection: 2048, 3072, 4096] bits, hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE128 with 256-bit output, SHAKE256 with 512-bit output]
-|RFC 8017 (Section 8.1) [PKCS #1 v2.2]
-
-FIPS PUB 186-5 (Section 5.4) [RSASSA-PSS]
-
-|DSA
-|DSA
-|Domain parameters for (L, N) = [selection: (2048, 224), (2048, 256), (3072, 256)] bits
-|FIPS PUB 186-4 (Section 4.7) [DSA Signature Verification]
-
-|ECDSA
-|ECDSA
-|Elliptic Curve [selection: P-256, brainpoolP256r1, P-384, brainpoolP384r1, P-521, brainpoolP512r1] using hash or XOF function using [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE128 with 256-bit output, SHAKE256 with 512-bit output]
-|[selection: ISO/IEC 14888-3:2018 (Subclause 6.6), FIPS PUB 186-5 (Section 6.4.2)] [ECDSA]
-
-[selection: RFC 5639 (Section 3) [Brainpool Curves], NIST SP-800 186 (Section 4) [NIST Curves]]
-
-|KCDSA
-|KCDSA
-|hash function using [selection: SHA-224, SHA-256, SHA-384, SHA-512]
-|ISO/IEC 14888-3:2018 (Subclause 6.3) [KCDSA]
-
-|EC-KCDSA
-|EC-KCDSA
-|Elliptic Curve [selection: P-224, P-256, B-233, B-283, K-233, K-283] using hash [selection: SHA-224, SHA-256, SHA-384, SHA-512]
-|ISO/IEC 14888-3:2018 (Subclause 6.7) [EC-KCDSA]
-
-NIST SP 800-186 (Section 3) [NIST Curves]
-
-|EdDSA
-|Edwards-Curve Digital Signature Algorithm
-|Domain parameters approved for elliptic curves [selection: Edwards25519, Edwards448]
-|NIST FIPS PUB 186-5 (Section 7.7) [EdDSA]
-
-RFC 8032 [Edwards Curves]
-
-|LMS
-|LMS
-|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], Winternitz parameter = [selection: 1, 2, 4, 8], and tree height = [selection: 5, 10, 15, 20, 25]
-|RFC 8554 [LMS]
-
-NIST SP 800-208 [parameters]
-
-|HSS
-|Multitree version of LMS
-|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], Winternitz parameter = [selection: 1, 2, 4, 8], tree height = [selection: 5, 10, 15, 20, 25], and number of levels = [selection: 1, 2, 3, 4, 5, 6, 7, 8]
-|RFC 8554 [HSS]
-
-NIST SP 800-208 [parameters]
-
-|XMSS
-|XMSS
-|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], tree height = [selection: 10, 16, 20]
-|RFC 8391 [XMSS]
-
-NIST SP 800-208 [parameters]
-
-|XMSS^MT^
-|Multitree version of XMSS
-|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], (total tree height, number of levels) = [selection: (20, 2), (20, 4), (40, 2), (40, 4), (40, 8), (60, 3), (60, 6), (60, 12)]
-|RFC 8391 [XMSS^MT^]
-
-NIST SP 800-208 [parameters]
-
-|ML-DSA
-|ML-DSA.Verify
-|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87]
-|NIST FIPS 204 (Section 5.3)
-
-|HashML-DSA
-|HashML-DSA.Verify
-|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87] and hash function [selection: SHA-256, SHA-512/256, SHA3-256, SHAKE128, SHA-384, SHA3-384, SHA-512, SHA3-512, SHAKE256]
-|NIST FIPS 204 (Section 5.4)
-
-|===
-
-_Application Note {counter:remark_count}_:: _DSA may only be used to verify signatures generated prior to the implementation date of FIPS 186-5._
-+
-_The TOE may contain a public key which is integrity protected (e.g., in hardware), in which case the FDP_ITC.1 and FDP_ITC.2 dependencies do not apply. In this case, no dependencies may be chosen._
-+
-_For signature verifications, private keys are not necessary, so there are no dependencies required for generating or destroying cryptographic keys._
-+
-_For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
-+
-_For HSS and XMSS^MT^ the same hash or XOF function shall be used at each level. Within each level, the same Winternitz parameter shall be used but can be different for each level. For HSS, within each level, the same tree height shall be used but can be different for each level._
-+
-_Per Section 5.4 of NIST FIPS 204, the collision strength of the hash function selected for the pre-hash of HashML-DSA must be at least the strength of the signature algorithm._
-
-==== FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
-
-FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
-
-FCS_COP.1.1/SKC:: The TSF shall perform [_symmetric-key encryption/decryption_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
-
-The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/SKC.
-
-.Allowed choices for FCS_COP.1/SKC
-[[SymmetricKeyCrypto]]
-[cols=".^1,.^2,.^2,.^2",options=header]
-|===
-
-|Identifier
-|Cryptographic Algorithm
-|Cryptographic Key Sizes
-|List of Standards
-
-|AES-CBC
-|AES in CBC mode with IVs generated according to FCS_OTV_EXT.1
-|[selection: 128, 192, 256] bits
-|[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
-
-[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
-
-|XTS-AES
-|AES in XTS mode with tweak values generated according to FCS_OTV_EXT.1
-|[selection: 256, 512] bits
-|[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
-
-[selection: IEEE Std. 1619-2018, NIST SP 800-38E] [XTS]
-
-|AES-CTR
-|AES in CTR mode with counter values generated according to FCS_OTV_EXT.1
-|[selection: 128, 192, 256] bits
-|[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
-
-[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
-
-|CAM-CBC
-|Camellia in CBC mode with IVs generated according to FCS_OTV_EXT.1
-|[selection: 128, 192, 256] bits
-|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
-
-[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
-
-|CAM-CFB
-|Camellia in CFB mode with IVs generated according to FCS_OTV_EXT.1
-|[selection: 128, 192, 256] bits
-|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
-
-[selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
-
-|CAM-OFB
-|Camellia in OFB mode with IVs generated according to FCS_OTV_EXT.1
-|[selection: 128, 192, 256] bits
-|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
-
-[selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [CFB]
-
-|XTS-CAM
-|Camellia in XTS mode with tweak values generated according to FCS_OTV_EXT.1
-|[selection: 256, 512] bits
-|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
-
-[selection: IEEE Std. 1619-2018, NIST SP 800-38E] [XTS]
-
-|CAM-CTR
-|Camellia in CTR mode with counter values generated according to FCS_OTV_EXT.1
-|[selection: 128, 192, 256] bits
-|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
-
-[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
-
-|SEED-CBC
-|SEED in CBC mode with IVs generated according to FCS_OTV_EXT.1
-|128 bits
-|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
-
-[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
-
-|SEED-CFB
-|SEED in CFB mode with IVs generated according to FCS_OTV_EXT.1
-|128 bits
-|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
-
-[selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
-
-|SEED-OFB
-|SEED in OFB mode with IVs generated according to FCS_OTV_EXT.1
-|128 bits
-|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
-
-[selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
-
-|SEED-CTR
-|SEED in CTR mode with counter values generated according to FCS_OTV_EXT.1
-|128 bits
-|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
-
-[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
-
-|HIGHT-CBC
-|HIGHT in CBC mode with IVs generated according to FCS_OTV_EXT.1
-|128 bits
-|ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
-
-[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
-
-|HIGHT-CFB
-|HIGHT in CFB mode with IVs generated according to FCS_OTV_EXT.1
-|128 bits
-|ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
-
-[selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
-
-|HIGHT-OFB
-|HIGHT in OFB mode with IVs generated according to FCS_OTV_EXT.1
-|128 bits
-|ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
-
-[selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
-
-|HIGHT-CTR
-|HIGHT in CTR mode with counter values generated according to FCS_OTV_EXT.1
-|128 bits
-|ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
-
-[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
-
-|LEA-CBC
-|LEA in CBC mode with IVs generated according to FCS_OTV_EXT.1
-|[selection: 128, 192, 256] bits
-|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
-
-[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
-
-|LEA-CFB
-|LEA in CFB mode with IVs generated according to FCS_OTV_EXT.1
-|[selection: 128, 192, 256] bits
-|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
-
-[selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
-
-|LEA-OFB
-|LEA in OFB mode with IVs generated according to FCS_OTV_EXT.1
-|[selection: 128, 192, 256] bits
-|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
-
-[selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
-
-|LEA-CTR
-|LEA in CTR mode with counter values generated according to FCS_OTV_EXT.1
-|[selection: 128, 192, 256] bits
-|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
-
-[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
-
-|===
-
 ==== FCS_RBG.1 Random Bit Generation (RBG)
 
 FCS_RBG.1 Random Bit Generation (RBG)
@@ -1674,7 +1227,7 @@ _The SDO.AuthData attribute is data that is required in order to validate author
 +
 _The SDO.Reauth attribute for an individual SDO specifies the conditions where access to the SDO will require reauthorization to continue access to the SDO. Examples of TOE-specified events might be explicit revocation of authorization by a user, expiry of a time interval, or completion of a fixed number of uses since the last authorization. The re-authorization conditions are used in FIA_UAU.6 and FDP_ACF.1. These determine whether a single authorization by the SDO owner will allow any number of uses of the SDO until the end of the user's session (value 'none'), or whether each use of the SDO must be individually authorized (value 'each access'), or whether re-authorization must happen each time one of the TOE-specified events occurs._
 +
-_The SDO.Conf attribute indicates which SDEs, if any, the TOE encrypts when not in operational use. The TOE should use the methods in FCS_COP.1/AEAD, FCS_COP.1/SKC, FCS_STG_EXT.1, or FCS_CKM_EXT.3 to protect the SDEs in this list._
+_The SDO.Conf attribute indicates which SDEs, if any, the TOE encrypts when not in operational use. The TOE should use the methods in FCS_COP.1/AEAD, FCS_COP.1/KeyEncap, FCS_COP.1/KeyWrap, FCS_COP.1/SKC, FCS_STG_EXT.1, or FCS_CKM_EXT.3 to protect the SDEs in this list._
 +
 _The SDO.Integrity attribute includes evidence that the TSF can use to protect and verify the integrity of the SDO._
 +
@@ -1940,15 +1493,21 @@ The following rationale provides justification for each security problem definit
 |FDP_FRS_EXT.1 (selection-based)
 |This requirement ensures that all user-specific SDOs are purged upon factory reset and may indicate any factory default SDOs that are reset to their initial values.
 
-.12+|T.SDE_TRANSIT_COMPROMISE
+.13+|T.SDE_TRANSIT_COMPROMISE
 |FCS_CKM.6
 |This requirement ensures that key data is destroyed in a manner that prevents its future recovery.
 
 |FCS_COP.1/AEAD (selection-based)
-|This requirement provides a cryptographic operation for maintaining the confidentiality and integrity of SDOs.
+|This requirement provides a cryptographic operation for maintaining the confidentiality and integrity of SDEs and SDOs.
 
-|FCS_COP.1/SKC
-|This requirement provides a cryptographic operation for maintaining the confidentiality of SDOs.
+|FCS_COP.1/KeyEncap (selection-based)
+|This requirement provides a cryptographic operation for maintaining the confidentiality of SDEs.
+
+|FCS_COP.1/KeyWrap (selection-based)
+|This requirement provides a cryptographic operation for maintaining the confidentiality of SDEs.
+
+|FCS_COP.1/SKC (selection-based)
+|This requirement provides a cryptographic operation for maintaining the confidentiality of SDEs.
 
 |FDP_ETC_EXT.2
 |This requirement ensures that the confidentiality of protected data propagated outside the TOE is maintained.
@@ -1974,21 +1533,28 @@ The following rationale provides justification for each security problem definit
 |FTP_ITE_EXT.1 (selection-based)
 |This requirement defines the cryptographic method used to transfer data between the TOE and external entities.
 
+.1+|T.SDE_TRANSIT_COMPROMISE
 |FTP_ITP_EXT.1 (selection-based)
 |This requirement defines a physically protected channel that the TSF can use to securely parse data being imported into it.
 
-.9+|T.WEAK_ELEMENT_BINDING
-|FCS_COP.1/Hash
+.10+|T.WEAK_ELEMENT_BINDING
+|FCS_COP.1/CMAC (selection-based)
+|This requirement provides a cryptographic operation for asserting the authenticity of SDOs.
+
+|FCS_COP.1/Hash (selection-based)
 |This requirement provides a cryptographic operation for asserting the integrity of SDOs.
 
-|FCS_COP.1/KeyedHash
+|FCS_COP.1/KeyedHash (selection-based)
 |This requirement provides a cryptographic operation for asserting the authenticity of SDOs.
 
-|FCS_COP.1/SigGen
+|FCS_COP.1/SigGen (selection-based)
 |This requirement provides a cryptographic operation for preserving the authenticity of SDOs.
 
-|FCS_COP.1/SigVer
+|FCS_COP.1/SigVer (selection-based)
 |This requirement provides a cryptographic operation for asserting the authenticity of SDOs.
+
+|FCS_COP.1/XOF (selection-based)
+|This requirement provides a cryptographic operation for asserting the integrity of SDOs.
 
 |FDP_SDI.2
 |This requirement ensures that SDOs are monitored for integrity violations.
@@ -1998,9 +1564,6 @@ The following rationale provides justification for each security problem definit
 
 |FPT_ROT_EXT.2 (selection-based)
 |This requirement ensures that the TSF can measure the integrity of its stored data.
-
-|FCS_COP.1/CMAC (selection-based)
-|This requirement provides a cryptographic operation for asserting the authenticity of SDOs.
 
 |FPT_FLS.1/FW (selection-based)
 |This requirement requires the TSF to take action to preserve its secure operation if any violations to its firmware integrity are detected.
@@ -2040,43 +1603,67 @@ The following rationale provides justification for each security problem definit
 |FPT_RPL.1/FW (selection-based)
 |This requirement ensures that the TSF will not permit loading earlier versions of its firmware.
 
-.11+|T.WEAK_CRYPTO
+.18+|T.WEAK_CRYPTO
 |FCS_CKM.1
 |This requirement specifies the supported methods of key generation.
+
+|FCS_CKM.1/AKG (selection-based)
+|This requirement ensures the generation of strong asymmetric keys.
+
+|FCS_CKM.1/SKG (selection-based)
+|This requirement ensures the generation of strong symmetric keys.
 
 |FCS_CKM.2
 |This requirement specifies the supported methods of key distribution.
 
+|FCS_CKM_EXT.3 (selection-based)
+|This requirement ensures the use of strong methods to perform key encapsulation, key wrawpping, or key encryption when accessing keys.
+
+|FCS_CKM.5 (selection-based)
+|This requirement ensures the use of strong mechanisms to perform key derivation.
+
 |FCS_CKM_EXT.7 
 |This requirement ensures the use of strong key agreement mechanisms.
+
+|FCS_CKM_EXT.8 (selection-based)
+|This requirement ensures the use of strong methods to derive keys from password data.
 
 |FCS_COP.1/AEAD (selection-based)
 |This requirement ensures the use of strong methods to encrypt and authenticate sensitive data.
 
-|FCS_COP.1/Hash 
+|FCS_COP.1/CMAC (selection-based)
+|This requirement ensures the use of strong CMAC mechanisms.
+
+|FCS_COP.1/Hash (selection-based)
 |This requirement ensures the use of strong hash mechanisms.
 
-|FCS_COP.1/KeyedHash 
+|FCS_COP.1/KeyedHash (selection-based)
 |This requirement ensures the use of strong HMAC mechanisms.
 
-|FCS_COP.1/SigGen 
-|This requirement ensures the use of strong digital signature services.
+|FCS_COP.1/KeyEncap (selection-based)
+|This requirement ensures the use of strong methods to perform key encapsulation.
 
-|FCS_COP.1/SigVer 
-|This requirement ensures the use of strong digital signature services.
+|FCS_COP.1/KeyWrap (selection-based)
+|This requirement ensures the use of strong methods to perform key wrapping.
 
-|FCS_COP.1/SKC 
+|FCS_COP.1/SigGen (selection-based)
+|This requirement ensures the use of strong digital signature mechanisms.
+
+|FCS_COP.1/SigVer (selection-based)
+|This requirement ensures the use of strong digital signature mechanisms.
+
+|FCS_COP.1/SKC (selection-based)
 |This requirement ensures the use of strong methods to encrypt sensitive data.
 
-|FCS_RBG.1
-|This requirement ensures the use of strong random bit generation mechanisms.
+|FCS_COP.1/XOF (selection-based)
+|This requirement ensures the use of strong methods to perform XOF.
 
+.8+|T.WEAK_CRYPTO
 |FCS_OTV_EXT.1
 |This requirement ensures that one-time values used by the TOE do not negatively impact key strength.
 
-.10+|T.WEAK_CRYPTO
-|FPT_STM_EXT.1 
-|This requirement provides reliable system time services that may be used as inputs to cryptographic functions.
+|FCS_RBG.1
+|This requirement ensures the use of strong random bit generation mechanisms.
 
 |FCS_RBG.2 (optional)
 |This requirement provides an external interface to seed the random bit generator that enforces strong cryptography by requiring a minimum amount of input.
@@ -2093,33 +1680,8 @@ The following rationale provides justification for each security problem definit
 |FCS_RBG.6 (optional)
 |This requirement provides an interface to access RBG output so that the TSF can support the use of strong cryptography in its operational environment.
 
-|FCS_CKM.1/AKG (selection-based)
-|This requirement ensures the generation of strong asymmetric keys.
-
-|FCS_CKM.1/SKG (selection-based)
-|This requirement ensures the generation of strong symmetric keys.
-
-|FCS_CKM_EXT.3 (selection-based)
-|This requirement ensures the use of strong methods to perform key encapsulation, key wrawpping, or key encryption when accessing keys.
-
-|FCS_CKM.5 (selection-based)
-|This requirement ensures the use of strong mechanisms to perform key derivation.
-
-.5+|T.WEAK_CRYPTO
-|FCS_COP.1/CMAC (selection-based)
-|This requirement ensures the use of strong methods to perform CMAC.
-
-|FCS_COP.1/KeyEncap (selection-based)
-|This requirement ensures the use of strong methods to perform key encapsulation.
-
-|FCS_COP.1/KeyWrap (selection-based)
-|This requirement ensures the use of strong methods to perform key wrapping.
-
-|FCS_COP.1/XOF (selection-based)
-|This requirement ensures the use of strong methods to perform XOF.
-
-|FCS_CKM_EXT.8 (selection-based)
-|This requirement ensures the use of strong methods to derive keys from password data.
+|FPT_STM_EXT.1 
+|This requirement provides reliable system time services that may be used as inputs to cryptographic functions.
 
 |===
 
@@ -2750,6 +2312,71 @@ The following table provides the allowed choices for completion of the selection
 
 |===
 
+==== FCS_COP.1/Hash Cryptographic Operation - Hashing
+
+FCS_COP.1/Hash Cryptographic Operation - Hashing
+
+FCS_COP.1.1/Hash:: The TSF shall perform [_cryptographic hashing_] in accordance with a specified cryptographic algorithm [*selection*: _SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, SHA-512/256, SHA3-224, SHA3-256, SHA3-384, SHA3-512_] that meets the following: [*selection*: _ISO/IEC 10118-3:2018 [SHA, SHA3], FIPS PUB 180-4 [SHA], FIPS PUB 202 [SHA3]_].
+
+_Application Note {counter:remark_count}_:: _SHA-1 is allowed in cases where collision resistance is not required. SHA-1 may be used for the following applications: generating and verifying hash-based message authentication codes (HMACs), key derivation functions (KDFs), and random bit/number generation. SHA-1 may also be used for verifying old digital signatures and time stamps, if this is explicitly allowed by the application domain._
+
+==== FCS_COP.1/KeyedHash Cryptographic Operation - Keyed Hash
+
+FCS_COP.1/KeyedHash Cryptographic Operation - Keyed Hash
+
+FCS_COP.1.1/KeyedHash:: The TSF shall perform [_keyed hash message authentication_] in accordance with a specified cryptographic algorithm [*selection*: _keyed hash algorithm_] and cryptographic key sizes [*selection*: _cryptographic key size_] that meet the following: [*selection*: _list of standards_].
+
+The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/KeyedHash.
+
+.Allowed choices for FCS_COP.1/KeyedHash
+[[KeyedHashAlgorithms]]
+[cols=".^1,.^1,.^3",options=header]
+|===
+
+|Keyed Hash Algorithm
+|Cryptographic Key Sizes
+|List of Standards
+
+|HMAC-SHA-1
+|[selection: (ISO, FIPS) 160, (FIPS) 128] bits
+|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"); FIPS PUB 198-1]
+
+|HMAC-SHA-224
+|[selection: (ISO, FIPS) 224, (FIPS) 192, 128] bits
+|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"); FIPS PUB 198-1]
+
+|HMAC-SHA-256
+|[selection: (ISO, FIPS) 256, (FIPS) 192, 128] bits
+|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"); FIPS PUB 198-1]
+
+|HMAC-SHA-384
+|[selection: (ISO, FIPS) 384, (FIPS) 256, 192, 128] bits
+|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"); FIPS PUB 198-1]
+
+|HMAC-SHA-512
+|[selection: (ISO, FIPS) 512, (FIPS) 384, 256, 192, 128] bits
+|[selection: ISO/IEC 9797-2:2021 (Section 7 "MAC Algorithm 2"); FIPS PUB 198-1]
+
+|KMAC128
+|128 bits
+|[selection: ISO/IEC 9797-2:2021 (Section 9 "MAC Algorithm 4"); NIST SP 800-185 (Section 4 "KMAC")]
+
+|KMAC256
+|256 bits
+|[selection: ISO/IEC 9797-2:2021 (Section 9 "MAC Algorithm 4"); NIST SP 800-185 (Section 4 "KMAC")]
+
+|KMACXOF128
+|[assignment: integer 256 <= Lk < 2^2040^]
+|[selection: ISO/IEC 9797-2:2021 (Section 9 "MAC Algorithm 4"); NIST SP 800-185 (Section 4 "KMAC")]
+
+|KMACXOF256
+|[assignment: integer 256 <= Lk < 2^2040^]
+|[selection: ISO/IEC 9797-2:2021 (Section 9 "MAC Algorithm 4"); NIST SP 800-185 (Section 4 "KMAC")]
+
+|===
+
+_Application Note {counter:remark_count}_:: _The HMAC minimum key sizes in the table are specified in ISO/IEC 9797-2:2021, which requires that the minimum key size be equal to the digest size. The FIPS standard specifies no minimum or maximum key sizes, so if FIPS PUB 198-1 is selected, larger or smaller key sizes may be used. This is indicted by the parenthesized annotations in the Cryptographic Key Sizes column._
+
 ==== FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
 
 FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
@@ -2764,7 +2391,7 @@ The following table provides the allowed choices for completion of the selection
 |===
 
 |Identifier
-|Cryptographic Algorithm 
+|Cryptographic Algorithm
 |Cryptographic Algorithm Parameters
 |List of Standards
 
@@ -2822,6 +2449,388 @@ FCS_COP.1.1/KeyWrap:: The TSF shall perform [_key wrapping_] in accordance with 
 IV length must be equal to 96 bits; the deterministic IV construction method [SP800-38D, Section 8.2.1] must be used; the MAC length t must be one of the values 96, 104, 112, 120, and 128 bits.
 |[selection: (AES, CAM, SEED, LEA) 128, (AES, CAM, LEA) 192, (AES, CAM, LEA) 256] bits
 |[selection: ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38C] [CCM mode]
+
+|===
+
+==== FCS_COP.1/SigGen Cryptographic Operation - Signature Generation
+
+FCS_COP.1/SigGen Cryptographic Operation - Signature Generation
+
+FCS_COP.1.1/SigGen:: The TSF shall perform [_digital signature generation_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
+
+The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/SigGen.
+
+.Allowed choices for FCS_COP.1/SigGen
+[[SigGenOps]]
+[cols=".^1,.^2,.^2,.^2",options=header]
+|===
+
+|Identifier
+|Cryptographic Algorithm
+|Cryptographic Algorithm Parameters
+|List of Standards
+
+|RSA-PKCS
+|RSASSA-PKCS1-v1_5
+|Modulus of size [selection: 2048, 3072, 4096] bits, hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512]
+|RFC 8017 (Section 8.2) [PKCS #1 v2.2]
+
+FIPS PUB 186-5 (Section 5.4) [RSASSA-PKCS1-v1_5]
+
+|RSA-PSS
+|RSASSA-PSS
+|Modulus of size [selection: 2048, 3072, 4096] bits, hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE128 with 256-bit output, SHAKE256 with 512-bit output]
+|RFC 8017 (Section 8.1) [PKCS #1 v2.2]
+
+FIPS PUB 186-5 (Section 5.4) [RSASSA-PSS]
+
+|ECDSA
+|ECDSA
+|Elliptic Curve [selection: P-256, brainpoolP256r1, P-384, brainpoolP384r1, P-521, brainpoolP512r1], per-message secret number generation [selection: extra random bits, rejection sampling, deterministic] and hash or XOF function using [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE128 with 256-bit output, SHAKE256 with 512-bit output]
+|[selection: ISO/IEC 14888-3:2018 (Subclause 6.6), FIPS PUB 186-5 (Sections 6.3.1, 6.4.1)] [ECDSA]
+
+[selection: RFC 5639 (Section 3) [Brainpool Curves], NIST SP-800 186 (Section 4) [NIST Curves]]
+
+|KCDSA
+|KCDSA
+|hash function using [selection: SHA-224, SHA-256, SHA-384, SHA-512]
+|ISO/IEC 14888-3:2018 (Subclause 6.3) [KCDSA]
+
+|EC-KCDSA
+|EC-KCDSA
+|Elliptic Curve [selection: P-224, P-256, B-233, B-283, K-233, K-283] using hash [selection: SHA-224, SHA-256, SHA-384, SHA-512]
+|ISO/IEC 14888-3:2018 (Subclause 6.7) [EC-KCDSA]
+
+NIST SP 800-186 (Section 3) [NIST Curves]
+
+|EdDSA
+|Edwards-Curve Digital Signature Algorithm
+|Domain parameters approved for elliptic curves [selection: Edwards25519, Edwards448]
+|NIST FIPS PUB 186-5 (Section 7.6) [EdDSA]
+
+RFC 8032 [Edwards Curves]
+
+|LMS
+|LMS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], Winternitz parameter = [selection: 1, 2, 4, 8], and tree height = [selection: 5, 10, 15, 20, 25]
+|RFC 8554 [LMS]
+
+NIST SP 800-208 [parameters]
+
+|HSS
+|Multitree version of LMS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], Winternitz parameter = [selection: 1, 2, 4, 8], tree height = [selection: 5, 10, 15, 20, 25], and number of levels = [selection: 1, 2, 3, 4, 5, 6, 7, 8]
+|RFC 8554 [HSS]
+
+NIST SP 800-208 [parameters]
+
+|XMSS
+|XMSS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], tree height = [selection: 10, 16, 20]
+|RFC 8391 [XMSS]
+
+NIST SP 800-208 [parameters]
+
+|XMSS^MT^
+|Multitree version of XMSS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], (total tree height, number of levels) = [selection: (20, 2), (20, 4), (40, 2), (40, 4), (40, 8), (60, 3), (60, 6), (60, 12)]
+|RFC 8391 [XMSS^MT^]
+
+NIST SP 800-208 [parameters]
+
+|ML-DSA
+|ML-DSA.Sign
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87]
+|NIST FIPS 204 (Section 5.2)
+
+|HashML-DSA
+|HashML-DSA.Sign
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87] and hash function [selection: SHA-256, SHA-512/256, SHA3-256, SHAKE128, SHA-384, SHA3-384, SHA-512, SHA3-512, SHAKE256]
+|NIST FIPS 204 (Section 5.4)
+
+|===
+
+_Application Note {counter:remark_count}_:: _The dependency on FCS_OTV_EXT.1 is needed only for signature schemes that require random bits, such as ECDSA, KCDSA, or EC-KCDSA._
++
+_For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
++
+_For HSS and XMSS^MT^ the same hash or XOF function shall be used at each level. Within each level, the same Winternitz parameter shall be used but can be different for each level. For HSS, within each level, the same tree height shall be used but can be different for each level._
++
+_Per Section 5.4 of NIST FIPS 204, the collision strength of the hash function selected for the pre-hash of HashML-DSA must be at least the strength of the signature algorithm._
+
+==== FCS_COP.1/SigVer Cryptographic Operation - Signature Verification
+
+FCS_COP.1/SigVer Cryptographic Operation - Signature Verification
+
+FCS_COP.1.1/SigVer:: The TSF shall perform [_digital signature verification_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
+
+
+The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/SigVer.
+
+.Allowed choices for FCS_COP.1/SigVer
+[[SigVerOps]]
+[cols=".^1,.^2,.^2,.^2",options=header]
+|===
+
+|Identifier
+|Cryptographic Algorithm
+|Cryptographic Algorithm Parameters
+|List of Standards
+
+|RSA-PKCS
+|RSASSA-PKCS1-v1_5
+|Modulus of size [selection: 2048, 3072, 4096] bits, hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512]
+|RFC 8017 (Section 8.2) [PKCS #1 v2.2]
+
+FIPS PUB 186-5 (Section 5.4) [RSASSA-PKCS1-v1_5]
+
+|RSA-PSS
+|RSASSA-PSS
+|Modulus of size [selection: 2048, 3072, 4096] bits, hash or XOF [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE128 with 256-bit output, SHAKE256 with 512-bit output]
+|RFC 8017 (Section 8.1) [PKCS #1 v2.2]
+
+FIPS PUB 186-5 (Section 5.4) [RSASSA-PSS]
+
+|DSA
+|DSA
+|Domain parameters for (L, N) = [selection: (2048, 224), (2048, 256), (3072, 256)] bits
+|FIPS PUB 186-4 (Section 4.7) [DSA Signature Verification]
+
+|ECDSA
+|ECDSA
+|Elliptic Curve [selection: P-256, brainpoolP256r1, P-384, brainpoolP384r1, P-521, brainpoolP512r1] using hash or XOF function using [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512, SHAKE128 with 256-bit output, SHAKE256 with 512-bit output]
+|[selection: ISO/IEC 14888-3:2018 (Subclause 6.6), FIPS PUB 186-5 (Section 6.4.2)] [ECDSA]
+
+[selection: RFC 5639 (Section 3) [Brainpool Curves], NIST SP-800 186 (Section 4) [NIST Curves]]
+
+|KCDSA
+|KCDSA
+|hash function using [selection: SHA-224, SHA-256, SHA-384, SHA-512]
+|ISO/IEC 14888-3:2018 (Subclause 6.3) [KCDSA]
+
+|EC-KCDSA
+|EC-KCDSA
+|Elliptic Curve [selection: P-224, P-256, B-233, B-283, K-233, K-283] using hash [selection: SHA-224, SHA-256, SHA-384, SHA-512]
+|ISO/IEC 14888-3:2018 (Subclause 6.7) [EC-KCDSA]
+
+NIST SP 800-186 (Section 3) [NIST Curves]
+
+|EdDSA
+|Edwards-Curve Digital Signature Algorithm
+|Domain parameters approved for elliptic curves [selection: Edwards25519, Edwards448]
+|NIST FIPS PUB 186-5 (Section 7.7) [EdDSA]
+
+RFC 8032 [Edwards Curves]
+
+|LMS
+|LMS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], Winternitz parameter = [selection: 1, 2, 4, 8], and tree height = [selection: 5, 10, 15, 20, 25]
+|RFC 8554 [LMS]
+
+NIST SP 800-208 [parameters]
+
+|HSS
+|Multitree version of LMS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], Winternitz parameter = [selection: 1, 2, 4, 8], tree height = [selection: 5, 10, 15, 20, 25], and number of levels = [selection: 1, 2, 3, 4, 5, 6, 7, 8]
+|RFC 8554 [HSS]
+
+NIST SP 800-208 [parameters]
+
+|XMSS
+|XMSS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], tree height = [selection: 10, 16, 20]
+|RFC 8391 [XMSS]
+
+NIST SP 800-208 [parameters]
+
+|XMSS^MT^
+|Multitree version of XMSS
+|Private key size = [selection: 192 bits with [selection: SHA-256/192, SHAKE256/192], 256 bits with [selection: SHA-256, SHAKE256]], (total tree height, number of levels) = [selection: (20, 2), (20, 4), (40, 2), (40, 4), (40, 8), (60, 3), (60, 6), (60, 12)]
+|RFC 8391 [XMSS^MT^]
+
+NIST SP 800-208 [parameters]
+
+|ML-DSA
+|ML-DSA.Verify
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87]
+|NIST FIPS 204 (Section 5.3)
+
+|HashML-DSA
+|HashML-DSA.Verify
+|Parameter set = [selection: ML-DSA-44, ML-DSA-65, ML-DSA-87] and hash function [selection: SHA-256, SHA-512/256, SHA3-256, SHAKE128, SHA-384, SHA3-384, SHA-512, SHA3-512, SHAKE256]
+|NIST FIPS 204 (Section 5.4)
+
+|===
+
+_Application Note {counter:remark_count}_:: _DSA may only be used to verify signatures generated prior to the implementation date of FIPS 186-5._
++
+_The TOE may contain a public key which is integrity protected (e.g., in hardware), in which case the FDP_ITC.1 and FDP_ITC.2 dependencies do not apply. In this case, no dependencies may be chosen._
++
+_For signature verifications, private keys are not necessary, so there are no dependencies required for generating or destroying cryptographic keys._
++
+_For LMS, HSS, XMSS, and XMSS^MT^, the key sizes do not represent the expected security strength. All key sizes given here correspond to an expected security strength of 128 bits, per NIST SP 800-208._
++
+_For HSS and XMSS^MT^ the same hash or XOF function shall be used at each level. Within each level, the same Winternitz parameter shall be used but can be different for each level. For HSS, within each level, the same tree height shall be used but can be different for each level._
++
+_Per Section 5.4 of NIST FIPS 204, the collision strength of the hash function selected for the pre-hash of HashML-DSA must be at least the strength of the signature algorithm._
+
+==== FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
+
+FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
+
+FCS_COP.1.1/SKC:: The TSF shall perform [_symmetric-key encryption/decryption_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic key sizes [*selection*: _cryptographic key sizes_] that meet the following: [*selection*: _list of standards_].
+
+The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/SKC.
+
+.Allowed choices for FCS_COP.1/SKC
+[[SymmetricKeyCrypto]]
+[cols=".^1,.^2,.^2,.^2",options=header]
+|===
+
+|Identifier
+|Cryptographic Algorithm
+|Cryptographic Key Sizes
+|List of Standards
+
+|AES-CBC
+|AES in CBC mode with IVs generated according to FCS_OTV_EXT.1
+|[selection: 128, 192, 256] bits
+|[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
+
+[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
+
+|XTS-AES
+|AES in XTS mode with tweak values generated according to FCS_OTV_EXT.1
+|[selection: 256, 512] bits
+|[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
+
+[selection: IEEE Std. 1619-2018, NIST SP 800-38E] [XTS]
+
+|AES-CTR
+|AES in CTR mode with counter values generated according to FCS_OTV_EXT.1
+|[selection: 128, 192, 256] bits
+|[selection: ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197] [AES]
+
+[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
+
+|CAM-CBC
+|Camellia in CBC mode with IVs generated according to FCS_OTV_EXT.1
+|[selection: 128, 192, 256] bits
+|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
+
+[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
+
+|CAM-CFB
+|Camellia in CFB mode with IVs generated according to FCS_OTV_EXT.1
+|[selection: 128, 192, 256] bits
+|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
+
+[selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
+
+|CAM-OFB
+|Camellia in OFB mode with IVs generated according to FCS_OTV_EXT.1
+|[selection: 128, 192, 256] bits
+|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
+
+[selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [CFB]
+
+|XTS-CAM
+|Camellia in XTS mode with tweak values generated according to FCS_OTV_EXT.1
+|[selection: 256, 512] bits
+|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
+
+[selection: IEEE Std. 1619-2018, NIST SP 800-38E] [XTS]
+
+|CAM-CTR
+|Camellia in CTR mode with counter values generated according to FCS_OTV_EXT.1
+|[selection: 128, 192, 256] bits
+|ISO/IEC 18033-3:2010 (Subclause 5.3) [Camellia]
+
+[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
+
+|SEED-CBC
+|SEED in CBC mode with IVs generated according to FCS_OTV_EXT.1
+|128 bits
+|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
+
+[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
+
+|SEED-CFB
+|SEED in CFB mode with IVs generated according to FCS_OTV_EXT.1
+|128 bits
+|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
+
+[selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
+
+|SEED-OFB
+|SEED in OFB mode with IVs generated according to FCS_OTV_EXT.1
+|128 bits
+|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
+
+[selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
+
+|SEED-CTR
+|SEED in CTR mode with counter values generated according to FCS_OTV_EXT.1
+|128 bits
+|ISO/IEC 18033-3:2010 (Subclause 5.4) [SEED]
+
+[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
+
+|HIGHT-CBC
+|HIGHT in CBC mode with IVs generated according to FCS_OTV_EXT.1
+|128 bits
+|ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
+
+[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
+
+|HIGHT-CFB
+|HIGHT in CFB mode with IVs generated according to FCS_OTV_EXT.1
+|128 bits
+|ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
+
+[selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
+
+|HIGHT-OFB
+|HIGHT in OFB mode with IVs generated according to FCS_OTV_EXT.1
+|128 bits
+|ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
+
+[selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
+
+|HIGHT-CTR
+|HIGHT in CTR mode with counter values generated according to FCS_OTV_EXT.1
+|128 bits
+|ISO/IEC 18033-3:2010 (Subclause 4.5) [HIGHT]
+
+[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
+
+|LEA-CBC
+|LEA in CBC mode with IVs generated according to FCS_OTV_EXT.1
+|[selection: 128, 192, 256] bits
+|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
+
+[selection: ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A] [CBC]
+
+|LEA-CFB
+|LEA in CFB mode with IVs generated according to FCS_OTV_EXT.1
+|[selection: 128, 192, 256] bits
+|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
+
+[selection: ISO/IEC 10116:2017 (Clause 8), NIST SP 800-38A] [CFB]
+
+|LEA-OFB
+|LEA in OFB mode with IVs generated according to FCS_OTV_EXT.1
+|[selection: 128, 192, 256] bits
+|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
+
+[selection: ISO/IEC 10116:2017 (Clause 9), NIST SP 800-38A] [OFB]
+
+|LEA-CTR
+|LEA in CTR mode with counter values generated according to FCS_OTV_EXT.1
+|[selection: 128, 192, 256] bits
+|ISO/IEC 29192-2:2019 (Subclause 6.3) [LEA]
+
+[selection: ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A] [CTR]
 
 |===
 
@@ -3905,7 +3914,7 @@ FCS_CKM_EXT.7 - (selection-based SFR) included
 
 FCS_CKM_EXT.8 - (selection-based SFR) included
 
-FCS_COP.1 - included
+FCS_COP.1 - (selection-based SFR) included
 
 FCS_RBG.1 - included
 
@@ -3938,78 +3947,6 @@ FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data
 FCS_CKM.1 - included
 
 FCS_CKM.5 - (selection-based SFR) included
-
-|FCS_COP.1/Hash 
-|No dependencies.
-|There are no keys involved with hashing, so no cryptograhpic key-based dependencies are necessary.
-
-|FCS_COP.1/KeyedHash 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8] 
-
-FCS_CKM.6 
-|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
-
-FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
-
-FCS_CKM.1 - included
-
-FCS_CKM.5 - (selection-based SFR) included
-
-FCS_CKM_EXT.7 - (selection-based SFR) included
-
-FCS_CKM_EXT.8 - (selection-based SFR) included
-
-FCS_CKM.6 - included
-
-|FCS_COP.1/SigGen 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1/AKG, or FCS_CKM.5] 
-
-FCS_CKM.6 
-|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
-
-FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
-
-FCS_CKM.1/AKG - (selection-based SFR) included
-
-FCS_CKM.5 - (selection-based SFR) included
-
-FCS_CKM.6 - included
-
-|FCS_COP.1/SigVer 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5] 
-
-FCS_CKM.6 
-|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
-
-FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
-
-FCS_CKM.1 - included
-
-FCS_CKM.5 - (selection-based SFR) included
-
-FCS_CKM.6 - included
-
-|FCS_COP.1/SKC 
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8] 
-
-FCS_CKM.6 
-
-FCS_OTV_EXT.1
-|FDP_ITC_EXT.1 satisfies FDP_ITC.1 related to a mechanism by which key data can be imported into the TSF - included
-
-FDP_ITC_EXT.2 satisfies FDP_ITC.2 related to a mechanism by which key data can be imported into the TSF - included
-
-FCS_CKM.1 - included
-
-FCS_CKM.5 - (selection-based SFR) included
-
-FCS_CKM_EXT.7 - (selection-based SFR) included
-
-FCS_CKM_EXT.8 - (selection-based SFR) included
-
-FCS_CKM.6 - included
-
-FCS_OTV_EXT.1 - included
 
 |FCS_RBG.1 
 |[FCS_RBG.2 or FCS_RBG.3]
@@ -4048,13 +3985,13 @@ FMT_MSA.3 - included
 
 |FDP_ETC_EXT.2 
 |FCS_COP.1 
-|FCS_COP.1 - included
+|FCS_COP.1 - (selection-based SFR) included
 
 |FDP_ITC_EXT.1 
 |FCS_COP.1 
 
 [FTP_ITC_EXT.1, FTP_ITE_EXT.1, or FTP_ITP_EXT.1] 
-|FCS_COP.1 - included
+|FCS_COP.1 - (selection-based SFR) included
 
 FTP_ITC_EXT.1 - (selection-based SFR) included
 
@@ -4066,7 +4003,7 @@ FTP_ITP_EXT.1 - (selection-based SFR) included
 |FCS_COP.1 
 
 [FTP_ITC_EXT.1, FTP_ITE_EXT.1, or FTP_ITP_EXT.1] 
-|FCS_COP.1 - included
+|FCS_COP.1 - (selection-based SFR) included
 
 FTP_ITC_EXT.1 - (selection-based SFR) included
 
@@ -4080,7 +4017,7 @@ FTP_ITP_EXT.1 - (selection-based SFR) included
 
 |FDP_SDC.2 
 |FCS_COP.1
-|FCS_COP.1 - included
+|FCS_COP.1 - (selection-based SFR) included
 
 |FDP_SDI.2 
 |No dependencies
@@ -4228,7 +4165,7 @@ FCS_RBG.4 - (optional SFR) included
 |Rationale Statement
 
 |FCS_CKM.1/AKG 
-|[FCS_CKM.2, FCS_CKM.5 or FCS_COP.1]
+|[FCS_CKM.2, FCS_CKM.5, or FCS_COP.1]
 
 [FCS_RBG.1 or FCS_RNG.1]
 
@@ -4237,7 +4174,7 @@ FCS_CKM.6
 
 FCS_CKM.5 - (selection-based SFR) included
 
-FCS_COP.1 - included
+FCS_COP.1 - (selection-based SFR) included
 
 FCS_RBG.1 - included
 
@@ -4246,7 +4183,7 @@ FCS_RNG.1 is satisfied by FCS_RBG.1 - included
 FCS_CKM.6 - included
 
 |FCS_CKM.1/SKG 
-|[FCS_CKM.2, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_COP.1]
+|[FCS_CKM.2, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_COP.1]
 
 [FCS_RBG.1 or FCS_RNG.1]
 
@@ -4257,7 +4194,7 @@ FCS_CKM.5 - (selection-based SFR) included
 
 FCS_CKM_EXT.7 - (selection-based SFR) included
 
-FCS_COP.1 - included
+FCS_COP.1 - (selection-based SFR) included
 
 FCS_RBG.1 - included
 
@@ -4340,7 +4277,7 @@ FCS_CKM.6 - included
 FCS_OTV_EXT.1 - included
 
 |FCS_COP.1/AEAD
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8]
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
 
 FCS_CKM.6
 
@@ -4362,7 +4299,7 @@ FCS_CKM.6 - included
 FCS_OTV_EXT.1 - included
 
 |FCS_COP.1/CMAC
-|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7 or FCS_CKM_EXT.8]
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
 
 FCS_CKM.6
 
@@ -4380,10 +4317,38 @@ FCS_CKM_EXT.8 - (selection-based SFR) included
 
 FCS_CKM.6 - included
 
+|FCS_COP.1/Hash
+|No dependencies.
+|There are no keys involved with hashing, so no cryptograhpic key-based dependencies are necessary.
+
+|FCS_COP.1/KeyedHash
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
+
+FCS_CKM.6
+
+[FCS_COP.1/Hash or FCS_COP.1/XOF]
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - (selection-based SFR) included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
+
+FCS_COP.1/Hash - (selection-based SFR) included
+
+FCS_COP.1/XOF - (selection-based SFR) included
+
 |FCS_COP.1/KeyEncap
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
 
-FCS_CKM.6 
+FCS_CKM.6
 
 FCS_OTV_EXT.1
 |FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
@@ -4405,7 +4370,9 @@ FCS_OTV_EXT.1 - included
 |FCS_COP.1/KeyWrap
 |[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
 
-FCS_CKM.6 
+FCS_CKM.6
+
+FCS_COP.1/SKC
 |FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
 
 FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
@@ -4419,6 +4386,74 @@ FCS_CKM_EXT.7 - (selection-based SFR) included
 FCS_CKM_EXT.8 - (selection-based SFR) included
 
 FCS_CKM.6 - included
+
+FCS_COP.1/SKC - (selection-based SFR) included
+
+|FCS_COP.1/SigGen
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1/AKG, or FCS_CKM.5]
+
+[FCS_COP.1/Hash or FCS_COP.1/XOF]
+
+FCS_OTV_EXT.1
+
+FCS_CKM.6
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1/AKG - (selection-based SFR) included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_COP.1/Hash - (selection-based SFR) included
+
+FCS_COP.1/XOF - (selection-based SFR) included
+
+FCS_OTV_EXT.1 - included
+
+FCS_CKM.6 - included
+
+|FCS_COP.1/SigVer
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, or FCS_CKM.5]
+
+[FCS_COP.1/Hash or FCS_COP.1/XOF]
+
+FCS_CKM.6
+|FDP_ITC.1 is satisfied by FDP_ITC_EXT.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC.2 is satisfied by FDP_ITC_EXT.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_COP.1/Hash - (selection-based SFR) included
+
+FCS_COP.1/XOF - (selection-based SFR) included
+
+FCS_CKM.6 - included
+
+|FCS_COP.1/SKC
+|[FDP_ITC.1, FDP_ITC.2, FCS_CKM.1, FCS_CKM.5, FCS_CKM_EXT.7, or FCS_CKM_EXT.8]
+
+FCS_CKM.6
+
+FCS_OTV_EXT.1
+|FDP_ITC_EXT.1 satisfies FDP_ITC.1 related to a mechanism by which key data can be imported into the TSF - included
+
+FDP_ITC_EXT.2 satisfies FDP_ITC.2 related to a mechanism by which key data can be imported into the TSF - included
+
+FCS_CKM.1 - included
+
+FCS_CKM.5 - (selection-based SFR) included
+
+FCS_CKM_EXT.7 - (selection-based SFR) included
+
+FCS_CKM_EXT.8 - (selection-based SFR) included
+
+FCS_CKM.6 - included
+
+FCS_OTV_EXT.1 - included
 
 |FDP_DAU.1/Prove 
 |No dependencies
@@ -4442,7 +4477,7 @@ FCS_CKM.6 - included
 FCS_COP.1
 |FPT_MFW_EXT.1 - included
 
-FCS_COP.1 - included
+FCS_COP.1 - (selection-based SFR) included
 
 |FPT_ROT_EXT.2
 |FPT_ROT_EXT.1
@@ -4454,7 +4489,7 @@ FCS_COP.1 - included
 FCS_COP.1
 |FPT_ROT_EXT.2 - (selection-based SFR) included
 
-FCS_COP.1 - included
+FCS_COP.1 - (selection-based SFR) included
 
 |FPT_ROT_EXT.4
 |FPT_ROT_EXT.1
@@ -4462,7 +4497,7 @@ FCS_COP.1 - included
 FCS_COP.1
 |FPT_ROT_EXT.1 - included
 
-FCS_COP.1 - included
+FCS_COP.1 - (selection-based SFR) included
 
 |FPT_RPL.1/FW
 |No dependencies
@@ -4472,13 +4507,13 @@ FCS_COP.1 - included
 |No dependencies
 |N/A
 
-|FTP_ITC_EXT.1 
-|FCS_COP.1 
-|FCS_COP.1 - included
+|FTP_ITC_EXT.1
+|FCS_COP.1
+|FCS_COP.1 - (selection-based SFR) included
 
-|FTP_ITE_EXT.1 
-|FCS_COP.1 
-|FCS_COP.1 - included
+|FTP_ITE_EXT.1
+|FCS_COP.1
+|FCS_COP.1 - (selection-based SFR) included
 
 |FTP_ITP_EXT.1 
 |No dependencies
@@ -4511,11 +4546,11 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/AEAD !Cryptographic Operation (Authenticated Encryption with Associated Data)
 
+!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
+
 !FCS_COP.1/Hash !Cryptographic Operation - Hashing
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation - Keyed Hash
-
-!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
 
 !FCS_COP.1/KeyEncap !Cryptographic Operation - Key Encapsulation
 
@@ -4549,11 +4584,11 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/AEAD !Cryptographic Operation (Authenticated Encryption with Associated Data)
 
+!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
+
 !FCS_COP.1/Hash !Cryptographic Operation - Hashing
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation - Keyed Hash
-
-!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
 
 !FCS_COP.1/SKC !Cryptographic Operation - Symmetric-Key Cryptography
 
@@ -4589,11 +4624,11 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/AEAD !Cryptographic Operation (Authenticated Encryption with Associated Data)
 
+!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
+
 !FCS_COP.1/Hash !Cryptographic Operation - Hashing
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation - Keyed Hash
-
-!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
 
 !FCS_COP.1/SKC !Cryptographic Operation - Symmetric-Key Cryptography
 
@@ -4629,13 +4664,15 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 
 !FCS_COP.1/AEAD !Cryptographic Operation (Authenticated Encryption with Associated Data)
 
+!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
+
 !FCS_COP.1/Hash !Cryptographic Operation - Hashing
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation - Keyed Hash
 
-!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
+!FCS_COP.1/KeyEncap !Cryptographic Operation - Key Encapsulation
 
-!FCS_COP.1/KeyEnc !Cryptographic Operation (Key Encryption)
+!FCS_COP.1/KeyWrap !Cryptographic Operation - Key Wrapping
 
 !FCS_COP.1/SigGen !Cryptographic Operation - Signature Generation
 
@@ -4683,11 +4720,15 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 !===
 
+!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
+
 !FCS_COP.1/Hash !Cryptographic Operation - Hashing
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation - Keyed Hash
 
-!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
+!FCS_COP.1/SigGen !Cryptographic Operation - Signature Generation
+
+!FCS_COP.1/SigVer !Cryptographic Operation - Signature Verification
 
 !FCS_RBG.1 !Random Bit Generation (RBG)
 
@@ -4725,15 +4766,17 @@ a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 a|[cols=".^1,3",options=noheader,grid="none",frame="none"]
 !===
 
+!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
+
 !FCS_COP.1/AEAD !Cryptographic Operation (Authenticated Encryption with Associated Data)
 
 !FCS_COP.1/Hash !Cryptographic Operation - Hashing
 
 !FCS_COP.1/KeyedHash !Cryptographic Operation - Keyed Hash
 
-!FCS_COP.1/CMAC !Cryptographic Operation - CMAC
+!FCS_COP.1/KeyEncap !Cryptographic Operation - Key Encapsulation
 
-!FCS_COP.1/KeyEnc !Cryptographic Operation (Key Encryption)
+!FCS_COP.1/KeyWrap !Cryptographic Operation - Key Wrapping
 
 !FCS_COP.1/SKC !Cryptographic Operation - Symmetric-Key Cryptography
 
