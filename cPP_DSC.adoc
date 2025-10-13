@@ -173,10 +173,10 @@ image::SDOcomposition.png[]
 
 An SDO is created by combining SDEs with some attributes. Each SDE used to create the SDO reaches the DSC in one of the following ways:
 
-* By parsing SDEs received via secure channels (see O.PARSE_PROTECTION). 
+* By parsing SDEs received via secure channels.
 * By generating the SDEs locally on the DSC as part of the Provisioning service. 
 
-An SDO may include one or more SDEs from one or both of these sources. In the Provisioning step, the relevant SDEs are then bound together with a set of attributes resulting in an SDO. Explicit binding occurs when the DSC includes one or more SDEs along with their attributes in a formatted structure to form the SDO. An X.509 certificate is just one example of an SDO (where the signature in the certificate provides the binding of the attributes contained). A DSC protects the integrity of an SDO (see O.DATA_PROTECTION).
+An SDO may include one or more SDEs from one or both of these sources. In the Provisioning step, the relevant SDEs are then bound together with a set of attributes resulting in an SDO. Explicit binding occurs when the DSC includes one or more SDEs along with their attributes in a formatted structure to form the SDO. An X.509 certificate is just one example of an SDO (where the signature in the certificate provides the binding of the attributes contained). A DSC protects the integrity of an SDO and confidentiality of SDEs in an SDO, if so configured.
 
 Explicit binding may also occur when the DSC wraps an SDO prior to storing it externally. <<SDOcomposition>> shows an example SDO with binding data used to secure an arbitrary number of SDEs.
 
@@ -226,7 +226,7 @@ DSCs provide seven core security services to a platform as illustrated in <<Core
 |The DSC shall create SDOs from parsed or generated SDEs and attributes using binding mechanisms to apply integrity protection to the SDEs together with their attributes.
 
 |Protect
-|The DSC shall manage protected storage for all SDOs. DSCs may implement local storage internal to the DSC boundary or utlilize external storage outside the DSC boundary. A DSC shall maintain the integrity and confidentiality (if required) of SDOs stored both inside and outside the boundary.
+|The DSC shall manage protected storage for all SDOs. DSCs may implement local storage internal to the DSC boundary or utlilize external storage outside the DSC boundary. A DSC shall maintain the integrity and confidentiality (if required) of SDOs and SDEs stored both inside and outside the boundary.
 
 |Process
 |The DSC shall modify and use SDOs or their attributes on behalf of authorized entities. The Process service shall coordinate with the Protect service for storage of the SDOs while not in use and shall collaborate with the Prove service to authenticate the requesting entity and validate their authorization for access to the SDO in the requested mode. The Process service shall submit an SDO to the Purge service when it is no longer needed by the platform.
@@ -282,10 +282,10 @@ Security Attributes: The following list contains the minimum security attributes
 * EPS.ID - The External Platform Storage (EPS) identifier. This attribute is optional for a passive EPS (i.e. plain memory that only stores information). If the DSC uses an active EPS to manage storage, then support for this attribute is required.
 * SDO.* - The SDO Security Attributes:
 ** SDO.ID - SDO Identifier
-** SDO.Type - SDO Type
-** SDO.AuthData - SDO Reference authorization data
+** SDO.Type - SDO type
+** SDO.AuthData - SDO reference authorization data
 ** SDO.Reauth - SDO re-authorization conditions
-** SDO.Conf - SDO confidential SDE list
+** SDO.Conf - SDO confidential SDE list, indicating which SDEs in this SDO should be confidential
 ** SDO.Export - SDO export flag
 ** SDO.Integrity - SDO integrity protection data
 ** SDO.Bind - SDO binding data
@@ -433,9 +433,9 @@ Roles may play an important part in key hierarchies. One of the simplest models 
 
 ==== Protected Storage Locations
 
-This cPP covers several different types of storage locations for keys and critical security parameters (CSPs) such as authentication tokens. Some DSCs may have a generous amount of protected storage internal to themselves, which allows it to accommodate all keys and CSPs in operational use, whether the DSC is performing operations to administer itself or operations on behalf of users. Other DSCs may have a minimal amount of protected storage locations with just enough to accommodate root keys along with a limited number of operational keys and CSPs for user authorized sessions.
+This cPP covers several different types of storage locations for SDOs, SDEs, and other sensitive TSF and user data. Some DSCs may have a generous amount of protected storage internal to themselves, which allows it to accommodate all these items in operational use, whether the DSC is performing operations to administer itself or operations on behalf of users. Other DSCs may have a minimal amount of protected storage locations with just enough to accommodate root keys along with a limited number of operational keys and data for user authorized sessions.
 
-For those cases in which the DSC relies on storage external to itself to accommodate all the keys and CSPs on which applications expect it to operate, it will either have to support secure channels to another DSC with a more generous allocation of protected storage locations, or use a series of wrapping keys to protect private keys and CSPs while outside of the DSC. Whether the DSC is powered on or powered off, the DSC is expected to provide support for protected storage locations for its Root Keys. If the DSC uses external storage without secure channels, then it should be ready to wrap both Intermediate Keys as well as the Leaf Objects. This implies that there will be some sort of structure on each of these items stored external to the DSC. The next section discusses that structure.
+For those cases in which the DSC relies on storage external to itself to accommodate all the items on which applications expect it to operate, it will either have to support secure channels to another DSC with a more generous allocation of protected storage locations, or use a series of wrapping keys to protect the confidentiality and integrity of this sensitive data while outside of the DSC. Whether the DSC is powered on or powered off, the DSC is expected to provide support for protected storage locations for its root keys. If the DSC uses external storage without secure channels, then it should be ready to wrap both Intermediate Keys as well as the Leaf Objects. This implies that there will be some sort of structure on each of these items stored external to the DSC. The next section discusses that structure.
 
 A conformant TOE may include "write-once" storage such as single-use eFuses. Since data is written to any such storage as part of the initial provisioning of the TOE, the data is considered immutable once the TOE has entered its evaluated configuration. The integrity of this data is maintained through the physical properties of its storage medium.
 
@@ -443,7 +443,7 @@ A conformant TOE may include "write-once" storage such as single-use eFuses. Sin
 
 This section is used to map keys and authentication tokens to SDEs and SDOs. This cPP does not impose a strict structure on the items in the key hierarchy. An X.509 certificate is one example of a strict structure of a key with attributes. Collecting attributes of an SDE and composing an SDO structure with an SDE and attribute fields imposes temporal and storage penalties in all cases. In certain resource-constrained cases the attributes could be implicit. 
 
-In the previous section on protected storage locations, a DSC may have to use storage external to itself. In these cases, an SDO of a wrapped key may contain a number of important attributes, such as a pointer to its parent, authorization values, and other indications of the functions allowed (encrypt vs. sign). Alternatively, some or all attributes may be implied, which means that only the keys or CSPs themselves exist outside the DSC. In either case, the sensitive values, such as private keys, secret keys, and CSPs, should be encrypted when outside the DSC. The parents of these objects are either Intermediate Keys, or encrypting Root Keys.
+In the previous section on protected storage locations, a DSC may have to use storage external to itself. In these cases, an SDO of a wrapped key may contain a number of important attributes, such as a pointer to its parent, authorization values, and other indications of the functions allowed (encrypt vs. sign). Alternatively, some or all attributes may be implied, which means that only the SDEs themselves exist outside the DSC. In either case, the sensitive values, such as private keys, secret keys, and authorization data, should be encrypted when outside the DSC. The parents of these objects are either Intermediate Keys, or encrypting Root Keys.
 
 Some DSCs may want to distinguish between SDEs created within itself from SDEs ingested from an external source. Additionally, some DSCs may output SDEs without additional context or attributes from the DSC. A DSC, in some contexts, will not distinguish an ingested SDE from raw keys.
 
@@ -1406,32 +1406,43 @@ _Application Note {counter:remark_count}_:: _When an SDE is a key then it is als
 
 FDP_SDC.2 Stored data confidentiality with dedicated method
 
-FDP_SDC.2.1:: The TSF shall ensure the confidentiality of [.line-through]#the# {empty}[[.underline]#the following user data [_authorization data, [assignment: SDEs identified in the confidential SDE list attribute of an SDO]_]#] according to [assignment: *SDEs identified in the confidential SDE list attribute of an SDO*] while it is stored under the control of the TSF.
+FDP_SDC.2.1:: The TSF shall ensure the confidentiality of [.line-through]#the# {empty}[[.underline]#the following user data [_authorization data, [assignment: SDEs identified in the SDO.Conf attribute of an SDO]_]#] according to [*selection*:
++
+* _presence in DSC protected storage,_
+* _authenticated encryption as defined in FCS_COP.1/AEAD_,
+* _key encapsulation as defined in FCS_COP.1/KeyEncap_,
+* _key wrapping as defined in FCS_COP.1/KeyWrap_,
+* _symmetric-key cryptography as defined in FCS_COP.1/SKC_
++
+] while it is stored under the control of the TSF.
 
 FDP_SDC.2.2:: The TSF shall ensure the confidentiality of the user data specified in FDP_SDC.2.1 without user intervention.
 
-_Application Note {counter:remark_count}_:: _This SFR applies to SDOs with the confidential-SDE attribute set to require confidentiality, especially secret and private keys, Allowed Random Number Generators' state data, and vendor verification reference data. If SDEs do not require confidentiality, then its omission from this list indicates that confidentiality is not required. This SFR also applies to all authorization data appearing in the attribute list under SDO.AuthData as well as any administrator authorization data which may be stored implicitly._
+_Application Note {counter:remark_count}_:: _This SFR applies to SDOs with the SDO.Conf attribute set to require confidentiality of its SDEs, especially secret keys, private keys, and DRBG state data. Omission from the list under SDO.Conf indicates that an SDE is not required to be confidential. This SFR also applies to all authorization data appearing in the attribute list under SDO.AuthData as well as any administrator authorization data which may be stored implicitly._
 
 ==== FDP_SDI.2 Stored Data Integrity Monitoring and Action
 
 FDP_SDI.2 Stored Data Integrity Monitoring and Action
 
-FDP_SDI.2.1:: The TSF shall monitor *SDOs and SDEs* controlled by the TSF for [_integrity errors_] on all objects, based on the following attributes: [*selection*: _[assignment: attribute associated with presence in protected storage], message authentication code as specified in FCS_COP.1/CMAC, cryptographic hash as specified in FCS_COP.1/Hash, keyed hash as specified in FCS_COP.1/KeyedHash, digital signature as specified in FCS_COP.1/SigVer, key wrap encryption algorithm as specified in FCS_COP.1/KeyWrap_].
+FDP_SDI.2.1:: The TSF shall monitor *SDOs and SDEs* controlled by the TSF for [_integrity errors_] on all objects, based on the following attributes: [*selection*:
++
+* _[assignment: attribute associated with presence in DSC protected storage]_,
+* _message authentication code as defined in FCS_COP.1/CMAC_,
+* _hash as defined in FCS_COP.1/Hash_,
+* _nessage authentication code as defined in FCS_COP.1/KeyedHash_,
+* _encapsulated key as defined in FCS_COP.1/KeyEncap_,
+* _wrapped key as defined in FCS_COP.1/KeyWrap_,
+* _digital signature as defined in FCS_COP.1/SigGen and FCS_COP.1/SigVer_,
+* _hash as defined in FCS_COP.1/XOF_
++
+].
 
 FDP_SDI.2.2:: Upon detection of a data integrity error, the TSF shall [
 +
 * _prohibit the use of the altered data_
 * _send notification of the error where applicable_].
 
-_Application Note {counter:remark_count}_:: _This SFR deals with the mechanism that protects the integrity of the SDEs and security attributes within an SDO. This provides the binding data that ensures the prevention of unauthorized changes to the SDEs and attributes. It is not expected that a single key will be protected from corruption by multiple of these methods; however, a product may use one integrity-protection method for one type of key and a different method for other types of keys._
-+
-_The cryptographic requirements for cryptographic hashes and digital signatures apply here._
-+
-_No specific requirement is placed here on the nature of the integrity protection data, but the Security Target shall describe this protection measure, and shall identify the iteration of FCS_COP.1/CMAC, FCS_COP.1/Hash, FCS_COP.1/KeyedHash, FCS_COP.1/SigVer, or FCS_COP.1/KeyWrap that covers any cryptographic algorithm used._
-+
-_The integrity protection data in FDP_SDI.2.1 is included in the list of attributes identified in FMT_MSA.1, and protects the value of the SDEs and of the SDO security attributes._
-+
-_When an SDO is parsed, its integrity is checked when it is imported into the TOE._
+_Application Note {counter:remark_count}_:: _This SFR deals with the mechanism that protects the integrity of the SDEs and security attributes within an SDO, as provided in the SDO.Integrity attribute. This provides the binding data that ensures the prevention of unauthorized changes to the SDEs and attributes. It is not expected that a single SDE will be protected from corruption by multiple of these methods; however, a product may use one integrity-protection method for one type of SDE and a different method for other types of SDE._
 
 === Identification and Authentication
 
@@ -1770,10 +1781,10 @@ _Application Note {counter:remark_count}_:: _One expects that only authorized so
 
 FPT_ROT_EXT.1.3:: The TSF shall provide a Root of Trust for Confidentiality to prevent unauthorized disclosure of SDOs, using the following techniques: [selection:
 +
-* _Authenticated encryption as defined in FCS_COP.1/AEAD_,
-* _Key encapsulation as defined in FCS_COP.1/KeyEncap_,
-* _Key wrapping as defined in FCS_COP.1/KeyWrap_,
-* _Symmetric-key cryptography as defined in FCS_COP.1/SKC,_
+* _authenticated encryption as defined in FCS_COP.1/AEAD_,
+* _key encapsulation as defined in FCS_COP.1/KeyEncap_,
+* _key wrapping as defined in FCS_COP.1/KeyWrap_,
+* _symmetric-key cryptography as defined in FCS_COP.1/SKC_
 +
 ].
 
@@ -1952,7 +1963,7 @@ The following rationale provides justification for each security problem definit
 |This requirement ensures that all SDOs parsed by the TOE are transmitted over a secure channel.
 
 |FDP_SDC.2
-|This requirement ensures that the confidentiality of authorization data is protected prior to storage.
+|This requirement ensures that the confidentiality of authorization data is protected.
 
 |FPT_ITT.1 (optional)
 |This requirement ensures that confidentiality and integrity is maintained in cases where data is transmitted between physically separate parts of a distributed TOE.
@@ -1980,7 +1991,7 @@ The following rationale provides justification for each security problem definit
 |This requirement provides a cryptographic operation for asserting the authenticity of SDOs.
 
 |FDP_SDI.2
-|This requirement ensures that SDEs/SDOs are monitored for integrity violations.
+|This requirement ensures that SDOs are monitored for integrity violations.
 
 |FPT_TST.1
 |This requirement defines the mechanisms used to verify and attest to the integrity of the TSF.
@@ -2002,7 +2013,7 @@ The following rationale provides justification for each security problem definit
 |This requirement ensures that all SDOs parsed by the TOE have verifiable integrity.
 
 |FDP_SDC.2
-|This requirement ensures that SDEs/SDOs are stored with confidentiality and that all authorization data is protected prior to storage.
+|This requirement ensures that SDEs are stored confidentially (if required) and that all authorization data is protected.
 
 |FDP_ITC_EXT.1
 |This requirement ensures that all SDEs parsed by the TOE include appropriate binding metadata.

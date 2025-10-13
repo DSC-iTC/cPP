@@ -1081,7 +1081,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall confirm that the ST author describes the methods for protecting the integrity of SDOs stored with the TOE, and shall identify the iteration of FCS_COP.1/Hash, FCS_COP.1/KeyedHash, FCS_COP.1/SigVer or FCS_COP.1/KeyWrap that covers any cryptographic algorithm used. The evaluator shall also confirm that the TSS describes the response upon the detection of an integrity error.
+The evaluator shall examine the TSS to determine that it describes the protection for SDOs and the methods of protection (e.g. protected storage, hashing, digital signatures, key wrapping, etc.). The evaluator shall also confirm that the TSS describes the response upon the detection of an integrity error.
 
 The evaluator shall confirm that the TSS describes the actions the TSF takes when the integrity verification fails for an SDO, including the circumstances that cause a notification to be sent when this occurs.
 
