@@ -2819,7 +2819,7 @@ FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrapping
 
 FCS_COP.1.1/KeyWrap:: The TSF shall perform [_key wrapping_] in accordance with a specified cryptographic algorithm [*selection*: _cryptographic algorithm_] and cryptographic *algorithm parameters* [*selection*: _cryptographic algorithm parameters_] that meet the following: [*selection*: _list of standards_].
 
-.Key Wrap
+.Allowed choices for FCS_COP.1/KeyWrap
 [[KeyWrapAlgorithms]]
 [cols=".^1,.^2,.^2,.^2",options=header]
 |===
