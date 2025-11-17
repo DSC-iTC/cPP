@@ -5,8 +5,8 @@
 :sectnums:
 :sectnumlevels: 5
 :imagesdir: images
-:revnumber: 2.1-Proposed-Draft
-:revdate: August 25, 2025
+:revnumber: 2.1
+:revdate: November 6, 2025
 :xrefstyle: full
 :doctype: book
 :chapter-refsig: Section
@@ -57,6 +57,10 @@ This Supporting Document was developed by the DSC international Technical Commun
 |2.0
 |October 28, 2024
 |Final publication for v2.0 (conversion to asciidoc, respond to CCDB comments)
+
+|2.1
+|November 6, 2025
+|Final publication for v2.1 (post-quantum cryptography, respond to NIAP comments)
 
 |===
 
@@ -2957,7 +2961,7 @@ The supplementary information required by this SD are:
 |https://www.iso.org/standard/72515.html
 
 |[DSC cPP]
-|collaborative Protection Profile for Dedicated Security Component, Version 2.0, October 28, 2024
+|collaborative Protection Profile for Dedicated Security Component, Version 2.1, November 6, 2025
 |https://dsc-itc.github.io
 
 |===
