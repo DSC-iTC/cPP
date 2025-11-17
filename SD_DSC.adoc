@@ -6,7 +6,7 @@
 :sectnumlevels: 5
 :imagesdir: images
 :revnumber: 2.1
-:revdate: November 6, 2025
+:revdate: November 17, 2025
 :xrefstyle: full
 :doctype: book
 :chapter-refsig: Section
@@ -59,7 +59,7 @@ This Supporting Document was developed by the DSC international Technical Commun
 |Final publication for v2.0 (conversion to asciidoc, respond to CCDB comments)
 
 |2.1
-|November 6, 2025
+|November 17, 2025
 |Final publication for v2.1 (post-quantum cryptography, respond to NIAP comments)
 
 |===
