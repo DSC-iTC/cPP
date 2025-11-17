@@ -5,8 +5,8 @@
 :sectnums:
 :sectnumlevels: 5
 :imagesdir: images
-:revnumber: 2.0
-:revdate: October 28, 2024
+:revnumber: 2.1
+:revdate: November 17, 2025
 :xrefstyle: full
 :doctype: book
 :chapter-refsig: Section
@@ -57,6 +57,10 @@ This Supporting Document was developed by the DSC international Technical Commun
 |2.0
 |October 28, 2024
 |Final publication for v2.0 (conversion to asciidoc, respond to CCDB comments)
+
+|2.1
+|November 17, 2025
+|Final publication for v2.1 (post-quantum cryptography, respond to NIAP comments)
 
 |===
 
@@ -272,9 +276,6 @@ For definitions of standard CC terminology, see [CC] part 1.
 
 |CCM 
 |Counter with CBC-Message Authentication Code
-
-|CCMP 
-|CCM Protocol
 
 |CPU 
 |Central Processing Unit
@@ -561,53 +562,9 @@ The evaluator shall examine the KMD to ensure that all keys and keying material 
 
 Note that where selections include 'destruction of reference to the key directly followed by a request for garbage collection' (for volatile memory) then the evaluator shall examine the KMD to ensure that it explains the nature of the destruction of the reference, the request for garbage collection, and of the garbage collection process itself.
 
-===== FCS_CKM_EXT.7 Cryptographic Key Agreement
-
-====== TSS
-
-The evaluator shall ensure that the selected RSA, DH, and ECDH key agreement schemes correspond to the key generation schemes selected in FCS_CKM.1/AKG. If the ST selects DH, the TSS shall describe how the implementation meets the relevant sections of RFC 3526 (Section 3-7) or RFC 7919 (Appendices A.1-A.5). If the ST selects ECIES, the TSS shall describe the key sizes and algorithms (e.g. elliptic curve point multiplication, ECDH with either NIST or Brainpool curves, a symmetric cipher permitted by FCS_COP.1/SKC, a hash algorithm permitted by FCS_COP.1/Hash, and a MAC algorithm permitted by FCS_COP.1/KeyedHash or FCS_COP.1/CMAC) that are supported for the ECIES implementation.
-
-The evaluator shall ensure that, for each key agreement scheme, the size of the derived keying material is at least the same as the intended strength of the key agreement scheme, and where feasible this should be twice the intended security strength of the key agreement scheme.
-
-For each key agreement scheme, the TSS shall list the associated key derivation function if applicable.
-
-====== AGD
-
-The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key agreement scheme.
-
-====== Test
-
-The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
-
-The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
-
-* Modulus size (KAS2)
-* Domain parameters (DH)
-* Curve (ECDH, ECIES)
-* Key agreement role (initiator or responder)
-* Hash algorithm (if applicable)
-* Associated data pattern (if applicable)
-* KDF configuration (if applicable)
-
-Each test group shall consist of at least 10 test cases meeting the following requirements:
-
-* Test cases shall be generated according to the parameter configuration of the test group.
-* Each test case shall consist of an arbitrary "owner" private key, an arbitrary "peer" public key, an arbitrary associated data string (if applicable), and the corresponding shared secret or derived key.
-* A representative sample of the domain of supported associated data sizes shall be tested.
-* A representative sample of the domain of supported shared secret sizes shall be tested.
-* A representative sample of the domain of supported derived key sizes shall be tested.
-
-For each test case in each test group, the evaluator shall verify that the TSF generates the correct shared secret or derived key.
-
-The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
 ==== Cryptographic Operation (FCS_COP)
 
-===== FCS_COP.1/Hash Cryptographic Operation (Hashing) 
+===== FCS_COP.1/Hash Cryptographic Operation - Hashing
 
 ====== TSS
 
@@ -644,7 +601,7 @@ for i = 1 through 100
     seed = digest
 ----
 
-For each test case in each test group, the evaluator shall verify that the TSF generates the correct 100 digest values.
+For each MCT test case in each test group, the evaluator shall verify that the TSF generates the correct 100 digest values.
 
 The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
@@ -652,7 +609,7 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash)
+===== FCS_COP.1/KeyedHash Cryptographic Operation - Keyed Hash
 
 ====== TSS
 
@@ -685,7 +642,7 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/SigGen Cryptographic Operation (Signature Generation)
+===== FCS_COP.1/SigGen Cryptographic Operation - Signature Generation
 
 ====== TSS
 
@@ -705,6 +662,7 @@ The developer shall provide sufficient information to the evaluator to properly 
 * Curve (ECDSA, EC-KCDSA, EdDSA)
 * Group size (KCDSA)
 * Private key size (LMS, HSS, XMSS, XMSS^MT^)
+* Parameter set (ML-DSA, HashML-DSA)
 * Padding scheme (RSA)
 * Hash or XOF algorithm
 
@@ -722,7 +680,7 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/SigVer Cryptographic Operation (Signature Verification)
+===== FCS_COP.1/SigVer Cryptographic Operation - Signature Verification
 
 ====== TSS
 
@@ -742,6 +700,7 @@ The developer shall provide sufficient information to the evaluator to properly 
 * Curve (ECDSA, EC-KCDSA, EdDSA)
 * Group size (DSA, KCDSA)
 * Private key size (LMS, HSS, XMSS, XMSS^MT^)
+* Parameter set (ML-DSA, HashML-DSA)
 * Padding scheme (RSA)
 * Hash or XOF algorithm
 
@@ -759,7 +718,7 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/SKC Cryptographic Operation (Symmetric-Key Cryptography)
+===== FCS_COP.1/SKC Cryptographic Operation - Symmetric-Key Cryptography
 
 ====== TSS
 
@@ -840,7 +799,7 @@ for i = 1 through 100
     ct = pt[j - 1]
 ----
 
-For each test case in each test group, the evaluator shall verify that the TSF generates the correct 100 ciphertexts/plaintexts.
+For each MCT test case in each test group, the evaluator shall verify that the TSF generates the correct 100 ciphertexts/plaintexts.
 
 The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
 
@@ -995,7 +954,7 @@ The evaluator shall examine the TSS to verify that it describes the policy rules
 
 Given that this SFR requires a large number of potential subject-object-operation pairings to be identified, it is not the expectation that the TSS contain an exhaustive list of these pairings. It is possible that large numbers of pairings are addressed by blanket statements of policy rules, such as "the subjects S.DSC and S.CApp are never able to perform any operation on the OB.AntiReplay object." For any rules that are not addressed in this manner, the evaluator shall verify the TSS includes sufficient data for the evaluator to determine how the TSF will evaluate the action. This can be presented in the form of a table, flowchart, list, or other manner that the ST author finds suitable.
 
-Note that the TOE developer may not use the same terminology for its subjects, objects, and operations as the PP. If this is the case, the evaluator shall verify that the TSS includes a mapping that unambiguously shows how the vendor's preferred terminology corresponds to what the PP defines.
+Note that the TOE developer may not use the same terminology for its subjects, objects, and operations as the PP. If this is the case, the evaluator shall verify that the TSS includes a mapping that unambiguously shows how the vendor's preferred terminology corresponds to what the PP defines. If the TSF implements additional security attributes beyond the minimum security attributes for a DSC, the evaluator shall verify that the TSS identifies these attributes.
 
 ====== AGD
 
@@ -1025,7 +984,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS to ensure that it describes how it protects the SDO references, authorization data, against access from unauthorized entities. In particular, it should describe how it provides confidentiality of the data while it resides outside the TOE after export.
+The evaluator shall examine the TSS to ensure that it describes how it protects the wrapped authorization data and wrapped SDOs against access from unauthorized entities. In particular, it should describe how it provides confidentiality of the data while it resides outside the TOE after export.
 
 ====== AGD
 
@@ -1033,7 +992,7 @@ There are no guidance evaluation activities for this component.
 
 ====== Test
 
-There are no test evaluation activities for this component.
+Testing for this SFR is performed as part of FCS_CKM.2.
 
 ====== KMD
 
@@ -1299,7 +1258,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS to determine that it describes each of the options for reauthorization.
+The evaluator shall examine the TSS to determine that it describes each of the policy options for reauthorization.
 
 ====== AGD
 
@@ -1341,7 +1300,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall confirm that the TSS describes the modification constraints for each SDO security attribute. 
+The evaluator shall confirm that the TSS describes the modification constraints for each SDO security attribute. The TSS shall specify any additional constraints that are relevant but not directly called out in the table.
 
 ====== AGD
 
@@ -1359,7 +1318,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall confirm that the TSS describes the initialization process for importing and generating SDOs. The TSS shall describe each type of SDO.Type and any additional attributes that are beyond the ones listed. In particular, it shall describe all attributes assigned to the SDO during parsing. Additionally, list any further restrictions of the allowed values for the minimum list of attributes.
+The evaluator shall confirm that the TSS describes the initialization process for importing and generating SDOs. The TSS shall describe each type of SDO.Type and any additional attributes that are beyond the ones listed. The TSS shall describe any implicit attributes for pre-installed SDOs as well as those stored in special locations. In particular, it shall describe all attributes assigned to the SDO during parsing. Additionally, list any further restrictions of the allowed values for the minimum list of attributes.
 
 The evaluator shall confirm that the TSS describes the allowed values for each of the attributes.
 
@@ -1891,7 +1850,7 @@ There are no KMD evaluation activities for this component.
 
 ==== Cryptographic Key Generation (FCS_CKM)
 
-===== FCS_CKM.1/AKG Cryptographic Key Generation (Asymmetric Keys)
+===== FCS_CKM.1/AKG Cryptographic Key Generation - Asymmetric Key
 
 ====== TSS
 
@@ -1912,6 +1871,7 @@ The developer shall provide sufficient information to the evaluator to properly 
 * Domain parameters (FFC)
 * Group size (KCDSA)
 * Private key size (LMS, HSS, XMSS, XMSS^MT^)
+* Parameter set (ML-KEM, ML-DSA)
 
 Each test group shall consist of at least 10 test cases meeting the following requirements:
 
@@ -1928,7 +1888,7 @@ If the TOE uses the generated key in a key chain/hierarchy then the evaluator sh
 * If [.underline]#AK1# is selected, then the KMD describes which methods for generating p and q are used
 * How the key is used as part of the key chain/hierarchy. 
 
-===== FCS_CKM.1/SKG Cryptographic key generation (Symmetric Key)
+===== FCS_CKM.1/SKG Cryptographic Key Generation - Symmetric Key
 
 ====== TSS
 
@@ -1956,9 +1916,11 @@ If the TOE uses the generated key in a key chain/hierarchy then the KMD shall de
 
 The evaluator shall check that the TSS includes a description of the key derivation functions and shall check that this uses a key derivation algorithm and key sizes according to the specification selected in the ST out of the [DSC cPP] Table "Cryptographic Key Derivation" per row. The evaluator shall confirm that the TSS supports the selected methods.
 
-If [.underline]#Concatenated key5# is selected for any key derivation function, the evaluator shall verify that the TSS shows that the total length of the concatenated keys used as input to the KDF is greater than or equal to the length of the output from the KDF.
+[conditional] If intermediary or concatenated keys are used as part of key derivation, the evaluator shall verify that the TSS describes the sources of the keys, the order in which they are concatenated (if applicable), along with any other values that are concatenated with them. The evaluator shall also verify that the TSS shows that the total length of these keys used as input to the derivation algorithm is greater than or equal to the length of the output from the algorithm.
 
-[conditional] If key combination is used to form a KEK, the evaluator shall verify that the TSS describes the method of combination and that this method is either an XOR, a KDF, or encryption.
+[conditional] If [.underline]#KDF-XOR# is selected, the evaluator shall verify that the TSS describes the method used to derive a key from more than one intermediary key using XOR.
+
+[conditional] If [.underline]#KDF-ENC# is selected, the evaluator shall verify that the TSS describes the encryption algorithm used (from FCS_COP.1/AEAD or FCS_COP.1/SKC), and identify which of the two inputs is used as the plaintext and the key in the encryption algorithm.
 
 [conditional] If a KDF is used to form a KEK, the evaluator shall ensure that the TSS includes a description of the key derivation function and shall verify the key derivation uses an approved derivation mode and key expansion algorithm according to SP 800-108 Rev. 1 or SP 800-56C Rev. 2.
 
@@ -1967,10 +1929,10 @@ If [.underline]#Concatenated key5# is selected for any key derivation function, 
 * The description must include how an approved untruncated MAC function is being used for the randomness extraction step and the evaluator must verify the TSS describes that the output length (in bits) of the MAC function is at least as large as the targeted security strength (in bits) of the parameter set employed by the key establishment scheme (see Tables 1-3 of SP 800-56C Rev. 2).
 * The description must include how the MAC function being used for the randomness extraction step is related to the PRF used in the key expansion and verify the TSS description includes the correct MAC function:
 ** If an HMAC-hash is used in the randomness extraction step, then the same HMAC-hash (with the same hash function hash) is used as the PRF in the key expansion step.
-** If an AES-CMAC (with key length 128, 192, or 256 bits) is used in the randomness extraction step, then AES-CMAC with a 128-bit key is used as the PRF in the key expansion step.
+** If an AES-N-CMAC or Camellia-N-CMAC (with N equal to 128, 192, or 256 bits) is used in the randomness extraction step, then CMAC with the same cipher and a 128-bit key is used as the PRF in the key expansion step.
 * The description must include the lengths of the salt values being used in the randomness extraction step and the evaluator shall verify the TSS description includes correct salt lengths:
 ** If an HMAC-hash is being used as the MAC, the salt length can be any value up to the maximum bit length permitted for input to the hash function hash.
-** If an AES-CMAC is being used as the MAC, the salt length shall be the same length as the AES key (i.e. 128, 192, or 256 bits).
+** If an CMAC is being used as the MAC, the salt length shall be the same length as the CMAC cipher key (i.e. 128, 192, or 256 bits).
 
 ====== AGD
 
@@ -1982,10 +1944,10 @@ The algorithm tests might require access to a development version of the TOE or 
 
 The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
 
-* PRF (KDF-CTR, KDF-FB, KDF-DPI)
+* PRF (KDF-CTR, KDF-FB, KDF-DPI, KDF-KMAC)
 * Encryption algorithm (KDF-ENC)
 * Hash algorithm (KDF-HASH)
-* MAC algorithm (KDF-MAC-1S, KDF-MAC-2S, KDF-KMAC)
+* MAC algorithm (KDF-MAC-1S, KDF-MAC-2S)
 * Counter size (KDF-CTR, KDF-FB, KDF-DPI)
 * Counter location (KDF-CTR, KDF-FB, KDF-DPI)
 * Salt length (KDF-MAC-1S, KDF-MAC-2S)
@@ -2018,7 +1980,7 @@ The evaluator shall examine the KMD to ensure that:
 
 ====== TSS
 
-The evaluator shall verify that for each key selected cryptograhpic method the ST contains the corresponding SFR. The evaluator shall ensure the key access operations which utilize the specified cryptographic methods. Where multiple methods may be selected, the evaluator shall verify that each method's usage is described.
+The evaluator shall verify that for each key selected cryptographic method the ST contains the corresponding SFR. The evaluator shall ensure the key access operations which utilize the specified cryptographic methods. Where multiple methods may be selected, the evaluator shall verify that each method's usage is described.
 
 ===== AGD
 
@@ -2031,6 +1993,50 @@ Testing for this SFR is performed under the corresponding functions based on the
 ===== KMD
 
 The developer is allowed to provide additional details of the key access operations and cryptographic methods in the KMD. The evaluator shall verify the accuracy of any additional descriptions (if present).
+
+===== FCS_CKM_EXT.7 Cryptographic Key Agreement
+
+====== TSS
+
+The evaluator shall ensure that the selected RSA, DH, and ECDH key agreement schemes correspond to the key generation schemes selected in FCS_CKM.1/AKG. If the ST selects DH, the TSS shall describe how the implementation meets the relevant sections of RFC 3526 (Section 3-7) or RFC 7919 (Appendices A.1-A.5). If the ST selects ECIES, the TSS shall describe the key sizes and algorithms (e.g. elliptic curve point multiplication, ECDH with either NIST or Brainpool curves, a symmetric cipher permitted by FCS_COP.1/SKC, a hash algorithm permitted by FCS_COP.1/Hash, and a MAC algorithm permitted by FCS_COP.1/KeyedHash or FCS_COP.1/CMAC) that are supported for the ECIES implementation.
+
+The evaluator shall ensure that, for each key agreement scheme, the size of the derived keying material is at least the same as the intended strength of the key agreement scheme, and where feasible this should be twice the intended security strength of the key agreement scheme.
+
+For each key agreement scheme, the TSS shall list the associated key derivation function if applicable.
+
+====== AGD
+
+The evaluator shall verify that the guidance instructs the administrator how to configure the TOE to use the selected key agreement scheme.
+
+====== Test
+
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
+
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
+
+* Modulus size (KAS2)
+* Domain parameters (DH)
+* Curve (ECDH, ECIES)
+* Key agreement role (initiator or responder)
+* Hash algorithm (if applicable)
+* Associated data pattern (if applicable)
+* KDF configuration (if applicable)
+
+Each test group shall consist of at least 10 test cases meeting the following requirements:
+
+* Test cases shall be generated according to the parameter configuration of the test group.
+* Each test case shall consist of an arbitrary "owner" private key, an arbitrary "peer" public key, an arbitrary associated data string (if applicable), and the corresponding shared secret or derived key.
+* A representative sample of the domain of supported associated data sizes shall be tested.
+* A representative sample of the domain of supported shared secret sizes shall be tested.
+* A representative sample of the domain of supported derived key sizes shall be tested.
+
+For each test case in each test group, the evaluator shall verify that the TSF generates the correct shared secret or derived key.
+
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
 
 ===== FCS_CKM_EXT.8 Password-Based Key Derivation
 
@@ -2072,7 +2078,7 @@ There are no KMD evaluation activities for this component.
 
 ==== Cryptographic Operation (FCS_COP)
 
-===== FCS_COP.1/AEAD Cryptographic Operation (Authenticated Encryption with Associated Data)
+===== FCS_COP.1/AEAD Cryptographic Operation - Authenticated Encryption with Associated Data
 
 ====== TSS
 
@@ -2115,7 +2121,7 @@ Assessment of the complete data path for authenticated encryption with associate
 
 The evaluator shall examine the KMD to ensure that it describes how the IV is generated and that the same initialization vector is never reused to encrypt different plaintext pairs under the same key. Moreover in the case of GCM, the evaluator must ensure that, at each invocation of GCM, the length of the plaintext is at most (2^32)-2 blocks.
 
-===== FCS_COP.1/CMAC Cryptographic Operation (CMAC)
+===== FCS_COP.1/CMAC Cryptographic Operation - CMAC
 
 ====== TSS
 
@@ -2148,7 +2154,7 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/KeyEncap Cryptographic Operation (Key Encapsulation)
+===== FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
 
 ====== TSS
 
@@ -2168,8 +2174,9 @@ The algorithm tests might require access to a development version of the TOE or 
 
 The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
 
-* Modulus size
-* Key agreement role (initiator or responder)
+* Modulus size (RSA)
+* Parameter set (ML-KEM)
+* Key agreement role (initiator or responder) or operation (encapsulation or decapsulation)
 * Hash algorithm (if applicable)
 * Associated data pattern (if applicable)
 * KDF configuration (if applicable)
@@ -2190,7 +2197,7 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 
 There are no KMD evaluation activities for this component.
 
-===== FCS_COP.1/KeyWrap Cryptographic Operation (Key Wrap)
+===== FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrapping
 
 ====== TSS
 
@@ -2225,6 +2232,60 @@ The evaluator shall be able to provide a rationale as to the sufficiency of the 
 ====== KMD
 
 The evaluator shall examine the KMD to ensure that it describes when the key wrapping occurs, that the KMD description is consistent with the description in the TSS, and that for all keys that are wrapped the TOE uses a method as described in the [DSC cPP] table. No uncertainty should be left over which is the wrapping key and the key to be wrapped and where the wrapping key potentially comes from i.e. is derived from.
+
+===== FCS_COP.1/XOF Extendable-Output Function
+
+====== TSS
+
+The evaluator shall check that the association of the extendable-output function with other TSF cryptographic functions (for example, the digital signature verification function) is documented in the TSS.
+
+====== AGD
+
+The evaluator checks the AGD documents to determine that any configuration that is required to configure the output sizes is present. The evaluator also checks the AGD documents to confirm that the instructions for establishing the evaluated configuration use only those hash algorithms selected in the ST.
+
+====== Test
+
+The algorithm tests might require access to a development version of the TOE or a test platform that provides tools not typically found on factory products.
+
+The developer shall provide sufficient information to the evaluator to properly define the implementation of the algorithm. The evaluator shall define at least one test group (a configuration of algorithm properties and associated test cases) for each combination of the following parameters, according to the implementation of the algorithm:
+
+* XOF algorithm
+
+Each test group shall consist of at least 100 test cases meeting the following requirements:
+
+* Test cases shall be generated according to the parameter configuration of the test group.
+* For SHAKE, each test case shall consist of an arbitrary input message, output length, and the corresponding digest value.
+* For cSHAKE, each test case shall consist of an arbitrary input message, customization string, output length, and the corresponding digest value.
+* For KMACXOF, each test case shall consist of an arbitrary input message, key, customization string, output length, and the corresponding MAC value.
+* A representative sample of the domain of supported input message sizes, key sizes, customization string sizes, and output lengths shall be tested.
+
+For each test case in each test group, the evaluator shall verify that the TSF generates the correct digest or MAC value.
+
+Additionally, each SHAKE and cSHAKE test group shall contain least one Monte Carlo Test (MCT) test case, consisting of an arbitrary seed and a list of 100 digest values. For XOF algorithms, the MCT is defined as follows (note: customization is only used for cSHAKE):
+----
+range = max_out_len - min_out_len + 1
+out_len = max_out_len
+customization = ""
+for i = 1 through 100
+    digest = seed
+    for j = 1 through 1000
+        msg = 128 leftmost bits of digest
+        right-pad msg with "0" bits until msg is at least 128 bits long
+        digest = XOF(msg, customization) to out_len bytes
+        offset = 16 rightmost bits of digest as an integer
+        out_len = min_out_len + (offset % range)
+        customization = (msg) || (16 rightmost bits of digest)
+    output digest
+    seed = digest
+----
+
+For each MCT test case in each test group, the evaluator shall verify that the TSF generates the correct 100 digest values.
+
+The evaluator shall be able to provide a rationale as to the sufficiency of the test groups and test cases in exercising the algorithm. Test cases shall be generated using a known-good implementation to ensure the correct result is produced by the TSF. The evaluator shall determine the proper known-good implementation and provide a rationale for its use for testing. Internal or external implementations are acceptable with a sufficient rationale.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
 
 === User Data Protection (FDP)
 
@@ -2446,62 +2507,6 @@ There are no KMD evaluation activities for this component.
 
 === Trusted Path/Channels (FTP)
 
-==== CCM Protocol (Extended - FTP_CCMP_EXT)
-
-===== FTP_CCMP_EXT.1 CCM Protocol
-
-====== TSS
-
-The evaluator shall verify that the TSS includes a description of the TOE's expected responses to CCMP authentication failures and malformed or invalid CCMP data units.
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-The evaluator shall perform the following tests:
-
-Test 1: The evaluator shall attempt to establish a CCMP connection to the TOE from an external entity, observe the return traffic with a network traffic analyzer, and verify that the connection succeeds and that the traffic is identified as properly constructed CCMP data units.
-
-Test 2: The evaluator shall attempt to establish a CCMP connection to the TOE using five messages with incorrect or invalid authentication factors and verify that an authentication failure or error status is returned.
-
-Test 3: The evaluator shall attempt to establish a CCMP connection to the TOE using five different messages that are malformed or invalid due to noncompliance with the CCMP standard and observe that all connection attempts are unsuccessful.
-
-Test 4: The evaluator shall establish a valid CCMP connection to the TOE. Once this has been established, the evaluator shall send ten different messages that are malformed or invalid due to noncompliance with the CCMP standard and observe that each of these messages are rejected.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
-==== GCM Protocol (Extended - FTP_GCMP_EXT)
-
-===== FTP_GCMP_EXT.1 GCM Protocol
-
-====== TSS
-
-The evaluator shall verify that the TSS includes a description of the TOE's expected responses to GCMP authentication failures and malformed or invalid GCMP data units.
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-The evaluator shall perform the following tests:
-
-Test 1: The evaluator shall attempt to establish a GCMP connection to the TOE from an external entity, observe the return traffic with a network traffic analyzer, and verify that the connection succeeds and that the traffic is identified as properly constructed GCMP data units.
-
-Test 2: The evaluator shall attempt to establish a GCMP connection to the TOE using five messages with incorrect or invalid authentication factors and verify that an authentication failure or error status is returned.
-
-Test 3: The evaluator shall attempt to establish a GCMP connection to the TOE using five different messages that are malformed or invalid due to noncompliance with the GCMP standard and observe that all connection attempts are unsuccessful.
-
-Test 4: The evaluator shall establish a valid GCMP connection to the TOE. Once this has been established, the evaluator shall send ten different messages that are malformed or invalid due to noncompliance with the GCMP standard and observe that each of these messages are rejected.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
 ==== Inter-TSF Trusted Channel (Extended - FTP_ITC_EXT)
 
 ===== FTP_ITC_EXT.1 Cryptographically Protected Communications Channels
@@ -2516,7 +2521,7 @@ There are no AGD evaluation activities for this component.
 
 ====== Test
 
-The evaluator shall configure the TOE to communicate with each external IT entity or type of remote user identified in the TSS. The evaluator shall monitor network traffic while the TSF performs communication with each of these destinations. The evaluator shall ensure that for each session a trusted channel was established in conformance with the protocols identified in the selection.
+The evaluator shall configure the TOE to communicate with each external IT entity or type of remote user identified in the TSS. The evaluator shall monitor network traffic while the TSF performs communication with each of these destinations. The evaluator shall ensure that for each session a trusted channel was established in conformance with the protocols identified in the assignment.
 
 ====== KMD
 
@@ -2538,7 +2543,7 @@ There are no AGD evaluation activities for this component.
 
 The evaluator shall configure the TOE to communicate with each external entity identified in the TSS. The evaluator shall initiate a transaction that will result in data being transferred to the TOE through the mechanism and other data returned to the initiating entity through the mechanism. The evaluator must verify that the data returned to the entity was encrypted using the documented mechanism when received.
 
-====== 4KMD
+====== KMD
 
 There are no KMD evaluation activities for this component.
 
@@ -2694,8 +2699,11 @@ However, if the evaluator is unable to perform some other required EA because th
 |Cryptographic Signature Verification
 |FCS_COP.1/SigVer
 
+|Extendable-Output Function
+|FCS_COP.1/XOF
+
 |Symmetric-Key Cryptography 
-|FCS_COP.1/SKC, [FTP_CCMP_EXT.1, FTP_GCMP_EXT.1]
+|FCS_COP.1/SKC, [FCS_COP.1/AEAD]
 
 |Random Bit Generation
 |FCS_RBG.1, [FCS_RBG.6]
@@ -2953,7 +2961,7 @@ The supplementary information required by this SD are:
 |https://www.iso.org/standard/72515.html
 
 |[DSC cPP]
-|collaborative Protection Profile for Dedicated Security Component, Version 2.0, October 28, 2024
+|collaborative Protection Profile for Dedicated Security Component, Version 2.1, November 17, 2025
 |https://dsc-itc.github.io
 
 |===
