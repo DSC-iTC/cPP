@@ -2953,7 +2953,7 @@ The supplementary information required by this SD are:
 |https://www.commoncriteriaportal.org/cc/index.cfm
 
 |[CC-E&I]
-|Errata and Interpretation for CC:2022 (Release 1) and CEM:2022 (Release 1), 001, Version 1.1, February 1, 2024
+|Errata and Interpretation for CC:2022 (Release 1) and CEM:2022 (Release 1), 001, Version 1.2, October 15, 2025
 |https://www.commoncriteriaportal.org/cc/index.cfm
 
 |[ISO-TR]
