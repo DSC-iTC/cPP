@@ -193,32 +193,23 @@ For definitions of standard CC terminology, see [CC] part 1.
 |Root Encryption Key 
 |An encryption key that serves as the anchor of a hierarchy of keys.
 
-|Root of Trust 
-|A root of trust performs one or more security specific functions; establishing the foundation on which all trust in a system is placed. [NIST-ROTM]
+|Root of Trust (RoT)
+|A RoT performs one or more security specific functions; establishing the foundation on which all trust in a system is placed. [NIST-ROTM]
 
-|Root of Trust for Authorization 
-|(As defined by [GP_ROT]) The Root of Trust for Authorization provides reliable capabilities to assess authorization tokens and determine whether or not they satisfy policies for access control.
-
-|Root of Trust for Confidentiality 
+|Root of Trust for Confidentiality
 |(As defined by [GP_ROT]) The Root of Trust for Confidentiality maintains shielded locations for the purpose of storing sensitive data, such as secret keys and passwords.
 
-|Root of Trust for Integrity 
+|Root of Trust for Integrity
 |(As defined by [GP_ROT]) The Root of Trust for Integrity maintains shielded locations for the purpose of storing and protecting the integrity of non-secret critical security parameters and platform characteristics. Critical security parameters include, but are not limited to, authorization values, public keys, and public key certificates.
 
-|Root of Trust for Measurement 
+|Root of Trust for Measurement
 |(As defined by [GP_ROT]) The Root of Trust for Measurement provides the ability to reliably create platform characteristics.
 
-|Root of Trust for Reporting 
+|Root of Trust for Reporting
 |(As defined by [GP_ROT]) The Root of Trust for Reporting reliably reports platform characteristics. It provides an interface that limits its services to providing reports on its platform characteristics authenticated by a platform identity.
 
-|Root of Trust for Storage 
-|A root of trust that acts as the Root of Trust for Confidentiality and the Root of Trust for Integrity.
-
-|Root of Trust for Update 
-|A root of trust responsible for updating the firmware.
-
-|Root of Trust for Verification 
-|A root of trust responsible for verifying digital signatures.
+|Root of Trust for Verification
+|(As defined by [GP_ROT]) The Root of Trust for Verification verifies the integrity and authenticity of signed objects. Objects may include, but are not limited to, public keys, code, and data.
 
 |Security Data Element 
 |A Critical Security Parameter, such as a cryptographic key or authorization token.
@@ -998,38 +989,6 @@ Testing for this SFR is performed as part of FCS_CKM.2.
 
 There are no KMD evaluation activities for this component.
 
-==== Factory Reset (Extended - FDP_FRS_EXT)
-
-===== FDP_FRS_EXT.1 Factory Reset
-
-====== TSS
-
-The evaluator shall examine the TSS to determine that it describes each of the conditions which may lead to a factory reset.
-
-====== AGD
-
-The evaluator shall examine the operational guidance to ensure that it describes the ways the administrator can set the conditions to initiate a factory reset if this is supported.
-
-====== Test
-
-Test 1 [conditional]: If [.underline]#activation by external interface# is selected in FDP_FRS_EXT.1.1, the evaluator shall identify all external interfaces that reset the DSC to factory settings. For each external interface, the evaluator shall perform the following steps:
-
-. Create an SDE or SDO.
-. Verify the presence of the item created in the previous step.
-. Initiate the factory reset using the given external interface.
-. Verify the item created in Step #1. no longer exists.
-
-Test 2 [conditional]: If [.underline]#presentation of ...# is selected in FDP_FRS_EXT.1.1, the evaluator shall identify all functions that reset the DSC to factory settings and their respective required authorization data. For each function and for each authorization method (i.e., type of requured authorization data), the evaluator shall perform the following steps:
-
-. Create an SDE or SDO.
-. Verify the presence of the item created in the previous step.
-. Initiate the factory reset using the given function and authorization data.
-. Verify the item created in Step #1. no longer exists.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
 ==== Import from Outside the TOE (Extended - FDP_ITC_EXT)
 
 ===== FDP_ITC_EXT.1 Parsing of SDEs
@@ -1172,7 +1131,7 @@ Test 1: If the administrator is able to configure any of the variables for autho
 
 Test 2: After reaching the limit for unsuccessful authorization attempts as in Test 1 above, the evaluator shall proceed as follows. If the action selected in FIA_AFL_EXT.1.3 is included in the ST then the evaluator shall confirm by testing that following the operational guidance and performing each action specified in the ST to re-enable access results in successful access. If the time period selection in FIA_AFL_EXT.1.3 is included in the ST, then the evaluator shall wait for just less than the time period configured in Test 1 and show that an authorization attempt using valid credentials does not result in successful access. The evaluator shall then wait until just after the time period configured in Test 1 and show that an authorization attempt using valid credentials results in successful access.
 
-Test 3 [conditional]: If [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.2# is selected in FIA_AFL_EXT.1.3, the evaluator shall perform the test required by FDP_FRS_EXT.2 with step 5 replaced with "The evaluator shall initiate a factory reset by deliberately meeting or surpassing the threshold for unsuccessful authorization attempts, depending on whether [.underline]#meets# or [.underline]#surpasses# is selected in FIA_AFL_EXT.1.3."
+Test 3 [conditional]: If [.underline]#factory reset the TOE wiping out all non-permanent SDEs and SDOs, as described by FDP_FRS_EXT.1# is selected in FIA_AFL_EXT.1.3, the evaluator shall perform the test required by FDP_FRS_EXT.1 with step 5 replaced with "The evaluator shall initiate a factory reset by deliberately meeting or surpassing the threshold for unsuccessful authorization attempts, depending on whether [.underline]#meets# or [.underline]#surpasses# is selected in FIA_AFL_EXT.1.3."
 
 ====== KMD
 
@@ -1490,9 +1449,9 @@ The evaluator shall then induce a voltage glitch outside of the specified normal
 
 There are no KMD evaluation activities for this component.
 
-==== Root of Trust (Extended - FPT_PRO_EXT)
+==== Root of Trust (Extended - FPT_ROT_EXT)
 
-===== FPT_PRO_EXT.1 Root of Trust
+===== FPT_ROT_EXT.1 Root of Trust
 
 ====== TSS
 
@@ -1501,6 +1460,10 @@ The evaluator shall examine the TSS to ensure that it describes how Root of Trus
 [conditional] For immutable Root of Trust data, the evaluator shall ensure there are no mechanisms to update the Root of Trust.
 
 [conditional] For mutable Root of Trust data, the evaluator shall ensure the Root of Trust update mechanism uses an approved method for authenticating the source of the update.
+
+The evaluator shall ensure that the TSS describes how the Root of Trust prevents unauthorized disclosure and unauthorized modification to SDOs. The evaluator shall also examine the TSS to verify that it uses approved mechanisms to protect the confidentiality of secret SDOs and to protect the integrity of SDOs.
+
+The evaluator shall ensure that the TSS identifies the Roots of Trust it provides (including but not limited to the Roots of Trust identified in the selections in this requirement) and describes their function in the context of the TOE. The TSS shall describe the cryptographic algorithms in use for the Roots of Trust.
 
 ====== AGD
 
@@ -1523,58 +1486,6 @@ For mutable Root of Trust data, the evaluator shall perform the following tests:
 ====== KMD
 
 The evaluator shall ensure that the KMD describes either a pre-installed identity (contained within an SDO), or a process on how the TOE creates an identity. IEEE 802.1ar is one example of a standard which a device can use to create such an identity. 
-
-==== Root of Trust Services (Extended - FPT_ROT_EXT)
-
-===== FPT_ROT_EXT.1 Root of Trust Services
-
-====== TSS
-
-The evaluator shall ensure that the TSS identifies the Roots of Trust it provides (including but not limited to the Roots of Trust identified in the selections in this requirement) and describes their function in the context of the TOE. The TSS shall describe the cryptographic algorithms in use for the Roots of Trust.
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-*_Root of Trust for Storage_*
-
-Testing for this component is performed through evaluation of FCS_CKM.1, FCS_STG_EXT.1 and FPT_PHP.3.
-
-*_Root of Trust for Authorization_*
-
-Testing for this component is performed through evaluation of FIA_AFL_EXT.1.
-
-*_Root of Trust for Measurement_*
-
-Testing for this component is performed through evaluation of FCS_COP.1/Hash.
-
-*_Root of Trust for Reporting_*
-
-Testing for this component is performed through evaluation of FCS_COP.1/SigGen.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
-===== FPT_ROT_EXT.2 Root of Trust for Storage
-
-====== TSS
-
-The evaluator shall ensure that the TSS describes how the Root of Trust for Storage prevents unauthorized access (including unauthorized disclosure and unauthorized modification) to SDOs. The evaluator shall also examine the TSS to verify that it uses approved mechanisms to protect the confidentiality of secret SDOs and to protect the integrity of SDOs.
-
-====== AGD
-
-There are no AGD evaluation activities for this component.
-
-====== Test
-
-Testing for this component is performed through evaluation of FCS_CKM.1, FCS_STG_EXT.1, FDP_SDC.2, FDP_SDI.2 and FPT_PHP.3.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
 
 ==== Replay Prevention (FPT_RPL)
 
@@ -1602,7 +1513,7 @@ There are no KMD evaluation activities for this component.
 
 ====== TSS
 
-The evaluator shall examine the TSS and other vendor documentation and ensure they describe the methods used to verify integrity of the TSF and TSF data, both automatic checks and if supported, checks requested by the user. If more than the power-on check is selected, then each condition for the self test shall be examined.
+The evaluator shall examine the TSS and other vendor documentation and ensure they describe the methods used to demonstrate the correct operation of the TSF, verify the integrity of the TSF and its data, both automatic checks and if supported, checks requested by the user. The TSS shall also describe how the TSF responds to self-test failures. Each condition for the self-tests shall be described and examined.
 
 ====== AGD
 
@@ -1610,11 +1521,9 @@ The evaluator shall examine the operational guidance to ensure it provides autho
 
 ====== Test
 
-Test 1: The evaluator shall verify that the DSC performs an integrity check of all TSF, including data, as well as performing KATs for those functions. The evaluator shall verify failures using malformed known answer test data (for example, unexpected input or output values).
+Test 1: For each implemented self-test, the evaluator shall cause the self-test to fail and verify the TSF responds as described in the TSS.
 
-Test 2: The evaluator shall ensure that when an integrity check failure occurs specific to failing KATs and failure to verify the integrity of the TSF, the TOE will prevent any further processing of the current TSF and user data. 
-
-Test 3 [conditional]: For each condition where a self test may be initiated, the evaluator shall verify that the self tests are run as specified.
+Test 2 [conditional]: For each condition where a self-test may be initiated, the evaluator shall verify that the self-tests are performed as specified.
 
 ====== KMD
 
@@ -1770,9 +1679,9 @@ Note that test 4 shall only be performed for those interfaces where physical int
 
 There are no KMD evaluation activities for this component.
 
-==== Root of Trust (Extended - FPT_PRO_EXT)
+==== Root of Trust (Extended - FPT_ROT_EXT)
 
-===== FPT_PRO_EXT.2 Data Integrity Measurements
+===== FPT_ROT_EXT.2 Root of Trust for Measurement
 
 ====== TSS
 
@@ -1810,9 +1719,7 @@ Refer to [DSC cPP] for more information about what could constitute DSC data or 
 
 There are no KMD evaluation activities for this component.
 
-==== Root of Trust Services (Extended - FPT_ROT_EXT)
-
-===== FPT_ROT_EXT.3 Root of Trust for Reporting Mechanisms
+===== FPT_ROT_EXT.3 Root of Trust for Reporting
 
 ====== TSS
 
@@ -1824,7 +1731,7 @@ In addition, the evaluator shall examine the TSS and ensure that it describes ho
 
 ====== AGD
 
-The evaluator shall examine the guidance documentation to confirm it describes how to enable the root of trust for reporting mechanism on the TOE, how to generate a report, and how reports are verified as genuine.
+The evaluator shall examine the guidance documentation to confirm it describes how to enable the Root of Trust for Reporting mechanism on the TOE, how to generate a report, and how reports are verified as genuine.
 
 ====== Test
 
@@ -1832,13 +1739,37 @@ Note that the following test may require the developer to provide access to a te
 
 The evaluator shall perform the following tests:
 
-Test 1: The evaluator shall enable the root of trust for reporting mechanism on the TOE and generate a report.
+Test 1: The evaluator shall enable the Root of Trust for Reporting mechanism on the TOE and generate a report.
 
 Test 2: The evaluator shall confirm the generated report is valid.
 
 Test 3: The evaluator shall modify the signature of a valid report and confirm the report is invalid. 
 
 Test 4: The evaluator shall modify the contents of a valid report and confirm the report is invalid.
+
+====== KMD
+
+There are no KMD evaluation activities for this component.
+
+===== FPT_ROT_EXT.4 Root of Trust for Verification
+
+====== TSS
+
+The evaluator shall examine the TSS and ensure that it describes the cryptographically verifiable identities for the Root of Trust for Verification, how they relate to the Root of Trust identified in FPT_ROT_EXT.1.1, and how they are used.
+
+====== AGD
+
+[conditional] If the DSC provides a service to perform the verification, the evaluator shall examine the guidance documentation to confirm it describes how to access this service.
+
+====== Test
+
+Note that the following test may require the developer to provide access to a test platform that provides the evaluator with tools that are not typically available to end users.
+
+The evaluator shall perform the following tests:
+
+Test 1: The evaluator shall confirm that an object with a valid signature is successfully verified by the Root of Trust for Verification.
+
+Test 2: The evaluator shall modify the signature on any object verified by the Root of Trust for Verification and confirm the verification fails.
 
 ====== KMD
 
@@ -2323,25 +2254,39 @@ There are no KMD evaluation activities for this component.
 
 ==== Factory Reset (Extended - FDP_FRS_EXT)
 
-===== FDP_FRS_EXT.2 Factory Reset Behavior
+===== FDP_FRS_EXT.1 Factory Reset
 
 ====== TSS
+
+The evaluator shall examine the TSS to determine that it describes each of the conditions which may lead to a factory reset.
 
 The evaluator shall examine the TSS to determine the pre-installed SDOs that are reverted to their factory settings when a factory reset occurs, what the factory settings are for those SDOs, and that the TSS states that all non-permanent SDEs and SDOs are destroyed.
 
 ====== AGD
 
+The evaluator shall examine the operational guidance to ensure that it describes the ways the administrator can set the conditions to initiate a factory reset.
+
 The evaluator shall examine the operational guidance and verify that it identifies the pre-installed SDOs that are reverted to their initial values when a factory reset has been performed.
 
 ====== Test
 
-The evaluator shall perform the following test:
+Test 1 [conditional]: If [.underline]#activation by external interface# is selected in FDP_FRS_EXT.1.1, the evaluator shall identify all external interfaces that reset the DSC to factory settings. For each external interface, the evaluator shall perform the following steps:
 
-. The evaluator shall use each supported role to create or import an SDE or SDO that has known data. 
-. The evaluator shall then verify that the created SDE/SDO resides either within the DSC, or under the control of the DSC. 
+. The evaluator shall use each supported role to create or import an SDE or SDO that has known data.
+. The evaluator shall then verify that the created SDE/SDO resides either within the DSC, or under the control of the DSC.
 . The evaluator shall perform some operation for each created or imported SDE/SDO in step 1 that demonstrates that the SDE/SDO has been set to the indicated value.
-. For each pre-installed SDO that is identified in FDP_FRS_EXT.2.1, the evaluator shall perform some operation to verify what the current value of that SDO is.
-. The evaluator shall initiate a factory reset.
+. For each pre-installed SDO that is identified in FDP_FRS_EXT.1.2, the evaluator shall perform some operation to verify what the current value of that SDO is.
+. The evaluator shall initiate a factory reset using the given external interface.
+. For each created or imported SDE/SDO that is identified in step 3, the evaluator shall re-attempt the operation and verify that it no longer completes successfully because the SDE/SDO data has been erased.
+. For each pre-installed SDO that is identified in step 4, the evaluator shall re-attempt the operation and verify that the SDOs have been set to their factory default values.
+
+Test 2 [conditional]: If [.underline]#presentation of ...# is selected in FDP_FRS_EXT.1.1, the evaluator shall identify all functions that reset the DSC to factory settings and their respective required authorization data. For each function and for each authorization method (i.e., type of required authorization data), the evaluator shall perform the following steps:
+
+. The evaluator shall use each supported role to create or import an SDE or SDO that has known data.
+. The evaluator shall then verify that the created SDE/SDO resides either within the DSC, or under the control of the DSC.
+. The evaluator shall perform some operation for each created or imported SDE/SDO in step 1 that demonstrates that the SDE/SDO has been set to the indicated value.
+. For each pre-installed SDO that is identified in FDP_FRS_EXT.1.2, the evaluator shall perform some operation to verify what the current value of that SDO is.
+. The evaluator shall initiate a factory reset using the given function and authorization data.
 . For each created or imported SDE/SDO that is identified in step 3, the evaluator shall re-attempt the operation and verify that it no longer completes successfully because the SDE/SDO data has been erased.
 . For each pre-installed SDO that is identified in step 4, the evaluator shall re-attempt the operation and verify that the SDOs have been set to their factory default values.
 
@@ -2401,33 +2346,11 @@ There are no KMD evaluation activities for this component.
 
 ==== Mutable/Immutable Firmware (Extended - FPT_MFW_EXT)
 
-===== FPT_MFW_EXT.2 Basic Firmware Integrity
+===== FPT_MFW_EXT.2 Firmware Integrity
 
 ====== TSS
 
-The evaluator shall verify that the TSS describes which critical memory is measured for these integrity values and how the measurement is performed (including which TOE software measures the memory integrity values, how that software accesses the critical memory, and which algorithms are used).
-
-====== AGD
-
-If the integrity values are provided to the administrator, the evaluator shall verify that the AGD guidance contains instructions for retrieving these values and information for interpreting them. For example, if multiple measurements are taken, what those measurements are and how changes to those values relate to changes in the device state.
-
-====== Test
-
-Note that the following test may require the developer to provide access to a test platform that provides the evaluator with tools that are not typically available to end users.
-
-The evaluator shall repeat the following test for each measurement:
-
-The evaluator shall boot the TOE in an approved state and record the measurement taken. The evaluator shall modify the critical memory or value that is measured. The evaluator shall reboot the TOE and verify that the measurement changed.
-
-====== KMD
-
-There are no KMD evaluation activities for this component.
-
-===== FPT_MFW_EXT.3 Firmware Authentication with Identity of Guarantor
-
-====== TSS
-
-The evaluator shall examine the TSS to ensure it describes the methods and identities used to verify integrity and authenticity of the firmware. The TSS shall identify the Guarantor and how to verify its identity.
+The evaluator shall examine the TSS to ensure it describes the methods (i.e., cryptographic algorithms) and identities (e.g., code signing certificates) used to verify integrity and authenticity of the firmware. The TSS shall identify the Guarantor (e.g., root certificate authority or trusted public key) and how to verify its identity.
 
 ====== AGD
 
@@ -2439,13 +2362,23 @@ The TOE guarantees the authenticity of the firmware using the identity of the Gu
 
 *Test 1: Verify Authentic Firmware*
 
-The evaluator shall trigger the TOE to load and evaluate the authenticity of authentic firmware according the methods described in the TSS. The evaluator shall ensure that the TOE provides a clear indication of the success of the evaluation to consider the test a 'Pass', otherwise, the test is a 'Fail'.
+The evaluator shall trigger the TOE to load and evaluate the integrity and authenticity of authentic firmware before execution, according the methods described in the TSS. The evaluator shall ensure that the TOE provides a clear indication of the success of the evaluation to consider the test a 'Pass', otherwise, the test is a 'Fail'.
 
 *Test 2: Verify Unauthentic Firmware*
 
-The evaluator shall deliberately modify authentic firmware. 
+The evaluator shall deliberately modify the authentic firmware.
 
-The evaluator shall trigger the TOE to load and evaluate the authenticity of the deliberately modified firmware according the methods described in the TSS. The evaluator shall ensure that the TOE provides a clear indication of the failure of the evaluation to consider the test a 'Pass', otherwise, the test is a 'Fail'.
+The evaluator shall trigger the TOE to load and evaluate the integrity and authenticity of the deliberately modified firmware before execution, according the methods described in the TSS. The evaluator shall ensure that the TOE provides a clear indication of the failure of the evaluation to consider the test a 'Pass', otherwise, the test is a 'Fail'.
+
+*Test 3: Verify Authentic Firmware Updates*
+
+The evaluator shall trigger the TOE to load and evaluate the integrity and authenticity of an authentic firmware update, according the methods described in the TSS. The evaluator shall ensure that the TOE provides a clear indication of the success of the evaluation to consider the test a 'Pass', otherwise, the test is a 'Fail'.
+
+*Test 4: Verify Unauthentic Firmware Updates*
+
+The evaluator shall deliberately modify the authentic firmware update.
+
+The evaluator shall trigger the TOE to load and evaluate the authenticity of the deliberately modified firmware update, according the methods described in the TSS. The evaluator shall ensure that the TOE provides a clear indication of the failure of the evaluation to consider the test a 'Pass', otherwise, the test is a 'Fail'.
 
 ====== KMD
 
@@ -2453,7 +2386,7 @@ There are no KMD evaluation activities for this component.
 
 ==== Replay Detection (FPT_RPL)
 
-===== FPT_RPL.1/Rollback Replay Detection (Rollback)
+===== FPT_RPL.1/FW Replay Detection (Firmware)
 
 ====== TSS
 
@@ -2467,7 +2400,7 @@ There are no AGD evaluation activities for this component.
 
 The evaluator shall repeat the following tests to cover all allowed firmware verification mechanisms as described in the TSS. For example, if the firmware verification mechanism replaces an entire partition or subset of the DSC scope containing many separate code files, the evaluator does not need to repeat the test for each individual file.
 
-Test 1: The evaluator shall attempt to execute an earlier instance or build of the software (as determined by the vendor). The evaluator shall verify that this attempt fails by checking the version identifiers or cryptographic hashes of the firmware against those previously recorded and checking that the values do not correspond to an unauthorized build.
+Test 1: The evaluator shall attempt to execute an earlier instance or build of the firmware (as determined by the vendor). The evaluator shall verify that this attempt fails by checking the version identifiers or cryptographic hashes of the firmware against those previously recorded and checking that the values do not correspond to an unauthorized build.
 
 Test 2: The evaluator shall attempt to execute a current or later instance and shall verify that the firmware execution succeeds.
 
@@ -2718,10 +2651,10 @@ However, if the evaluator is unable to perform some other required EA because th
 |FCS_STG_EXT.1
 
 |Factory Reset
-|FDP_FRS_EXT.1, [FDP_FRS_EXT.2]
+|[FDP_FRS_EXT.1]
 
-|Generation of Data Integrity Measurements
-|[FPT_PRO_EXT.2]
+|Root of Trust for Reporting
+|[FPT_ROT_EXT.3]
 
 |Generation of Secrets
 |FIA_SOS.2
